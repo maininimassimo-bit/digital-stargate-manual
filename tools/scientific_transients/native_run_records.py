@@ -55,7 +55,8 @@ class NativeRunRecords:
         dt.datetime.strptime(intent['createdUTC'],'%Y-%m-%dT%H:%M:%SZ')
         self._intent_created=intent['createdUTC']
         self._snapshot,self._control,_,inputs,input_bytes=pub._v2_launch(
-            self._work,self._journal,binding,bootstrap_session,self._base_guard)
+            self._work,self._journal,binding,bootstrap_session,self._base_guard,
+            progress_guard=self._progress_guard)
         self._pins.extend(inputs)
         _,grant,grant_info=pub._read_control(self._work/'launch-grant.json')
         require(grant['sha256']==binding['grantSha256'],'RUN_RECORDS_GRANT_PIN')
@@ -69,8 +70,9 @@ class NativeRunRecords:
                 'RUN_RECORDS_INPUT_AGGREGATE')
         self.verify()
 
-    def _base_guard(self):
-        self._budget.require_running(); self._session.assert_intact()
+    def _progress_guard(self):
+        require(not self._failed,'RUN_RECORDS_FAILED')
+        self._budget.require_running()
         require([pub._directory(p) for p,_ in self._roots]==self._roots,'RUN_RECORDS_ROOT_CHANGED')
         pub._metadata_bound(self._journal)
         self._budget.require_running()
@@ -78,6 +80,9 @@ class NativeRunRecords:
                      self._journal/'supervision-uncertain.json',self._journal/'publication-uncertain.json',
                      self._journal/'publication-intent.json',self._journal/'owned-closure.json']:
             require(not os.path.lexists(path),'RUN_RECORDS_UNCERTAINTY_OR_CANCEL')
+
+    def _base_guard(self):
+        self._budget.require_running(); self._session.assert_intact(); self._progress_guard()
 
     def _inventory(self):
         expected=self._initial_names|{p.name for p,_,_ in self._pins if p.parent==self._work}

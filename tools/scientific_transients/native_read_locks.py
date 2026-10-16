@@ -69,10 +69,12 @@ class NativeReadLocks:
     No finalizer/context manager releases locks on an unrelated exception. Explicit
     release is a file operation only; it does not prove the native process exited.
     """
-    def __init__(self, records, *, guard):
+    def __init__(self, records, *, guard, progress_guard=None):
         require(type(records) is list and 1 <= len(records) <= 128 and callable(guard), 'READ_LOCK_RECORDS')
+        require(progress_guard is None or callable(progress_guard), 'READ_LOCK_PROGRESS_GUARD')
         self._api = _WindowsFiles(); self._held = []; self._released = False
         self._guard = guard
+        self._progress_guard = guard if progress_guard is None else progress_guard
         paths = set(); total = 0
         try:
             for row in records:
@@ -102,7 +104,7 @@ class NativeReadLocks:
         for handle, path, row, info in self._held:
             self._guard(); require(safe_path(path) == path, 'READ_LOCK_PATH_CHANGED')
             require(self._api.info(handle) == info, 'READ_LOCK_IDENTITY_CHANGED')
-            require(self._api.digest(handle, row['byteLength'], self._guard) == row['sha256'], 'READ_LOCK_HASH')
+            require(self._api.digest(handle, row['byteLength'], self._progress_guard) == row['sha256'], 'READ_LOCK_HASH')
             require(self._api.info(handle) == info, 'READ_LOCK_IDENTITY_CHANGED')
         self._guard()
 

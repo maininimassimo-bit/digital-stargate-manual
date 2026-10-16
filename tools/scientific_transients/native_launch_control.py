@@ -44,7 +44,9 @@ def _path(value):
     return path
 
 
-def _pin(path, expected_sha, cap, guard, *, size=None, identity=None, capture=False):
+def _pin(path, expected_sha, cap, guard, *, size=None, identity=None, capture=False, progress_guard=None):
+    require(callable(guard) and (progress_guard is None or callable(progress_guard)), 'LAUNCH_CONTROL_GUARD')
+    progress = guard if progress_guard is None else progress_guard
     path = _path(path)
     guard()
     digest, count, raw = hashlib.sha256(), 0, bytearray()
@@ -56,7 +58,7 @@ def _pin(path, expected_sha, cap, guard, *, size=None, identity=None, capture=Fa
         if identity is not None:
             require(signature(before) == signature(identity), 'LAUNCH_CONTROL_IDENTITY')
         while chunk := stream.read(min(65536, before.st_size - count + 1)):
-            guard(); count += len(chunk)
+            progress(); count += len(chunk)
             require(count <= before.st_size, 'LAUNCH_CONTROL_FILE_CHANGED')
             digest.update(chunk)
             if capture: raw.extend(chunk)
@@ -129,9 +131,11 @@ class LaunchControlSnapshot:
     The trusted caller retains the object in the same session, verifies it at
     publication/closure boundaries and still supplies independent live ownership.
     """
-    def __init__(self, control, pins, sources, loaded_sources, guard):
+    def __init__(self, control, pins, sources, loaded_sources, guard, *, progress_guard=None):
+        require(progress_guard is None or callable(progress_guard), 'LAUNCH_CONTROL_GUARD')
         self._control_raw, self._pins = json.dumps(control).encode('ascii'), tuple(pins)
         self._sources, self._loaded_sources, self._guard = sources, loaded_sources, guard
+        self._progress_guard = progress_guard
 
     @property
     def control(self):
@@ -141,20 +145,22 @@ class LaunchControlSnapshot:
         self._guard()
         require(_loaded(self._loaded_sources()) == self._sources, 'LAUNCH_CONTROL_LOADED_CHANGED')
         for path, digest, size, info, cap in self._pins:
-            _pin(path.as_posix(), digest, cap, self._guard, size=size, identity=info)
+            _pin(path.as_posix(), digest, cap, self._guard, size=size, identity=info,
+                 progress_guard=self._progress_guard)
         require(_loaded(self._loaded_sources()) == self._sources, 'LAUNCH_CONTROL_LOADED_CHANGED')
         self._guard()
         return True
 
 
-def inspect_launch_control(path, expected_sha256, *, loaded_sources, guard):
+def inspect_launch_control(path, expected_sha256, *, loaded_sources, guard, progress_guard=None):
     """Validate every declared code pin and exact live-attested local source set.
 
     Raw approval/review hashes bind provenance only. This does not authenticate
     human consent, infer executing code from disk, create an attempt or close it.
     """
     require(_hex(expected_sha256,64) and callable(loaded_sources) and callable(guard), 'LAUNCH_CONTROL_ARGUMENTS')
-    control_pin, raw = _pin(path, expected_sha256, MIB, guard, capture=True)
+    require(progress_guard is None or callable(progress_guard), 'LAUNCH_CONTROL_GUARD')
+    control_pin, raw = _pin(path, expected_sha256, MIB, guard, capture=True, progress_guard=progress_guard)
     value = _json(raw)
     _fields(value, FIELDS)
     require(value['protocol'] == 'DSG_NATIVE_LINEAR_LAUNCH_CONTROL_V1', 'LAUNCH_CONTROL_PROTOCOL')
@@ -187,12 +193,12 @@ def inspect_launch_control(path, expected_sha256, *, loaded_sources, guard):
         else:
             require(role not in fixed and name == file.name, 'LAUNCH_CONTROL_DUPLICATE_ROLE')
             fixed[role] = row
-        pin, _ = _pin(row['path'], row['sha256'], cap, guard, size=row['byteLength'])
+        pin, _ = _pin(row['path'], row['sha256'], cap, guard, size=row['byteLength'], progress_guard=progress_guard)
         pins.append(pin)
     require(set(fixed) == FIXED, 'LAUNCH_CONTROL_REQUIRED_ROLES')
     for key, role in HASH_ROLES.items():
         require(value[key] == fixed[role]['sha256'], 'LAUNCH_CONTROL_ROLE_BINDING')
     require(_loaded(loaded_sources()) == _loaded(sources), 'LAUNCH_CONTROL_LOADED_MISMATCH')
-    snapshot = LaunchControlSnapshot(value, pins, sources, loaded_sources, guard)
+    snapshot = LaunchControlSnapshot(value, pins, sources, loaded_sources, guard, progress_guard=progress_guard)
     snapshot.verify()
     return snapshot

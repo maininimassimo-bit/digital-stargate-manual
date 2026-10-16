@@ -68,5 +68,36 @@ class NativeReadLocksTests(unittest.TestCase):
         self.path.write_bytes(b''); self.row.update(sha256=hashlib.sha256(b'').hexdigest(),byteLength=0)
         locks=self.acquire(); locks.verify()
 
+    def test_separate_chunk_guard_preserves_original_read_locks(self):
+        full=[]; progress=[]
+        locks=NativeReadLocks([self.row],guard=lambda:full.append(True),
+            progress_guard=lambda:progress.append(True)); self.addCleanup(locks.release)
+        self.assertEqual(len(full),3)  # acquisition, verify-record, verify-end
+        self.assertGreater(len(progress),len(full))
+        with self.assertRaises(OSError): self.path.write_bytes(b'LOCK_STILL_HELD')
+        before=len(full); locks.verify(); self.assertEqual(len(full)-before,2)
+
+    def test_separate_chunk_failure_releases_only_failed_construction(self):
+        def fail(): raise RuntimeError('SYNTHETIC_PROGRESS_DEADLINE')
+        with self.assertRaisesRegex(RuntimeError,'PROGRESS_DEADLINE'):
+            NativeReadLocks([self.row],guard=lambda:None,progress_guard=fail)
+        self.path.write_bytes(b'NO_NATIVE_START_LOCK_RELEASED')
+
+    def test_invalid_optional_callback_is_rejected_before_acquiring(self):
+        with self.assertRaisesRegex(Exception,'PROGRESS_GUARD'):
+            NativeReadLocks([self.row],guard=lambda:None,progress_guard=False)
+        self.path.write_bytes(b'NOT_LOCKED')
+
+    def test_reentrant_progress_cannot_return_a_false_verified_digest(self):
+        locks=self.acquire(); entered=False
+        def progress():
+            nonlocal entered
+            if not entered:
+                entered=True; locks.verify()
+        locks._progress_guard=progress
+        with self.assertRaisesRegex(Exception,'READ_LOCK_SHORT_READ'): locks.verify()
+        self.assertFalse(locks._released)
+        with self.assertRaises(OSError): self.path.write_bytes(b'STILL_HELD_AFTER_VERIFY_FAILURE')
+
 
 if __name__=='__main__': unittest.main()

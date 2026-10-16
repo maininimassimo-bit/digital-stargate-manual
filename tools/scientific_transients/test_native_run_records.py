@@ -149,5 +149,34 @@ class NativeRunRecordsTests(unittest.TestCase):
         records.verify()
         self.assertFalse(records.diagnostic()['processClosureAuthorized'])
 
+    def test_progress_keeps_original_budget_and_fences_without_source_reread(self):
+        records=self.records()
+        with patch.object(records._session,'assert_intact',wraps=records._session.assert_intact) as source:
+            records._progress_guard(); source.assert_not_called()
+            records._base_guard(); self.assertEqual(source.call_count,1)
+            (self.fixture.work/'cancel.json').write_bytes(b'SYNTHETIC_PARTIAL_CANCEL')
+            with self.assertRaisesRegex(Exception,'RUN_RECORDS_UNCERTAINTY_OR_CANCEL'): records._progress_guard()
+
+    def test_progress_never_renews_original_deadline(self):
+        records=self.records(); original=records._budget.deadline_monotonic; self.mono=181
+        with self.assertRaisesRegex(Exception,'NATIVE_BUDGET_EXPIRED'): records._progress_guard()
+        self.assertEqual(records._budget.deadline_monotonic,original)
+
+    def test_progress_rejects_every_original_partial_fence(self):
+        records=self.records()
+        for path in [records._work/'native-publication-uncertain.json',records._work/'cancel.json',
+                     records._journal/'supervision-uncertain.json',records._journal/'publication-uncertain.json',
+                     records._journal/'publication-intent.json',records._journal/'owned-closure.json']:
+            with self.subTest(path=path.name):
+                path.write_bytes(b'SYNTHETIC_PARTIAL_FENCE')
+                try:
+                    with self.assertRaisesRegex(Exception,'RUN_RECORDS_UNCERTAINTY_OR_CANCEL'): records._progress_guard()
+                finally: path.unlink()  # Only this synthetic fixture file.
+
+    def test_progress_retains_original_directory_identity(self):
+        records=self.records(); path=records._work; renamed=path.with_name('synthetic-moved-root')
+        path.rename(renamed); path.mkdir()
+        with self.assertRaisesRegex(Exception,'RUN_RECORDS_ROOT_CHANGED'): records._progress_guard()
+
 
 if __name__=='__main__': unittest.main()

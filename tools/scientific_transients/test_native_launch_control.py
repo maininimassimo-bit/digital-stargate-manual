@@ -143,5 +143,79 @@ class LaunchControlTests(unittest.TestCase):
         self.write()
         with self.assertRaisesRegex(control.ProtocolError,'HASH'):self.inspect(digest='0'*64)
 
+    def test_multichunk_progress_keeps_full_boundary_guards_and_exact_bytes(self):
+        path=self.root/'large.synthetic'; raw=b'SYNTHETIC_BYTE'*30000; path.write_bytes(raw)
+        full=[]; progress=[]
+        pin,captured=control._pin(path.as_posix(),sha(raw),control.MIB,lambda:full.append(True),
+            capture=True,progress_guard=lambda:progress.append(True))
+        self.assertEqual(captured,raw); self.assertEqual(pin[2],len(raw))
+        self.assertEqual(len(full),2); self.assertEqual(len(progress),(len(raw)+65535)//65536)
+
+    def test_midstream_source_failure_rejected_by_final_full_gate(self):
+        path=self.root/'large.synthetic'; raw=b'SYNTHETIC'*20000; path.write_bytes(raw)
+        changed=False
+        def full():
+            if changed: raise RuntimeError('SYNTHETIC_SOURCE_CLOSURE_CHANGED')
+        def progress():
+            nonlocal changed
+            changed=True
+        with self.assertRaisesRegex(RuntimeError,'SOURCE_CLOSURE_CHANGED'):
+            control._pin(path.as_posix(),sha(raw),control.MIB,full,progress_guard=progress)
+
+    def test_progress_failure_interrupts_stream_and_never_runs_final_positive_gate(self):
+        path=self.root/'large.synthetic'; raw=b'SYNTHETIC'*20000; path.write_bytes(raw)
+        full=[]; progress=[]
+        def tick():
+            progress.append(True)
+            if len(progress)==2: raise RuntimeError('SYNTHETIC_ORIGINAL_DEADLINE')
+        with self.assertRaisesRegex(RuntimeError,'ORIGINAL_DEADLINE'):
+            control._pin(path.as_posix(),sha(raw),control.MIB,lambda:full.append(True),progress_guard=tick)
+        self.assertEqual(len(full),1); self.assertEqual(len(progress),2)
+
+    def test_empty_source_keeps_both_full_gates_with_no_chunk(self):
+        path=self.root/'empty.synthetic'; path.write_bytes(b''); full=[]; progress=[]
+        control._pin(path.as_posix(),sha(b''),control.MIB,lambda:full.append(True),
+            progress_guard=lambda:progress.append(True))
+        self.assertEqual(len(full),2); self.assertEqual(progress,[])
+
+    def test_invalid_progress_callback_is_not_silently_defaulted(self):
+        for invalid in [False,0,'',[],{}]:
+            with self.subTest(value=invalid), self.assertRaisesRegex(control.ProtocolError,'GUARD'):
+                control._pin(self.path.as_posix(),'a'*64,control.MIB,self.guard,progress_guard=invalid)
+
+    def test_snapshot_retains_separate_callbacks_and_loaded_set_failure(self):
+        calls=[]; digest=self.write()
+        snapshot=control.inspect_launch_control(self.path.as_posix(),digest,
+            loaded_sources=lambda:self.sources,guard=self.guard,progress_guard=lambda:calls.append(True))
+        self.assertGreater(len(calls),0); before=len(calls)
+        snapshot.verify(); self.assertGreater(len(calls),before)
+        self.sources['tools.synthetic']['sha256']='0'*64
+        with self.assertRaisesRegex(control.ProtocolError,'LOADED_CHANGED'): snapshot.verify()
+
+    def test_midstream_same_byte_source_replacement_is_seen_at_full_end(self):
+        source=self.root/'original-source.py'; source.write_bytes(b'# SYNTHETIC_CODE\n')
+        original=source.stat(); target=self.root/'large.synthetic'; raw=b'SYNTHETIC'*20000; target.write_bytes(raw)
+        replaced=False
+        def full():
+            if source.stat().st_ino!=original.st_ino: raise RuntimeError('SYNTHETIC_SOURCE_IDENTITY_CHANGED')
+        def progress():
+            nonlocal replaced
+            if not replaced:
+                other=source.with_name('replacement.py'); other.write_bytes(source.read_bytes()); other.replace(source)
+                replaced=True
+        with self.assertRaisesRegex(RuntimeError,'SOURCE_IDENTITY_CHANGED'):
+            control._pin(target.as_posix(),sha(raw),control.MIB,full,progress_guard=progress)
+        self.assertEqual(source.read_bytes(),b'# SYNTHETIC_CODE\n')
+
+    def test_attested_module_change_during_snapshot_progress_blocks_result(self):
+        changed=False
+        def progress():
+            if changed: self.sources['tools.synthetic']['sha256']='0'*64
+        digest=self.write()
+        snapshot=control.inspect_launch_control(self.path.as_posix(),digest,
+            loaded_sources=lambda:self.sources,guard=self.guard,progress_guard=progress)
+        changed=True
+        with self.assertRaisesRegex(control.ProtocolError,'LOADED_CHANGED'): snapshot.verify()
+
 
 if __name__=='__main__':unittest.main()

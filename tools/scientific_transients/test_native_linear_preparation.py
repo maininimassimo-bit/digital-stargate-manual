@@ -67,7 +67,7 @@ class LinearPreparationTests(unittest.TestCase):
         # and file-lock acquisition; the actual renderer has independent pure tests.
         self.renderer=patch.object(preparation,'render_entry',return_value=b'// SYNTHETIC_ENTRY_NOT_EXECUTED\r\n')
         self.renderer.start(); self.addCleanup(self.renderer.stop)
-        def locks(rows,guard):
+        def locks(rows,guard,*,progress_guard=None):
             group=object.__new__(NativeReadLocks); group._released=False
             group._held=[(object(),Path(row['path']),dict(row),()) for row in rows]
             return group

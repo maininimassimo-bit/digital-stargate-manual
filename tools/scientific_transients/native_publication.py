@@ -206,24 +206,34 @@ def _snapshot(path, expected):
 
 def _metadata_bound(root):
     total, entries = 0, 0
-    pending = [(root, 0)]
+    pending = [(root, 0, None)]
     while pending:
-        directory, depth = pending.pop()
+        directory, depth, expected = pending.pop()
         require(depth <= 8, 'PUBLICATION_METADATA_DEPTH')
+        directory = safe_path(directory)
+        before = directory.lstat()
+        require(stat.S_ISDIR(before.st_mode) and before.st_ino != 0, 'PUBLICATION_METADATA_DIRECTORY')
+        require(expected is None or signature(before) == signature(expected), 'PUBLICATION_METADATA_DIRECTORY_CHANGED')
         for child in directory.iterdir():
             entries += 1; require(entries <= 256, 'PUBLICATION_METADATA_ENTRIES')
-            info = safe_path(child).lstat()
-            if stat.S_ISDIR(info.st_mode): pending.append((child, depth + 1))
+            # Ancestors are checked once per directory, before AND after this
+            # scan. Still inspect every entry without following a child link.
+            info = child.lstat()
+            require(not stat.S_ISLNK(info.st_mode) and not getattr(info,'st_file_attributes',0) & 0x400,
+                    'LOCAL_LINK_OR_REPARSE')
+            if stat.S_ISDIR(info.st_mode): pending.append((child, depth + 1, info))
             else:
                 require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1, 'PUBLICATION_METADATA_FILE')
                 total += info.st_size
                 require(total <= 16*MIB, 'PUBLICATION_METADATA_AGGREGATE')
+        after = safe_path(directory).lstat()
+        require(signature(after) == signature(before), 'PUBLICATION_METADATA_DIRECTORY_CHANGED')
 
 
-def _v2_launch(work, journal, binding, session, guard):
+def _v2_launch(work, journal, binding, session, guard, *, progress_guard=None):
     """Code/bootstrap/input binding only; no fresh consent or held-PID authority."""
     snapshot = inspect_launch_control((journal/'launch-control.json').as_posix(), binding['launchControlSha256'],
-        loaded_sources=session.attest_sources, guard=guard)
+        loaded_sources=session.attest_sources, guard=guard, progress_guard=progress_guard)
     c = snapshot.control
     require(all(c[k] == binding[k] for k in ['operationRef','sealSha256','grantSha256']), 'PUBLICATION_CONTROL_BINDING')
     fixed = {r['role']:r for r in c['files'] if r['role'] != 'PARENT_SOURCE'}

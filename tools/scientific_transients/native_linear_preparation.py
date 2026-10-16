@@ -318,7 +318,7 @@ class LinearAttemptPreparation:
                   for path,row,_ in self._records._pins if path.parent==work]
             rows.extend({k:resources[role][k] for k in ['path','sha256','byteLength']} for role in ['ENTRY','LAUNCHER'])
             def observer_guard(): self._budget.check(); self._session.assert_intact()
-            self._guard(); self._locks=NativeReadLocks(rows,guard=observer_guard)
+            self._guard(); self._locks=NativeReadLocks(rows,guard=observer_guard,progress_guard=self._budget.check)
             self._supervisor=LinearNativeSupervisor(self._records,self._signals,[self._locks])
             self._guard(); self._state='PREPARED_LIVE'
             return self._supervisor
