@@ -237,7 +237,10 @@
       q('observed').textContent='Consultazione aggiornata ora. Nessun controllo periodico; il PC potrebbe avere uno stato successivo.';
     }
     async function call(path,method='GET',body) {
-      const campaignPath=/^\/campaigns(?:\/inputs\/[a-f0-9]{32}(?:\/review)?|\/[a-f0-9]{32}(?:\/(?:freeze|review-outcome|finalize|revoke|review-receipt))?)?$/.test(path);
+      const campaignMetadataPath=/^\/campaigns(?:\/inputs\/[a-f0-9]{32}(?:\/review)?|\/[a-f0-9]{32}(?:\/(?:freeze|review-outcome|finalize|revoke|review-receipt))?)?$/.test(path);
+      const campaignRead=/^\/campaigns\/[a-f0-9]{32}\/(?:inputs\/[a-f0-9]{32}\/dispatch-context|dispatch-intents\/[a-f0-9]{64}\/jobs\/[0-2]\/technical-context)$/.test(path);
+      const campaignWrite=/^\/campaigns\/[a-f0-9]{32}\/dispatch-intents(?:\/[a-f0-9]{64}\/jobs\/[0-2]\/project)?$/.test(path);
+      const campaignPath=campaignMetadataPath||(method==='GET'&&campaignRead)||(method==='POST'&&campaignWrite);
       require(path==='/options'||path==='/jobs'||/^\/jobs\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery)$/.test(path)||campaignPath);
       if(!usableAccess())return null;
       const session=epoch,credential=token;require(current()&&credential);controller=new AbortController();

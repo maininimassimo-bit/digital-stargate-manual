@@ -77,7 +77,7 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
       removeItem(key){if(removeFail)throw Error('PRIVATE_STORAGE_ERROR');storage.delete(key);}},
     async fetch(url,options){
       requests.push({url,options});
-      if(campaignAdapter&&url.endsWith('/campaigns'))assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/campaigns$/);
+      if(campaignAdapter&&url.includes('/campaigns'))assert.equal(new URL(url).origin,'https://dsg-pixinsight-pilot-183451329061.europe-west1.run.app');
       else assert.match(url,/^https:\/\/dsg-pixinsight-pilot-183451329061.europe-west1.run.app\/v1\/transient-analysis\/(?:options|jobs(?:\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery))?)$/);
       assert.equal(options.cache,'no-store');
       assert.equal(options.redirect,'error');assert.equal(options.credentials,'omit');
@@ -91,7 +91,8 @@ function harness({jobs=[fixture()],status=200,fail=false,deferred=false,googleMi
         if(postDeferred)await new Promise(resolve=>{release=resolve;});
         if(postFailure==='before')throw Error('LOST_ACK');
         const body=JSON.parse(options.body);
-        if(url.endsWith('/jobs')) {
+        if(campaignAdapter&&url.includes('/campaigns'))responseBody={synthetic:true};
+        else if(url.endsWith('/jobs')) {
           let job=jobs.find(j=>j.jobId==='TRN_'+body.requestId);
           if(!job){job={...fixture(),jobId:'TRN_'+body.requestId,request:body,binding:bindings.find(b=>b.bindingRef===body.bindingRef),state:'QUEUED',sequence:0,result:null};
             for(const key of ['rootId','attemptId','leaseIssuedAt','leaseExpiresAt'])delete job[key];jobs.push(job);}
@@ -433,4 +434,18 @@ test('restored recovery intent reads fresh state and resends only after explicit
   const h=harness({jobs:[recoveryFixture()],storage:first.storage});await h.login();assert.equal(posts(h).length,0);
   assert.equal(h.controls.retry.disabled,false);h.controls.retry.click();await tick();assert.equal(posts(h).length,1);
   assert.equal(h.storage.size,0);
+});
+
+test('Owner bridge permits only exact campaign preparation POSTs and correlation GETs',async()=>{
+  let bridge;const h=harness({campaignAdapter:{mount(root,host){bridge=host;return {hasPending:()=>false,update(){},reset(){},dispose(){}};}}});
+  await h.login();
+  const base='/campaigns/'+'a'.repeat(32),intent=base+'/dispatch-intents/'+'b'.repeat(64);
+  for(const path of [base+'/inputs/'+'c'.repeat(32)+'/dispatch-context',intent+'/jobs/0/technical-context'])
+    await bridge.request(path);
+  await bridge.request(base+'/dispatch-intents','POST',{});
+  await bridge.request(intent+'/jobs/2/project','POST',{});
+  for(const [path,method] of [[intent+'/jobs/0/technical-context','POST'],[intent+'/jobs/0/project','GET'],
+    [intent+'/jobs/3/project','POST'],[intent+'/jobs/0/reserve-once','POST'],['/worker'+intent,'GET']])
+    {const before=h.requests.length;await assert.rejects(bridge.request(path,method,{}));assert.equal(h.requests.length,before);}
+  assert.equal(posts(h).length,2);
 });
