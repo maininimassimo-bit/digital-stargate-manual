@@ -35,7 +35,7 @@ hide:
 <section class="dsg-live-board" aria-labelledby="dsg-live-title" data-dsg-home-snapshot aria-live="polite">
   <div class="dsg-live-board__heading">
     <div><span class="dsg-section-kicker">SNAPSHOT GOVERNATO</span><h2 id="dsg-live-title">Il progetto e l’ultima notte</h2></div>
-    <span class="dsg-data-freshness" data-home-freshness>Caricamento projection…</span>
+    <div class="dsg-home-refresh"><span class="dsg-data-freshness" data-home-freshness>Caricamento roadmap…</span><button class="md-button" type="button" data-home-refresh>Aggiorna riepilogo</button></div>
   </div>
   <div class="dsg-live-board__grid">
     <article class="dsg-live-card dsg-live-card--primary">
@@ -47,6 +47,7 @@ hide:
     <article class="dsg-live-card">
       <span>Ultima sessione</span>
       <strong data-home-latest-session>—</strong>
+      <p data-home-latest-freshness>Date non ancora disponibili</p>
       <p data-home-latest-detail>Projection scientifica non ancora disponibile</p>
       <a href="./scientific-session-catalog/" data-home-latest-link>Apri dettaglio sessione</a>
     </article>
@@ -54,9 +55,11 @@ hide:
       <span>Patrimonio pubblicato</span>
       <strong data-home-session-count>—</strong>
       <p data-home-session-totals>Conteggi non ancora disponibili</p>
+      <p data-home-session-records>Registrazioni non ancora disponibili</p>
       <a href="./scientific-session-catalog/">Apri catalogo</a>
     </article>
   </div>
+  <p data-home-refresh-status>Aggiornamento automatico in preparazione.</p>
 </section>
 <!-- DSG:AUTO-HOMEPAGE:END -->
 

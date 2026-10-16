@@ -18,6 +18,9 @@ REQUIRED_CONTRACT_TOKENS = (
     "data-home-latest-link",
     "data-home-session-count",
     "data-home-session-totals",
+    "data-home-session-records",
+    "data-home-latest-freshness",
+    "data-home-refresh",
 )
 
 FORBIDDEN_STALE_TOKENS = (

@@ -484,3 +484,8 @@
   color: var(--dsg-text-muted);
 }
 
+
+/* Snapshot dates and actions wrap without competing with the section heading. */
+.dsg-home-refresh{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:.6rem;min-width:0;max-width:100%}
+.dsg-home-refresh .dsg-data-freshness{white-space:normal;overflow-wrap:anywhere}
+.dsg-live-board [data-home-refresh-status]{font-size:.8rem;color:var(--dsg-text-muted);margin:.9rem 0 0}
