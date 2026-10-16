@@ -5,7 +5,9 @@ SESSION_ID="2026-08-31_2026-09-01"
 SESSION_DIR="data/sessions/2026/08/${SESSION_ID}"
 METRICS="${SESSION_DIR}/normalized/session-metrics.json"
 HISTORY="data/analytics/history/sessions.csv"
-LATEST="docs/data/realtime/latest-observation.json"
+# Exercise historical payload generation in isolation: production latest must not regress.
+LATEST="$(mktemp -d)/latest-observation.json"
+export DSG_E2E_LATEST="$LATEST"
 
 python dsg-analytics/analyzer/analyze_session.py --session "${SESSION_DIR}" >/tmp/dsg-e2e-metrics.json
 python dsg-analytics/history/update_history.py --metrics "${METRICS}" --history "${HISTORY}"
@@ -16,7 +18,7 @@ node .github/scripts/generate-scientific-catalog.mjs --write
 python dsg-analytics/reporter/update_latest_observation.py --session "${SESSION_DIR}" --output "${LATEST}"
 
 python - <<'PY'
-import csv, json, math
+import csv, json, math, os
 from pathlib import Path
 sid='2026-08-31_2026-09-01'
 expected_start='2026-08-31T17:00:06.0000000Z'
@@ -67,7 +69,7 @@ assert doc['facetValues']['camera']==['QHY695A']
 assert doc['facetValues']['sqmState']==['AVAILABLE']
 assert math.isclose(float(doc['rankingSignals']['sqmMedianMagArcsec2']),18.66,abs_tol=1e-6)
 
-latest=json.loads(Path('docs/data/realtime/latest-observation.json').read_text(encoding='utf-8'))
+latest=json.loads(Path(os.environ['DSG_E2E_LATEST']).read_text(encoding='utf-8'))
 assert latest['session_id']==sid
 assert latest['target']['name']=='M 27'
 assert math.isclose(float(latest['target']['ra_deg']),299.9,abs_tol=1e-6)
