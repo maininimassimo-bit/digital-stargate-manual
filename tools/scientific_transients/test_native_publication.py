@@ -18,7 +18,9 @@ class NativePublicationTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        # Windows runners may expose TEMP through an 8.3 alias. Canonicalize
+        # fixture paths before binding them; production rejects aliases unchanged.
+        self.root = Path(self.temp.name).resolve()
         self.operation = "a" * 32
         self.work, self.archive, self.journal = [self.root / n / self.operation
             for n in ["native-work", "native-retained", "native-supervision"]]
