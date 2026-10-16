@@ -37,7 +37,39 @@ percorso e nessun percorso equivalente Worker è aggiunto. La composizione runti
 delle campagne conserva il valore disabilitato esistente. Non sono aggiunti
 percorsi locali, file originali, token o lease alla risposta.
 
-## Disegno ancora da implementare e verificare
+## Registro di ammissione locale in verifica
+
+Le application port `prepare_dispatch`, `admit_frame`, `close_frame` e
+`dispatch_receipt` sono implementate nel servizio della campagna e **non sono
+esposte via HTTP**. Non creano o prenotano job e non avviano processi nativi.
+L'intento Owner vincola il contesto completo, tre binding ordinati e request ID
+distinti, worker/root e hash dell'archivio privato dichiarato. Il registro impedisce
+di preparare nuovamente lo stesso caso o riutilizzare request ID tra campagne.
+
+L'ammissione usa lo stesso CAS della revoca e mantiene un solo avvio in volo o
+incerto per il worker nel registro configurato. Non viene riemessa dopo una
+risposta persa: la ripetizione esatta restituisce `RECONCILIATION_REQUIRED` senza
+ammissione. La revoca prima del commit impedisce l'ammissione; se il commit
+dell'ammissione precede la revoca, la ricevuta conserva `STOP_PENDING_RECONCILIATION`.
+Questo ordine non attesta l'istante di creazione o arresto del processo OS.
+
+La chiusura conserva il digest delle evidenze di arresto **riportate dal Worker**,
+insieme a job, attempt, binding, root, cronologia e rapporto tecnico esatti. Il
+confronto con lo snapshot tecnico della coda avviene fuori dal callback CAS. Una
+chiusura `COMPLETED` richiede misure complete e almeno una misura. Solo una chiusura
+completata del frame precedente permette l'ammissione del successivo; errore,
+annullamento o recupero incerto non completano la tripletta. Queste dichiarazioni
+non sono attestazioni indipendenti: il coordinatore locale dovrà verificare i
+file e l'effettiva chiusura del processo prima di inviarle.
+
+Un job `RECOVERY_REQUIRED` può chiudere il blocco tecnico soltanto dopo la
+`recoveryClosure` Owner già prevista dalla coda, validata con le stesse regole e
+con un hash dell'evidenza uguale a quello riportato dal Worker. La chiusura Owner
+viene conservata nella ricevuta. Il caso mantiene `RECOVERY_REQUIRED` e non
+consente il frame successivo della stessa tripletta; può liberare il worker per
+un diverso intento Owner valido. Non è un'attestazione indipendente di arresto.
+
+## Integrazione ancora da implementare e verificare
 
 L'intento della tripletta e l'ammissione di ogni avvio devono usare il medesimo
 registro autorevole della revoca. Le chiamate alla coda devono avvenire fuori dai
@@ -52,8 +84,9 @@ in volo o incerta fino alle evidenze di chiusura, anche dopo revoca. Nessuna
 revoca o scadenza prova da sola l'arresto di PixInsight. La lettura del contesto
 qui implementata non risolve questo requisito e non consente ancora avvii.
 
-Restano da completare il registro degli intenti e delle ammissioni, la proiezione
-dei job che impedisca accessi attraverso i percorsi legacy, il coordinatore locale
+Restano da verificare indipendentemente il registro degli intenti e delle
+ammissioni e da completare la proiezione dei job che impedisca accessi attraverso
+i percorsi legacy, il coordinatore locale
 sequenziale con intenti durabili, le riconciliazioni, i collegamenti dei rapporti,
 la vista Owner e il collaudo integrato. Il flusso diagnostico singolo esistente
 resta distinto. Nessun controllo confermativo è stato eseguito.
@@ -65,3 +98,19 @@ Le suite `test_confirmatory_dispatch_context`, `test_confirmatory_campaign` e
 sul contesto e sui confini HTTP. Sono fixture sintetiche e non dimostrano
 accettazione scientifica, dispatch completo, CI sull'exact HEAD, rilascio o
 accettazione operativa. ARB e RQ esatte restano gate separati.
+
+Le prime 20 prove sintetiche del registro di ammissione sono passate, comprese
+revoca concorrente forzata durante il CAS, risposta persa, ordine dei frame,
+annullamento richiesto distinto dall'arresto, risultati incompleti e lettura della
+coda eseguita una sola volta anche durante un retry del CAS. Una prova ulteriore
+di capienza ha registrato 59 intenti e 177 ammissioni/chiusure simulate: 415 eventi
+complessivi entro il limite di 8 MiB, con zero qualificati. Le quattro suite
+contestuali hanno superato 64 prove; la nuova prova di capienza è passata
+separatamente, per 65 prove complessive. Non dimostrano il dispatch dei job, il
+coordinatore locale o un avvio reale.
+
+Due ulteriori prove sul recupero Owner sono passate: chiusura esatta mantenendo
+il caso non completato e rifiuto di evidenze discordanti con conservazione del
+blocco. La suite del registro comprende ora 22 prove; il successivo controllo
+contestuale dei 67 casi complessivi è passato in 66,232 secondi sul candidato
+locale. Non sostituisce CI e revisioni sull'esatto commit finale.
