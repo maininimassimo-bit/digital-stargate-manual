@@ -9,6 +9,7 @@ import copy
 from tools.pixinsight.local_pilot.broker import require, opaque
 from tools.scientific_transients.confirmatory_campaign import ConfirmatoryCampaigns, fingerprint
 from tools.scientific_transients.queue import TransientQueue, CAMPAIGN_PROFILE, fields, digest
+from tools.scientific_transients.campaign_handoff import TECHNICAL, selection_sha, validate_technical
 
 
 class CampaignQueue:
@@ -134,6 +135,33 @@ class CampaignQueue:
 
     def dispatch_receipt(self, plan_ref, intent_sha):
         return self._bound_intent(plan_ref, intent_sha, 0)
+
+    def technical_context(self, plan_ref, intent_sha, ordinal):
+        """Dedicated Worker correlation only; read snapshots never grant a start."""
+        receipt = self._bound_intent(plan_ref, intent_sha, ordinal)
+        require(not receipt['revoked'], 'CAMPAIGN_QUEUE_REVOKED')
+        intent = receipt['intent']; context = intent['facts']['context']
+        selected = intent['request']['jobs'][ordinal]
+        job = self.queue._campaign_technical_snapshot('TRN_' + selected['requestId'], guard=self._guard)
+        require(job['campaignOrigin'] == self._origin(intent, context, ordinal)
+                and job['binding'] == selected['binding']
+                and job['request'] == {'requestId': selected['requestId'], 'bindingRef': selected['binding']['bindingRef']},
+                'CAMPAIGN_QUEUE_ORIGIN_MISMATCH')
+        value = {'protocol': TECHNICAL, 'planRef': plan_ref, 'intentSha256': intent_sha, 'ordinal': ordinal,
+                 'queueNamespaceSha256': self.namespace_sha, 'jobId': job['jobId'],
+                 'requestId': selected['requestId'], 'bindingRef': selected['binding']['bindingRef'],
+                 'bindingSha256': fingerprint(selected['binding']), 'inputSha256': context['frames'][ordinal]['sha256'],
+                 'contextSha256': context['contextSha256'], 'archiveSha256': intent['request']['archiveSha256'],
+                 'workerId': intent['request']['workerId'], 'rootId': intent['request']['rootId'],
+                 'projectionState': job['state'], 'revoked': False,
+                 'reservationConsumed': job['reservationConsumed'] or any(
+                     e['request']['ordinal'] == ordinal for e in receipt['admissions']),
+                 'launchAuthorized': False, 'scientificValidation': 'NOT_VALIDATED'}
+        if job['cancelRequested']:
+            # Preserve a stop blocker even if the queue's state was still QUEUED.
+            value['projectionState'] = 'CANCELLED'
+        value['requestSelectionSha256'] = selection_sha(value)
+        return validate_technical(value)
 
     def close_frame(self, plan_ref, request):
         self._assert_composition()
