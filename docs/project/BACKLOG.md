@@ -1,5 +1,9 @@
 # Project Backlog
 
+## Ultima osservazione scientifica — correzione 16 ottobre 2026
+
+Pacchetti senza LIGHT: no-op sulla pubblicazione scientifica e latest observation preservata. Coordinate mancanti non diventano0°,0°; refresh visibile ogni60s e manuale. [Diagnosi, contratto, test e rollback](HANDOVER_2026-10-16-LATEST-SCIENTIFIC-COORDINATES.md). Nessuna modifica ai RAW, Safety o authority.
+
 ## BKL-051 — risposte rifiutate, 15 ottobre 2026
 
 Conservare il fallimento postmerge Windows della PR601; completare la correzione

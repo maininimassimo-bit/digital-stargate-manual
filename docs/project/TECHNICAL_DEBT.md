@@ -1,5 +1,9 @@
 # Technical Debt Register
 
+## Ultima osservazione scientifica — correzione 16 ottobre 2026
+
+Pacchetti senza LIGHT: no-op sulla pubblicazione scientifica e latest observation preservata. Coordinate mancanti non diventano0°,0°; refresh visibile ogni60s e manuale. [Diagnosi, contratto, test e rollback](HANDOVER_2026-10-16-LATEST-SCIENTIFIC-COORDINATES.md). Nessuna modifica ai RAW, Safety o authority.
+
 ## BKL-051 — chiusura con dati POST residui, 15 ottobre 2026
 
 Il 404 può andare perso su Windows se la connessione chiude con dati non letti.

@@ -1,5 +1,9 @@
 # Repository Knowledge Map
 
+## Ultima osservazione scientifica — correzione 16 ottobre 2026
+
+Pacchetti senza LIGHT: no-op sulla pubblicazione scientifica e latest observation preservata. Coordinate mancanti non diventano0°,0°; refresh visibile ogni60s e manuale. [Diagnosi, contratto, test e rollback](HANDOVER_2026-10-16-LATEST-SCIENTIFIC-COORDINATES.md). Nessuna modifica ai RAW, Safety o authority.
+
 ## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
 
 Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.5 con campo additivo e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.
