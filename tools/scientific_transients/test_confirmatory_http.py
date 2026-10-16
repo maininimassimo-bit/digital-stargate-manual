@@ -97,6 +97,32 @@ class CampaignHttpTests(unittest.TestCase):
         self.assertIsNone(view['statisticalResult']);self.assertEqual(view['status'],'BLOCKED')
         self.assertNotIn('leaseToken',str(view));self.assertEqual(len(self.queue.status()['jobs']),3)
 
+    def test_dispatch_context_is_owner_only_read_without_queue_or_state_mutation(self):
+        self.fixture.freeze()
+        path=BASE+'/'+ref(10)+'/inputs/'+ref(100)+'/dispatch-context'
+        before=self.fixture.store.get(self.fixture.service.key)
+        code,value=self.request(path,token='synthetic-owner',owner=True)
+        self.assertEqual(code,200)
+        self.assertFalse(value['launchAuthorized'])
+        self.assertEqual(value['frames'],self.fixture.inputs[0]['frames'])
+        self.assertEqual(before,self.fixture.store.get(self.fixture.service.key))
+        self.assertEqual(self.queue.status()['jobs'],[])
+        self.assertNotIn('leaseToken',str(value))
+        self.assertNotIn('review',value)
+        self.assertEqual(self.request(path,token=TOKEN)[0],403)
+        worker_path=WORKER+'/'+ref(10)+'/inputs/'+ref(100)+'/dispatch-context'
+        self.assertEqual(self.request(worker_path,token=TOKEN)[0],404)
+        self.assertEqual(self.request(path,{},'synthetic-owner',True)[0],404)
+
+    def test_dispatch_context_denies_unfrozen_and_revoked_plan(self):
+        path=BASE+'/'+ref(10)+'/inputs/'+ref(100)+'/dispatch-context'
+        self.assertEqual(self.request(path,token='synthetic-owner',owner=True)[0],400)
+        self.fixture.freeze()
+        self.fixture.service.revoke(ref(10),{'decisionId':ref(51000),
+            'planHeadSha256':self.fixture.service.view(ref(10))['headSha256'],
+            'evidenceSha256':sha(51000),'reason':'OWNER_WITHDRAWAL'})
+        self.assertEqual(self.request(path,token='synthetic-owner',owner=True)[0],400)
+
     def test_disabled_composition_keeps_authenticated_404(self):
         self.server.RequestHandlerClass=self.handler(enabled=False)
         self.assertEqual(self.request(BASE,token='synthetic-owner',owner=True)[0],404)

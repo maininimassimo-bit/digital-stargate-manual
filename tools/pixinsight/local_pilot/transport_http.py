@@ -131,6 +131,9 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 if not is_campaign_worker and path == campaign_base:
                     if self.command == 'POST': return self.send(200, campaigns.create(self.body()))
                     if self.command == 'GET': return self.send(200, campaigns.view())
+                match = re.fullmatch(campaign_base + r'/([a-f0-9]{32})/inputs/([a-f0-9]{32})/dispatch-context', path)
+                if match and self.command == 'GET':
+                    return self.send(200, campaigns.dispatch_context(*match.groups()))
                 match = re.fullmatch(campaign_base + r'/inputs/([a-f0-9]{32})(/review)?', path)
                 if match:
                     witness_ref, action = match.groups()

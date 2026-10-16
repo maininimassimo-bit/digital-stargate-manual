@@ -294,6 +294,41 @@ class ConfirmatoryCampaigns:
                                 'inputReviewSnapshotSha256':request['expectedInputReviewSha256']})
         return self._mutate(operation)
 
+    def dispatch_context(self, ref, witness_ref):
+        """Owner-only read port for exact frozen inputs, never a launch permit.
+
+        The snapshot is stable across other cases' execution records. A caller
+        must recheck current authority separately; this read does not serialize
+        revocation with queue writes or native process creation.
+        """
+        require(opaque(witness_ref), 'CAMPAIGN_DISPATCH_CONTEXT_WITNESS')
+        def snapshot(state, _):
+            p = self._plan(state, ref)
+            require(p['frozenUTC'] is not None and not p['revoked']
+                    and not self._sample_blockers(state, p), 'CAMPAIGN_DISPATCH_CONTEXT_BLOCKED')
+            require(witness_ref in p['request']['inputWitnessRefs'], 'CAMPAIGN_DISPATCH_CONTEXT_WITNESS')
+            freezes = [e for e in p['events'] if e['kind'] == 'FREEZE']
+            require(len(freezes) == 1, 'CAMPAIGN_DISPATCH_CONTEXT_FREEZE')
+            freeze = freezes[0]
+            require(freeze['facts']['inputReviewSnapshotSha256'] == self._selected_reviews_sha(state, p),
+                    'CAMPAIGN_DISPATCH_CONTEXT_REVIEW_CHANGED')
+            require(not any(e['request']['witnessRef'] == witness_ref for e in p['executions']),
+                    'CAMPAIGN_DISPATCH_CONTEXT_ALREADY_EXECUTED')
+            w = self._input(state, witness_ref)
+            value = {'protocol': 'DSG_CONFIRMATORY_DISPATCH_CONTEXT_V1',
+                     'planRef': ref, 'planSha256': p['planSha256'],
+                     'freezeEventSha256': freeze['sha256'], 'frozenUTC': p['frozenUTC'],
+                     'inputReviewSnapshotSha256': freeze['facts']['inputReviewSnapshotSha256'],
+                     'witnessRef': witness_ref, 'witnessSha256': w['sha256'],
+                     'inputReportSha256': w['request']['reportSha256'],
+                     'frames': copy.deepcopy(w['request']['frames']),
+                     'launchAuthorized': False, 'scientificValidation': 'NOT_VALIDATED'}
+            for key in ('algorithmRef', 'algorithmSha256', 'contractRef', 'contractSha256'):
+                value[key] = p['request'][key]
+            value['contextSha256'] = fingerprint(value)
+            return value
+        return self._mutate(snapshot)
+
     def record_execution(self, ref, request):
         fields(request, {'executionRef','planSha256','witnessRef','algorithmSha256','contractSha256',
                          'scienceEvidenceSha256','pipelineStatus','outcome','jobs'})
