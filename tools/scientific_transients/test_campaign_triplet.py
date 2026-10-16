@@ -103,6 +103,8 @@ class TripletTests(unittest.TestCase):
             def request(self,path,value=None):
                 test.calls.append(('worker',path))
                 if path.endswith('/register'):return test.queue.register(value)
+                if path.endswith('/technical-context'):
+                    parts=path.split('/');return test.bridge.technical_context(ref(11),parts[-4],int(parts[-2]))
                 if path.endswith('/reserve-once'):
                     parts=path.split('/');test.events.append('reserve-'+parts[-2])
                     result=test.bridge.reserve_envelope(ref(11),parts[-4],int(parts[-2]),value['reservation'],value['decisionId'])

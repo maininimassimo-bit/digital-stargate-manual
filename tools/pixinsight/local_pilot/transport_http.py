@@ -133,7 +133,7 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     return self.reject(404, {'error':'NOT_FOUND'})
                 protected = re.fullmatch(
                     (campaign_worker if is_campaign_worker else campaign_base) +
-                    r'/([a-f0-9]{32})/(dispatch-intents(?:/([a-f0-9]{64})/(receipt|jobs/([0-2])/(project|unreserved-context|close-unreserved|reserve-once)))?|frame-closures)', path)
+                    r'/([a-f0-9]{32})/(dispatch-intents(?:/([a-f0-9]{64})/(receipt|jobs/([0-2])/(project|unreserved-context|close-unreserved|reserve-once|technical-context)))?|frame-closures)', path)
                 if protected:
                     if campaign_queue is None:
                         return self.reject(404, {'error':'NOT_FOUND'})
@@ -150,6 +150,8 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                             return self.send(200, campaign_queue.unreserved_context(plan_ref, intent_sha, int(ordinal)))
                         if job_action == 'close-unreserved' and self.command == 'POST':
                             return self.send(200, campaign_queue.close_unreserved(plan_ref, intent_sha, int(ordinal), self.body()))
+                    elif self.command == 'GET' and job_action == 'technical-context':
+                        return self.send(200, campaign_queue.technical_context(plan_ref, intent_sha, int(ordinal)))
                     elif self.command == 'POST':
                         if action == 'frame-closures':
                             event = campaign_queue.close_frame(plan_ref, self.body())

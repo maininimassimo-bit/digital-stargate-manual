@@ -216,6 +216,15 @@ class TransientQueue:
         require('campaignOrigin' in job, 'TRANSIENT_CAMPAIGN_PROTECTED_JOB_REQUIRED')
         return {key: copy.deepcopy(job[key]) for key in ('jobId', 'request', 'binding', 'campaignOrigin')}
 
+    def _campaign_technical_snapshot(self, job_id, *, guard):
+        """Private read-only metadata: never runs expiry or commits queue state."""
+        self._campaign_access(guard)
+        state, _ = self._read(); job = self._job(state, job_id)
+        require('campaignOrigin' in job, 'TRANSIENT_CAMPAIGN_PROTECTED_JOB_REQUIRED')
+        return {key: copy.deepcopy(job[key]) for key in
+                ('jobId','request','binding','campaignOrigin','state','cancelRequested')} | {
+                'reservationConsumed': 'attemptId' in job or 'campaignReservation' in job}
+
     def _campaign_fenced_snapshot(self, job_id, *, guard):
         self._campaign_access(guard)
         state, _ = self._read(); job = self._job(state, job_id)

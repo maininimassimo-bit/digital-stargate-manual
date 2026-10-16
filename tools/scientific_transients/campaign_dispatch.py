@@ -22,10 +22,12 @@ class CampaignWorkerTransport(TransientTransport):
     """Existing bounded TLS transport with exactly two additional Worker POSTs."""
     def request(self, path, value=None):
         if path.startswith(BASE):
-            require(re.fullmatch(BASE + r'[a-f0-9]{32}/(?:frame-closures|dispatch-intents/'
-                    r'[a-f0-9]{64}/jobs/[0-2]/reserve-once)', path) is not None
-                    and value is not None, 'CAMPAIGN_WORKER_ROUTE')
-            return self._exchange(path, value, is_read=False)
+            is_read = re.fullmatch(BASE + r'[a-f0-9]{32}/dispatch-intents/'
+                                  r'[a-f0-9]{64}/jobs/[0-2]/technical-context', path) is not None
+            is_post = re.fullmatch(BASE + r'[a-f0-9]{32}/(?:frame-closures|dispatch-intents/'
+                                  r'[a-f0-9]{64}/jobs/[0-2]/reserve-once)', path) is not None
+            require((is_read and value is None) or (is_post and value is not None), 'CAMPAIGN_WORKER_ROUTE')
+            return self._exchange(path, value, is_read=is_read)
         return super().request(path, value)
 
 

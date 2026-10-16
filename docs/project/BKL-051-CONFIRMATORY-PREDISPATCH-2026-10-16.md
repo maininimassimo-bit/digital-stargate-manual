@@ -276,3 +276,50 @@ il chiamante deve fornire trasporti autenticati e piani locali già preparati.
 Nessuna credenziale è caricata, nessun processo nativo o servizio cloud viene
 avviato dalle prove. Restano da completare integrazione operativa, recupero
 assistito, accettazione Owner e pipeline scientifica; R09 resta aperto.
+
+## Candidato handoff e ingresso Worker separato
+
+`campaign_handoff.py` definisce due contratti esatti e limitati: il file
+`DSG_CAMPAIGN_WORKER_HANDOFF_V1` e la risposta tecnica Worker. Tre job ordinati
+sono legati a piano, intento, namespace, contesto, archivio, Worker e root.
+`requestSelectionSha256` è SHA256 canonico della selezione con dominio fisso
+`DSG_CAMPAIGN_REQUEST_SELECTION_V1`; il file ha inoltre un hash proprio. Sono
+impronte di correlazione, non credenziali o autorizzazioni trasferibili.
+
+Il GET Worker `.../jobs/<ordinal>/technical-context` richiede la credenziale
+dedicata e la composizione protetta. Restituisce soltanto scalari consentiti,
+mai eventi Owner, prove private, ammissioni riutilizzabili, attempt o lease.
+Lo snapshot della coda è strettamente in lettura: non esegue la scadenza delle
+lease e non scrive stato. Revoca e consumo sono ricontrollati dai gate di
+prenotazione; una lettura precedente non serializza revoca, CAS e avvio OS.
+
+Il pacchetto locale segue ora anche un percorso distinto dalla libreria con
+Owner transport iniettato: `prepare`, `register_all`, proposta Owner, fase Owner
+esterna e `run_worker`. I tre binding sono registrati con intenti e ACK durevoli
+prima delle proiezioni Owner. La riapertura di un pacchetto registrato verifica
+tutti gli ACK e richiede directory di esecuzione vuote e nessun marker di avvio
+o incertezza. Non recupera un tentativo. L'ingresso Worker non chiama né simula
+un'operazione Owner; confronta il file con gli snapshot autenticati, poi usa il
+medesimo driver, la prenotazione fresca e le chiusure sequenziali già verificati.
+
+`campaign_worker_cli.py` offre preflight offline, preparazione, registrazione,
+esportazione della proposta e ingresso Worker. La configurazione privata locale
+e l'handoff sono fissati da hash espliciti; l'origine del servizio è quella del
+codice/configurazione fidata, non del file importato. L'avvio richiede
+`--authorize-native-launch`. La sola credenziale Worker viene letta dall'ambiente
+e rimossa prima della costruzione del trasporto e di qualsiasi processo figlio.
+Non esistono fallback Google, token in argv/file, daemon o ripresa automatica.
+
+La UI Owner è ancora un gate distinto: PR607 non riconosce i nuovi eventi e il
+limite precedente di 512 è inferiore ai 534 eventi minimi della campagna completa.
+Occorrono schema, hash-chain, fatti, autorità e capacità espliciti aggiornati,
+etichette, integrazione degli esatti branch e nuova verifica visiva. La memoria
+di sessione del browser non equivale a fsync: la preparazione durevole delle
+operazioni Owner, in particolare delle proiezioni con intento noto, va completata
+prima di collegare i nuovi comandi al portale. Gli artefatti Owner di tale fase
+restano separati dal pacchetto Worker che deve essere ancora mai avviato.
+
+Questo candidato non attiva la composizione di produzione e non esegue prove
+native o cloud. Il percorso positivo usa soltanto processi mock e conteggi
+sintetici dichiarati. R09, integrazione UI e milestone restano aperti, con zero
+controlli scientifici reali qualificati.
