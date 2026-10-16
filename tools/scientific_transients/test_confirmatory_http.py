@@ -130,11 +130,11 @@ class CampaignHttpTests(unittest.TestCase):
         jobs=[{'requestId':ref(150000+i),'binding':{'bindingRef':ref(151000+i),
             'inputRef':frame['frameRef'],'referenceRef':ref(152000),
             'algorithmRef':ref(20),'contractRef':ref(30)}} for i,frame in enumerate(context['frames'])]
-        intent=f.service.prepare_dispatch(ref(10),{'decisionId':ref(153000),
+        bridge=CampaignQueue(f.service,self.queue)
+        intent=bridge.prepare_dispatch(ref(10),{'decisionId':ref(153000),
             'contextSha256':context['contextSha256'],'witnessRef':ref(100),'jobs':jobs,
             'workerId':ref(2),'rootId':ref(154000),'archiveSha256':sha(155000)})
         for item in jobs:self.queue.register(item['binding'])
-        bridge=CampaignQueue(f.service,self.queue)
         projected=bridge.project(ref(10),intent['sha256'],0)
         request={'workerId':ref(2),'rootId':ref(154000),'jobId':projected['jobId'],
             'bindingRef':jobs[0]['binding']['bindingRef'],'reservationRef':ref(156000)}

@@ -216,6 +216,18 @@ class TransientQueue:
         require('campaignOrigin' in job, 'TRANSIENT_CAMPAIGN_PROTECTED_JOB_REQUIRED')
         return {key: copy.deepcopy(job[key]) for key in ('jobId', 'request', 'binding', 'campaignOrigin')}
 
+    def _campaign_fenced_snapshot(self, job_id, *, guard):
+        self._campaign_access(guard)
+        state, _ = self._read(); job = self._job(state, job_id)
+        # Exact shape excludes every attempt, root, lease, reservation and
+        # recovery field, including unexpected fields with a null value.
+        fields(job, {'jobId', 'request', 'binding', 'state', 'cancelRequested', 'sequence',
+                     'result', 'reviews', 'createdAt', 'updatedAt', 'campaignOrigin'})
+        require(job['state'] == 'CANCELLED' and job['cancelRequested'] is True
+                and type(job['sequence']) is int and job['sequence'] == 0
+                and job['result'] is None and job['reviews'] == [], 'TRANSIENT_CAMPAIGN_NOT_FENCED_UNRESERVED')
+        return copy.deepcopy(job)
+
     def _reserve_campaign_once(self, request, origin, admission_sha, *, guard):
         self._campaign_access(guard)
         fields(request, {'workerId', 'rootId', 'jobId', 'bindingRef', 'reservationRef'})

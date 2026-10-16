@@ -8,9 +8,12 @@ ref,sha=fixtures.ref,fixtures.sha
 
 class AdmissionTests(unittest.TestCase):
     def setUp(self):
+        self.setup_fixture()
+
+    def setup_fixture(self, *, prepare=True):
         self.f=fixtures.CampaignTests();self.f.setUp();self.f.freeze();self.s=self.f.service
         self.request=self.intent_request(0)
-        self.intent=self.s.prepare_dispatch(ref(10),self.request)
+        self.intent=self.s.prepare_dispatch(ref(10),self.request) if prepare else None
 
     def intent_request(self,case):
         context=self.s.dispatch_context(ref(10),ref(100+case))

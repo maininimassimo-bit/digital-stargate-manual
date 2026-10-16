@@ -92,7 +92,10 @@ class ConfirmatoryCampaigns:
                     'inputs': [], 'plans': [], 'lastRecordedUTC': None, 'stateSha256': None}, generation
         require(len(raw) <= LIMIT, 'CAMPAIGN_STORAGE_LIMIT')
         state = decode(raw)
-        fields(state, {'protocol', 'workerId', 'ownerRef', 'inputs', 'plans', 'lastRecordedUTC', 'stateSha256'})
+        fields(state, {'protocol', 'workerId', 'ownerRef', 'inputs', 'plans', 'lastRecordedUTC', 'stateSha256'}
+               | ({'queueNamespaceSha256'} if 'queueNamespaceSha256' in state else set()))
+        require('queueNamespaceSha256' not in state or digest(state['queueNamespaceSha256']),
+                'CAMPAIGN_QUEUE_NAMESPACE')
         require(state['workerId'] == self.worker_id and state['ownerRef'] == self.owner_ref
                 and state['stateSha256'] == fingerprint({k:v for k,v in state.items() if k != 'stateSha256'}),
                 'CAMPAIGN_STATE_IDENTITY_OR_INTEGRITY')
@@ -338,10 +341,19 @@ class ConfirmatoryCampaigns:
 
     @staticmethod
     def _open_admissions(plan):
-        closed = {e['request']['admissionSha256'] for e in plan['events'] if e['kind'] == 'FRAME_CLOSURE'}
+        closed = {e['request']['admissionSha256'] for e in plan['events']
+                  if e['kind'] in {'FRAME_CLOSURE', 'UNRESERVED_FENCED_CLOSURE'}}
         return [e for e in plan['events'] if e['kind'] == 'START_ADMISSION' and e['sha256'] not in closed]
 
-    def prepare_dispatch(self, ref, request):
+    def _dispatch_namespace(self, state, intent, guard):
+        namespace = intent['request'].get('queueNamespaceSha256')
+        configured = getattr(self, '_queue_namespace_sha', None)
+        if namespace is not None or configured is not None or 'queueNamespaceSha256' in state:
+            require(namespace is not None and namespace == configured == state.get('queueNamespaceSha256')
+                    and guard is getattr(self, '_queue_guard', None) and guard is not None
+                    and self.job_reader == self._queue_job_reader, 'CAMPAIGN_QUEUE_NAMESPACE_MISMATCH')
+
+    def prepare_dispatch(self, ref, request, *, queue_guard=None):
         """Owner application port: durable intent only, with no queue side effects.
 
         Not wired to HTTP until guarded queue projection and the local runner
@@ -349,6 +361,12 @@ class ConfirmatoryCampaigns:
         """
         fields(request, {'decisionId', 'contextSha256', 'witnessRef', 'jobs',
                          'workerId', 'rootId', 'archiveSha256'})
+        configured = getattr(self, '_queue_namespace_sha', None)
+        if configured is not None:
+            require(queue_guard is getattr(self, '_queue_guard', None) and queue_guard is not None
+                    and self.job_reader == self._queue_job_reader, 'CAMPAIGN_QUEUE_TRUSTED_PREPARATION_REQUIRED')
+            request = copy.deepcopy(request)
+            request['queueNamespaceSha256'] = configured
         require(all(opaque(request[k]) for k in ('decisionId', 'witnessRef', 'workerId', 'rootId'))
                 and request['workerId'] == self.worker_id
                 and digest(request['contextSha256']) and digest(request['archiveSha256'])
@@ -363,6 +381,7 @@ class ConfirmatoryCampaigns:
                 and len({j['binding']['bindingRef'] for j in request['jobs']}) == 3,
                 'CAMPAIGN_DISPATCH_DUPLICATE_JOB')
         def operation(state, stamp):
+            require(state.get('queueNamespaceSha256') in {None, configured}, 'CAMPAIGN_QUEUE_NAMESPACE_MISMATCH')
             p = self._plan(state, ref)
             repeat = self._repeat(p['events'], request)
             if repeat:
@@ -382,11 +401,13 @@ class ConfirmatoryCampaigns:
                 require(binding['inputRef'] == frame['frameRef']
                         and binding['algorithmRef'] == context['algorithmRef']
                         and binding['contractRef'] == context['contractRef'], 'CAMPAIGN_DISPATCH_JOB_BINDING')
+            if configured is not None:
+                state['queueNamespaceSha256'] = configured
             return self._event(p, 'DISPATCH_INTENT', request, stamp, 'AUTHENTICATED_OWNER_REQUEST',
                                {'context': context, 'queueProjectionPerformed': False, 'launchAuthorized': False})
         return self._mutate(operation)
 
-    def admit_frame(self, ref, request):
+    def admit_frame(self, ref, request, *, queue_guard=None):
         """Consume one exact admission; an existing admission never reissues a grant.
 
         Admission is in-flight intent, not evidence that an OS process started
@@ -399,11 +420,12 @@ class ConfirmatoryCampaigns:
                 'CAMPAIGN_START_ADMISSION')
         def operation(state, stamp):
             p = self._plan(state, ref)
+            intent = self._dispatch_event(p, 'DISPATCH_INTENT', request['dispatchIntentSha256'])
+            self._dispatch_namespace(state, intent, queue_guard)
             repeat = self._repeat(p['events'], request)
             if repeat:
                 require(repeat['kind'] == 'START_ADMISSION', 'CAMPAIGN_DISPATCH_DECISION_KIND')
                 return {'disposition': 'RECONCILIATION_REQUIRED', 'admission': None}
-            intent = self._dispatch_event(p, 'DISPATCH_INTENT', request['dispatchIntentSha256'])
             owner = intent['request']; ordinal = request['ordinal']
             require(request['rootId'] == owner['rootId'] and request['workerId'] == owner['workerId'],
                     'CAMPAIGN_ADMISSION_WORKER_ROOT')
@@ -431,11 +453,12 @@ class ConfirmatoryCampaigns:
                 {'jobId': 'TRN_' + owner['jobs'][ordinal]['requestId'],
                  'binding': owner['jobs'][ordinal]['binding'],
                  'inputSha256': context['frames'][ordinal]['sha256'],
+                 'queueNamespaceSha256': owner.get('queueNamespaceSha256'),
                  'inFlightOrUncertain': True, 'nativeStoppedAttested': False})
             return {'disposition': 'CREATED', 'admission': admission}
         return self._mutate(operation)
 
-    def close_frame(self, ref, request):
+    def close_frame(self, ref, request, *, queue_guard=None):
         """Retain exact worker-reported stop evidence; never scientific acceptance.
 
         Read the technical queue snapshot once outside the CAS callback, whose
@@ -452,17 +475,23 @@ class ConfirmatoryCampaigns:
                 and request['technicalState'] in {'COMPLETED', 'FAILED', 'CANCELLED', 'RECOVERY_REQUIRED'}
                 and (request['reportSha256'] is None or digest(request['reportSha256'])),
                 'CAMPAIGN_FRAME_CLOSURE')
+        current, _ = self._read()
+        current_plan = self._plan(current, ref)
+        current_admission = self._dispatch_event(current_plan, 'START_ADMISSION', request['admissionSha256'])
+        current_intent = self._dispatch_event(current_plan, 'DISPATCH_INTENT',
+                                              current_admission['request']['dispatchIntentSha256'])
+        self._dispatch_namespace(current, current_intent, queue_guard)
         job = copy.deepcopy(self.job_reader(request['jobId']))
         def operation(state, stamp):
             p = self._plan(state, ref)
+            admission = self._dispatch_event(p, 'START_ADMISSION', request['admissionSha256'])
+            intent = self._dispatch_event(p, 'DISPATCH_INTENT', admission['request']['dispatchIntentSha256'])
+            self._dispatch_namespace(state, intent, queue_guard)
             repeat = self._repeat(p['events'], request)
             if repeat:
                 require(repeat['kind'] == 'FRAME_CLOSURE', 'CAMPAIGN_DISPATCH_DECISION_KIND')
                 return repeat
-            admission = self._dispatch_event(p, 'START_ADMISSION', request['admissionSha256'])
-            intent = self._dispatch_event(p, 'DISPATCH_INTENT', admission['request']['dispatchIntentSha256'])
-            require(not any(e['kind'] == 'FRAME_CLOSURE' and
-                            e['request']['admissionSha256'] == admission['sha256'] for e in p['events']),
+            require(admission in self._open_admissions(p),
                     'CAMPAIGN_FRAME_ALREADY_CLOSED')
             result = job.get('result')
             require(request['jobId'] == admission['facts']['jobId'] == job['jobId']
@@ -492,6 +521,58 @@ class ConfirmatoryCampaigns:
                  'ownerRecoveryClosure': copy.deepcopy(job.get('recoveryClosure'))})
         return self._mutate(operation)
 
+    def _close_unreserved(self, ref, request, snapshot, *, queue_guard):
+        """Trusted Owner reconciliation of a stable cancelled/unreserved queue.
+
+        Snapshot must come from the configured private queue port before this
+        CAS. This records a terminal queue barrier, never an OS stop assertion.
+        """
+        require(queue_guard is not None and queue_guard is getattr(self, '_queue_guard', None),
+                'CAMPAIGN_QUEUE_TRUSTED_RECONCILIATION_REQUIRED')
+        fields(request, {'decisionId', 'admissionSha256', 'jobId', 'fenceSnapshotSha256',
+                         'cancellationEvidenceSha256'})
+        require(opaque(request['decisionId']) and all(digest(request[k]) for k in
+                ('admissionSha256', 'fenceSnapshotSha256', 'cancellationEvidenceSha256'))
+                and request['fenceSnapshotSha256'] == fingerprint(snapshot), 'CAMPAIGN_UNRESERVED_PROOF')
+        snapshot = copy.deepcopy(snapshot)
+        def operation(state, stamp):
+            p = self._plan(state, ref)
+            admission = self._dispatch_event(p, 'START_ADMISSION', request['admissionSha256'])
+            intent = self._dispatch_event(p, 'DISPATCH_INTENT', admission['request']['dispatchIntentSha256'])
+            self._dispatch_namespace(state, intent, queue_guard)
+            repeat = self._repeat(p['events'], request)
+            if repeat:
+                require(repeat['kind'] == 'UNRESERVED_FENCED_CLOSURE', 'CAMPAIGN_DISPATCH_DECISION_KIND')
+                return repeat
+            require(admission in self._open_admissions(p), 'CAMPAIGN_FRAME_ALREADY_CLOSED')
+            origin = snapshot['campaignOrigin']; ordinal = admission['request']['ordinal']
+            selected = intent['request']['jobs'][ordinal]
+            require(snapshot['jobId'] == request['jobId'] == admission['facts']['jobId']
+                    and snapshot['binding'] == selected['binding'] == admission['facts']['binding']
+                    and snapshot['request'] == {'requestId': selected['requestId'],
+                                               'bindingRef': selected['binding']['bindingRef']}
+                    and origin['namespaceSha256'] == intent['request']['queueNamespaceSha256']
+                    == admission['facts']['queueNamespaceSha256']
+                    and origin['intentSha256'] == intent['sha256'] and origin['ordinal'] == ordinal
+                    and origin['rootId'] == intent['request']['rootId']
+                    and utc(snapshot['createdAt']) >= utc(intent['recordedUTC'])
+                    and utc(snapshot['updatedAt']) >= utc(snapshot['createdAt'])
+                    and utc(snapshot['updatedAt']) <= utc(stamp), 'CAMPAIGN_UNRESERVED_BINDING')
+            # Queue APIs do not reset/delete terminal jobs. A cancelled job
+            # without reservation fields cannot later commit a stale reserve.
+            fields(snapshot, {'jobId', 'request', 'binding', 'state', 'cancelRequested', 'sequence',
+                              'result', 'reviews', 'createdAt', 'updatedAt', 'campaignOrigin'})
+            require(snapshot['state'] == 'CANCELLED' and snapshot['cancelRequested'] is True
+                    and type(snapshot['sequence']) is int and snapshot['sequence'] == 0
+                    and snapshot['result'] is None and snapshot['reviews'] == [],
+                    'CAMPAIGN_UNRESERVED_NOT_FENCED')
+            return self._event(p, 'UNRESERVED_FENCED_CLOSURE', request, stamp,
+                'AUTHENTICATED_OWNER_TECHNICAL_RECONCILIATION',
+                {'status': 'NOT_STARTED_FENCED', 'queueNamespaceSha256': origin['namespaceSha256'],
+                 'queueFenceSnapshot': snapshot, 'nativeStoppedAttested': False,
+                 'scientificValidation': 'NOT_VALIDATED'})
+        return self._mutate(operation)
+
     def dispatch_receipt(self, ref, intent_sha):
         """Owner read-only reconciliation; no admission/lease can be recovered."""
         require(digest(intent_sha), 'CAMPAIGN_DISPATCH_RECEIPT')
@@ -501,10 +582,11 @@ class ConfirmatoryCampaigns:
             admissions = [e for e in p['events'] if e['kind'] == 'START_ADMISSION' and
                           e['request']['dispatchIntentSha256'] == intent_sha]
             shas = {e['sha256'] for e in admissions}
-            closures = [e for e in p['events'] if e['kind'] == 'FRAME_CLOSURE' and
+            closures = [e for e in p['events'] if e['kind'] in {'FRAME_CLOSURE', 'UNRESERVED_FENCED_CLOSURE'} and
                         e['request']['admissionSha256'] in shas]
             closed = {e['request']['admissionSha256'] for e in closures}
             return {'intent': intent, 'admissions': admissions, 'closures': closures,
+                    'queueNamespaceSha256': state.get('queueNamespaceSha256'),
                     'headSha256': p['headSha256'], 'revoked': p['revoked'],
                     'pendingAdmissionSha256': [e['sha256'] for e in admissions if e['sha256'] not in closed],
                     'pendingDisposition': 'STOP_PENDING_RECONCILIATION' if p['revoked'] else 'IN_FLIGHT_OR_UNCERTAIN',
@@ -528,8 +610,11 @@ class ConfirmatoryCampaigns:
                     and (job['attemptId'] is None or opaque(job['attemptId']))
                     and (job['reportSha256'] is None or digest(job['reportSha256'])), 'CAMPAIGN_EXECUTION_JOB')
         require(len({j['jobId'] for j in request['jobs']})==3, 'CAMPAIGN_JOB_REUSED')
-        def operation(state, stamp):
+        def authority(state):
             p=self._plan(state,ref);v=p['request']
+            if 'queueNamespaceSha256' in state:
+                require(state['queueNamespaceSha256'] == getattr(self, '_queue_namespace_sha', None)
+                        and self.job_reader == self._queue_job_reader, 'CAMPAIGN_QUEUE_NAMESPACE_MISMATCH')
             require(p['frozenUTC'] is not None and not p['revoked']
                     and request['planSha256']==p['planSha256']
                     and request['algorithmSha256']==v['algorithmSha256']
@@ -537,15 +622,49 @@ class ConfirmatoryCampaigns:
                     and request['witnessRef'] in v['inputWitnessRefs'], 'CAMPAIGN_EXECUTION_BINDING')
             previous=[e for e in p['executions'] if e['request']['executionRef']==request['executionRef']]
             if previous:
-                require(previous[0]['request']==request,'CAMPAIGN_EXECUTION_CONFLICT');return self._worker_record(previous[0])
+                require(previous[0]['request']==request,'CAMPAIGN_EXECUTION_CONFLICT');return p, v, None, previous[0]
             require(not any(e['request']['witnessRef']==request['witnessRef'] for e in p['executions']),
                     'CAMPAIGN_CASE_EXECUTION_ALREADY_RECORDED')
-            w=self._input(state,request['witnessRef']); technical=True; snapshots=[]
+            w=self._input(state,request['witnessRef'])
             require([j['frameRef'] for j in request['jobs']]==[f['frameRef'] for f in w['request']['frames']],
                     'CAMPAIGN_FRAME_BINDING')
-            for item,frame in zip(request['jobs'],w['request']['frames']):
+            if 'queueNamespaceSha256' in state:
+                intents = [e for e in p['events'] if e['kind'] == 'DISPATCH_INTENT'
+                           and e['request']['witnessRef'] == request['witnessRef']]
+                require(len(intents) == 1, 'CAMPAIGN_EXECUTION_DISPATCH_BINDING')
+                intent = intents[0]
+                self._dispatch_namespace(state, intent, self._queue_guard)
+                require([j['jobId'] for j in request['jobs']] ==
+                        ['TRN_' + j['requestId'] for j in intent['request']['jobs']],
+                        'CAMPAIGN_EXECUTION_DISPATCH_BINDING')
+                if request['outcome'] != 'INCONCLUSIVE':
+                    for ordinal, item in enumerate(request['jobs']):
+                        admissions = [e for e in p['events'] if e['kind'] == 'START_ADMISSION'
+                                      and e['request']['dispatchIntentSha256'] == intent['sha256']
+                                      and e['request']['ordinal'] == ordinal]
+                        closures = [e for e in p['events'] if e['kind'] == 'FRAME_CLOSURE' and admissions
+                                    and e['request']['admissionSha256'] == admissions[0]['sha256']]
+                        require(len(admissions) == len(closures) == 1
+                                and closures[0]['request']['technicalState'] == 'COMPLETED'
+                                and closures[0]['request']['attemptId'] == item['attemptId']
+                                and closures[0]['request']['reportSha256'] == item['reportSha256'],
+                                'CAMPAIGN_EXECUTION_FRAME_CLOSURE_MISSING')
+            return p, v, w, None
+        initial, _ = self._read()
+        prior = authority(initial)[3]
+        reader = self.job_reader
+        # Read once outside the retriable CAS. Positive terminal queue reports
+        # are immutable; inconclusive snapshots remain point-in-time evidence.
+        jobs = [] if prior is not None else [copy.deepcopy(reader(item['jobId'])) for item in request['jobs']]
+        def operation(state, stamp):
+            p, v, w, previous = authority(state)
+            if previous is not None:
+                return self._worker_record(previous)
+            require(len(jobs) == 3, 'CAMPAIGN_EXECUTION_SNAPSHOT_MISSING')
+            technical = True; snapshots = []
+            for item,frame,job in zip(request['jobs'],w['request']['frames'],jobs):
                 require(item['inputSha256']==frame['sha256'], 'CAMPAIGN_INPUT_DIGEST')
-                job=self.job_reader(item['jobId']); binding=job['binding']
+                binding=job['binding']
                 require(job['jobId']==item['jobId'] and job.get('attemptId')==item['attemptId']
                         and binding['inputRef']==item['frameRef'] and binding['algorithmRef']==v['algorithmRef']
                         and binding['contractRef']==v['contractRef'] and utc(job['createdAt'])>utc(p['frozenUTC'])

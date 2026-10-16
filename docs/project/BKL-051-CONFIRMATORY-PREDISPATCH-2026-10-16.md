@@ -101,6 +101,48 @@ Questi collegamenti restano application port interne: nessun nuovo percorso HTTP
 protetto è esposto, nessuna composizione runtime è attivata e nessun processo
 nativo è avviato. La verifica completa del coordinatore locale resta necessaria.
 
+## Namespace e chiusura senza attempt in verifica
+
+La preparazione Owner passa ora attraverso `CampaignQueue.prepare_dispatch`.
+La composizione aggiunge il namespace canonico; il chiamante non può fornirlo
+come campo JSON o usare il metodo diretto per aggirare la configurazione. Il primo
+intento esplicito conserva il namespace nel registro, nell'intento e poi
+nell'ammissione. Una diversa chiave coda non può preparare, proiettare, prenotare
+o riconciliare quell'intento, anche con lo stesso Worker. La composizione fissa
+anche il lettore dei job alla coda esatta e rifiuta una sua sostituzione.
+Il vincolo copre anche il precedente `record_execution`: su un registro vincolato
+la coda configurata viene verificata prima di qualunque lettura dei job; servono
+l'intento Owner del caso e i suoi tre job esatti. Un esito diverso da INCONCLUSIVE
+richiede inoltre le tre ammissioni con chiusure COMPLETED e attempt/rapporti
+corrispondenti. La chiusura di un frame verifica la provenienza prima di leggere
+la coda e di nuovo nel CAS. Questi controlli non trasformano i rapporti Worker in
+attestazioni scientifiche né sostituiscono la revisione Owner.
+Non viene assegnato automaticamente un namespace agli intenti storici non
+vincolati, che restano leggibili ma non vengono adottati dai nuovi flussi.
+
+Per un'ammissione consumata senza attempt, `unreserved_context` legge uno snapshot
+privato della coda. Deve essere esattamente CANCELLED, con richiesta di
+annullamento, sequenza zero e senza alcun campo attempt, root, lease,
+prenotazione o recupero, neppure con valore null. Il marcatore completo deve
+corrispondere all'intento, all'ammissione e al namespace. Una lettura QUEUED o un
+job assente non sono prove sufficienti.
+
+La cancellazione è una barriera stabile della coda: se vince prima del commit di
+prenotazione, il CAS obsoleto perde e non può emettere una lease; se la
+prenotazione vince, esiste un attempt e questo percorso rifiuta la chiusura.
+La barriera può precedere anche l'ammissione logica, purché la cronologia del job
+sia coerente: il job terminale resta non prenotabile da tutte le API previste.
+
+`close_unreserved` è una application port Owner, ancora non esposta via HTTP.
+Rilegge lo snapshot fuori dal CAS del registro e conserva l'evento distinto
+UNRESERVED_FENCED_CLOSURE con stato NOT_STARTED_FENCED, hash dello snapshot ed
+evidenza dell'annullamento dichiarata dall'Owner. Non inventa un attempt, non
+attesta un arresto OS e non produce COMPLETED. Libera soltanto l'ammissione esatta:
+il frame successivo dello stesso caso resta bloccato. La pulizia è ammessa dopo
+revoca senza riabilitare nuovi avvii. Intenti durabili prima dei futuri POST di
+annullamento e chiusura, riconciliazione delle risposte perse e autenticazione
+Owner restano requisiti dell'integrazione HTTP/coordinatore.
+
 ## Integrazione ancora da implementare e verificare
 
 L'intento della tripletta e l'ammissione di ogni avvio devono usare il medesimo
@@ -154,3 +196,25 @@ regressione su coda, capienza, ReservationIntent e OperatorPlan. I riferimenti d
 arresto della prova di capienza sono fixture dichiarate, non evidenze OS né
 controlli scientifici. Il successivo controllo contestuale campagna/HTTP e le
 revisioni esatte sono gate separati.
+
+Le prime 15 prove sintetiche di namespace e chiusura senza attempt sono passate:
+concorrenza forzata cancel/reserve, barriera precedente all'ammissione, rifiuto di
+attempt presenti anche dopo CANCELLED, namespace estranei, campi null inattesi,
+revoca, ripetizione di decisioni e lettura dello snapshot una sola volta fuori
+dal callback CAS. Le regressioni sull'esatto candidato e ARB/RQ restano separate.
+
+La prima revisione ha rilevato che il precedente percorso di registrazione degli
+esiti non applicava ancora il namespace. Il candidato è stato corretto prima
+del commit; quattro ulteriori controprove verificano rifiuto della coda estranea
+senza letture, obbligo dei job Owner, obbligo delle tre chiusure e mantenimento
+dello stato Worker-reported. Quel candidato comprendeva 19 prove di riconciliazione;
+la prima regressione di 105 casi è passata, ma precede la correzione seguente.
+
+Il secondo riesame ha rilevato letture della coda dentro il callback CAS della
+registrazione degli esiti. Gli snapshot sono stati spostati fuori dal callback:
+autorità e binding sono verificati prima delle letture e ricontrollati ad ogni
+retry del CAS. Tre job producono tre letture anche con conflitto, mentre una
+decisione già registrata non rilegge la coda. Una richiesta di chiusura malformata
+viene inoltre rifiutata prima di acquisire lo snapshot privato. La suite di
+riconciliazione comprende ora 21 prove e la regressione completa richiede 107
+casi, oltre a nuova ARB/RQ e CI sull'esatto commit.

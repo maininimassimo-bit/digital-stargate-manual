@@ -13,10 +13,11 @@ ref,sha=fixtures.ref,fixtures.sha
 
 class CampaignQueueTests(unittest.TestCase):
     def setUp(self):
-        self.fixture=fixtures.AdmissionTests();self.fixture.setUp();self.f=self.fixture.f;self.s=self.fixture.s
+        self.fixture=fixtures.AdmissionTests();self.fixture.setup_fixture(prepare=False);self.f=self.fixture.f;self.s=self.fixture.s
         self.q=TransientQueue(self.f.store,ref(2),lambda:self.f.now,state_ref=ref(95000),capacity_profile=CAMPAIGN_PROFILE)
         self.s.job_reader=self.q.status;self.bridge=CampaignQueue(self.s,self.q)
-        self.intent=self.fixture.intent;self.owner=self.fixture.request
+        self.owner=self.fixture.request
+        self.intent=self.bridge.prepare_dispatch(ref(10),self.owner);self.fixture.intent=self.intent
         for item in self.owner['jobs']:self.q.register(item['binding'])
         self.job=self.bridge.project(ref(10),self.intent['sha256'],0)
         self.request={'workerId':ref(2),'rootId':self.owner['rootId'],'jobId':self.job['jobId'],
@@ -122,7 +123,7 @@ class CampaignQueueTests(unittest.TestCase):
         self.assertNotIn('leaseToken',str(self.q.worker_receipt(self.job['jobId'])))
 
     def test_forced_queue_cas_conflict_emits_exactly_one_lease(self):
-        admission=self.s.admit_frame(ref(10),self.fixture.admission_request())['admission']
+        admission=self.s.admit_frame(ref(10),self.fixture.admission_request(),queue_guard=self.bridge._guard)['admission']
         origin=self.bridge._origin(self.intent,self.intent['facts']['context'],0)
         original=self.q.store.put;fired=[];winner=[]
         def intercept(key,raw,generation):
@@ -142,8 +143,8 @@ class CampaignQueueTests(unittest.TestCase):
         raw,_=self.f.store.get(self.s.key);self.f.store.put(other.key,raw,0)
         q2=TransientQueue(self.f.store,ref(2),lambda:self.f.now,state_ref=ref(95000),capacity_profile=CAMPAIGN_PROFILE)
         bridge=CampaignQueue(other,q2)
-        with self.assertRaisesRegex(ProtocolError,'PROJECTION_CONFLICT'):bridge.project(ref(10),self.intent['sha256'],0)
-        with self.assertRaisesRegex(ProtocolError,'ORIGIN_MISMATCH'):
+        with self.assertRaisesRegex(ProtocolError,'NAMESPACE_MISMATCH'):bridge.project(ref(10),self.intent['sha256'],0)
+        with self.assertRaisesRegex(ProtocolError,'NAMESPACE_MISMATCH'):
             bridge.admit_and_reserve(ref(10),self.intent['sha256'],0,self.request,ref(96001))
 
     def test_existing_unmarked_job_is_never_upgraded(self):
@@ -187,7 +188,7 @@ class CampaignQueueTests(unittest.TestCase):
         # These stop/report digests are declared fixtures, never OS evidence.
         for case in range(59):
             owner=self.owner if case==0 else self.fixture.intent_request(case)
-            intent=self.intent if case==0 else self.s.prepare_dispatch(ref(10),owner)
+            intent=self.intent if case==0 else self.bridge.prepare_dispatch(ref(10),owner)
             for ordinal,item in enumerate(owner['jobs']):
                 index=3*case+ordinal
                 self.q.register(item['binding'])
@@ -203,7 +204,7 @@ class CampaignQueueTests(unittest.TestCase):
                     'qualityCounts':{'measured':1,'excluded':0,'incomplete':0}}})
                 receipt=self.s.dispatch_receipt(ref(10),intent['sha256'])
                 admission=receipt['admissions'][-1]
-                self.s.close_frame(ref(10),{'decisionId':ref(110000+index),'admissionSha256':admission['sha256'],
+                self.bridge.close_frame(ref(10),{'decisionId':ref(110000+index),'admissionSha256':admission['sha256'],
                     'jobId':job['jobId'],'attemptId':job['attemptId'],'reportSha256':sha(130000+index),
                     'nativeStopEvidenceSha256':sha(140000+index),'technicalState':'COMPLETED',
                     'processStoppedReported':True})
