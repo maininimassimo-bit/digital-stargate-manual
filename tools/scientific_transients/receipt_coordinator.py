@@ -48,6 +48,10 @@ class TransientTransport(OriginTransport):
         require(re.fullmatch(r"/v1/transient-analysis/worker/(?:claim|reserve|register|jobs/TRN_[a-f0-9]{32}(?:/report)?)", path), "TRANSIENT_ROUTE_INVALID")
         is_read = bool(re.fullmatch(r"/v1/transient-analysis/worker/jobs/TRN_[a-f0-9]{32}", path))
         require((value is None) == is_read, "TRANSIENT_METHOD_INVALID")
+        return self._exchange(path, value, is_read=is_read)
+
+    def _exchange(self, path, value, *, is_read):
+        """Bounded one-shot exchange after the public caller validates its route."""
         raw = None if is_read else encode(value)
         require(raw is None or len(raw) <= 16384, "TRANSIENT_REQUEST_SIZE")
         request = urllib.request.Request(self.origin + path, raw, method="GET" if is_read else "POST",
