@@ -102,7 +102,25 @@
       }
       return structuredClone(receipt);
     }
-    return Object.freeze({prepare,submit,invalidate,reconcileIntent,hasPending:inspectStorage,
+    async function reconcileProjection(proposal,intentReceipt,savedReceipt=null){
+      proposal=structuredClone(proposal);intentReceipt=structuredClone(intentReceipt);savedReceipt=structuredClone(savedReceipt);
+      check(!disposed&&host.canAct()&&inspectStorage()&&!blocked&&pending?.action==='PROJECT_JOB');
+      const generation=epoch,record=structuredClone(pending),ordinal=Number(record.relativePath.match(/\/jobs\/([0-2])\/project$/)[1]);
+      const alive=()=>check(!disposed&&epoch===generation&&host.canAct()&&inspectStorage()&&!blocked&&same(pending,record));
+      const raw=await host.request('/v1/transient-analysis/campaigns/'+record.planRef+'/review-receipt');alive();
+      const technical=await host.request(record.relativePath.replace(/\/project$/,'/technical-context'));alive();
+      const receipt=await globalThis.DSGCampaignOwnerReceipt.projected(raw,proposal,intentReceipt,ordinal,technical);alive();
+      check(receipt.planRef===record.planRef&&receipt.operationKeySha256===record.operationKeySha256
+        &&receipt.requestSha256===record.requestSha256);
+      if(savedReceipt!==null){
+        check(same(savedReceipt,receipt));alive();
+        try{host.storage.removeItem(KEY);check(host.storage.getItem(KEY)===null);}
+        catch{blocked=true;throw Error('Chiusura della memoria della richiesta non verificabile.');}
+        pending=null;invalidate();
+      }
+      return structuredClone(receipt);
+    }
+    return Object.freeze({prepare,submit,invalidate,reconcileIntent,reconcileProjection,hasPending:inspectStorage,
       dispose(){invalidate();disposed=true;}});
   }
   globalThis.DSGCampaignOwnerOperation=Object.freeze({create});

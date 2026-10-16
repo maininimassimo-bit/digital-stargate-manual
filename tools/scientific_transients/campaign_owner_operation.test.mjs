@@ -96,3 +96,25 @@ test('reload restores correlation record but never challenge or permission to su
   await assert.rejects(f.controller.submit({}));await assert.rejects(f.controller.prepare(f.selection));
   await f.controller.reconcileIntent({},old.receipt);assert.equal(f.controller.hasPending(),false);
 });
+
+async function projected(){
+  const f=fixture();f.selection.action='PROJECT_JOB';f.selection.relativePath+='/'+'d'.repeat(64)+'/jobs/0/project';f.selection.request={};
+  await f.controller.submit(await f.envelope(await f.controller.prepare(f.selection)));
+  const record=JSON.parse([...f.values.values()][0]);
+  const receipt={planRef:record.planRef,operationKeySha256:record.operationKeySha256,requestSha256:record.requestSha256};
+  f.context.DSGCampaignOwnerReceipt={projected:async()=>receipt};
+  f.host.request=async(path,method)=>{assert.equal(method,undefined);f.calls.push(path);return {};};
+  return {...f,receipt};
+}
+test('projection reconciliation uses two GETs and exact saved receipt, never POST again',async()=>{
+  const f=await projected();await f.controller.reconcileProjection({},{});assert.equal(f.controller.hasPending(),true);
+  await f.controller.reconcileProjection({},{},f.receipt);assert.equal(f.controller.hasPending(),false);
+  assert.equal(f.calls.length,5);assert.ok(f.calls[2].endsWith('/jobs/0/technical-context'));
+});
+test('projection read missing or session changed preserves pending and forbids replay',async()=>{
+  const f=await projected();f.host.request=async()=>{throw Error('synthetic unavailable GET');};
+  await assert.rejects(f.controller.reconcileProjection({},{},f.receipt));assert.equal(f.controller.hasPending(),true);
+  await assert.rejects(f.controller.prepare(f.selection));
+  f.host.request=async()=>{f.controller.invalidate();return {};};
+  await assert.rejects(f.controller.reconcileProjection({},{},f.receipt));assert.equal(f.controller.hasPending(),true);
+});
