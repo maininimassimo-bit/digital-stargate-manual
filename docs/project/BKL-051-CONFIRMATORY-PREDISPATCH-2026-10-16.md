@@ -218,3 +218,27 @@ decisione già registrata non rilegge la coda. Una richiesta di chiusura malform
 viene inoltre rifiutata prima di acquisire lo snapshot privato. La suite di
 riconciliazione comprende ora 21 prove e la regressione completa richiede 107
 casi, oltre a nuova ARB/RQ e CI sull'esatto commit.
+
+## Candidato HTTP protetto (non attivato)
+
+`handler_for` accetta una composizione `campaign_queue` esplicita, disabilitata
+per default. Verifica l'identità dei servizi effettivi e il namespace senza
+creare stato. I nuovi percorsi Owner permettono intento, ricevuta, proiezione e
+chiusura con barriera; i percorsi Worker permettono prenotazione singola e
+chiusura tecnica. I ruoli restano distinti e non esistono fallback legacy.
+La risposta Worker di chiusura è una ricevuta tecnica minimizzata: hash della
+chiusura e dell'ammissione, stato dichiarato e assenza di attestazione scientifica.
+La dichiarazione di riconciliazione Owner resta nel registro e nella ricevuta
+Owner, senza essere restituita al Worker. Questa separazione corregge il P2
+rilevato dalla prima ARB; il candidato precedente e il rapporto sono conservati.
+
+La prenotazione protetta restituisce `DSG_CAMPAIGN_RESERVATION_V1`, con il solo
+hash dell'ammissione appena creata e il job nel formato precedente. Una richiesta
+ripetuta restituisce `RECONCILIATION_REQUIRED`, hash e job nulli. Il metodo interno
+precedente conserva il formato esatto `{disposition, job}`. La ricevuta Owner è
+metadato di riconciliazione e non autorizza avvii o recupero della lease.
+
+Questo candidato richiede ancora gate completi e revisioni indipendenti. Il
+coordinatore locale durevole e il suo adattatore non sono ancora implementati;
+nessuna composizione di produzione è modificata. R09 resta aperto, la milestone
+`NOT_VALIDATED` e i controlli qualificati reali restano zero.

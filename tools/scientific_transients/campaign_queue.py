@@ -87,6 +87,10 @@ class CampaignQueue:
                                            guard=self._guard)
 
     def admit_and_reserve(self, plan_ref, intent_sha, ordinal, request, decision_id):
+        response = self.reserve_envelope(plan_ref, intent_sha, ordinal, request, decision_id)
+        return {'disposition': response['disposition'], 'job': response['job']}
+
+    def reserve_envelope(self, plan_ref, intent_sha, ordinal, request, decision_id):
         """Worker technical port consuming a fresh admission, then one queue lease.
 
         The future authenticated boundary must supply this exact request after
@@ -112,7 +116,8 @@ class CampaignQueue:
         if admitted['disposition'] != 'CREATED':
             require(admitted == {'disposition': 'RECONCILIATION_REQUIRED', 'admission': None},
                     'CAMPAIGN_QUEUE_ADMISSION_RESPONSE')
-            return {'disposition': 'RECONCILIATION_REQUIRED', 'job': None}
+            return {'protocol': 'DSG_CAMPAIGN_RESERVATION_V1',
+                    'disposition': 'RECONCILIATION_REQUIRED', 'admissionSha256': None, 'job': None}
         admission = admitted['admission']
         require(admission['facts']['jobId'] == request['jobId']
                 and admission['facts']['binding'] == selected['binding']
@@ -120,8 +125,15 @@ class CampaignQueue:
                 'CAMPAIGN_QUEUE_ADMISSION_BINDING')
         # If this call fails or its acknowledgement is lost, the admission is
         # already consumed and remains in flight. No rollback or resend here.
-        return self.queue._reserve_campaign_once(copy.deepcopy(request), origin, admission['sha256'],
-                                                 guard=self._guard)
+        response = self.queue._reserve_campaign_once(copy.deepcopy(request), origin, admission['sha256'],
+                                                     guard=self._guard)
+        require(response['disposition'] == 'CREATED' and response['job'] is not None,
+                'CAMPAIGN_QUEUE_FRESH_RESERVATION_REQUIRED')
+        return {'protocol': 'DSG_CAMPAIGN_RESERVATION_V1', 'disposition': 'CREATED',
+                'admissionSha256': admission['sha256'], 'job': response['job']}
+
+    def dispatch_receipt(self, plan_ref, intent_sha):
+        return self._bound_intent(plan_ref, intent_sha, 0)
 
     def close_frame(self, plan_ref, request):
         self._assert_composition()
