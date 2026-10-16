@@ -84,6 +84,38 @@ della sua evidenza di whitening, dell’ordine degli assi, della normalizzazione
 dell’unità. Calcola la covarianza `u_left dot u_right` e la varianza della
 differenza con la norma di `u_left-u_right`; non presume indipendenza tra notti.
 
+## Monitor cooperativo del calcolo
+
+L’estensione `DSG_NATIVE_LINEAR_TRUSTED_BUDGET_V1` permette una funzione locale
+revisionata come secondo argomento di `inspect`, o terzo di `compare`. Senza
+monitor i risultati e lo schema precedente restano identici. Il monitor non è
+un campo JSON e non riceve il modello: controlla il tempo e l’annullamento,
+può sollevare un errore e non può autorizzare avvii o accettazioni.
+
+Con il monitor, ogni oggetto e array dell’ingresso deve essere già congelato
+ricorsivamente dal wrapper locale, dopo aver costruito i campioni. Il nucleo
+verifica questa proprietà e rifiuta accessor e dati non passivi; non crea una
+copia dell’intero modello. La verifica difensiva limita profondità, contenitori,
+dimensione degli array e nodi visitati. Per `compare` controlla entrambi gli
+ingressi prima del calcolo. Non è un sandbox per monitor ostili o globali del
+motore alterati: solo il codice locale sigillato può fornire la funzione.
+
+Gli array devono avere esattamente gli indici propri `0..length-1` come dati
+enumerabili, senza buchi, proprietà aggiuntive o simboli. Gli oggetti devono
+avere proprietà proprie enumerabili passive. Sono ammessi solo i prototipi
+standard del medesimo motore, oppure il prototipo nullo per gli oggetti: dati
+provenienti da altri contesti JavaScript devono essere prima materializzati
+dal parser locale. La regressione ARB copre un buco nascosto da una proprietà
+aggiunta e un getter ereditato mutabile, che viene rifiutato senza eseguirlo.
+
+I controlli avvengono nelle fasi principali, per ogni fattore e almeno ogni
+4096 elementi visitati nei cicli lunghi, inclusa la verifica di immutabilità.
+Un errore interrompe la funzione senza restituire una misura parziale.
+L’espansione numerica di un singolo prodotto o le operazioni sincrone del motore
+non costituiscono un limite rigido di tempo: il supervisore deve continuare a
+verificare il proprio termine monotono e rifiutare completamenti fuori tempo.
+Il monitor non cattura errori, non riprova e non gestisce processi o finestre.
+
 ## Evidenza e limiti
 
 Le prove Node eseguono il nucleo in un contesto isolato su soli vettori numerici

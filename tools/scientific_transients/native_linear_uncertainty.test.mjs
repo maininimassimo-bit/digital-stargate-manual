@@ -138,3 +138,73 @@ test('inputs are preserved and result vectors cannot alter later computations',(
  assert.equal(JSON.stringify(m),before);assert.equal(result(m).latentRefs[0],'synthetic-latent-0');
  assert.equal(kernel.compare(m,m).differenceVarianceUnderSuppliedJointModel,0);
 });
+function freezeData(v) {
+ if(v&&typeof v==='object'){
+  for(const key of Object.keys(v)){const d=Object.getOwnPropertyDescriptor(v,key);if('value' in d)freezeData(d.value);}
+  Object.freeze(v);
+ }
+ return v;
+}
+function engineData(v) {
+ context.dsgSyntheticJSON=JSON.stringify(v);
+ const parsed=vm.runInContext('JSON.parse(dsgSyntheticJSON)',context);
+ delete context.dsgSyntheticJSON;return parsed;
+}
+function frozenFixture(v){return freezeData(engineData(v));}
+test('trusted budget protocol preserves every computational output',()=>{
+ assert.equal(kernel.budgetMonitorProtocol,'DSG_NATIVE_LINEAR_TRUSTED_BUDGET_V1');
+ for(const original of [fixture(),fixture([[2],[2]]),fixture([[2],[-2]])]){
+  const m=engineData(original);
+  const before=JSON.stringify(result(m));freezeData(m);let calls=0;
+  assert.equal(JSON.stringify(kernel.inspect(m,()=>{calls++;})),before);assert(calls>=3);
+  const expected=JSON.stringify(kernel.compare(m,m));
+  assert.equal(JSON.stringify(kernel.compare(m,m,()=>{calls++;})),expected);
+ }
+});
+test('monitored computation requires complete frozen passive input and rejects accessors',()=>{
+ let calls=0;assert.throws(()=>kernel.inspect(fixture(),()=>{calls++;}),/IMMUTABLE_REQUIRED/);assert.equal(calls,0);
+ const partial=engineData(fixture());Object.freeze(partial);assert.throws(()=>kernel.inspect(partial,()=>{}),/IMMUTABLE_REQUIRED/);
+ const active=engineData(fixture());Object.defineProperty(active,'samples',{enumerable:true,get(){throw Error('EXECUTED');}});freezeData(active);
+ assert.throws(()=>kernel.inspect(active,()=>{}),/IMMUTABLE_ACCESSOR_OR_INDEX/);
+ for(const monitor of [{},'cancel',true,0])assert.throws(()=>kernel.inspect(fixture(),monitor),/BUDGET_MONITOR/);
+ assert.throws(()=>kernel.compare(frozenFixture(fixture()),fixture(),()=>{}),/IMMUTABLE_REQUIRED/);
+});
+test('monitor cancellation never returns a partial measurement',()=>{
+ const m=frozenFixture(fixture());assert.throws(()=>kernel.inspect(m,()=>{throw Error('CANCELLED');}),/CANCELLED/);
+ assert.throws(()=>kernel.compare(m,m,()=>{throw Error('DEADLINE');}),/DEADLINE/);
+ close(result(m).varianceUnderSuppliedJointModel,8);
+});
+test('long source support and factor loops keep checking the monitor',()=>{
+ const n=8192,a=Array(n).fill(1),b=Array(n).fill(0);a[n-1]=0;b[n-1]=1;
+ const m=frozenFixture(fixture(Array.from({length:n},()=>[1]),Array(n).fill(2),a,b));
+ let calls=0;const r=kernel.inspect(m,()=>{calls++;});assert(calls>20);assert.equal(r.observedFiniteApertureFlux,0);
+ let reached=0;assert.throws(()=>kernel.inspect(m,()=>{if(++reached===20)throw Error('STOP_LONG_LOOP');}),/STOP_LONG_LOOP/);
+ assert.equal(reached,20);
+});
+test('reentrant monitoring has no shared budget state or mutable model window',()=>{
+ const m=frozenFixture(fixture());let first=true,inner;
+ const r=kernel.inspect(m,()=>{
+  assert.throws(()=>{m.samples[0]=999;},TypeError);
+  if(first){first=false;inner=result(fixture([[2],[-2]]));}
+ });
+ assert.equal(r.observedFiniteApertureFlux,7);assert.equal(inner.varianceUnderSuppliedJointModel,16);
+ assert.equal(m.samples[0],10);
+});
+test('ARB inherited sample getter and a hole disguised by an extra property are rejected',()=>{
+ const m=engineData(fixture());let captured=10,getterCalls=0,monitorCalls=0;
+ const sparse=engineData([null,3]);delete sparse[0];sparse.extra=0;
+ const custom=Object.create(Object.getPrototypeOf(sparse));
+ Object.defineProperty(custom,'0',{get(){getterCalls++;return captured;}});
+ Object.setPrototypeOf(sparse,custom);m.samples=sparse;freezeData(m);
+ assert.throws(()=>kernel.inspect(m,()=>{monitorCalls++;captured=999;}),/IMMUTABLE_PROTOTYPE/);
+ assert.equal(getterCalls,0);assert.equal(monitorCalls,0);
+ const plain=engineData(fixture());delete plain.samples[0];plain.samples.extra=0;freezeData(plain);
+ assert.throws(()=>kernel.inspect(plain,()=>{}),/IMMUTABLE_ACCESSOR_OR_INDEX/);
+});
+test('hidden additions, symbols and foreign prototypes are rejected by monitored mode',()=>{
+ const hidden=engineData(fixture());Object.defineProperty(hidden.samples,'hidden',{value:1});freezeData(hidden);
+ assert.throws(()=>kernel.inspect(hidden,()=>{}),/IMMUTABLE_FIELDS/);
+ const symbol=engineData(fixture());symbol.samples[Symbol('hidden')]=1;freezeData(symbol);
+ assert.throws(()=>kernel.inspect(symbol,()=>{}),/IMMUTABLE_SYMBOL/);
+ assert.throws(()=>kernel.inspect(freezeData(fixture()),()=>{}),/IMMUTABLE_PROTOTYPE/);
+});

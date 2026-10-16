@@ -14,6 +14,37 @@ var DSGNativeLinearUncertainty = (function () {
    }
    function sha(x) { return typeof x === 'string' && /^[a-f0-9]{64}$/.test(x); }
    function ref(x) { return typeof x === 'string' && /^[a-zA-Z0-9_-]{1,96}$/.test(x); }
+   function checkpoint(monitor) {
+      need(monitor === undefined || monitor === null || typeof monitor === 'function', 'BUDGET_MONITOR');
+      var steps = 0;
+      return function (force) {
+         if (monitor && (force || ++steps >= 4096)) { steps = 0; monitor(); }
+      };
+   }
+   function immutableInput(root, check) {
+      var nodes = 0, containers = 0;
+      function visit(v, depth) {
+         need(++nodes <= 3000000, 'IMMUTABLE_NODE_BOUND');
+         if (v === null || typeof v === 'boolean' || finite(v)) { check(); return; }
+         if (typeof v === 'string') { need(v.length <= 192, 'IMMUTABLE_STRING_BOUND'); check(); return; }
+         need(v && typeof v === 'object' && depth <= 12 && ++containers <= 65536, 'IMMUTABLE_DATA');
+         need(Object.isFrozen(v), 'IMMUTABLE_REQUIRED');
+         var array = Array.isArray(v);
+         var prototype = Object.getPrototypeOf(v);
+         need(array ? prototype === Array.prototype : prototype === null || prototype === Object.prototype, 'IMMUTABLE_PROTOTYPE');
+         if (array) need(v.length <= 16384, 'IMMUTABLE_ARRAY_BOUND');
+         var names = Object.getOwnPropertyNames(v);
+         need(array ? names.length === v.length + 1 : names.length <= 32, 'IMMUTABLE_FIELDS');
+         if (typeof Object.getOwnPropertySymbols === 'function') need(Object.getOwnPropertySymbols(v).length === 0, 'IMMUTABLE_SYMBOL');
+         for (var i = 0; i < (array ? v.length : names.length); ++i) {
+            var descriptor = Object.getOwnPropertyDescriptor(v, array ? String(i) : names[i]);
+            need(descriptor && Object.prototype.hasOwnProperty.call(descriptor, 'value') && descriptor.enumerable, 'IMMUTABLE_ACCESSOR_OR_INDEX');
+            visit(descriptor.value, depth + 1);
+         }
+         check();
+      }
+      visit(root, 1);
+   }
    function product(x, y) {
       var p = x * y;
       need(finite(p), 'PRODUCT_OVERFLOW');
@@ -67,30 +98,32 @@ var DSGNativeLinearUncertainty = (function () {
       need(s.partials.length === 0 || t !== 0, 'SUM_RESIDUAL_LOST');
       return t;
    }
-   function sum(values) {
+   function sum(values, check) {
       var s = accumulator();
-      for (var i = 0; i < values.length; ++i) add(s, values[i]);
+      for (var i = 0; i < values.length; ++i) { add(s, values[i]); if (check) check(); }
       return total(s);
    }
-   function dot(a, b) {
+   function dot(a, b, check) {
       var s = accumulator();
-      for (var i = 0; i < a.length; ++i) addProduct(s, a[i], b[i]);
+      for (var i = 0; i < a.length; ++i) { addProduct(s, a[i], b[i]); check(); }
       return total(s);
    }
-   function squaredNorm(a) {
+   function squaredNorm(a, check) {
       var scale = 0, i;
-      for (i = 0; i < a.length; ++i) scale = Math.max(scale, Math.abs(a[i]));
+      for (i = 0; i < a.length; ++i) { scale = Math.max(scale, Math.abs(a[i])); check(); }
       if (scale === 0) return {variance: 0, sigma: 0};
       var s = accumulator();
       for (i = 0; i < a.length; ++i) {
          var r = a[i] / scale;
          need(a[i] === 0 || r !== 0, 'RATIO_UNDERFLOW');
          add(s, product(r, r));
+         check();
       }
       var sigma = product(scale, Math.sqrt(total(s)));
       return {variance: product(sigma, sigma), sigma: sigma};
    }
-   function inspect(m) {
+   function inspectInternal(m, check) {
+      check(true);
       fields(m, ['protocol', 'identity', 'grid', 'pixelIndices', 'samples', 'aperture',
          'background', 'basis', 'factors', 'budget']);
       need(m.protocol === 'DSG_NATIVE_LINEAR_UNCERTAINTY_V1', 'PROTOCOL');
@@ -109,6 +142,7 @@ var DSGNativeLinearUncertainty = (function () {
       var n = m.pixelIndices.length, arrays = [m.samples, m.aperture, m.background], i, j;
       for (i = 0; i < arrays.length; ++i) need(Array.isArray(arrays[i]) && arrays[i].length === n, 'VECTOR');
       for (i = 0; i < n; ++i) {
+         check();
          need(integer(m.pixelIndices[i], 0, m.grid.width * m.grid.height - 1) &&
             (i === 0 || m.pixelIndices[i] > m.pixelIndices[i - 1]), 'PIXEL_ORDER');
          need(finite(m.samples[i]) && finite(m.aperture[i]) && finite(m.background[i]), 'NONFINITE');
@@ -116,23 +150,25 @@ var DSGNativeLinearUncertainty = (function () {
             !(m.aperture[i] > 0 && m.background[i] > 0) &&
             (m.aperture[i] > 0 || m.background[i] > 0), 'WEIGHTS');
       }
-      var alpha = sum(m.aperture), backgroundResidual = sum(m.background) - 1;
+      var alpha = sum(m.aperture, check), backgroundResidual = sum(m.background, check) - 1;
       var tau = 64 * EPS * n, w = [];
       need(alpha > 0 && Math.abs(backgroundResidual) <= tau, 'BACKGROUND_NORMALIZATION');
-      for (i = 0; i < n; ++i) w.push(m.aperture[i] - product(alpha, m.background[i]));
-      var skyResidual = sum(w);
+      for (i = 0; i < n; ++i) { w.push(m.aperture[i] - product(alpha, m.background[i])); check(); }
+      var skyResidual = sum(w, check);
       need(Math.abs(skyResidual) <= tau * Math.max(1, alpha), 'CONSTANT_SKY_RESIDUAL');
       fields(m.basis, ['sha256', 'whiteningEvidenceSha256', 'latentRefs']);
       need(sha(m.basis.sha256) && sha(m.basis.whiteningEvidenceSha256) && Array.isArray(m.basis.latentRefs) &&
          m.basis.latentRefs.length >= 1 && m.basis.latentRefs.length <= 16384, 'BASIS');
       var seen = {}, refs = m.basis.latentRefs;
       for (i = 0; i < refs.length; ++i) {
+         check();
          need(ref(refs[i]) && !Object.prototype.hasOwnProperty.call(seen, '$' + refs[i]), 'LATENT_ID');
          seen['$' + refs[i]] = true;
       }
       need(Array.isArray(m.factors) && m.factors.length === refs.length, 'FACTOR_COVERAGE');
       var count = 0, u = [];
       for (i = 0; i < refs.length; ++i) {
+         check(true);
          var f = m.factors[i];
          fields(f, ['latentRef', 'rows', 'responses', 'structuralZeroEvidenceSha256']);
          need(f.latentRef === refs[i] && Array.isArray(f.rows) && Array.isArray(f.responses) &&
@@ -145,6 +181,7 @@ var DSGNativeLinearUncertainty = (function () {
             need(integer(f.rows[j], 0, n - 1) && (j === 0 || f.rows[j] > f.rows[j - 1]), 'FACTOR_ROW');
             need(finite(f.responses[j]) && f.responses[j] !== 0, 'FACTOR_RESPONSE');
             addProduct(s, w[f.rows[j]], f.responses[j]);
+            check();
          }
          u.push(total(s));
       }
@@ -158,13 +195,15 @@ var DSGNativeLinearUncertainty = (function () {
             sha(b.evidenceSha256) && sha(b.domainSha256), 'BUDGET_EVIDENCE');
          states.push({component: b.component, state: b.state, evidenceSha256: b.evidenceSha256, domainSha256: b.domainSha256});
       }
-      var norm = squaredNorm(u), identity = {};
+      var norm = squaredNorm(u, check), identity = {};
       Object.keys(m.identity).forEach(function (key) { identity[key] = m.identity[key]; });
+      var flux = dot(w, m.samples, check);
+      check(true);
       return {protocol: 'DSG_NATIVE_LINEAR_UNCERTAINTY_RESULT_V1', identity: identity,
          fluxUnit: m.identity.unit + '_WEIGHTED_SUM', varianceUnit: '(' + m.identity.unit + '_WEIGHTED_SUM)^2',
          basisSha256: m.basis.sha256, whiteningEvidenceSha256: m.basis.whiteningEvidenceSha256,
          latentRefs: refs.slice(), latentResponses: u, budget: states,
-         observedFiniteApertureFlux: dot(w, m.samples),
+         observedFiniteApertureFlux: flux,
          varianceUnderSuppliedJointModel: norm.variance,
          standardUncertaintyUnderSuppliedJointModel: norm.sigma,
          diagnostics: {arithmetic: 'FLOAT64_TWO_PRODUCT_EXPANSION_SUM_SCALED_NORM', supportPixels: n,
@@ -174,9 +213,16 @@ var DSGNativeLinearUncertainty = (function () {
          provenanceVerified: false, physicalApplicabilityVerified: false,
          fullPhysicalVariance: null, significance: null, scientificValidation: 'NOT_VALIDATED', qualifiedControls: 0};
    }
-   function compare(leftInput, rightInput) {
+   function inspect(m, monitor) {
+      var check = checkpoint(monitor);
+      if (monitor) immutableInput(m, check);
+      return inspectInternal(m, check);
+   }
+   function compare(leftInput, rightInput, monitor) {
       // Recompute from inputs; never accept caller-authored result objects as evidence.
-      var l = inspect(leftInput), r = inspect(rightInput);
+      var check = checkpoint(monitor);
+      if (monitor) { immutableInput(leftInput, check); immutableInput(rightInput, check); }
+      var l = inspectInternal(leftInput, check), r = inspectInternal(rightInput, check);
       need(l.basisSha256 === r.basisSha256 && l.whiteningEvidenceSha256 === r.whiteningEvidenceSha256 &&
          l.latentRefs.length === r.latentRefs.length &&
          l.identity.unit === r.identity.unit &&
@@ -184,13 +230,16 @@ var DSGNativeLinearUncertainty = (function () {
       var d = [];
       for (var i = 0; i < l.latentRefs.length; ++i) {
          need(l.latentRefs[i] === r.latentRefs[i], 'CROSS_LATENT_ORDER');
-         d.push(sum([l.latentResponses[i], -r.latentResponses[i]]));
+         d.push(sum([l.latentResponses[i], -r.latentResponses[i]], check));
       }
+      var covariance = dot(l.latentResponses, r.latentResponses, check);
+      var variance = squaredNorm(d, check).variance;
+      check(true);
       return {protocol: 'DSG_NATIVE_LINEAR_CROSS_RESULT_V1', basisSha256: l.basisSha256,
-         covarianceUnderSuppliedJointModel: dot(l.latentResponses, r.latentResponses),
+         covarianceUnderSuppliedJointModel: covariance,
          differenceUnderSuppliedJointModel: sum([l.observedFiniteApertureFlux, -r.observedFiniteApertureFlux]),
-         differenceVarianceUnderSuppliedJointModel: squaredNorm(d).variance,
+         differenceVarianceUnderSuppliedJointModel: variance,
          fullPhysicalVariance: null, significance: null, scientificValidation: 'NOT_VALIDATED', qualifiedControls: 0};
    }
-   return {inspect: inspect, compare: compare};
+   return {inspect: inspect, compare: compare, budgetMonitorProtocol: 'DSG_NATIVE_LINEAR_TRUSTED_BUDGET_V1'};
 }());
