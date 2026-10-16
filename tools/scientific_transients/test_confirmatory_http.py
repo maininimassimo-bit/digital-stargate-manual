@@ -10,6 +10,7 @@ from http.server import HTTPServer
 from tools.pixinsight.local_pilot.broker import Broker, encode, decode, ProtocolError
 from tools.pixinsight.local_pilot.transport_http import handler_for, AuthError
 from tools.scientific_transients.queue import TransientQueue, CAMPAIGN_PROFILE
+from tools.scientific_transients.campaign_queue import CampaignQueue
 from tools.scientific_transients import test_confirmatory_campaign as fixtures
 ref,sha=fixtures.ref,fixtures.sha
 
@@ -122,6 +123,33 @@ class CampaignHttpTests(unittest.TestCase):
             'planHeadSha256':self.fixture.service.view(ref(10))['headSha256'],
             'evidenceSha256':sha(51000),'reason':'OWNER_WITHDRAWAL'})
         self.assertEqual(self.request(path,token='synthetic-owner',owner=True)[0],400)
+
+    def test_marked_campaign_job_cannot_escape_through_legacy_http_lease_routes(self):
+        f=self.fixture;f.freeze()
+        context=f.service.dispatch_context(ref(10),ref(100))
+        jobs=[{'requestId':ref(150000+i),'binding':{'bindingRef':ref(151000+i),
+            'inputRef':frame['frameRef'],'referenceRef':ref(152000),
+            'algorithmRef':ref(20),'contractRef':ref(30)}} for i,frame in enumerate(context['frames'])]
+        intent=f.service.prepare_dispatch(ref(10),{'decisionId':ref(153000),
+            'contextSha256':context['contextSha256'],'witnessRef':ref(100),'jobs':jobs,
+            'workerId':ref(2),'rootId':ref(154000),'archiveSha256':sha(155000)})
+        for item in jobs:self.queue.register(item['binding'])
+        bridge=CampaignQueue(f.service,self.queue)
+        projected=bridge.project(ref(10),intent['sha256'],0)
+        request={'workerId':ref(2),'rootId':ref(154000),'jobId':projected['jobId'],
+            'bindingRef':jobs[0]['binding']['bindingRef'],'reservationRef':ref(156000)}
+        job=bridge.admit_and_reserve(ref(10),intent['sha256'],0,request,ref(157000))['job']
+        for path,body in [('/v1/transient-analysis/worker/claim',{'workerId':ref(2),'rootId':ref(154000)}),
+                          ('/v1/transient-analysis/worker/reserve',request)]:
+            code,value=self.request(path,body,TOKEN)
+            self.assertEqual(code,400);self.assertNotIn(job['leaseToken'],str(value))
+        for path,token,owner in [('/v1/transient-analysis/jobs/'+job['jobId'],'synthetic-owner',True),
+                                 ('/v1/transient-analysis/worker/jobs/'+job['jobId'],TOKEN,False)]:
+            code,value=self.request(path,token=token,owner=owner)
+            self.assertEqual(code,200);self.assertNotIn('leaseToken',str(value))
+            self.assertNotIn('campaignOrigin',str(value));self.assertNotIn('campaignReservation',str(value))
+        self.assertEqual(self.request(WORKER+'/'+ref(10)+'/admit-frame',{},TOKEN)[0],404)
+        self.assertEqual(self.request(BASE+'/'+ref(10)+'/dispatch',{},'synthetic-owner',True)[0],404)
 
     def test_disabled_composition_keeps_authenticated_404(self):
         self.server.RequestHandlerClass=self.handler(enabled=False)

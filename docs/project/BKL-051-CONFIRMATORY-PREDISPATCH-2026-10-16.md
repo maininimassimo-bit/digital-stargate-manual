@@ -69,6 +69,38 @@ viene conservata nella ricevuta. Il caso mantiene `RECOVERY_REQUIRED` e non
 consente il frame successivo della stessa tripletta; può liberare il worker per
 un diverso intento Owner valido. Non è un'attestazione indipendente di arresto.
 
+## Coda protetta interna in verifica
+
+`CampaignQueue` collega esplicitamente il registro e una coda isolata con profilo
+campagna, stessa identità Worker e stesso oggetto storage configurato. Il namespace
+vincola le chiavi dei due registri e l'Owner; non introduce un nuovo firmatario o
+un'API di autenticazione. I metodi interni della coda richiedono la capacità
+in-process della composizione, che non può essere fornita da JSON HTTP.
+
+La proiezione conserva sul nuovo job un marcatore interno immutabile con contesto,
+intento, piano, FREEZE, riferimento, input, algoritmo, contratto, ordinale,
+binding e worker/root. Un job precedente non viene adottato o migrato. Marker
+malformati o di versione sconosciuta bloccano la lettura. Marcatore e metadati
+della prenotazione sono rimossi dalle viste esterne; gli schemi esistenti di
+`ReservationIntent`, rapporti e ricevute Worker restano invariati.
+
+`admit_and_reserve` ottiene un'ammissione appena creata dal registro e poi esegue
+la prenotazione protetta della coda fuori dal callback CAS. La prenotazione
+registra insieme ammissione, intento, attempt e lease. Solo il primo risultato
+creato restituisce la lease: ripetizioni e conflitti concorrenti non la recuperano.
+Un errore della coda dopo l'ammissione conserva il blocco nel registro, anche
+quando la risposta è persa dopo un commit. Le letture non autorizzano reinvii.
+
+I percorsi legacy `create`, `claim` e `reserve_once` rifiutano i job marcati. Il
+controllo di `claim` copre anche il ritorno di job già RESERVED/RUNNING o in
+recupero, prima che una vista possa rivelare una lease esistente. Dopo una
+chiusura di recupero Owner, il job resta RECOVERY_REQUIRED e nessuna lettura
+restituisce la sua vecchia lease.
+
+Questi collegamenti restano application port interne: nessun nuovo percorso HTTP
+protetto è esposto, nessuna composizione runtime è attivata e nessun processo
+nativo è avviato. La verifica completa del coordinatore locale resta necessaria.
+
 ## Integrazione ancora da implementare e verificare
 
 L'intento della tripletta e l'ammissione di ogni avvio devono usare il medesimo
@@ -84,9 +116,8 @@ in volo o incerta fino alle evidenze di chiusura, anche dopo revoca. Nessuna
 revoca o scadenza prova da sola l'arresto di PixInsight. La lettura del contesto
 qui implementata non risolve questo requisito e non consente ancora avvii.
 
-Restano da verificare indipendentemente il registro degli intenti e delle
-ammissioni e da completare la proiezione dei job che impedisca accessi attraverso
-i percorsi legacy, il coordinatore locale
+Restano da verificare indipendentemente la proiezione protetta della coda e da
+completare il coordinatore locale
 sequenziale con intenti durabili, le riconciliazioni, i collegamenti dei rapporti,
 la vista Owner e il collaudo integrato. Il flusso diagnostico singolo esistente
 resta distinto. Nessun controllo confermativo è stato eseguito.
@@ -114,3 +145,12 @@ il caso non completato e rifiuto di evidenze discordanti con conservazione del
 blocco. La suite del registro comprende ora 22 prove; il successivo controllo
 contestuale dei 67 casi complessivi è passato in 66,232 secondi sul candidato
 locale. Non sostituisce CI e revisioni sull'esatto commit finale.
+
+La coda protetta ha superato 17 prime prove sintetiche, una prova separata su 59
+triplette/177 job marcati con rapporti e chiusure dichiarati (415 eventi nel
+registro, entrambi i registri entro 8 MiB), e una prova HTTP contro il recupero
+della lease attraverso i percorsi precedenti. Sono passate anche 61 prove di
+regressione su coda, capienza, ReservationIntent e OperatorPlan. I riferimenti di
+arresto della prova di capienza sono fixture dichiarate, non evidenze OS né
+controlli scientifici. Il successivo controllo contestuale campagna/HTTP e le
+revisioni esatte sono gate separati.

@@ -2,6 +2,7 @@
 import copy
 import datetime as dt
 import secrets
+import hashlib
 
 from tools.pixinsight.local_pilot.broker import ProtocolError, decode, encode, opaque, require
 from tools.scientific_registry.ingestion_storage import Conflict
@@ -16,6 +17,20 @@ LIMIT = 1024 * 1024
 CAMPAIGN_PROFILE = "CANDIDATE_59X3_V1"
 CAMPAIGN_LIMIT = 8 * 1024 * 1024
 CAMPAIGN_CAPACITY = 512
+CAMPAIGN_ORIGIN_FIELDS = {'protocol', 'namespaceSha256', 'planRef', 'planSha256', 'freezeEventSha256',
+                         'contextSha256', 'intentSha256', 'witnessRef', 'witnessSha256', 'ordinal',
+                         'inputSha256', 'algorithmSha256', 'contractSha256', 'bindingSha256', 'workerId', 'rootId'}
+
+
+def campaign_origin(value, binding, worker_id):
+    """Internal marker integrity/schema, not authorization from a JSON payload."""
+    fields(value, CAMPAIGN_ORIGIN_FIELDS)
+    require(value['protocol'] == 'DSG_CAMPAIGN_JOB_ORIGIN_V1'
+            and all(opaque(value[k]) for k in ('planRef', 'witnessRef', 'workerId', 'rootId'))
+            and value['workerId'] == worker_id and type(value['ordinal']) is int and 0 <= value['ordinal'] < 3
+            and all(digest(value[k]) for k in CAMPAIGN_ORIGIN_FIELDS if k.endswith('Sha256'))
+            and value['bindingSha256'] == hashlib.sha256(encode(binding)).hexdigest(),
+            'TRANSIENT_CAMPAIGN_ORIGIN')
 
 
 def digest(value):
@@ -64,6 +79,15 @@ class TransientQueue:
         require(type(state["bindings"]) is list and type(state["jobs"]) is list
                 and len(state["bindings"]) <= self.capacity and len(state["jobs"]) <= self.capacity,
                 "TRANSIENT_STATE_CAPACITY")
+        for job in state['jobs']:
+            if 'campaignOrigin' in job:
+                campaign_origin(job['campaignOrigin'], job['binding'], self.worker_id)
+            if 'campaignReservation' in job:
+                require('campaignOrigin' in job, 'TRANSIENT_CAMPAIGN_RESERVATION_WITHOUT_ORIGIN')
+                fields(job['campaignReservation'], {'admissionSha256', 'request'})
+                require(digest(job['campaignReservation']['admissionSha256'])
+                        and job['campaignReservation']['request'] == job.get('reservationIntent'),
+                        'TRANSIENT_CAMPAIGN_RESERVATION')
         return state, generation
 
     def _mutate(self, operation):
@@ -108,6 +132,8 @@ class TransientQueue:
         result = copy.deepcopy(job)
         result.pop("lastEvent", None)
         result.pop("reservationIntent", None)
+        result.pop('campaignOrigin', None)
+        result.pop('campaignReservation', None)
         if not worker:
             result.pop("leaseToken", None)
         else:
@@ -140,6 +166,7 @@ class TransientQueue:
         def operation(state, now):
             existing = next((j for j in state["jobs"] if j["request"]["requestId"] == request["requestId"]), None)
             if existing:
+                require('campaignOrigin' not in existing, 'TRANSIENT_CAMPAIGN_PROTECTED')
                 require(existing["request"] == request, "TRANSIENT_IDEMPOTENCY_CONFLICT")
                 return self._view(existing)
             binding = next((b for b in state["bindings"] if b["bindingRef"] == request["bindingRef"]), None)
@@ -151,6 +178,74 @@ class TransientQueue:
                    "createdAt": now.isoformat(), "updatedAt": now.isoformat()}
             state["jobs"].append(job)
             return self._view(job)
+        return self._mutate(operation)
+
+    def _campaign_access(self, guard):
+        # Configured in-process composition only. This is not an authentication
+        # or signature API and cannot be satisfied by a caller-provided JSON.
+        require(guard is not None and guard is getattr(self, '_campaign_guard', None),
+                'TRANSIENT_CAMPAIGN_TRUSTED_COMPOSITION_REQUIRED')
+
+    def _create_campaign(self, request, binding, origin, *, guard):
+        self._campaign_access(guard)
+        fields(request, {'requestId', 'bindingRef'}); fields(binding, BINDING_FIELDS)
+        require(all(opaque(v) for v in request.values()) and all(opaque(v) for v in binding.values())
+                and request['bindingRef'] == binding['bindingRef'], 'TRANSIENT_CAMPAIGN_PROJECTION')
+        campaign_origin(origin, binding, self.worker_id)
+        request, binding, origin = copy.deepcopy((request, binding, origin))
+        def operation(state, now):
+            existing = next((j for j in state['jobs'] if j['request']['requestId'] == request['requestId']), None)
+            if existing:
+                require(existing.get('campaignOrigin') == origin and existing['request'] == request
+                        and existing['binding'] == binding, 'TRANSIENT_CAMPAIGN_PROJECTION_CONFLICT')
+                return self._view(existing)  # Always lease-free, including active jobs.
+            registered = next((b for b in state['bindings'] if b['bindingRef'] == binding['bindingRef']), None)
+            require(registered == binding, 'TRANSIENT_CAMPAIGN_REGISTERED_BINDING')
+            require(len(state['jobs']) < self.capacity, 'TRANSIENT_JOB_CAPACITY')
+            job = {'jobId': 'TRN_' + request['requestId'], 'request': request, 'binding': binding,
+                   'state': 'QUEUED', 'cancelRequested': False, 'sequence': 0, 'result': None,
+                   'reviews': [], 'createdAt': now.isoformat(), 'updatedAt': now.isoformat(),
+                   'campaignOrigin': origin}
+            state['jobs'].append(job)
+            return self._view(job)
+        return self._mutate(operation)
+
+    def _campaign_snapshot(self, job_id, *, guard):
+        self._campaign_access(guard)
+        state, _ = self._read(); job = self._job(state, job_id)
+        require('campaignOrigin' in job, 'TRANSIENT_CAMPAIGN_PROTECTED_JOB_REQUIRED')
+        return {key: copy.deepcopy(job[key]) for key in ('jobId', 'request', 'binding', 'campaignOrigin')}
+
+    def _reserve_campaign_once(self, request, origin, admission_sha, *, guard):
+        self._campaign_access(guard)
+        fields(request, {'workerId', 'rootId', 'jobId', 'bindingRef', 'reservationRef'})
+        require(request['workerId'] == self.worker_id
+                and all(opaque(request[k]) for k in ('rootId', 'bindingRef', 'reservationRef'))
+                and digest(admission_sha), 'TRANSIENT_CAMPAIGN_RESERVATION_ID')
+        request, origin = copy.deepcopy((request, origin))
+        token, attempt = secrets.token_hex(32), secrets.token_hex(16)
+        def operation(state, now):
+            job = self._job(state, request['jobId'])
+            require(job.get('campaignOrigin') == origin and origin['rootId'] == request['rootId']
+                    and job['binding']['bindingRef'] == request['bindingRef'],
+                    'TRANSIENT_CAMPAIGN_RESERVATION_BINDING')
+            existing = job.get('campaignReservation')
+            if existing:
+                require(existing == {'admissionSha256': admission_sha, 'request': request},
+                        'TRANSIENT_CAMPAIGN_RESERVATION_CONFLICT')
+                return {'disposition': 'RECONCILIATION_REQUIRED', 'job': None}
+            require(not any(j.get('campaignReservation', {}).get('admissionSha256') == admission_sha
+                            or j.get('reservationIntent', {}).get('reservationRef') == request['reservationRef']
+                            for j in state['jobs']), 'TRANSIENT_CAMPAIGN_ADMISSION_OR_RESERVATION_REUSED')
+            require(state['rootId'] in {None, request['rootId']}, 'TRANSIENT_ROOT_MISMATCH')
+            require(job['state'] == 'QUEUED' and not job['cancelRequested'], 'TRANSIENT_RESERVATION_NOT_FRESH')
+            require(not any(self._blocks_reservation(j) for j in state['jobs']), 'TRANSIENT_ATTEMPT_ACTIVE')
+            state['rootId'] = request['rootId']
+            job.update(state='RESERVED', rootId=request['rootId'], attemptId=attempt, leaseToken=token,
+                       leaseIssuedAt=now.isoformat(), leaseExpiresAt=(now + dt.timedelta(seconds=LEASE_SECONDS)).isoformat(),
+                       updatedAt=now.isoformat(), reservationIntent=request,
+                       campaignReservation={'admissionSha256': admission_sha, 'request': request})
+            return {'disposition': 'CREATED', 'job': self._view(job, worker=True)}
         return self._mutate(operation)
 
     def status(self, job_id=None):
@@ -204,9 +299,11 @@ class TransientQueue:
             active = [j for j in state["jobs"] if self._blocks_reservation(j)]
             require(len(active) <= 1, "TRANSIENT_QUEUE_INVARIANT")
             if active:
+                require('campaignOrigin' not in active[0], 'TRANSIENT_CAMPAIGN_PROTECTED')
                 return {"job": self._view(active[0], worker=True)}
             job = next((j for j in state["jobs"] if j["state"] == "QUEUED"), None)
             if job:
+                require('campaignOrigin' not in job, 'TRANSIENT_CAMPAIGN_PROTECTED')
                 job.update(state="RESERVED", rootId=request["rootId"], attemptId=attempt, leaseToken=token,
                            leaseIssuedAt=now.isoformat(), leaseExpiresAt=(now + dt.timedelta(seconds=LEASE_SECONDS)).isoformat(),
                            updatedAt=now.isoformat())
@@ -221,6 +318,8 @@ class TransientQueue:
         token, attempt = secrets.token_hex(32), secrets.token_hex(16)
         def operation(state, now):
             require(state["rootId"] in {None, request["rootId"]}, "TRANSIENT_ROOT_MISMATCH")
+            target = self._job(state, request['jobId'])
+            require('campaignOrigin' not in target, 'TRANSIENT_CAMPAIGN_PROTECTED')
             existing = [j for j in state["jobs"] if j.get("reservationIntent", {}).get("reservationRef")
                         == request["reservationRef"]]
             if existing:
