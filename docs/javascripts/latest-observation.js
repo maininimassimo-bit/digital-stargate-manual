@@ -5,13 +5,13 @@
   const DATA_PATH = "data/realtime/latest-observation.json";
 
   const formatNumber = (value, decimals = 0) => {
-    const number = Number(value);
+    const number = typeof value === "number" ? value : NaN;
     if (!Number.isFinite(number)) return "—";
     return number.toLocaleString("it-IT", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
   };
 
   const formatCoordinate = (value) => {
-    const number = Number(value);
+    const number = typeof value === "number" ? value : NaN;
     return Number.isFinite(number) ? `${formatNumber(number, 4)}°` : "Non disponibile";
   };
 
@@ -49,7 +49,7 @@
       const script = document.createElement("script");
       script.src = ALADIN_SRC; script.charset = "utf-8"; script.async = true;
       script.addEventListener("load", () => { script.dataset.loaded = "true"; resolve(); }, { once: true });
-      script.addEventListener("error", reject, { once: true });
+      script.addEventListener("error", () => { script.remove(); reject(new Error("Aladin script unavailable")); }, { once: true });
       document.head.appendChild(script);
     });
   };
@@ -68,18 +68,21 @@
     if (metricValues[2]) metricValues[2].textContent = `${formatNumber(metrics.rms_total_arcsec, 3)}″`;
   };
 
-  const buildTarget = (data) => {
-    const ra = Number(data.target?.ra_deg), dec = Number(data.target?.dec_deg);
-    if (Number.isFinite(ra) && Number.isFinite(dec)) return `${ra} ${dec}`;
-    return data.target?.name || "LDN 1320";
+  const coordinates = data => {
+    const ra = data.target?.ra_deg, dec = data.target?.dec_deg;
+    return typeof ra === 'number' && Number.isFinite(ra) && ra >= 0 && ra < 360
+      && typeof dec === 'number' && Number.isFinite(dec) && dec >= -90 && dec <= 90
+      && data.target?.epoch === 'J2000' ? [ra, dec] : null;
   };
 
   const updatePanel = (data) => {
     setText("[data-sky-survey]", data.sky_view?.survey || "P/DSS2/color");
     setText("[data-sky-fov]", `${formatNumber(data.sky_view?.field_of_view_deg || 1.5, 1)}°`);
-    setText("[data-sky-ra]", formatCoordinate(data.target?.ra_deg));
-    setText("[data-sky-dec]", formatCoordinate(data.target?.dec_deg));
-    setText("[data-sky-source]", data.target?.coordinate_source || data.coordinate_source || "governed-registry");
+    const pair = coordinates(data);
+    setText("[data-sky-ra]", pair ? formatCoordinate(pair[0]) : "Non disponibile");
+    setText("[data-sky-dec]", pair ? formatCoordinate(pair[1]) : "Non disponibile");
+    setText("[data-sky-session]", data.session_id || "Non disponibile");
+    setText("[data-sky-source]", data.target?.coordinate_source || data.coordinate_source || "unavailable");
   };
 
   const enableFallback = (sky, canvas, status, fallbackUrl) => {
@@ -93,25 +96,70 @@
     media.dataset.dynamicSkyReady = "true"; injectStyles(); media.classList.add("is-loading");
     media.innerHTML = `<div id="dsg-latest-sky" class="dsg-showcase__sky is-loading"><div id="dsg-latest-sky-canvas" class="dsg-showcase__sky-canvas" aria-label="Vista astronomica interattiva"></div><div class="dsg-showcase__sky-shade" aria-hidden="true"></div><span class="dsg-showcase__sky-status">Caricamento survey</span></div>`;
     const sky = media.querySelector("#dsg-latest-sky"), canvas = media.querySelector("#dsg-latest-sky-canvas"), status = media.querySelector(".dsg-showcase__sky-status");
-    let data;
-    try {
-      const response = await fetch(new URL(DATA_PATH, document.baseURI), { cache: "no-store" });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      data = await response.json(); applyData(data); updatePanel(data);
-      events?.emit("latest-observation-data-ready", { target: data.target?.name || null, source: DATA_PATH });
-    } catch (error) {
-      console.warn("Digital StarGate: latest observation data unavailable", error);
-      enableFallback(sky, canvas, status, new URL("assets/images/osservatorio-hero.jpg", document.baseURI).href);
-      media.classList.remove("is-loading", "is-ready"); media.classList.add("is-degraded"); return;
-    }
-    const fallbackUrl = data.fallback_image ? new URL(data.fallback_image, document.baseURI).href : new URL("assets/images/osservatorio-hero.jpg", document.baseURI).href;
-    try {
-      await loadAladin(); await window.A.init;
-      window.A.aladin("#dsg-latest-sky-canvas", { survey:data.sky_view?.survey || "P/DSS2/color", target:buildTarget(data), fov:Number(data.sky_view?.field_of_view_deg)||1.5, projection:"SIN", cooFrame:"equatorial", showReticle:true, showZoomControl:false, showFullscreenControl:false, showLayersControl:false, showGotoControl:false, showShareControl:false, showSimbadPointerControl:false });
-      sky.classList.remove("is-loading"); media.classList.remove("is-loading", "is-degraded"); media.classList.add("is-ready"); status.textContent = `Survey attiva · FOV ${formatNumber(data.sky_view?.field_of_view_deg || 1.5, 1)}°`;
-    } catch (error) {
-      console.warn("Digital StarGate: Aladin Lite unavailable", error); enableFallback(sky, canvas, status, fallbackUrl); media.classList.remove("is-loading", "is-ready"); media.classList.add("is-degraded");
-    }
+    let viewer = null, renderedKey = null, loading = false, stopped = false;
+    const section = media.closest('.dsg-latest-observation');
+    const button = section?.querySelector('[data-latest-sky-refresh]');
+    const note = section?.querySelector('[data-latest-sky-note]');
+    const bounded = (promise, milliseconds) => {
+      let timer;
+      return Promise.race([promise, new Promise((_,reject) => {timer=setTimeout(()=>reject(new Error('Timeout')),milliseconds);})]).finally(()=>clearTimeout(timer));
+    };
+    const unavailable = (message, data = {}) => {
+      renderedKey = null;
+      enableFallback(sky, canvas, status, new URL('assets/images/osservatorio-hero.jpg',document.baseURI).href);
+      status.textContent = message;
+      if (note) note.textContent = data.session_id
+        ? `Sessione ${data.session_id}: coordinate J2000 non disponibili nei dati importati. Nessun centro astronomico dedotto.`
+        : 'Dati dell’ultima sessione non disponibili. Riprova con Aggiorna.';
+      media.classList.remove('is-loading','is-ready'); media.classList.add('is-degraded');
+    };
+    const refresh = async () => {
+      if (loading || stopped || !media.isConnected) return;
+      loading=true;
+      if (button) button.disabled=true;
+      const controller=new AbortController();
+      const timeout=setTimeout(()=>controller.abort(),12000);
+      let data;
+      try {
+        const response=await fetch(new URL(DATA_PATH,document.baseURI),{cache:'no-store',signal:controller.signal});
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload=await response.json();
+        if (payload?.schema_version !== '1.2' || !/^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$/.test(payload.session_id)) throw new Error('Invalid latest observation');
+        data=payload;
+        if (stopped || !media.isConnected) return;
+        applyData(data); updatePanel(data);
+        events?.emit('latest-observation-data-ready',{target:data.target?.name || null,source:DATA_PATH});
+        const pair=coordinates(data);
+        if (!pair) {unavailable('Coordinate non disponibili',data);return;}
+        const fov=typeof data.sky_view?.field_of_view_deg==='number' && data.sky_view.field_of_view_deg>0 && data.sky_view.field_of_view_deg<=180 ? data.sky_view.field_of_view_deg : 1.5;
+        const survey=data.sky_view?.survey || 'P/DSS2/color';
+        const key=JSON.stringify([data.session_id,...pair,survey,fov]);
+        if (key===renderedKey) return;
+        await bounded(loadAladin().then(()=>window.A.init),15000);
+        if (stopped || !media.isConnected) return;
+        canvas.style.display='';
+        if (!viewer) viewer=window.A.aladin('#dsg-latest-sky-canvas',{survey,target:`${pair[0]} ${pair[1]}`,fov,projection:'SIN',cooFrame:'equatorial',showReticle:true,showZoomControl:false,showFullscreenControl:false,showLayersControl:false,showGotoControl:false,showShareControl:false,showSimbadPointerControl:false});
+        else {viewer.gotoRaDec(...pair);viewer.setFoV(fov);viewer.setBaseImageLayer(survey);}
+        renderedKey=key;
+        sky.classList.remove('is-loading','is-fallback'); media.classList.remove('is-loading','is-degraded');media.classList.add('is-ready');
+        status.textContent=`Survey attiva · FOV ${formatNumber(fov,1)}°`;
+        if (note) note.textContent=`Sessione ${data.session_id} · coordinate J2000 dai dati importati. Aggiornamento automatico ogni 60 secondi.`;
+      } catch (error) {
+        console.warn('Digital StarGate: latest observation unavailable',error);
+        if (stopped || !media.isConnected) return;
+        if (!data) {applyData({});updatePanel({});}
+        unavailable(data ? 'Survey non disponibile' : 'Dati non disponibili');
+        if (data && note) note.textContent=`Sessione ${data.session_id}: coordinate pubblicate disponibili, survey temporaneamente non disponibile.`;
+      } finally {clearTimeout(timeout);loading=false;if(button)button.disabled=false;}
+    };
+    const onVisible=()=>{if (!document.hidden) refresh();};
+    button?.addEventListener('click',refresh);
+    document.addEventListener('visibilitychange',onVisible);
+    const timer=setInterval(()=>{
+      if (!media.isConnected) {stopped=true;clearInterval(timer);document.removeEventListener('visibilitychange',onVisible);return;}
+      if (!document.hidden) refresh();
+    },60000);
+    await refresh();
   };
 
   if (window.DSG?.components) { window.DSG.components.register({ name:"latest-observation", order:68, initialize }); return; }

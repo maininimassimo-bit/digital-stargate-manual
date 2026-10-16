@@ -11,8 +11,23 @@ NEW=yaml.load((ROOT/'.github/workflows/analyze-session-automatic.yml').read_text
 class Tests(unittest.TestCase):
     def test_scientific_job_unchanged_except_guard(self):
         job=dict(NEW['jobs']['analyze']);guard=job.pop('if')
+        steps=[]
+        for step in job['steps']:
+            if step.get('id')=='acquisition': continue
+            step=dict(step)
+            if 'if' in step: step['if']=step['if'].replace(" && steps.acquisition.outputs.skip != 'true'",'')
+            steps.append(step)
+        job['steps']=steps
         self.assertEqual(job,BASE['jobs']['analyze'])
         self.assertEqual(guard,"github.ref == 'refs/heads/main' && (github.event_name != 'workflow_dispatch' || inputs.telemetry_probe == 'off' || inputs.telemetry_probe == '')")
+    def test_no_acquisition_guard_only_narrows_scientific_publication(self):
+        steps=NEW['jobs']['analyze']['steps']
+        guard=next(step for step in steps if step.get('id')=='acquisition')
+        self.assertIn('python .github/scripts/check-session-acquisition.py --session',guard['run'])
+        self.assertEqual(guard['if'],"steps.resolve.outputs.skip != 'true'")
+        for step in steps[steps.index(guard)+1:]:
+            self.assertIn("steps.acquisition.outputs.skip != 'true'",step['if'])
+
     def test_trigger_and_session_input_preserved(self):
         self.assertEqual(NEW['name'],BASE['name'])
         # Scientific work starts only after the package is promoted to main.

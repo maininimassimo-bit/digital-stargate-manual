@@ -13,16 +13,17 @@ import json
 from copy import deepcopy
 from pathlib import Path
 
-from update_latest_observation import build_payload, read_json
+from update_latest_observation import build_payload, read_json, has_scientific_acquisition
 
 
-def latest_session_dir(repo_root: Path) -> Path:
+def latest_session_dir(repo_root: Path) -> Path | None:
     candidates = sorted(
         path.parent.parent
         for path in repo_root.glob("data/sessions/*/*/*/normalized/session-metrics.json")
+        if has_scientific_acquisition(read_json(path))
     )
     if not candidates:
-        raise SystemExit("No normalized session metrics found.")
+        return None
     return max(candidates, key=lambda path: path.name)
 
 
@@ -46,6 +47,9 @@ def main() -> int:
     root = args.repo_root.resolve()
     output = args.output if args.output.is_absolute() else root / args.output
     session_dir = latest_session_dir(root)
+    if session_dir is None:
+        print("No scientific acquisition found; latest observation unchanged.")
+        return 0
     metrics = read_json(session_dir / "normalized" / "session-metrics.json")
     existing = read_json(output, default={})
     rebuilt = build_payload(session_dir, metrics, existing)

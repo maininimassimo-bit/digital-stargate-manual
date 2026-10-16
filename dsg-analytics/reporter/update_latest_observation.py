@@ -5,7 +5,7 @@ Astronomical evidence is parsed once by analyze_session.py. This reporter is a
 projection only and never reinterprets raw N.I.N.A. logs.
 """
 from __future__ import annotations
-import argparse,json
+import argparse,json,math
 from datetime import datetime,timezone
 from pathlib import Path
 from typing import Any
@@ -15,6 +15,12 @@ def read_json(path:Path,default=None)->dict[str,Any]:
     value=json.loads(path.read_text(encoding='utf-8-sig'))
     if not isinstance(value,dict): raise ValueError(f'JSON object expected in {path}')
     return value
+
+def has_scientific_acquisition(metrics:dict[str,Any])->bool:
+    nina=metrics.get('nina')
+    if not isinstance(nina,dict): return False
+    return any(isinstance(value,(int,float)) and not isinstance(value,bool) and math.isfinite(value) and value>0
+               for value in (nina.get('light_started'),nina.get('light_completed')))
 
 def relative_report_url(session_id:str)->str:
     return f"./session-reports/{session_id[0:4]}/{session_id[5:7]}/{session_id}/report-sessione/"
@@ -27,5 +33,11 @@ def build_payload(session_dir:Path,metrics:dict[str,Any],existing:dict[str,Any])
 def main()->int:
     p=argparse.ArgumentParser(description=__doc__); p.add_argument('--session',required=True,type=Path); p.add_argument('--output',required=True,type=Path); a=p.parse_args(); metrics_path=a.session/'normalized'/'session-metrics.json'
     if not metrics_path.exists(): raise SystemExit(f'Metrics file not found: {metrics_path}')
-    payload=build_payload(a.session,read_json(metrics_path),read_json(a.output,{})); a.output.parent.mkdir(parents=True,exist_ok=True); a.output.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(f"Updated {a.output} for session {payload['session_id']}"); return 0
+    metrics=read_json(metrics_path)
+    if not has_scientific_acquisition(metrics):
+        print(f'No scientific acquisition for {a.session.name}; latest observation unchanged.'); return 0
+    existing=read_json(a.output,{})
+    if str(existing.get('session_id',''))>str(metrics.get('session_id') or a.session.name):
+        print('Historical session: latest observation unchanged.'); return 0
+    payload=build_payload(a.session,metrics,existing); a.output.parent.mkdir(parents=True,exist_ok=True); a.output.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(f"Updated {a.output} for session {payload['session_id']}"); return 0
 if __name__=='__main__': raise SystemExit(main())

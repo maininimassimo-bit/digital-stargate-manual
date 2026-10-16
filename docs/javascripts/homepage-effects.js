@@ -33,6 +33,8 @@
         </div>
         <a class="md-button dsg-latest-observation__explorer" href="./scientific-session-catalog/">Apri Session Explorer →</a>
       </div>
+      <p data-latest-sky-note role="status">Caricamento dell’ultima sessione importata.</p>
+      <button type="button" class="md-button" data-latest-sky-refresh>Aggiorna vista astronomica</button>
       <div class="dsg-showcase__layout">
         <div class="dsg-showcase__media" aria-label="Mappa dinamica dell'ultima osservazione astronomica"></div>
         <aside class="dsg-showcase__content" aria-label="Coordinate dell'ultima osservazione">
@@ -40,6 +42,7 @@
           <h2>Ultima osservazione</h2>
           <div class="dsg-showcase__sky-panel dsg-showcase__coordinate-panel">
             <div class="dsg-showcase__sky-meta">
+              <span>Sessione</span><span data-sky-session>—</span>
               <span>Survey</span><span data-sky-survey>—</span>
               <span>FOV</span><span data-sky-fov>—</span>
               <span>RA (J2000)</span><span data-sky-ra>—</span>
