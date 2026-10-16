@@ -26,12 +26,13 @@ function node(tag='div'){
     addEventListener(type,callback){this.callbacks[type]=callback;},
     async click(){if(!this.disabled)return this.callbacks.click?.();}};
 }
-function harness({storage=new Map(),initial=fixtures.draft,postFailure='',storageFail=false}={}){
+function harness({storage=new Map(),initial=fixtures.draft,postFailure='',storageFail=false,dispatchAdapter=null}={}){
   const controls=Object.fromEntries(['refresh','select','open','file','confirmed','send','retry','pending','status','preview','result'].map(k=>[k,node()]));
+  if(dispatchAdapter)controls.dispatch=node();
   const root=node();root.querySelector=s=>controls[s.match(/data-campaign-(.+)\]/)[1]];
   let authorized=false,busy=false,queueBlocked=false,expired=false,module,current=structuredClone(initial),deferred=null;
   const requests=[];
-  const context=vm.createContext({crypto:webcrypto,TextEncoder,structuredClone,document:{createElement:node},sessionStorage:{
+  const context=vm.createContext({...(dispatchAdapter?{DSGCampaignDispatchOwner:dispatchAdapter}:{}),crypto:webcrypto,TextEncoder,structuredClone,document:{createElement:node},sessionStorage:{
     getItem:k=>storage.get(k)??null,
     setItem(k,v){if(storageFail)throw Error('PRIVATE_STORAGE_FAILURE');assert.equal(v.includes('Bearer'),false);storage.set(k,v);},
     removeItem(k){if(storageFail)throw Error('PRIVATE_STORAGE_FAILURE');storage.delete(k);}
@@ -152,4 +153,15 @@ test('input review uses Owner-only input receipt for exact acknowledgement',asyn
   const h=harness();h.login();await h.refresh();await h.open();await h.load(fixtures.inputAction);h.confirm();await h.controls.send.click();
   assert.equal(posts(h).length,1);assert.match(posts(h)[0].path,/\/inputs\/[a-f0-9]{32}\/review$/);
   assert.equal(h.storage.size,0);assert.ok(h.requests.some(r=>r.method==='GET'&&r.path.includes('/inputs/')));
+});
+
+test('dispatch child shares Owner host, interlocks metadata and invalidates on view or auth change',async()=>{
+  let bridge,pending=false,invalidations=0,resets=0;const states=[];
+  const h=harness({dispatchAdapter:{mount(root,host){bridge=host;return {
+    hasPending:()=>pending,update:s=>states.push(s),invalidate(){invalidations++;},reset(){resets++;},dispose(){}};}}});
+  h.login();await h.refresh();await h.open();await h.load();h.confirm();assert.equal(h.controls.send.disabled,false);
+  assert.equal(bridge.planRef(),fixtures.draft.plan.planRef);assert.equal(bridge.canMutate(),true);
+  pending=true;bridge.changed();assert.equal(h.module.hasPending(),true);assert.equal(h.controls.send.disabled,true);
+  const before=invalidations;await h.refresh();assert.ok(invalidations>before);
+  h.logout();assert.ok(resets>0);assert.equal(states.at(-1).authorized,false);
 });

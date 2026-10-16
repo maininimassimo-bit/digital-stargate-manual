@@ -35,6 +35,7 @@
     const api=globalThis.DSGCampaignContract;check(api);
     const q=name=>root.querySelector(`[data-campaign-${name}]`);
     let authorized=false,busy=false,queueBlocked=true,disposed=false,epoch=0,loadVersion=0;
+    let dispatchUI=null;
     let pending=null,storageBlocked=false,retryAllowed=false,loaded=null,view=null,listed=false,selected='',viewVersion=0;
     const current=()=>!disposed&&root.isConnected;
     const el=(tag,text,parent)=>{const n=document.createElement(tag);n.textContent=text;parent.append(n);return n;};
@@ -43,7 +44,7 @@
     catch{storageBlocked=true;}
     function lock(){
       if(!current())return;
-      const denied=!authorized||busy,blocked=denied||queueBlocked||storageBlocked;
+      const denied=!authorized||busy,blocked=denied||queueBlocked||storageBlocked||Boolean(dispatchUI?.hasPending());
       q('refresh').disabled=denied;q('select').disabled=denied||Boolean(pending)||!listed;
       q('open').disabled=denied||!selected;
       q('file').disabled=blocked||Boolean(pending);
@@ -53,8 +54,9 @@
       q('pending').textContent=storageBlocked?'Memoria della richiesta non verificabile: registrazioni bloccate.':
         pending?(authorized?'Richiesta conservata: '+names[pending.action]+'. Aggiorna le campagne per verificarne l’esito.':
           'Una richiesta è conservata. Accedi per riconciliarla.') : '';
+      dispatchUI?.update({authorized,busy,blocked:queueBlocked||storageBlocked||Boolean(pending)});
     }
-    function clearView(){viewVersion++;view=null;q('result').replaceChildren();retryAllowed=false;}
+    function clearView(){dispatchUI?.invalidate();viewVersion++;view=null;q('result').replaceChildren();retryAllowed=false;}
     function preview(value){
       q('preview').replaceChildren();if(!value||!authorized)return;
       el('p',names[value.action],q('preview'));el('p','Piano: '+value.planRef,q('preview'));
@@ -194,15 +196,18 @@
       pending=loaded;loaded=null;host.changed();await send();
     }));
     q('retry').addEventListener('click',()=>perform(async()=>{check(retryAllowed&&q('confirmed').checked);await send();}));
-    function reset(){epoch++;loadVersion++;clearView();loaded=null;listed=false;selected='';q('select').replaceChildren();
+    function reset(){epoch++;loadVersion++;clearView();dispatchUI?.reset();loaded=null;listed=false;selected='';q('select').replaceChildren();
       q('file').value='';q('confirmed').checked=false;q('preview').replaceChildren();say('Accedi e aggiorna le campagne per consultare il collaudo.');}
+    const dispatchPanel=q('dispatch');
+    if(dispatchPanel&&globalThis.DSGCampaignDispatchOwner)dispatchUI=globalThis.DSGCampaignDispatchOwner.mount(dispatchPanel,{...host,
+      planRef:()=>view?.campaign.planRef||'',canMutate:()=>!pending&&!storageBlocked&&!queueBlocked&&host.canMutate()});
     lock();
     return Object.freeze({hasPending(){
       try{if(pending)stored();else check(sessionStorage.getItem(KEY)===null);}catch{storageBlocked=true;}
-      return Boolean(pending)||storageBlocked;
+      return Boolean(pending)||storageBlocked||Boolean(dispatchUI?.hasPending());
     },
       update(state){if(authorized&&!state.authorized)reset();authorized=state.authorized;busy=state.busy;queueBlocked=state.queueBlocked;lock();},
-      reset,dispose(){reset();disposed=true;}});
+      reset,dispose(){reset();dispatchUI?.dispose();disposed=true;}});
   }
   globalThis.DSGCampaignOwner=Object.freeze({mount});
 })();
