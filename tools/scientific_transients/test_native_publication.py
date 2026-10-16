@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 from tools.pixinsight.local_pilot.broker import encode, ProtocolError
 from tools.scientific_transients import native_publication as pub
+from tools.scientific_transients import test_native_launch_control as control_fixture
 
 
 def sha(raw): return hashlib.sha256(raw).hexdigest()
@@ -22,16 +23,66 @@ class NativePublicationTests(unittest.TestCase):
         self.work, self.archive, self.journal = [self.root / n / self.operation
             for n in ["native-work", "native-retained", "native-supervision"]]
         for path in [self.work, self.archive, self.journal]: path.mkdir(parents=True)
-        for name in ["launch-seal.json", "launch-grant.json"]: (self.work / name).write_bytes(b"{}")
-        self.intent = {"protocol": "DSG_NATIVE_LINEAR_PARENT_INTENT_V1", "operationRef": self.operation,
-                       "createdUTC": "2026-10-16T10:00:00Z", "sealSha256": sha(b"{}"), "grantSha256": sha(b"{}")}
+        self.control_case=control_fixture.LaunchControlTests()
+        self.control_case.setUp();self.addCleanup(self.control_case.doCleanups)
+        self.control=self.control_case.value
+        self.fixed={r['role']:r for r in self.control['files'] if r['role']!='PARENT_SOURCE'}
+        for role,name in [('CORE','native_linear_uncertainty.jsh'),('PARSER','strict_passive_json.jsh'),
+            ('PRIMARY','native_float32_primary.jsh'),('WRAPPER','native_linear_measurement.jsh')]:
+            row=self.fixed[role];path=self.work/name;path.write_bytes(Path(row['path']).read_bytes())
+            row.update(path=path.as_posix(),name=name)
+        for name,raw in [('source.fits',b'SYNTHETIC_OPAQUE_INPUT'),('kernel-spec.json',b'{}'),('source-lineage.json',b'{}')]:
+            (self.work/name).write_bytes(raw)
+        p=dict(protocol='DSG_NATIVE_LINEAR_MEASUREMENT_V2',operationRef=self.operation,ownerNonce=self.control['ownerNonce'],
+            processSessionRef=self.control['processSessionRef'],expectedPixInsightVersion=self.control['expectedPixInsightVersion'],
+            dependencies={key:self.fixed[role]['sha256'] for role,key in [('CORE','coreSha256'),('PARSER','parserSha256'),
+                ('PRIMARY','primarySha256'),('WRAPPER','wrapperSha256')]})
+        (self.work/'parameters.json').write_bytes(encode(p))
+        self.seal=dict(protocol='DSG_NATIVE_LINEAR_LAUNCH_SEAL_V1',operationRef=self.operation,createdUTC='2026-10-16T10:00:00Z',
+            arbSha256=self.control['arbSha256'],rqSha256=self.control['rqSha256'],inputClosureAccepted=False,
+            files=[dict(role=path.name,name=path.name,sha256=sha(path.read_bytes()),byteLength=path.stat().st_size) for path in self.work.iterdir()])
+        (self.work/'launch-seal.json').write_bytes(encode(self.seal))
+        (self.work/'launch-grant.json').write_bytes(encode(dict(protocol='DSG_NATIVE_LINEAR_SINGLE_START_GRANT_V1',
+            operationRef=self.operation,sealSha256=sha(encode(self.seal)))))
+        for name,label in [('_dsg_verified_bootstrap','bootstrap-source.py'),('_dsg_pinned_source_loader','loader-source.py')]:
+            path=self.control_case.root/label;raw=('SYNTHETIC_'+label).encode('ascii');path.write_bytes(raw)
+            row=dict(path=path.as_posix(),sha256=sha(raw),byteLength=len(raw))
+            self.control_case.sources[name]=row
+            self.control['files'].append(dict(role='PARENT_SOURCE',name=name,**row))
+        sm=self.control_case.root/'source-manifest.json';sm.write_bytes(b'{}')
+        boot=dict(protocol='DSG_NATIVE_BOOTSTRAP_MANIFEST_V1',
+            bootstrapSha256=self.control_case.sources['_dsg_verified_bootstrap']['sha256'],
+            entrySha256=self.control['bootstrapEntrySha256'],pythonVersion=self.control['expectedPythonVersion'],
+            pythonExecutable=self.fixed['PYTHON_EXECUTABLE']['path'],pythonExecutableSha256=self.fixed['PYTHON_EXECUTABLE']['sha256'],
+            loaderPath=self.control_case.sources['_dsg_pinned_source_loader']['path'],
+            loaderSha256=self.control_case.sources['_dsg_pinned_source_loader']['sha256'],sourcesManifestPath=sm.as_posix(),
+            sourcesManifestSha256=sha(b'{}'),entryModule='tools.synthetic',entryCallable='main')
+        raw=encode(boot);Path(self.fixed['BOOTSTRAP_MANIFEST']['path']).write_bytes(raw)
+        self.fixed['BOOTSTRAP_MANIFEST'].update(sha256=sha(raw),byteLength=len(raw));self.control['bootstrapManifestSha256']=sha(raw)
+        self.control.update(sealSha256=sha((self.work/'launch-seal.json').read_bytes()),grantSha256=sha((self.work/'launch-grant.json').read_bytes()))
+        self.bootstrap=dict(bootstrapManifestSha256=self.control['bootstrapManifestSha256'],bootstrapEntrySha256=boot['entrySha256'],
+            bootstrapSourceSha256=boot['bootstrapSha256'],loaderSha256=boot['loaderSha256'],sourcesManifestSha256=boot['sourcesManifestSha256'],
+            expectedPythonVersion=boot['pythonVersion'],pythonExecutable=boot['pythonExecutable'],pythonExecutableSha256=boot['pythonExecutableSha256'])
+        case=self
+        class SyntheticSession:
+            # This is deliberately a fake live callback, never native ownership/consent.
+            def attest_sources(self):return copy.deepcopy(case.control_case.sources)
+            def attest_bootstrap(self):return copy.deepcopy(case.bootstrap)
+            def assert_intact(self):return True
+        self.session=SyntheticSession()
+        raw=encode(self.control);(self.journal/'launch-control.json').write_bytes(raw)
+        self.intent = {"protocol": "DSG_NATIVE_LINEAR_PARENT_INTENT_V2", "operationRef": self.operation,
+                       "createdUTC": "2026-10-16T10:00:00Z", "sealSha256": self.control['sealSha256'],
+                       "grantSha256":self.control['grantSha256'],'launchControlSha256':sha(raw)}
         for prefix, path in zip(["nativeWork", "retained", "supervision"], [self.work, self.archive, self.journal]):
             info = path.stat()
             self.intent[prefix + "CanonicalPath"] = path.as_posix()
             self.intent[prefix + "DirectoryIdentity"] = [info.st_dev, info.st_ino]
         self.binding = {"operationRef": self.operation, "parentIntentSha256": "0" * 64,
-                        "sealSha256": sha(b"{}"), "grantSha256": sha(b"{}")}
+                        "sealSha256": self.control['sealSha256'], "grantSha256":self.control['grantSha256'],
+                        'launchControlSha256':self.intent['launchControlSha256']}
         self.write_intent()
+        self.write_owner()
         self.records = []
         for name in sorted(pub.REQUIRED):
             # Deliberately opaque, not actual XISF/History/numeric result payloads.
@@ -56,19 +107,117 @@ class NativePublicationTests(unittest.TestCase):
         (self.work / "terminal-ready.json").write_bytes(encode({
             "protocol": "DSG_NATIVE_LINEAR_TERMINAL_READY_V1", "operationRef": self.operation,
             "terminalSha256": sha(raw)}))
+        returned=dict(protocol='DSG_NATIVE_LINEAR_RETURNED_V1',operationRef=self.operation,sealSha256=self.control['sealSha256'],
+            wrapperSha256=self.fixed['WRAPPER']['sha256'],terminalSha256=sha(raw),readySha256=sha((self.work/'terminal-ready.json').read_bytes()),
+            state=self.terminal['state'],unclosedOwnedViews=self.terminal['unclosedOwnedViews'],fullPhysicalVariance=None,
+            significance=None,scientificValidation='NOT_VALIDATED',qualifiedControls=0,nativeProcessId='4242',
+            processSessionRef=self.control['processSessionRef'],ownerSha256=sha((self.work/'native-owner.json').read_bytes()),
+            ownerReadySha256=sha((self.work/'native-owner-ready.json').read_bytes()))
+        (self.work/'native-return.json').write_bytes(encode(returned))
+
+    def write_owner(self):
+        owner=dict(protocol='DSG_NATIVE_LINEAR_OWNER_V1',operationRef=self.operation,processSessionRef=self.control['processSessionRef'],
+            ownerNonce=self.control['ownerNonce'],sealSha256=self.control['sealSha256'],grantSha256=self.control['grantSha256'],
+            launchControlSha256=self.binding['launchControlSha256'],parentIntentSha256=self.binding['parentIntentSha256'],
+            nativeProcessId='4242',processCreationFileTime='0123456789abcdef',parentDeadlineUTC=self.control['parentDeadlineUTC'])
+        raw=encode(owner);(self.work/'native-owner.json').write_bytes(raw)
+        (self.work/'native-owner-ready.json').write_bytes(encode(dict(protocol='DSG_NATIVE_LINEAR_OWNER_READY_V1',
+            operationRef=self.operation,processSessionRef=owner['processSessionRef'],ownerNonce=owner['ownerNonce'],ownerSha256=sha(raw))))
 
     def publish(self, clock=lambda: 1, deadline=180):
         return pub.publish_native_bundle(self.work, self.archive, self.journal,
-                                         self.binding, clock=clock, deadline=deadline)
+                                         self.binding, clock=clock, deadline=deadline,bootstrap_session=self.session)
 
     def assert_uncertain(self):
         self.assertTrue((self.journal / "publication-uncertain.json").exists())
         self.assertFalse((self.archive / "retained-native-terminal.json").exists())
 
+    def test_missing_causal_return_blocks_before_copy(self):
+        (self.work/'native-return.json').unlink()
+        with self.assertRaises(pub.PublicationFailure): self.publish()
+        self.assert_uncertain()
+        self.assertEqual(list(self.archive.iterdir()), [])
+
+    def test_owner_identity_disagrees_with_return(self):
+        path=self.work/'native-return.json'
+        import json
+        value=json.loads(path.read_bytes()); value['nativeProcessId']='4243'
+        path.write_bytes(encode(value))
+        with self.assertRaises(pub.PublicationFailure): self.publish()
+        self.assert_uncertain()
+
+    def test_live_bootstrap_binding_disagreement_blocks(self):
+        self.bootstrap['bootstrapEntrySha256']='0'*64
+        with self.assertRaises(pub.PublicationFailure): self.publish()
+        self.assert_uncertain()
+
+    def test_v1_parent_intent_is_not_accepted(self):
+        self.intent['protocol']='DSG_NATIVE_LINEAR_PARENT_INTENT_V1'
+        self.write_intent(); self.write_owner(); self.write_terminal()
+        with self.assertRaises(pub.PublicationFailure): self.publish()
+        self.assert_uncertain()
+
+    def test_unlisted_work_file_blocks(self):
+        (self.work/'unexpected.txt').write_bytes(b'UNLISTED')
+        with self.assertRaises(pub.PublicationFailure): self.publish()
+        self.assert_uncertain()
+
+    def test_sealed_input_changed_blocks(self):
+        (self.work/'source.fits').write_bytes(b'CHANGED_SYNTHETIC_INPUT')
+        with self.assertRaises(pub.PublicationFailure): self.publish()
+        self.assert_uncertain()
+
+    def test_valid_initial_cancel_can_be_retained_without_authority(self):
+        (self.work/'cancel.json').write_bytes(encode(dict(
+            protocol='DSG_NATIVE_LINEAR_CANCEL_V1',operationRef=self.operation,requested=True)))
+        outcome=self.publish()
+        self.assertFalse(outcome['processClosureAuthorized'])
+        self.assertFalse(outcome['newNativeStartAllowed'])
+
+    def test_cancel_arriving_during_last_marker_readback_blocks_return(self):
+        original=pub._hash_bounded
+        def late_cancel(path, size, info):
+            result=original(path,size,info)
+            if Path(path).name=='retained-native-terminal.json':
+                (self.work/'cancel.json').write_bytes(encode(dict(
+                    protocol='DSG_NATIVE_LINEAR_CANCEL_V1',operationRef=self.operation,requested=True)))
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=late_cancel):
+            with self.assertRaisesRegex(pub.PublicationFailure,'PUBLICATION_CANCEL_CHANGED'): self.publish()
+        self.assertTrue((self.archive/'retained-native-terminal.json').exists())
+        self.assertTrue((self.journal/'publication-uncertain.json').exists())
+
+    def test_existing_cancel_changed_during_last_marker_readback_blocks_return(self):
+        path=self.work/'cancel.json'
+        path.write_bytes(encode(dict(protocol='DSG_NATIVE_LINEAR_CANCEL_V1',operationRef=self.operation,requested=True)))
+        original=pub._hash_bounded
+        def late_change(target,size,info):
+            result=original(target,size,info)
+            if Path(target).name=='retained-native-terminal.json': path.write_bytes(b'CHANGED_CANCEL')
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=late_change):
+            with self.assertRaises(pub.PublicationFailure): self.publish()
+        self.assertTrue((self.archive/'retained-native-terminal.json').exists())
+        self.assertTrue((self.journal/'publication-uncertain.json').exists())
+
+    def test_deadline_crossed_in_final_cancel_readback_is_uncertain(self):
+        (self.work/'cancel.json').write_bytes(encode(dict(
+            protocol='DSG_NATIVE_LINEAR_CANCEL_V1',operationRef=self.operation,requested=True)))
+        original=pub._hash_bounded; now=[179]; marker_read=[False]
+        def cross(target,size,info):
+            result=original(target,size,info)
+            if Path(target).name=='retained-native-terminal.json': marker_read[0]=True
+            if marker_read[0] and Path(target).name=='cancel.json': now[0]=181
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=cross):
+            with self.assertRaisesRegex(pub.PublicationFailure,'PUBLICATION_DEADLINE_CROSSED_DURING_MARKER'):
+                self.publish(clock=lambda:now[0])
+        self.assertTrue((self.journal/'publication-uncertain.json').exists())
+
     def test_complete_set_raw_chain_and_no_lifecycle_or_science_authority(self):
         outcome = self.publish()
         marker = outcome["marker"]
-        self.assertEqual(len(marker["products"]), 14)
+        self.assertEqual(len(marker["products"]), 17)
         for row in marker["products"]:
             self.assertEqual((self.archive / row["name"]).read_bytes(), (self.work / row["name"]).read_bytes())
         self.assertFalse(outcome["processClosureAuthorized"])
@@ -160,9 +309,13 @@ class NativePublicationTests(unittest.TestCase):
         self.assertFalse(outcome["marker"]["measurementAccepted"])
 
     def test_deadline_crossing_marker_preserves_stale_marker_and_uncertainty(self):
-        clock = iter([179, 181])
-        with self.assertRaisesRegex(pub.PublicationFailure, "PUBLICATION_DEADLINE_CROSSED_DURING_MARKER"):
-            self.publish(clock=lambda: next(clock))
+        now=[179];original=pub._write_control
+        def cross(path,value):
+            result=original(path,value)
+            if path.name=='retained-native-terminal.json':now[0]=181
+            return result
+        with patch.object(pub,'_write_control',side_effect=cross),self.assertRaisesRegex(pub.PublicationFailure, "PUBLICATION_DEADLINE_CROSSED_DURING_MARKER"):
+            self.publish(clock=lambda: now[0])
         self.assertTrue((self.archive / "retained-native-terminal.json").exists())
         self.assertTrue((self.journal / "publication-uncertain.json").exists())
         with self.assertRaises(pub.PublicationFailure): self.publish()
@@ -186,7 +339,7 @@ class NativePublicationTests(unittest.TestCase):
         with patch.object(pub, "retain_opaque_product", side_effect=mutate):
             with self.assertRaisesRegex(pub.PublicationFailure, "RETENTION_IDENTITY_CHANGED"): self.publish()
         self.assert_uncertain()
-        self.assertEqual(len(list(self.archive.iterdir())), 14)
+        self.assertEqual(len(list(self.archive.iterdir())), 17)
 
     def test_partial_copy_error_and_uncertainty_write_failure_never_return_success(self):
         original = pub.retain_opaque_product

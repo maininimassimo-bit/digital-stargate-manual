@@ -5,6 +5,22 @@ ricevuta di disponibilità. È il componente di conservazione W7 del supervisore
 in costruzione. Non avvia PixInsight, non decodifica immagini e non autorizza
 la chiusura di processi o nuove esecuzioni.
 
+L'integrazione V2 richiede il keyword `bootstrap_session` vivo e un binding
+con cinque campi, incluso `launchControlSha256`. Accetta soltanto il
+parent-intent `DSG_NATIVE_LINEAR_PARENT_INTENT_V2`. L'ispettore del controllo
+di avvio verifica i sorgenti attestati dalla sessione isolata; le attestazioni
+del bootstrap vengono confrontate con il manifest e con i ruoli fissati nel
+controllo. La sessione e i file vengono ricontrollati durante la conservazione.
+Il callback fidato deve provenire dal bootstrap verificato: un oggetto Python
+arbitrario che espone gli stessi metodi non costituisce una prova di esecuzione.
+
+Sigillo, parametri V2 e quattro librerie native devono essere coerenti con il
+controllo. Owner e owner-ready vincolano nonce, sessione, PID dichiarato,
+impronte e termine del parent. La ricevuta `native-return.json` deve concordare
+con terminale, ready e Owner. Il componente verifica questi legami documentali;
+la proprietà effettiva del processo e la causalità del ritorno richiedono ancora
+il supervisore con il suo handle vivo. Non vengono dedotte dal solo PID o JSON.
+
 Il profilo bundle V2 applica `role=name` ai nomi fissi dei prodotti. Per un
 terminale `COMPLETED_CONDITIONAL_COMPUTATION` richiede tutti i dodici prodotti:
 avvio, log, risultato, evidenza, checkpoint e sette History. Rifiuta prodotti
@@ -29,7 +45,12 @@ L'incertezza viene ricontrollata anche nelle verifiche finali. Un errore
 successivo non rende disponibile il tentativo. La ricevuta
 ready deve fissare l'impronta grezza del terminale, che dichiara prodotti unici
 con nome, ruolo, impronta e dimensione. Il limite aggregato di 192 MiB e 20 file
-include terminale e ready. Si applicano anche limiti per ruolo: risultato 8 MiB,
+include terminale, ready, native-return, Owner, owner-ready e marker finale
+(per quest'ultimo è riservato 1 MiB). I metadati effettivi della directory del
+parent hanno un limite separato di 16 MiB. Gli input sigillati, Owner e consenso,
+con una riserva per l'annullamento, rispettano 200 MiB. L'inventario di lavoro
+deve essere esatto: file estranei o variazioni dell'annullamento durante la copia
+producono incertezza. Si applicano anche limiti per ruolo: risultato 8 MiB,
 singola History 4 MiB, log 32 MiB, controlli JSON 1 MiB. I file immagine restano
 byte opachi e non possono superare da soli il limite aggregato.
 

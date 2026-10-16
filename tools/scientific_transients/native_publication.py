@@ -10,13 +10,14 @@ import stat
 from tools.pixinsight.local_pilot.broker import ProtocolError, encode, require
 from tools.scientific_transients.local_registry import safe_path, signature
 from tools.scientific_transients.native_retention import retain_opaque_product, _hash_bounded
+from tools.scientific_transients.native_launch_control import inspect_launch_control
 
 MIB = 1024 * 1024
 REQUIRED = frozenset({"started-native.json", "native.log", "result.json", "native-evidence.json",
     "checkpoint.xisf", "source-initial.js", "source-before.js", "source-after.js",
     "checkpoint-initial.js", "checkpoint-current.js", "closing-source.js", "closing-checkpoint.js"})
 ERROR_VIEWS = frozenset({"error-owned-1.xisf", "error-owned-2.xisf"})
-CONTROL = frozenset({"terminal.json", "terminal-ready.json"})
+CONTROL = frozenset({"terminal.json", "terminal-ready.json", "native-return.json", "native-owner.json", "native-owner-ready.json"})
 ALLOWED = REQUIRED | ERROR_VIEWS | CONTROL
 STATES = {"COMPLETED_CONDITIONAL_COMPUTATION", "FAILED_RETAINED", "CANCELLED_RETAINED", "UNCERTAIN_RETENTION"}
 TERMINAL_FIELDS = {"protocol", "operationRef", "state", "errorCode", "retentionErrorCode", "products",
@@ -24,7 +25,7 @@ TERMINAL_FIELDS = {"protocol", "operationRef", "state", "errorCode", "retentionE
     "scientificValidation", "qualifiedControls", "provenanceVerified", "physicalApplicabilityVerified"}
 INTENT_FIELDS = {"protocol", "operationRef", "createdUTC", "nativeWorkCanonicalPath",
     "nativeWorkDirectoryIdentity", "retainedCanonicalPath", "retainedDirectoryIdentity",
-    "supervisionCanonicalPath", "supervisionDirectoryIdentity", "sealSha256", "grantSha256"}
+    "supervisionCanonicalPath", "supervisionDirectoryIdentity", "sealSha256", "grantSha256", "launchControlSha256"}
 
 
 class PublicationFailure(ProtocolError):
@@ -49,26 +50,27 @@ def _directory(path):
     return path, [info.st_dev, info.st_ino]
 
 
-def _control_tree(value, depth=1):
+def _control_tree(value, depth=1, *, array_limit=20, string_limit=192):
     require(depth <= 8, "PUBLICATION_JSON_DEPTH")
     if value is None or type(value) is bool: return
     if type(value) is int:
         # Private Python parent metadata includes OS volume/file identities up to 128 bits.
         require(abs(value) <= 2**128 - 1, "PUBLICATION_JSON_INTEGER")
     elif type(value) is str:
-        require(len(value) <= 192 and value.isascii(), "PUBLICATION_JSON_STRING")
+        require(len(value) <= string_limit and value.isascii(), "PUBLICATION_JSON_STRING")
     elif type(value) is list:
-        require(len(value) <= 20, "PUBLICATION_JSON_ARRAY")
-        for item in value: _control_tree(item, depth + 1)
+        require(len(value) <= array_limit, "PUBLICATION_JSON_ARRAY")
+        for item in value: _control_tree(item, depth + 1, array_limit=array_limit, string_limit=string_limit)
     elif type(value) is dict:
         require(len(value) <= 32, "PUBLICATION_JSON_MEMBERS")
         for key, item in value.items():
             require(key not in {"__proto__", "prototype", "constructor"}, "PUBLICATION_JSON_KEY")
-            _control_tree(key, depth + 1); _control_tree(item, depth + 1)
+            _control_tree(key, depth + 1, array_limit=array_limit, string_limit=string_limit)
+            _control_tree(item, depth + 1, array_limit=array_limit, string_limit=string_limit)
     else: raise ProtocolError("PUBLICATION_JSON_TYPE")
 
 
-def _read_control(path):
+def _read_control(path, *, array_limit=20, string_limit=192):
     path = safe_path(path)
     raw = bytearray()
     with path.open("rb") as stream:
@@ -96,7 +98,7 @@ def _read_control(path):
                            parse_int=integer, parse_float=invalid, parse_constant=invalid)
     except (ValueError, UnicodeError, RecursionError) as exc:
         raise ProtocolError("PUBLICATION_JSON_INVALID") from exc
-    _control_tree(value)
+    _control_tree(value, array_limit=array_limit, string_limit=string_limit)
     return value, {"role": path.name, "name": path.name,
                    "sha256": hashlib.sha256(raw).hexdigest(), "byteLength": len(raw)}, before
 
@@ -166,13 +168,92 @@ def _snapshot(path, expected):
     return info
 
 
-def publish_native_bundle(native_work, retained, supervision, binding, *, clock, deadline):
+def _metadata_bound(root):
+    total, entries = 0, 0
+    pending = [(root, 0)]
+    while pending:
+        directory, depth = pending.pop()
+        require(depth <= 8, 'PUBLICATION_METADATA_DEPTH')
+        for child in directory.iterdir():
+            entries += 1; require(entries <= 256, 'PUBLICATION_METADATA_ENTRIES')
+            info = safe_path(child).lstat()
+            if stat.S_ISDIR(info.st_mode): pending.append((child, depth + 1))
+            else:
+                require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1, 'PUBLICATION_METADATA_FILE')
+                total += info.st_size
+                require(total <= 16*MIB, 'PUBLICATION_METADATA_AGGREGATE')
+
+
+def _v2_launch(work, journal, binding, session, guard):
+    """Code/bootstrap/input binding only; no fresh consent or held-PID authority."""
+    snapshot = inspect_launch_control((journal/'launch-control.json').as_posix(), binding['launchControlSha256'],
+        loaded_sources=session.attest_sources, guard=guard)
+    c = snapshot.control
+    require(all(c[k] == binding[k] for k in ['operationRef','sealSha256','grantSha256']), 'PUBLICATION_CONTROL_BINDING')
+    fixed = {r['role']:r for r in c['files'] if r['role'] != 'PARENT_SOURCE'}
+    sources = {r['name']:r for r in c['files'] if r['role'] == 'PARENT_SOURCE'}
+    b = session.attest_bootstrap()
+    _fields(b, {'bootstrapManifestSha256','bootstrapEntrySha256','bootstrapSourceSha256','loaderSha256',
+                'sourcesManifestSha256','expectedPythonVersion','pythonExecutable','pythonExecutableSha256'})
+    require(all(_sha(b[k]) for k in b if k not in {'expectedPythonVersion','pythonExecutable'}), 'PUBLICATION_BOOTSTRAP_PIN')
+    require(all(c[k] == b[k] for k in ['bootstrapManifestSha256','bootstrapEntrySha256','expectedPythonVersion'])
+        and fixed['PYTHON_EXECUTABLE']['path'] == b['pythonExecutable']
+        and fixed['PYTHON_EXECUTABLE']['sha256'] == b['pythonExecutableSha256']
+        and sources.get('_dsg_verified_bootstrap',{}).get('sha256') == b['bootstrapSourceSha256']
+        and sources.get('_dsg_pinned_source_loader',{}).get('sha256') == b['loaderSha256'], 'PUBLICATION_BOOTSTRAP_BINDING')
+    bootstrap, br, bs = _read_control(safe_path(fixed['BOOTSTRAP_MANIFEST']['path']), string_limit=512)
+    _fields(bootstrap, {'protocol','bootstrapSha256','entrySha256','pythonVersion','pythonExecutable',
+        'pythonExecutableSha256','loaderPath','loaderSha256','sourcesManifestPath','sourcesManifestSha256','entryModule','entryCallable'})
+    require(br['sha256'] == b['bootstrapManifestSha256'] and bootstrap['protocol'] == 'DSG_NATIVE_BOOTSTRAP_MANIFEST_V1'
+        and bootstrap['bootstrapSha256'] == b['bootstrapSourceSha256'] and bootstrap['entrySha256'] == b['bootstrapEntrySha256']
+        and bootstrap['pythonVersion'] == b['expectedPythonVersion']
+        and safe_path(bootstrap['pythonExecutable']).as_posix() == b['pythonExecutable']
+        and bootstrap['pythonExecutableSha256'] == b['pythonExecutableSha256']
+        and bootstrap['loaderSha256'] == b['loaderSha256'] and bootstrap['sourcesManifestSha256'] == b['sourcesManifestSha256']
+        and safe_path(bootstrap['loaderPath']).as_posix() == sources['_dsg_pinned_source_loader']['path'], 'PUBLICATION_BOOTSTRAP_MANIFEST')
+    seal, sr, ss = _read_control(work/'launch-seal.json', array_limit=128, string_limit=512)
+    _fields(seal, {'protocol','operationRef','createdUTC','files','arbSha256','rqSha256','inputClosureAccepted'})
+    require(sr['sha256'] == binding['sealSha256'] and seal['protocol'] == 'DSG_NATIVE_LINEAR_LAUNCH_SEAL_V1'
+        and seal['operationRef'] == binding['operationRef'] and seal['arbSha256'] == c['arbSha256']
+        and seal['rqSha256'] == c['rqSha256'] and seal['inputClosureAccepted'] is False
+        and type(seal['files']) is list and 8 <= len(seal['files']) <= 72, 'PUBLICATION_SEAL')
+    required = {'parameters.json','kernel-spec.json','source.fits','source-lineage.json',
+        'native_linear_uncertainty.jsh','strict_passive_json.jsh','native_float32_primary.jsh','native_linear_measurement.jsh'}
+    rows, pins, total = {}, [(work/'launch-seal.json',sr,ss)], sr['byteLength']
+    for row in seal['files']:
+        _fields(row, {'role','name','sha256','byteLength'})
+        name = row['name']
+        require(type(name) is str and (name in required or re.fullmatch('source-card-[a-f0-9]{64}\\.json',name))
+            and row['role'] == name and name not in rows and _sha(row['sha256'])
+            and type(row['byteLength']) is int and 0 < row['byteLength'] <= (64*MIB if name in {'source.fits','kernel-spec.json'} else MIB),
+            'PUBLICATION_INPUT_ROLE')
+        if name.startswith('source-card-'):
+            require(name == 'source-card-'+row['sha256']+'.json', 'PUBLICATION_CARD_NAME')
+        rows[name] = row; total += row['byteLength']; require(total + MIB <= 200*MIB, 'PUBLICATION_INPUT_AGGREGATE')
+        info = _snapshot(work/name,row)
+        require(_hash_bounded(work/name,row['byteLength'],info) == row['sha256'], 'PUBLICATION_INPUT_HASH')
+        pins.append((work/name,row,info)); guard()
+    require(required <= rows.keys(), 'PUBLICATION_INPUT_CLOSURE')
+    parameters, pr, ps = _read_control(work/'parameters.json',array_limit=128,string_limit=512)
+    require(pr['sha256'] == rows['parameters.json']['sha256'] and
+        parameters.get('protocol') == 'DSG_NATIVE_LINEAR_MEASUREMENT_V2' and
+        all(parameters.get(k) == c[k] for k in ['operationRef','ownerNonce','processSessionRef'])
+        and parameters.get('expectedPixInsightVersion') == c['expectedPixInsightVersion'], 'PUBLICATION_PARAMETERS_V2')
+    for role, name, dependency in [('CORE','native_linear_uncertainty.jsh','coreSha256'),
+        ('PARSER','strict_passive_json.jsh','parserSha256'),('PRIMARY','native_float32_primary.jsh','primarySha256'),
+        ('WRAPPER','native_linear_measurement.jsh','wrapperSha256')]:
+        require(fixed[role]['path'] == (work/name).as_posix() and fixed[role]['sha256'] == rows[name]['sha256']
+            and parameters.get('dependencies',{}).get(dependency) == fixed[role]['sha256'], 'PUBLICATION_NATIVE_CODE_BINDING')
+    return snapshot, c, fixed, pins, total
+
+
+def publish_native_bundle(native_work, retained, supervision, binding, *, clock, deadline, bootstrap_session):
     """One publication attempt; caller already owns and supervises the sole launch.
 
     Return is a byte-retention receipt, never permission to close/restart a process.
     Live trusted parent clock/deadline cover the original whole attempt, not this call.
     """
-    _fields(binding, {"operationRef", "parentIntentSha256", "sealSha256", "grantSha256"})
+    _fields(binding, {"operationRef", "parentIntentSha256", "sealSha256", "grantSha256", "launchControlSha256"})
     binding = dict(binding)
     operation = binding["operationRef"]
     require(type(operation) is str and re.fullmatch("[a-f0-9]{32}", operation) is not None
@@ -198,6 +279,8 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
                 and (last_clock is None or now >= last_clock), "PUBLICATION_CLOCK_CHANGED")
         last_clock = now
         return now >= deadline
+    def code_guard():
+        roots_unchanged(); fences_absent(); exceeded()
     failed_role = None
     try:
         fences_absent()
@@ -209,10 +292,11 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
         intent, intent_record, intent_stat = _read_control(journal / "parent-intent.json")
         _fields(intent, INTENT_FIELDS)
         require(intent_record["sha256"] == binding["parentIntentSha256"]
-                and intent["protocol"] == "DSG_NATIVE_LINEAR_PARENT_INTENT_V1"
+                and intent["protocol"] == "DSG_NATIVE_LINEAR_PARENT_INTENT_V2"
                 and intent["operationRef"] == operation
                 and intent["sealSha256"] == binding["sealSha256"]
-                and intent["grantSha256"] == binding["grantSha256"], "PUBLICATION_INTENT_BINDING")
+                and intent["grantSha256"] == binding["grantSha256"]
+                and intent["launchControlSha256"] == binding["launchControlSha256"], "PUBLICATION_INTENT_BINDING")
         require(type(intent["createdUTC"]) is str
                 and re.fullmatch(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ", intent["createdUTC"]) is not None,
                 "PUBLICATION_INTENT_TIME")
@@ -235,23 +319,70 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
             record = {"sha256": expected_sha, "byteLength": info.st_size}
             require(_hash_bounded(path, info.st_size, info) == expected_sha, "PUBLICATION_LAUNCH_PIN")
             pins.append((path, record, info))
+        code_snapshot, control, fixed, input_pins, input_bytes = _v2_launch(work,journal,binding,bootstrap_session,code_guard)
+        pins.extend(input_pins)
+        owner, owner_record, owner_stat = _read_control(work/'native-owner.json')
+        _fields(owner, {'protocol','operationRef','processSessionRef','ownerNonce','sealSha256','grantSha256',
+            'launchControlSha256','parentIntentSha256','nativeProcessId','processCreationFileTime','parentDeadlineUTC'})
+        require(owner['protocol'] == 'DSG_NATIVE_LINEAR_OWNER_V1' and
+            all(owner[k] == control[k] for k in ['operationRef','processSessionRef','ownerNonce','sealSha256','grantSha256','parentDeadlineUTC'])
+            and owner['launchControlSha256'] == binding['launchControlSha256']
+            and owner['parentIntentSha256'] == binding['parentIntentSha256']
+            and type(owner['nativeProcessId']) is str and re.fullmatch('[1-9][0-9]{0,9}',owner['nativeProcessId'])
+            and int(owner['nativeProcessId']) <= 4294967295
+            and type(owner['processCreationFileTime']) is str and re.fullmatch('[a-f0-9]{16}',owner['processCreationFileTime']), 'PUBLICATION_OWNER_BINDING')
+        owner_ready, owner_ready_record, owner_ready_stat = _read_control(work/'native-owner-ready.json')
+        _fields(owner_ready, {'protocol','operationRef','processSessionRef','ownerNonce','ownerSha256'})
+        require(owner_ready['protocol'] == 'DSG_NATIVE_LINEAR_OWNER_READY_V1' and
+            all(owner_ready[k] == owner[k] for k in ['operationRef','processSessionRef','ownerNonce'])
+            and owner_ready['ownerSha256'] == owner_record['sha256'], 'PUBLICATION_OWNER_READY')
+        grant_bytes = next(record['byteLength'] for path,record,info in pins if path == work/'launch-grant.json')
+        require(input_bytes + owner_record['byteLength'] + owner_ready_record['byteLength'] +
+            grant_bytes + MIB <= 200*MIB, 'PUBLICATION_INPUT_AGGREGATE')
+        cancel_present = os.path.lexists(work/'cancel.json')
+        if cancel_present:
+            cancel, cr, cs = _read_control(work/'cancel.json')
+            _fields(cancel, {'protocol','operationRef','requested'})
+            require(cancel['protocol'] == 'DSG_NATIVE_LINEAR_CANCEL_V1' and cancel['operationRef'] == operation
+                and cancel['requested'] is True, 'PUBLICATION_CANCEL')
+            pins.append((work/'cancel.json',cr,cs))
         ready, ready_record, ready_stat = _read_control(work / "terminal-ready.json")
         _fields(ready, {"protocol", "operationRef", "terminalSha256"})
         require(ready["protocol"] == "DSG_NATIVE_LINEAR_TERMINAL_READY_V1"
                 and ready["operationRef"] == operation and _sha(ready["terminalSha256"]), "PUBLICATION_READY")
         terminal, terminal_record, terminal_stat = _read_control(work / "terminal.json")
         require(ready["terminalSha256"] == terminal_record["sha256"], "PUBLICATION_TERMINAL_HASH")
-        records = _terminal(terminal, operation) + [terminal_record, ready_record]
-        require(len(records) <= 20 and sum(row["byteLength"] for row in records) <= 192 * MIB,
+        returned, return_record, return_stat = _read_control(work/'native-return.json')
+        _fields(returned, {'protocol','operationRef','sealSha256','wrapperSha256','terminalSha256','readySha256',
+            'state','unclosedOwnedViews','fullPhysicalVariance','significance','scientificValidation','qualifiedControls',
+            'nativeProcessId','processSessionRef','ownerSha256','ownerReadySha256'})
+        require(returned['protocol'] == 'DSG_NATIVE_LINEAR_RETURNED_V1' and returned['operationRef'] == operation
+            and returned['sealSha256'] == binding['sealSha256'] and returned['wrapperSha256'] == fixed['WRAPPER']['sha256']
+            and returned['terminalSha256'] == terminal_record['sha256'] and returned['readySha256'] == ready_record['sha256']
+            and returned['state'] == terminal['state'] and type(returned['unclosedOwnedViews']) is int
+            and returned['unclosedOwnedViews'] == terminal['unclosedOwnedViews']
+            and returned['fullPhysicalVariance'] is None and returned['significance'] is None
+            and returned['scientificValidation'] == 'NOT_VALIDATED' and type(returned['qualifiedControls']) is int
+            and returned['qualifiedControls'] == 0 and returned['nativeProcessId'] == owner['nativeProcessId']
+            and returned['processSessionRef'] == owner['processSessionRef'] and returned['ownerSha256'] == owner_record['sha256']
+            and returned['ownerReadySha256'] == owner_ready_record['sha256'], 'PUBLICATION_CAUSAL_RETURN')
+        records = _terminal(terminal, operation) + [terminal_record, ready_record, return_record, owner_record, owner_ready_record]
+        require(len(records) + 1 <= 20 and sum(row["byteLength"] for row in records) + MIB <= 192 * MIB,
                 "PUBLICATION_AGGREGATE")
         require({path.name for path in work.iterdir()} & ALLOWED == {row["name"] for row in records},
                 "PUBLICATION_UNLISTED_PRODUCT")
+        input_names = {path.name for path, record, info in input_pins} | {'launch-grant.json'}
+        work_names = input_names | {r['name'] for r in records} | ({'cancel.json'} if cancel_present else set())
+        require({path.name for path in work.iterdir()} == work_names, 'PUBLICATION_WORK_INVENTORY')
         source_stats = {row["name"]: _snapshot(work / row["name"], row) for row in records}
         # Bind the control parsing descriptors to the sources that are about to be copied.
         require(signature(source_stats["terminal.json"]) == signature(terminal_stat)
                 and signature(source_stats["terminal-ready.json"]) == signature(ready_stat),
                 "PUBLICATION_CONTROL_CHANGED")
+        for name, info in [('native-return.json',return_stat),('native-owner.json',owner_stat),('native-owner-ready.json',owner_ready_stat)]:
+            require(signature(source_stats[name]) == signature(info), 'PUBLICATION_CONTROL_CHANGED')
         retained_stats = {}
+        _metadata_bound(journal)
         for record in records:
             failed_role = record["role"]
             roots_unchanged()
@@ -260,6 +391,7 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
             retained_stats[record["name"]] = _snapshot(archive / record["name"], record)
         def verify_bundle(marker_pin=None):
             fences_absent()
+            code_snapshot.verify(); bootstrap_session.assert_intact(); _metadata_bound(journal)
             for record in records:
                 name, size = record["name"], record["byteLength"]
                 require(_hash_bounded(work / name, size, source_stats[name]) == record["sha256"]
@@ -273,6 +405,8 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
             require({path.name for path in work.iterdir()} & ALLOWED == expected_names
                     and {path.name for path in archive.iterdir()} == archive_names,
                     "PUBLICATION_FINAL_INVENTORY_CHANGED")
+            require(os.path.lexists(work/'cancel.json') == cancel_present, 'PUBLICATION_CANCEL_CHANGED')
+            require({path.name for path in work.iterdir()} == work_names, 'PUBLICATION_FINAL_WORK_INVENTORY')
             if marker_pin:
                 expected_sha, info = marker_pin
                 require(_hash_bounded(archive / "retained-native-terminal.json", info.st_size, info)
@@ -281,8 +415,10 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
             fences_absent()
         verify_bundle()
         overrun = exceeded()
-        marker = {"protocol": "DSG_NATIVE_LINEAR_RETAINED_TERMINAL_V1", **binding,
+        marker = {"protocol": "DSG_NATIVE_LINEAR_RETAINED_TERMINAL_V2", **binding,
             "nativeTerminalSha256": terminal_record["sha256"], "nativeReadySha256": ready_record["sha256"],
+            "nativeReturnSha256": return_record['sha256'], "ownerSha256": owner_record['sha256'],
+            "ownerReadySha256": owner_ready_record['sha256'],
             "nativeState": terminal["state"], "products": records, "allProductsRetained": True,
             "unclosedOwnedViews": terminal["unclosedOwnedViews"],
             "parentMonotonicDeadlineExceeded": overrun, "measurementAccepted": False,
@@ -293,6 +429,12 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
         verify_bundle((marker_sha, marker_stat))
         require(exceeded() == overrun, "PUBLICATION_DEADLINE_CROSSED_DURING_MARKER")
         roots_unchanged()
+        require(os.path.lexists(work/'cancel.json') == cancel_present, 'PUBLICATION_CANCEL_CHANGED')
+        if cancel_present:
+            require(_hash_bounded(work/'cancel.json', cr['byteLength'], cs) == cr['sha256'],
+                    'PUBLICATION_CANCEL_CHANGED')
+        require(exceeded() == overrun, "PUBLICATION_DEADLINE_CROSSED_DURING_MARKER")
+        require({path.name for path in work.iterdir()} == work_names, 'PUBLICATION_FINAL_WORK_INVENTORY')
         fences_absent()
         return {"marker": marker, "markerSha256": marker_sha, "processClosureAuthorized": False,
                 "newNativeStartAllowed": False}
