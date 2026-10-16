@@ -97,6 +97,31 @@ class CampaignTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError,'FREEZE_BLOCKED'):
             self.service.freeze(ref(10),self.freeze_request())
 
+    def test_owner_receipt_reconciles_lost_metadata_ack_without_mutation(self):
+        request=self.freeze();self.completed(0)
+        before=self.store.get(self.service.key)
+        receipt=self.service.review_receipt(ref(10))
+        self.assertEqual(receipt['plan'],self.request)
+        self.assertEqual([e['request'] for e in receipt['events'] if e['kind']=='FREEZE'],[request])
+        self.assertEqual(receipt['executions'][0]['review']['request']['executionSha256'],
+                         receipt['executions'][0]['sha256'])
+        self.assertEqual(receipt['campaign']['headSha256'],receipt['events'][-1]['sha256'])
+        self.assertEqual(before,self.store.get(self.service.key))
+        self.assertFalse(receipt['localBytesVerified']);self.assertFalse(receipt['implicitDispatch'])
+        receipt['events'].clear();receipt['plan']['inputWitnessRefs'].clear()
+        self.assertEqual(len(self.service.review_receipt(ref(10))['plan']['inputWitnessRefs']),59)
+        self.assertEqual(before,self.store.get(self.service.key))
+
+    def test_owner_receipt_preserves_revoked_decisions_and_unknown_plan_is_error(self):
+        self.freeze();view=self.service.view(ref(10))
+        self.service.revoke(ref(10),{'decisionId':ref(21000),'planHeadSha256':view['headSha256'],
+                                    'evidenceSha256':sha(21001),'reason':'REFERENCE_INVALID'})
+        receipt=self.service.review_receipt(ref(10))
+        self.assertEqual([e['kind'] for e in receipt['events']],['CREATE','FREEZE','REVOCATION'])
+        self.assertIn('PLAN_REVOKED',receipt['campaign']['blockers'])
+        with self.assertRaisesRegex(ProtocolError,'PLAN_NOT_FOUND'):
+            self.service.review_receipt(ref(999))
+
     def test_59_completed_owner_reviews_produce_conditional_bound_then_final_review(self):
         self.freeze()
         for i in range(59):self.completed(i)

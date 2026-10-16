@@ -9,6 +9,46 @@
   <button type="button" data-dsg-transients-connect>Accedi con Google</button>
   <button type="button" data-dsg-transients-disconnect disabled>Termina accesso</button>
   <div data-dsg-transients-signin></div>
+  <section data-dsg-campaign-owner aria-label="Collaudo confermativo privato">
+    <h2>Collaudo confermativo privato</h2>
+    <p>Consulta il piano congelato, tutti i controlli e le decisioni registrate dall’Owner. Il registro richiede un’attivazione separata; l’accesso alla pagina non lo attiva. Questi comandi registrano metadati e non avviano analisi o invii.</p>
+    <button type="button" data-campaign-refresh disabled>Aggiorna campagne</button>
+    <label>Campagna <select data-campaign-select disabled><option value="">Seleziona una campagna</option></select></label>
+    <button type="button" data-campaign-open disabled>Apri ricevuta privata</button>
+    <p data-campaign-status role="status" aria-live="polite">Accedi e aggiorna le campagne per consultare il collaudo.</p>
+    <div data-campaign-result></div>
+    <details>
+      <summary>Registra un piano o una decisione Owner</summary>
+      <p>Apri una richiesta minimizzata preparata sul PC per creare il piano, rivedere un controllo o un esito, congelare, accettare o revocare la sola campagna. I documenti scientifici restano sul PC: verifica che le impronte corrispondano ai file esaminati. Caricare la richiesta non registra una decisione.</p>
+      <label>Richiesta di registrazione (JSON, massimo 16 KiB) <input type="file" data-campaign-file accept="application/json,.json" disabled></label>
+      <div data-campaign-preview></div>
+      <label><input type="checkbox" data-campaign-confirmed disabled> Ho esaminato le prove private indicate dalle impronte e autorizzo questa sola registrazione sul servizio.</label>
+      <button type="button" data-campaign-send disabled>Registra la richiesta confermata</button>
+      <p data-campaign-pending role="status" aria-live="polite"></p>
+      <button type="button" data-campaign-retry disabled>Ripeti la stessa registrazione</button>
+      <p>Se la risposta si perde, la richiesta resta conservata in questa sessione. Aggiorna le campagne per riconciliarla: nessuna ripetizione è automatica. Una richiesta non risolta blocca nuove decisioni e nuovi avvii dal portale. Le credenziali non sono conservate con la richiesta.</p>
+    </details>
+    <details data-campaign-dispatch>
+      <summary>Prepara i tre file del controllo</summary>
+      <p>Questi comandi preparano registrazioni tecniche e non avviano PixInsight. Apri prima la ricevuta della campagna. La proposta e la busta vengono preparate sul PC; qui si scambiano soltanto identificativi e impronte.</p>
+      <label>Proposta preparata sul PC (JSON, massimo 16 KiB) <input type="file" data-dispatch-proposal accept="application/json,.json" disabled></label>
+      <label>Operazione <select data-dispatch-action disabled><option value="DISPATCH_INTENT">Registra la preparazione dei tre file</option><option value="PROJECT_JOB">Registra uno dei tre job</option></select></label>
+      <label>File da registrare <select data-dispatch-ordinal disabled><option value="0">Primo file</option><option value="1">Secondo file</option><option value="2">Terzo file</option></select></label>
+      <label>Ricevuta della preparazione, richiesta per i job (JSON) <input type="file" data-dispatch-intent-receipt accept="application/json,.json" disabled></label>
+      <button type="button" data-dispatch-prepare disabled>Verifica la selezione e salva la conferma</button>
+      <p data-dispatch-preview></p>
+      <p>Usa la conferma sul PC per preparare la busta. Un cambio di campagna, operazione, file, accesso o un ricaricamento invalida la conferma. Se sul PC esiste già un blocco dell’operazione, conserva tutto e riconcilia: non preparare un secondo invio.</p>
+      <label>Busta preparata sul PC (JSON, massimo 16 KiB) <input type="file" data-dispatch-envelope accept="application/json,.json" disabled></label>
+      <label><input type="checkbox" data-dispatch-confirmed disabled> Ho verificato la selezione e autorizzo questa sola registrazione tecnica.</label>
+      <button type="button" data-dispatch-send disabled>Invia la registrazione confermata</button>
+      <p data-dispatch-pending role="status" aria-live="polite"></p>
+      <button type="button" data-dispatch-reconcile disabled>Verifica la registrazione e salva la ricevuta</button>
+      <label>Copia della ricevuta salvata (JSON) <input type="file" data-dispatch-saved-receipt accept="application/json,.json" disabled></label>
+      <button type="button" data-dispatch-complete disabled>Conferma la ricevuta salvata e riconcilia</button>
+      <p data-dispatch-status role="status" aria-live="polite">Accedi e apri una campagna per preparare le registrazioni tecniche.</p>
+      <p>Una richiesta senza esito dimostrabile resta bloccata. Questi comandi eseguono nuove letture per verificarla e non ripetono l’invio. Le ricevute confermano la registrazione esatta, senza autorizzare avvii o convalidare risultati scientifici.</p>
+    </details>
+  </section>
   <section data-dsg-test-plan aria-label="Piano locale di collaudo">
     <h2>Piano locale di collaudo</h2>
     <p>Apri una bozza minimizzata preparata sul PC per consultare il campione candidato. Il file viene letto nel browser senza essere inviato al servizio o conservato. Usa il formato BKL051_TEST_PLAN_DRAFT_V1, privo di percorsi e metadati personali.</p>

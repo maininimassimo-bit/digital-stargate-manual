@@ -58,7 +58,9 @@ def relative(value):
 
 
 class LocalRegistry:
-    def __init__(self, artifact_root, registry_root):
+    def __init__(self, artifact_root, registry_root, *, record_verifications=True):
+        require(type(record_verifications) is bool, "LOCAL_VERIFICATION_POLICY")
+        self.record_verifications = record_verifications
         self.artifacts, self.registry = safe_path(artifact_root), safe_path(registry_root)
         require(self.artifacts.is_dir() and self.registry.is_dir(), "LOCAL_ROOT_DIRECTORY")
         require(self.artifacts != self.registry and self.artifacts not in self.registry.parents
@@ -132,16 +134,24 @@ class LocalRegistry:
         return {"binding": value["binding"], "manifestSha256": sha,
                 "scientificValidation": "NOT_VALIDATED"}
 
+    def inspect(self, binding_ref, manifest_sha256):
+        """Same byte/schema checks as verify, with no receipt writes, including errors."""
+        require(opaque(binding_ref) and digest(manifest_sha256), "LOCAL_EXPECTED_IDENTITY")
+        raw = self._read_manifest(self.registry / ("binding-" + binding_ref + ".json"))
+        require(hashlib.sha256(raw).hexdigest() == manifest_sha256, "LOCAL_MANIFEST_CHANGED")
+        value = decode(raw); self._schema(value)
+        require(value["binding"]["bindingRef"] == binding_ref, "LOCAL_BINDING_CONFLICT")
+        self._verify_files(value)
+        return value
+
     def verify(self, binding_ref, manifest_sha256):
         require(opaque(binding_ref) and digest(manifest_sha256), "LOCAL_EXPECTED_IDENTITY")
         try:
-            raw = self._read_manifest(self.registry / ("binding-" + binding_ref + ".json"))
-            require(hashlib.sha256(raw).hexdigest() == manifest_sha256, "LOCAL_MANIFEST_CHANGED")
-            value = decode(raw); self._schema(value)
-            require(value["binding"]["bindingRef"] == binding_ref, "LOCAL_BINDING_CONFLICT")
-            self._verify_files(value)
-            self._receipt("VERIFY", binding_ref, manifest_sha256, "BYTES_VERIFIED", "NO_SCIENTIFIC_ATTESTATION")
+            value = self.inspect(binding_ref, manifest_sha256)
+            if self.record_verifications:
+                self._receipt("VERIFY", binding_ref, manifest_sha256, "BYTES_VERIFIED", "NO_SCIENTIFIC_ATTESTATION")
             return value
         except (ProtocolError, OSError) as error:
-            self._receipt("VERIFY", binding_ref, manifest_sha256, "FAILED", str(error) if isinstance(error, ProtocolError) else "LOCAL_IO_ERROR")
+            if self.record_verifications:
+                self._receipt("VERIFY", binding_ref, manifest_sha256, "FAILED", str(error) if isinstance(error, ProtocolError) else "LOCAL_IO_ERROR")
             raise

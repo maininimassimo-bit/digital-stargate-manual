@@ -15,6 +15,26 @@ JOB_FIELDS = {'jobId', 'request', 'binding', 'state', 'cancelRequested', 'sequen
               'executionEvidence', 'scientificValidation', 'detailsLocation', 'publication'}
 
 
+def validate_fresh_job(job, request, binding):
+    """Pure shared validation; never recover authority from a read receipt."""
+    fields(job, JOB_FIELDS)
+    fields(job['request'], {'requestId','bindingRef'})
+    require(job['jobId'] == request['jobId'] and job['rootId'] == request['rootId']
+            and job['binding'] == binding and opaque(job['attemptId']) and digest(job['leaseToken'])
+            and job['request'] == {'requestId':job['jobId'][4:], 'bindingRef':binding['bindingRef']},
+            'RESERVATION_RESPONSE_IDENTITY')
+    require(job['state'] == 'RESERVED' and job['cancelRequested'] is False
+            and type(job['sequence']) is int and job['sequence'] == 0
+            and job['result'] is None and job['reviews'] == []
+            and job['executionEvidence'] == 'WORKER_REPORTED_NOT_ATTESTED'
+            and job['scientificValidation'] == 'NOT_VALIDATED'
+            and job['detailsLocation'] == 'OWNER_PC' and job['publication'] == 'NONE', 'RESERVATION_RESPONSE_STATE')
+    times = [dt.datetime.fromisoformat(job[key]) for key in ['createdAt','updatedAt','leaseIssuedAt','leaseExpiresAt']]
+    require(all(t.tzinfo is not None and t.utcoffset() == dt.timedelta(0) for t in times)
+            and times[0] <= times[1] == times[2] and times[3] - times[2] == dt.timedelta(seconds=LEASE_SECONDS),
+            'RESERVATION_RESPONSE_TIME')
+
+
 class ReservationIntent:
     @classmethod
     def prepare(cls, registry, root, worker_id, root_id, job_id, reservation_ref, binding,
@@ -75,22 +95,7 @@ class ReservationIntent:
                 self._freeze()
                 return {'state':self.phase, 'nativeLaunchRequested':False}
             require(response['disposition'] == 'CREATED', 'RESERVATION_RESPONSE')
-            job = response['job']; fields(job, JOB_FIELDS)
-            fields(job['request'], {'requestId','bindingRef'})
-            require(job['jobId'] == self.request['jobId'] and job['rootId'] == self.request['rootId']
-                    and job['binding'] == self.binding and opaque(job['attemptId']) and digest(job['leaseToken'])
-                    and job['request'] == {'requestId':job['jobId'][4:], 'bindingRef':self.binding['bindingRef']},
-                    'RESERVATION_RESPONSE_IDENTITY')
-            require(job['state'] == 'RESERVED' and job['cancelRequested'] is False
-                    and type(job['sequence']) is int and job['sequence'] == 0
-                    and job['result'] is None and job['reviews'] == []
-                    and job['executionEvidence'] == 'WORKER_REPORTED_NOT_ATTESTED'
-                    and job['scientificValidation'] == 'NOT_VALIDATED'
-                    and job['detailsLocation'] == 'OWNER_PC' and job['publication'] == 'NONE', 'RESERVATION_RESPONSE_STATE')
-            times = [dt.datetime.fromisoformat(job[key]) for key in ['createdAt','updatedAt','leaseIssuedAt','leaseExpiresAt']]
-            require(all(t.tzinfo is not None and t.utcoffset() == dt.timedelta(0) for t in times)
-                    and times[0] <= times[1] == times[2] and times[3] - times[2] == dt.timedelta(seconds=LEASE_SECONDS),
-                    'RESERVATION_RESPONSE_TIME')
+            job = response['job']; validate_fresh_job(job, self.request, self.binding)
             value = {key:copy.deepcopy(job[key]) for key in ['jobId','attemptId','rootId','binding']}
             value['manifestSha256'] = self.manifest_sha; identity(value)
             self.reserved_sha = write_new(self.records / 'reserved.json',
