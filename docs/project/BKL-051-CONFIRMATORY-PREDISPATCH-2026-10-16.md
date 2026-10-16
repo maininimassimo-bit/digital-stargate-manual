@@ -238,7 +238,41 @@ ripetuta restituisce `RECONCILIATION_REQUIRED`, hash e job nulli. Il metodo inte
 precedente conserva il formato esatto `{disposition, job}`. La ricevuta Owner è
 metadato di riconciliazione e non autorizza avvii o recupero della lease.
 
-Questo candidato richiede ancora gate completi e revisioni indipendenti. Il
-coordinatore locale durevole e il suo adattatore non sono ancora implementati;
-nessuna composizione di produzione è modificata. R09 resta aperto, la milestone
-`NOT_VALIDATED` e i controlli qualificati reali restano zero.
+Il candidato HTTP ha ottenuto ARB r2 e RQ sui quattro file esatti; la CI è un
+gate distinto. Nessuna composizione di produzione è modificata. R09 resta
+aperto, la milestone `NOT_VALIDATED` e i controlli qualificati reali restano zero.
+
+## Candidato coordinatore locale durevole
+
+`campaign_dispatch.py` aggiunge il trasporto Worker protetto, l'adattatore della
+prenotazione selezionata e le operazioni Owner durevoli. Prima di ciascun POST
+conserva un intento esclusivo con flush/fsync. Prima di consegnare la risposta
+a `ReservationIntent`, verifica il job e conserva il legame fra ammissione,
+attempt, prenotazione e manifest. La lease resta solo in memoria. Errori di
+persistenza, risposta persa o risposta alterata richiedono riconciliazione;
+nessuna lettura ricostruisce una sessione prenotata o autorizza un reinvio.
+
+`CampaignTriplet.prepare` confronta contesto congelato, archivio privato e tre
+`OperatorPlan`: ordine, identità e hash effettivi di input, algoritmo e contratto.
+`run` richiede un'autorizzazione esplicita distinta e usa i driver esistenti.
+Ogni frame registra il binding, proietta il job Owner e prenota tramite il
+percorso protetto. Il successivo è possibile soltanto dopo rapporto completo,
+ricevute locali di terminale e chiusura del processo posseduto, chiusura della
+campagna e conservazione del relativo ACK. Un processo incerto resta aperto;
+il coordinatore si ferma senza avviare il frame seguente. Le prove di arresto
+sono dichiarazioni Worker conservate, non attestazioni indipendenti.
+
+Le prove usano esclusivamente server sintetici, file fixture e processi mock.
+La prova positiva dei tre avvii inietta conteggi di qualità sintetici per
+verificare l'ordine; non prova che il motore di apertura attuale produca
+incertezze complete. Il rapporto diagnostico reale della fixture conserva
+`incomplete > 0` e una prova distinta verifica che blocchi il secondo frame.
+Il primo errore nel test positivo riguardava il tipo dell'eccezione di rifiuto
+del replay: il rifiuto era già corretto e il log fallito è conservato.
+
+Questo incremento richiede ancora regressioni e ARB/RQ esatti. Non aggiunge
+un accesso Owner reale, una CLI attiva o il collegamento alla UI del portale;
+il chiamante deve fornire trasporti autenticati e piani locali già preparati.
+Nessuna credenziale è caricata, nessun processo nativo o servizio cloud viene
+avviato dalle prove. Restano da completare integrazione operativa, recupero
+assistito, accettazione Owner e pipeline scientifica; R09 resta aperto.
