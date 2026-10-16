@@ -69,3 +69,13 @@ contenuto sia un checkpoint valido o una History completa. Nessuna composizione
 di produzione, accettazione scientifica o chiusura R01-R14 deriva da questo
 componente. Le prove usano soltanto prodotti sintetici, compresi payload
 deliberatamente opachi che non vengono presentati come file XISF validi.
+
+Il profilo dell'adattatore nativo V2 aggiunge il segnale scratch
+`native-publication-uncertain.json`: anche se parziale o malformato, blocca
+prima della prenotazione e nelle verifiche prima e dopo il marker. Entrambi i
+segnali, nativo e parent, sono ricontrollati anche dopo l'ultima rilettura e dopo
+il controllo finale di tempo e directory, prima di restituire la ricevuta. Il segnale
+non viene incluso tra i prodotti accettati. Se una sua scrittura fallisce,
+l'assenza del file non dimostra il successo dell'esecuzione: questa funzione
+non sostituisce il controllo dell'esito effettivo e del processo da parte del
+supervisore.

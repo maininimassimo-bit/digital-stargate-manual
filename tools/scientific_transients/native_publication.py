@@ -187,6 +187,9 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
             "PUBLICATION_ROOT_LAYOUT")
     def roots_unchanged():
         require([_directory(path) for path in [work, archive, journal]] == roots, "PUBLICATION_ROOT_CHANGED")
+    def fences_absent():
+        require(not os.path.lexists(work / "native-publication-uncertain.json"), "PUBLICATION_NATIVE_UNCERTAINTY")
+        require(not os.path.lexists(journal / "publication-uncertain.json"), "PUBLICATION_PRIOR_UNCERTAINTY")
     last_clock = None
     def exceeded():
         nonlocal last_clock
@@ -197,7 +200,7 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
         return now >= deadline
     failed_role = None
     try:
-        require(not os.path.lexists(journal / "publication-uncertain.json"), "PUBLICATION_PRIOR_UNCERTAINTY")
+        fences_absent()
         # Reserve even if the subsequent intent/control validation fails. No repair/retry.
         publication_intent = {
             "protocol": "DSG_NATIVE_LINEAR_PUBLICATION_INTENT_V1", "operationRef": operation,
@@ -256,7 +259,7 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
                                   {k: record[k] for k in ["sha256", "byteLength"]})
             retained_stats[record["name"]] = _snapshot(archive / record["name"], record)
         def verify_bundle(marker_pin=None):
-            require(not os.path.lexists(journal / "publication-uncertain.json"), "PUBLICATION_PRIOR_UNCERTAINTY")
+            fences_absent()
             for record in records:
                 name, size = record["name"], record["byteLength"]
                 require(_hash_bounded(work / name, size, source_stats[name]) == record["sha256"]
@@ -275,6 +278,7 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
                 require(_hash_bounded(archive / "retained-native-terminal.json", info.st_size, info)
                         == expected_sha, "PUBLICATION_FINAL_MARKER_CHANGED")
             roots_unchanged()
+            fences_absent()
         verify_bundle()
         overrun = exceeded()
         marker = {"protocol": "DSG_NATIVE_LINEAR_RETAINED_TERMINAL_V1", **binding,
@@ -289,6 +293,7 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
         verify_bundle((marker_sha, marker_stat))
         require(exceeded() == overrun, "PUBLICATION_DEADLINE_CROSSED_DURING_MARKER")
         roots_unchanged()
+        fences_absent()
         return {"marker": marker, "markerSha256": marker_sha, "processClosureAuthorized": False,
                 "newNativeStartAllowed": False}
     except Exception as exc:

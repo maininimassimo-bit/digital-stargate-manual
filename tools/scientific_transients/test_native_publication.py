@@ -101,6 +101,14 @@ class NativePublicationTests(unittest.TestCase):
         self.assertFalse((self.journal / "publication-intent.json").exists())
         self.assertEqual(list(self.archive.iterdir()), [])
 
+    def test_native_partial_failure_fence_blocks_stale_ready_before_reservation(self):
+        (self.work / "native-publication-uncertain.json").write_bytes(b'{"partial":')
+        with self.assertRaisesRegex(pub.PublicationFailure, "PUBLICATION_NATIVE_UNCERTAINTY"):
+            self.publish()
+        self.assertFalse((self.journal / "publication-intent.json").exists())
+        self.assert_uncertain()
+        self.assertEqual(list(self.archive.iterdir()), [])
+
     def test_initial_reservation_write_failure_with_uncertainty_blocks_retry(self):
         original = pub._write_control
         def failure(path, value):
@@ -229,7 +237,7 @@ class NativePublicationTests(unittest.TestCase):
 
     def test_mutations_during_marker_write_reject_positive_but_stale_marker(self):
         # Each case is a separate attempt, without modifying any real image.
-        for target in ["retained-result", "source-result", "parent-pin", "marker-replacement", "inventory", "uncertainty"]:
+        for target in ["retained-result", "source-result", "parent-pin", "marker-replacement", "inventory", "uncertainty", "native-uncertainty"]:
             with self.subTest(target=target):
                 case = NativePublicationTests(methodName="test_complete_set_raw_chain_and_no_lifecycle_or_science_authority")
                 case.setUp()
@@ -248,7 +256,8 @@ class NativePublicationTests(unittest.TestCase):
                             replacement = case.archive / "replacement"
                             replacement.write_bytes(path.read_bytes()); replacement.replace(path)
                         elif target == "inventory": (case.archive / "unexpected.dat").write_bytes(b"synthetic")
-                        else: (case.journal / "publication-uncertain.json").write_bytes(b"synthetic partial")
+                        elif target == "uncertainty": (case.journal / "publication-uncertain.json").write_bytes(b"synthetic partial")
+                        else: (case.work / "native-publication-uncertain.json").write_bytes(b"synthetic partial")
                     return result
                 with patch.object(pub, "_write_control", side_effect=mutate):
                     with self.assertRaises(pub.PublicationFailure): case.publish()
@@ -286,6 +295,24 @@ class NativePublicationTests(unittest.TestCase):
             if record["name"] == "result.json": record.update(sha256=sha(raw), byteLength=len(raw))
         self.write_terminal()
         self.assertFalse(self.publish()["marker"]["measurementAccepted"])
+
+    def test_fence_arriving_during_last_marker_readback_blocks_normal_return(self):
+        for native in [True, False]:
+            with self.subTest(native=native):
+                case = NativePublicationTests(methodName="test_complete_set_raw_chain_and_no_lifecycle_or_science_authority")
+                case.setUp(); self.addCleanup(case.doCleanups)
+                original = pub._hash_bounded
+                def late_fence(path, size, expected_stat):
+                    result = original(path, size, expected_stat)
+                    if path.name == "retained-native-terminal.json":
+                        target = case.work / "native-publication-uncertain.json" if native else case.journal / "publication-uncertain.json"
+                        target.write_bytes(b"SYNTHETIC_PARTIAL_FENCE")
+                    return result
+                with patch.object(pub, "_hash_bounded", side_effect=late_fence):
+                    with self.assertRaises(pub.PublicationFailure): case.publish()
+                self.assertTrue((case.archive / "retained-native-terminal.json").exists())
+                self.assertTrue((case.journal / "publication-uncertain.json").exists())
+                with self.assertRaises(pub.PublicationFailure): case.publish()
 
 
 if __name__ == "__main__": unittest.main()
