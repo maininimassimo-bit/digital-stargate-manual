@@ -22,7 +22,7 @@ function DSGNativeLinearOwnership(root, expected, monitor) {
          var raw = file.read(15, size);
          need(raw.length === size && file.size === size, 'READ_CHANGED');
          var result = {value: parseStrictPassiveAsciiJson(raw.toUint8Array(), {maxBytes: 1048576, checkBudget: monitor}),
-            sha256: new CryptographicHash(CryptographicHash.SHA256).hash(raw).toHex(), byteLength: size};
+            sha256: new CryptographicHash(256).hash(raw).toHex(), byteLength: size};
          monitor(); return result;
       } finally { file.close(); }
    }
@@ -82,7 +82,9 @@ function DSGNativeLinearMeasurement(root, launcherBudget) {
       if (expired) overrun = true;
       if (!retaining) need(!expired, invalid ? 'CLOCK_CHANGED' : 'DEADLINE');
    }
-   function digest(bytes) { return new CryptographicHash(CryptographicHash.SHA256).hash(bytes).toHex(); }
+   // SHA-256 code256 is declared in installed pjsr/CryptographicHash.jsh;
+   // build1706 does not expose the CryptographicHash.SHA256 static property.
+   function digest(bytes) { return new CryptographicHash(256).hash(bytes).toHex(); }
    function bounded(path, cap, expected, hold, monitor) {
       var f = new File, kept = false;
       try {
@@ -117,7 +119,7 @@ function DSGNativeLinearMeasurement(root, launcherBudget) {
       var f = new File;
       try {
          f.openForReading(root + '/' + name);
-         var size = f.size, read = 0, h = new CryptographicHash(CryptographicHash.SHA256);
+         var size = f.size, read = 0, h = new CryptographicHash(256);
          need(integer(size, 0, cap), 'HASH_SIZE');
          h.initialize();
          while (read < size) {
@@ -487,6 +489,11 @@ function DSGNativeLinearMeasurement(root, launcherBudget) {
          need(observed.sha256 === pin.sha256 && observed.byteLength === pin.byteLength, 'FINAL_PRODUCT_CHANGED');
       });
    }
+   function finalChecks(terminal) {
+      verifyProducts(); rehashInputs(function () { checkTime(true); }); checkTime(true);
+      need(overrun === terminal.cooperativeDeadlineExceeded, 'FINAL_DEADLINE_CHANGED');
+      if (terminal.state === 'COMPLETED_CONDITIONAL_COMPUTATION') { need(!overrun, 'DEADLINE'); cancellation(); }
+   }
    try {
       verifyProducts(); rehashInputs(function () { checkTime(true); }); checkTime(true);
       if (overrun && terminalState === 'COMPLETED_CONDITIONAL_COMPUTATION') { terminalState = 'FAILED_RETAINED'; errorCode = 'NATIVE_LINEAR_DEADLINE'; }
@@ -494,15 +501,10 @@ function DSGNativeLinearMeasurement(root, launcherBudget) {
          errorCode: errorCode, retentionErrorCode: retentionError, products: products, unclosedOwnedViews: owned.length,
          cooperativeDeadlineExceeded: overrun, fullPhysicalVariance: null, significance: null, scientificValidation: 'NOT_VALIDATED',
          qualifiedControls: 0, provenanceVerified: false, physicalApplicabilityVerified: false};
-      function finalChecks() {
-         verifyProducts(); rehashInputs(function () { checkTime(true); }); checkTime(true);
-         need(overrun === terminal.cooperativeDeadlineExceeded, 'FINAL_DEADLINE_CHANGED');
-         if (terminal.state === 'COMPLETED_CONDITIONAL_COMPUTATION') { need(!overrun, 'DEADLINE'); cancellation(); }
-      }
       var terminalPin = writeJSON('terminal.json', terminal, false);
-      finalChecks();
+      finalChecks(terminal);
       var readyPin = writeJSON('terminal-ready.json', {protocol: 'DSG_NATIVE_LINEAR_TERMINAL_READY_V1', operationRef: operation, terminalSha256: terminalPin.sha256}, false);
-      finalChecks();
+      finalChecks(terminal);
       [['terminal.json', terminalPin], ['terminal-ready.json', readyPin]].forEach(function (row) {
          var observed = hashFile(row[0], MIB, function () { checkTime(true); });
          need(observed.sha256 === row[1].sha256 && observed.byteLength === row[1].byteLength, 'FINAL_CONTROL_CHANGED');

@@ -35,7 +35,8 @@ function DSGNativeLinearLaunch(root, expected) {
          var raw = file.read(15, size);
          need(raw.length === size && file.size === size, 'READ_CHANGED');
          var value = parse ? parseStrictPassiveAsciiJson(raw.toUint8Array(), {maxBytes: MIB, checkBudget: function () { clock(retaining); }}) : null;
-         var pin = {value: value, sha256: new CryptographicHash(CryptographicHash.SHA256).hash(raw).toHex(), byteLength: size};
+         // Explicit SHA-256 algorithm code from installed pjsr/CryptographicHash.jsh.
+         var pin = {value: value, sha256: new CryptographicHash(256).hash(raw).toHex(), byteLength: size};
          clock(retaining); return pin;
       } finally { file.close(); }
    }
@@ -139,7 +140,7 @@ function DSGNativeLinearLaunch(root, expected) {
       need(!File.exists(root + '/native-return.json'), 'RETURN_COLLISION');
       File.writeTextFile(root + '/native-return.json', text); // Guarded single writer, not atomic create-new.
       var pin = read('native-return.json', true, true);
-      need(pin.sha256 === new CryptographicHash(CryptographicHash.SHA256).hash(text).toHex() && JSON.stringify(pin.value) === text, 'RETURN_READBACK');
+      need(pin.sha256 === new CryptographicHash(256).hash(text).toHex() && JSON.stringify(pin.value) === text, 'RETURN_READBACK');
       inputs(true);
       need(read('terminal.json', false, true).sha256 === terminal.sha256 && read('terminal-ready.json', false, true).sha256 === ready.sha256, 'FINAL_CONTROLS');
       runtimeBound(0); clock(true); need(!clockInvalid, 'CLOCK_CHANGED'); fences();

@@ -13,10 +13,10 @@ function fixture() {
  const files=new Map(), pixels=new Float64Array([.01,.31]), window={mainView:{image:{width:64,height:64,numberOfNominalChannels:1,isComplex:false},initialProcessing:{toSource:()=> 'native initial'},processing:{toSource:()=> 'native current'}},saveAs:(p)=>{files.set(p,'checkpoint');return true;},forceClose:()=>{window.closed=true;}};
  files.set(root+'/parameters.json',JSON.stringify(m));files.set(root+'/input.xisf','source');
  const context={File:{exists:p=>files.has(p),writeTextFile:(p,v)=>files.set(p,v),readTextFile:p=>files.get(p),readFile:p=>files.get(p)},
-  CryptographicHash:class {hash(){return {toHex:()=>hash};}},
+  CryptographicHash:class {constructor(algorithm){assert.equal(algorithm,256);}hash(){return {toHex:()=>hash};}},
   CoreApplication:{versionMajor:1,versionMinor:9,versionRelease:5,versionBuild:1706},
   ImageWindow:{open:()=>[window]},PhotometryPixels:{FromImage:()=>({data:pixels}),Measure:()=>({clipped:false,flux:.3,area:50.4,background:.01,peak:.31,noise:0,localCount:248})}};
- context.CryptographicHash.SHA256=1;vm.createContext(context);vm.runInContext(source,context);
+ vm.createContext(context);vm.runInContext(source,context);
  return {m,root,files,pixels,window,context,run:()=>context.DSGNativeAperture(m)};
 }
 test('native adapter keeps normalized units and unknown uncertainty, preserves exports',()=>{

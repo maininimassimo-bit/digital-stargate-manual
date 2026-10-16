@@ -101,7 +101,7 @@ function fixture(change = () => {}, options = {}) {
     globalThis.ElapsedTime=class{constructor(){this.origin=bridgeElapsed();}get value(){return bridgeElapsed()-this.origin;}};
     globalThis.System={msleep(ms){bridgeSleep(ms);}};
     class MockBytes{constructor(a){this.data=new Uint8Array(a);}get length(){return this.data.length;}toUint8Array(){return new Uint8Array(this.data);}}
-    globalThis.CryptographicHash=class{static SHA256=1;hash(a){let s=bridgeHash(a instanceof MockBytes?a.data:a);return{toHex(){return s;}};}initialize(){this.parts=[];}update(a){bridgeHashChunk(a.length);this.parts.push(...a.data);}finalize(){return this.hash(new Uint8Array(this.parts));}};
+    globalThis.CryptographicHash=class{constructor(algorithm){if(algorithm!==256)throw Error('MOCK_SHA256_ALGORITHM_REQUIRED');}hash(a){let s=bridgeHash(a instanceof MockBytes?a.data:a);return{toHex(){return s;}};}initialize(){this.parts=[];}update(a){bridgeHashChunk(a.length);this.parts.push(...a.data);}finalize(){return this.hash(new Uint8Array(this.parts));}};
     globalThis.File=class{static exists(p){return bridgeExists(p);}static writeTextFile(p,t){bridgeWrite(p,t);}openForReading(p){this.path=p;this.pos=0;bridgeSize(p);}get size(){return bridgeSize(this.path);}read(type,n){if(type!==15)throw Error('MOCK_TYPE');let out=new MockBytes(bridgeRead(this.path,this.pos,n));this.pos+=n;return out;}close(){}};
     globalThis.FileFind=class{begin(p){this.items=JSON.parse(bridgeNames());this.i=0;return this.items.length>0;}next(){return ++this.i<this.items.length;}end(){}get name(){return this.items[this.i];}get isFile(){return true;}get isDirectory(){return false;}get isSymbolicLink(){return false;}get isRedirectionPoint(){return false;}get isReparsePoint(){return this.name===options.reparseName;}};
     globalThis.console={beginLog(p){File.writeTextFile(p,'SYNTHETIC_LOG');},endLog(){},writeln(s){}};
@@ -127,6 +127,17 @@ const stripLineCommentTails = source => source.split('\n').map(line => {
   const start = line.indexOf('//');
   return start < 0 ? line : line.slice(0, start);
 }).join('\n');
+
+test('native SHA-256: absent static constant still permits only explicit algorithm256', () => {
+  const f=fixture();
+  assert.equal(f.context.CryptographicHash.SHA256, undefined);
+  assert.equal(vm.runInContext("new CryptographicHash(256).hash('abc').toHex()",f.context),
+    'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
+  for(const algorithm of [undefined,1,5,224,384,512])
+    assert.throws(()=>new f.context.CryptographicHash(algorithm),/MOCK_SHA256_ALGORITHM_REQUIRED/);
+  assert.equal(f.runLauncher().state,'COMPLETED_CONDITIONAL_COMPUTATION');
+  assert.equal(f.json('result.json').fullPhysicalVariance,null);
+});
 
 test('native includes: ordinary JS parsing misses the observed slash/comment hazard', () => {
   const original = String.raw`function rootGate(root) { return /^[A-Za-z]:\//.test(root); }`;

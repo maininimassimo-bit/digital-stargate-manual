@@ -3,7 +3,8 @@
 function DSGNativeAperture(m) {
    function need(ok, code) { if (!ok) throw Error(code); }
    function fields(v, names) { need(v && typeof v==='object' && !Array.isArray(v) && Object.keys(v).sort().join(',')===names.slice().sort().join(','),'NATIVE_FIELDS'); }
-   function sha(path) { return new CryptographicHash(CryptographicHash.SHA256).hash(File.readFile(path)).toHex(); }
+   // SHA-256 algorithm code from installed pjsr/CryptographicHash.jsh.
+   function sha(path) { return new CryptographicHash(256).hash(File.readFile(path)).toHex(); }
    function finite(v) { return typeof v==='number' && Number.isFinite(v); }
    function opaque(v) { return typeof v==='string' && /^[a-f0-9]{32}$/.test(v); }
    fields(m,['protocol','runDirectory','operationRef','input','parameters','runtime','targets']);
