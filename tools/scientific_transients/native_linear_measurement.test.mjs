@@ -15,7 +15,7 @@ const componentNames = ['PHOTON_READ_DIGITIZATION', 'DARK_MASTER_AND_TEMPORAL', 
   'CALIBRATION', 'SKY_BACKGROUND_ESTIMATOR', 'RESAMPLING_REGISTRATION', 'QUANTIZATION', 'REFERENCE_PSF_APERTURE_SELECTION'];
 
 function fixture(change = () => {}, options = {}) {
-  const operation = 'a'.repeat(32), root = 'F:/Synthetic/native-work/' + operation;
+  const operation = 'a'.repeat(32), root = options.root ?? 'F:/Synthetic/native-work/' + operation;
   const files = new Map(libraries.map(n => [n, Buffer.from(code[n])]));
   const width = options.width || 3, height = options.height || 2;
   const source = Buffer.alloc(2880 + Math.ceil(width * height * 4 / 2880) * 2880);
@@ -119,6 +119,51 @@ function fixture(change = () => {}, options = {}) {
       parentDeadlineUTC:'2026-10-16T10:03:00Z'};change(p);return vm.runInContext(`DSGNativeLinearLaunch(${JSON.stringify(root)},${JSON.stringify(p)})`,context);},
     json(name) { return JSON.parse(files.get(name).toString('ascii')); }};
 }
+
+// Regression for the actual build1706 include failure: this conservative
+// transformation models only the observed line-comment hazard, NOT PJSR syntax
+// or runtime compatibility. The native preflight remains a separate gate.
+const stripLineCommentTails = source => source.split('\n').map(line => {
+  const start = line.indexOf('//');
+  return start < 0 ? line : line.slice(0, start);
+}).join('\n');
+
+test('native includes: ordinary JS parsing misses the observed slash/comment hazard', () => {
+  const original = String.raw`function rootGate(root) { return /^[A-Za-z]:\//.test(root); }`;
+  assert.doesNotThrow(() => new vm.Script(original));
+  assert.throws(() => new vm.Script(stripLineCommentTails(original)), SyntaxError);
+});
+
+test('native includes: shipped definitions survive conservative line-comment stripping', () => {
+  for (const [name, source] of [...Object.entries(code), ['native_linear_launcher.jsh', launcherCode]]) {
+    assert.doesNotThrow(() => new vm.Script(stripLineCommentTails(source), {filename: name}), name);
+  }
+});
+
+test('native root gates: valid drive roots still compute the supplied synthetic model', () => {
+  for (const prefix of ['F:/Synthetic/native-work/', 'f:/Synthetic/native-work/', 'Z:/Q/']) {
+    const f = fixture(undefined, {root: prefix + 'a'.repeat(32)});
+    assert.equal(f.runLauncher().state, 'COMPLETED_CONDITIONAL_COMPUTATION');
+    assert.equal(f.json('result.json').observedFiniteApertureFlux, 3);
+    assert.equal(f.json('result.json').varianceUnderSuppliedJointModel, .0625);
+  }
+});
+
+test('native root gates: malformed paths fail before file reads or view allocation', () => {
+  const suffix = '/' + 'a'.repeat(32);
+  for (const root of ['F:relative', '//server/share', 'F:\\Synthetic\\work', '1:/work' + suffix,
+    'F:/trailing/', 'F:/a/..' + suffix, 'F:/a/.' + suffix, 'F:/a//' + 'a'.repeat(32),
+    'F:/a.' + suffix, 'F:/a ' + suffix, 'F:/a?b' + suffix, 'F:/a|b' + suffix,
+    'F:/a:b' + suffix, 'F:/\u00e9' + suffix, 'F:/a\nb' + suffix]) {
+    for (const entry of ['DSGNativeLinearOwnership', 'DSGNativeLinearMeasurement', 'DSGNativeLinearLaunch']) {
+      const f = fixture();
+      assert.throws(() => vm.runInContext(`${entry}(${JSON.stringify(root)})`, f.context), /_ROOT/);
+      assert.equal(f.state.reads.length, 0);
+      assert.equal(f.state.created, 0);
+      assert.equal(f.state.writes.length, 0);
+    }
+  }
+});
 
 test('native wrapper: synthetic source and actual core produce exact conditional flux and variance', () => {
   const f = fixture(); const terminal = f.run();

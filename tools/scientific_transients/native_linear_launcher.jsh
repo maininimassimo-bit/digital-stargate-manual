@@ -5,8 +5,8 @@ function DSGNativeLinearLaunch(root, expected) {
    function fields(value, keys) { need(value && typeof value === 'object' && !Array.isArray(value) &&
       Object.keys(value).sort().join(',') === keys.slice().sort().join(','), 'FIELDS'); }
    function hex(value, length) { return typeof value === 'string' && value.length === length && /^[a-f0-9]+$/.test(value); }
-   need(typeof root === 'string' && /^[A-Za-z]:\//.test(root) && root.length <= 512 &&
-      !/[\x00-\x1f\x7f-\uffff\\"'<>|:*?\[\]]/.test(root.slice(2)) && !/\/$/.test(root), 'ROOT');
+   need(typeof root === 'string' && /^[A-Za-z]:\x2f/.test(root) && root.length <= 512 &&
+      !/[\x00-\x1f\x7f-\uffff\\"'<>|:*?\[\]]/.test(root.slice(2)) && !/\x2f$/.test(root), 'ROOT');
    root.slice(3).split('/').forEach(function (p) { need(p.length > 0 && p !== '.' && p !== '..' && !/[. ]$/.test(p), 'ROOT_COMPONENT'); });
    fields(expected, ['operationRef', 'ownerNonce', 'processSessionRef', 'sealSha256', 'grantSha256', 'wrapperSha256', 'parentDeadlineUTC']);
    ['operationRef', 'ownerNonce', 'processSessionRef'].forEach(function (key) { need(hex(expected[key], 32), 'EXPECTED'); });
