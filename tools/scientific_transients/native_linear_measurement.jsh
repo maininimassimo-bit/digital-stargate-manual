@@ -51,11 +51,12 @@ function DSGNativeLinearOwnership(root, expected, monitor) {
       ownerByteLength: owner.byteLength, ownerReadyByteLength: ready.byteLength, deadlineUTC: deadline};
 }
 
-function DSGNativeLinearMeasurement(root) {
+function DSGNativeLinearMeasurement(root, launcherBudget) {
    function need(ok, code) { if (!ok) throw Error('NATIVE_LINEAR_' + code); }
    function integer(x, lo, hi) { return typeof x === 'number' && isFinite(x) && Math.floor(x) === x && x >= lo && x <= hi; }
    function sha(x) { return typeof x === 'string' && /^[a-f0-9]{64}$/.test(x); }
    function fields(x, keys) { need(x && typeof x === 'object' && !Array.isArray(x) && Object.keys(x).sort().join(',') === keys.slice().sort().join(','), 'FIELDS'); }
+   need(launcherBudget === undefined || typeof launcherBudget === 'function', 'TRUSTED_LAUNCHER_BUDGET');
    var MIB = 1048576, BYTE_ARRAY_TYPE = 15; // Installed PJSR DataType.jsh SHA503f8d097b7b7a6a1892cb7d00e782e1fbccecb6746987d52e9b758793a4e298.
    var entryUTC = Date.now(), timer = new ElapsedTime, remaining = 180, deadline = null, lastUTC = entryUTC;
    // Reserve one MiB for the future launcher-only causal return, inside192MiB.
@@ -75,7 +76,9 @@ function DSGNativeLinearMeasurement(root) {
       need(typeof elapsed === 'number' && isFinite(elapsed) && elapsed >= 0, 'MONOTONIC_CLOCK');
       var invalid = now < lastUTC || now < entryUTC;
       lastUTC = now;
-      var expired = invalid || elapsed >= remaining || (deadline !== null && now >= deadline);
+      var callerWithin = launcherBudget === undefined ? true : launcherBudget(retaining);
+      need(typeof callerWithin === 'boolean', 'TRUSTED_LAUNCHER_BUDGET');
+      var expired = invalid || !callerWithin || elapsed >= remaining || (deadline !== null && now >= deadline);
       if (expired) overrun = true;
       if (!retaining) need(!expired, invalid ? 'CLOCK_CHANGED' : 'DEADLINE');
    }

@@ -8,6 +8,7 @@ import vm from 'node:vm';
 const base = new URL('./', import.meta.url);
 const libraries = ['native_linear_uncertainty.jsh', 'strict_passive_json.jsh', 'native_float32_primary.jsh', 'native_linear_measurement.jsh'];
 const code = Object.fromEntries(libraries.map(n => [n, readFileSync(new URL(n, base), 'utf8')]));
+const launcherCode = readFileSync(new URL('native_linear_launcher.jsh',base),'utf8');
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const bytes = value => Buffer.from(JSON.stringify(value), 'ascii');
 const componentNames = ['PHOTON_READ_DIGITIZATION', 'DARK_MASTER_AND_TEMPORAL', 'FLAT_GAIN_NORMALIZATION',
@@ -91,11 +92,14 @@ function fixture(change = () => {}, options = {}) {
     bridgeCreated: () => { ++state.created; },
     bridgeClosed: kind => { state.closed.push(kind); },
     bridgeOpen: () => { options.onOpen?.(state); },
-    bridgeTimeAdvance: () => { state.wall += options.advanceWall || 0; state.mono += options.advanceMono || 0; }
+    bridgeTimeAdvance: () => { state.wall += options.advanceWall || 0; state.mono += options.advanceMono || 0; },
+    bridgeSleep: ms => {state.wall+=ms;state.mono+=ms/1000;state.sleeps=(state.sleeps||0)+1;options.onSleep?.(state);},
+    bridgeAfterWrapper: () => options.afterWrapper?.(state)
   });
   vm.runInContext(`
     class MockDate extends Date { static now(){return bridgeNow();} } globalThis.Date=MockDate;
-    globalThis.ElapsedTime=class{get value(){return bridgeElapsed();}};
+    globalThis.ElapsedTime=class{constructor(){this.origin=bridgeElapsed();}get value(){return bridgeElapsed()-this.origin;}};
+    globalThis.System={msleep(ms){bridgeSleep(ms);}};
     class MockBytes{constructor(a){this.data=new Uint8Array(a);}get length(){return this.data.length;}toUint8Array(){return new Uint8Array(this.data);}}
     globalThis.CryptographicHash=class{static SHA256=1;hash(a){let s=bridgeHash(a instanceof MockBytes?a.data:a);return{toHex(){return s;}};}initialize(){this.parts=[];}update(a){bridgeHashChunk(a.length);this.parts.push(...a.data);}finalize(){return this.hash(new Uint8Array(this.parts));}};
     globalThis.File=class{static exists(p){return bridgeExists(p);}static writeTextFile(p,t){bridgeWrite(p,t);}openForReading(p){this.path=p;this.pos=0;bridgeSize(p);}get size(){return bridgeSize(this.path);}read(type,n){if(type!==15)throw Error('MOCK_TYPE');let out=new MockBytes(bridgeRead(this.path,this.pos,n));this.pos+=n;return out;}close(){}};
@@ -107,7 +111,12 @@ function fixture(change = () => {}, options = {}) {
     globalThis.ImageWindow=class{constructor(w,h,c,b,real,color,id){bridgeCreated();this.id=id;this.closed=false;let image=new MockImage(w,h);this.mainView={image,beginProcess(){},endProcess(){},initialProcessing:{toSource(){if(options.failInitial)throw Error('MOCK_HISTORY');return 'SYNTHETIC_INITIAL_HISTORY';}},processing:{toSource(){return 'SYNTHETIC_CURRENT_HISTORY';}}};mockWindows.push(this);}saveAs(path,q,m,s,o,hints){if(options.failSave)return false;mockSaved[path]={width:this.mainView.image.width,height:this.mainView.image.height,values:new Float64Array(this.mainView.image.values)};File.writeTextFile(path,'SYNTHETIC_MOCK_XISF');return true;}forceClose(){if(options.failClose)throw Error('MOCK_CLOSE');this.closed=true;bridgeClosed(this.id);}static open(path){bridgeOpen();bridgeTimeAdvance();let s=mockSaved[path],out=[];for(let i=0;i<(options.openCount??1);i++){let w=new ImageWindow(s.width,s.height,1,64,true,false,'reopened_'+i);w.mainView.image.values.set(s.values);if(options.corruptReopen)w.mainView.image.values[0]+=1;out.push(w);}return out;}};
   `, context);
   for (const name of libraries) vm.runInContext(code[name], context, {filename: name});
+  vm.runInContext(launcherCode,context,{filename:'native_linear_launcher.jsh'});
+  vm.runInContext('globalThis.syntheticActualWrapper=DSGNativeLinearMeasurement;DSGNativeLinearMeasurement=function(root,budget){var t=syntheticActualWrapper(root,budget);bridgeAfterWrapper();return t;};',context);
   return {state, context, parameters, seal, run() { return vm.runInContext(`DSGNativeLinearMeasurement(${JSON.stringify(root)})`, context); },
+    runLauncher(change=()=>{}) {const p={operationRef:operation,ownerNonce:parameters.ownerNonce,processSessionRef:parameters.processSessionRef,
+      sealSha256:hash(files.get('launch-seal.json')),grantSha256:hash(files.get('launch-grant.json')),wrapperSha256:hash(files.get('native_linear_measurement.jsh')),
+      parentDeadlineUTC:'2026-10-16T10:03:00Z'};change(p);return vm.runInContext(`DSGNativeLinearLaunch(${JSON.stringify(root)},${JSON.stringify(p)})`,context);},
     json(name) { return JSON.parse(files.get(name).toString('ascii')); }};
 }
 
@@ -306,4 +315,95 @@ test('native ownership: V2 evidence binds actual PID and exact dynamic control h
 test('native ownership: stricter parent wall deadline cannot be reset by wrapper', () => {
   const f=fixture(undefined,{alterOwner(p){p.parentDeadlineUTC='2026-10-16T10:00:03Z';},advanceWall:5000,advanceMono:5});
   const t=f.run();assert.equal(t.state,'FAILED_RETAINED');assert.equal(t.cooperativeDeadlineExceeded,true);
+});
+
+test('native launcher: actual wrapper return is separately bound to terminal, ready and PID',()=>{
+  const f=fixture(),r=f.runLauncher();assert.equal(r.protocol,'DSG_NATIVE_LINEAR_RETURNED_V1');
+  assert.equal(r.terminalSha256,hash(f.state.files.get('terminal.json')));assert.equal(r.readySha256,hash(f.state.files.get('terminal-ready.json')));
+  assert.equal(r.nativeProcessId,'4242');assert.equal(r.state,'COMPLETED_CONDITIONAL_COMPUTATION');
+  assert.equal(r.qualifiedControls,0);assert.equal(f.state.writes.filter(n=>n==='native-return.json').length,1);
+  assert.ok(!f.json('terminal.json').products.some(p=>p.name==='native-return.json'));
+});
+
+test('native launcher: bounded parent wait precedes any image and supports delayed ready',()=>{
+  let ready;
+  const f=fixture(undefined,{onSleep(state){assert.equal(state.created,0);if(state.sleeps===3)state.files.set('native-owner-ready.json',ready);}});
+  ready=f.state.files.get('native-owner-ready.json');f.state.files.delete('native-owner-ready.json');
+  assert.equal(f.runLauncher().state,'COMPLETED_CONDITIONAL_COMPUTATION');assert.equal(f.state.sleeps,3);
+});
+
+test('native launcher: absent parent ready expires without wrapper/images or causal return',()=>{
+  const f=fixture();f.state.files.delete('native-owner-ready.json');
+  assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);assert.equal(f.state.created,0);
+  assert.equal(f.json('native-publication-uncertain.json').errorCode,'NATIVE_LAUNCH_DEADLINE');
+  assert.ok(!f.state.files.has('native-return.json'));assert.ok(f.state.sleeps<=18000);
+});
+
+test('native launcher: cancellation during parent wait prevents native wrapper call',()=>{
+  const f=fixture(undefined,{onSleep(state){state.files.set('cancel.json',bytes({protocol:'DSG_NATIVE_LINEAR_CANCEL_V1',operationRef:state.operation,requested:true}));}});
+  f.state.files.delete('native-owner-ready.json');assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);
+  assert.equal(f.state.created,0);assert.equal(f.json('native-publication-uncertain.json').errorCode,'NATIVE_LAUNCH_CANCELLED');
+});
+
+test('native launcher: wrong actual PID or parent deadline is refused before wrapper outputs',()=>{
+  for(const option of [{nativePid:'4243'},{alterOwner(p){p.parentDeadlineUTC='2026-10-16T10:02:00Z';}}]){
+    const f=fixture(undefined,option);assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);
+    assert.equal(f.state.created,0);assert.ok(!f.state.files.has('started-native.json'));
+  }
+});
+
+test('native launcher: thrown wrapper after stale ready never synthesizes causal return',()=>{
+  const f=fixture();vm.runInContext("DSGNativeLinearMeasurement=function(root){syntheticActualWrapper(root);throw Error('SYNTHETIC_AFTER_READY');};",f.context);
+  assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);assert.ok(f.state.files.has('terminal-ready.json'));
+  assert.ok(!f.state.files.has('native-return.json'));assert.ok(f.state.files.has('native-publication-uncertain.json'));
+});
+
+test('native launcher: stored terminal must equal full actual returned object',()=>{
+  const f=fixture(undefined,{afterWrapper(state){const t=JSON.parse(state.files.get('terminal.json'));t.state='FAILED_RETAINED';state.files.set('terminal.json',bytes(t));}});
+  assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);assert.equal(f.json('native-publication-uncertain.json').errorCode,'NATIVE_LAUNCH_ACTUAL_RETURN');
+  assert.ok(!f.state.files.has('native-return.json'));
+});
+
+test('native launcher: actual returned cleanup evidence survives elapsed deadline without scientific acceptance',()=>{
+  const f=fixture(undefined,{afterWrapper(state){state.wall+=181000;state.mono+=181;}});
+  const r=f.runLauncher();assert.equal(r.state,'COMPLETED_CONDITIONAL_COMPUTATION');assert.equal(r.qualifiedControls,0);
+  assert.equal(r.fullPhysicalVariance,null);assert.ok(!Object.hasOwn(r,'technicalComputationAccepted'));
+});
+
+test('native launcher: existing return is preserved and never grants another wrapper call',()=>{
+  const f=fixture();f.state.files.set('native-return.json',Buffer.from('KEEP'));
+  assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);assert.equal(f.state.files.get('native-return.json').toString(),'KEEP');
+  assert.equal(f.state.created,0);assert.equal(f.state.writes.filter(n=>n==='native-return.json').length,0);
+});
+
+test('native launcher: failed or partial return IO retains uncertainty without retry',()=>{
+  for(const option of [{failWrite:'native-return.json'},{onWrite(name,state){if(name==='native-return.json')state.files.set(name,Buffer.from('{'));}}]){
+    const f=fixture(undefined,option);assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);
+    assert.equal(f.state.writes.filter(n=>n==='native-return.json').length,1);assert.ok(f.state.files.has('native-publication-uncertain.json'));
+  }
+});
+
+test('native launcher: valid return file does not outrank fence created during publication',()=>{
+  const f=fixture(undefined,{onWrite(name,state){if(name==='native-return.json')state.files.set('native-publication-uncertain.json',Buffer.from('SYNTHETIC_FENCE'));}});
+  assert.throws(()=>f.runLauncher(),/NATIVE_LAUNCH_UNCERTAIN/);assert.equal(f.json('native-return.json').protocol,'DSG_NATIVE_LINEAR_RETURNED_V1');
+  assert.equal(f.state.files.get('native-publication-uncertain.json').toString(),'SYNTHETIC_FENCE');
+});
+
+test('native launcher: stalled UTC cannot renew one second of original residual budget',()=>{
+  let ready;
+  const f=fixture(undefined,{alterOwner(p){p.parentDeadlineUTC='2026-10-16T10:00:02Z';},onSleep(state){state.wall-=10;state.mono+=2;state.files.set('native-owner-ready.json',ready);}});
+  ready=f.state.files.get('native-owner-ready.json');f.state.files.delete('native-owner-ready.json');
+  assert.throws(()=>f.runLauncher(p=>{p.parentDeadlineUTC='2026-10-16T10:00:02Z';}),/NATIVE_LAUNCH_UNCERTAIN/);
+  assert.equal(f.state.created,0);assert.ok(!f.state.files.has('started-native.json'));
+  assert.equal(f.json('native-publication-uncertain.json').errorCode,'NATIVE_LAUNCH_DEADLINE');
+});
+
+test('native launcher: wrapper carries live original residual after a partial wait with stalled UTC',()=>{
+  let ready;
+  const f=fixture(undefined,{alterOwner(p){p.parentDeadlineUTC='2026-10-16T10:00:02Z';},advanceMono:.6,
+    onSleep(state){state.wall-=10;state.mono+=.5;state.files.set('native-owner-ready.json',ready);}});
+  ready=f.state.files.get('native-owner-ready.json');f.state.files.delete('native-owner-ready.json');
+  const r=f.runLauncher(p=>{p.parentDeadlineUTC='2026-10-16T10:00:02Z';});
+  assert.equal(r.state,'FAILED_RETAINED');assert.equal(f.json('terminal.json').cooperativeDeadlineExceeded,true);
+  assert.equal(f.json('terminal.json').errorCode,'NATIVE_LAUNCH_DEADLINE');
 });
