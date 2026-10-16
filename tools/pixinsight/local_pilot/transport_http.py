@@ -141,6 +141,8 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                     if not is_campaign_worker:
                         if action == 'dispatch-intents' and self.command == 'POST':
                             return self.send(200, campaign_queue.prepare_dispatch(plan_ref, self.body()))
+                        if job_action == 'technical-context' and self.command == 'GET':
+                            return self.send(200, campaign_queue.technical_context(plan_ref, intent_sha, int(ordinal)))
                         if tail == 'receipt' and self.command == 'GET':
                             return self.send(200, campaign_queue.dispatch_receipt(plan_ref, intent_sha))
                         if job_action == 'project' and self.command == 'POST':

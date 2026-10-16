@@ -112,7 +112,7 @@ class HandoffHttpTests(unittest.TestCase):
 
     def path(self):return self.f.path(True,'jobs/0/technical-context')
 
-    def test_dedicated_worker_get_and_bounded_transport_no_owner_alias(self):
+    def test_separate_owner_worker_reads_and_bounded_worker_transport(self):
         f=self.f
         self.assertEqual(f.request(self.path(),token='synthetic-owner',owner=True)[0],403)
         self.assertEqual(f.request(self.path(),token=http_fixtures.LEGACY_TOKEN)[0],403)
@@ -120,7 +120,7 @@ class HandoffHttpTests(unittest.TestCase):
         transport=CampaignWorkerTransport('http://127.0.0.1:'+str(f.server.server_port),http_fixtures.TOKEN,test_loopback=True)
         row=transport.request(self.path());self.assertFalse(row['launchAuthorized'])
         self.assertEqual(row,module.validate_technical(row))
-        self.assertEqual(f.request(f.path(False,'jobs/0/technical-context'),token='synthetic-owner',owner=True)[0],404)
+        self.assertEqual(f.request(f.path(False,'jobs/0/technical-context'),token='synthetic-owner',owner=True)[0],200)
         self.assertEqual(f.request(self.path(),{},http_fixtures.TOKEN)[0],404)
         with self.assertRaises(ProtocolError):transport.request(self.path(),{})
 
@@ -130,6 +130,37 @@ class HandoffHttpTests(unittest.TestCase):
         f.server.RequestHandlerClass=f.handler(False)
         self.assertEqual(f.request(self.path(),token=http_fixtures.TOKEN)[0],404)
         self.assertEqual(before,[f.f.f.store.get(k) for k in (f.f.q.state_key,f.f.s.key)])
+
+    def test_owner_read_is_exact_nonmutating_and_does_not_expire_or_admit(self):
+        from unittest.mock import patch
+        f=self.f;before=[f.f.f.store.get(k) for k in (f.f.q.state_key,f.f.s.key)]
+        path=f.path(False,'jobs/0/technical-context')
+        with patch.object(f.f.q,'_mutate',side_effect=AssertionError('read mutated queue')):
+            code,row=f.request(path,token='synthetic-owner',owner=True)
+        self.assertEqual(code,200);self.assertEqual(row,module.validate_technical(row))
+        self.assertEqual(row['jobId'],f.f.job['jobId']);self.assertFalse(row['reservationConsumed'])
+        self.assertFalse(row['launchAuthorized']);self.assertEqual(row['projectionState'],'QUEUED')
+        self.assertEqual(before,[f.f.f.store.get(k) for k in (f.f.q.state_key,f.f.s.key)])
+        self.assertEqual(f.request(path,{},'synthetic-owner',True)[0],404)
+        self.assertEqual(f.request(path,token=http_fixtures.TOKEN)[0],403)
+        self.assertEqual(f.request(path,token=http_fixtures.LEGACY_TOKEN)[0],403)
+
+    def test_owner_read_reconciles_already_consumed_projection_without_reserving(self):
+        f=self.f;job=f.f.reserve()['job']
+        before=[f.f.f.store.get(k) for k in (f.f.q.state_key,f.f.s.key)]
+        code,row=f.request(f.path(False,'jobs/0/technical-context'),token='synthetic-owner',owner=True)
+        self.assertEqual(code,200);self.assertTrue(row['reservationConsumed'])
+        self.assertEqual(row['projectionState'],'RESERVED');self.assertFalse(row['launchAuthorized'])
+        for key in ('attemptId','leaseToken','admissionSha256'):self.assertNotIn(key,row)
+        self.assertNotIn(job['leaseToken'],str(row))
+        self.assertEqual(before,[f.f.f.store.get(k) for k in (f.f.q.state_key,f.f.s.key)])
+
+    def test_owner_revoked_or_missing_projection_never_confirms_another_job(self):
+        f=self.f;path=f.path(False,'jobs/0/technical-context')
+        missing=path.replace(f.intent,'f'*64)
+        self.assertNotEqual(f.request(missing,token='synthetic-owner',owner=True)[0],200)
+        f.f.fixture.revoke()
+        self.assertNotEqual(f.request(path,token='synthetic-owner',owner=True)[0],200)
 
 
 if __name__=='__main__':unittest.main()
