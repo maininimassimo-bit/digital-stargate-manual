@@ -15,7 +15,7 @@ from tools.scientific_transients.operator_run import OperatorPlan, ORIGIN
 from tools.scientific_transients.queue import fields, digest
 
 
-def load_config(path, expected_sha, *, engine=ENGINE, catalog=CATALOG):
+def load_config(path, expected_sha, *, engine=ENGINE, catalog=CATALOG, record_verifications=True):
     require(digest(expected_sha), 'CAMPAIGN_LOCAL_CONFIG_DIGEST')
     value, actual = read_json(path)
     fields(value, {'protocol','contextPath','contextFileSha256','archiveDirectory','archiveSha256',
@@ -29,7 +29,7 @@ def load_config(path, expected_sha, *, engine=ENGINE, catalog=CATALOG):
     for row in value['operatorPlans']:
         fields(row, {'path','sha256'})
         require(type(row['path']) is str and Path(row['path']).is_absolute(), 'CAMPAIGN_LOCAL_ABSOLUTE_PATH')
-        plans.append(OperatorPlan.load(row['path'], row['sha256'], engine=engine, catalog=catalog))
+        plans.append(OperatorPlan.load(row['path'], row['sha256'], engine=engine, catalog=catalog, record_verifications=record_verifications))
     archive = CampaignInputArchive(value['archiveDirectory'], value['archiveSha256'])
     return (value['coordinatorRoot'], value['contextPath'], value['contextFileSha256'], archive, plans, value['decisionId'])
 

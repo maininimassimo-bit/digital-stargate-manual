@@ -21,7 +21,7 @@ PLAN_KEYS={'protocol','serviceOrigin','workerId','rootId','jobId','reservationRe
 
 class OperatorPlan:
     @classmethod
-    def load(cls,path,expected_sha,*,engine=ENGINE,catalog=CATALOG):
+    def load(cls,path,expected_sha,*,engine=ENGINE,catalog=CATALOG,record_verifications=True):
         require(digest(expected_sha),'OPERATOR_PLAN_DIGEST')
         value,sha=read_json(path);require(sha==expected_sha,'OPERATOR_PLAN_CHANGED')
         fields(value,PLAN_KEYS);fields(value['paths'],PATH_KEYS);fields(value['binding'],BINDING_FIELDS)
@@ -44,7 +44,7 @@ class OperatorPlan:
         require(roots['artifacts'] in roots['run'].parents,'OPERATOR_NATIVE_ROOT')
         result=cls.__new__(cls);result.path,result.sha=safe_path(path),sha
         result.value,result.roots=copy.deepcopy(value),roots
-        result.registry=LocalRegistry(roots['artifacts'],roots['registry'])
+        result.registry=LocalRegistry(roots['artifacts'],roots['registry'],record_verifications=record_verifications)
         result.engine,result.catalog=engine,catalog
         result.verify()
         return result
