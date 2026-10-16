@@ -83,8 +83,9 @@
   });
 
   const formatDate = (value) => {
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return '—';
     const parsed = new Date(value);
-    return Number.isNaN(parsed.getTime()) ? '—' : parsed.toLocaleDateString('it-IT');
+    return Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0,10) !== value ? '—' : parsed.toLocaleDateString('it-IT', {timeZone:'UTC'});
   };
 
   const formatRa = (degrees) => {
@@ -106,23 +107,27 @@
     return `${value >= 0 ? '+' : '−'}${String(units).padStart(2, '0')}° ${String(minutes).padStart(2, '0')}′ ${String(seconds).padStart(2, '0')}″`;
   };
 
-  const fetchProjection = async (path) => {
-    const response = await fetch(new URL(path, resolveSiteRoot()), { cache: 'no-store' });
+  const fetchProjection = async (path, signal) => {
+    const response = await fetch(new URL(path, resolveSiteRoot()), { cache: 'no-store', signal });
     if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
     return response.json();
   };
 
-  const hydrateHomeSnapshot = async () => {
-    const board = document.querySelector('[data-dsg-home-snapshot]');
-    if (!board || board.dataset.homeSnapshotLoading === 'true') return;
+  const hydrateHomeSnapshot = async (board) => {
+    if (!board?.isConnected || board.dataset.homeSnapshotLoading === 'true') return;
     board.dataset.homeSnapshotLoading = 'true';
+    const button = board.querySelector('[data-home-refresh]');
+    if (button) button.disabled = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
 
     try {
       const [roadmap, catalog, latest] = await Promise.all([
-        fetchProjection('data/roadmap.json'),
-        fetchProjection('data/scientific-session-catalog.json'),
-        fetchProjection('data/realtime/latest-observation.json')
+        fetchProjection('data/roadmap.json', controller.signal),
+        fetchProjection('data/scientific-session-catalog.json', controller.signal),
+        fetchProjection('data/realtime/latest-observation.json', controller.signal)
       ]);
+      if (!board.isConnected) return;
       if (!roadmap?.summary || !hasNumber(roadmap.summary.percentCompleted) || !Array.isArray(roadmap.waves) || !Array.isArray(catalog?.sessions)) {
         throw new Error('Contratto projection incompleto');
       }
@@ -131,7 +136,9 @@
       const current = roadmapItems.find((item) => item.id === roadmap.currentPackage);
       const sessions = catalog.sessions;
       const latestId = String(latest?.session_id || '');
-      const latestCatalog = sessions.find((session) => session.sessionId === latestId) || {};
+      const ids = sessions.map(session => session.sessionId);
+      if (new Set(ids).size !== ids.length || !/^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$/.test(latestId) || !ids.includes(latestId)) throw new Error('Identità catalogo/latest non coerente');
+      const latestCatalog = sessions.find((session) => session.sessionId === latestId);
       const target = latest?.target || {};
       const equipment = latest?.equipment || {};
       const metrics = latest?.metrics || {};
@@ -153,33 +160,66 @@
       setText(board, '[data-home-latest-detail]', `${target.name || latestCatalog.target || 'Target non disponibile'} · ${coordinates} · ${equipmentLabel} · ${integrationLabel} · ${framesLabel} · ${severity} · RMS ${rms}`);
 
       const latestLink = board.querySelector('[data-home-latest-link]');
-      if (latestLink && latestId) latestLink.href = new URL(`scientific-session-detail/?sessionId=${encodeURIComponent(latestId)}`, resolveSiteRoot()).href;
+      if (latestLink) {latestLink.href = new URL(`scientific-session-detail/?sessionId=${encodeURIComponent(latestId)}`, resolveSiteRoot()).href;latestLink.textContent = 'Apri dettaglio sessione';}
 
-      const totalHours = sessions.reduce((sum, session) => sum + asNumber(session.integrationHours), 0);
-      const totalFrames = sessions.reduce((sum, session) => sum + asNumber(session.lightCompleted), 0);
-      const targets = new Set(sessions.map((session) => String(session.target || '').trim()).filter(Boolean));
-      setText(board, '[data-home-session-count]', `${sessions.length} sessioni`);
-      setText(board, '[data-home-session-totals]', `${formatNumber(totalHours, 2)} h · ${formatNumber(totalFrames)} light · ${targets.size} target`);
-      setText(board, '[data-home-freshness]', `Roadmap ${formatDate(roadmap.updatedAt)} · dati scientifici ${formatDate(latest.generated_at)}`);
+      const counter = value => typeof value === 'number' && Number.isInteger(value) && value >= 0;
+      const hours = value => typeof value === 'number' && Number.isFinite(value) && value >= 0;
+      if (sessions.some(session => ['lightStarted','lightCompleted'].some(key => session[key] != null && !counter(session[key])) || (session.integrationHours != null && !hours(session.integrationHours)))) throw new Error('Conteggi catalogo non validi');
+      const acquisitions = sessions.filter(session => (counter(session.lightStarted) && session.lightStarted > 0) || (counter(session.lightCompleted) && session.lightCompleted > 0));
+      const withoutLight = sessions.filter(session => session.lightStarted === 0 && session.lightCompleted === 0).length;
+      const uncertain = sessions.length - acquisitions.length - withoutLight;
+      const totalHours = sessions.reduce((sum, session) => sum + (hours(session.integrationHours) ? session.integrationHours : 0), 0);
+      const totalFrames = sessions.reduce((sum, session) => sum + (counter(session.lightCompleted) ? session.lightCompleted : 0), 0);
+      const unknownTargets = new Set(['UNKNOWN','N/A','NA','NOT_AVAILABLE','TARGET NON DISPONIBILE','NON DISPONIBILE','SCONOSCIUTO','—','-']);
+      const targets = new Set(sessions.map(session => String(session.target || '').trim().toUpperCase()).filter(value => value && !unknownTargets.has(value)));
+      const partial = sessions.some(session => !hours(session.integrationHours) || !counter(session.lightCompleted));
+      setText(board, '[data-home-session-count]', `${acquisitions.length} sessioni con LIGHT`);
+      setText(board, '[data-home-session-totals]', `${formatNumber(totalHours, 2)} h · ${formatNumber(totalFrames)} light · ${targets.size} target identificati${partial ? ' · totali parziali' : ''}`);
+      setText(board, '[data-home-session-records]', `Catalogo: ${sessions.length} registrazioni · ${withoutLight} senza LIGHT${uncertain ? ` · ${uncertain} con acquisizione non determinabile` : ''}`);
+      setText(board, '[data-home-freshness]', `Roadmap aggiornata: ${formatDate(roadmap.updatedAt)}`);
+      const night = `${latestId.slice(0,10).split('-').reverse().join('/')}–${latestId.slice(11).split('-').reverse().join('/')}`;
+      const generated = typeof latest.generated_at === 'string' ? new Date(latest.generated_at) : new Date(NaN);
+      const updated = Number.isFinite(generated.getTime()) ? generated.toLocaleString('it-IT',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Rome'}) : 'non disponibile';
+      setText(board, '[data-home-latest-freshness]', `Acquisizione: ${night} · Aggiornamento dati: ${updated}`);
+      setText(board, '[data-home-refresh-status]', 'Aggiornamento automatico ogni 60 secondi mentre la pagina è visibile.');
       board.dataset.homeSnapshotState = 'ready';
     } catch (error) {
+      if (!board.isConnected) return;
       setText(board, '[data-home-current-package]', 'UNKNOWN');
       setText(board, '[data-home-current-detail]', 'Projection roadmap non disponibile');
       setText(board, '[data-home-latest-session]', 'UNKNOWN');
       setText(board, '[data-home-latest-detail]', 'Projection scientifica non disponibile');
       setText(board, '[data-home-session-count]', '—');
       setText(board, '[data-home-session-totals]', 'Conteggi non disponibili');
-      setText(board, '[data-home-freshness]', 'Projection non disponibile');
+      setText(board, '[data-home-freshness]', 'Dati non disponibili');
+      setText(board, '[data-home-latest-freshness]', 'Date non disponibili');
+      setText(board, '[data-home-session-records]', 'Registrazioni non disponibili');
+      setText(board, '[data-home-refresh-status]', 'Aggiornamento non riuscito. Riprova con Aggiorna; il prossimo tentativo è automatico.');
+      const link = board.querySelector('[data-home-latest-link]');
+      if (link) {link.href = new URL('scientific-session-catalog/',resolveSiteRoot()).href;link.textContent = 'Apri catalogo';}
       board.dataset.homeSnapshotState = 'unavailable';
       console.warn('Digital StarGate homepage projection:', error);
     } finally {
+      clearTimeout(timeout);
+      if (button) button.disabled = false;
       board.dataset.homeSnapshotLoading = 'false';
     }
   };
 
   const initializeHome = () => {
     ensureLatestObservationShowcase();
-    hydrateHomeSnapshot();
+    const board = document.querySelector('[data-dsg-home-snapshot]');
+    if (!board || board.dataset.homeSnapshotRefreshReady === 'true') return;
+    board.dataset.homeSnapshotRefreshReady = 'true';
+    const refresh = () => hydrateHomeSnapshot(board);
+    const visible = () => {if (!document.hidden) refresh();};
+    board.querySelector('[data-home-refresh]')?.addEventListener('click',refresh);
+    document.addEventListener('visibilitychange',visible);
+    const timer = setInterval(() => {
+      if (!board.isConnected) {clearInterval(timer);document.removeEventListener('visibilitychange',visible);return;}
+      if (!document.hidden) refresh();
+    },60000);
+    refresh();
   };
 
   initializeHome();

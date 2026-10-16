@@ -15,6 +15,9 @@ spec.loader.exec_module(homepage)
 def sample_block(detail: str = "Projection scientifica non ancora disponibile") -> str:
     return f'''{homepage.START_MARKER}
 <section data-dsg-home-snapshot>
+  <button data-home-refresh>Aggiorna riepilogo</button>
+  <span data-home-latest-freshness>Date non disponibili</span>
+  <span data-home-session-records>Registrazioni non disponibili</span>
   <span data-home-freshness>Caricamento projection…</span>
   <strong data-home-current-package>—</strong>
   <p data-home-current-detail>Stato roadmap non ancora disponibile</p>

@@ -1,5 +1,9 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Riepilogo homepage — coerenza 16 ottobre 2026
+
+Date roadmap, notte di acquisizione e aggiornamento projection distinte; conteggi separati di acquisizioni LIGHT e registrazioni, esclusione target segnaposto, refresh automatico ogni 60s e manuale. Nessuna riscrittura di sorgenti scientifiche o baseline roadmap. [Contratto, audit e verifiche](HANDOVER_2026-10-16-HOME-SNAPSHOT-CONSISTENCY.md); gate exact-head e pubblicazione attestati nella PR.
+
 ## Ultima osservazione scientifica — correzione 16 ottobre 2026
 
 Pacchetti senza LIGHT: no-op sulla pubblicazione scientifica e latest observation preservata. Coordinate mancanti non diventano0°,0°; refresh visibile ogni60s e manuale. [Diagnosi, contratto, test e rollback](HANDOVER_2026-10-16-LATEST-SCIENTIFIC-COORDINATES.md). Nessuna modifica ai RAW, Safety o authority.
