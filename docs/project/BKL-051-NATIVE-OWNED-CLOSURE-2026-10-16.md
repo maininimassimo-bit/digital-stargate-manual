@@ -45,6 +45,11 @@ registri, dei segnali e della ricevuta dopo gli ultimi callback e controlli di
 tempo. Questo corregge ARB-OWNED-P2-1: una modifica o sostituzione identica del
 registro durante l'ultima lettura non può usare il precedente snapshot positivo.
 Non è una snapshot atomica contro scritture ostili concorrenti dello stesso utente.
+La correzione RQ successiva campiona nuovamente il budget originale dopo tutta
+la verifica finale di identità e percorsi, prima del commit privato e senza
+ulteriori I/O. Una scadenza attraversata in quella stessa verifica non può
+riutilizzare la diagnostica temporale precedente. La regressione sposta il
+tempo sintetico durante l'apertura finale della ricevuta.
 Un errore o una scadenza attraversata durante la ricevuta mantiene il file
 storico ma produce `EXIT_VERIFIED_EVIDENCE_UNCERTAIN` in memoria, mai un successo.
 Il supervisore dovrà conservare quel contesto e tentare una sola registrazione

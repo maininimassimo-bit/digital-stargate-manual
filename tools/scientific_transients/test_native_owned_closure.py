@@ -1,6 +1,7 @@
 """Fake held process and Win32 exit calls; no native starts, waits or termination."""
 import datetime as dt
 import json
+import inspect
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -181,6 +182,27 @@ class OwnedClosureTests(unittest.TestCase):
             with self.assertRaisesRegex(Exception,'OWNED_EXIT_DEADLINE_CROSSED_DURING_RECEIPT'): owned.close()
         self.assertEqual(owned.diagnostic()['state'],'EXIT_VERIFIED_EVIDENCE_UNCERTAIN')
         self.assertFalse(owned.diagnostic()['receiptCommitted'])
+
+    def test_final_identity_read_crossing_original_deadline_preserves_exit_not_acceptance(self):
+        self.code=0; owned=self.closer(); original=Path.open; injected=False
+        def read(path,*args,**kwargs):
+            nonlocal injected
+            result=original(path,*args,**kwargs)
+            if path==self.records._journal/'owned-closure.json' and \
+                    inspect.currentframe().f_back.f_code.co_name=='_post_receipt_verify':
+                self.mono=182; injected=True
+            return result
+        with patch.object(Path,'open',read):
+            with self.assertRaisesRegex(Exception,'OWNED_EXIT_DEADLINE_CROSSED_DURING_RECEIPT'):
+                owned.close()
+        self.assertTrue(injected)
+        self.assertEqual(owned.diagnostic()['state'],'EXIT_VERIFIED_EVIDENCE_UNCERTAIN')
+        self.assertTrue(owned.diagnostic()['processExitObserved'])
+        self.assertFalse(owned.diagnostic()['receiptCommitted'])
+        historical=json.loads((self.records._journal/'owned-closure.json').read_bytes())
+        self.assertTrue(historical['technicalComputationAccepted'])
+        self.assertFalse(historical['parentMonotonicDeadlineExceeded'])
+        with self.assertRaisesRegex(Exception,'OWNED_EXIT_REPLAY'): owned.close()
 
     def test_reconstruction_of_closer_on_same_records_is_rejected(self):
         self.closer()

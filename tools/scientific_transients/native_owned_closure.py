@@ -194,7 +194,13 @@ class OwnedNativeClosure:
             require(self._signals._roots()+len(encode(receipt))<=16*pub.MIB,'OWNED_EXIT_METADATA_RESERVE')
             sha,info=pub._write_control(r._journal/'owned-closure.json',receipt)
             self._post_receipt_verify(sha,info)
-            after=r._budget.diagnostic()
+            # Identity/path verification above is fallible IO and may cross the
+            # original deadline. Cached diagnostics from before it are stale.
+            # This last observation has no subsequent file/process IO before
+            # the private commit; a historical receipt is never rewritten.
+            after=r._budget.check()
+            require(not self._failed and not r._failed and not self._signals.diagnostic()['liveUncertain'],
+                    'OWNED_EXIT_UNCERTAIN')
             require(receipt['parentMonotonicDeadlineExceeded']==after['parentMonotonicDeadlineExceeded'] and
                     (not accepted or not after['parentWallDeadlineExceeded']), 'OWNED_EXIT_DEADLINE_CROSSED_DURING_RECEIPT')
             self._receipt=dict(receipt); self._state='CLOSED_RETAINED'
