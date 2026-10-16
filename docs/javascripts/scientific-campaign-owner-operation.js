@@ -18,7 +18,18 @@
       try{
         const raw=host.storage.getItem(KEY);
         if(pending)check(raw===JSON.stringify(pending));
-        else if(raw!==null){blocked=true;return true;}
+        else if(raw!==null){
+          check(raw.length<=LIMIT);const record=JSON.parse(raw);
+          check(exact(record,['protocol','operationKeySha256','envelopeSha256','planRef','action','requestSha256',
+            'relativePath','implicitRetry','state'])&&record.protocol==='DSG_CAMPAIGN_OWNER_BROWSER_PENDING_V1'
+            &&['DISPATCH_INTENT','PROJECT_JOB'].includes(record.action)&&ref(record.planRef)
+            &&['operationKeySha256','envelopeSha256','requestSha256'].every(k=>hash(record[k]))
+            &&record.implicitRetry===false&&record.state==='RECONCILIATION_REQUIRED');
+          const base='/v1/transient-analysis/campaigns/'+record.planRef+'/dispatch-intents';
+          check(record.action==='DISPATCH_INTENT'?record.relativePath===base:
+            new RegExp('^'+base+'/[a-f0-9]{64}/jobs/[0-2]/project$').test(record.relativePath));
+          pending=record;
+        }
       }catch{blocked=true;}
       return blocked||Boolean(pending);
     }
@@ -73,7 +84,25 @@
       check(!disposed&&epoch===generation&&host.canAct()&&same(challenge,fresh)&&inspectStorage()&&!blocked);
       return response;
     }
-    return Object.freeze({prepare,submit,invalidate,hasPending:inspectStorage,
+    async function reconcileIntent(proposal,savedReceipt=null){
+      // A fresh authenticated read is mandatory even when a saved receipt exists.
+      proposal=structuredClone(proposal);savedReceipt=structuredClone(savedReceipt);
+      check(!disposed&&host.canAct()&&inspectStorage()&&!blocked&&pending?.action==='DISPATCH_INTENT');
+      const generation=epoch,record=structuredClone(pending);
+      const alive=()=>check(!disposed&&epoch===generation&&host.canAct()&&inspectStorage()&&!blocked&&same(pending,record));
+      const raw=await host.request('/v1/transient-analysis/campaigns/'+record.planRef+'/review-receipt');alive();
+      const receipt=await globalThis.DSGCampaignOwnerReceipt.intent(raw,proposal);alive();
+      check(receipt.planRef===record.planRef&&receipt.operationKeySha256===record.operationKeySha256
+        &&receipt.requestSha256===record.requestSha256);
+      if(savedReceipt!==null){
+        check(same(savedReceipt,receipt));alive();
+        try{host.storage.removeItem(KEY);check(host.storage.getItem(KEY)===null);}
+        catch{blocked=true;throw Error('Chiusura della memoria della richiesta non verificabile.');}
+        pending=null;invalidate();
+      }
+      return structuredClone(receipt);
+    }
+    return Object.freeze({prepare,submit,invalidate,reconcileIntent,hasPending:inspectStorage,
       dispose(){invalidate();disposed=true;}});
   }
   globalThis.DSGCampaignOwnerOperation=Object.freeze({create});
