@@ -234,5 +234,24 @@
     check(validated.has(value)&&Object.hasOwn(value,'events'));plan(request);
     return same(value.plan,request)?'CONFIRMED':'CONFLICT';
   }
-  globalThis.DSGCampaignContract=Object.freeze({summary,receipt,reconcile,action,input,reconcileInput,reconcileCreate});
+  async function dispatchProposal(value,proposal,context){
+    proposal=structuredClone(proposal);context=structuredClone(context);
+    check(validated.has(value)&&Object.hasOwn(value,'events'));
+    check(exact(proposal,['protocol','planRef','request','launchAuthorized','scientificValidation','proposalSha256'])
+      &&proposal.protocol==='DSG_CAMPAIGN_OWNER_DISPATCH_PROPOSAL_V1'&&proposal.planRef===value.campaign.planRef
+      &&proposal.launchAuthorized===false&&proposal.scientificValidation==='NOT_VALIDATED'&&hash(proposal.proposalSha256));
+    const {proposalSha256,...payload}=proposal;check(await digest(payload)===proposalSha256);
+    check(exact(proposal.request,['decisionId','contextSha256','witnessRef','jobs','workerId','rootId','archiveSha256']));
+    const event={kind:'DISPATCH_INTENT',request:proposal.request,
+      facts:{context,queueProjectionPerformed:false,launchAuthorized:false}};
+    check(globalThis.DSGCampaignDispatchContract);
+    await globalThis.DSGCampaignDispatchContract.inspect(event,value.plan,value.events,
+      {check,exact,ref,hash,utc,instantKey,same,digest});
+    const operationKeySha256=await digest({protocol:'DSG_CAMPAIGN_OWNER_OPERATION_KEY_V1',
+      serviceOrigin:'https://dsg-pixinsight-pilot-183451329061.europe-west1.run.app',action:'DISPATCH_INTENT',
+      planRef:proposal.planRef,witnessRef:proposal.request.witnessRef,contextSha256:proposal.request.contextSha256});
+    return freeze({action:'DISPATCH_INTENT',planRef:proposal.planRef,proposalSha256,operationKeySha256,
+      relativePath:'/v1/transient-analysis/campaigns/'+proposal.planRef+'/dispatch-intents',request:structuredClone(proposal.request)});
+  }
+  globalThis.DSGCampaignContract=Object.freeze({summary,receipt,reconcile,action,input,reconcileInput,reconcileCreate,dispatchProposal});
 })();
