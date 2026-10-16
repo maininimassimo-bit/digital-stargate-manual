@@ -1,5 +1,56 @@
 // Definition only. Requires the three sealed DSG libraries and actual PJSR APIs.
 // No launcher, grant creation, network, parent publication or scientific acceptance.
+function DSGNativeLinearOwnership(root, expected, monitor) {
+   function need(ok, code) { if (!ok) throw Error('NATIVE_LINEAR_OWNER_' + code); }
+   function fields(value, keys) { need(value && typeof value === 'object' && !Array.isArray(value) &&
+      Object.keys(value).sort().join(',') === keys.slice().sort().join(','), 'FIELDS'); }
+   function hex(value, length) { return typeof value === 'string' && value.length === length && /^[a-f0-9]+$/.test(value); }
+   need(typeof root === 'string' && /^[A-Za-z]:\//.test(root) && root.length <= 512 &&
+      !/[\x00-\x1f\x7f-\uffff\\"'<>|:*?\[\]]/.test(root.slice(2)) && !/\/$/.test(root), 'ROOT');
+   root.slice(3).split('/').forEach(function (p) { need(p.length > 0 && p !== '.' && p !== '..' && !/[. ]$/.test(p), 'ROOT_COMPONENT'); });
+   fields(expected, ['operationRef', 'ownerNonce', 'processSessionRef', 'sealSha256', 'grantSha256']);
+   ['operationRef', 'ownerNonce', 'processSessionRef'].forEach(function (key) { need(hex(expected[key], 32), 'EXPECTED'); });
+   ['sealSha256', 'grantSha256'].forEach(function (key) { need(hex(expected[key], 64), 'EXPECTED'); });
+   need(typeof monitor === 'function', 'MONITOR');
+   function read(name) {
+      monitor();
+      var file = new File;
+      try {
+         file.openForReading(root + '/' + name);
+         var size = file.size;
+         need(typeof size === 'number' && Math.floor(size) === size && size > 0 && size <= 1048576, 'SIZE');
+         var raw = file.read(15, size);
+         need(raw.length === size && file.size === size, 'READ_CHANGED');
+         var result = {value: parseStrictPassiveAsciiJson(raw.toUint8Array(), {maxBytes: 1048576, checkBudget: monitor}),
+            sha256: new CryptographicHash(CryptographicHash.SHA256).hash(raw).toHex(), byteLength: size};
+         monitor(); return result;
+      } finally { file.close(); }
+   }
+   var ready = read('native-owner-ready.json'), owner = read('native-owner.json'), r = ready.value, p = owner.value;
+   fields(r, ['protocol', 'operationRef', 'processSessionRef', 'ownerNonce', 'ownerSha256']);
+   fields(p, ['protocol', 'operationRef', 'processSessionRef', 'ownerNonce', 'sealSha256', 'grantSha256',
+      'launchControlSha256', 'parentIntentSha256', 'nativeProcessId', 'processCreationFileTime', 'parentDeadlineUTC']);
+   need(r.protocol === 'DSG_NATIVE_LINEAR_OWNER_READY_V1' && p.protocol === 'DSG_NATIVE_LINEAR_OWNER_V1' &&
+      r.ownerSha256 === owner.sha256, 'READY_BINDING');
+   ['operationRef', 'ownerNonce', 'processSessionRef'].forEach(function (key) {
+      need(r[key] === expected[key] && p[key] === expected[key], 'SESSION_BINDING');
+   });
+   need(p.sealSha256 === expected.sealSha256 && p.grantSha256 === expected.grantSha256 &&
+      hex(p.launchControlSha256, 64) && hex(p.parentIntentSha256, 64) && hex(p.processCreationFileTime, 16), 'PARENT_BINDING');
+   need(typeof p.nativeProcessId === 'string' && /^[1-9][0-9]{0,9}$/.test(p.nativeProcessId) &&
+      Number(p.nativeProcessId) <= 4294967295 && typeof CoreApplication.pid === 'string' &&
+      p.nativeProcessId === CoreApplication.pid, 'PID');
+   need(typeof p.parentDeadlineUTC === 'string' && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$/.test(p.parentDeadlineUTC), 'DEADLINE');
+   var deadline = Date.parse(p.parentDeadlineUTC);
+   need(isFinite(deadline) && new Date(deadline).toISOString().replace('.000Z', 'Z') === p.parentDeadlineUTC &&
+      Date.now() < deadline, 'DEADLINE');
+   // Recheck both raw controls after parsing and the trusted monitor boundary.
+   monitor();
+   need(read('native-owner.json').sha256 === owner.sha256 && read('native-owner-ready.json').sha256 === ready.sha256, 'BYTES_CHANGED');
+   return {owner: p, ownerSha256: owner.sha256, ownerReadySha256: ready.sha256,
+      ownerByteLength: owner.byteLength, ownerReadyByteLength: ready.byteLength, deadlineUTC: deadline};
+}
+
 function DSGNativeLinearMeasurement(root) {
    function need(ok, code) { if (!ok) throw Error('NATIVE_LINEAR_' + code); }
    function integer(x, lo, hi) { return typeof x === 'number' && isFinite(x) && Math.floor(x) === x && x >= lo && x <= hi; }
@@ -7,12 +58,13 @@ function DSGNativeLinearMeasurement(root) {
    function fields(x, keys) { need(x && typeof x === 'object' && !Array.isArray(x) && Object.keys(x).sort().join(',') === keys.slice().sort().join(','), 'FIELDS'); }
    var MIB = 1048576, BYTE_ARRAY_TYPE = 15; // Installed PJSR DataType.jsh SHA503f8d097b7b7a6a1892cb7d00e782e1fbccecb6746987d52e9b758793a4e298.
    var entryUTC = Date.now(), timer = new ElapsedTime, remaining = 180, deadline = null, lastUTC = entryUTC;
-   var operation = null, owned = [], written = Object.create(null), products = [], totalBytes = 0, extraBytes = 0;
+   // Reserve one MiB for the future launcher-only causal return, inside192MiB.
+   var operation = null, owned = [], written = Object.create(null), products = [], totalBytes = 0, extraBytes = MIB;
    var sourceHandle = null, logOpen = false, overrun = false, retentionError = null;
    var names = ['started-native.json', 'native.log', 'result.json', 'native-evidence.json', 'checkpoint.xisf',
       'source-initial.js', 'source-before.js', 'source-after.js', 'checkpoint-initial.js', 'checkpoint-current.js',
       'closing-source.js', 'closing-checkpoint.js', 'error-owned-1.xisf', 'error-owned-2.xisf', 'terminal.json', 'terminal-ready.json',
-      'native-publication-uncertain.json'];
+      'native-publication-uncertain.json', 'native-return.json'];
    var components = ['PHOTON_READ_DIGITIZATION', 'DARK_MASTER_AND_TEMPORAL', 'FLAT_GAIN_NORMALIZATION',
       'CALIBRATION', 'SKY_BACKGROUND_ESTIMATOR', 'RESAMPLING_REGISTRATION', 'QUANTIZATION', 'REFERENCE_PSF_APERTURE_SELECTION'];
    need(typeof root === 'string' && /^[A-Za-z]:\//.test(root) && root.length <= 512 &&
@@ -100,7 +152,7 @@ function DSGNativeLinearMeasurement(root) {
    function addProduct(name) {
       need(!products.some(function (p) { return p.name === name; }), 'PRODUCT_DUPLICATE');
       var pin = hashFile(name, limit(name), function () { checkTime(true); });
-      need(products.length < 18 && totalBytes + pin.byteLength <= 192 * MIB, 'PRODUCT_AGGREGATE');
+      need(products.length < 18 && totalBytes + extraBytes + pin.byteLength <= 192 * MIB, 'PRODUCT_AGGREGATE');
       totalBytes += pin.byteLength;
       products.push({role: name, name: name, sha256: pin.sha256, byteLength: pin.byteLength});
    }
@@ -263,19 +315,21 @@ function DSGNativeLinearMeasurement(root) {
             if (name !== '.' && name !== '..') {
                need(finder.isFile === true && finder.isDirectory === false && finder.isSymbolicLink === false && finder.isRedirectionPoint === false &&
                   finder.isReparsePoint === false && allowed.indexOf(name) >= 0 && found.indexOf(name) < 0, 'UNEXPECTED_ENTRY');
-               found.push(name); need(found.length <= 75, 'ENTRY_BOUND');
+               found.push(name); need(found.length <= 77, 'ENTRY_BOUND');
             }
             active = finder.next();
          }
       } finally { finder.end(); }
       return found;
    }
-   var initialNames = fixed.concat(Object.keys(sealed).filter(function (n) { return fixed.indexOf(n) < 0; }), ['launch-seal.json', 'launch-grant.json']);
+   var initialNames = fixed.concat(Object.keys(sealed).filter(function (n) { return fixed.indexOf(n) < 0; }),
+      ['launch-seal.json', 'launch-grant.json', 'native-owner.json', 'native-owner-ready.json']);
    var initial = enumeration(initialNames.concat(['cancel.json']));
    need(initialNames.every(function (n) { return initial.indexOf(n) >= 0; }), 'MISSING_INPUT');
+   var ownerPins = [];
    function rehashInputs(monitor) {
       seal.files.concat([{name: 'launch-seal.json', sha256: sealRead.sha256, byteLength: sealRead.byteLength},
-         {name: 'launch-grant.json', sha256: grantRead.sha256, byteLength: grantRead.byteLength}]).forEach(function (r) {
+         {name: 'launch-grant.json', sha256: grantRead.sha256, byteLength: grantRead.byteLength}]).concat(ownerPins).forEach(function (r) {
          var actual = hashFile(r.name, r.byteLength, monitor);
          need(actual.sha256 === r.sha256 && actual.byteLength === r.byteLength, 'SEALED_BYTES_CHANGED');
       });
@@ -283,10 +337,17 @@ function DSGNativeLinearMeasurement(root) {
    rehashInputs(function () { checkTime(false); });
    var parameterRead = readJSON('parameters.json', MIB, function () { checkTime(false); }), p = parameterRead.value;
    need(parameterRead.sha256 === sealed['parameters.json'].sha256, 'PARAMETER_BYTES_CHANGED');
-   fields(p, ['protocol', 'operationRef', 'purpose', 'expectedPixInsightVersion', 'kernelSpecSha256', 'lineageSha256', 'source', 'dependencies', 'maxRuntimeSeconds', 'bindings']);
-   need(p.protocol === 'DSG_NATIVE_LINEAR_MEASUREMENT_V1' && p.operationRef === operation && p.purpose === 'DEVELOPMENT' && p.maxRuntimeSeconds === 180 &&
+   fields(p, ['protocol', 'operationRef', 'purpose', 'expectedPixInsightVersion', 'kernelSpecSha256', 'lineageSha256', 'source', 'dependencies', 'maxRuntimeSeconds', 'bindings', 'ownerNonce', 'processSessionRef']);
+   need(p.protocol === 'DSG_NATIVE_LINEAR_MEASUREMENT_V2' && p.operationRef === operation && p.purpose === 'DEVELOPMENT' && p.maxRuntimeSeconds === 180 &&
       typeof p.expectedPixInsightVersion === 'string' && /^[\x20-\x7e]{1,96}$/.test(p.expectedPixInsightVersion) &&
       p.kernelSpecSha256 === sealed['kernel-spec.json'].sha256 && p.lineageSha256 === sealed['source-lineage.json'].sha256, 'PARAMETERS');
+   var ownership = DSGNativeLinearOwnership(root, {operationRef: operation, ownerNonce: p.ownerNonce,
+      processSessionRef: p.processSessionRef, sealSha256: sealRead.sha256, grantSha256: grantRead.sha256}, function () { checkTime(false); });
+   ownerPins = [{name: 'native-owner.json', sha256: ownership.ownerSha256, byteLength: ownership.ownerByteLength},
+      {name: 'native-owner-ready.json', sha256: ownership.ownerReadySha256, byteLength: ownership.ownerReadyByteLength}];
+   need(inputBytes + ownership.ownerByteLength + ownership.ownerReadyByteLength + MIB <= 200 * MIB, 'DYNAMIC_INPUT_CLOSURE');
+   deadline = Math.min(deadline, ownership.deadlineUTC);
+   remaining = Math.min(remaining, (deadline - entryUTC) / 1000); checkTime(false);
    fields(p.source, ['sha256', 'byteLength', 'primaryHeaderSha256', 'dataOffset', 'width', 'height', 'sampleFormat', 'orientation', 'bscale', 'bzero']);
    need(p.source.sha256 === sealed['source.fits'].sha256 && p.source.byteLength === sealed['source.fits'].byteLength && sha(p.source.primaryHeaderSha256) &&
       integer(p.source.width, 1, 4194304) && integer(p.source.height, 1, 4194304) && p.source.width * p.source.height <= 4194304 &&
@@ -375,7 +436,9 @@ function DSGNativeLinearMeasurement(root) {
       compare(opened[0], decoded, p.source, budget);
       history(opened[0], 'current', 'checkpoint-current.js');
       rehashInputs(budget); compare(sourceWindow, decoded, p.source, budget);
-      writeJSON('native-evidence.json', {protocol: 'DSG_NATIVE_LINEAR_EVIDENCE_V1', operationRef: operation,
+      writeJSON('native-evidence.json', {protocol: 'DSG_NATIVE_LINEAR_EVIDENCE_V2', operationRef: operation,
+         nativeProcessId: ownership.owner.nativeProcessId, processSessionRef: p.processSessionRef,
+         ownerSha256: ownership.ownerSha256, ownerReadySha256: ownership.ownerReadySha256,
          sourceSha256: p.source.sha256, parametersSha256: parameterRead.sha256, kernelSpecSha256: p.kernelSpecSha256,
          lineageSha256: p.lineageSha256, dependencies: p.dependencies, pixInsightVersion: version,
          sourceFormat: 'FLOAT32_BE', orientation: 'FITS_AXIS1_FAST_NO_FLIP', sourceValueImportCompared: true,

@@ -22,13 +22,40 @@ un solo avvio; deve possedere il processo, preservarne il controllo e applicare
 il proprio termine monotono. I vecchi consensi restano consumati. Questo modulo
 non crea consensi o processi e non rende autorevole un JSON con `authorized:true`.
 
+La versione candidata richiede parametri `DSG_NATIVE_LINEAR_MEASUREMENT_V2`,
+con nonce privato e riferimento di sessione scelti prima del sigillo. Il parent
+deve prima possedere il processo appena creato, acquisirne PID e tempo di
+creazione dallo stesso handle e produrre `native-owner.json` e poi
+`native-owner-ready.json`. Quest'ultimo fissa l'impronta grezza del primo.
+`DSGNativeLinearOwnership` verifica schemi chiusi, sessione, nonce, sigillo,
+consenso, riferimenti parent, tempo e PID effettivo `CoreApplication.pid`
+prima di creare log o immagini. Le due impronte sono ricontrollate fino al
+ritorno e incluse nell'evidenza `DSG_NATIVE_LINEAR_EVIDENCE_V2`.
+I vecchi parametri V1 sono rifiutati, senza fallback.
+
+Questi file non dimostrano da soli la proprietà del processo: il futuro
+supervisore deve verificarli rispetto al proprio handle vivo, senza ricostruirlo
+da un PID salvato. Il controllo nativo è una verifica ulteriore. Launcher con
+attesa limitata dei controlli, ricevuta causale di ritorno e supervisore completo
+restano da integrare e collaudare. Questa funzione non crea quei file né avvia
+un processo. Nessuna API PJSR reale è stata chiamata dalle prove attuali.
+
 Sono controllati protocollo, identità, tempi, sigillo, versioni, hash grezzi e
 dimensioni. I ruoli degli input sigillati corrispondono ai nomi letterali: otto
 fissi più al massimo 64 carte; sigillo e consenso sono esclusi dalla lista del
-sigillo, per un massimo di 74 input e 200 MiB. Il launcher resta nei metadati del
+sigillo, per un massimo di 74 input statici, più due controlli parent dinamici
+e un eventuale annullamento: al massimo 77 voci iniziali. Il limite resta
+200 MiB, includendo i controlli e una riserva di 1 MiB per l'annullamento.
+Il termine del parent può soltanto ridurre quello del consenso; il suo
+termine monotono vivo resta autorevole. Il launcher resta nei metadati del
 parent. Nella directory nativa non sono ammessi file iniziali estranei o prodotti
 precedenti. Le voci devono risultare file, senza collegamenti o reparse point;
 la verifica canonica di tutti gli antenati resta anche un obbligo del parent.
+
+Il set runtime riserva inoltre il nome `native-return.json`, mai prodotto
+dall'adattatore, e 1 MiB per quel futuro documento entro i 192 MiB complessivi.
+Un file già presente con quel nome impedisce l'avvio. La riserva non prova che
+il launcher sia stato implementato o che il processo possa essere chiuso.
 
 Le carte risolvono separatamente riferimenti semantici e hash grezzi delle carte.
 Sono richiesti esattamente i ruoli applicabili di identità, base, budget e lineage,

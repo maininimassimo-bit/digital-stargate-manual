@@ -49,7 +49,8 @@ function fixture(change = () => {}, options = {}) {
     const cardSha256 = hash(raw); files.set('source-card-' + cardSha256 + '.json', raw);
     return {role, referenceSha256, cardSha256};
   });
-  const parameters = {protocol: 'DSG_NATIVE_LINEAR_MEASUREMENT_V1', operationRef: operation, purpose: 'DEVELOPMENT',
+  const parameters = {protocol: 'DSG_NATIVE_LINEAR_MEASUREMENT_V2', operationRef: operation, purpose: 'DEVELOPMENT',
+    ownerNonce: 'b'.repeat(32), processSessionRef: 'c'.repeat(32),
     expectedPixInsightVersion: '1.9.5 build 1706', kernelSpecSha256: hash(files.get('kernel-spec.json')), lineageSha256: hash(files.get('source-lineage.json')),
     source: {sha256: hash(source), byteLength: source.length, primaryHeaderSha256: hash(source.subarray(0, 2880)), dataOffset: 2880,
       width, height, sampleFormat: 'FLOAT32_BE', orientation: 'FITS_AXIS1_FAST_NO_FLIP', bscale: 1, bzero: 0},
@@ -65,6 +66,14 @@ function fixture(change = () => {}, options = {}) {
   files.set('launch-grant.json', bytes({protocol: 'DSG_NATIVE_LINEAR_SINGLE_START_GRANT_V1', operationRef: operation,
     sealSha256: hash(files.get('launch-seal.json')), purpose: 'DEVELOPMENT', authorized: true, maxStarts: 1, maxRuntimeSeconds: 180,
     createdUTC: '2026-10-16T10:00:00Z', expiresUTC: '2026-10-16T10:03:00Z', deadlineUTC: '2026-10-16T10:03:00Z'}));
+  const owner = {protocol:'DSG_NATIVE_LINEAR_OWNER_V1',operationRef:operation,ownerNonce:parameters.ownerNonce,
+    processSessionRef:parameters.processSessionRef,sealSha256:hash(files.get('launch-seal.json')),
+    grantSha256:hash(files.get('launch-grant.json')),launchControlSha256:h('control'),parentIntentSha256:h('intent'),
+    nativeProcessId:'4242',processCreationFileTime:'0123456789abcdef',parentDeadlineUTC:'2026-10-16T10:03:00Z'};
+  options.alterOwner?.(owner); files.set('native-owner.json',bytes(owner));
+  const ownerReady = {protocol:'DSG_NATIVE_LINEAR_OWNER_READY_V1',operationRef:operation,ownerNonce:parameters.ownerNonce,
+    processSessionRef:parameters.processSessionRef,ownerSha256:hash(files.get('native-owner.json'))};
+  options.alterOwnerReady?.(ownerReady);files.set('native-owner-ready.json',bytes(ownerReady));
   const state = {wall: created + 1000, mono: 0, reads: [], chunks: [], hashChunks: [], writes: [], closed: [], created: 0, root, operation, files};
   const basename = path => { assert.ok(path.startsWith(root + '/')); return path.slice(root.length + 1); };
   const context = vm.createContext({
@@ -92,7 +101,7 @@ function fixture(change = () => {}, options = {}) {
     globalThis.File=class{static exists(p){return bridgeExists(p);}static writeTextFile(p,t){bridgeWrite(p,t);}openForReading(p){this.path=p;this.pos=0;bridgeSize(p);}get size(){return bridgeSize(this.path);}read(type,n){if(type!==15)throw Error('MOCK_TYPE');let out=new MockBytes(bridgeRead(this.path,this.pos,n));this.pos+=n;return out;}close(){}};
     globalThis.FileFind=class{begin(p){this.items=JSON.parse(bridgeNames());this.i=0;return this.items.length>0;}next(){return ++this.i<this.items.length;}end(){}get name(){return this.items[this.i];}get isFile(){return true;}get isDirectory(){return false;}get isSymbolicLink(){return false;}get isRedirectionPoint(){return false;}get isReparsePoint(){return this.name===options.reparseName;}};
     globalThis.console={beginLog(p){File.writeTextFile(p,'SYNTHETIC_LOG');},endLog(){},writeln(s){}};
-    globalThis.CoreApplication={versionMajor:1,versionMinor:9,versionRelease:5,versionBuild:1706};
+    globalThis.CoreApplication={pid:options.nativePid===undefined?'4242':options.nativePid,versionMajor:1,versionMinor:9,versionRelease:5,versionBuild:1706};
     globalThis.mockWindows=[];globalThis.mockSaved=Object.create(null);
     class MockImage{constructor(w,h){this.width=w;this.height=h;this.numberOfChannels=1;this.numberOfNominalChannels=1;this.bitsPerSample=64;this.isInteger=false;this.isComplex=false;this.values=new Float64Array(w*h);}setSamples(v){this.values.set(v);if(options.clamp)this.values[1]=0;}getSamples(v,x0,y0,x1,y1,c){bridgeChunk(v.length);if(v.length>65536||y1!==y0+1||c!==0)throw Error('MOCK_CHUNK');for(let x=x0;x<x1;x++)v[x-x0]=this.values[y0*this.width+x];}sample(x,y,c){return this.values[y*this.width+x]+(options.badSingleSample?1:0);}}
     globalThis.ImageWindow=class{constructor(w,h,c,b,real,color,id){bridgeCreated();this.id=id;this.closed=false;let image=new MockImage(w,h);this.mainView={image,beginProcess(){},endProcess(){},initialProcessing:{toSource(){if(options.failInitial)throw Error('MOCK_HISTORY');return 'SYNTHETIC_INITIAL_HISTORY';}},processing:{toSource(){return 'SYNTHETIC_CURRENT_HISTORY';}}};mockWindows.push(this);}saveAs(path,q,m,s,o,hints){if(options.failSave)return false;mockSaved[path]={width:this.mainView.image.width,height:this.mainView.image.height,values:new Float64Array(this.mainView.image.values)};File.writeTextFile(path,'SYNTHETIC_MOCK_XISF');return true;}forceClose(){if(options.failClose)throw Error('MOCK_CLOSE');this.closed=true;bridgeClosed(this.id);}static open(path){bridgeOpen();bridgeTimeAdvance();let s=mockSaved[path],out=[];for(let i=0;i<(options.openCount??1);i++){let w=new ImageWindow(s.width,s.height,1,64,true,false,'reopened_'+i);w.mainView.image.values.set(s.values);if(options.corruptReopen)w.mainView.image.values[0]+=1;out.push(w);}return out;}};
@@ -234,4 +243,67 @@ test('native wrapper: cancellation arriving during final ready hash preserves st
   assert.equal(readyReads,3);assert.ok(f.state.files.has('terminal-ready.json'));
   assert.equal(f.json('native-publication-uncertain.json').errorCode,'NATIVE_LINEAR_CANCELLED');
   assert.equal(f.state.writes.filter(n=>n==='terminal-ready.json').length,1);
+});
+
+test('native ownership: actual process ID must match before any output or image', () => {
+  for (const nativePid of ['4243',4242,'04242','0','4294967296']) {
+    const f=fixture(undefined,{nativePid});assert.throws(()=>f.run(),/OWNER_PID/);
+    assert.equal(f.state.created,0);assert.equal(f.state.writes.length,0);
+  }
+});
+
+test('native ownership: nonce, session, seal and grant mismatch block before allocation', () => {
+  for (const key of ['ownerNonce','processSessionRef','sealSha256','grantSha256']) {
+    const f=fixture(undefined,{alterOwner(p){p[key]='d'.repeat(key.endsWith('Sha256')?64:32);}});
+    assert.throws(()=>f.run(),/OWNER_(SESSION_BINDING|PARENT_BINDING)/);
+    assert.equal(f.state.created,0);assert.equal(f.state.writes.length,0);
+  }
+});
+
+test('native ownership: ready must pin exact owner bytes and session', () => {
+  for (const alterOwnerReady of [r=>{r.ownerSha256='0'.repeat(64);},r=>{r.processSessionRef='d'.repeat(32);},r=>{r.extra=true;}]) {
+    const f=fixture(undefined,{alterOwnerReady});assert.throws(()=>f.run(),/OWNER_/);
+    assert.equal(f.state.created,0);assert.equal(f.state.writes.length,0);
+  }
+});
+
+test('native ownership: missing controls and V1 parameters are refused', () => {
+  for (const name of ['native-owner.json','native-owner-ready.json']) {
+    const f=fixture();f.state.files.delete(name);assert.throws(()=>f.run(),/MISSING_INPUT/);assert.equal(f.state.created,0);
+  }
+  const f=fixture(undefined,{alterParameters(p){p.protocol='DSG_NATIVE_LINEAR_MEASUREMENT_V1';}});
+  assert.throws(()=>f.run(),/PARAMETERS/);assert.equal(f.state.created,0);
+});
+
+test('native ownership: malformed PID, parent pins, creation time and expiry block', () => {
+  for (const alterOwner of [p=>{p.nativeProcessId='04242';},p=>{p.launchControlSha256='bad';},
+    p=>{p.processCreationFileTime='0';},p=>{p.parentDeadlineUTC='2026-10-16T10:00:00Z';},p=>{p.extra=true;}]) {
+    const f=fixture(undefined,{alterOwner});assert.throws(()=>f.run(),/OWNER_/);assert.equal(f.state.created,0);
+  }
+});
+
+test('native ownership: post-read raw mutation blocks before outputs', () => {
+  let mutated=false;
+  const f=fixture(undefined,{onRead(name,state){if(name==='native-owner.json'&&!mutated){mutated=true;const p=JSON.parse(state.files.get(name));p.parentIntentSha256='0'.repeat(64);state.files.set(name,bytes(p));}}});
+  assert.throws(()=>f.run(),/OWNER_BYTES_CHANGED/);assert.equal(f.state.created,0);assert.equal(f.state.writes.length,0);
+});
+
+test('native ownership: raw controls remain pinned through final ready publication', () => {
+  const f=fixture(undefined,{onWrite(name,state){if(name==='terminal-ready.json')state.files.set('native-owner-ready.json',Buffer.from('{}'));}});
+  assert.throws(()=>f.run(),/FINAL_PUBLICATION_UNCERTAIN/);
+  assert.ok(f.state.files.has('native-publication-uncertain.json'));assert.ok(f.state.files.has('terminal-ready.json'));
+});
+
+test('native ownership: V2 evidence binds actual PID and exact dynamic control hashes', () => {
+  const f=fixture();assert.equal(f.run().state,'COMPLETED_CONDITIONAL_COMPUTATION');const e=f.json('native-evidence.json');
+  assert.equal(e.protocol,'DSG_NATIVE_LINEAR_EVIDENCE_V2');assert.equal(e.nativeProcessId,'4242');
+  assert.equal(e.processSessionRef,f.parameters.processSessionRef);
+  assert.equal(e.ownerSha256,hash(f.state.files.get('native-owner.json')));
+  assert.equal(e.ownerReadySha256,hash(f.state.files.get('native-owner-ready.json')));
+  assert.equal(e.qualifiedControls,0);assert.equal(e.fullPhysicalVariance,null);
+});
+
+test('native ownership: stricter parent wall deadline cannot be reset by wrapper', () => {
+  const f=fixture(undefined,{alterOwner(p){p.parentDeadlineUTC='2026-10-16T10:00:03Z';},advanceWall:5000,advanceMono:5});
+  const t=f.run();assert.equal(t.state,'FAILED_RETAINED');assert.equal(t.cooperativeDeadlineExceeded,true);
 });
