@@ -5,6 +5,37 @@ ricevuta di disponibilità. È il componente di conservazione W7 del supervisore
 in costruzione. Non avvia PixInsight, non decodifica immagini e non autorizza
 la chiusura di processi o nuove esecuzioni.
 
+Il ritorno locale include ora `liveVerification`, un oggetto costruito solo
+dopo le verifiche finali. Mantiene la chiusura in memoria con le identità OS
+originali di sorgenti, copie, controlli e marker, senza ricostruirle dal JSON.
+Non mantiene nuovi handle file aperti: i blocchi nativi in lettura restano un
+obbligo separato del supervisore. `verify()` rilegge impronte, identità,
+attestazioni, inventari, annullamento e segnali. Un errore resta permanente
+nell'oggetto anche quando il file o l'orologio viene ripristinato. Il supervisore
+deve propagare l'incertezza e tentare il proprio segnale: una verifica successiva
+al ritorno non scrive automaticamente un nuovo record di pubblicazione.
+
+La copia `marker` esportata è indipendente dai record attesi privati; modificarla
+non modifica i pin della verifica viva. `marker` e `markerSha256` restano metadati
+serializzabili. L'intero risultato locale con l'oggetto vivo non è un protocollo
+JSON e non va inviato al portale o persistito per ricostruire una sessione. Non
+esiste una factory da marker JSON: il token interno non è un confine di sicurezza
+contro memoria ostile nello stesso processo, ma impedisce la ricostruzione tramite
+l'API prevista. La futura composizione deve conservare l'istanza esatta restituita.
+
+Il flag del marker descrive il termine osservato alla pubblicazione. Una verifica
+viva successiva può registrare un nuovo superamento noto per il solo cleanup,
+senza riscrivere il marker o dichiarare accettazione. Un cambiamento del termine
+durante la pubblicazione iniziale continua invece a farla fallire. La diagnostica
+è memorizzata, non una nuova verifica. Tutti i risultati mantengono false le
+autorità di chiusura, nuovo avvio e accettazione della misura. Restano necessari
+prova causale, proprietà viva, metadati S6, blocchi, budget e assenza di qualsiasi
+incertezza osservata; l'assenza dei file di segnale da sola non prova successo.
+
+Anche `supervision-uncertain.json`, parziale o malformato, blocca prima della
+prenotazione e nelle verifiche vive. L'inventario retained viene ricontrollato
+dopo l'ultima rilettura del marker, prima di restituire un esito normale.
+
 L'integrazione V2 richiede il keyword `bootstrap_session` vivo e un binding
 con cinque campi, incluso `launchControlSha256`. Accetta soltanto il
 parent-intent `DSG_NATIVE_LINEAR_PARENT_INTENT_V2`. L'ispettore del controllo

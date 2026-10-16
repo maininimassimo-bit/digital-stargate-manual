@@ -35,6 +35,42 @@ class PublicationFailure(ProtocolError):
         self.uncertain_marker_written = uncertain_marker_written
 
 
+_LIVE_VERIFICATION_TOKEN = object()
+
+
+class LivePublicationVerification:
+    """Original in-memory file identities, not reconstructible via a JSON marker API.
+
+    Only publish_native_bundle constructs this object after its final checks. The
+    caller must still prove live process ownership, state and absence of other
+    observed uncertainty; this object never authorizes close, acceptance or replay.
+    """
+    def __init__(self, token, recheck, marker_sha, original_overrun):
+        require(token is _LIVE_VERIFICATION_TOKEN and callable(recheck) and _sha(marker_sha)
+                and type(original_overrun) is bool, 'PUBLICATION_LIVE_FACTORY_REQUIRED')
+        self._recheck=recheck; self._marker_sha=marker_sha; self._original_overrun=original_overrun
+        self._current_overrun=original_overrun; self._failed=False; self._verified_after_return=False
+
+    def verify(self):
+        require(not self._failed,'PUBLICATION_LIVE_UNCERTAIN')
+        try:
+            current=self._recheck()
+            require(type(current) is bool,'PUBLICATION_LIVE_CLOCK')
+            self._current_overrun |= current
+            self._verified_after_return=True
+        except BaseException:
+            self._failed=True
+            raise
+        return self.diagnostic()
+
+    def diagnostic(self):
+        return {'markerSha256':self._marker_sha,'verificationFailed':self._failed,
+                'verifiedAfterReturn':self._verified_after_return,
+                'publicationParentMonotonicDeadlineExceeded':self._original_overrun,
+                'currentParentMonotonicDeadlineExceeded':self._current_overrun,
+                'processClosureAuthorized':False,'newNativeStartAllowed':False,'measurementAccepted':False}
+
+
 def _fields(value, names):
     require(type(value) is dict and set(value) == set(names), "PUBLICATION_FIELDS")
 
@@ -271,6 +307,7 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
     def fences_absent():
         require(not os.path.lexists(work / "native-publication-uncertain.json"), "PUBLICATION_NATIVE_UNCERTAINTY")
         require(not os.path.lexists(journal / "publication-uncertain.json"), "PUBLICATION_PRIOR_UNCERTAINTY")
+        require(not os.path.lexists(journal / 'supervision-uncertain.json'), 'PUBLICATION_SUPERVISION_UNCERTAINTY')
     last_clock = None
     def exceeded():
         nonlocal last_clock
@@ -425,19 +462,33 @@ def publish_native_bundle(native_work, retained, supervision, binding, *, clock,
             "scientificValidation": "NOT_VALIDATED", "qualifiedControls": 0}
         failed_role = None
         marker_sha, marker_stat = _write_control(archive / "retained-native-terminal.json", marker)
+        def recheck_publication(*, permit_later_overrun):
+            verify_bundle((marker_sha, marker_stat))
+            first_overrun=exceeded()
+            roots_unchanged()
+            require(os.path.lexists(work/'cancel.json') == cancel_present, 'PUBLICATION_CANCEL_CHANGED')
+            if cancel_present:
+                require(_hash_bounded(work/'cancel.json', cr['byteLength'], cs) == cr['sha256'],
+                        'PUBLICATION_CANCEL_CHANGED')
+            require({path.name for path in work.iterdir()} == work_names, 'PUBLICATION_FINAL_WORK_INVENTORY')
+            require({path.name for path in archive.iterdir()} ==
+                    {r['name'] for r in records}|{'retained-native-terminal.json'},
+                    'PUBLICATION_FINAL_RETAINED_INVENTORY')
+            last_overrun=exceeded()
+            require(os.path.lexists(work/'cancel.json') == cancel_present, 'PUBLICATION_CANCEL_CHANGED')
+            roots_unchanged(); fences_absent()
+            if not permit_later_overrun:
+                require(first_overrun==overrun and last_overrun==overrun,
+                        'PUBLICATION_DEADLINE_CROSSED_DURING_MARKER')
+            return first_overrun or last_overrun
         # Last IO phase is part of publication: a marker is not acceptance by itself.
-        verify_bundle((marker_sha, marker_stat))
-        require(exceeded() == overrun, "PUBLICATION_DEADLINE_CROSSED_DURING_MARKER")
-        roots_unchanged()
-        require(os.path.lexists(work/'cancel.json') == cancel_present, 'PUBLICATION_CANCEL_CHANGED')
-        if cancel_present:
-            require(_hash_bounded(work/'cancel.json', cr['byteLength'], cs) == cr['sha256'],
-                    'PUBLICATION_CANCEL_CHANGED')
-        require(exceeded() == overrun, "PUBLICATION_DEADLINE_CROSSED_DURING_MARKER")
-        require({path.name for path in work.iterdir()} == work_names, 'PUBLICATION_FINAL_WORK_INVENTORY')
-        fences_absent()
-        return {"marker": marker, "markerSha256": marker_sha, "processClosureAuthorized": False,
-                "newNativeStartAllowed": False}
+        recheck_publication(permit_later_overrun=False)
+        live=LivePublicationVerification(_LIVE_VERIFICATION_TOKEN,
+            lambda:recheck_publication(permit_later_overrun=True),marker_sha,overrun)
+        # Exported JSON metadata must not expose the mutable expected records held
+        # by the live verification closure.
+        return {"marker": json.loads(encode(marker)), "markerSha256": marker_sha,
+                "processClosureAuthorized": False,"newNativeStartAllowed": False,'liveVerification':live}
     except Exception as exc:
         code = str(exc) if isinstance(exc, ProtocolError) else "PUBLICATION_IO_OR_JSON_FAILURE"
         if re.fullmatch("[A-Z0-9_]{1,96}", code) is None: code = "PUBLICATION_FAILURE"

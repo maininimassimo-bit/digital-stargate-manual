@@ -229,6 +229,98 @@ class NativePublicationTests(unittest.TestCase):
         with self.assertRaises(pub.PublicationFailure): self.publish()
         self.assertEqual((self.archive / "retained-native-terminal.json").read_bytes(), before)
 
+    def test_live_verification_is_private_and_json_marker_is_only_metadata(self):
+        import json
+        outcome=self.publish(); live=outcome['liveVerification']
+        result=live.verify()
+        self.assertTrue(result['verifiedAfterReturn'])
+        self.assertFalse(result['processClosureAuthorized'])
+        self.assertFalse(result['measurementAccepted'])
+        self.assertEqual(result['markerSha256'],outcome['markerSha256'])
+        json.dumps(outcome['marker'])
+        with self.assertRaises(TypeError): json.dumps(outcome)
+        with self.assertRaisesRegex(Exception,'PUBLICATION_LIVE_FACTORY_REQUIRED'):
+            pub.LivePublicationVerification(None,lambda:False,outcome['markerSha256'],False)
+
+    def test_exported_marker_mutation_cannot_change_private_expected_records(self):
+        outcome=self.publish(); live=outcome['liveVerification']
+        row=next(r for r in outcome['marker']['products'] if r['name']=='result.json')
+        changed=b'X'*row['byteLength']; row['sha256']=sha(changed)
+        outcome['marker']['nativeState']='UNCERTAIN_RETENTION'
+        live.verify()  # Exported metadata is an independent copy.
+        (self.work/'result.json').write_bytes(changed)
+        (self.archive/'result.json').write_bytes(changed)
+        with self.assertRaises(Exception): live.verify()
+        self.assertTrue(live.diagnostic()['verificationFailed'])
+
+    def test_live_verification_rejects_identical_source_replacement(self):
+        live=self.publish()['liveVerification']; path=self.work/'result.json'
+        replacement=self.work/'replacement.dat'; replacement.write_bytes(path.read_bytes()); replacement.replace(path)
+        with self.assertRaises(Exception): live.verify()
+        with self.assertRaisesRegex(Exception,'PUBLICATION_LIVE_UNCERTAIN'): live.verify()
+
+    def test_live_verification_rejects_identical_retained_marker_replacement(self):
+        live=self.publish()['liveVerification']; path=self.archive/'retained-native-terminal.json'
+        replacement=self.archive/'replacement.dat'; replacement.write_bytes(path.read_bytes()); replacement.replace(path)
+        with self.assertRaises(Exception): live.verify()
+
+    def test_live_verification_rejects_identical_parent_source_replacement(self):
+        live=self.publish()['liveVerification']
+        row=next(iter(self.control_case.sources.values())); path=Path(row['path'])
+        replacement=path.with_name('replacement-source.py'); replacement.write_bytes(path.read_bytes()); replacement.replace(path)
+        with self.assertRaises(Exception): live.verify()
+
+    def test_live_verification_fence_failure_stays_sticky_after_file_removed(self):
+        live=self.publish()['liveVerification']; fence=self.work/'native-publication-uncertain.json'
+        fence.write_bytes(b'SYNTHETIC_PARTIAL_FENCE')
+        with self.assertRaises(Exception): live.verify()
+        fence.unlink()  # Synthetic test only: restoring absence must not reset live uncertainty.
+        with self.assertRaisesRegex(Exception,'PUBLICATION_LIVE_UNCERTAIN'): live.verify()
+
+    def test_live_verification_rejects_new_cancellation(self):
+        live=self.publish()['liveVerification']
+        (self.work/'cancel.json').write_bytes(encode(dict(protocol='DSG_NATIVE_LINEAR_CANCEL_V1',
+            operationRef=self.operation,requested=True)))
+        with self.assertRaises(Exception): live.verify()
+
+    def test_live_verification_rejects_parent_supervision_uncertainty(self):
+        live=self.publish()['liveVerification']
+        (self.journal/'supervision-uncertain.json').write_bytes(b'SYNTHETIC_PARTIAL')
+        with self.assertRaisesRegex(Exception,'PUBLICATION_SUPERVISION_UNCERTAINTY'): live.verify()
+        self.assertTrue(live.diagnostic()['verificationFailed'])
+
+    def test_prior_supervision_uncertainty_blocks_before_publication_reservation(self):
+        path=self.journal/'supervision-uncertain.json'; path.write_bytes(b'SYNTHETIC_PARTIAL')
+        with self.assertRaisesRegex(pub.PublicationFailure,'PUBLICATION_SUPERVISION_UNCERTAINTY'): self.publish()
+        self.assertFalse((self.journal/'publication-intent.json').exists())
+        self.assertEqual(path.read_bytes(),b'SYNTHETIC_PARTIAL')
+
+    def test_live_verification_later_overrun_is_cleanup_only_without_marker_rewrite(self):
+        now=[1]; outcome=self.publish(clock=lambda:now[0]); live=outcome['liveVerification']
+        path=self.archive/'retained-native-terminal.json'; before=path.read_bytes(); now[0]=181
+        result=live.verify()
+        self.assertFalse(result['publicationParentMonotonicDeadlineExceeded'])
+        self.assertTrue(result['currentParentMonotonicDeadlineExceeded'])
+        self.assertFalse(result['measurementAccepted'])
+        self.assertEqual(path.read_bytes(),before)
+
+    def test_live_verification_clock_failure_is_sticky(self):
+        now=[1]; live=self.publish(clock=lambda:now[0])['liveVerification']; now[0]=0
+        with self.assertRaisesRegex(Exception,'PUBLICATION_CLOCK_CHANGED'): live.verify()
+        now[0]=2
+        with self.assertRaisesRegex(Exception,'PUBLICATION_LIVE_UNCERTAIN'): live.verify()
+
+    def test_retained_inventory_change_during_last_marker_readback_blocks_initial_return(self):
+        original=pub._hash_bounded
+        def late_entry(path,size,info):
+            result=original(path,size,info)
+            if Path(path).name=='retained-native-terminal.json': (self.archive/'unlisted.dat').write_bytes(b'SYNTHETIC')
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=late_entry):
+            with self.assertRaisesRegex(pub.PublicationFailure,'PUBLICATION_FINAL_RETAINED_INVENTORY'): self.publish()
+        self.assertTrue((self.archive/'retained-native-terminal.json').exists())
+        self.assertTrue((self.journal/'publication-uncertain.json').exists())
+
     def test_missing_required_success_history_rejected(self):
         self.terminal["products"] = [r for r in self.terminal["products"] if r["name"] != "closing-source.js"]
         self.write_terminal()
