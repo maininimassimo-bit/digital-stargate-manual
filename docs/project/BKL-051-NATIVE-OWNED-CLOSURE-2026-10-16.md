@@ -39,6 +39,12 @@ qualunque ricevuta di chiusura: non viene riabilitato. La fase terminale verific
 invece esattamente il nuovo file originale, tutti i pin S7 originali, i blocchi,
 la pubblicazione viva, sessione, handle uscito, directory, cancellazione e segnali
 prima e dopo l'ultima lettura. Non accetta una ricevuta sostituita con byte identici.
+La rilettura finale della ricevuta è seguita da un nuovo controllo degli hash
+S7 e dei segnali/cancel fissati, poi dalla verifica delle identità originali dei
+registri, dei segnali e della ricevuta dopo gli ultimi callback e controlli di
+tempo. Questo corregge ARB-OWNED-P2-1: una modifica o sostituzione identica del
+registro durante l'ultima lettura non può usare il precedente snapshot positivo.
+Non è una snapshot atomica contro scritture ostili concorrenti dello stesso utente.
 Un errore o una scadenza attraversata durante la ricevuta mantiene il file
 storico ma produce `EXIT_VERIFIED_EVIDENCE_UNCERTAIN` in memoria, mai un successo.
 Il supervisore dovrà conservare quel contesto e tentare una sola registrazione

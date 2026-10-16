@@ -41,6 +41,7 @@ class OwnedNativeClosure:
     def __init__(self,proof):
         self._proof=proof; self._attempted=False; self._termination_attempted=False
         self._exit_observed=False; self._exit_code=None; self._receipt=None
+        self._cancel_pin=None
         self._state='READY_NO_ACTION'; self._failed=False
         require(type(proof) is RetainedRunVerification,'OWNED_EXIT_LIVE_PROOF')
         self._records=proof._records; self._signals=proof._signals; self._held=self._records._held
@@ -110,7 +111,30 @@ class OwnedNativeClosure:
         p._live.verify()
         require(pub._hash_bounded(r._journal/'owned-closure.json',info.st_size,info)==sha,
                 'OWNED_EXIT_RECEIPT_CHANGED')
+        # The last receipt read is itself fallible IO. Recheck original S7 pins
+        # and immutable cancel records afterwards, rather than accepting the
+        # earlier positive snapshot. Publication also pins an initial cancel
+        # created outside the signals writer.
+        final_pins=r._pins+([self._cancel_pin] if self._cancel_pin is not None else [])
+        for path,row,original in final_pins:
+            require(pub._hash_bounded(path,row['byteLength'],original)==row['sha256'],
+                    'OWNED_EXIT_RECORD_CHANGED')
+        self._signals.verify_records(); p._live.verify()
         r._budget.check()
+        # Close the readback boundary with original descriptor identities after
+        # all raw hashes/callbacks. No receipt reread after this scan can silently
+        # invalidate an earlier pin. This is private/quiescent continuity, not
+        # an atomic snapshot against hostile concurrent same-user writes.
+        identities=[(path,original) for path,_,original in final_pins]
+        identities.extend((path,original) for path,_,original in self._signals._pins)
+        identities.append((r._journal/'owned-closure.json',info))
+        for path,original in identities:
+            with pub.safe_path(path).open('rb') as stream:
+                current=os.fstat(stream.fileno())
+                require(pub.signature(current)==pub.signature(original) and current.st_nlink==1,
+                        'OWNED_EXIT_FINAL_IDENTITY_CHANGED')
+            require(pub.signature(current)[:4]==pub.signature(pub.safe_path(path).lstat())[:4],
+                    'OWNED_EXIT_FINAL_IDENTITY_CHANGED')
         require([pub._directory(path) for path,_ in r._roots]==r._roots,'OWNED_EXIT_ROOT_CHANGED')
         for path in [r._work/'native-publication-uncertain.json',r._journal/'publication-uncertain.json',
                      r._journal/'supervision-uncertain.json']:
@@ -125,6 +149,14 @@ class OwnedNativeClosure:
         try:
             value=self._proof.verify()
             self._original_handle()
+            cancel_path=self._records._work/'cancel.json'
+            require(os.path.lexists(cancel_path)==value['parentCancelRequested'],'OWNED_EXIT_CANCEL_CHANGED')
+            if value['parentCancelRequested']:
+                cancel,row,info=pub._read_control(cancel_path)
+                pub._fields(cancel,{'protocol','operationRef','requested'})
+                require(cancel['protocol']=='DSG_NATIVE_LINEAR_CANCEL_V1' and cancel['requested'] is True
+                        and cancel['operationRef']==self._records._binding['operationRef'],'OWNED_EXIT_CANCEL_RECORD')
+                self._cancel_pin=(cancel_path,row,info)
             observed=self._observe_trusted(); method='NATURAL_EXIT'
             if observed['processObservation']=='HELD_RUNNING':
                 api=_WindowsOwnedExit()

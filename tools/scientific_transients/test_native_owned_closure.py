@@ -224,6 +224,94 @@ class OwnedClosureTests(unittest.TestCase):
             with self.assertRaisesRegex(Exception,'OWNED_EXIT_FENCE'): owned.close()
         self.assertTrue(owned.diagnostic()['processExitObserved'])
 
+    def pinned_start(self):
+        path=self.records._journal/'start-consumed.json'; raw=b'SYNTHETIC_ORIGINAL_START'
+        path.write_bytes(raw)
+        row=dict(sha256=pub.hashlib.sha256(raw).hexdigest(),byteLength=len(raw))
+        self.records._pins.append((path,row,pub._snapshot(path,row)))
+        return path,raw
+
+    def late_original_pin(self,replace=False):
+        self.code=0; owned=self.closer(); path,raw=self.pinned_start()
+        original=pub._hash_bounded; calls=0
+        def digest(target,size,info):
+            nonlocal calls
+            result=original(target,size,info)
+            if target==self.records._journal/'owned-closure.json':
+                calls+=1
+                if calls==2:
+                    if replace:
+                        other=path.with_name('replacement.json'); other.write_bytes(raw); other.replace(path)
+                    else: path.write_bytes(b'X'*len(raw))
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=digest):
+            with self.assertRaises(Exception): owned.close()
+        self.assertEqual(owned.diagnostic()['state'],'EXIT_VERIFIED_EVIDENCE_UNCERTAIN')
+        self.assertTrue(owned.diagnostic()['processExitObserved'])
+        self.assertFalse(owned.diagnostic()['receiptCommitted'])
+        self.assertTrue((self.records._journal/'owned-closure.json').exists())
+        with self.assertRaisesRegex(Exception,'OWNED_EXIT_REPLAY'): owned.close()
+
+    def test_original_start_changed_during_last_receipt_readback_blocks_commit(self):
+        self.late_original_pin()
+
+    def test_identical_original_start_replacement_during_last_readback_blocks_commit(self):
+        self.late_original_pin(replace=True)
+
+    def test_cancel_bytes_changed_during_last_receipt_readback_block_commit(self):
+        self.code=0; self.signals.request_cancel(); owned=self.closer()
+        original=pub._hash_bounded; calls=0
+        def digest(target,size,info):
+            nonlocal calls
+            result=original(target,size,info)
+            if target==self.records._journal/'owned-closure.json':
+                calls+=1
+                if calls==2: (self.records._work/'cancel.json').write_bytes(b'SYNTHETIC_CHANGED_CANCEL')
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=digest):
+            with self.assertRaises(Exception): owned.close()
+        self.assertEqual(owned.diagnostic()['state'],'EXIT_VERIFIED_EVIDENCE_UNCERTAIN')
+        self.assertFalse(owned.diagnostic()['receiptCommitted'])
+
+    def test_signal_read_after_final_pin_hash_cannot_hide_original_pin_change(self):
+        self.code=0; self.signals.request_cancel(); owned=self.closer(); path,raw=self.pinned_start()
+        original=pub._hash_bounded; receipt_reads=0
+        def digest(target,size,info):
+            nonlocal receipt_reads
+            result=original(target,size,info)
+            if target==self.records._journal/'owned-closure.json': receipt_reads+=1
+            if target==self.records._work/'cancel.json' and receipt_reads==2:
+                path.write_bytes(b'X'*len(raw))
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=digest):
+            with self.assertRaisesRegex(Exception,'OWNED_EXIT_FINAL_IDENTITY_CHANGED'): owned.close()
+        self.assertTrue(owned.diagnostic()['processExitObserved'])
+        self.assertFalse(owned.diagnostic()['receiptCommitted'])
+
+    def test_initial_cancel_outside_signals_changed_by_final_clock_callback_is_rejected(self):
+        self.code=0; path=self.records._work/'cancel.json'
+        pub._write_control(path,dict(protocol='DSG_NATIVE_LINEAR_CANCEL_V1',
+            operationRef=self.records._binding['operationRef'],requested=True))
+        self.assertEqual(self.signals._pins,[])
+        owned=self.closer(); original_hash=pub._hash_bounded; original_clock=self.records._budget.check
+        receipt_reads=0; changed=False
+        def digest(target,size,info):
+            nonlocal receipt_reads
+            result=original_hash(target,size,info)
+            if target==self.records._journal/'owned-closure.json': receipt_reads+=1
+            return result
+        def clock():
+            nonlocal changed
+            result=original_clock()
+            if receipt_reads==2 and not changed:
+                path.write_bytes(b'SYNTHETIC_CHANGED_INITIAL_CANCEL'); changed=True
+            return result
+        with patch.object(pub,'_hash_bounded',side_effect=digest), patch.object(
+                self.records._budget,'check',side_effect=clock):
+            with self.assertRaisesRegex(Exception,'OWNED_EXIT_FINAL_IDENTITY_CHANGED'): owned.close()
+        self.assertEqual(owned.diagnostic()['state'],'EXIT_VERIFIED_EVIDENCE_UNCERTAIN')
+        self.assertFalse(owned.diagnostic()['receiptCommitted'])
+
 
 class OwnedClosureCompositionTests(unittest.TestCase):
     def test_real_opaque_byte_composition_and_natural_exit_receipt_with_fake_process_only(self):
