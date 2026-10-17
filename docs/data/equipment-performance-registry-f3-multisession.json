@@ -11,7 +11,7 @@
     "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
     "angular_calibration_state": "NOT_PROVEN"
   },
-  "population_count": 11,
+  "population_count": 12,
   "populations": [
     {
       "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0wNy0xNF8yMDI2LTA3LTE1fExETiAxMzIwfExQUk98TElHSFR8RldITQ",
@@ -11106,6 +11106,849 @@
           "provenance_refs": [
             "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
             "data/sessions/2026/10/2026-10-14_2026-10-15/normalized/session-metrics.json"
+          ]
+        }
+      ]
+    },
+    {
+      "population_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0",
+      "configuration_id": "QUATTRO200_TOUPTEK294_BIN1",
+      "session_id": "2026-10-16_2026-10-17",
+      "target_name": "NGC 281",
+      "filter_name": "UHC",
+      "frame_type": "LIGHT",
+      "metric_name": "FWHM",
+      "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+      "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+      "angular_calibration_state": "NOT_PROVEN",
+      "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+      "authority": "projection",
+      "action_authority": "NONE",
+      "measurement_method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+      "measurement_count": 22,
+      "source_metadata_ref": "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json",
+      "citation_refs": [
+        "data/analytics/history/target-exposures.csv",
+        "data/analytics/history/target-summary.csv",
+        "data/analytics/metadata/session-scientific-metadata.csv"
+      ],
+      "provenance_refs": [
+        "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+        "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+      ],
+      "source_record_refs": [
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=557",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=570",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=607",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=618",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=640",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=666",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=688",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=710",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=748",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=758",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=781",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=808",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=830",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=863",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=889",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=916",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=971",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=998",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1019",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1042",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1073",
+        "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1099"
+      ],
+      "records": [
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0115",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0115",
+          "timestamp": "2026-10-16T20:39:08.364100+02:00",
+          "value": 6.98,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=557"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0116",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0116",
+          "timestamp": "2026-10-16T20:49:25.067200+02:00",
+          "value": 6.83,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=570"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0117",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0117",
+          "timestamp": "2026-10-16T20:59:50.296100+02:00",
+          "value": 6.89,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=607"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0118",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0118",
+          "timestamp": "2026-10-16T21:10:02.410300+02:00",
+          "value": 6.83,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=618"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0119",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0119",
+          "timestamp": "2026-10-16T21:20:31.943400+02:00",
+          "value": 7.32,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=640"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0120",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0120",
+          "timestamp": "2026-10-16T21:30:53.946400+02:00",
+          "value": 6.74,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=666"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0121",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0121",
+          "timestamp": "2026-10-16T21:41:22.340600+02:00",
+          "value": 6.59,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=688"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0122",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0122",
+          "timestamp": "2026-10-16T21:51:41.469000+02:00",
+          "value": 7.06,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=710"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0123",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0123",
+          "timestamp": "2026-10-16T22:02:20.488900+02:00",
+          "value": 6.93,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=748"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0124",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0124",
+          "timestamp": "2026-10-16T22:12:35.205000+02:00",
+          "value": 6.94,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=758"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0125",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0125",
+          "timestamp": "2026-10-16T22:22:57.473900+02:00",
+          "value": 7.35,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=781"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0126",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0126",
+          "timestamp": "2026-10-16T22:33:21.887700+02:00",
+          "value": 7.21,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=808"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0127",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0127",
+          "timestamp": "2026-10-16T22:43:42.543100+02:00",
+          "value": 7.37,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=830"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0128",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0128",
+          "timestamp": "2026-10-16T22:54:01.551100+02:00",
+          "value": 7.47,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=863"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0129",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0129",
+          "timestamp": "2026-10-16T23:04:23.242600+02:00",
+          "value": 7.63,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=889"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0130",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0130",
+          "timestamp": "2026-10-16T23:14:41.625200+02:00",
+          "value": 7.35,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=916"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0131",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0131",
+          "timestamp": "2026-10-16T23:28:32.551700+02:00",
+          "value": 7.23,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=971"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0132",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0132",
+          "timestamp": "2026-10-16T23:38:58.463300+02:00",
+          "value": 6.86,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=998"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0133",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0133",
+          "timestamp": "2026-10-16T23:49:18.201200+02:00",
+          "value": 7.42,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1019"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0134",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0134",
+          "timestamp": "2026-10-16T23:59:48.479000+02:00",
+          "value": 7.02,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1042"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0135",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0135",
+          "timestamp": "2026-10-17T00:10:10.551400+02:00",
+          "value": 6.73,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1073"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-M-0136",
+          "semantic_type": "PERFORMANCE_MEASUREMENT",
+          "sequence_number": "0136",
+          "timestamp": "2026-10-17T00:20:40.895400+02:00",
+          "value": 7.08,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-NINA-FILENAME-EXTRACT-V1",
+          "quality": "SOURCE_RESOLVED",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1099"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-MEAN",
+          "semantic_type": "DESCRIPTIVE_PERFORMANCE_STATISTIC",
+          "statistic_type": "MEAN",
+          "value": 7.0832,
+          "sample_count": 22,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-MEAN-V1",
+          "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+          "quality": "COMPLETE_FOR_DECLARED_POPULATION",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=557",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=570",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=607",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=618",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=640",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=666",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=688",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=710",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=748",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=758",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=781",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=808",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=830",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=863",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=889",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=916",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=971",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=998",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1019",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1042",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1073",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1099"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-MINIMUM",
+          "semantic_type": "DESCRIPTIVE_PERFORMANCE_STATISTIC",
+          "statistic_type": "MINIMUM",
+          "value": 6.59,
+          "sample_count": 22,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-MIN-V1",
+          "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+          "quality": "COMPLETE_FOR_DECLARED_POPULATION",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=557",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=570",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=607",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=618",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=640",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=666",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=688",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=710",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=748",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=758",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=781",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=808",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=830",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=863",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=889",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=916",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=971",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=998",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1019",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1042",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1073",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1099"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-MAXIMUM",
+          "semantic_type": "DESCRIPTIVE_PERFORMANCE_STATISTIC",
+          "statistic_type": "MAXIMUM",
+          "value": 7.63,
+          "sample_count": 22,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-MAX-V1",
+          "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+          "quality": "COMPLETE_FOR_DECLARED_POPULATION",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=557",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=570",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=607",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=618",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=640",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=666",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=688",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=710",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=748",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=758",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=781",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=808",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=830",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=863",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=889",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=916",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=971",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=998",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1019",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1042",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1073",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1099"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
+          ]
+        },
+        {
+          "record_id": "EPR-F5-UVVBVFRSTzIwMF9UT1VQVEVLMjk0X0JJTjF8MjAyNi0xMC0xNl8yMDI2LTEwLTE3fE5HQyAyODF8VUhDfExJR0hUfEZXSE0-S-SAMPLE_STDDEV",
+          "semantic_type": "DESCRIPTIVE_PERFORMANCE_STATISTIC",
+          "statistic_type": "SAMPLE_STDDEV",
+          "value": 0.2795,
+          "sample_count": 22,
+          "metric_name": "FWHM",
+          "unit": "NINA_FILENAME_FWHM_SOURCE_UNIT",
+          "unit_semantics": "SOURCE_NATIVE_UNCALIBRATED",
+          "angular_calibration_state": "NOT_PROVEN",
+          "method_id": "BKL039-F3-FWHM-SAMPLE-STDDEV-V1",
+          "coverage": "COMPLETE_FOR_DECLARED_POPULATION",
+          "quality": "COMPLETE_FOR_DECLARED_POPULATION",
+          "authority": "projection",
+          "action_authority": "NONE",
+          "source_record_refs": [
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=557",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=570",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=607",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=618",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=640",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=666",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=688",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=710",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=748",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=758",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=781",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=808",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=830",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=863",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=889",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=916",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=971",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=998",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1019",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1042",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1073",
+            "data/analytics/history/target-exposures.csv#2026-10-16_2026-10-17:line=1099"
+          ],
+          "citation_refs": [
+            "data/analytics/history/target-exposures.csv",
+            "data/analytics/history/target-summary.csv",
+            "data/analytics/metadata/session-scientific-metadata.csv"
+          ],
+          "provenance_refs": [
+            "docs/architecture/telemetry/BKL-039-F5-Dynamic-Multi-Session-Equipment-Performance-Registry-Contract.md",
+            "data/sessions/2026/10/2026-10-16_2026-10-17/normalized/session-metrics.json"
           ]
         }
       ]

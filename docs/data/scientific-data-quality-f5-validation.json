@@ -3,11 +3,11 @@
   "validationType": "SCIENTIFIC_DATA_QUALITY_REAL_EVIDENCE_VALIDATION",
   "validationId": "BKL041-F5-REAL-EVIDENCE-V1",
   "validationState": "COMPLETE",
-  "generatedAt": "2026-10-16T06:00:54.781Z",
+  "generatedAt": "2026-10-17T06:07:46.149Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
-    "digest": "49f31825dbed50c52cc914d60b186a19bd55f5e19a8e0c3c29254a56941bd823",
-    "sessionCount": 25,
+    "digest": "d429276b1fba459bfb5de02cbe76c9839a78481b7d509dfc42457d68a1c27cc8",
+    "sessionCount": 26,
     "sessionIds": [
       "2026-07-14_2026-07-15",
       "2026-07-15_2026-07-16",
@@ -33,12 +33,13 @@
       "2026-09-22_2026-09-23",
       "2026-10-13_2026-10-14",
       "2026-10-14_2026-10-15",
-      "2026-10-15_2026-10-16"
+      "2026-10-15_2026-10-16",
+      "2026-10-16_2026-10-17"
     ]
   },
   "sourceProjection": {
     "path": "docs/data/scientific-data-quality-projection.json",
-    "digest": "b6e54e3ada83e656d18ad4adbe4ee2dd8753bb2288b23b7dbefb265807b0c879",
+    "digest": "988279541428c3ccf25c1d864dcb81da943e8bbac0dfd2d112f1d010218fb001",
     "projectionId": "BKL041-F4-CATALOG-V1",
     "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
     "profileVersion": "1.0.0-f3"
@@ -46,9 +47,9 @@
   "cohort": {
     "cohortId": "ALL-CANONICAL-IMPORTED-SESSIONS-F5",
     "selectionRule": "ALL_SESSIONS_IN_CANONICAL_CATALOG_NO_OUTCOME_FILTERING",
-    "sessionCount": 25,
+    "sessionCount": 26,
     "observedFrom": "2026-07-14T18:00:00",
-    "observedThrough": "2026-10-16T03:59:41.0000000Z",
+    "observedThrough": "2026-10-17T03:59:43.0000000Z",
     "knownTargets": [
       "LDN 1320",
       "M 27",
@@ -57,19 +58,19 @@
     "targetDistribution": {
       "LDN 1320": 3,
       "M 27": 16,
-      "NGC 281": 4,
+      "NGC 281": 5,
       "UNKNOWN": 2
     },
     "evidenceAvailability": {
-      "sourceMetrics": 25,
-      "metadataLineage": 22,
-      "acquisitionCompletion": 22,
-      "guidingRms": 21,
+      "sourceMetrics": 26,
+      "metadataLineage": 23,
+      "acquisitionCompletion": 23,
+      "guidingRms": 22,
       "guidingTemporalCoverage": 4,
-      "sqm": 18
+      "sqm": 19
     },
     "assessmentStates": {
-      "available": 12,
+      "available": 13,
       "unavailable": 5,
       "invalid": 8
     }
@@ -118,7 +119,7 @@
       "evidence": [
         {
           "name": "sessions",
-          "value": 25,
+          "value": 26,
           "unit": "count"
         },
         {
@@ -142,7 +143,7 @@
       "evidence": [
         {
           "name": "available",
-          "value": 12,
+          "value": 13,
           "unit": "count"
         },
         {
@@ -166,7 +167,7 @@
       "evidence": [
         {
           "name": "available",
-          "value": 18,
+          "value": 19,
           "unit": "count"
         },
         {
@@ -190,7 +191,7 @@
         },
         {
           "name": "sessions",
-          "value": 25,
+          "value": 26,
           "unit": "count"
         }
       ],
@@ -273,5 +274,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "validationDigest": "fcccb833677bebf486acdf5ee3f5c971b30a66ad0b42b21c1c66ebe009775518"
+  "validationDigest": "827b69585c7dc68d3c59fa1f13b4b39b7b1f6c8260957a918c94f24887ec23aa"
 }
