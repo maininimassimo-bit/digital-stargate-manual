@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-09-06_2026-09-07",
-  "generated_at": "2026-10-18T10:26:27.187187+02:00",
+  "generated_at": "2026-10-18T10:37:06.386438+02:00",
   "scientific": {
     "target_name": "M 27",
     "ra_deg": 299.9,
@@ -49,7 +49,7 @@
     "guide_samples_rejected": 765,
     "guide_samples_settling_excluded": 469,
     "guide_samples_unscaled": 0,
-    "settling_failures": 43,
+    "settling_failures": null,
     "equipment_profiles": [
       "C8_QHY695A",
       "SW4P_EVO"
@@ -59,7 +59,25 @@
     "rms_dec_arcsec": 1.246,
     "rms_total_arcsec": 2.797,
     "lost_star_events": 765,
-    "pulse_guide_failures": 0
+    "pulse_guide_failures": 0,
+    "event_attribution": {
+      "method_version": "DSG-PHD-EVENT-BOUNDS-1.0",
+      "clock_resolution_seconds": 1,
+      "state": "PARTIAL",
+      "known_counts": {
+        "pulse_guide_failures": 0,
+        "settling_failures": 42
+      },
+      "uncertain_events": [
+        {
+          "event": "settling_failures",
+          "line": 8104,
+          "earliest": "2026-09-07T05:07:07+02:00",
+          "latest": null,
+          "source": "data/sessions/2026/09/2026-09-06_2026-09-07/raw/phd2/PHD2_GuideLog_2026-09-06_155318.txt"
+        }
+      ]
+    }
   },
   "weather": {
     "weather_rows_total": 3960,

@@ -7,6 +7,36 @@ mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
 from target.extract_target_metrics import parse_saved_filename
 
 class Tests(unittest.TestCase):
+ def test_imported_manifest_windows_do_not_overlap(self):
+  windows=sorted((mod.load_session_metadata(p.parent) for p in (ROOT/'data/sessions').glob('*/*/*/manifest.json')),key=lambda x:x.start_local)
+  for a,b in zip(windows,windows[1:]):self.assertLessEqual(a.end_local,b.start_local,(a.session_id,b.session_id))
+
+ def test_phd_events_use_event_bounds_not_segment_anchor(self):
+  scope=mod.load_session_metadata(ROOT/'data/sessions/2026/10/2026-10-17_2026-10-18')
+  cases=[
+   # Segment starts outside, event is proved inside.
+   ('2026-10-17 18:58:00',180,240,1,0),
+   # Segment starts inside, event is proved outside.
+   ('2026-10-18 05:58:00',180,240,0,0),
+   # Either boundary crossed by uncertain event bounds must remain unknown.
+   ('2026-10-17 18:58:00',60,180,0,2),
+   ('2026-10-18 05:58:00',60,180,0,2),
+  ]
+  for anchor,a,b,count,uncertain in cases:
+   text=f'Guiding Begins at {anchor}\n1,{a},"Mount"\nINFO: PulseGuide failed\nINFO: Settling failed\n2,{b},"Mount"'
+   known,unknown=mod.attribute_phd_events(text,scope)
+   self.assertEqual(known,{'pulse_guide_failures':count,'settling_failures':count})
+   self.assertEqual(len(unknown),uncertain)
+
+ def test_phd_unknown_event_is_not_zero_or_green(self):
+  scope=mod.load_session_metadata(ROOT/'data/sessions/2026/10/2026-10-17_2026-10-18')
+  known,unknown=mod.attribute_phd_events('INFO: PulseGuide failed',scope)
+  self.assertEqual(len(unknown),1);self.assertEqual(known['pulse_guide_failures'],0)
+  nina={'light_failed_explicit':0,'light_interrupted_unmatched':0,'autofocus_failed_explicit':0}
+  phd={'pulse_guide_failures':None,'lost_star_events':0,'event_attribution':{'known_counts':known}}
+  severity,reasons=mod.classify({'nina':nina,'phd2':phd})
+  self.assertEqual(severity,'YELLOW');self.assertIn('non determinabile',reasons[0])
+
  def test_windows_image_paths_are_platform_independent(self):
   name='LIGHT_1x1_600.00s_910_99_LDN 1320_Quattro 200P__-9.90C_LPRO_0001.xisf'
   windows=parse_saved_filename('D:\\Images NINA\\Target\\'+name)

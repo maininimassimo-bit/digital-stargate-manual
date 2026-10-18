@@ -64,6 +64,7 @@
   <p>
     Il Catalogo non certifica automaticamente manifest, transfer o publication state.
     Quando tali stati non sono rappresentati nei dataset sorgente vengono mostrati come non disponibili.
+    La ricevuta di transfer riguarda il pacchetto di log, documenti e telemetria; non attesta la copia dei RAW fotografici.
   </p>
 </aside>
 

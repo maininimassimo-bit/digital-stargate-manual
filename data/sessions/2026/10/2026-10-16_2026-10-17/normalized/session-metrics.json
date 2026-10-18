@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-10-16_2026-10-17",
-  "generated_at": "2026-10-18T10:26:32.780185+02:00",
+  "generated_at": "2026-10-18T10:37:15.718678+02:00",
   "scientific": {
     "target_name": "NGC 281",
     "ra_deg": 13.10416667,
@@ -58,7 +58,17 @@
     "rms_dec_arcsec": 0.628,
     "rms_total_arcsec": 0.973,
     "lost_star_events": 144,
-    "pulse_guide_failures": 0
+    "pulse_guide_failures": 0,
+    "event_attribution": {
+      "method_version": "DSG-PHD-EVENT-BOUNDS-1.0",
+      "clock_resolution_seconds": 1,
+      "state": "AVAILABLE",
+      "known_counts": {
+        "pulse_guide_failures": 0,
+        "settling_failures": 0
+      },
+      "uncertain_events": []
+    }
   },
   "weather": {
     "weather_rows_total": 3960,

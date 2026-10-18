@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-09-12_2026-09-13",
-  "generated_at": "2026-10-18T10:26:27.920197+02:00",
+  "generated_at": "2026-10-18T10:37:07.609988+02:00",
   "scientific": {
     "target_name": "M 27",
     "ra_deg": 299.9,
@@ -58,7 +58,17 @@
     "rms_dec_arcsec": 0.876,
     "rms_total_arcsec": 1.814,
     "lost_star_events": 0,
-    "pulse_guide_failures": 0
+    "pulse_guide_failures": 0,
+    "event_attribution": {
+      "method_version": "DSG-PHD-EVENT-BOUNDS-1.0",
+      "clock_resolution_seconds": 1,
+      "state": "AVAILABLE",
+      "known_counts": {
+        "pulse_guide_failures": 0,
+        "settling_failures": 0
+      },
+      "uncertain_events": []
+    }
   },
   "weather": {
     "weather_rows_total": 3960,

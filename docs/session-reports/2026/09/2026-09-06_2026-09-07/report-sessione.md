@@ -24,7 +24,7 @@
 | Campioni saturi inclusi | 5935 |
 | Campioni rifiutati | 765 |
 | Campioni esclusi durante settling | 469 |
-| Settling falliti | 43 |
+| Settling falliti | n/d |
 | RMS AR | 2.505 arcsec |
 | RMS DEC | 1.246 arcsec |
 | RMS totale | 2.797 arcsec |
@@ -55,6 +55,10 @@
 - `GREEN` o `YELLOW`: archiviazione ordinaria e verifica delle ottimizzazioni.
 - `ORANGE` o `RED`: diagnostica di secondo livello e raccolta dei log specialistici.
 
+
+## Eventi PHD2 con attribuzione incerta
+
+- Metodo: `DSG-PHD-EVENT-BOUNDS-1.0`. 1 eventi non collocabili con certezza nella finestra; il contatore interessato è `n/d`, non zero. Riferimenti e limiti temporali nel normalizzato sorgente.
 
 ## Attribuzione temporale
 

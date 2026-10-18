@@ -117,15 +117,66 @@ def parse_nina(folder):
         zone=ZoneInfo(scope.timezone_id)
         m['acquisition_scope']={'method_version':'DSG-MANIFEST-LIGHT-1.0','manifest_path':(session/'manifest.json').as_posix(),'manifest_sha256':hashlib.sha256((session/'manifest.json').read_bytes()).hexdigest(),'start_local':scope.start_local.isoformat(),'end_local':scope.end_local.isoformat(),'start_wall_clock':scope.start_local.astimezone(zone).replace(tzinfo=None).isoformat(),'end_wall_clock':scope.end_local.astimezone(zone).replace(tzinfo=None).isoformat(),'timezone_id':scope.timezone_id,'interval':'START_INCLUSIVE_END_EXCLUSIVE','excluded_light_starts':excluded_starts}
     return m
+def attribute_phd_events(text,scope):
+    """Count only events whose timestamp or enclosing clock bounds prove ownership."""
+    lines=text.splitlines();times=[];anchor=None
+    for line in lines:
+        instant=None
+        try:
+            if line.startswith('Guiding Begins at '):
+                anchor=parse_local_datetime(line[18:],scope.timezone_id);instant=anchor
+            elif line.startswith('Guiding Ends at '):instant=parse_local_datetime(line[16:],scope.timezone_id)
+            elif line.startswith('Log closed at '):instant=parse_local_datetime(line[14:],scope.timezone_id)
+            elif re.match(r'^\d{4}-\d\d-\d\d[T ]\d\d:',line):instant=parse_local_datetime(line.split('|')[0],scope.timezone_id)
+            elif anchor is not None and re.match(r'^\d+,',line):
+                elapsed=float(next(csv.reader([line]))[1])
+                if math.isfinite(elapsed) and elapsed>=0:instant=anchor+timedelta(seconds=elapsed)
+        except (ValueError,IndexError,csv.Error):pass
+        times.append(instant)
+    ordered=[t for t in times if t is not None]
+    # GuideLog anchors/closures have whole-second resolution; subsecond rows
+    # can precede a rounded closure by <1s without a clock reversal.
+    resolution=timedelta(seconds=1)
+    monotonic=all(b>=a-resolution for a,b in zip(ordered,ordered[1:]))
+    before=[];clock=None
+    for instant in times:
+        if instant is not None:clock=instant
+        before.append(clock)
+    after=[None]*len(times);clock=None
+    for i in range(len(times)-1,-1,-1):
+        if times[i] is not None:clock=times[i]
+        after[i]=clock
+    known={'pulse_guide_failures':0,'settling_failures':0};unknown=[]
+    for i,line in enumerate(lines):
+        low=line.lower()
+        key='pulse_guide_failures' if ('pulseguide failed' in low or 'pulse guide failed' in low) else ('settling_failures' if 'settling failed' in low else None)
+        if not key:continue
+        lo,hi=before[i],after[i]
+        if times[i] is None:
+            lo=lo-resolution if lo is not None else None
+            hi=hi+resolution if hi is not None else None
+        if monotonic and lo is not None and hi is not None and scope.contains(lo) and scope.contains(hi):known[key]+=1
+        elif monotonic and ((hi is not None and hi<scope.start_local) or (lo is not None and lo>=scope.end_local)):continue
+        else:unknown.append({'event':key,'line':i+1,'earliest':lo.isoformat() if lo else None,'latest':hi.isoformat() if hi else None})
+    return known,unknown
+
 def parse_phd2(folder):
     ra=[]; dec=[]; segments=lost=pulse=settling_failures=0
     session=folder.parent.parent
     scope=load_session_metadata(session) if SESSION_RE.fullmatch(session.name) else None
     seen_samples=set()
+    unknown_events=[];seen_files=set()
     samples_total=saturated=rejected=settling_excluded=unscaled=0
     profiles=set()
     scale_re=re.compile(r'Pixel scale\s*=\s*(?P<scale>\d+(?:\.\d+)?)\s*arc-sec/px',re.I)
-    for _,text in files(folder):
+    for path,text in files(folder):
+        if scope:
+            digest=hashlib.sha256(text.encode('utf-8')).hexdigest()
+            if digest in seen_files:continue
+            seen_files.add(digest)
+            known,unknown=attribute_phd_events(text,scope)
+            pulse+=known['pulse_guide_failures'];settling_failures+=known['settling_failures']
+            unknown_events.extend({**event,'source':path.as_posix()} for event in unknown)
         settling=False; active_segment=False; header=None; pixel_scale=None; anchor=None; profile=None; segment_counted=False
         for line in text.splitlines():
             low=line.lower()
@@ -151,10 +202,10 @@ def parse_phd2(folder):
                 settling=True
                 continue
             if 'settling complete' in low or 'settling failed' in low:
-                if 'settling failed' in low and (scope is None or (anchor is not None and scope.contains(anchor))): settling_failures+=1
+                if 'settling failed' in low and scope is None: settling_failures+=1
                 settling=False
                 continue
-            if ('pulseguide failed' in low or 'pulse guide failed' in low) and (scope is None or (anchor is not None and scope.contains(anchor))): pulse+=1
+            if ('pulseguide failed' in low or 'pulse guide failed' in low) and scope is None: pulse+=1
             if not active_segment or header is None or not re.match(r'^\d+,',line): continue
             try:
                 row=next(csv.reader([line]))
@@ -191,7 +242,7 @@ def parse_phd2(folder):
     def rms(v): return math.sqrt(sum(x*x for x in v)/len(v)) if v else None
     rr,dd=rms(ra),rms(dec)
     tt=math.sqrt(rr*rr+dd*dd) if rr is not None and dd is not None else None
-    return {
+    result={
         'guide_segments':segments,
         'guide_samples_total':samples_total,
         'guide_samples_valid':min(len(ra),len(dec)),
@@ -199,15 +250,17 @@ def parse_phd2(folder):
         'guide_samples_rejected':rejected,
         'guide_samples_settling_excluded':settling_excluded,
         'guide_samples_unscaled':unscaled,
-        'settling_failures':settling_failures,
+        'settling_failures':None if any(e['event']=='settling_failures' for e in unknown_events) else settling_failures,
         'equipment_profiles':sorted(profiles),
         'rms_method':'PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.',
         'rms_ra_arcsec':round(rr,3) if rr is not None else None,
         'rms_dec_arcsec':round(dd,3) if dd is not None else None,
         'rms_total_arcsec':round(tt,3) if tt is not None else None,
         'lost_star_events':lost,
-        'pulse_guide_failures':pulse
+        'pulse_guide_failures':None if any(e['event']=='pulse_guide_failures' for e in unknown_events) else pulse
     }
+    if scope:result['event_attribution']={'method_version':'DSG-PHD-EVENT-BOUNDS-1.0','clock_resolution_seconds':1,'state':'PARTIAL' if unknown_events else 'AVAILABLE','known_counts':{'pulse_guide_failures':pulse,'settling_failures':settling_failures},'uncertain_events':unknown_events}
+    return result
 def to_bool(v):
     v=v.strip().lower(); return True if v in {'true','1','yes','safe','ok'} else False if v in {'false','0','no','unsafe','not safe'} else None
 def parse_weather(folder):
@@ -248,7 +301,11 @@ def resolve_configuration(repo_root,scientific):
     return None
 def classify(m):
     sev='GREEN'; reasons=[]; n=m['nina']; p=m['phd2']
-    if p['pulse_guide_failures']>0: sev='ORANGE'; reasons.append(f"PulseGuide failures: {p['pulse_guide_failures']}")
+    known_pulse=p.get('event_attribution',{}).get('known_counts',{}).get('pulse_guide_failures',p['pulse_guide_failures'])
+    if known_pulse is not None and known_pulse>0: sev='ORANGE'; reasons.append(f"PulseGuide failures: {known_pulse}")
+    if p['pulse_guide_failures'] is None:
+        if sev=='GREEN':sev='YELLOW'
+        reasons.append('Eventi PulseGuide presenti ma attribuzione temporale non determinabile.')
     if n['light_failed_explicit']>=3: sev='ORANGE'; reasons.append(f"Pose LIGHT fallite esplicitamente: {n['light_failed_explicit']}")
     elif n['light_failed_explicit']>0 or n['light_interrupted_unmatched']>1:
         if sev=='GREEN': sev='YELLOW'

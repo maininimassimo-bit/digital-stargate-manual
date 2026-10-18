@@ -14,6 +14,8 @@ def main():
   generated=after['generated_at'];after['generated_at']=before.get('generated_at',generated)
   after['nina']['acquisition_scope']['manifest_path']=(session/'manifest.json').relative_to(ROOT).as_posix()
   if after.get('sqm'):after['sqm']['source_path']=(session/'raw/sqm/sqm-summary.json').relative_to(ROOT).as_posix()
+  for event in after['phd2'].get('event_attribution',{}).get('uncertain_events',[]):
+   source=Path(event['source']);event['source']=source.relative_to(ROOT).as_posix() if source.is_absolute() else source.as_posix()
   if before==after:continue
   n=before.get('nina',before)
   entry={'sessionId':session.name,'before':{'started':n.get('light_started',n.get('exposures_started')),'completed':n.get('light_completed',n.get('exposures_completed')),'integrationSeconds':n.get('integration_seconds')},'after':{k:after['nina'][v] for k,v in [('started','light_started'),('completed','light_completed'),('integrationSeconds','integration_seconds')]},'scope':after['nina']['acquisition_scope']}
