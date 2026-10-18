@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import argparse,csv,json,math,re
-from datetime import datetime
+import argparse,csv,json,math,re,sys,hashlib
+from datetime import datetime,timedelta
 from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from session import load_session_metadata, parse_local_datetime
+from zoneinfo import ZoneInfo
 SESSION_RE=re.compile(r'^\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}$'); PHD_BEGIN=re.compile(r'^Guiding Begins at ')
 TARGET_COORD_RE=re.compile(r'Target:\s*(?P<target>.+?)\s+RA:\s*(?P<rah>\d{1,2}):(?P<ram>\d{1,2}):(?P<ras>\d+(?:\.\d+)?)\s*;\s*Dec:\s*(?P<sign>[+-]?)(?P<decd>\d{1,2})[^\d]+(?P<decm>\d{1,2})[^\d]+(?P<decs>\d+(?:\.\d+)?)',re.I)
 LIGHT_BIN_RE=re.compile(r'LIGHT_(?P<bin>\d+)x(?P=bin)_',re.I)
@@ -43,17 +46,28 @@ def camera_from_connection_line(line):
     return None
 def parse_nina(folder):
     m={'camera_exposures_total':0,'light_started':0,'light_completed':0,'light_failed_explicit':0,'light_interrupted_unmatched':0,'technical_exposures_estimated':0,'integration_seconds':0.0,'autofocus_started':0,'autofocus_completed':0,'autofocus_failed_explicit':0,'autofocus_unmatched':0,'dither_requests':0,'nina_errors':0,'nina_warnings':0}; scientific={'target_name':None,'ra_deg':None,'dec_deg':None,'epoch':None,'telescope':None,'camera':None,'binning':None,'source':'nina-log'}; connected_camera=None; fallback_camera=None; pending_light=pending_af=0; durations=[]; dur_re=re.compile(r'(?:ExposureTime|Duration|Exposure)\D{0,20}(?P<sec>\d+(?:\.\d+)?)\s*(?:s|sec|seconds?)',re.I)
+    session=folder.parent.parent
+    scope=load_session_metadata(session) if SESSION_RE.fullmatch(session.name) else None
+    seen=set(); excluded_starts=0; context_target=None; owned_duration=None
     light_telescopes=set(); light_cameras=set(); light_binnings=set(); explicit_camera_connection=False
     for _,text in files(folder):
         active_exposure_type=None
         for line in text.splitlines():
+            if re.match(r'^\d{4}-\d\d-\d\dT\d\d:\d\d:',line):
+                if line in seen: continue
+                seen.add(line)
+            timestamp=line.split('|',1)[0]
+            try: instant=parse_local_datetime(timestamp,scope.timezone_id) if scope else None
+            except ValueError: instant=None
+            owned=scope is None or (instant is not None and scope.contains(instant))
             low=line.lower(); coord=TARGET_COORD_RE.search(line)
-            if coord and scientific['ra_deg'] is None and not CALIBRATION_TARGET_RE.match(coord.group('target').strip()):
-                h=float(coord.group('rah')); mi=float(coord.group('ram')); sec=float(coord.group('ras')); dd=float(coord.group('decd')); dm=float(coord.group('decm')); ds=float(coord.group('decs')); scientific['target_name']=coord.group('target').strip(); scientific['ra_deg']=round((h+mi/60+sec/3600)*15,8); scientific['dec_deg']=round((-1 if coord.group('sign')=='-' else 1)*(dd+dm/60+ds/3600),8); scientific['epoch']='J2000' if 'J2000' in line else None
+            if coord and not CALIBRATION_TARGET_RE.match(coord.group('target').strip()):
+                h=float(coord.group('rah')); mi=float(coord.group('ram')); sec=float(coord.group('ras')); dd=float(coord.group('decd')); dm=float(coord.group('decm')); ds=float(coord.group('decs')); context_target={'target_name':coord.group('target').strip(),'ra_deg':round((h+mi/60+sec/3600)*15,8),'dec_deg':round((-1 if coord.group('sign')=='-' else 1)*(dd+dm/60+ds/3600),8),'epoch':'J2000' if 'J2000' in line else None}
             image=LIGHT_BIN_RE.search(line)
+            if context_target and scientific['target_name'] is None and (scope is None or (owned and m['light_started']>0)): scientific.update(context_target)
             # Instrument names in calibration images or setup messages do not
             # describe the scientific LIGHT acquisition. Keep only LIGHT saves.
-            if image and ('saved image to ' in low or 'successfully saved file at ' in low):
+            if image and (owned or pending_light>0) and ('saved image to ' in low or 'successfully saved file at ' in low):
                 light_binnings.add(int(image.group('bin')))
                 telescope=telescope_from_line(line)
                 if telescope: light_telescopes.add(telescope)
@@ -64,9 +78,9 @@ def parse_nina(folder):
             elif 'disconnected camera' in low: connected_camera=None
             camera=QHY_CAMERA_RE.search(line)
             if camera: fallback_camera=fallback_camera or canonical_camera(camera.group('camera'))
-            if '|error|' in low: m['nina_errors']+=1
-            if '|warn|' in low or '|warning|' in low: m['nina_warnings']+=1
-            if 'starting exposure' in low or 'capture - starting' in low: m['camera_exposures_total']+=1
+            if owned and '|error|' in low: m['nina_errors']+=1
+            if owned and ('|warn|' in low or '|warning|' in low): m['nina_warnings']+=1
+            if owned and ('starting exposure' in low or 'capture - starting' in low): m['camera_exposures_total']+=1
             is_light=(('takeexposure' in low and any(x in low for x in ('starting instruction','starting','executing'))) or ('imagetype' in low and 'light' in low and any(x in low for x in ('starting','execute'))))
             if is_light:
                 image_type=IMAGE_TYPE_RE.search(line)
@@ -75,13 +89,21 @@ def parse_nina(folder):
                 # explicitly naming a calibration must not enter LIGHT counters.
                 # Unknown/untyped legacy instructions retain prior interpretation.
                 if active_exposure_type in CALIBRATION_IMAGE_TYPES: continue
-                m['light_started']+=1; pending_light+=1; mm=dur_re.search(line)
-                if mm: durations.append(float(mm.group('sec')))
+                if not owned:
+                    if scope and instant is None: raise ValueError('LIGHT instruction has no valid local timestamp')
+                    excluded_starts+=1; pending_light=0; owned_duration=None; continue
+                if context_target and scientific['target_name'] is None: scientific.update(context_target)
+                m['light_started']+=1; pending_light=1
+                mm=re.search(r'ExposureTime\s*[:=]?\s*(?P<sec>\d+(?:\.\d+)?)',line,re.I) or dur_re.search(line)
+                if scope and not mm: raise ValueError('LIGHT duration not evidenced')
+                owned_duration=float(mm.group('sec')) if mm else 600.0
+                if not math.isfinite(owned_duration) or owned_duration<=0: raise ValueError('LIGHT duration must be positive and finite')
                 continue
             if active_exposure_type not in CALIBRATION_IMAGE_TYPES:
-                if any(x in low for x in ('takeexposure failed','exposure failed','exposure aborted','exposure cancelled','camera exposure error')): m['light_failed_explicit']+=1; pending_light=max(0,pending_light-1); continue
-                if 'takeexposure' in low and any(x in low for x in ('finishing instruction','finished instruction','completed')): m['light_completed']+=1; pending_light=max(0,pending_light-1); continue
-                if pending_light>0 and any(x in low for x in ('image saved','saved image','file saved')) and ('light' in low or 'takeexposure' in low): m['light_completed']+=1; pending_light-=1; continue
+                if pending_light>0 and any(x in low for x in ('takeexposure failed','exposure failed','exposure aborted','exposure cancelled','camera exposure error')): m['light_failed_explicit']+=1; pending_light=0; continue
+                if pending_light>0 and 'takeexposure' in low and any(x in low for x in ('finishing instruction','finished instruction','completed','finishing category:')): m['light_completed']+=1; pending_light=0; durations.append(owned_duration); continue
+                if pending_light>0 and any(x in low for x in ('image saved','saved image','file saved')) and ('light' in low or 'takeexposure' in low): m['light_completed']+=1; pending_light=0; durations.append(owned_duration); continue
+            if not owned: continue
             if any(x in low for x in ('autofocus starting','starting autofocus','autofocus started')): m['autofocus_started']+=1; pending_af+=1
             elif 'autofocus failed' in low: m['autofocus_failed_explicit']+=1; pending_af=max(0,pending_af-1)
             elif any(x in low for x in ('autofocus completed','autofocus finished','autofocus successful')): m['autofocus_completed']+=1; pending_af=max(0,pending_af-1)
@@ -90,23 +112,33 @@ def parse_nina(folder):
     scientific['binning']=next(iter(light_binnings)) if len(light_binnings)==1 else None
     scientific['camera']=next(iter(light_cameras)) if len(light_cameras)==1 else None
     if not explicit_camera_connection and light_cameras=={None}: scientific['camera']=fallback_camera
-    m['light_interrupted_unmatched']=max(0,m['light_started']-m['light_completed']-m['light_failed_explicit']); m['autofocus_unmatched']=max(0,m['autofocus_started']-m['autofocus_completed']-m['autofocus_failed_explicit']); m['technical_exposures_estimated']=max(0,m['camera_exposures_total']-m['light_started']); m['integration_seconds']=sum(durations[:m['light_completed']]) if durations else (m['light_completed']*600.0 if m['light_completed']>0 else 0.0); m['scientific']=scientific; return m
+    m['light_interrupted_unmatched']=max(0,m['light_started']-m['light_completed']-m['light_failed_explicit']); m['autofocus_unmatched']=max(0,m['autofocus_started']-m['autofocus_completed']-m['autofocus_failed_explicit']); m['technical_exposures_estimated']=max(0,m['camera_exposures_total']-m['light_started']); m['integration_seconds']=sum(durations); m['scientific']=scientific
+    if scope:
+        zone=ZoneInfo(scope.timezone_id)
+        m['acquisition_scope']={'method_version':'DSG-MANIFEST-LIGHT-1.0','manifest_path':(session/'manifest.json').as_posix(),'manifest_sha256':hashlib.sha256((session/'manifest.json').read_bytes()).hexdigest(),'start_local':scope.start_local.isoformat(),'end_local':scope.end_local.isoformat(),'start_wall_clock':scope.start_local.astimezone(zone).replace(tzinfo=None).isoformat(),'end_wall_clock':scope.end_local.astimezone(zone).replace(tzinfo=None).isoformat(),'timezone_id':scope.timezone_id,'interval':'START_INCLUSIVE_END_EXCLUSIVE','excluded_light_starts':excluded_starts}
+    return m
 def parse_phd2(folder):
     ra=[]; dec=[]; segments=lost=pulse=settling_failures=0
+    session=folder.parent.parent
+    scope=load_session_metadata(session) if SESSION_RE.fullmatch(session.name) else None
+    seen_samples=set()
     samples_total=saturated=rejected=settling_excluded=unscaled=0
     profiles=set()
     scale_re=re.compile(r'Pixel scale\s*=\s*(?P<scale>\d+(?:\.\d+)?)\s*arc-sec/px',re.I)
     for _,text in files(folder):
-        settling=False; active_segment=False; header=None; pixel_scale=None
+        settling=False; active_segment=False; header=None; pixel_scale=None; anchor=None; profile=None; segment_counted=False
         for line in text.splitlines():
             low=line.lower()
             if low.startswith('equipment profile ='):
                 profile=line.split('=',1)[1].strip()
-                if profile: profiles.add(profile)
+                if profile and scope is None: profiles.add(profile)
             scale_match=scale_re.search(line)
             if scale_match: pixel_scale=float(scale_match.group('scale'))
             if PHD_BEGIN.match(line):
-                segments+=1; active_segment=True; header=None; pixel_scale=None
+                anchor=parse_local_datetime(line[len('Guiding Begins at '):],scope.timezone_id) if scope else None
+                segment_counted=scope is None or scope.contains(anchor)
+                if segment_counted: segments+=1
+                active_segment=True; header=None; pixel_scale=None
                 continue
             if line.lower().startswith('frame,time,'):
                 try: header={name.strip().lower():index for index,name in enumerate(next(csv.reader([line])))}
@@ -119,10 +151,10 @@ def parse_phd2(folder):
                 settling=True
                 continue
             if 'settling complete' in low or 'settling failed' in low:
-                if 'settling failed' in low: settling_failures+=1
+                if 'settling failed' in low and (scope is None or (anchor is not None and scope.contains(anchor))): settling_failures+=1
                 settling=False
                 continue
-            if 'pulseguide failed' in low or 'pulse guide failed' in low: pulse+=1
+            if ('pulseguide failed' in low or 'pulse guide failed' in low) and (scope is None or (anchor is not None and scope.contains(anchor))): pulse+=1
             if not active_segment or header is None or not re.match(r'^\d+,',line): continue
             try:
                 row=next(csv.reader([line]))
@@ -130,6 +162,14 @@ def parse_phd2(folder):
                     index=header.get(name.lower())
                     return row[index].strip() if index is not None and index<len(row) else ''
                 error_text=field('ErrorCode')
+                if scope:
+                    elapsed=float(field('Time'))
+                    if not math.isfinite(elapsed) or elapsed<0 or anchor is None or not scope.contains(anchor+timedelta(seconds=elapsed)): continue
+                    identity=(anchor.isoformat(),field('Frame'),field('Time'))
+                    if identity in seen_samples: continue
+                    seen_samples.add(identity)
+                    if not segment_counted: segments+=1; segment_counted=True
+                    if profile: profiles.add(profile)
                 error_code=int(error_text) if error_text else 0
                 samples_total+=1
                 mount=field('mount').upper()
@@ -222,9 +262,15 @@ def find_repo_root(session):
     for candidate in (session.resolve(),*session.resolve().parents):
         if (candidate/'data'/'analytics').exists(): return candidate
     return session.resolve()
+def analyze(s):
+    raw=s/'raw'; nina=parse_nina(raw/'nina'); scientific=dict(nina.pop('scientific')); scientific['configuration_id']=resolve_configuration(find_repo_root(s),scientific)
+    m={'schema_version':'0.2.0','session_id':s.name,'generated_at':datetime.now().astimezone().isoformat(),'scientific':scientific,'nina':nina,'phd2':parse_phd2(raw/'phd2'),'weather':parse_weather(raw/'weather'),'sqm':parse_sqm(raw/'sqm')}
+    m['severity'],m['severity_reasons']=classify(m)
+    return m
+
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--session',required=True); a=ap.parse_args(); s=Path(a.session)
     if not s.is_dir(): raise SystemExit(f'Sessione non trovata: {s}')
     if not SESSION_RE.match(s.name): raise SystemExit(f'Nome sessione non valido: {s.name}')
-    raw=s/'raw'; nina=parse_nina(raw/'nina'); scientific=dict(nina.pop('scientific')); scientific['configuration_id']=resolve_configuration(find_repo_root(s),scientific); m={'schema_version':'0.2.0','session_id':s.name,'generated_at':datetime.now().astimezone().isoformat(),'scientific':scientific,'nina':nina,'phd2':parse_phd2(raw/'phd2'),'weather':parse_weather(raw/'weather'),'sqm':parse_sqm(raw/'sqm')}; m['severity'],m['severity_reasons']=classify(m); out=s/'normalized'; out.mkdir(parents=True,exist_ok=True); (out/'session-metrics.json').write_text(json.dumps(m,indent=2,ensure_ascii=False)+'\n',encoding='utf-8'); print(json.dumps(m,indent=2,ensure_ascii=False))
+    m=analyze(s);out=s/'normalized'; out.mkdir(parents=True,exist_ok=True); (out/'session-metrics.json').write_text(json.dumps(m,indent=2,ensure_ascii=False)+'\n',encoding='utf-8'); print(json.dumps(m,indent=2,ensure_ascii=False))
 if __name__=='__main__': main()

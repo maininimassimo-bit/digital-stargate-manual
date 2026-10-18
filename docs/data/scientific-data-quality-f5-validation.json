@@ -3,10 +3,10 @@
   "validationType": "SCIENTIFIC_DATA_QUALITY_REAL_EVIDENCE_VALIDATION",
   "validationId": "BKL041-F5-REAL-EVIDENCE-V1",
   "validationState": "COMPLETE",
-  "generatedAt": "2026-10-18T06:05:12.555Z",
+  "generatedAt": "2026-10-18T08:26:35.577Z",
   "sourceCatalog": {
     "path": "docs/data/scientific-session-catalog.json",
-    "digest": "264b719d24e00d2a761d0a69112576b599be18b237edc5a7f17b51b6ad7d348d",
+    "digest": "919d0bf45acf86d64277c337d62ea45302b1dc279f904ac7370b723b99166fba",
     "sessionCount": 27,
     "sessionIds": [
       "2026-07-14_2026-07-15",
@@ -40,7 +40,7 @@
   },
   "sourceProjection": {
     "path": "docs/data/scientific-data-quality-projection.json",
-    "digest": "87ad7170ff628dd90820ee2a763e0471c8e6be3236ce775b7ced0b5556e45a78",
+    "digest": "96e6a0bc1a34bca774715b187b94f437f2a62cd743bd0f232cf5d111fd559121",
     "projectionId": "BKL041-F4-CATALOG-V1",
     "profileId": "DSG-SCIENTIFIC-QUALITY-SYNTHETIC-DEMONSTRATOR",
     "profileVersion": "1.0.0-f3"
@@ -59,21 +59,21 @@
     "targetDistribution": {
       "LDN 1320": 3,
       "M 27": 16,
-      "NGC 281": 6,
-      "UNKNOWN": 2
+      "NGC 281": 4,
+      "UNKNOWN": 4
     },
     "evidenceAvailability": {
       "sourceMetrics": 27,
-      "metadataLineage": 24,
-      "acquisitionCompletion": 24,
-      "guidingRms": 22,
-      "guidingTemporalCoverage": 4,
+      "metadataLineage": 22,
+      "acquisitionCompletion": 22,
+      "guidingRms": 23,
+      "guidingTemporalCoverage": 5,
       "sqm": 20
     },
     "assessmentStates": {
-      "available": 13,
-      "unavailable": 6,
-      "invalid": 8
+      "available": 15,
+      "unavailable": 10,
+      "invalid": 2
     }
   },
   "acceptancePolicy": {
@@ -130,7 +130,7 @@
         },
         {
           "name": "unknownTargets",
-          "value": 2,
+          "value": 4,
           "unit": "count"
         }
       ],
@@ -144,17 +144,17 @@
       "evidence": [
         {
           "name": "available",
-          "value": 13,
+          "value": 15,
           "unit": "count"
         },
         {
           "name": "unavailable",
-          "value": 6,
+          "value": 10,
           "unit": "count"
         },
         {
           "name": "invalid",
-          "value": 8,
+          "value": 2,
           "unit": "count"
         }
       ],
@@ -187,7 +187,7 @@
       "evidence": [
         {
           "name": "governedNonZero",
-          "value": 4,
+          "value": 5,
           "unit": "count"
         },
         {
@@ -228,7 +228,7 @@
       "evidence": [
         {
           "name": "invalidAssessments",
-          "value": 8,
+          "value": 2,
           "unit": "count"
         }
       ],
@@ -275,5 +275,5 @@
     "actionAuthority": "NONE",
     "safetyAuthority": "LOCAL_PHYSICAL_INTERLOCKS"
   },
-  "validationDigest": "f4915f5241e90cb7f1868621ed66fca733349dccc5ce6739aed4e05e8dd7d2fe"
+  "validationDigest": "c7a4ab68c3a4b9a2615fa66225eea809bb04d34925db8709623b338408ef557f"
 }

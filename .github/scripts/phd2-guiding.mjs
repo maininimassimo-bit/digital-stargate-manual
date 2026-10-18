@@ -53,13 +53,16 @@ const numberOrNull = (value) => {
   return Number.isFinite(parsed) ? parsed : null;
 };
 
-export const parseGuideLog = (text, sourcePath = '', maxPoints = 96) => {
+export const parseGuideLog = (text, sourcePath = '', maxPoints = 96, scope = null) => {
   const samples = [];
   let segment = 0;
   let settling = false;
+  let anchor=NaN;
+  const wall=value=>Date.parse(value.replace(' ','T').replace(/(\.\d{3})\d+$/,'$1')+'Z');
 
   for (const line of text.split(/\r?\n/)) {
     if (line.startsWith('Guiding Begins at ')) {
+      anchor=wall(line.slice(18));
       segment += 1;
       settling = false;
       continue;
@@ -83,6 +86,7 @@ export const parseGuideLog = (text, sourcePath = '', maxPoints = 96) => {
     if (!Number.isFinite(errorCode) || errorCode !== 0) continue;
 
     const elapsedSeconds = numberOrNull(row[1]);
+    if(scope && !(anchor+elapsedSeconds*1000>=wall(scope.start_wall_clock)&&anchor+elapsedSeconds*1000<wall(scope.end_wall_clock)))continue;
     const raArcsec = numberOrNull(row[7]);
     const decArcsec = numberOrNull(row[8]);
     if (elapsedSeconds === null || raArcsec === null || decArcsec === null) continue;

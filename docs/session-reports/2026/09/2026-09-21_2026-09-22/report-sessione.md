@@ -10,8 +10,8 @@
 | Pose LIGHT completate | 38 |
 | Pose LIGHT fallite esplicitamente | 0 |
 | Pose LIGHT non abbinate/interrotte | 3 |
-| Esposizioni camera totali | 100 |
-| Esposizioni tecniche stimate | 59 |
+| Esposizioni camera totali | 99 |
+| Esposizioni tecniche stimate | 58 |
 | Integrazione LIGHT totale | 6.33 h |
 | Autofocus avviati | 8 |
 | Autofocus completati | 4 |
@@ -54,3 +54,11 @@
 
 - `GREEN` o `YELLOW`: archiviazione ordinaria e verifica delle ottimizzazioni.
 - `ORANGE` o `RED`: diagnostica di secondo livello e raccolta dei log specialistici.
+
+
+## Attribuzione temporale
+
+- Metodo: `DSG-MANIFEST-LIGHT-1.0`; manifest: `data/sessions/2026/09/2026-09-21_2026-09-22/manifest.json`.
+- Finestra dichiarata: 2026-09-21T19:00:00+02:00 → 2026-09-22T06:00:00+02:00 (Europe/Rome); inizio incluso, fine esclusa.
+- Le pose sono attribuite in base all’avvio; il completamento della stessa posa può oltrepassare la fine della finestra.
+- Avvii LIGHT esterni esclusi: 0. Log originali conservati.

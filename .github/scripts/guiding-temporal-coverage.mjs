@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { parseCsvRecord } from './phd2-guiding.mjs';
 
-export const METHOD = 'DSG-GUIDING-LIGHT-TEMPORAL-1.0';
+export const METHOD = 'DSG-GUIDING-LIGHT-TEMPORAL-1.1';
 // A continuity bound, not a guiding-quality threshold. No extrapolated tails.
 export const MAX_GAP_EXPOSURES = 3;
 const stamp = value => {
@@ -21,11 +21,17 @@ const union = intervals => {
 const duration = intervals => intervals.reduce((s,[a,b])=>s+b-a,0)/1000;
 const ref = source => ({path:source.path.replaceAll('\\','/'),sha256:createHash('sha256').update(source.bytes ?? source.text).digest('hex')});
 
-export function buildGuidingTemporalCoverage(ninaSources, guideSources, expectedLightStarts = null) {
+export function buildGuidingTemporalCoverage(ninaSources, guideSources, expectedLightStarts = null, scope = null) {
   const sourceRefs=[...ninaSources,...guideSources].map(ref);
-  const unavailable = reason => ({methodVersion:METHOD,state:'UNAVAILABLE',reason,coverage:null,lightSeconds:null,coveredSeconds:null,clockBasis:'NOT_VERIFIED',maxGapExposures:MAX_GAP_EXPOSURES,sourceRefs});
+  if(scope?.manifest_path&&scope?.manifest_sha256)sourceRefs.push({path:scope.manifest_path,sha256:scope.manifest_sha256});
+  const scopeEvidence=scope?{acquisitionScope:scope}:{};
+  const unavailable = reason => ({methodVersion:METHOD,state:'UNAVAILABLE',reason,coverage:null,lightSeconds:null,coveredSeconds:null,clockBasis:'NOT_VERIFIED',maxGapExposures:MAX_GAP_EXPOSURES,sourceRefs,...scopeEvidence});
   if ([...ninaSources,...guideSources].some(s=>s.bytes && !Buffer.from(s.text,'utf8').equals(s.bytes))) return unavailable('INVALID_SOURCE_ENCODING');
   const lights=[];
+  const scopeStart=scope ? stamp(scope.start_wall_clock) : -Infinity;
+  const scopeEnd=scope ? stamp(scope.end_wall_clock) : Infinity;
+  if(scope && !(Number.isFinite(scopeStart)&&Number.isFinite(scopeEnd)&&scopeEnd>scopeStart))return unavailable('INVALID_ACQUISITION_WINDOW');
+  const seen=new Set();
   let starts=0;
   for (const source of ninaSources) {
     // A remote/unknown PHD2 clock cannot be silently aligned by overlapping dates.
@@ -34,8 +40,11 @@ export function buildGuidingTemporalCoverage(ninaSources, guideSources, expected
     let active=null, lastTime=-Infinity;
     for (const line of source.text.split(/\r?\n/)) {
       const t=stamp(line.split('|')[0]);
+      if(Number.isFinite(t)){if(seen.has(line))continue;seen.add(line);}
       if (Number.isFinite(t)) {if(t<lastTime)return unavailable('NON_MONOTONIC_NINA_CLOCK');lastTime=t;}
+      if(t<scopeStart)continue;
       if (line.includes('SequenceItem.cs|Run|') && line.includes('Starting Category:') && line.includes('Item: TakeExposure')) {
+        if(t>=scopeEnd)continue;
         if (active) return unavailable('UNPAIRED_LIGHT_EXPOSURE');
         if (/ImageType LIGHT\b/.test(line)) {starts++;active={start:t,capture:null,seconds:Number(line.match(/ExposureTime ([\d.]+)/)?.[1])};}
       }
@@ -80,5 +89,5 @@ export function buildGuidingTemporalCoverage(ninaSources, guideSources, expected
   const light=union(lights), intersections=[];
   for (const [a,b] of light) for (const [c,d] of guide) if (Math.min(b,d)>Math.max(a,c)) intersections.push([Math.max(a,c),Math.min(b,d)]);
   const lightSeconds=duration(light), coveredSeconds=duration(union(intersections));
-  return {methodVersion:METHOD,state:'AVAILABLE',reason:null,coverage:Math.round(coveredSeconds/lightSeconds*1e6)/1e6,lightSeconds,coveredSeconds:Math.round(coveredSeconds*1000)/1000,lightExposureCount:starts,clockBasis:'SHARED_LOCAL_WALL_CLOCK',maxGapExposures:MAX_GAP_EXPOSURES,sourceRefs};
+  return {methodVersion:METHOD,state:'AVAILABLE',reason:null,coverage:Math.round(coveredSeconds/lightSeconds*1e6)/1e6,lightSeconds,coveredSeconds:Math.round(coveredSeconds*1000)/1000,lightExposureCount:starts,clockBasis:'SHARED_LOCAL_WALL_CLOCK',maxGapExposures:MAX_GAP_EXPOSURES,sourceRefs,...scopeEvidence};
 }

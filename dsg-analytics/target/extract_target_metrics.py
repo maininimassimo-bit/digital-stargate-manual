@@ -22,7 +22,7 @@ import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass, asdict
 from datetime import datetime
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Iterable, Optional
 
 if __package__ in (None, ""):
@@ -124,7 +124,8 @@ def parse_timestamp(line: str) -> str:
 
 
 def parse_saved_filename(image_path: str) -> Optional[dict[str, str]]:
-    filename = Path(image_path.strip().strip('"')).name
+    # N.I.N.A. paths use Windows separators even on the Linux publication runner.
+    filename = PureWindowsPath(image_path.strip().strip('"')).name
 
     # Expected NINA structure:
     # LIGHT_1x1_600.00s_910_99_LDN 1320_Skywatcher quattro 200p__-9.90C_LPRO_0075_...

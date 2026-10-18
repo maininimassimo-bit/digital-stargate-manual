@@ -139,6 +139,7 @@ jobs:
           python -m pip install --requirement requirements.txt
           python -m pip install --disable-pip-version-check reportlab
       - { name: Test canonical scientific session evidence, run: python dsg-analytics/tests/test_scientific_session_evidence.py }
+      - { name: Test manifest-bound scientific night attribution, run: python dsg-analytics/tests/test_night_attribution.py }
       - { name: Test latest scientific observation no-op and selection, run: python dsg-analytics/tests/test_latest_observation.py }
       - { name: Test homepage datetime normalization, run: python dsg-analytics/tests/test_homepage_datetime_normalization.py }
       - { name: Test real-session scientific E2E projections, shell: bash, run: bash ./.github/scripts/test-scientific-session-e2e.sh }

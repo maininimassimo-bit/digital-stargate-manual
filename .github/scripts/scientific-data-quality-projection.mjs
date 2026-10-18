@@ -59,7 +59,7 @@ export function mapCatalogSessionToF3Inputs(session) {
   const guiding = session.guiding;
   if (source && guiding?.state === 'AVAILABLE' && finite(guiding.rmsTotalArcsec) && guiding.sampleCount > 0) {
     const temporal = guiding.temporalCoverage;
-    const measured = temporal?.methodVersion === 'DSG-GUIDING-LIGHT-TEMPORAL-1.0' && temporal.state === 'AVAILABLE' && finite(temporal.coverage) && temporal.coverage >= 0 && temporal.coverage <= 1 && finite(temporal.lightSeconds) && temporal.lightSeconds > 0 && temporal.clockBasis === 'SHARED_LOCAL_WALL_CLOCK' && temporal.maxGapExposures === 3 && Math.abs(temporal.coverage - temporal.coveredSeconds / temporal.lightSeconds) <= 0.000001 && finite(temporal.coveredSeconds) && temporal.coveredSeconds >= 0 && temporal.coveredSeconds <= temporal.lightSeconds;
+    const measured = ['DSG-GUIDING-LIGHT-TEMPORAL-1.0','DSG-GUIDING-LIGHT-TEMPORAL-1.1'].includes(temporal?.methodVersion) && temporal.state === 'AVAILABLE' && finite(temporal.coverage) && temporal.coverage >= 0 && temporal.coverage <= 1 && finite(temporal.lightSeconds) && temporal.lightSeconds > 0 && temporal.clockBasis === 'SHARED_LOCAL_WALL_CLOCK' && temporal.maxGapExposures === 3 && Math.abs(temporal.coverage - temporal.coveredSeconds / temporal.lightSeconds) <= 0.000001 && finite(temporal.coveredSeconds) && temporal.coveredSeconds >= 0 && temporal.coveredSeconds <= temporal.lightSeconds;
     inputs.push(evidence('GUIDING_STABILITY', guiding.rmsTotalArcsec, 'arcsec', measured ? temporal.coverage : 0, measured ? `${F4_SOURCE_CATALOG_PATH}#${session.sessionId}/guiding/temporalCoverage` : `${source}#phd2`));
   }
 

@@ -6,17 +6,17 @@
 
 | KPI | Valore |
 |---|---:|
-| Pose LIGHT avviate | 23 |
-| Pose LIGHT completate | 22 |
+| Pose LIGHT avviate | 0 |
+| Pose LIGHT completate | 0 |
 | Pose LIGHT fallite esplicitamente | 0 |
-| Pose LIGHT non abbinate/interrotte | 1 |
-| Esposizioni camera totali | 59 |
-| Esposizioni tecniche stimate | 36 |
-| Integrazione LIGHT totale | 3.67 h |
-| Autofocus avviati | 6 |
-| Autofocus completati | 3 |
+| Pose LIGHT non abbinate/interrotte | 0 |
+| Esposizioni camera totali | 0 |
+| Esposizioni tecniche stimate | 0 |
+| Integrazione LIGHT totale | 0.00 h |
+| Autofocus avviati | 0 |
+| Autofocus completati | 0 |
 | Autofocus falliti esplicitamente | 0 |
-| Dither richiesti | 43 |
+| Dither richiesti | 0 |
 | Segmenti di guida PHD2 | 0 |
 | Profili PHD2 | n/d |
 | Campioni guida totali | 0 |
@@ -54,3 +54,12 @@
 
 - `GREEN` o `YELLOW`: archiviazione ordinaria e verifica delle ottimizzazioni.
 - `ORANGE` o `RED`: diagnostica di secondo livello e raccolta dei log specialistici.
+
+
+## Attribuzione temporale
+
+- Metodo: `DSG-MANIFEST-LIGHT-1.0`; manifest: `data/sessions/2026/10/2026-10-17_2026-10-18/manifest.json`.
+- Finestra dichiarata: 2026-10-17T19:00:00+02:00 → 2026-10-18T06:00:00+02:00 (Europe/Rome); inizio incluso, fine esclusa.
+- Le pose sono attribuite in base all’avvio; il completamento della stessa posa può oltrepassare la fine della finestra.
+- Avvii LIGHT esterni esclusi: 23. Log originali conservati.
+- Pacchetto tecnico senza nuove acquisizioni LIGHT; non aggiorna l’ultima osservazione scientifica.

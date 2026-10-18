@@ -18,8 +18,8 @@
 </section>
 
 <section class="dsg-session-kpis" data-session-kpis aria-live="polite">
-  <article><span>SESSIONI</span><strong>—</strong><small>nel catalogo versionato</small></article>
-  <article><span>TARGET</span><strong>—</strong><small>oggetti distinti</small></article>
+  <article><span>REGISTRAZIONI</span><strong>—</strong><small data-session-acquisition-count>nel catalogo versionato</small></article>
+  <article><span>TARGET</span><strong>—</strong><small>oggetti identificati distinti</small></article>
   <article><span>INTEGRAZIONE</span><strong>—</strong><small>ore complessive</small></article>
   <article><span>QUALITÀ</span><strong>—</strong><small>sessioni validate</small></article>
 </section>
@@ -43,14 +43,16 @@
       <option value="">Tutte</option>
       <option value="VALIDATED_ANALYTICS">Validated</option>
       <option value="ATTENTION_REQUIRED">Attention required</option>
+      <option value="METADATA_INCOMPLETE">Metadata incompleti / senza LIGHT</option>
     </select>
   </label>
   <button type="button" data-session-reset>Reimposta</button>
+  <button type="button" data-session-refresh>Aggiorna catalogo</button>
 </section>
 
 <div class="dsg-session-resultbar">
   <span data-session-count>Caricamento catalogo…</span>
-  <span>Fonte: dataset versionati · stato non real-time</span>
+  <span data-session-freshness>Fonte: dataset versionati · aggiornamento ogni 60s a pagina visibile</span>
 </div>
 
 <section class="dsg-session-grid" data-session-grid aria-live="polite">

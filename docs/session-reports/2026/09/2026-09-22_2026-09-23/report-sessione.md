@@ -1,22 +1,22 @@
 # Report sessione 2026-09-22_2026-09-23
 
-**Stato:** `YELLOW`
+**Stato:** `GREEN`
 
 ## Executive summary
 
 | KPI | Valore |
 |---|---:|
-| Pose LIGHT avviate | 41 |
-| Pose LIGHT completate | 38 |
+| Pose LIGHT avviate | 0 |
+| Pose LIGHT completate | 0 |
 | Pose LIGHT fallite esplicitamente | 0 |
-| Pose LIGHT non abbinate/interrotte | 3 |
-| Esposizioni camera totali | 100 |
-| Esposizioni tecniche stimate | 59 |
-| Integrazione LIGHT totale | 6.33 h |
-| Autofocus avviati | 8 |
-| Autofocus completati | 4 |
+| Pose LIGHT non abbinate/interrotte | 0 |
+| Esposizioni camera totali | 0 |
+| Esposizioni tecniche stimate | 0 |
+| Integrazione LIGHT totale | 0.00 h |
+| Autofocus avviati | 0 |
+| Autofocus completati | 0 |
 | Autofocus falliti esplicitamente | 0 |
-| Dither richiesti | 77 |
+| Dither richiesti | 0 |
 | Segmenti di guida PHD2 | 0 |
 | Profili PHD2 | n/d |
 | Campioni guida totali | 0 |
@@ -38,7 +38,7 @@
 
 ## Anomalie e osservazioni
 
-- Pose LIGHT da verificare: fallite=0, non abbinate=3
+- Nessuna anomalia grave rilevata dai criteri v0.2.0.
 
 ## Note metodologiche
 
@@ -54,3 +54,12 @@
 
 - `GREEN` o `YELLOW`: archiviazione ordinaria e verifica delle ottimizzazioni.
 - `ORANGE` o `RED`: diagnostica di secondo livello e raccolta dei log specialistici.
+
+
+## Attribuzione temporale
+
+- Metodo: `DSG-MANIFEST-LIGHT-1.0`; manifest: `data/sessions/2026/09/2026-09-22_2026-09-23/manifest.json`.
+- Finestra dichiarata: 2026-09-22T19:00:00+02:00 → 2026-09-23T06:00:00+02:00 (Europe/Rome); inizio incluso, fine esclusa.
+- Le pose sono attribuite in base all’avvio; il completamento della stessa posa può oltrepassare la fine della finestra.
+- Avvii LIGHT esterni esclusi: 41. Log originali conservati.
+- Pacchetto tecnico senza nuove acquisizioni LIGHT; non aggiorna l’ultima osservazione scientifica.

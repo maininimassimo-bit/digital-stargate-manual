@@ -1,0 +1,33 @@
+# Catalogo e attribuzione alle notti — 18 ottobre 2026
+
+## Problema e perimetro
+
+L’audit del catalogo ha rilevato log N.I.N.A. cumulativi conteggiati integralmente in pacchetti successivi. Il 17–18 ottobre riproponeva gli stessi 23 avvii e 22 completamenti LIGHT del 16–17 ottobre, pur senza nuovi avvii nella propria finestra. Esistono altre sei coppie con eventi identici. La projection pubblica era allineata allo storico: il difetto era a monte della presentazione. Il guard di importazione usava lo stesso parser senza limite temporale e quindi non riconosceva questo caso come no-op.
+
+## Contratto corretto
+
+Metodo `DSG-MANIFEST-LIGHT-1.0`: la finestra è quella **dichiarata nel manifest**, con fuso validato dal parser di sessione esistente, inizio incluso e fine esclusa. Non viene inventata una finestra astronomica più ampia né modificato il manifest. I timestamp N.I.N.A. privi di offset sono interpretati nel timezone_id dichiarato. Si conserva il contesto di connessione della camera e del target precedente all’avvio, ma si attribuiscono i contatori scientifici soltanto agli avvii nella finestra. Un completamento deve avere un avvio posseduto; il completamento della stessa posa può oltrepassare il limite finale. Avvii esterni, calibrazioni e istruzioni senza durata o timestamp valido non possono inventare acquisizioni della notte. Gli eventi timestampati identici ripetuti in più sorgenti non si sommano. Le durate completate sono sommate per posa abbinata, non prendendo i primi N avvii del log.
+
+I campioni PHD2 sono limitati alla finestra dichiarata mediante ancora del segmento e tempo trascorso; restano RMS grezzo convertito con scala pixel, settling escluso e ErrorCode 0/1 ammessi. Campioni ripetuti non duplicano l’RMS. Il metodo di copertura temporale diventa `DSG-GUIDING-LIGHT-TEMPORAL-1.1`: denominatore dalle sole pose attribuite, intersezione con guida valida, nessuna estrapolazione; finestra e SHA-256 del manifest accompagnano la provenienza. La versione 1.0 resta leggibile per compatibilità, senza reinterpretare vecchie misure come nuove. Telemetria meteo e SQM restano descrittive nelle rispettive finestre importate; nessuna Safety Authority o comando agli apparati.
+
+**Limite esplicito:** un avvio dopo la fine dichiarata, anche se astronomicamente vicino alla stessa notte, resta esterno. Il ricalcolo non cancella quell’evidenza dal RAW. Per includerla è necessaria una rettifica fondata del manifest, seguita da nuova elaborazione. Il 14–15 ottobre passa da 58 a56 avvii/completamenti perché due avvii sono oltre la fine dichiarata; il 13–14 ottobre ne esclude uno. Non si estendono automaticamente le finestre per far coincidere i vecchi totali. L’estrattore target preesistente filtra invece gli istanti dei file salvati: una posa avviata prima della fine ma salvata dopo può produrre una differenza esplicita di un frame fra le due popolazioni.
+
+## Riconciliazione e dati conservati
+
+Ricalcolo dei 27 pacchetti con lo stesso analyzer canonico, inclusa la conversione del primo formato legacy. Ricevuta [before/after con hash](evidence/SESSION-NIGHT-RECONCILIATION-2026-10-18.json): sorgenti originali, hash dei normalizzati prima/dopo, finestre e avvii esclusi. RAW e manifest rimangono byte identici alla base bfb76a35; i precedenti normalizzati e report restano recuperabili nella storia Git. La migrazione idempotente `.github/scripts/reconcile-session-night-attribution.py` verifica il drift senza scrivere per default; `--write` aggiorna soltanto i normalizzati effettivamente diversi. Il controllo è collegato a Validate Digital StarGate History.
+
+Risultato alla riconciliazione: **27 registrazioni,22 con avvii LIGHT,5 senza LIGHT,697 completamenti,116,1667 ore**. Prima:964 completamenti e160,6668 ore. Il 22–23 settembre e17–18 ottobre diventano pacchetti senza nuove LIGHT. L’ultima acquisizione torna a NGC281 del16–17 ottobre,22/23 pose,3,67h, RMS0,973arcsec. La classificazione di severità mantiene i criteri esistenti, applicati alle evidenze correttamente attribuite; non si forza GREEN per superare un gate. Le stime sperimentali F4/F5 e gli advisory sono rigenerati e restano privi di authority produttiva.
+
+Sono rigenerati storico consolidato, viste Analytics, proiezioni catalogo/ricerca/confronti/qualità/advisory/equipment, latest observation e27 report Markdown/PDF. Schedulatore EAGLE e trasporto non sono modificati. Alle successive importazioni il guard scoped salta pacchetti senza nuove LIGHT mantenendo byte e mtime delle pubblicazioni scientifiche.
+
+## Consumer catalogo
+
+Il KPI distingue registrazioni da acquisizioni e pacchetti senza LIGHT. UNKNOWN resta ricercabile come dato mancante ma non è un quarto target identificato. RMS, completamento, esposizione e coordinate null non diventano zero; uno zero realmente numerico resta visualizzabile. Un pacchetto senza LIGHT è dichiarato esplicitamente e non viene validato come acquisizione. Ricevute transfer lette dalla collection verificata `SESSION_DOCUMENT_PACKAGE`: indicano l’integrità di log/telemetria/documenti trasferiti, **non** la copia di FITS/RAW fotografici. Gli stati INVALID storici rimangono tali: non sono corretti artificialmente.
+
+Refresh no-store ogni60s mentre la pagina è visibile, al ritorno e con pulsante. Richieste bounded e senza sovrapposizioni, filtri conservati senza duplicare opzioni, nessun aggiornamento di nodi dismessi. Fallimenti rimuovono KPI e schede vecchie; i filtri non possono ripresentarle. Una ricevuta transfer indisponibile non invalida la lettura del catalogo e viene mostrata come indisponibile.
+
+## Verifica, governance e rollback
+
+Test reali di log riproposto e sovrapposizioni storiche; test sintetici di confini inclusivo/esclusivo, durata variabile, completamento oltre fine, sorgenti duplicate e manifest mancante; test browser del markup reale per null/zero, conteggi, ricevute, filtri, refresh e recupero. Verifica idempotenza della riconciliazione, gate di provenienza temporale, suite scientifiche e browser, build strict, ARB indipendente poi Release Quality sull’exact HEAD, CI e verifica postmerge/Pages: esiti e SHA finali attestati nella PR.
+
+Rollback unitario del package di codice e dei derivati riconciliati. Non ripristinare solo il vecchio consumer o solo i vecchi contatori lasciando fonti disallineate. I RAW e i manifest non richiedono rollback perché non sono stati modificati. Roadmap e baseline di avanzamento restano invariate.

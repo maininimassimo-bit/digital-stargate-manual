@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-10-16_2026-10-17",
-  "generated_at": "2026-10-17T06:07:42.683637+00:00",
+  "generated_at": "2026-10-18T10:26:32.780185+02:00",
   "scientific": {
     "target_name": "NGC 281",
     "ra_deg": 13.10416667,
@@ -26,8 +26,20 @@
     "autofocus_failed_explicit": 0,
     "autofocus_unmatched": 3,
     "dither_requests": 43,
-    "nina_errors": 20,
-    "nina_warnings": 69
+    "nina_errors": 1,
+    "nina_warnings": 45,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/10/2026-10-16_2026-10-17/manifest.json",
+      "manifest_sha256": "c62ac5db4826022e860a0ad951d32c7e1babb5b3b8000b0f2c155a99fb09f380",
+      "start_local": "2026-10-16T19:00:00+02:00",
+      "end_local": "2026-10-17T06:00:00+02:00",
+      "start_wall_clock": "2026-10-16T19:00:00",
+      "end_wall_clock": "2026-10-17T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 0
+    }
   },
   "phd2": {
     "guide_segments": 4,

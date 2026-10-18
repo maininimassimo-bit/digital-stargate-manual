@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-10-14_2026-10-15",
-  "generated_at": "2026-10-15T09:21:44.997476+02:00",
+  "generated_at": "2026-10-18T10:26:31.775913+02:00",
   "scientific": {
     "target_name": "NGC 281",
     "ra_deg": 13.10416667,
@@ -14,38 +14,50 @@
     "configuration_id": "QUATTRO200_TOUPTEK294_BIN1"
   },
   "nina": {
-    "camera_exposures_total": 125,
-    "light_started": 58,
-    "light_completed": 58,
+    "camera_exposures_total": 105,
+    "light_started": 56,
+    "light_completed": 56,
     "light_failed_explicit": 0,
     "light_interrupted_unmatched": 0,
-    "technical_exposures_estimated": 67,
-    "integration_seconds": 34800.0,
+    "technical_exposures_estimated": 49,
+    "integration_seconds": 33600.0,
     "autofocus_started": 10,
-    "autofocus_completed": 5,
+    "autofocus_completed": 4,
     "autofocus_failed_explicit": 0,
-    "autofocus_unmatched": 5,
-    "dither_requests": 114,
-    "nina_errors": 28,
-    "nina_warnings": 69
+    "autofocus_unmatched": 6,
+    "dither_requests": 112,
+    "nina_errors": 4,
+    "nina_warnings": 62,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/10/2026-10-14_2026-10-15/manifest.json",
+      "manifest_sha256": "9b831bbb117b1d13d5a9e8a733d765e191d749e8ad016ed07e232919fc7f2639",
+      "start_local": "2026-10-14T19:00:00+02:00",
+      "end_local": "2026-10-15T06:00:00+02:00",
+      "start_wall_clock": "2026-10-14T19:00:00",
+      "end_wall_clock": "2026-10-15T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 2
+    }
   },
   "phd2": {
-    "guide_segments": 6,
-    "guide_samples_total": 15461,
-    "guide_samples_valid": 14974,
+    "guide_segments": 5,
+    "guide_samples_total": 14928,
+    "guide_samples_valid": 14458,
     "guide_samples_saturated": 0,
-    "guide_samples_rejected": 1,
-    "guide_samples_settling_excluded": 486,
+    "guide_samples_rejected": 0,
+    "guide_samples_settling_excluded": 470,
     "guide_samples_unscaled": 0,
     "settling_failures": 3,
     "equipment_profiles": [
       "SW4P_EVO"
     ],
     "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
-    "rms_ra_arcsec": 1.083,
-    "rms_dec_arcsec": 0.79,
-    "rms_total_arcsec": 1.34,
-    "lost_star_events": 1,
+    "rms_ra_arcsec": 1.094,
+    "rms_dec_arcsec": 0.798,
+    "rms_total_arcsec": 1.354,
+    "lost_star_events": 0,
     "pulse_guide_failures": 0
   },
   "weather": {

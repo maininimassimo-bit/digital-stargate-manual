@@ -1,5 +1,7 @@
 # Ultima osservazione e pacchetti senza acquisizione — 16 ottobre 2026
 
+> Rettifica18 ottobre2026: conteggi, ultima sessione e misure citati qui descrivono lo stato storico precedente alla [riconciliazione per finestra manifest](HANDOVER_2026-10-18-CATALOG-NIGHT-RECONCILIATION.md). Il RAW è preservato; usare i derivati riconciliati per lo stato corrente.
+
 ## Richiesta e diagnosi
 
 Owner richiede coordinate dinamiche dall’ultima sessione importata e chiarisce che, senza nuova sessione scientifica, il sistema non deve fare nulla. La notte 15–16 ottobre è stata importata come pacchetto COMPLETE con log/telemetria ma `light_started=0`, `light_completed=0` e coordinate assenti. Il reporter l’ha scelta per data e ha sostituito il riferimento al 14–15 ottobre. Il consumer convertiva `null` con `Number(null)` in 0, presentando una survey centrata a 0°,0° come attiva; inoltre poteva usare un target fisso LDN1320.

@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-09-19_2026-09-20",
-  "generated_at": "2026-09-20T06:11:59.321837+00:00",
+  "generated_at": "2026-10-18T10:26:29.754704+02:00",
   "scientific": {
     "target_name": "M 27",
     "ra_deg": 299.9,
@@ -26,8 +26,20 @@
     "autofocus_failed_explicit": 0,
     "autofocus_unmatched": 6,
     "dither_requests": 31,
-    "nina_errors": 39,
-    "nina_warnings": 71
+    "nina_errors": 34,
+    "nina_warnings": 56,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/09/2026-09-19_2026-09-20/manifest.json",
+      "manifest_sha256": "a815c741135f6f43c05ffb81604ca7447d48c5dd35ca58397737e8f7503dbfec",
+      "start_local": "2026-09-19T19:00:00+02:00",
+      "end_local": "2026-09-20T06:00:00+02:00",
+      "start_wall_clock": "2026-09-19T19:00:00",
+      "end_wall_clock": "2026-09-20T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 0
+    }
   },
   "phd2": {
     "guide_segments": 15,

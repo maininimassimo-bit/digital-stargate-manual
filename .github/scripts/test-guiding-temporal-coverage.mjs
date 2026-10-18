@@ -56,6 +56,7 @@ test('latest real imported logs reproduce the catalog numerator and denominator'
   const latest=catalog.sessions.find(s=>s.sessionId==='2026-10-14_2026-10-15');
   const t=latest.guiding.temporalCoverage;
   const sources=t.sourceRefs.map(r=>({path:r.path,text:readFileSync(r.path,'utf8')}));
-  const actual=build(sources.filter(s=>s.path.includes('/nina/')),sources.filter(s=>s.path.includes('/phd2/')),latest.lightStarted);
-  assert.deepEqual(actual,t);assert.equal(t.lightSeconds,58*600);assert(t.coverage>0&&t.coverage<1);
+  const metrics=JSON.parse(readFileSync(latest.sourceMetricsPath,'utf8'));
+  const actual=build(sources.filter(s=>s.path.includes('/nina/')),sources.filter(s=>s.path.includes('/phd2/')),latest.lightStarted,metrics.nina.acquisition_scope);
+  assert.deepEqual(actual,t);assert.equal(t.lightSeconds,56*600);assert(t.coverage>0&&t.coverage<1);
 });

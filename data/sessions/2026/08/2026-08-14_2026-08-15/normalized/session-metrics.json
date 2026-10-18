@@ -1,7 +1,18 @@
 {
-  "schema_version": "0.1.1",
+  "schema_version": "0.2.0",
   "session_id": "2026-08-14_2026-08-15",
-  "generated_at": "2026-08-15T23:17:00.858807+00:00",
+  "generated_at": "2026-10-18T10:26:20.774494+02:00",
+  "scientific": {
+    "target_name": "M 27",
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "C8_QHY695A_BIN1"
+  },
   "nina": {
     "camera_exposures_total": 127,
     "light_started": 37,
@@ -16,14 +27,36 @@
     "autofocus_unmatched": 5,
     "dither_requests": 72,
     "nina_errors": 13,
-    "nina_warnings": 49
+    "nina_warnings": 49,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/08/2026-08-14_2026-08-15/manifest.json",
+      "manifest_sha256": "8713c8fcf74075aee7c9beae811b7232411c66d84be7c08e327b57dc64b2e1f7",
+      "start_local": "2026-08-14T19:00:00+02:00",
+      "end_local": "2026-08-15T06:00:00+02:00",
+      "start_wall_clock": "2026-08-14T19:00:00",
+      "end_wall_clock": "2026-08-15T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 0
+    }
   },
   "phd2": {
     "guide_segments": 5,
+    "guide_samples_total": 9803,
     "guide_samples_valid": 9513,
-    "rms_ra_arcsec": 0.208,
-    "rms_dec_arcsec": 0.139,
-    "rms_total_arcsec": 0.25,
+    "guide_samples_saturated": 0,
+    "guide_samples_rejected": 0,
+    "guide_samples_settling_excluded": 290,
+    "guide_samples_unscaled": 0,
+    "settling_failures": 0,
+    "equipment_profiles": [
+      "SW4P_EVO"
+    ],
+    "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
+    "rms_ra_arcsec": 0.947,
+    "rms_dec_arcsec": 0.559,
+    "rms_total_arcsec": 1.1,
     "lost_star_events": 0,
     "pulse_guide_failures": 0
   },
@@ -34,8 +67,13 @@
     "weather_unsafe_pct_full_window": 20.58,
     "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
   },
+  "sqm": {
+    "state": "NOT_AVAILABLE",
+    "quality": "NOT_AVAILABLE",
+    "source_path": "data/sessions/2026/08/2026-08-14_2026-08-15/raw/sqm/sqm-summary.json"
+  },
   "severity": "GREEN",
   "severity_reasons": [
-    "Nessuna anomalia grave rilevata dai criteri v0.1.1."
+    "Nessuna anomalia grave rilevata dai criteri v0.2.0."
   ]
 }

@@ -1,30 +1,64 @@
 {
-  "schema_version": "0.1.1",
+  "schema_version": "0.2.0",
   "session_id": "2026-08-15_2026-08-16",
-  "generated_at": "2026-08-16T11:09:54.733776+00:00",
+  "generated_at": "2026-10-18T10:26:21.443357+02:00",
+  "scientific": {
+    "target_name": "M 27",
+    "ra_deg": 299.9,
+    "dec_deg": 22.72111111,
+    "epoch": "J2000",
+    "telescope": "Celestron C8 XLT",
+    "camera": "QHY695A",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "C8_QHY695A_BIN1"
+  },
   "nina": {
-    "camera_exposures_total": 255,
-    "light_started": 71,
-    "light_completed": 69,
+    "camera_exposures_total": 128,
+    "light_started": 34,
+    "light_completed": 32,
     "light_failed_explicit": 0,
     "light_interrupted_unmatched": 2,
-    "technical_exposures_estimated": 184,
-    "integration_seconds": 41400.0,
-    "autofocus_started": 18,
-    "autofocus_completed": 8,
-    "autofocus_failed_explicit": 2,
-    "autofocus_unmatched": 8,
-    "dither_requests": 139,
-    "nina_errors": 38,
-    "nina_warnings": 111
+    "technical_exposures_estimated": 94,
+    "integration_seconds": 19200.0,
+    "autofocus_started": 8,
+    "autofocus_completed": 3,
+    "autofocus_failed_explicit": 1,
+    "autofocus_unmatched": 4,
+    "dither_requests": 67,
+    "nina_errors": 25,
+    "nina_warnings": 62,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/08/2026-08-15_2026-08-16/manifest.json",
+      "manifest_sha256": "21f73688b72f136086f9fdcdbf62ab9fe881c82d2d3f62d9262c6e807bfb1f8d",
+      "start_local": "2026-08-15T19:00:00+02:00",
+      "end_local": "2026-08-16T06:00:00+02:00",
+      "start_wall_clock": "2026-08-15T19:00:00",
+      "end_wall_clock": "2026-08-16T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 37
+    }
   },
   "phd2": {
-    "guide_segments": 11,
-    "guide_samples_valid": 15866,
-    "rms_ra_arcsec": 0.2,
-    "rms_dec_arcsec": 0.122,
-    "rms_total_arcsec": 0.234,
-    "lost_star_events": 0,
+    "guide_segments": 6,
+    "guide_samples_total": 7654,
+    "guide_samples_valid": 7445,
+    "guide_samples_saturated": 1092,
+    "guide_samples_rejected": 5,
+    "guide_samples_settling_excluded": 209,
+    "guide_samples_unscaled": 0,
+    "settling_failures": 4,
+    "equipment_profiles": [
+      "Guide F4 x C8",
+      "SW4P_EVO"
+    ],
+    "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
+    "rms_ra_arcsec": 0.937,
+    "rms_dec_arcsec": 0.507,
+    "rms_total_arcsec": 1.065,
+    "lost_star_events": 5,
     "pulse_guide_failures": 0
   },
   "weather": {
@@ -34,9 +68,14 @@
     "weather_unsafe_pct_full_window": 20.28,
     "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
   },
+  "sqm": {
+    "state": "NOT_AVAILABLE",
+    "quality": "NOT_AVAILABLE",
+    "source_path": "data/sessions/2026/08/2026-08-15_2026-08-16/raw/sqm/sqm-summary.json"
+  },
   "severity": "YELLOW",
   "severity_reasons": [
     "Pose LIGHT da verificare: fallite=0, non abbinate=2",
-    "Autofocus falliti esplicitamente: 2"
+    "Autofocus falliti esplicitamente: 1"
   ]
 }
