@@ -18,7 +18,7 @@
 </section>
 
 <section class="dsg-session-kpis" data-session-kpis aria-live="polite">
-  <article><span>REGISTRAZIONI</span><strong>—</strong><small data-session-acquisition-count>nel catalogo versionato</small></article>
+  <article><span>SESSIONI CON LIGHT</span><strong>—</strong><small data-session-acquisition-count>acquisizioni scientifiche</small></article>
   <article><span>TARGET</span><strong>—</strong><small>oggetti identificati distinti</small></article>
   <article><span>INTEGRAZIONE</span><strong>—</strong><small>ore complessive</small></article>
   <article><span>QUALITÀ</span><strong>—</strong><small>sessioni validate</small></article>
@@ -43,8 +43,12 @@
       <option value="">Tutte</option>
       <option value="VALIDATED_ANALYTICS">Validated</option>
       <option value="ATTENTION_REQUIRED">Attention required</option>
-      <option value="METADATA_INCOMPLETE">Metadata incompleti / senza LIGHT</option>
+      <option value="METADATA_INCOMPLETE">Metadata incompleti</option>
     </select>
+  </label>
+  <label class="dsg-session-technical-toggle">
+    <input type="checkbox" data-session-technical>
+    <span>Mostra pacchetti tecnici</span>
   </label>
   <button type="button" data-session-reset>Reimposta</button>
   <button type="button" data-session-refresh>Aggiorna catalogo</button>
@@ -62,6 +66,9 @@
 <aside class="dsg-session-governance">
   <strong>Regola di governance</strong>
   <p>
+    La vista iniziale include solo sessioni con almeno una LIGHT avviata o completata, comprese le acquisizioni fallite.
+    Il filtro «Mostra pacchetti tecnici» include anche i pacchetti senza acquisizioni; i KPI restano riferiti alle sessioni con LIGHT.
+    Manifest, log e ricevute restano conservati.
     Il Catalogo non certifica automaticamente manifest, transfer o publication state.
     Quando tali stati non sono rappresentati nei dataset sorgente vengono mostrati come non disponibili.
     La ricevuta di transfer riguarda il pacchetto di log, documenti e telemetria; non attesta la copia dei RAW fotografici.

@@ -1,5 +1,9 @@
 # Decision Log
 
+## Catalogo scientifico: pacchetti tecnici opzionali — 18 ottobre 2026
+
+Owner approva vista iniziale con sole LIGHT avviate o completate, comprese acquisizioni fallite. Il filtro «Mostra pacchetti tecnici» aggiunge i record senza acquisizioni; KPI sulle sole sessioni con LIGHT, reset e refresh coerenti. Dataset, manifest, RAW e ricevute conservati; guard no-op invariato. [Contratto, verifica e rollback](HANDOVER_2026-10-18-CATALOG-SCIENTIFIC-VIEW.md). Gate e rilascio attestati nella PR applicabile.
+
 ## Catalogo e finestre scientifiche — rettifica 18 ottobre 2026
 
 Log cumulativi attribuiti alla finestra del manifest, riconciliazione di27 registrazioni con RAW preservati, ultima acquisizione16–17 ottobre e consumer catalogo coerente con missingness e ricevute. [Metodo, limiti di finestra, ledger before/after e rollback](HANDOVER_2026-10-18-CATALOG-NIGHT-RECONCILIATION.md). Le cifre di precedenti handover sono storiche e sono sostituite dalla riconciliazione; roadmap e authority restano invariate. Esiti di review, CI e pubblicazione attestati nella PR.
