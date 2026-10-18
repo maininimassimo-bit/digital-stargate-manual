@@ -24,6 +24,8 @@
     const target = root.querySelector('[data-session-target]');
     const quality = root.querySelector('[data-session-quality]');
     const reset = root.querySelector('[data-session-reset]');
+    const showTechnical = root.querySelector('[data-session-technical]');
+    const hasAcquisition = session => session.lightStarted > 0 || session.lightCompleted > 0;
 
     const state = { sessions: [], filtered: [], transfers: new Map(), available:false };
 
@@ -58,12 +60,15 @@
       return { ra, dec: decValue, source: session.coordinateSource || 'governed-registry' };
     };
 
-    const renderKpis = async () => {
-      const values = await engine.getKPIs(source);
-      const display = [String(values.sessionCount),String(values.targetCount),`${dec(values.integrationHours)} h`,`${values.validatedCount}/${values.sessionCount}`];
-      [...kpis.querySelectorAll('strong')].forEach((node, index) => { node.textContent = display[index] || '—'; });
+    const renderKpis = () => {
+      const sessions = state.sessions.filter(hasAcquisition);
+      const targets = new Set(sessions.map(session => session.target).filter(value => value && !['UNKNOWN','N/A','NA','NOT_AVAILABLE'].includes(String(value).trim().toUpperCase())));
+      const hours = sessions.reduce((sum, session) => sum + (session.integrationHours || 0), 0);
+      const validated = sessions.filter(session => session.qualityState === 'VALIDATED_ANALYTICS').length;
+      const display = [String(sessions.length),String(targets.size),`${dec(hours)} h`,`${validated}/${sessions.length}`];
+      [...kpis.querySelectorAll('strong')].forEach((node, index) => { node.textContent = display[index]; });
       const label=root.querySelector('[data-session-acquisition-count]');
-      if(label)label.textContent=`${values.acquisitionCount} con LIGHT · ${values.noLightCount} senza LIGHT`;
+      if(label)label.textContent=`${state.sessions.length - sessions.length} pacchetti senza acquisizioni consultabili con il filtro`;
     };
 
     const populateFilters = async () => {
@@ -115,14 +120,15 @@
 
     const render = () => {
       if(!state.available)return;
-      state.filtered = engine.filterSessions(state.sessions, {query: search.value,year: year.value,target: target.value,quality: quality.value});
-      count.textContent = `${state.filtered.length} registrazioni visualizzate su ${state.sessions.length}`;
+      const sessions = showTechnical.checked ? state.sessions : state.sessions.filter(hasAcquisition);
+      state.filtered = engine.filterSessions(sessions, {query: search.value,year: year.value,target: target.value,quality: quality.value});
+      count.textContent = showTechnical.checked ? `${state.filtered.length} registrazioni visualizzate su ${sessions.length} · inclusi i pacchetti tecnici` : `${state.filtered.length} sessioni scientifiche visualizzate su ${sessions.length}`;
       grid.innerHTML = state.filtered.length ? state.filtered.map(card).join('') : '<article class="dsg-session-empty">Nessuna sessione corrisponde ai filtri selezionati.</article>';
       events?.emit('scientific-session-explorer-filtered', {source,visible: state.filtered.length,total: state.sessions.length});
     };
 
-    [search, year, target, quality].forEach((control) => control.addEventListener('input', render));
-    reset.addEventListener('click', () => {search.value='';year.value='';target.value='';quality.value='';render();});
+    [search, year, target, quality, showTechnical].forEach((control) => control.addEventListener('input', render));
+    reset.addEventListener('click', () => {search.value='';year.value='';target.value='';quality.value='';showTechnical.checked=false;render();});
 
     let loading=false;
     const refreshButton=root.querySelector('[data-session-refresh]');

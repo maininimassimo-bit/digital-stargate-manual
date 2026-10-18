@@ -26,6 +26,8 @@ Sono rigenerati storico consolidato, viste Analytics, proiezioni catalogo/ricerc
 
 ## Consumer catalogo
 
+> Aggiornamento successivo approvato dall’Owner: [vista scientifica e filtro pacchetti tecnici](HANDOVER_2026-10-18-CATALOG-SCIENTIFIC-VIEW.md). La vista iniziale esclude i pacchetti senza acquisizioni; dataset e ricevute rimangono completi. I KPI si riferiscono alle sole acquisizioni anche quando il filtro tecnico è attivo.
+
 Il KPI distingue registrazioni da acquisizioni e pacchetti senza LIGHT. UNKNOWN resta ricercabile come dato mancante ma non è un quarto target identificato. RMS, completamento, esposizione e coordinate null non diventano zero; uno zero realmente numerico resta visualizzabile. Un pacchetto senza LIGHT è dichiarato esplicitamente e non viene validato come acquisizione. Ricevute transfer lette dalla collection verificata `SESSION_DOCUMENT_PACKAGE`: indicano l’integrità di log/telemetria/documenti trasferiti, **non** la copia di FITS/RAW fotografici. Gli stati INVALID storici rimangono tali: non sono corretti artificialmente.
 
 Refresh no-store ogni60s mentre la pagina è visibile, al ritorno e con pulsante. Richieste bounded e senza sovrapposizioni, filtri conservati senza duplicare opzioni, nessun aggiornamento di nodi dismessi. Fallimenti rimuovono KPI e schede vecchie; i filtri non possono ripresentarle. Una ricevuta transfer indisponibile non invalida la lettura del catalogo e viene mostrata come indisponibile.
