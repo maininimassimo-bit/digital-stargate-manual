@@ -21,14 +21,14 @@ Report generato dallo storico delle sessioni Digital StarGate.
 - ID: `QUATTRO200_TOUPTEK294_BIN1`
 - Telescopio: Sky-Watcher Quattro 200P
 - Camera: ToupTek 294MC PRO
-- Sessioni: **8**
-- Durata complessiva: **93.9702 h**
-- Integrazione complessiva: **67.3333 h**
-- Efficienza di integrazione: **71.65%**
-- Completamento medio: **89.0825%**
+- Sessioni: **9**
+- Durata complessiva: **104.9538 h**
+- Integrazione complessiva: **71 h**
+- Efficienza di integrazione: **67.65%**
+- Completamento medio: **89.8122%**
 - RMS totale medio: **1.069″**
-- Frame: 404 completati, 106 falliti, 510 avviati
-- Periodo: `2026-07-14T18:00:00` – `2026-10-17T03:59:43.0000000Z`
+- Frame: 426 completati, 107 falliti, 533 avviati
+- Periodo: `2026-07-14T18:00:00` – `2026-10-18T03:59:29.0000000Z`
 
 ## UNKNOWN
 
