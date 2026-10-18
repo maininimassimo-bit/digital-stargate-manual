@@ -102,7 +102,7 @@
     metrics.networkLoads += 1;
     emit('load-start', { source });
 
-    entry.promise = fetch(source, { signal })
+    entry.promise = fetch(source, { signal, cache: 'no-store' })
       .then((response) => {
         if (!response.ok) throw new Error(`Catalog request failed: ${response.status}`);
         return response.json();
@@ -179,7 +179,9 @@
     const sessions = entry.catalog.sessions;
     return {
       sessionCount: sessions.length,
-      targetCount: entry.indexes.targets.length,
+        targetCount: entry.indexes.targets.filter(value=>value && !['UNKNOWN','N/A','NA','NOT_AVAILABLE'].includes(String(value).trim().toUpperCase())).length,
+        acquisitionCount: sessions.filter(session=>session.lightStarted>0||session.lightCompleted>0).length,
+        noLightCount: sessions.filter(session=>session.lightStarted===0&&session.lightCompleted===0).length,
       integrationHours: sessions.reduce((sum, session) => sum + Number(session.integrationHours || 0), 0),
       validatedCount: sessions.filter((session) => session.qualityState === 'VALIDATED_ANALYTICS').length
     };

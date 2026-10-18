@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync,readdirSync} from 'node:fs';
+import {dirname,join} from 'node:path';
 import { parseCsvRecord, parseGuideLog } from './phd2-guiding.mjs';
 
 test('parseCsvRecord preserves all PHD2 positional columns', () => {
@@ -11,9 +13,10 @@ test('parseCsvRecord preserves all PHD2 positional columns', () => {
   assert.equal(row[17], '0');
 });
 
-test('parseGuideLog excludes settling and ErrorCode samples and preserves segments', () => {
+test('parseGuideLog scales raw distances, excludes settling and rejected samples, retains saturated and preserves segments', () => {
   const log = [
     'Guiding Begins at 2026-08-10 22:18:22',
+    'Pixel scale = 2.00 arc-sec/px',
     'Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode',
     'INFO: SETTLING STATE CHANGE, Settling started',
     '1,2.137,"Mount",-0.009,0.200,0.093,-0.177,0.500,0.500,0,,0,,,,647845,451.47,0',
@@ -22,7 +25,9 @@ test('parseGuideLog excludes settling and ErrorCode samples and preserves segmen
     '8,15.921,"Mount",-0.158,-0.012,0.138,0.078,0.113,0.200,26,W,0,,,,670723,454.00,0',
     '9,17.933,"Mount",0.217,-0.024,-0.207,-0.072,-0.900,0.900,28,E,0,,,,642406,475.90,2',
     'Guiding Begins at 2026-08-10 23:00:00',
-    '10,19.829,"Mount",-0.183,0.012,0.170,0.067,0.099,-0.100,22,W,0,,,,641874,433.69,0'
+    'Pixel scale = 0.61 arc-sec/px',
+    'Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode',
+    '10,19.829,"Mount",-0.183,0.012,0.170,0.067,0.099,-0.100,22,W,0,,,,641874,433.69,1'
   ].join('\n');
 
   const result = parseGuideLog(log, 'data\\session\\raw\\phd2\\guide.txt');
@@ -32,10 +37,31 @@ test('parseGuideLog excludes settling and ErrorCode samples and preserves segmen
   assert.equal(result.samples.length, 3);
   assert.deepEqual(result.samples.map((sample) => sample.segment), [1, 1, 2]);
   assert.equal(result.samples[0].elapsedSeconds, 13.949);
-  assert.equal(result.samples[0].raArcsec, 0.371);
-  assert.equal(result.samples[1].decArcsec, 0.2);
+  assert.equal(result.samples[0].raArcsec, 1.094);
+  assert.equal(result.samples[1].decArcsec, 0.156);
   assert.equal(result.sourcePath, 'data/session/raw/phd2/guide.txt');
   assert.ok(result.rmsRaArcsec > 0);
   assert.ok(result.rmsDecArcsec > 0);
   assert.ok(result.rmsTotalArcsec > 0);
+});
+
+
+test('missing pixel scale cannot be presented as arcseconds',()=>{
+ const text='Guiding Begins at 2026-10-18 20:00:00\nFrame,Time,mount,RARawDistance,DECRawDistance,ErrorCode\n1,1,"Mount",1,2,0';
+ assert.equal(parseGuideLog(text),null);
+});
+
+test('all imported guide detail RMS and populations match canonical metrics',()=>{
+ const catalog=JSON.parse(readFileSync('docs/data/scientific-session-catalog.json','utf8'));
+ for(const session of catalog.sessions){
+  const metrics=JSON.parse(readFileSync(session.sourceMetricsPath,'utf8'));
+  const dir=join(dirname(dirname(session.sourceMetricsPath)),'raw/phd2');
+  const texts=readdirSync(dir).filter(n=>/^PHD2_GuideLog_.*\.txt$/i.test(n)).sort().map(n=>readFileSync(join(dir,n),'utf8'));
+  const detail=parseGuideLog(texts,'',96,metrics.nina.acquisition_scope);
+  assert.equal(detail?.sampleCount??0,metrics.phd2.guide_samples_valid,session.sessionId);
+  for(const [key,native] of [['rmsRaArcsec','rms_ra_arcsec'],['rmsDecArcsec','rms_dec_arcsec'],['rmsTotalArcsec','rms_total_arcsec']]){
+   if(metrics.phd2[native]===null)assert.equal(detail,null,session.sessionId);
+   else assert(Math.abs(detail[key]-metrics.phd2[native])<=0.001,`${session.sessionId} ${key}: ${detail[key]} vs ${metrics.phd2[native]}`);
+  }
+ }
 });

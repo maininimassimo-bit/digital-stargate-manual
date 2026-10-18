@@ -6,29 +6,29 @@
 
 | KPI | Valore |
 |---|---:|
-| Pose LIGHT avviate | 58 |
-| Pose LIGHT completate | 58 |
+| Pose LIGHT avviate | 56 |
+| Pose LIGHT completate | 56 |
 | Pose LIGHT fallite esplicitamente | 0 |
 | Pose LIGHT non abbinate/interrotte | 0 |
-| Esposizioni camera totali | 125 |
-| Esposizioni tecniche stimate | 67 |
-| Integrazione LIGHT totale | 9.67 h |
+| Esposizioni camera totali | 105 |
+| Esposizioni tecniche stimate | 49 |
+| Integrazione LIGHT totale | 9.33 h |
 | Autofocus avviati | 10 |
-| Autofocus completati | 5 |
+| Autofocus completati | 4 |
 | Autofocus falliti esplicitamente | 0 |
-| Dither richiesti | 114 |
-| Segmenti di guida PHD2 | 6 |
+| Dither richiesti | 112 |
+| Segmenti di guida PHD2 | 5 |
 | Profili PHD2 | SW4P_EVO |
-| Campioni guida totali | 15461 |
-| Campioni guida validi | 14974 |
+| Campioni guida totali | 14928 |
+| Campioni guida validi | 14458 |
 | Campioni saturi inclusi | 0 |
-| Campioni rifiutati | 1 |
-| Campioni esclusi durante settling | 486 |
+| Campioni rifiutati | 0 |
+| Campioni esclusi durante settling | 470 |
 | Settling falliti | 3 |
-| RMS AR | 1.083 arcsec |
-| RMS DEC | 0.79 arcsec |
-| RMS totale | 1.34 arcsec |
-| Lost Star | 1 |
+| RMS AR | 1.094 arcsec |
+| RMS DEC | 0.798 arcsec |
+| RMS totale | 1.354 arcsec |
+| Lost Star | 0 |
 | PulseGuide failures | 0 |
 | SQM minimo | 12.6100 mag/arcsec² |
 | SQM medio | 20.5763 mag/arcsec² |
@@ -54,3 +54,11 @@
 
 - `GREEN` o `YELLOW`: archiviazione ordinaria e verifica delle ottimizzazioni.
 - `ORANGE` o `RED`: diagnostica di secondo livello e raccolta dei log specialistici.
+
+
+## Attribuzione temporale
+
+- Metodo: `DSG-MANIFEST-LIGHT-1.0`; manifest: `data/sessions/2026/10/2026-10-14_2026-10-15/manifest.json`.
+- Finestra dichiarata: 2026-10-14T19:00:00+02:00 → 2026-10-15T06:00:00+02:00 (Europe/Rome); inizio incluso, fine esclusa.
+- Le pose sono attribuite in base all’avvio; il completamento della stessa posa può oltrepassare la fine della finestra.
+- Avvii LIGHT esterni esclusi: 2. Log originali conservati.

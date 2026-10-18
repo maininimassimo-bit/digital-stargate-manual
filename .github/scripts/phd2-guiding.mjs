@@ -53,66 +53,44 @@ const numberOrNull = (value) => {
   return Number.isFinite(parsed) ? parsed : null;
 };
 
-export const parseGuideLog = (text, sourcePath = '', maxPoints = 96) => {
-  const samples = [];
-  let segment = 0;
-  let settling = false;
-
-  for (const line of text.split(/\r?\n/)) {
-    if (line.startsWith('Guiding Begins at ')) {
-      segment += 1;
-      settling = false;
-      continue;
+// Same raw-distance / active pixel-scale population as the canonical analyzer.
+export const parseGuideLog = (text, sourcePath = '', maxPoints = 96, scope = null) => {
+  const samples=[],rawRa=[],rawDec=[],seen=new Map(),countedSegments=new Set();
+  let segment=0;
+  const wall=value=>Date.parse(value.replace(' ','T').replace(/(\.\d{3})\d+$/,'$1')+'Z');
+  const start=scope?wall(scope.start_wall_clock):-Infinity,end=scope?wall(scope.end_wall_clock):Infinity;
+  if(scope&&!(Number.isFinite(start)&&Number.isFinite(end)&&end>start))return null;
+  for(const source of (Array.isArray(text)?text:[text])){
+    let anchor=NaN,active=false,settling=false,scale=null,header=null;
+    for(const line of source.split(/\r?\n/)){
+      const low=line.toLowerCase();
+      if(line.startsWith('Guiding Begins at ')){
+        anchor=wall(line.slice(18));active=true;scale=null;header=null;segment++;
+        if(!scope||(anchor>=start&&anchor<end))countedSegments.add(anchor);
+        continue;
+      }
+      if(line.startsWith('Guiding Ends at ')){active=false;header=null;continue;}
+      const pixel=line.match(/Pixel scale\s*=\s*([\d.]+)\s*arc-sec\/px/i);
+      if(pixel)scale=numberOrNull(pixel[1]);
+      if(low.startsWith('frame,time,')){header=new Map(parseCsvRecord(line).map((name,i)=>[name.trim().toLowerCase(),i]));continue;}
+      if(low.includes('settling started')){settling=true;continue;}
+      if(low.includes('settling complete')||low.includes('settling failed')){settling=false;continue;}
+      if(!active||!header||settling||!(scale>0)||!/^\d+,/.test(line))continue;
+      const row=parseCsvRecord(line),field=name=>row[header.get(name.toLowerCase())];
+      const error=numberOrNull(field('ErrorCode')),elapsed=numberOrNull(field('Time'));
+      const raPixels=numberOrNull(field('RARawDistance')),decPixels=numberOrNull(field('DECRawDistance'));
+      if(![0,1].includes(error)||String(field('mount')).toUpperCase()==='DROP'||elapsed===null||elapsed<0||raPixels===null||decPixels===null)continue;
+      const instant=anchor+elapsed*1000;
+      if(scope&&!(instant>=start&&instant<end))continue;
+      const key=`${anchor}|${field('Frame')}|${field('Time')}`,value=`${raPixels}|${decPixels}|${scale}|${error}`;
+      if(seen.has(key)){if(seen.get(key)!==value)return null;continue;}
+      seen.set(key,value);countedSegments.add(anchor);
+      const raArcsec=raPixels*scale,decArcsec=decPixels*scale;
+      rawRa.push(raArcsec);rawDec.push(decArcsec);
+      samples.push({segment,elapsedSeconds:round(elapsed),raArcsec:round(raArcsec),decArcsec:round(decArcsec),totalArcsec:round(Math.hypot(raArcsec,decArcsec))});
     }
-
-    const low = line.toLowerCase();
-    if (low.includes('settling started')) {
-      settling = true;
-      continue;
-    }
-    if (low.includes('settling complete')) {
-      settling = false;
-      continue;
-    }
-    if (settling || segment === 0 || !/^\d+,\s*[\d.]+,"[^"]+",/.test(line)) continue;
-
-    const row = parseCsvRecord(line);
-    if (row.length <= 17) continue;
-
-    const errorCode = Number(row[17] || 0);
-    if (!Number.isFinite(errorCode) || errorCode !== 0) continue;
-
-    const elapsedSeconds = numberOrNull(row[1]);
-    const raArcsec = numberOrNull(row[7]);
-    const decArcsec = numberOrNull(row[8]);
-    if (elapsedSeconds === null || raArcsec === null || decArcsec === null) continue;
-
-    samples.push({
-      segment,
-      elapsedSeconds: round(elapsedSeconds),
-      raArcsec: round(raArcsec),
-      decArcsec: round(decArcsec),
-      totalArcsec: round(Math.hypot(raArcsec, decArcsec))
-    });
   }
-
-  if (!samples.length) return null;
-
-  const ra = samples.map((sample) => sample.raArcsec);
-  const dec = samples.map((sample) => sample.decArcsec);
-  const total = samples.map((sample) => sample.totalArcsec);
-  const rmsRa = rms(ra);
-  const rmsDec = rms(dec);
-
-  return {
-    sourcePath: String(sourcePath).replaceAll('\\', '/'),
-    sampleCount: samples.length,
-    segmentCount: Math.max(...samples.map((sample) => sample.segment)),
-    rmsRaArcsec: round(rmsRa),
-    rmsDecArcsec: round(rmsDec),
-    rmsTotalArcsec: round(Math.hypot(rmsRa ?? 0, rmsDec ?? 0)),
-    p95TotalArcsec: round(percentile(total, 95)),
-    maxTotalArcsec: round(Math.max(...total)),
-    samples: downsample(samples, maxPoints)
-  };
+  if(!samples.length)return null;
+  const total=rawRa.map((ra,i)=>Math.hypot(ra,rawDec[i])),rmsRa=rms(rawRa),rmsDec=rms(rawDec);
+  return {methodVersion:'PHD2-RAW-PIXELSCALE-1.0',sourcePath:String(sourcePath).replaceAll('\\','/'),sampleCount:samples.length,segmentCount:countedSegments.size,rmsRaArcsec:round(rmsRa),rmsDecArcsec:round(rmsDec),rmsTotalArcsec:round(Math.hypot(rmsRa,rmsDec)),p95TotalArcsec:round(percentile(total,95)),maxTotalArcsec:round(Math.max(...total)),samples:downsample(samples,maxPoints)};
 };

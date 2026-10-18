@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-09-13_2026-09-14",
-  "generated_at": "2026-09-14T12:00:11.763740+00:00",
+  "generated_at": "2026-10-18T10:37:08.468187+02:00",
   "scientific": {
     "target_name": "M 27",
     "ra_deg": 299.9,
@@ -27,7 +27,19 @@
     "autofocus_unmatched": 4,
     "dither_requests": 52,
     "nina_errors": 37,
-    "nina_warnings": 65
+    "nina_warnings": 65,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/09/2026-09-13_2026-09-14/manifest.json",
+      "manifest_sha256": "5a54e4431810559d41c7ee5b049dc4abea7b3ef85c143e320c7b024ef187995c",
+      "start_local": "2026-09-13T19:00:00+02:00",
+      "end_local": "2026-09-14T06:00:00+02:00",
+      "start_wall_clock": "2026-09-13T19:00:00",
+      "end_wall_clock": "2026-09-14T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 0
+    }
   },
   "phd2": {
     "guide_segments": 7,
@@ -46,7 +58,17 @@
     "rms_dec_arcsec": 0.731,
     "rms_total_arcsec": 1.414,
     "lost_star_events": 346,
-    "pulse_guide_failures": 0
+    "pulse_guide_failures": 0,
+    "event_attribution": {
+      "method_version": "DSG-PHD-EVENT-BOUNDS-1.0",
+      "clock_resolution_seconds": 1,
+      "state": "AVAILABLE",
+      "known_counts": {
+        "pulse_guide_failures": 0,
+        "settling_failures": 26
+      },
+      "uncertain_events": []
+    }
   },
   "weather": {
     "weather_rows_total": 3960,

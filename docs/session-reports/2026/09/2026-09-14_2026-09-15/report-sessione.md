@@ -15,7 +15,7 @@
 | Integrazione LIGHT totale | 3.50 h |
 | Autofocus avviati | 14 |
 | Autofocus completati | 6 |
-| Autofocus falliti esplicitamente | 3 |
+| Autofocus falliti esplicitamente | 2 |
 | Dither richiesti | 42 |
 | Segmenti di guida PHD2 | 18 |
 | Profili PHD2 | C8_QHY695A |
@@ -38,7 +38,7 @@
 
 ## Anomalie e osservazioni
 
-- Autofocus falliti esplicitamente: 3
+- Autofocus falliti esplicitamente: 2
 
 ## Note metodologiche
 
@@ -54,3 +54,11 @@
 
 - `GREEN` o `YELLOW`: archiviazione ordinaria e verifica delle ottimizzazioni.
 - `ORANGE` o `RED`: diagnostica di secondo livello e raccolta dei log specialistici.
+
+
+## Attribuzione temporale
+
+- Metodo: `DSG-MANIFEST-LIGHT-1.0`; manifest: `data/sessions/2026/09/2026-09-14_2026-09-15/manifest.json`.
+- Finestra dichiarata: 2026-09-14T19:00:00+02:00 → 2026-09-15T06:00:00+02:00 (Europe/Rome); inizio incluso, fine esclusa.
+- Le pose sono attribuite in base all’avvio; il completamento della stessa posa può oltrepassare la fine della finestra.
+- Avvii LIGHT esterni esclusi: 0. Log originali conservati.

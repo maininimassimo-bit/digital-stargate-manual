@@ -37,6 +37,10 @@ jobs:
 
       - name: Test canonical scientific session evidence
         run: python dsg-analytics/tests/test_scientific_session_evidence.py
+      - name: Test manifest-bound scientific night attribution
+        run: python dsg-analytics/tests/test_night_attribution.py
+      - name: Verify normalized metrics respect their manifest window
+        run: python .github/scripts/reconcile-session-night-attribution.py
 
       - name: Consolidate history
         run: python dsg-analytics/history/consolidate_history.py --mode update

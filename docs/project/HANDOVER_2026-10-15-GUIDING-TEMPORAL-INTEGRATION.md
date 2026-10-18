@@ -1,5 +1,7 @@
 # Copertura temporale della guida — integrazione del 15 ottobre 2026
 
+> Rettifica18 ottobre2026: conteggi, ultima sessione e misure citati qui descrivono lo stato storico precedente alla [riconciliazione per finestra manifest](HANDOVER_2026-10-18-CATALOG-NIGHT-RECONCILIATION.md). Il RAW è preservato; usare i derivati riconciliati per lo stato corrente.
+
 ## Mandato e metodo versionato
 
 Owner autorizza l’integrazione dai log già importati. Questo incremento sostituisce, solo quando misurabile, il sentinel di copertura F4 con `DSG-GUIDING-LIGHT-TEMPORAL-1.0`. Il precedente handover di presentazione resta uno snapshot storico. Il catalogo conserva **schemaVersion 1.5**, aggiungendo il campo facoltativo `guiding.temporalCoverage` con metodo versionato separatamente: i servizi già installati con allowlist 1.5 restano compatibili. Nessun RAW o report storico viene riscritto.

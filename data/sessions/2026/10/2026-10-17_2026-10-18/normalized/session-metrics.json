@@ -1,33 +1,45 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-10-17_2026-10-18",
-  "generated_at": "2026-10-18T06:05:08.829567+00:00",
+  "generated_at": "2026-10-18T10:37:16.384849+02:00",
   "scientific": {
-    "target_name": "NGC 281",
-    "ra_deg": 13.10416667,
-    "dec_deg": 56.565,
-    "epoch": "J2000",
-    "telescope": "Sky-Watcher Quattro 200P",
-    "camera": "ToupTek 294MC PRO",
-    "binning": 1,
+    "target_name": null,
+    "ra_deg": null,
+    "dec_deg": null,
+    "epoch": null,
+    "telescope": null,
+    "camera": null,
+    "binning": null,
     "source": "nina-log",
-    "configuration_id": "QUATTRO200_TOUPTEK294_BIN1"
+    "configuration_id": null
   },
   "nina": {
-    "camera_exposures_total": 59,
-    "light_started": 23,
-    "light_completed": 22,
+    "camera_exposures_total": 0,
+    "light_started": 0,
+    "light_completed": 0,
     "light_failed_explicit": 0,
-    "light_interrupted_unmatched": 1,
-    "technical_exposures_estimated": 36,
-    "integration_seconds": 13200.0,
-    "autofocus_started": 6,
-    "autofocus_completed": 3,
+    "light_interrupted_unmatched": 0,
+    "technical_exposures_estimated": 0,
+    "integration_seconds": 0,
+    "autofocus_started": 0,
+    "autofocus_completed": 0,
     "autofocus_failed_explicit": 0,
-    "autofocus_unmatched": 3,
-    "dither_requests": 43,
-    "nina_errors": 83,
-    "nina_warnings": 88
+    "autofocus_unmatched": 0,
+    "dither_requests": 0,
+    "nina_errors": 63,
+    "nina_warnings": 11,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/10/2026-10-17_2026-10-18/manifest.json",
+      "manifest_sha256": "046c0b73d1f823a8ef918832fe2c6d34646995006c11ccb21b1a719a2d0e8956",
+      "start_local": "2026-10-17T19:00:00+02:00",
+      "end_local": "2026-10-18T06:00:00+02:00",
+      "start_wall_clock": "2026-10-17T19:00:00",
+      "end_wall_clock": "2026-10-18T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 23
+    }
   },
   "phd2": {
     "guide_segments": 0,
@@ -44,7 +56,17 @@
     "rms_dec_arcsec": null,
     "rms_total_arcsec": null,
     "lost_star_events": 0,
-    "pulse_guide_failures": 0
+    "pulse_guide_failures": 0,
+    "event_attribution": {
+      "method_version": "DSG-PHD-EVENT-BOUNDS-1.0",
+      "clock_resolution_seconds": 1,
+      "state": "AVAILABLE",
+      "known_counts": {
+        "pulse_guide_failures": 0,
+        "settling_failures": 0
+      },
+      "uncertain_events": []
+    }
   },
   "weather": {
     "weather_rows_total": 3960,

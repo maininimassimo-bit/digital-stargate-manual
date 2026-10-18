@@ -171,7 +171,8 @@ def test_calibration_exposure_counters(root):
 def test_real_calibration_night():
     folder=ROOT/'data/sessions/2026/10/2026-10-14_2026-10-15/raw/nina'
     parsed=MOD.parse_nina(folder)
-    assert parsed['light_started']==parsed['light_completed']==58,parsed
+    assert parsed['light_started']==parsed['light_completed']==56,parsed
+    assert parsed['acquisition_scope']['excluded_light_starts']==2,parsed
     assert parsed['light_interrupted_unmatched']==parsed['light_failed_explicit']==0,parsed
     assert parsed['scientific']['target_name']=='NGC 281',parsed
 

@@ -1,22 +1,89 @@
 {
+  "schema_version": "0.2.0",
   "session_id": "2026-07-14_2026-07-15",
-  "exposures_started": 146,
-  "exposures_completed": 48,
-  "exposures_failed": 98,
-  "integration_seconds": 28800.0,
-  "autofocus_runs": 24,
-  "autofocus_failures": 2,
-  "dithers": 48,
-  "phd2_guiding_sessions": 28,
-  "phd2_rms_ra_arcsec": 1.0342276449687884,
-  "phd2_rms_dec_arcsec": 1.131515961177653,
-  "phd2_rms_total_arcsec": 1.5329563568534736,
-  "weather_rows": 3960,
-  "weather_unsafe_rows": 1251,
-  "severity": "RED",
-  "notes": [
-    "RMS totale sopra soglia: 1.53 arcsec",
-    "Pose fallite: 98",
-    "Autofocus falliti: 2"
+  "generated_at": "2026-10-18T10:36:49.235748+02:00",
+  "scientific": {
+    "target_name": "LDN 1320",
+    "ra_deg": 63.8,
+    "dec_deg": 85.63305556,
+    "epoch": "J2000",
+    "telescope": "Sky-Watcher Quattro 200P",
+    "camera": "ToupTek 294MC PRO",
+    "binning": 1,
+    "source": "nina-log",
+    "configuration_id": "QUATTRO200_TOUPTEK294_BIN1"
+  },
+  "nina": {
+    "camera_exposures_total": 209,
+    "light_started": 20,
+    "light_completed": 19,
+    "light_failed_explicit": 0,
+    "light_interrupted_unmatched": 1,
+    "technical_exposures_estimated": 189,
+    "integration_seconds": 11400.0,
+    "autofocus_started": 40,
+    "autofocus_completed": 20,
+    "autofocus_failed_explicit": 0,
+    "autofocus_unmatched": 20,
+    "dither_requests": 41,
+    "nina_errors": 13,
+    "nina_warnings": 5,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/07/2026-07-14_2026-07-15/manifest.json",
+      "manifest_sha256": "3f2f990ab609bd9fec28fdde5723f59df56ab06e045c829d94acb88add051ed9",
+      "start_local": "2026-07-14T19:00:00+02:00",
+      "end_local": "2026-07-15T06:00:00+02:00",
+      "start_wall_clock": "2026-07-14T19:00:00",
+      "end_wall_clock": "2026-07-15T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 29
+    }
+  },
+  "phd2": {
+    "guide_segments": 21,
+    "guide_samples_total": 6254,
+    "guide_samples_valid": 5996,
+    "guide_samples_saturated": 0,
+    "guide_samples_rejected": 0,
+    "guide_samples_settling_excluded": 258,
+    "guide_samples_unscaled": 0,
+    "settling_failures": 0,
+    "equipment_profiles": [
+      "SW4P_EVO"
+    ],
+    "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
+    "rms_ra_arcsec": 0.448,
+    "rms_dec_arcsec": 0.618,
+    "rms_total_arcsec": 0.763,
+    "lost_star_events": 0,
+    "pulse_guide_failures": 0,
+    "event_attribution": {
+      "method_version": "DSG-PHD-EVENT-BOUNDS-1.0",
+      "clock_resolution_seconds": 1,
+      "state": "AVAILABLE",
+      "known_counts": {
+        "pulse_guide_failures": 0,
+        "settling_failures": 0
+      },
+      "uncertain_events": []
+    }
+  },
+  "weather": {
+    "weather_rows_total": 3960,
+    "weather_rows_unsafe_full_window": 1251,
+    "weather_safe_transitions_full_window": 2,
+    "weather_unsafe_pct_full_window": 31.59,
+    "weather_scope_note": "Valori riferiti alla finestra CSV importata; non penalizzano la severita finche non sono correlati alla sequenza attiva/cupola aperta."
+  },
+  "sqm": {
+    "state": "NOT_AVAILABLE",
+    "quality": "NOT_AVAILABLE",
+    "source_path": "data/sessions/2026/07/2026-07-14_2026-07-15/raw/sqm/sqm-summary.json"
+  },
+  "severity": "GREEN",
+  "severity_reasons": [
+    "Nessuna anomalia grave rilevata dai criteri v0.2.0."
   ]
 }

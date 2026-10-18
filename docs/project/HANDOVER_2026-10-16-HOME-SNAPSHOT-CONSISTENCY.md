@@ -1,5 +1,7 @@
 # Riepilogo homepage: coerenza e aggiornamento — 16 ottobre 2026
 
+> Rettifica18 ottobre2026: conteggi, ultima sessione e misure citati qui descrivono lo stato storico precedente alla [riconciliazione per finestra manifest](HANDOVER_2026-10-18-CATALOG-NIGHT-RECONCILIATION.md). Il RAW è preservato; usare i derivati riconciliati per lo stato corrente.
+
 ## Diagnosi e significato dei dati
 
 Il badge «Roadmap 13/10/2026 · dati scientifici 16/10/2026» accostava due date diverse senza chiarire che la seconda era la generazione della projection, non la notte acquisita. Roadmap aggiornata il 13 ottobre, package BKL-051 e avanzamento 90% sono coerenti con roadmap-source.json. L’ultima acquisizione scientifica è NGC281 del 14–15 ottobre; latest-observation.json è stato rigenerato il 16 ottobre. Non si cambia alcuna di queste date per far apparire nuove le sorgenti.

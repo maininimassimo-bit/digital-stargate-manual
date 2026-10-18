@@ -1,5 +1,9 @@
 # Digital StarGate Enterprise Architecture Context
 
+## Catalogo e finestre scientifiche — rettifica 18 ottobre 2026
+
+Log cumulativi attribuiti alla finestra del manifest, riconciliazione di27 registrazioni con RAW preservati, ultima acquisizione16–17 ottobre e consumer catalogo coerente con missingness e ricevute. [Metodo, limiti di finestra, ledger before/after e rollback](HANDOVER_2026-10-18-CATALOG-NIGHT-RECONCILIATION.md). Le cifre di precedenti handover sono storiche e sono sostituite dalla riconciliazione; roadmap e authority restano invariate. Esiti di review, CI e pubblicazione attestati nella PR.
+
 ## Riepilogo homepage — coerenza 16 ottobre 2026
 
 Date roadmap, notte di acquisizione e aggiornamento projection distinte; conteggi separati di acquisizioni LIGHT e registrazioni, esclusione target segnaposto, refresh automatico ogni 60s e manuale. Nessuna riscrittura di sorgenti scientifiche o baseline roadmap. [Contratto, audit e verifiche](HANDOVER_2026-10-16-HOME-SNAPSHOT-CONSISTENCY.md); gate exact-head e pubblicazione attestati nella PR.

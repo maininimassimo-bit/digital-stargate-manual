@@ -3,15 +3,15 @@
   "evaluationType": "BKL046_F5_REAL_EVIDENCE_EVALUATION",
   "evaluationState": "F5C_CLOSURE_EVALUATED",
   "identityMethod": "BKL046-F5-CANONICAL-JSON-SHA256-1",
-  "evaluationId": "BKL046-F5C-C158FED046874585D6D6D208",
-  "generatedAt": "2026-10-18T06:05:12.947Z",
+  "evaluationId": "BKL046-F5C-EAFA4DF1FE44A56F25E04695",
+  "generatedAt": "2026-10-18T08:44:22.581Z",
   "producer": "DSG.AiPostProcessingRealEvidenceEvaluator",
   "producerVersion": "2.0.0-f5c",
   "methodId": "BKL046-F5C-CLOSED-EVALUATION-1",
   "sourceSnapshots": {
     "catalog": {
       "path": "docs/data/scientific-session-catalog.json",
-      "digest": "264b719d24e00d2a761d0a69112576b599be18b237edc5a7f17b51b6ad7d348d",
+      "digest": "1de4faebec4fcbf9e4c26851e52f5e2574cb8fd02c385390517e7005e9f6aa93",
       "sessionCount": 27,
       "sessionIds": [
         "2026-07-14_2026-07-15",
@@ -45,9 +45,9 @@
     },
     "f4Projection": {
       "path": "docs/data/ai-post-processing-advisory-projection.json",
-      "digest": "dbbdc5f79de6ceced240a4b47829288303d15c4f36e1a8adfd52384770531437",
-      "projectionId": "BKL046-F4-ECBF6336E3F70FFBAE3453C9",
-      "generatedAt": "2026-10-18T06:05:12.779Z",
+      "digest": "76a42598aa4de0fa13d814bb73215a90fbc0a1cc47634c70bcf8fff087eb299b",
+      "projectionId": "BKL046-F4-04B2EA9F0038DE8914135A9E",
+      "generatedAt": "2026-10-18T08:44:22.381Z",
       "sourceSetDigest": "d0529a1abfe7d607991fc1b6172279bb49c28eaba51ebe03983dae05cc2de9dc",
       "recordCount": 27
     },
@@ -330,11 +330,11 @@
       },
       {
         "target": "NGC 281",
-        "count": 6
+        "count": 4
       },
       {
         "target": "UNKNOWN",
-        "count": 2
+        "count": 4
       }
     ]
   },
@@ -354,5 +354,5 @@
     "Human decisions and execution evidence are separate from scientific outcome quality.",
     "No AI model, provider, confidence score, automatic acceptance, PixInsight apply, device command, production authority or Safety Authority is implemented."
   ],
-  "evaluationDigest": "5ffb5c67c1863a19195d2edfab6f5059931ad62f0c816996bb593134e748d96e"
+  "evaluationDigest": "d005c7a969312ee104f8227a73ef1bcdf650b3148cbdb9e5c901c9f44a7554d9"
 }

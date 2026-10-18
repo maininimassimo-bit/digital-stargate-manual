@@ -6,28 +6,28 @@
 
 | KPI | Valore |
 |---|---:|
-| Pose LIGHT avviate | 57 |
-| Pose LIGHT completate | 57 |
+| Pose LIGHT avviate | 56 |
+| Pose LIGHT completate | 56 |
 | Pose LIGHT fallite esplicitamente | 0 |
 | Pose LIGHT non abbinate/interrotte | 0 |
-| Esposizioni camera totali | 125 |
-| Esposizioni tecniche stimate | 68 |
-| Integrazione LIGHT totale | 9.50 h |
+| Esposizioni camera totali | 123 |
+| Esposizioni tecniche stimate | 67 |
+| Integrazione LIGHT totale | 9.33 h |
 | Autofocus avviati | 12 |
 | Autofocus completati | 6 |
 | Autofocus falliti esplicitamente | 0 |
-| Dither richiesti | 113 |
+| Dither richiesti | 111 |
 | Segmenti di guida PHD2 | 7 |
 | Profili PHD2 | SW4P_EVO |
-| Campioni guida totali | 14950 |
-| Campioni guida validi | 14500 |
+| Campioni guida totali | 14500 |
+| Campioni guida validi | 14061 |
 | Campioni saturi inclusi | 0 |
 | Campioni rifiutati | 0 |
-| Campioni esclusi durante settling | 450 |
+| Campioni esclusi durante settling | 439 |
 | Settling falliti | 6 |
-| RMS AR | 1.056 arcsec |
-| RMS DEC | 1.331 arcsec |
-| RMS totale | 1.699 arcsec |
+| RMS AR | 1.039 arcsec |
+| RMS DEC | 1.282 arcsec |
+| RMS totale | 1.651 arcsec |
 | Lost Star | 0 |
 | PulseGuide failures | 0 |
 | SQM minimo | 11.7000 mag/arcsec² |
@@ -54,3 +54,11 @@
 
 - `GREEN` o `YELLOW`: archiviazione ordinaria e verifica delle ottimizzazioni.
 - `ORANGE` o `RED`: diagnostica di secondo livello e raccolta dei log specialistici.
+
+
+## Attribuzione temporale
+
+- Metodo: `DSG-MANIFEST-LIGHT-1.0`; manifest: `data/sessions/2026/10/2026-10-13_2026-10-14/manifest.json`.
+- Finestra dichiarata: 2026-10-13T19:00:00+02:00 → 2026-10-14T06:00:00+02:00 (Europe/Rome); inizio incluso, fine esclusa.
+- Le pose sono attribuite in base all’avvio; il completamento della stessa posa può oltrepassare la fine della finestra.
+- Avvii LIGHT esterni esclusi: 1. Log originali conservati.

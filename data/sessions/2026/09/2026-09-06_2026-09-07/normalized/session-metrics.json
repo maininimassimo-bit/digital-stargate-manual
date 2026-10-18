@@ -1,7 +1,7 @@
 {
   "schema_version": "0.2.0",
   "session_id": "2026-09-06_2026-09-07",
-  "generated_at": "2026-09-07T06:28:59.709363+00:00",
+  "generated_at": "2026-10-18T10:37:06.386438+02:00",
   "scientific": {
     "target_name": "M 27",
     "ra_deg": 299.9,
@@ -23,20 +23,61 @@
     "integration_seconds": 22200.0,
     "autofocus_started": 22,
     "autofocus_completed": 9,
-    "autofocus_failed_explicit": 6,
-    "autofocus_unmatched": 7,
+    "autofocus_failed_explicit": 4,
+    "autofocus_unmatched": 9,
     "dither_requests": 72,
     "nina_errors": 68,
-    "nina_warnings": 92
+    "nina_warnings": 92,
+    "acquisition_scope": {
+      "method_version": "DSG-MANIFEST-LIGHT-1.0",
+      "manifest_path": "data/sessions/2026/09/2026-09-06_2026-09-07/manifest.json",
+      "manifest_sha256": "9891a555f846bbf680fad3cc345912ee56fed7d3f61c7dd19c63a816c0e1f36a",
+      "start_local": "2026-09-06T19:00:00+02:00",
+      "end_local": "2026-09-07T06:00:00+02:00",
+      "start_wall_clock": "2026-09-06T19:00:00",
+      "end_wall_clock": "2026-09-07T06:00:00",
+      "timezone_id": "Europe/Rome",
+      "interval": "START_INCLUSIVE_END_EXCLUSIVE",
+      "excluded_light_starts": 0
+    }
   },
   "phd2": {
     "guide_segments": 22,
-    "guide_samples_valid": 172,
-    "rms_ra_arcsec": 1.757,
-    "rms_dec_arcsec": 0.519,
-    "rms_total_arcsec": 1.832,
-    "lost_star_events": 0,
-    "pulse_guide_failures": 0
+    "guide_samples_total": 7303,
+    "guide_samples_valid": 6107,
+    "guide_samples_saturated": 5935,
+    "guide_samples_rejected": 765,
+    "guide_samples_settling_excluded": 469,
+    "guide_samples_unscaled": 0,
+    "settling_failures": null,
+    "equipment_profiles": [
+      "C8_QHY695A",
+      "SW4P_EVO"
+    ],
+    "rms_method": "PHD2 RARawDistance/DECRawDistance multiplied by the active segment pixel scale; ErrorCode 0 and STAR_SATURATED (1) included; settling excluded.",
+    "rms_ra_arcsec": 2.505,
+    "rms_dec_arcsec": 1.246,
+    "rms_total_arcsec": 2.797,
+    "lost_star_events": 765,
+    "pulse_guide_failures": 0,
+    "event_attribution": {
+      "method_version": "DSG-PHD-EVENT-BOUNDS-1.0",
+      "clock_resolution_seconds": 1,
+      "state": "PARTIAL",
+      "known_counts": {
+        "pulse_guide_failures": 0,
+        "settling_failures": 42
+      },
+      "uncertain_events": [
+        {
+          "event": "settling_failures",
+          "line": 8104,
+          "earliest": "2026-09-07T05:07:07+02:00",
+          "latest": null,
+          "source": "data/sessions/2026/09/2026-09-06_2026-09-07/raw/phd2/PHD2_GuideLog_2026-09-06_155318.txt"
+        }
+      ]
+    }
   },
   "weather": {
     "weather_rows_total": 3960,
@@ -63,6 +104,6 @@
   },
   "severity": "YELLOW",
   "severity_reasons": [
-    "Autofocus falliti esplicitamente: 6"
+    "Autofocus falliti esplicitamente: 4"
   ]
 }
