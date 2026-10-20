@@ -16,3 +16,8 @@
 }
 .dsg-transients [data-dsg-dark-dispersion] { min-width: 0; overflow-wrap: anywhere; }
 .dsg-transients [data-dsg-dark-dispersion] input[type="file"] { max-width: 100%; box-sizing: border-box; }
+.dsg-transients [data-dsg-campaign-owner] { min-width: 0; overflow-wrap: anywhere; }
+.dsg-transients [data-dsg-campaign-owner] input[type="file"] { max-width: 100%; box-sizing: border-box; }
+.dsg-transients [data-dsg-campaign-owner] [role="region"] { max-width: 100%; overflow-x: auto; }
+.dsg-transients [data-dsg-campaign-owner] code { white-space: normal; overflow-wrap: anywhere; }
+.dsg-transients [data-dsg-campaign-owner] :is(button,select,input):focus-visible { outline: 3px solid var(--md-accent-fg-color); outline-offset: 3px; }

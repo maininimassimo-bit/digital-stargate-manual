@@ -139,7 +139,7 @@
     if(!root)return;
     const q=name=>root.querySelector(`[data-dsg-transients-${name}]`);
     let token='', tokenExpiresAt=0, busy=false, controller, disposed=false, epoch=0, url;
-    let bindings=[],jobs=[],ready=false,pending=null,storageBlocked=false,retryAllowed=false;
+    let bindings=[],jobs=[],ready=false,pending=null,storageBlocked=false,retryAllowed=false,campaigns=null;
     try {const stored=sessionStorage.getItem(pendingKey);if(stored!==null){require(stored.length<=2048);pending=inspectPending(JSON.parse(stored));}}
     catch {storageBlocked=true;}
     const current=()=>!disposed&&root.isConnected;
@@ -151,17 +151,20 @@
       if(!current())return;
       q('connect').disabled=busy;q('refresh').disabled=busy||!token;q('disconnect').disabled=!token;
       for(const button of q('jobs').querySelectorAll('button'))button.disabled=busy||!token;
-      const blocked=busy||!token||!ready||storageBlocked||Boolean(pending);
+      const baseBlocked=busy||!token||!ready||storageBlocked||Boolean(pending),campaignBlocked=Boolean(campaigns?.hasPending());
+      const blocked=baseBlocked||campaignBlocked;
       q('group').disabled=blocked;q('verified').disabled=blocked;
       q('create').disabled=blocked||!q('verified').checked||!bindings.some(b=>b.bindingRef===q('group').value);
       for(const control of q('jobs').querySelectorAll('select'))control.disabled=blocked;
       for(const control of q('jobs').querySelectorAll('input'))control.disabled=blocked;
-      for(const button of q('jobs').querySelectorAll('button'))if(button.dataset.mutation)button.disabled=blocked;
-      q('retry').disabled=busy||!token||!ready||storageBlocked||!pending||!retryAllowed;
+      for(const button of q('jobs').querySelectorAll('button'))if(button.dataset.mutation)
+        button.disabled=baseBlocked||(campaignBlocked&&button.dataset.action!=='CANCEL');
+      q('retry').disabled=busy||!token||!ready||storageBlocked||!pending||!retryAllowed||(campaignBlocked&&pending?.action!=='CANCEL');
+      campaigns?.update({authorized:Boolean(token),busy,queueBlocked:storageBlocked||Boolean(pending)});
       q('pending').textContent=storageBlocked?'La memoria della richiesta non è verificabile. Nessun nuovo comando è consentito; conserva questa sessione per il recupero supervisionato.':
         pending?(token?'Richiesta conservata: '+pending.action+' · '+pending.jobId+'. Aggiorna lo stato prima di ripetere lo stesso comando.':'Una richiesta è conservata in questa sessione. Accedi per verificarne lo stato.') : '';
     }
-    function disconnect() {epoch++;token='';tokenExpiresAt=0;controller?.abort();clear();q('signin').replaceChildren();
+    function disconnect() {epoch++;token='';tokenExpiresAt=0;controller?.abort();clear();campaigns?.reset();q('signin').replaceChildren();
       message('Accesso terminato. Le evidenze sul PC e sul servizio sono conservate.');lock();}
     function usableAccess() {
       if(!current()||!token)return false;
@@ -169,7 +172,7 @@
       disconnect();message('Accesso scaduto o prossimo alla scadenza. Accedi di nuovo con l’account Owner. Le richieste conservate restano da verificare.');
       return false;
     }
-    active={root,dispose(){disposed=true;epoch++;token='';tokenExpiresAt=0;controller?.abort();clear();q('signin').replaceChildren();}};
+    active={root,dispose(){disposed=true;epoch++;token='';tokenExpiresAt=0;controller?.abort();clear();campaigns?.dispose();q('signin').replaceChildren();}};
     const el=(tag,text,parent)=>{const node=document.createElement(tag);node.textContent=text;parent.append(node);return node;};
     function download(job) {
       if(!current()||!token||busy)return;
@@ -206,7 +209,7 @@
         el('p','Esecuzione comunicata dal PC, senza attestazione indipendente. Validazione scientifica non completata. Immagini e rapporto completo restano sul PC; nessuna pubblicazione.',card);
         const button=el('button','Scarica ricevuta dello stato',card);button.type='button';button.addEventListener('click',()=>download(job));
         if(!['COMPLETED','FAILED','CANCELLED','RECOVERY_REQUIRED'].includes(job.state)&&!job.cancelRequested) {
-          const cancel=el('button','Richiedi annullamento',card);cancel.type='button';cancel.dataset.mutation='true';
+          const cancel=el('button','Richiedi annullamento',card);cancel.type='button';cancel.dataset.mutation='true';cancel.dataset.action='CANCEL';
           cancel.addEventListener('click',()=>run(()=>start('CANCEL',job,{})));
         }
         if(job.state==='RECOVERY_REQUIRED'&&!job.recoveryClosure) {
@@ -234,7 +237,11 @@
       q('observed').textContent='Consultazione aggiornata ora. Nessun controllo periodico; il PC potrebbe avere uno stato successivo.';
     }
     async function call(path,method='GET',body) {
-      require(path==='/options'||path==='/jobs'||/^\/jobs\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery)$/.test(path));
+      const campaignMetadataPath=/^\/campaigns(?:\/inputs\/[a-f0-9]{32}(?:\/review)?|\/[a-f0-9]{32}(?:\/(?:freeze|review-outcome|finalize|revoke|review-receipt))?)?$/.test(path);
+      const campaignRead=/^\/campaigns\/[a-f0-9]{32}\/(?:inputs\/[a-f0-9]{32}\/dispatch-context|dispatch-intents\/[a-f0-9]{64}\/jobs\/[0-2]\/technical-context)$/.test(path);
+      const campaignWrite=/^\/campaigns\/[a-f0-9]{32}\/dispatch-intents(?:\/[a-f0-9]{64}\/jobs\/[0-2]\/project)?$/.test(path);
+      const campaignPath=campaignMetadataPath||(method==='GET'&&campaignRead)||(method==='POST'&&campaignWrite);
+      require(path==='/options'||path==='/jobs'||/^\/jobs\/TRN_[a-f0-9]{32}\/(?:cancel|review|close-recovery)$/.test(path)||campaignPath);
       if(!usableAccess())return null;
       const session=epoch,credential=token;require(current()&&credential);controller=new AbortController();
       const requestController=controller;
@@ -244,7 +251,7 @@
           redirect:'error',signal:requestController.signal,headers:{Authorization:'Bearer '+credential,...(method==='POST'?{'Content-Type':'application/json'}:{})},
           ...(method==='POST'?{body:JSON.stringify(body)}:{})});
         require(current()&&session===epoch);
-        if(response.status===404){clear();message('Il servizio di analisi non è attivato. Nessuna nuova analisi è stata avviata dalla pagina; eventuali richieste conservate restano da verificare.');return null;}
+        if(response.status===404){if(!campaignPath){clear();message('Il servizio di analisi non è attivato. Nessuna nuova analisi è stata avviata dalla pagina; eventuali richieste conservate restano da verificare.');}return null;}
         if(response.status===401||response.status===403){disconnect();message('Accesso non autorizzato o scaduto. Accedi di nuovo con l’account Owner.');return null;}
         if(!response.ok)throw new Error('Servizio non disponibile. Premi Aggiorna stato per una nuova consultazione.');
         require((response.headers.get('Content-Type')||'').split(';')[0].trim()==='application/json');
@@ -302,7 +309,7 @@
     }
     async function start(action,job,body) {
       if(!usableAccess())return;
-      require(ready&&!pending&&!storageBlocked&&token);
+      require(ready&&!pending&&!storageBlocked&&token&&(!campaigns?.hasPending()||action==='CANCEL'));
       try {require(sessionStorage.getItem(pendingKey)===null);}catch{storageBlocked=true;throw Error('Storage unavailable');}
       pending=inspectPending({kind:'BKL051_OWNER_PENDING_ACTION_V1',action,jobId:job.jobId,binding:job.binding,body});
       try {const text=JSON.stringify(pending);sessionStorage.setItem(pendingKey,text);require(sessionStorage.getItem(pendingKey)===text);}
@@ -310,7 +317,7 @@
       await send();
     }
     async function send() {
-      require(pending&&!storageBlocked&&token&&ready);
+      require(pending&&!storageBlocked&&token&&ready&&(!campaigns?.hasPending()||pending.action==='CANCEL'));
       verifyStoredIntent();
       retryAllowed=false;ready=false;lock();
       const path=pending.action==='CREATE'?'/jobs':'/jobs/'+pending.jobId+'/'+(pending.action==='CANCEL'?'cancel':pending.action==='RECOVERY'?'close-recovery':'review');
@@ -327,6 +334,15 @@
         'Consultazione non riuscita o ricevuta non valida. Nessun risultato mostrato; richiesta conservata. Aggiorna lo stato prima di riprovare manualmente.':
         'Consultazione non riuscita o ricevuta non valida. Nessun risultato mostrato; riprova manualmente.');}}
       finally {busy=false;lock();}
+    }
+    if(globalThis.DSGCampaignOwner){
+      const panel=root.querySelector('[data-dsg-campaign-owner]');
+      if(panel)campaigns=globalThis.DSGCampaignOwner.mount(panel,{request:call,run,canAct:usableAccess,changed:lock,
+        canMutate(){
+          if(!usableAccess()||pending||storageBlocked)return false;
+          try{require(sessionStorage.getItem(pendingKey)===null);return true;}
+          catch{storageBlocked=true;lock();return false;}
+        }});
     }
     q('refresh').addEventListener('click',()=>run(refresh));q('disconnect').addEventListener('click',disconnect);
     q('group').addEventListener('change',()=>{q('verified').checked=false;
@@ -346,7 +362,7 @@
       const loginEpoch=++epoch;
       google.accounts.id.initialize({client_id:CLIENT,callback:response=>{
         if(!current()||loginEpoch!==epoch||typeof response.credential!=='string'||!response.credential)return;
-        run(async()=>{clear();token='';tokenExpiresAt=0;tokenExpiresAt=credentialExpiry(response.credential);token=response.credential;lock();await refresh();});
+        run(async()=>{clear();campaigns?.reset();token='';tokenExpiresAt=0;tokenExpiresAt=credentialExpiry(response.credential);token=response.credential;lock();await refresh();});
       }});
       q('signin').replaceChildren();google.accounts.id.renderButton(q('signin'),{theme:'outline',size:'large'});
       message('Accedi con l’account Owner per leggere lo stato privato.');

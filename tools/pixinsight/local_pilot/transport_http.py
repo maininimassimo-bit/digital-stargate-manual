@@ -29,7 +29,7 @@ def google_owner(token, client_id, owner_email, *, request=None):
 
 
 def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scientific=None,
-                transient=None, transient_worker_digest=None, campaigns=None):
+                transient=None, transient_worker_digest=None, campaigns=None, *, campaign_queue=None):
     require(re.fullmatch(r"[a-f0-9]{64}", worker_digest) is not None, "WORKER_DIGEST_INVALID")
     if transient is not None or campaigns is not None:
         require(isinstance(transient_worker_digest, str) and
@@ -38,6 +38,11 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
     if campaigns is not None:
         require(transient is not None and campaigns.worker_id == transient.worker_id,
                 'CAMPAIGN_TRANSIENT_WORKER_BINDING')
+    if campaign_queue is not None:
+        from tools.scientific_transients.campaign_queue import CampaignQueue
+        require(type(campaign_queue) is CampaignQueue and campaign_queue.campaigns is campaigns
+                and campaign_queue.queue is transient, 'CAMPAIGN_QUEUE_HTTP_COMPOSITION')
+        campaign_queue._assert_composition()
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
             pass
@@ -126,11 +131,54 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 self.authenticate(is_campaign_worker, transient_worker_digest)
                 if campaigns is None:
                     return self.reject(404, {'error':'NOT_FOUND'})
+                protected = re.fullmatch(
+                    (campaign_worker if is_campaign_worker else campaign_base) +
+                    r'/([a-f0-9]{32})/(dispatch-intents(?:/([a-f0-9]{64})/(receipt|jobs/([0-2])/(project|unreserved-context|close-unreserved|reserve-once|technical-context)))?|frame-closures)', path)
+                if protected:
+                    if campaign_queue is None:
+                        return self.reject(404, {'error':'NOT_FOUND'})
+                    plan_ref, action, intent_sha, tail, ordinal, job_action = protected.groups()
+                    if not is_campaign_worker:
+                        if action == 'dispatch-intents' and self.command == 'POST':
+                            return self.send(200, campaign_queue.prepare_dispatch(plan_ref, self.body()))
+                        if job_action == 'technical-context' and self.command == 'GET':
+                            return self.send(200, campaign_queue.technical_context(plan_ref, intent_sha, int(ordinal)))
+                        if tail == 'receipt' and self.command == 'GET':
+                            return self.send(200, campaign_queue.dispatch_receipt(plan_ref, intent_sha))
+                        if job_action == 'project' and self.command == 'POST':
+                            require(self.body() == {}, 'REQUEST_FIELDS')
+                            return self.send(200, campaign_queue.project(plan_ref, intent_sha, int(ordinal)))
+                        if job_action == 'unreserved-context' and self.command == 'GET':
+                            return self.send(200, campaign_queue.unreserved_context(plan_ref, intent_sha, int(ordinal)))
+                        if job_action == 'close-unreserved' and self.command == 'POST':
+                            return self.send(200, campaign_queue.close_unreserved(plan_ref, intent_sha, int(ordinal), self.body()))
+                    elif self.command == 'GET' and job_action == 'technical-context':
+                        return self.send(200, campaign_queue.technical_context(plan_ref, intent_sha, int(ordinal)))
+                    elif self.command == 'POST':
+                        if action == 'frame-closures':
+                            event = campaign_queue.close_frame(plan_ref, self.body())
+                            return self.send(200, {
+                                'protocol': 'DSG_CAMPAIGN_FRAME_CLOSURE_RECEIPT_V1',
+                                'closureSha256': event['sha256'],
+                                'admissionSha256': event['request']['admissionSha256'],
+                                'status': event['request']['technicalState'],
+                                'nativeStoppedAttested': False,
+                                'scientificValidation': 'NOT_VALIDATED'})
+                        if job_action == 'reserve-once':
+                            value = self.body()
+                            require(type(value) is dict and set(value) == {'protocol', 'decisionId', 'reservation'}
+                                    and value['protocol'] == 'DSG_CAMPAIGN_RESERVATION_V1', 'REQUEST_FIELDS')
+                            return self.send(200, campaign_queue.reserve_envelope(
+                                plan_ref, intent_sha, int(ordinal), value['reservation'], value['decisionId']))
+                    return self.reject(404, {'error':'NOT_FOUND'})
                 if self.command == 'POST' and path == campaign_worker + '/inputs':
                     return self.send(200, campaigns.register_inputs(self.body()))
                 if not is_campaign_worker and path == campaign_base:
                     if self.command == 'POST': return self.send(200, campaigns.create(self.body()))
                     if self.command == 'GET': return self.send(200, campaigns.view())
+                match = re.fullmatch(campaign_base + r'/([a-f0-9]{32})/inputs/([a-f0-9]{32})/dispatch-context', path)
+                if match and self.command == 'GET':
+                    return self.send(200, campaigns.dispatch_context(*match.groups()))
                 match = re.fullmatch(campaign_base + r'/inputs/([a-f0-9]{32})(/review)?', path)
                 if match:
                     witness_ref, action = match.groups()
@@ -141,11 +189,13 @@ def handler_for(broker, authenticate_owner, portal_origin, worker_digest, scient
                 match = re.fullmatch(campaign_worker + r'/([a-f0-9]{32})/executions', path)
                 if match and self.command == 'POST':
                     return self.send(200, campaigns.record_execution(match[1], self.body()))
-                match = re.fullmatch(campaign_base + r'/([a-f0-9]{32})(?:/(freeze|review-outcome|finalize|revoke))?', path)
+                match = re.fullmatch(campaign_base + r'/([a-f0-9]{32})(?:/(freeze|review-outcome|finalize|revoke|review-receipt))?', path)
                 if match:
                     plan_ref, action = match.groups()
                     if self.command == 'GET' and action is None:
                         return self.send(200, campaigns.view(plan_ref))
+                    if self.command == 'GET' and action == 'review-receipt':
+                        return self.send(200, campaigns.review_receipt(plan_ref))
                     actions = {'freeze':campaigns.freeze, 'review-outcome':campaigns.review_outcome,
                                'finalize':campaigns.finalize, 'revoke':campaigns.revoke}
                     if self.command == 'POST' and action in actions:
