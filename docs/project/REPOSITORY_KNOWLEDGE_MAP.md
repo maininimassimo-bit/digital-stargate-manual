@@ -1,5 +1,10 @@
 # Repository Knowledge Map
 
+## BKL-051 allineamento al 20 ottobre 2026
+
+[Stato tecnico consolidato e predisposizione DSG Astro Intelligence](BKL-051-TECHNICAL-ALIGNMENT-2026-10-20.md): codice ee40d7a9 con 64 test sintetici PASS, 24 CI SUCCESS e ARB poi RQ APPROVED limitatamente ai sei file della correzione hash. Nuova prova nativa ancora da svolgere; prototipo estrattivo locale con dieci test PASS, senza modello o integrazione runtime. Milestone OPEN / NOT_VALIDATED, zero nuovi controlli nulli reali qualificati su 59 richiesti. Le sezioni sottostanti restano snapshot storici per il proprio ambito.
+
+
 ## Copertura temporale di guida — integrazione candidata 15 ottobre 2026
 
 Metodo versionato da intervalli LIGHT N.I.N.A. e campioni PHD2 sul clock locale condiviso, con provenienza SHA-256 e missingness esplicita. Catalogo 1.5 con campo additivo e aggiornamento automatico dopo importazione; F4/F5 sperimentali, nessuna nuova authority. [Metodo, audit, limiti e rollback](HANDOVER_2026-10-15-GUIDING-TEMPORAL-INTEGRATION.md). Il risultato preliminare sulla presenza degli orari non è una misura pubblicabile senza i controlli di coerenza.

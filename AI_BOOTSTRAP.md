@@ -1,5 +1,10 @@
 # Digital StarGate AI Bootstrap
 
+## BKL-051 allineamento al 20 ottobre 2026
+
+[Stato tecnico consolidato e predisposizione DSG Astro Intelligence](docs/project/BKL-051-TECHNICAL-ALIGNMENT-2026-10-20.md): codice ee40d7a9 con 64 test sintetici PASS, 24 CI SUCCESS e ARB poi RQ APPROVED limitatamente ai sei file della correzione hash. Nuova prova nativa ancora da svolgere; prototipo estrattivo locale con dieci test PASS, senza modello o integrazione runtime. Milestone OPEN / NOT_VALIDATED, zero nuovi controlli nulli reali qualificati su 59 richiesti. Le sezioni sottostanti restano snapshot storici per il proprio ambito.
+
+
 ## BKL-051 — dispersione locale dei dark, 15 ottobre 2026
 
 Misurata localmente la dispersione dei 50 dark del2024, con tre mappe Float64,

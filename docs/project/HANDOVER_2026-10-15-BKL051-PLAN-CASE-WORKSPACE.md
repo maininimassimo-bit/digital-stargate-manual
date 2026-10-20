@@ -1,5 +1,10 @@
 # Handover BKL-051 — piano e scheda unificata del caso
 
+## BKL-051 allineamento al 20 ottobre 2026
+
+[Stato tecnico consolidato e predisposizione DSG Astro Intelligence](BKL-051-TECHNICAL-ALIGNMENT-2026-10-20.md): codice ee40d7a9 con 64 test sintetici PASS, 24 CI SUCCESS e ARB poi RQ APPROVED limitatamente ai sei file della correzione hash. Nuova prova nativa ancora da svolgere; prototipo estrattivo locale con dieci test PASS, senza modello o integrazione runtime. Milestone OPEN / NOT_VALIDATED, zero nuovi controlli nulli reali qualificati su 59 richiesti. Le sezioni sottostanti restano snapshot storici per il proprio ambito.
+
+
 ## Aggiornamento — prova reale e accesso Owner
 
 PR594 e PR596 rilasciate; prova reale successiva interrotta dopo un completamento diagnostico collegato al piano. La scheda corrente contiene un tentativo, copertura incompleta e zero controlli qualificati; le schede precedenti senza tentativi restano storiche. Seconda richiesta non confermata per rifiuto di accesso: preservare la sessione e riconciliare prima di ripetere. Traffico, configurazione e IAM ripristinati. Candidato locale previene richieste con credenziale scaduta o prossima alla scadenza; gate del successore e nuova finestra operativa restano da autorizzare/verificare. [Dettagli](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). I paragrafi seguenti conservano gli snapshot precedenti.

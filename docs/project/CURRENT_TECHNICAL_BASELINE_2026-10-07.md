@@ -1,5 +1,10 @@
 # Current Technical Baseline — 2026-10-07
 
+## BKL-051 allineamento al 20 ottobre 2026
+
+[Stato tecnico consolidato e predisposizione DSG Astro Intelligence](BKL-051-TECHNICAL-ALIGNMENT-2026-10-20.md): codice ee40d7a9 con 64 test sintetici PASS, 24 CI SUCCESS e ARB poi RQ APPROVED limitatamente ai sei file della correzione hash. Nuova prova nativa ancora da svolgere; prototipo estrattivo locale con dieci test PASS, senza modello o integrazione runtime. Milestone OPEN / NOT_VALIDATED, zero nuovi controlli nulli reali qualificati su 59 richiesti. Le sezioni sottostanti restano snapshot storici per il proprio ambito.
+
+
 ## BKL-051 — accesso e prova diagnostica, 15 ottobre 2026
 
 PR596 rilasciata e prova autorizzata interrotta dopo una esecuzione diagnostica collegata al piano: seconda richiesta non confermata per rifiuto di accesso, nessun reinvio, ripristino completo di traffico/configurazione/IAM. Candidato frontend previene richieste con accesso scaduto o prossimo alla scadenza; 49 test locali PASS, gate exact-head e rilascio del successore ancora necessari. [Stato, limiti e residui](BKL-051-OWNER-SESSION-EXPIRY-2026-10-15.md). Copertura 1/3, zero controlli qualificati; milestone OPEN / NOT_VALIDATED, 37% indicativo. Snapshot successivi storici.
