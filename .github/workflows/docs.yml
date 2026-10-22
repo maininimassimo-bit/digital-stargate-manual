@@ -62,7 +62,8 @@ jobs:
       - name: Configura Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          # Match the tested portal runtime; 3.x selected 3.15 without pyarrow wheels.
+          python-version: "3.13"
           cache: pip
 
       - name: Installa dipendenze
