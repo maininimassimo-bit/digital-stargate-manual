@@ -43,6 +43,8 @@ jobs:
         run: python .github/scripts/verify-published-site.py --site site --base-path /digital-stargate-manual/
       - name: Navigation coverage
         run: python .github/scripts/verify-immersive-navigation.py
+      - name: BKL-042 chat error messages (synthetic gateway)
+        run: node .github/scripts/test-bkl042-chat-errors.cjs
       - name: Browser regression (live providers blocked)
         env:
           DSG_TEST_BASE_URL: http://127.0.0.1:8766/

@@ -90,7 +90,17 @@
       });
       const payload = await response.json();
       render(payload);
-      authStatus.textContent = response.ok ? 'Risposta bounded read-only ricevuta.' : `Richiesta non completata (${response.status}).`;
+      const errors = {
+        SOURCE_TOO_LARGE: 'Una fonte supera il limite di lettura del servizio. È necessario un aggiornamento tecnico.',
+        SOURCE_UNAVAILABLE: 'Una fonte documentale è temporaneamente non disponibile.',
+        SOURCE_INVALID: 'Una fonte documentale non rispetta il formato previsto.',
+        PILOT_REQUEST_LIMIT_REACHED: 'Il limite di richieste del pilota è stato raggiunto.',
+        RUNTIME_NOT_READY: 'Il servizio IA non è pronto.',
+        PROVIDER_REQUEST_FAILED: 'Il fornitore IA non ha completato la richiesta.',
+        PROVIDER_RESPONSE_INVALID: 'La risposta IA non rispetta il formato previsto.',
+        INVALID_GOOGLE_ID_TOKEN: 'Accesso Google scaduto o non valido. Accedi nuovamente.'
+      };
+      authStatus.textContent = response.ok ? 'Risposta bounded read-only ricevuta.' : errors[payload.error] || `Richiesta non completata (${response.status}).`;
     } catch (_) {
       authStatus.textContent = 'Servizio temporaneamente non disponibile; nessuna risposta è stata prodotta.';
       render({ state: 'NON DISPONIBILE', answer: 'Riprova più tardi.', command_authority: 'NONE', safety_authority: 'NONE' });

@@ -100,7 +100,16 @@ def forward(payload: dict[str, Any], google_token: str) -> tuple[int, dict[str, 
         with urllib.request.urlopen(request, timeout=60) as response:
             return response.status, _json_response(response)
     except urllib.error.HTTPError as exc:
-        return exc.code, {"error": "PRIVATE_RELAY_REQUEST_FAILED"}
+        # Forward only known public diagnostic codes, never upstream bodies.
+        code = "PRIVATE_RELAY_REQUEST_FAILED"
+        try:
+            data = json.loads(exc.read(4096).decode("utf-8"))
+            candidate = data.get("error") if isinstance(data, dict) else None
+            if isinstance(candidate, str) and candidate in {"SOURCE_TOO_LARGE", "SOURCE_UNAVAILABLE", "SOURCE_INVALID", "PILOT_REQUEST_LIMIT_REACHED", "RUNTIME_NOT_READY", "PROVIDER_REQUEST_FAILED", "PROVIDER_RESPONSE_INVALID"}:
+                code = candidate
+        except (ValueError, UnicodeDecodeError):
+            pass
+        return exc.code, {"error": code}
     except urllib.error.URLError:
         return 503, {"error": "PRIVATE_RELAY_UNAVAILABLE"}
 

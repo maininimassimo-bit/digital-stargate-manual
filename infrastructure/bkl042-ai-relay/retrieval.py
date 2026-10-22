@@ -12,11 +12,11 @@ from typing import Any
 
 
 BASE = "https://maininimassimo-bit.github.io/digital-stargate-manual/"
-METHOD_VERSION = "bkl042-static-projection-retrieval-v3"
+METHOD_VERSION = "bkl042-static-projection-retrieval-v4"
 SOURCES = {
     "observation-index": "docs/data/scientific-observation-index.json",
     "target-read-model": "docs/data/target-knowledge-read-model.json",
-    "session-catalog": "docs/data/scientific-session-catalog.json",
+    "session-catalog": "docs/data/bkl042-session-catalog.json",
     "session-comparison": "docs/data/session-comparison-projection.json",
     "scientific-data-quality": "docs/data/scientific-data-quality-projection.json",
 }
