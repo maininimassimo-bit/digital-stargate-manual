@@ -1,5 +1,9 @@
 # Project Backlog
 
+## BKL-042 — correzione fonte oltre limite, 22 ottobre 2026
+
+503 riprodotto: catalogo 1.035.349 byte oltre limite1MB. Fonte compatta automatica con stessi campi ammessi, budget verificato, retrieval v4 e diagnostica pubblica sanitizzata. Quota, modelli, identity e authority conservati; copertura RTU non attestata. [Diagnosi, contratto, test e rollback](HANDOVER_2026-10-22-BKL042-SOURCE-SIZE.md). Rilascio e revisioni runtime da attestare nella PR applicabile.
+
 ## Catalogo scientifico: pacchetti tecnici opzionali — 18 ottobre 2026
 
 Owner approva vista iniziale con sole LIGHT avviate o completate, comprese acquisizioni fallite. Il filtro «Mostra pacchetti tecnici» aggiunge i record senza acquisizioni; KPI sulle sole sessioni con LIGHT, reset e refresh coerenti. Dataset, manifest, RAW e ricevute conservati; guard no-op invariato. [Contratto, verifica e rollback](HANDOVER_2026-10-18-CATALOG-SCIENTIFIC-VIEW.md). Gate e rilascio attestati nella PR applicabile.

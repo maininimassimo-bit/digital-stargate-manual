@@ -1,3 +1,6 @@
+import json
+import urllib.error
+from unittest.mock import patch, MagicMock
 import unittest
 import importlib.util
 from pathlib import Path
@@ -32,11 +35,49 @@ gateway_spec.loader.exec_module(gateway)
 
 
 class RetrievalTests(unittest.TestCase):
+    def test_real_compact_catalog_matches_existing_eligible_facts(self):
+        root = Path(__file__).parents[2]
+        full = json.loads((root / 'docs/data/scientific-session-catalog.json').read_text(encoding='utf-8'))
+        compact_bytes = (root / 'docs/data/bkl042-session-catalog.json').read_bytes()
+        self.assertLessEqual(len(compact_bytes), 1_000_000)
+        compact = json.loads(compact_bytes)
+        fields = {'sessionId','observationDate','target','analyticsState','metadataState','evidenceState','integrationHours','completionPct','severity'}
+        self.assertEqual(compact['sessions'], [{k:v for k,v in row.items() if k in fields} for row in full['sessions']])
+        def fetch(path):
+            return json.loads((root / path).read_text(encoding='utf-8'))
+        self.assertIn(retrieve('M27 session', fetch)['state'], {'EVIDENCE_FOUND','CONFLICT_REQUIRES_REVIEW'})
+
+    def test_transport_byte_limit_stays_fail_closed(self):
+        import retrieval
+        response = MagicMock()
+        response.__enter__.return_value = response
+        response.status = 200
+        response.geturl.return_value = retrieval.BASE + 'data/bkl042-session-catalog.json'
+        response.headers = {'Content-Type':'application/json','Content-Length':'1000001'}
+        with patch.object(retrieval.urllib.request, 'build_opener') as opener:
+            opener.return_value.open.return_value = response
+            with self.assertRaisesRegex(RuntimeError, 'SOURCE_TOO_LARGE'):
+                retrieval._get_json('docs/data/bkl042-session-catalog.json')
+            response.read.assert_not_called()
+            response.headers['Content-Length'] = '0'
+            response.read.return_value = b'x' * 1_000_001
+            with self.assertRaisesRegex(RuntimeError, 'SOURCE_TOO_LARGE'):
+                retrieval._get_json('docs/data/bkl042-session-catalog.json')
+
+    def test_gateway_forwards_only_safe_error_codes(self):
+        from io import BytesIO
+        with patch.dict('os.environ', {'BKL042_PRIVATE_RELAY_URL':'https://relay.example.invalid'}), patch.object(gateway, 'readiness', return_value={'status':'READY'}), patch.object(gateway, 'id_token') as identity, patch.object(gateway, 'Request'), patch.object(gateway.urllib.request, 'urlopen') as open_url:
+            identity.fetch_id_token.return_value = 'synthetic-relay-token'
+            identity.verify_oauth2_token.return_value = {'email_verified':True,'email':'maininimassimo@gmail.com'}
+            for body, expected in [(b'{"error":"SOURCE_TOO_LARGE"}', 'SOURCE_TOO_LARGE'), (b'{"error":"private secret"}', 'PRIVATE_RELAY_REQUEST_FAILED'), (b'not-json', 'PRIVATE_RELAY_REQUEST_FAILED')]:
+                open_url.side_effect = urllib.error.HTTPError('https://example.invalid',503,'unavailable',{},BytesIO(body))
+                self.assertEqual(gateway.forward({},'synthetic'), (503,{'error':expected}))
+
     def test_allowlisted_records_exclude_sensitive_session_fields(self):
         fixtures = {
             "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
             "docs/data/target-knowledge-read-model.json": {"targets": [{"canonical_name": "M 27", "identity_state": "validated", "conflict_refs": ["private-conflict-ref"], "target_id": "must-not-leak"}]},
-            "docs/data/scientific-session-catalog.json": {
+            "docs/data/bkl042-session-catalog.json": {
                 "sessions": [{
                     "sessionId": "2026-08-14_2026-08-15", "observationDate": "2026-08-14", "target": "M 27",
                     "analyticsState": "ATTENTION_REQUIRED", "metadataState": "REGISTERED",
@@ -62,7 +103,7 @@ class RetrievalTests(unittest.TestCase):
         fixtures = {
             "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
             "docs/data/target-knowledge-read-model.json": {"targets": []},
-            "docs/data/scientific-session-catalog.json": {"sessions": []},
+            "docs/data/bkl042-session-catalog.json": {"sessions": []},
         }
         result = retrieve("unlisted imaginary subject", fixture_fetch(fixtures))
         self.assertEqual(result["state"], "INSUFFICIENT_EVIDENCE")
@@ -72,7 +113,7 @@ class RetrievalTests(unittest.TestCase):
         fixtures = {
             "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
             "docs/data/target-knowledge-read-model.json": {"targets": []},
-            "docs/data/scientific-session-catalog.json": {
+            "docs/data/bkl042-session-catalog.json": {
                 "sessions": [{
                     "sessionId": "2026-08-14_2026-08-15", "observationDate": "2026-08-14", "target": "M 27",
                     "analyticsState": "VALIDATED_ANALYTICS", "metadataState": "REGISTERED",
@@ -85,7 +126,7 @@ class RetrievalTests(unittest.TestCase):
         self.assertTrue(any(record["source_id"] == "session-catalog" for record in result["records"]))
         self.assertEqual(sum(record["source_id"] == "scientific-data-quality" for record in result["records"]), 0)
         self.assertEqual(sum(record["source_id"] == "session-catalog" for record in result["records"]), 1)
-        self.assertEqual(result["method_version"], "bkl042-static-projection-retrieval-v3")
+        self.assertEqual(result["method_version"], "bkl042-static-projection-retrieval-v4")
 
     def test_spaced_designation_matches_compact_index_term(self):
         fixtures = {
@@ -94,7 +135,7 @@ class RetrievalTests(unittest.TestCase):
                 "searchDocuments": [{"catalogItemId": "catalog-1", "title": "M27", "keywords": []}],
             },
             "docs/data/target-knowledge-read-model.json": {"targets": []},
-            "docs/data/scientific-session-catalog.json": {"sessions": [{
+            "docs/data/bkl042-session-catalog.json": {"sessions": [{
                 "sessionId": "2026-08-14_2026-08-15", "observationDate": "2026-08-14", "target": "M 27",
             }]},
         }
@@ -105,7 +146,7 @@ class RetrievalTests(unittest.TestCase):
         fixtures = {
             "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
             "docs/data/target-knowledge-read-model.json": {"targets": []},
-            "docs/data/scientific-session-catalog.json": {"sessions": []},
+            "docs/data/bkl042-session-catalog.json": {"sessions": []},
         }
         result = retrieve("M 27 experimental quality", fixture_fetch(fixtures))
         quality = next(record for record in result["records"] if record["source_id"] == "scientific-data-quality")
@@ -119,7 +160,7 @@ class RetrievalTests(unittest.TestCase):
         fixtures = {
             "docs/data/scientific-observation-index.json": {"catalogItems": [], "searchDocuments": []},
             "docs/data/target-knowledge-read-model.json": {"targets": []},
-            "docs/data/scientific-session-catalog.json": {"sessions": []},
+            "docs/data/bkl042-session-catalog.json": {"sessions": []},
         }
         result = retrieve("confronto SQM sessioni", fixture_fetch(fixtures))
         comparison = next(record for record in result["records"] if record["source_id"] == "session-comparison")
@@ -131,7 +172,7 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(_safe_url("scientific-data-quality/"), "https://maininimassimo-bit.github.io/digital-stargate-manual/scientific-data-quality/")
 
     def test_empty_query_and_invalid_projection_fail_closed(self):
-        self.assertEqual(retrieve("a", lambda _path: {})["method_version"], "bkl042-static-projection-retrieval-v3")
+        self.assertEqual(retrieve("a", lambda _path: {})["method_version"], "bkl042-static-projection-retrieval-v4")
         with self.assertRaisesRegex(RuntimeError, "SOURCE_INVALID"):
             retrieve("observatory", lambda _path: {})
 
