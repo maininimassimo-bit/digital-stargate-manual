@@ -69,7 +69,7 @@ class RetrievalTests(unittest.TestCase):
         with patch.dict('os.environ', {'BKL042_PRIVATE_RELAY_URL':'https://relay.example.invalid'}), patch.object(gateway, 'readiness', return_value={'status':'READY'}), patch.object(gateway, 'id_token') as identity, patch.object(gateway, 'Request'), patch.object(gateway.urllib.request, 'urlopen') as open_url:
             identity.fetch_id_token.return_value = 'synthetic-relay-token'
             identity.verify_oauth2_token.return_value = {'email_verified':True,'email':'maininimassimo@gmail.com'}
-            for body, expected in [(b'{"error":"SOURCE_TOO_LARGE"}', 'SOURCE_TOO_LARGE'), (b'{"error":"private secret"}', 'PRIVATE_RELAY_REQUEST_FAILED'), (b'not-json', 'PRIVATE_RELAY_REQUEST_FAILED')]:
+            for body, expected in [(b'{"error":"SOURCE_TOO_LARGE"}', 'SOURCE_TOO_LARGE'), (b'{"error":"private secret"}', 'PRIVATE_RELAY_REQUEST_FAILED'), (b'not-json', 'PRIVATE_RELAY_REQUEST_FAILED'), (b'{"error":[]}', 'PRIVATE_RELAY_REQUEST_FAILED'), (b'{"error":{}}', 'PRIVATE_RELAY_REQUEST_FAILED')]:
                 open_url.side_effect = urllib.error.HTTPError('https://example.invalid',503,'unavailable',{},BytesIO(body))
                 self.assertEqual(gateway.forward({},'synthetic'), (503,{'error':expected}))
 

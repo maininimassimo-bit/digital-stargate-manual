@@ -15,6 +15,10 @@ class Tests(unittest.TestCase):
         for step in job['steps']:
             if step.get('id')=='acquisition': continue
             step=dict(step)
+            if step.get('name') == 'Commit versioned analytics and catalog projections':
+                self.assertEqual(step['run'].count('docs/data/bkl042-session-catalog.json'), 1)
+                self.assertIn('governed_paths=(docs/data/bkl042-session-catalog.json data/sessions', step['run'])
+                step['run'] = step['run'].replace('governed_paths=(docs/data/bkl042-session-catalog.json data/sessions', 'governed_paths=(data/sessions')
             if 'if' in step: step['if']=step['if'].replace(" && steps.acquisition.outputs.skip != 'true'",'')
             steps.append(step)
         job['steps']=steps

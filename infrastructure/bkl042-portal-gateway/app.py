@@ -105,7 +105,7 @@ def forward(payload: dict[str, Any], google_token: str) -> tuple[int, dict[str, 
         try:
             data = json.loads(exc.read(4096).decode("utf-8"))
             candidate = data.get("error") if isinstance(data, dict) else None
-            if candidate in {"SOURCE_TOO_LARGE", "SOURCE_UNAVAILABLE", "SOURCE_INVALID", "PILOT_REQUEST_LIMIT_REACHED", "RUNTIME_NOT_READY", "PROVIDER_REQUEST_FAILED", "PROVIDER_RESPONSE_INVALID"}:
+            if isinstance(candidate, str) and candidate in {"SOURCE_TOO_LARGE", "SOURCE_UNAVAILABLE", "SOURCE_INVALID", "PILOT_REQUEST_LIMIT_REACHED", "RUNTIME_NOT_READY", "PROVIDER_REQUEST_FAILED", "PROVIDER_RESPONSE_INVALID"}:
                 code = candidate
         except (ValueError, UnicodeDecodeError):
             pass
