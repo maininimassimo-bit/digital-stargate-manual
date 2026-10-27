@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 0.9 — startrail ripristinati, anteprime Messier e nuovo backup 11/10/2026
+**Revisione:** 1.0 — analisi log, caricamento live e verifica reset USB 27/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -203,6 +203,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 0.7 | 09/10/2026 | Pannelli fuori dalla ripresa; CloudWatcher locale, stelle rilevate, candidati della notte, previsioni ISS, Aircraft adsb.fi e informazioni Sole/Luna/alba |
 | 0.8 | 10/10/2026 | Backup configurazione privato, copia pubblica sanificata, manifest SHA-256 e procedura di ripristino controllato |
 | 0.9 | 11/10/2026 | Ripristino soglia startrail 0,30, blocco trascinamento overlay, 110 anteprime Messier DSS2 e nuovo snapshot verificato |
+| 1.0 | 27/10/2026 | Analisi log e risorse, retry immagine live, prova telemetria annullata e correlazione reset USB/esposizioni; configurazione fotografica confermata |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -438,3 +439,52 @@ Il loader `virtualsky/virtualsky.js` costruisce le schede usando nodi DOM e perc
 Controlli: sintassi JavaScript, 110 JPEG e integrità del catalogo, coordinate originali invariate, accesso HTTPS pubblico al catalogo e alle immagini, prova browser con M1 e miniatura caricata, clock immagine/mappa coincidente e nessun errore console nel controllo. La presenza dei singoli oggetti dipende dall’orizzonte e dal campo; non è stato collaudato manualmente il passaggio del mouse su tutti i 110 oggetti o su tutti i browser. La funzionalità riguarda gli oggetti Messier, non miniature di stelle, pianeti o figure di costellazioni.
 
 Backup mirati: `/home/pi/allsky-private-archive/overlay-mouse-lock-20261011` e `/home/pi/allsky-private-archive/messier-previews-20261011`. Il secondo conserva renderer, catalogo e Home precedenti. Per annullare l’integrazione ripristinare soltanto quei file e aggiornare il riferimento di cache, mantenendo `mouse=false` se si vuole conservare il blocco. Non toccare la calibrazione o il controller del clock.
+
+
+## 27.30 Analisi dei log e ottimizzazione del caricamento live — 27 ottobre 2026
+
+L’analisi è stata eseguita via SSH nelle prime ore del 27/10/2026, fuso Europe/Rome, dopo il ripristino della raggiungibilità VPN. I risultati seguenti sono osservazioni della finestra esaminata, non garanzie di disponibilità futura.
+
+| Controllo | Esito osservato |
+|---|---|
+| Acquisizione, servizi periodici e lighttpd | Attivi; camera non riavviata durante l’analisi |
+| Temperatura CPU | Circa 37–39 °C |
+| Alimentazione e limitazioni termiche | `get_throttled=0x0` al controllo |
+| Disco | Circa 92 GB liberi, 19% occupato |
+| Memoria | Circa 3,4 GB disponibili; swap non utilizzato |
+| Orario | NTP sincronizzato |
+| Log acquisizione delle 24 ore precedenti | Nessuna corrispondenza ai filtri `error`, `traceback`, `failed`; non è una certificazione di assenza di ogni difetto |
+| Immagini scartate | 30 fotogrammi sotto soglia media 0,10, concentrati all’alba e al tramonto |
+| Prodotti dell’ultima notte completata | Keogramma, startrail e timelapse riusciti; startrail con 560 fotogrammi usati e 212 esclusi, soglia 0,30 |
+
+### Avviso «immagine mancante o corrotta»
+
+Lo screenshot del 26 ottobre mostrava l’avviso insieme a un fotogramma già ricevuto. Nei controlli successivi l’URL pubblico dell’immagine ha restituito JPEG validi e aggiornati; sei richieste consecutive erano riuscite. Il controller precedente generava l’avviso generico già al primo evento `error`, mantenendo nella pagina l’ultimo fotogramma caricato. Non sono disponibili log browser/accesso sufficienti per ricostruire la causa del singolo episodio: non è stata dimostrata né una corruzione del JPEG né una relazione causale con i reset USB.
+
+**Modifica mantenuta:** in `html/allsky/js/controller.js` un caricamento fallito viene ritentato una sola volta dopo due secondi, con URL aggiornato. Se fallisce ancora e nella pagina esiste un’immagine `current`, compare un avviso esplicito: l’aggiornamento non è riuscito e resta visibile l’ultimo fotogramma ricevuto. In assenza di un precedente fotogramma resta l’avviso di errore originario. Il successivo caricamento riuscito cancella il messaggio. Non viene attestata la freschezza dell’immagine sulla sola base della sua presenza nel riquadro.
+
+La Home usa il riferimento `js/controller.js?v=dsg-live-retry-20261027` per aggiornare la cache. Sono passati il controllo di sintassi JavaScript e una prova isolata del gestore con: singolo retry, avviso con vecchio fotogramma e errore persistente senza fotogramma. Sono stati verificati anche il controller pubblicato e un JPEG valido via HTTPS. Non è stato simulato un guasto della camera o della rete sull’impianto per collaudare il browser in condizioni di interruzione reale.
+
+### Telemetria: prova non mantenuta
+
+Il servizio periodico registra `PinFactoryFallback: Falling back from lgpio: No module named 'lgpio'`, pur aggiornando correttamente i dati. È stata provata la lettura CPU da `/sys/class/thermal/thermal_zone0/temp` nel modulo `allsky_pistatus.py`. La prova non eliminava l’avviso: anche il helper condiviso inizializza `gpiozero` per le informazioni della scheda. Il modulo originale è stato quindi ripristinato e i suoi SHA-256 confrontati con il backup. Nessun pacchetto o dipendenza è stato installato; l’avviso resta visibile e non bloccante nel controllo effettuato. È stato ricaricato solo `allskyperiodic`, senza riavviare `allsky`.
+
+### Conservazione e ripristino mirato
+
+Prima delle prove sono stati conservati controller, Home e modulo PiStatus in `/home/pi/allsky-private-archive/log-audit-20261027`, insieme ai log acquisiti. I log completi rimangono privati; questo capitolo ne riporta solo il riepilogo tecnico. Il rollback del retry consiste nel ripristino dei soli controller e Home precedenti, verificando le modifiche successive e aggiornando il riferimento di cache. Non sovrascrivere configurazioni fotografiche o calibrazione per annullare una modifica alla gestione del caricamento.
+
+Gli snapshot completi del 10 e 11 ottobre del §27.27 restano immutati e **non includono il retry del 27 ottobre**. Il backup mirato non equivale a un nuovo snapshot completo o a un ripristino integrale collaudato. Esposizione, guadagno, soglie, geometria, dimensioni e sincronizzazione della mappa non sono stati modificati.
+
+## 27.31 Verifica dei reset USB della camera — 27 ottobre 2026
+
+L’ASI290MC era collegata direttamente sul bus USB3 a 5000 Mbit/s e gestita dal processo `capture_ZWO` rimasto attivo. La camera aveva risparmio energetico USB già disabilitato (`power/control=on`), stato runtime `active` e tempo di sospensione runtime pari a zero: il valore di autosuspend configurato non comportava sospensioni osservate del dispositivo.
+
+Nella finestra precedente di 24 ore erano presenti **2.809 messaggi** `reset SuperSpeed USB device ... using xhci_hcd`. Per approfondire è stata confrontata una finestra di **30 minuti** dei log kernel e acquisizione: **30 avvii di esposizione, 30 reset, tutti entro 0,138 secondi dall’avvio più vicino e zero errori di acquisizione riconosciuti dai filtri**. Nei controlli non sono emerse disconnessioni, timeout o errori di descrittore. Questi conteggi valgono per le finestre osservate e non per tutte le acquisizioni future.
+
+La configurazione `zwoexposuretype=0` corrisponde nel sorgente Allsky a `ZWOsnap`, modalità singolo scatto che usa `ASIStartExposure` e `ASIGetDataAfterExp`. L’SDK è incorporato staticamente nel binario; i simboli e il codice ispezionati confermano la presenza di funzioni di gestione/reset USB. Questa ispezione, da sola, non costituisce una traccia delle chiamate eseguite in tempo reale.
+
+Una risposta del supporto ZWO nel [forum tecnico del produttore](https://bbs.zwoastro.com/d/9937-linux-sdk-asi120mm-mini-usb-reset-on-each-frame) descrive reset del collegamento USB eseguiti dall’SDK per ogni esposizione singola. La discussione riguarda ASI120MM Mini e versioni SDK specifiche, non una certificazione della ASI290MC installata. **L’interpretazione più coerente con i dati locali è un comportamento dell’SDK nella modalità corrente**, non una disconnessione casuale dimostrata. Non è stata provata in modo assoluto l’assenza di problemi hardware o firmware.
+
+**Decisione Owner:** mantenere la configurazione attuale. Non è stato individuato un metodo verificato per eliminare questi reset a caldo senza interrompere l’acquisizione o cambiare la modalità. Non sono stati modificati esposizione, guadagno, banda USB, modalità, SDK, driver, firmware, alimentazione o collegamenti. Non sono stati introdotti filtri per nascondere i messaggi kernel.
+
+Un eventuale confronto con un’altra modalità/SDK richiede una finestra di manutenzione separata, backup e collaudo; non è autorizzato implicitamente dalla diagnosi. Riaprire l’indagine se compaiono timeout, errori di trasferimento, disconnessioni/rinumerazioni, JPEG invalidi o interruzioni dei nuovi fotogrammi. Un reset isolato correlato allo scatto, con acquisizione riuscita, non basta da solo a concludere un guasto.
