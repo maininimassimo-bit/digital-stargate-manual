@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.0 — analisi log, caricamento live e verifica reset USB 27/10/2026
+**Revisione:** 1.1 — nuovo backup completo del perimetro configurazione 27/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -204,6 +204,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 0.8 | 10/10/2026 | Backup configurazione privato, copia pubblica sanificata, manifest SHA-256 e procedura di ripristino controllato |
 | 0.9 | 11/10/2026 | Ripristino soglia startrail 0,30, blocco trascinamento overlay, 110 anteprime Messier DSS2 e nuovo snapshot verificato |
 | 1.0 | 27/10/2026 | Analisi log e risorse, retry immagine live, prova telemetria annullata e correlazione reset USB/esposizioni; configurazione fotografica confermata |
+| 1.1 | 27/10/2026 | Snapshot aggiornato delle 08:01, backup privato 355 file e pubblico 140 file, hardlink settings preservato, checksum e guida aggiornati |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -473,7 +474,7 @@ Il servizio periodico registra `PinFactoryFallback: Falling back from lgpio: No 
 
 Prima delle prove sono stati conservati controller, Home e modulo PiStatus in `/home/pi/allsky-private-archive/log-audit-20261027`, insieme ai log acquisiti. I log completi rimangono privati; questo capitolo ne riporta solo il riepilogo tecnico. Il rollback del retry consiste nel ripristino dei soli controller e Home precedenti, verificando le modifiche successive e aggiornando il riferimento di cache. Non sovrascrivere configurazioni fotografiche o calibrazione per annullare una modifica alla gestione del caricamento.
 
-Gli snapshot completi del 10 e 11 ottobre del §27.27 restano immutati e **non includono il retry del 27 ottobre**. Il backup mirato non equivale a un nuovo snapshot completo o a un ripristino integrale collaudato. Esposizione, guadagno, soglie, geometria, dimensioni e sincronizzazione della mappa non sono stati modificati.
+Gli snapshot completi del 10 e 11 ottobre del §27.27 restano immutati e **non includono il retry del 27 ottobre**. Il backup mirato non equivale a un nuovo snapshot completo o a un ripristino integrale collaudato. Il successivo snapshot delle 08:01 del 27 ottobre, descritto sotto e nella guida backup, include invece il controller aggiornato e preserva le copie storiche. Esposizione, guadagno, soglie, geometria, dimensioni e sincronizzazione della mappa non sono stati modificati.
 
 ## 27.31 Verifica dei reset USB della camera — 27 ottobre 2026
 
@@ -488,3 +489,12 @@ Una risposta del supporto ZWO nel [forum tecnico del produttore](https://bbs.zwo
 **Decisione Owner:** mantenere la configurazione attuale. Non è stato individuato un metodo verificato per eliminare questi reset a caldo senza interrompere l’acquisizione o cambiare la modalità. Non sono stati modificati esposizione, guadagno, banda USB, modalità, SDK, driver, firmware, alimentazione o collegamenti. Non sono stati introdotti filtri per nascondere i messaggi kernel.
 
 Un eventuale confronto con un’altra modalità/SDK richiede una finestra di manutenzione separata, backup e collaudo; non è autorizzato implicitamente dalla diagnosi. Riaprire l’indagine se compaiono timeout, errori di trasferimento, disconnessioni/rinumerazioni, JPEG invalidi o interruzioni dei nuovi fotogrammi. Un reset isolato correlato allo scatto, con acquisizione riuscita, non basta da solo a concludere un guasto.
+
+
+## 27.32 Snapshot aggiornato dopo l’analisi — 27 ottobre 2026
+
+Alle **08:01 Europe/Rome** è stato acquisito lo snapshot `configuration-backup-20261027-080114`, con camera e servizi attivi. La copia privata comprende **355 file verificati** oltre al manifest, quella pubblica **140 file verificati** oltre al manifest. Rispetto al perimetro precedente il privato include anche PiStatus originale e helper condiviso; il collegamento fisico settings è preservato nel TAR. I due database SQLite sono stati acquisiti tramite backup API e hanno superato `quick_check`.
+
+L’export pubblico include il controller con retry e la Home con riferimento cache aggiornato; non contiene la prova PiStatus annullata, log grezzi, database, certificati, credenziali o coordinate geografiche precise. La copia completa privata è conservata nella directory riservata del Raspberry e consegnata separatamente all’Owner, fuori dal repository, con permessi limitati. Gli archivi del 10 e 11 ottobre restano immutati. Nessun servizio è stato fermato e nessun parametro fotografico o USB è stato modificato durante il backup.
+
+[Download sanificato, SHA-256, perimetro ed istruzioni di ripristino](../operations/allsky-configuration-backup.md). Integrità degli archivi e dei manifest, sintassi e sanificazione verificate; questo non attesta un ripristino integrale. È uno snapshot live del perimetro configurazione, non una transazione atomica dell’intera installazione o un’immagine SD.
