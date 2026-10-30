@@ -96,6 +96,7 @@
     media.dataset.dynamicSkyReady = "true"; injectStyles(); media.classList.add("is-loading");
     media.innerHTML = `<div id="dsg-latest-sky" class="dsg-showcase__sky is-loading"><div id="dsg-latest-sky-canvas" class="dsg-showcase__sky-canvas" aria-label="Vista astronomica interattiva"></div><div class="dsg-showcase__sky-shade" aria-hidden="true"></div><span class="dsg-showcase__sky-status">Caricamento survey</span></div>`;
     const sky = media.querySelector("#dsg-latest-sky"), canvas = media.querySelector("#dsg-latest-sky-canvas"), status = media.querySelector(".dsg-showcase__sky-status");
+    let imageKey = null, imageGeneration = 0;
     let viewer = null, renderedKey = null, loading = false, stopped = false;
     const section = media.closest('.dsg-latest-observation');
     const button = section?.querySelector('[data-latest-sky-refresh]');
@@ -106,12 +107,53 @@
     };
     const unavailable = (message, data = {}) => {
       renderedKey = null;
+      imageGeneration++; imageKey=null; sky.querySelector('.dsg-sky-cutout')?.remove();
       enableFallback(sky, canvas, status, new URL('assets/images/osservatorio-hero.jpg',document.baseURI).href);
       status.textContent = message;
       if (note) note.textContent = data.session_id
         ? `Sessione ${data.session_id}: coordinate J2000 non disponibili nei dati importati. Nessun centro astronomico dedotto.`
         : 'Dati dell’ultima sessione non disponibili. Riprova con Aggiorna.';
       media.classList.remove('is-loading','is-ready'); media.classList.add('is-degraded');
+    };
+    // Static cutouts do not depend on Aladin JS, WebAssembly or WebGL.
+    const staticField = (data, pair, fov) => {
+      const key=JSON.stringify([data.session_id,...pair,fov]);
+      if(imageKey===key && sky.querySelector('.dsg-sky-cutout')) return;
+      imageKey=key; const generation=++imageGeneration;
+      sky.querySelector('.dsg-sky-cutout')?.remove();
+      sky.style.backgroundImage='none';
+      const image=new Image(); image.className='dsg-sky-cutout';
+      image.alt=`Campo astronomico di ${data.target?.name || data.session_id} — DSS2, immagine di archivio`;
+      image.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;background:#07162d';
+      image.referrerPolicy='no-referrer';
+      const params=new URLSearchParams({hips:'CDS/P/DSS2/color',width:'800',height:'800',projection:'SIN',coordsys:'icrs',ra:String(pair[0]),dec:String(pair[1]),fov:String(fov),format:'jpg'});
+      const endpoints=['https://alasky.cds.unistra.fr/hips-image-services/hips2fits','https://alaskybis.cds.unistra.fr/hips-image-services/hips2fits'];
+      let attempt=0,timer,request=0;
+      const current=()=>generation===imageGeneration && media.isConnected;
+      const failed=()=>{
+        clearTimeout(timer);
+        if(!current())return;
+        if(attempt<endpoints.length){start();return;}
+        request++; image.remove(); imageKey=null;
+        if(!media.classList.contains('is-ready')){
+          status.textContent='Campo astronomico non disponibile';
+          if(note)note.textContent=`Sessione ${data.session_id}: coordinate disponibili; servizi astronomici non raggiungibili. Riprova con Aggiorna.`;
+        }
+      };
+      const start=()=>{
+        const active=++request;
+        image.onload=()=>{
+          if(active!==request)return;clearTimeout(timer);if(!current())return;
+          if(!media.classList.contains('is-ready')){
+            status.textContent='Campo DSS2 · immagine di archivio';
+            if(note)note.textContent=`Sessione ${data.session_id}: campo DSS2 centrato sulle coordinate J2000 importate · FOV ${formatNumber(fov,1)}°. Immagine di archivio, non ripresa della sessione.`;
+          }
+        };
+        image.onerror=()=>{if(active===request)failed();};
+        image.src=`${endpoints[attempt++]}?${params}`;
+        timer=setTimeout(()=>{if(active===request)failed();},12000);
+      };
+      sky.prepend(image);start();
     };
     const refresh = async () => {
       if (loading || stopped || !media.isConnected) return;
@@ -135,6 +177,8 @@
         const survey=data.sky_view?.survey || 'P/DSS2/color';
         const key=JSON.stringify([data.session_id,...pair,survey,fov]);
         if (key===renderedKey) return;
+        media.classList.remove('is-ready'); canvas.style.display='none';
+        staticField(data,pair,fov);
         await bounded(loadAladin().then(()=>window.A.init),15000);
         if (stopped || !media.isConnected) return;
         canvas.style.display='';
@@ -148,8 +192,13 @@
         console.warn('Digital StarGate: latest observation unavailable',error);
         if (stopped || !media.isConnected) return;
         if (!data) {applyData({});updatePanel({});}
-        unavailable(data ? 'Survey non disponibile' : 'Dati non disponibili');
-        if (data && note) note.textContent=`Sessione ${data.session_id}: coordinate pubblicate disponibili, survey temporaneamente non disponibile.`;
+        if(data && coordinates(data)) {
+          canvas.style.display='none';sky.classList.remove('is-loading');sky.classList.add('is-fallback');
+          media.classList.remove('is-loading','is-ready');media.classList.add('is-degraded');
+          const image=sky.querySelector('.dsg-sky-cutout');
+          status.textContent=image?.complete && image.naturalWidth>0 ? 'Campo DSS2 · immagine di archivio' : image ? 'Caricamento campo astronomico' : 'Campo astronomico non disponibile';
+          if(note)note.textContent=`Sessione ${data.session_id}: vista interattiva non disponibile; campo DSS2 dalle coordinate J2000 importate, immagine di archivio e non ripresa della sessione.`;
+        } else unavailable('Dati non disponibili');
       } finally {clearTimeout(timeout);loading=false;if(button)button.disabled=false;}
     };
     const onVisible=()=>{if (!document.hidden) refresh();};

@@ -1,5 +1,9 @@
 # Project Backlog
 
+## Campo ultima osservazione senza Aladin — 30 ottobre2026
+
+Ritaglio DSS2 da coordinate J2000 della projection,con endpointsecondario,boundedtimeout e statoesplicito. Immaginearchivio distinta da ripresadellasessione;missingcoordinates/failure non inventano centro. Dataset e no-opimmutati. [Contratto,limiti,test e rollback](HANDOVER_2026-10-30-LATEST-SKY-FALLBACK.md). RilascioattestatonellaPR.
+
 ## BKL-042 — correzione fonte oltre limite, 22 ottobre 2026
 
 503 riprodotto: catalogo 1.035.349 byte oltre limite1MB. Fonte compatta automatica con stessi campi ammessi, budget verificato, retrieval v4 e diagnostica pubblica sanitizzata. Quota, modelli, identity e authority conservati; copertura RTU non attestata. [Diagnosi, contratto, test e rollback](HANDOVER_2026-10-22-BKL042-SOURCE-SIZE.md). Rilascio e revisioni runtime da attestare nella PR applicabile.
