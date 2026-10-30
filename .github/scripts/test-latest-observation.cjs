@@ -62,13 +62,13 @@ const markup=`<!doctype html><html><head><meta charset="utf-8"></head><body><sec
   // No Aladin at all: static image still uses exact governed coordinates and both endpoints.
   httpError=false;payload=structuredClone(observed);
   const fallback=await browser.newPage();await fallback.clock.install();
-  let urls=[],failPrimary=false,failBoth=false;
+  let urls=[],failPrimary=false,failBoth=false,mastFail=false;
   await fallback.route('**/*',r=>{
     const url=new URL(r.request().url());
     if(url.origin===origin)return r.continue();
-    if(url.pathname.endsWith('/hips2fits')){
+    if(url.pathname.endsWith('/hips2fits') || url.pathname.endsWith('/dss_search')){
       urls.push(url.href);
-      if(failBoth || (failPrimary&&url.hostname==='alasky.cds.unistra.fr'))return r.abort();
+      if(failBoth || (mastFail&&url.hostname==='archive.stsci.edu') || (failPrimary&&url.hostname==='alasky.cds.unistra.fr'))return r.abort();
       return r.fulfill({contentType:'image/jpeg',body:fs.readFileSync('docs/assets/images/osservatorio-hero.jpg')});
     }
     return r.abort();
@@ -77,8 +77,10 @@ const markup=`<!doctype html><html><head><meta charset="utf-8"></head><body><sec
   await fallback.waitForFunction(()=>!document.querySelector('[data-latest-sky-refresh]').disabled);
   await fallback.waitForFunction(()=>document.querySelector('.dsg-sky-cutout')?.naturalWidth>0);
   assert.match(await fallback.locator('.dsg-showcase__sky-status').textContent(),/Campo DSS2/);
-  const url=new URL(urls.at(-1));assert.equal(url.searchParams.get('ra'),'13.10416667');assert.equal(url.searchParams.get('dec'),'56.565');assert.equal(url.searchParams.get('fov'),'1.5');
-  failPrimary=true;payload={...observed,session_id:'2026-10-16_2026-10-17',target:{...observed.target,ra_deg:0,dec_deg:0}};
+  const url=new URL(urls.at(-1));assert.equal(url.hostname,'archive.stsci.edu');assert.equal(url.searchParams.get('e'),'J2000');assert.equal(url.searchParams.get('h'),'60');
+  const sex=value=>value.trim().split(/\s+/).map(Number).reduce((sum,v,i)=>sum+v/60**i,0);
+  assert(Math.abs(sex(url.searchParams.get('r'))*15-13.10416667)<1e-7);assert(Math.abs(sex(url.searchParams.get('d'))-56.565)<1e-7);
+  mastFail=true;failPrimary=true;payload={...observed,session_id:'2026-10-16_2026-10-17',target:{...observed.target,ra_deg:0,dec_deg:0}};
   await fallback.getByRole('button',{name:'Aggiorna vista astronomica'}).click();
   await fallback.waitForFunction(()=>document.querySelector('.dsg-sky-cutout')?.naturalWidth>0);
   await fallback.waitForFunction(()=>document.querySelector('.dsg-sky-cutout')?.src.includes('alaskybis') && document.querySelector('.dsg-sky-cutout')?.src.includes('ra=0&'));
@@ -96,7 +98,7 @@ const markup=`<!doctype html><html><head><meta charset="utf-8"></head><body><sec
   httpError=false;payload=structuredClone(observed);
   const stalled=await browser.newPage();await stalled.clock.install();
   await stalled.addInitScript(()=>{window.A={init:new Promise(()=>{}),aladin(){throw Error('must not initialize');}};});
-  await stalled.route('**/*',r=>new URL(r.request().url()).origin===origin?r.continue():new URL(r.request().url()).pathname.endsWith('/hips2fits')?r.fulfill({contentType:'image/jpeg',body:fs.readFileSync('docs/assets/images/osservatorio-hero.jpg')}):r.abort());
+  await stalled.route('**/*',r=>new URL(r.request().url()).origin===origin?r.continue():['/hips-image-services/hips2fits','/cgi-bin/dss_search'].includes(new URL(r.request().url()).pathname)?r.fulfill({contentType:'image/jpeg',body:fs.readFileSync('docs/assets/images/osservatorio-hero.jpg')}):r.abort());
   await stalled.goto(origin);await stalled.waitForFunction(()=>document.querySelector('.dsg-sky-cutout')?.naturalWidth>0);
   await stalled.clock.runFor(15001);
   await stalled.waitForFunction(()=>!document.querySelector('[data-latest-sky-refresh]').disabled);

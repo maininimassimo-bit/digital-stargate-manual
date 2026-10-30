@@ -127,7 +127,14 @@
       image.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0;background:#07162d';
       image.referrerPolicy='no-referrer';
       const params=new URLSearchParams({hips:'CDS/P/DSS2/color',width:'800',height:'800',projection:'SIN',coordsys:'icrs',ra:String(pair[0]),dec:String(pair[1]),fov:String(fov),format:'jpg'});
-      const endpoints=['https://alasky.cds.unistra.fr/hips-image-services/hips2fits','https://alaskybis.cds.unistra.fr/hips-image-services/hips2fits'];
+      const sexagesimal=(value)=>{const hours=Math.floor(value),minutes=Math.floor((value-hours)*60);return `${hours} ${minutes} ${((value-hours-minutes/60)*3600).toFixed(7)}`;};
+      const mastFov=Math.min(fov,1);
+      const mastParams=new URLSearchParams({v:'poss2ukstu_red',r:sexagesimal(pair[0]/15),d:`${pair[1]<0?'-':'+'}${sexagesimal(Math.abs(pair[1]))}`,e:'J2000',h:String(mastFov*60),w:String(mastFov*60),f:'gif',c:'none'});
+      const endpoints=[
+        {url:`https://archive.stsci.edu/cgi-bin/dss_search?${mastParams}`,label:'DSS2 rosso · STScI',fov:mastFov},
+        {url:`https://alasky.cds.unistra.fr/hips-image-services/hips2fits?${params}`,label:'DSS2 colore · CDS',fov},
+        {url:`https://alaskybis.cds.unistra.fr/hips-image-services/hips2fits?${params}`,label:'DSS2 colore · CDS',fov}
+      ];
       let attempt=0,timer,request=0;
       const current=()=>generation===imageGeneration && media.isConnected;
       const failed=()=>{
@@ -141,16 +148,18 @@
         }
       };
       const start=()=>{
-        const active=++request;
+        const active=++request,endpoint=endpoints[attempt++];
+        image.alt=`Campo astronomico di ${data.target?.name || data.session_id} — ${endpoint.label}, archivio, FOV ${formatNumber(endpoint.fov,1)}°`;
+        image.dataset.fieldLabel=endpoint.label;image.dataset.fieldFov=String(endpoint.fov);
         image.onload=()=>{
           if(active!==request)return;clearTimeout(timer);if(!current())return;
           if(!media.classList.contains('is-ready')){
-            status.textContent='Campo DSS2 · immagine di archivio';
-            if(note)note.textContent=`Sessione ${data.session_id}: campo DSS2 centrato sulle coordinate J2000 importate · FOV ${formatNumber(fov,1)}°. Immagine di archivio, non ripresa della sessione.`;
+            status.textContent=`Campo ${endpoint.label} · archivio`;
+            if(note)note.textContent=`Sessione ${data.session_id}: campo ${endpoint.label} centrato sulle coordinate J2000 importate · FOV ripiego ${formatNumber(endpoint.fov,1)}°. Immagine di archivio, non ripresa della sessione.`;
           }
         };
         image.onerror=()=>{if(active===request)failed();};
-        image.src=`${endpoints[attempt++]}?${params}`;
+        image.src=endpoint.url;
         timer=setTimeout(()=>{if(active===request)failed();},12000);
       };
       sky.prepend(image);start();
@@ -196,8 +205,8 @@
           canvas.style.display='none';sky.classList.remove('is-loading');sky.classList.add('is-fallback');
           media.classList.remove('is-loading','is-ready');media.classList.add('is-degraded');
           const image=sky.querySelector('.dsg-sky-cutout');
-          status.textContent=image?.complete && image.naturalWidth>0 ? 'Campo DSS2 · immagine di archivio' : image ? 'Caricamento campo astronomico' : 'Campo astronomico non disponibile';
-          if(note)note.textContent=`Sessione ${data.session_id}: vista interattiva non disponibile; campo DSS2 dalle coordinate J2000 importate, immagine di archivio e non ripresa della sessione.`;
+          status.textContent=image?.complete && image.naturalWidth>0 ? `Campo ${image.dataset.fieldLabel} · archivio` : image ? 'Caricamento campo astronomico' : 'Campo astronomico non disponibile';
+          if(note)note.textContent=`Sessione ${data.session_id}: vista interattiva non disponibile; campo ${image?.dataset.fieldLabel || 'DSS2'} dalle coordinate J2000 importate · FOV ripiego ${formatNumber(Number(image?.dataset.fieldFov),1)}°. Immagine di archivio, non ripresa della sessione.`;
         } else unavailable('Dati non disponibili');
       } finally {clearTimeout(timeout);loading=false;if(button)button.disabled=false;}
     };
