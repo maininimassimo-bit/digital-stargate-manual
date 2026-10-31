@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.1 — nuovo backup completo del perimetro configurazione 27/10/2026
+**Revisione:** 1.2 — ricalibrazione dopo spostamento camera e backup 31/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -205,6 +205,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 0.9 | 11/10/2026 | Ripristino soglia startrail 0,30, blocco trascinamento overlay, 110 anteprime Messier DSS2 e nuovo snapshot verificato |
 | 1.0 | 27/10/2026 | Analisi log e risorse, retry immagine live, prova telemetria annullata e correlazione reset USB/esposizioni; configurazione fotografica confermata |
 | 1.1 | 27/10/2026 | Snapshot aggiornato delle 08:01, backup privato 355 file e pubblico 140 file, hardlink settings preservato, checksum e guida aggiornati |
+| 1.2 | 31/10/2026 | Camera spostata circa 14:30: nuova geometria overlay, verifica su secondo fotogramma e snapshot 18:21 separato privato/pubblico |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -498,3 +499,40 @@ Alle **08:01 Europe/Rome** è stato acquisito lo snapshot `configuration-backup-
 L’export pubblico include il controller con retry e la Home con riferimento cache aggiornato; non contiene la prova PiStatus annullata, log grezzi, database, certificati, credenziali o coordinate geografiche precise. La copia completa privata è conservata nella directory riservata del Raspberry e consegnata separatamente all’Owner, fuori dal repository, con permessi limitati. Gli archivi del 10 e 11 ottobre restano immutati. Nessun servizio è stato fermato e nessun parametro fotografico o USB è stato modificato durante il backup.
 
 [Download sanificato, SHA-256, perimetro ed istruzioni di ripristino](../operations/allsky-configuration-backup.md). Integrità degli archivi e dei manifest, sintassi e sanificazione verificate; questo non attesta un ripristino integrale. È uno snapshot live del perimetro configurazione, non una transazione atomica dell’intera installazione o un’immagine SD.
+
+
+## 27.33 Ricalibrazione dopo spostamento camera — 31 ottobre 2026
+
+L’Owner ha dichiarato lo spostamento della camera alle **14:30 circa Europe/Rome**. La calibrazione del 9 ottobre è quindi storica e non va usata per l’orientamento corrente. I fotogrammi usati per la nuova soluzione sono successivi allo spostamento. Il primo controllo, ancora troppo chiaro, non è stato usato per applicare una correzione approssimativa.
+
+### Metodo e verifica
+
+È stato analizzato il fotogramma con `Last-Modified` **17:10:21 UTC / 18:10:21 Europe/Rome**, a risoluzione 1936 × 1096. Le coordinate stellari sono state inizialmente riconosciute con il solver locale tetra3 e catalogo Hipparcos su un riquadro: 16 corrispondenze, probabilità di associazione casuale riportata dal solver circa 6,65×10⁻¹⁹ nel proprio modello. Questo valore non è una probabilità certificata della correttezza dell’intera calibrazione.
+
+La soluzione iniziale è stata confrontata con punti stellari distribuiti nel campo: **72 corrispondenze entro 4 pixel**, quindi ottimizzazione robusta della proiezione equisolidale usata dalla mappa. Una suddivisione interna di 24 riferimenti tenuti fuori dal fit iniziale ha dato RMS **0,74 pixel**, massimo 1,27 pixel. Il fit finale sui 72 riferimenti dà RMS **1,04 pixel**. La selezione mediante vicinanza alla proiezione è condizionata dalla soluzione iniziale; non equivale a 72 identificazioni cieche indipendenti.
+
+Un **secondo fotogramma**, `Last-Modified` **17:19:10 UTC / 18:19:10 Europe/Rome**, è stato verificato senza rifare il fit: **71 dei 72 riferimenti entro 4 pixel**, RMS 1,10 pixel sulle 71 corrispondenze e massimo 2,87 pixel; RMS 1,23 pixel su tutti i 72 punti più vicini. Il clock impiegato nel modello è quello del `Last-Modified`, coerente con la sincronizzazione web esistente, non una misura dell’inizio esposizione. La differenza temporale di elaborazione resta un limite. Il conteggio automatico del pannello, 15 al primo controllo, dipende dalla propria maschera/soglia ed è distinto dai riferimenti usati dalla calibrazione.
+
+### Geometria applicata
+
+| Parametro | Nuovo valore |
+|---|---|
+| Riferimento immagine | 1936 × 1096 pixel |
+| Centro X / Y | 1048,433 / 510,933 pixel |
+| Raggio orizzonte | 764,885 pixel |
+| `az` | 323,298707° |
+| `overlayLean` | 1,249056° |
+| `overlayLeanAz` | 164,934848° |
+| `overlayCalibration.calibratedAt` | `2026-10-31T17:10:21Z`, istante del fotogramma di fit |
+
+Sono cambiati **soltanto** `az`, `overlayLean`, `overlayLeanAz` e `overlayCalibration` in `html/allsky/configuration.json`. Centro e raggio seguono la nuova geometria misurata; il layout responsive e la dimensione del riquadro web non sono stati riscritti. Controller, sincronizzazione del clock, catalogo/miniature, retry live e `mouse=false` sono stati conservati. Esposizione, guadagno, acquisizione e parametri USB non sono stati modificati; la camera è rimasta attiva.
+
+Il nuovo JSON è stato verificato anche dal sito HTTPS pubblico. L’errore misurato riguarda i riferimenti visibili selezionati, non ogni punto dell’orizzonte o le aree coperte dagli apparati. Non è stato effettuato un audit di tutte le etichette/pianeti tramite browser o una nuova calibrazione fotometrica. Dopo ogni ulteriore spostamento ripetere il confronto su più stelle e fotogrammi. Le maschere di stelle/meteore non sono state modificate in questo intervento: dopo lo spostamento richiedono una verifica separata rispetto agli ostacoli nella nuova ripresa.
+
+### Backup e ripristino
+
+Backup prima dell’applicazione: `/home/pi/allsky-private-archive/starmap-recalibration-20261031-182056`, con configurazione, controller e Home precedenti. Evidenza completa di fit, verifica e soli campi modificati in `config/myFiles/starmap-calibration-20261031.json`, inclusa nella copia privata. La precedente copia di precauzione `pre-recalibration-20261031` è mantenuta.
+
+Per annullare questa sola calibrazione confrontare lo stato corrente e ripristinare i quattro campi geometrici dal JSON precedente, conservando le personalizzazioni successive. Ricaricare la pagina per ricreare la mappa e verificare clock/geometria; non ripristinare indiscriminatamente un intero sito storico.
+
+Alle **18:21 Europe/Rome** è stato creato lo snapshot `configuration-backup-20261031-182122`, con **356 file privati e 140 pubblici** oltre ai manifest; include la nuova configurazione e, nel privato, l’evidenza di calibrazione. SHA-256, manifest, JSON/Python/JavaScript, PHP Home/footer, due database SQLite (`quick_check`) e hardlink settings verificati; servizi di acquisizione/periodici/telemetria attivi. Privato conservato separatamente su Raspberry e PC Owner con permessi limitati; repository contenente solo export sanificato. Tutti gli snapshot precedenti restano immutati. [Archivio pubblico, checksum e limiti del ripristino](../operations/allsky-configuration-backup.md). Non è un’immagine SD e non è stato eseguito un ripristino completo.
