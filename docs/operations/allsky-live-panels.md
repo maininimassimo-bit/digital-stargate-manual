@@ -1,6 +1,6 @@
 # Allsky: pannelli informativi esterni alla ripresa
 
-Baseline operativa verificata il **09/10/2026**, in Europe/Rome. Riferimento: [Capitolo 27 — Sistema Allsky](../chapters/27-sistema-allsky.md#2726-pannelli-informativi-esterni-alla-ripresa).
+Baseline dei pannelli verificata il **09/10/2026**, estensione vento verificata il **31/10/2026**, in Europe/Rome. Riferimento: [Capitolo 27 — Sistema Allsky](../chapters/27-sistema-allsky.md#2726-pannelli-informativi-esterni-alla-ripresa).
 
 ## Disposizione e contenuto
 
@@ -8,7 +8,7 @@ Baseline operativa verificata il **09/10/2026**, in Europe/Rome. Riferimento: [C
 |---|---|
 | Alto sinistra, fuori dalla foto | **La notte a Manciano**: fase del cielo, altezza Sole/Luna, prossima alba in ora locale |
 | Basso sinistra, fuori dalla foto | **Acquisizione**: timestamp dello scatto, esposizione, guadagno, temperatura del sensore, percentuale illuminata della Luna |
-| Alto destra, fuori dalla foto | **Meteo locale · CloudWatcher**: temperatura ambiente, umidità, punto di rugiada e ora della misura |
+| Alto destra, fuori dalla foto | **Meteo locale · CloudWatcher**: temperatura ambiente, umidità, punto di rugiada, vento in km/h e ora della misura |
 | Destra, sotto il meteo | **Cielo ed eventi**: stelle rilevate, fotogrammi/tracce candidate della notte, prossimo passaggio ISS previsto e Aircraft nell’area di Manciano |
 | Fascia inferiore, fuori dalla foto | **Raspberry Pi**: temperatura CPU, RAM usata, disco libero e uptime |
 | Dentro il fotogramma, basso sinistra | Soltanto logo Digital Stargate e scritta ridotti |
@@ -30,7 +30,7 @@ Il JPEG pubblico, gli archivi e le anteprime Home/Status ricevono il solo logo/s
 | Candidati meteore | File `meteors-*.json` nell’archivio locale della notte corrente. Mostra separatamente fotogrammi e tracce; più tracce possono appartenere a un fotogramma. Nessuna conferma automatica. |
 | Aircraft | API pubblica [adsb.fi](https://adsb.fi/), area centrata sulla posizione approssimata di Manciano, raggio 27 NM (circa 50 km). Conta mezzi in volo con posizione recente ed espone un identificativo di volo disponibile. Non prova che l’aereo sia visibile nella foto; copertura ADS-B/MLAT incompleta. |
 
-Il CloudWatcher locale resta distinto dalla sorgente SOLO già documentata per SQM. Questa integrazione non pubblica SQM, pressione, velocità del vento o quantità di pioggia non validate nel flusso corrente. La temperatura ambiente è distinta da quelle del sensore fotografico e della CPU.
+Il CloudWatcher locale resta distinto dalla sorgente SOLO già documentata per SQM. Questa integrazione non pubblica SQM, pressione o quantità di pioggia non validate nel flusso corrente. La velocità del vento è inclusa dal 31/10/2026 con unità km/h confermata dall’Owner; non viene dedotta una raffica. La temperatura ambiente è distinta da quelle del sensore fotografico e della CPU.
 
 Le soglie descrittive dell’altezza del Sole sono: giorno ≥0°, crepuscolo civile da −6° a 0°, nautico da −12° a −6°, astronomico da −18° a −12°, notte astronomica sotto −18°. Non modificano la soglia di acquisizione Allsky né costituiscono un criterio di apertura della cupola.
 
@@ -90,3 +90,28 @@ Per annullare solo il riquadro astronomico ripristinare il secondo gruppo, inclu
 I sorgenti installati dei pannelli sono conservati anche in `config/myFiles/live-panels`; questa guida ne descrive la baseline ma non sostituisce un backup completo del Raspberry. Le configurazioni e i dati di accesso riservati non devono essere copiati nel repository pubblico.
 
 L’integrazione è informativa e in sola lettura: nessun comando a EAGLE, CloudWatcher, cupola, montatura o router e nessuna modifica alla Safety Authority. Non sono stati aggiunti asset hardware o cambiati i contratti Observatory Status esistenti.
+
+
+## Vento CloudWatcher in km/h — 31 ottobre 2026
+
+Il pannello meteo include **Vento** fra punto di rugiada e ora della misura. La Home e `js/dsg-live-panels.js?v=20261031-wind` mostrano il valore con suffisso km/h, oppure **Non disponibile** se assente, invalido o scaduto. Un valore misurato pari a zero è valido; assenza e vento calmo non sono equivalenti.
+
+### Sorgente e diagnosi
+
+L’intestazione del CSV locale su EAGLE contiene `Wind Condition` e `Wind Value`. Le righe complete fornite dall’Owner riportavano `Windy` e valori fra 13,9 e 18,4. Una lettura iniziale con `Tail 1` era caduta sulla riga ancora in scrittura, troncata: i campi vuoti ottenuti non dimostravano assenza del sensore. L’esportatore esistente seleziona già l’ultima riga strutturalmente completa e parseabile.
+
+`Export-CloudWatcherObservatoryStatus.ps1` lascia `systems.weather.wind_speed_kmh=null`, ma pubblica lo stesso valore in `diagnostics.wind_value_raw`. Il relay attuale conserva tale diagnostica. L’Owner ha confermato **km/h nell’app CloudWatcher**, quindi in questa installazione non serve una conversione. La sola presenza del numero non avrebbe consentito di dedurre l’unità.
+
+### Mapping applicato su Allsky
+
+Il collector `config/myFiles/live-panels/dsg-live-telemetry.py` include `wind_speed_kmh` nella propria allowlist. Usa prima il campo canonico; soltanto se assente prende `diagnostics.wind_value_raw`, e solo quando `systems.weather.source` è `CloudWatcher CSV` e `source_component` è `DSG.CloudWatcherCsvAdapter`. Non pubblica l’intero blocco diagnostico.
+
+Restano obbligatori meteo `CURRENT`, istante osservato non oltre 30 secondi nel futuro e `fresh_until_utc` successivo all’ora corrente. Il valore deve essere un numero finito non negativo, distinto da un booleano; valori mancanti, stringhe o misure invalide rimangono `null`. Il browser verifica inoltre freschezza del meteo e della proiezione. Non vengono calcolate raffiche, medie o soglie di sicurezza dalla misura istantanea.
+
+Questa compatibilità vale per l’unità locale confermata: se cambia l’unità CloudWatcher, verificare il mapping prima di continuare a interpretare la diagnostica come km/h. Il relay non fornisce un’attestazione automatica dell’unità del campo grezzo. L’esportatore e i processi EAGLE non sono stati modificati, evitando cambi locali al clone Git e interferenze con l’importazione scientifica. Nessun comando agli apparati, soglia meteo o Safety Authority è introdotto.
+
+### Verifiche e ripristino
+
+Verificati sintassi Python/JavaScript/PHP della Home, presenza della voce HTML e comportamento numerico per dato assente, zero, decimali e valori negativi. Il collector locale e il JSON HTTPS pubblico hanno mostrato misure aggiornate, fra cui **18 e 16,6 km/h** negli istanti controllati; non sono valori fissi attesi. La camera è rimasta attiva. Non è stato effettuato un confronto metrologico con un anemometro indipendente o un collaudo di tutti i browser.
+
+Backup mirati precedenti: `weather-wind-20261031-183945` per Home/JavaScript/collector e `wind-source-20261031-184840` per il collector prima del fallback. Directory nella sola area privata del Raspberry. Per annullare l’intera funzione confrontare e ripristinare i soli tre file, aggiornando il riferimento cache; non sovrascrivere `configuration.json` o la calibrazione. Per annullare il solo fallback ripristinare il collector precedente: con il produttore attuale il pannello tornerebbe a mostrare “Non disponibile”. Il successivo [snapshot delle 18:50](allsky-configuration-backup.md) conserva la funzione completa; quello delle 18:21 conserva la ricalibrazione ma precede l’aggiunta del vento.

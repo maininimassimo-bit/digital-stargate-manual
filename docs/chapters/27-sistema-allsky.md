@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.2 — ricalibrazione dopo spostamento camera e backup 31/10/2026
+**Revisione:** 1.3 — vento CloudWatcher in km/h e snapshot delle 18:50 del 31/10/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -206,6 +206,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 1.0 | 27/10/2026 | Analisi log e risorse, retry immagine live, prova telemetria annullata e correlazione reset USB/esposizioni; configurazione fotografica confermata |
 | 1.1 | 27/10/2026 | Snapshot aggiornato delle 08:01, backup privato 355 file e pubblico 140 file, hardlink settings preservato, checksum e guida aggiornati |
 | 1.2 | 31/10/2026 | Camera spostata circa 14:30: nuova geometria overlay, verifica su secondo fotogramma e snapshot 18:21 separato privato/pubblico |
+| 1.3 | 31/10/2026 | Vento dal relay diagnostico CloudWatcher, unità km/h confermata, controlli validità/freschezza e nuovo snapshot 18:50 |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -536,3 +537,12 @@ Backup prima dell’applicazione: `/home/pi/allsky-private-archive/starmap-recal
 Per annullare questa sola calibrazione confrontare lo stato corrente e ripristinare i quattro campi geometrici dal JSON precedente, conservando le personalizzazioni successive. Ricaricare la pagina per ricreare la mappa e verificare clock/geometria; non ripristinare indiscriminatamente un intero sito storico.
 
 Alle **18:21 Europe/Rome** è stato creato lo snapshot `configuration-backup-20261031-182122`, con **356 file privati e 140 pubblici** oltre ai manifest; include la nuova configurazione e, nel privato, l’evidenza di calibrazione. SHA-256, manifest, JSON/Python/JavaScript, PHP Home/footer, due database SQLite (`quick_check`) e hardlink settings verificati; servizi di acquisizione/periodici/telemetria attivi. Privato conservato separatamente su Raspberry e PC Owner con permessi limitati; repository contenente solo export sanificato. Tutti gli snapshot precedenti restano immutati. [Archivio pubblico, checksum e limiti del ripristino](../operations/allsky-configuration-backup.md). Non è un’immagine SD e non è stato eseguito un ripristino completo.
+
+
+## 27.34 Vento locale e nuovo snapshot — 31 ottobre 2026
+
+Il pannello **Meteo locale · CloudWatcher** include la velocità del vento in km/h. L’unità dell’app è stata confermata dall’Owner. Il CSV contiene misure valide in `Wind Value`; il produttore già attivo le inoltra come `diagnostics.wind_value_raw`, mentre il campo canonico resta nullo. Il collector Allsky usa quella sola misura come fallback per la sorgente CloudWatcher esplicitamente riconosciuta, con gli stessi controlli di freschezza del meteo e accettando soltanto numeri finiti non negativi. Dati assenti/scaduti restano indisponibili; zero misurato resta zero. Nessuna raffica è derivata. [Dettagli, limiti, test e rollback](../operations/allsky-live-panels.md#vento-cloudwatcher-in-kmh-31-ottobre-2026).
+
+Home, `js/dsg-live-panels.js` e collector sono i soli componenti runtime interessati; esportatore e clone EAGLE non sono stati modificati. Nessun parametro fotografico, geometria overlay, USB, soglia meteo o Safety Authority è cambiato. Misure aggiornate sono state verificate nel JSON pubblico HTTPS; non è stata eseguita una calibrazione metrologica del vento.
+
+Lo snapshot `configuration-backup-20261031-185033`, acquisito alle **18:50 Europe/Rome** senza fermare la camera, comprende la configurazione corrente con vento e ricalibrazione. **356 file privati e 140 pubblici** oltre ai manifest, SHA-256 verificati, due database SQLite `quick_check` OK, hardlink settings preservato e sintassi verificata. Il privato è separato su Raspberry/PC Owner con accesso limitato; nel repository è pubblicata soltanto la copia sanificata. Gli snapshot delle 18:21 e precedenti restano immutati. [Download, checksum e perimetro](../operations/allsky-configuration-backup.md). Il backup non è un’immagine SD; ripristino integrale non collaudato.
