@@ -1,0 +1,388 @@
+PHD2 version 2.6.14dev1 [Windows], Log version 2.5. Log enabled at 2026-11-08 00:01:23
+INFO: Guiding parameter change, MultiStar = true
+INFO: Guiding parameter change, MultiStar = true
+
+Calibration Begins at 2026-11-08 00:22:29
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 2
+ Camera = Simulator, gain = 95, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, Calibration Step = 1350 ms, Calibration Distance = 25 px, Assume orthogonal axes = no
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 91.079, 454.594, Star position = 91.079, 454.594, HFD = 1.68 px
+Direction,Step,dx,dy,x,y,Dist
+West,0,0.000,0.000,91.152,454.718,0.000
+West,1,-3.719,-0.844,94.871,455.562,3.813
+West,2,-7.296,-1.601,98.448,456.319,7.469
+West,3,-10.889,-2.420,102.042,457.138,11.155
+West,4,-14.506,-3.548,105.658,458.266,14.933
+West,5,-18.068,-4.312,109.221,459.029,18.575
+West,6,-21.781,-5.295,112.934,460.013,22.416
+West,7,-25.528,-6.269,116.681,460.987,26.287
+West calibration complete. Angle = -166.2 deg, Rate = 2.782 px/sec, Parity = N/A
+East,4,-25.528,-6.269,116.681,460.987,26.287
+East,3,-18.542,-4.298,109.695,459.016,19.034
+East,2,-11.854,-2.311,103.007,457.029,12.078
+East,1,-4.807,-0.473,95.960,455.191,4.831
+East,0,0.329,0.995,90.823,453.723,1.048
+Backlash,0,0.000,0.000,90.823,453.723,0.000
+Backlash,1,0.919,-3.190,89.904,456.913,3.320
+Backlash,2,1.909,-6.960,88.914,460.683,7.217
+Backlash,3,3.165,-10.977,87.658,464.700,11.424
+North,0,0.000,0.000,88.914,460.683,0.000
+North,1,1.256,-4.017,87.658,464.700,4.209
+North,2,2.427,-7.891,86.487,468.574,8.256
+INFO: STAR LOST during calibration, Mass= 0, SNR= 0.00, Error= 4, Status=Star lost - low HFD
+INFO: STAR LOST during calibration, Mass= 0, SNR= 0.00, Error= 4, Status=Star lost - low HFD
+INFO: STAR LOST during calibration, Mass= 0, SNR= 0.00, Error= 4, Status=Star lost - low HFD
+INFO: STAR LOST during calibration, Mass= 0, SNR= 0.00, Error= 4, Status=Star lost - low HFD
+North,3,3.490,-11.809,85.424,472.492,12.314
+INFO: STAR LOST during calibration, Mass= 0, SNR= 0.00, Error= 4, Status=Star lost - low HFD
+North,4,4.587,-15.614,84.327,476.297,16.274
+North,5,5.674,-19.691,83.240,480.374,20.493
+North,6,6.789,-23.649,82.125,484.332,24.605
+North,7,7.713,-27.553,81.201,488.236,28.612
+North calibration complete. Angle = 105.6 deg, Rate = 3.028 px/sec, Parity = N/A
+South,4,7.713,-27.553,81.201,488.236,28.612
+INFO: STAR LOST during calibration, Mass= 0, SNR= 0.00, Error= 4, Status=Star lost - low HFD
+South,3,5.923,-21.096,82.991,481.779,21.911
+South,2,3.854,-13.558,85.060,474.241,14.095
+South,1,1.788,-6.088,87.127,466.771,6.345
+South,0,0.054,-0.179,88.861,460.862,0.187
+INFO: STAR LOST during calibration, Mass= 0, SNR= 0.00, Error= 4, Status=Star lost - low HFD
+Calibration complete, mount = On Camera.
+
+Guiding Begins at 2026-11-08 00:24:23
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 2
+ Camera = Simulator, gain = 95, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.184
+Y guide algorithm = Resist Switch, Minimum move = 0.184 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 0 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 91.079, 454.594, Star position = 90.508, 454.421, HFD = 1.50 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.528,"Mount",-0.579,-0.409,0.660,-0.280,0.416,0.000,149,W,0,,,,177780,34.63,0
+2,4.652,"Mount",-0.096,-0.198,0.141,-0.174,0.000,0.000,0,,0,,,,200521,36.95,1
+3,6.916,"Mount",-0.131,-0.317,0.203,-0.283,0.128,0.000,46,W,0,,,,180233,34.57,1
+4,9.134,"Mount",-0.081,-0.255,0.140,-0.233,0.000,-0.233,0,,77,N,,,180790,35.53,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.386,"Mount",0.186,-0.359,-0.095,-0.390,0.000,-0.390,0,,129,N,,,180522,33.02,0
+Guiding Ends at 2026-11-08 00:24:35
+
+Guiding Begins at 2026-11-08 00:24:42
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 1
+ Camera = Simulator, gain = 95, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.184
+Y guide algorithm = Resist Switch, Minimum move = 0.184 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 0 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 91.109, 454.233, Star position = 91.109, 454.233, HFD = 1.69 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.377,"Mount",0.037,-0.135,-0.003,-0.140,0.000,0.000,0,,0,,,,174441,32.94,0
+2,4.620,"Mount",0.173,0.089,-0.189,0.052,-0.119,0.000,43,E,0,,,,188195,30.57,0
+3,6.778,"Mount",0.115,-0.158,-0.074,-0.178,0.000,0.000,0,,0,,,,184611,36.57,1
+4,8.979,"Mount",0.233,-0.417,-0.126,-0.456,0.000,0.000,0,,0,,,,186163,32.14,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.179,"Mount",-0.024,-0.186,0.068,-0.177,0.000,0.000,0,,0,,,,186269,36.35,1
+6,13.395,"Mount",0.172,-0.325,-0.090,-0.354,0.000,0.000,0,,0,,,,204484,36.70,0
+7,15.718,"Mount",0.130,-0.305,-0.054,-0.325,0.000,-0.325,0,,107,N,,,187649,34.86,1
+8,17.929,"Mount",0.083,-0.227,-0.027,-0.239,0.000,-0.239,0,,79,N,,,173306,33.93,1
+Guiding Ends at 2026-11-08 00:25:01
+
+Guiding Begins at 2026-11-08 00:25:08
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 1
+ Camera = Simulator, gain = 95, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.184
+Y guide algorithm = Resist Switch, Minimum move = 0.184 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 0 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 91.095, 453.991, Star position = 91.095, 453.991, HFD = 1.86 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.467,"Mount",0.281,-0.174,-0.231,-0.229,-0.146,0.000,52,E,0,,,,183685,32.64,0
+2,4.593,"Mount",0.024,-0.238,0.034,-0.237,0.000,0.000,0,,0,,,,186594,37.60,0
+3,6.805,"Mount",0.028,-0.064,-0.012,-0.069,0.000,0.000,0,,0,,,,185738,33.94,0
+4,9.132,"Mount",-0.021,-0.244,0.079,-0.235,0.000,-0.235,0,,78,N,,,180551,32.53,1
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.263,"Mount",0.008,-0.039,0.001,-0.040,0.000,0.000,0,,0,,,,182465,35.19,1
+6,13.501,"Mount",0.101,0.043,-0.108,0.021,0.000,0.000,0,,0,,,,178575,35.52,1
+7,15.716,"Mount",0.121,-0.039,-0.108,-0.064,0.000,0.000,0,,0,,,,183141,34.24,1
+8,18.009,"Mount",0.250,-0.101,-0.219,-0.151,-0.138,0.000,50,E,0,,,,195761,32.82,1
+Guiding Ends at 2026-11-08 00:25:28
+INFO: Guiding parameter change, MultiStar = true
+
+Guiding Begins at 2026-11-08 00:29:45
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 1
+ Camera = Simulator, gain = 50, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 493.566, 100.207, Star position = 493.566, 100.207, HFD = 2.93 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.485,"Mount",-0.031,-0.092,0.052,-0.083,0.000,0.000,0,,0,,,,703829,88.31,1
+Guiding Ends at 2026-11-08 00:29:48
+INFO: SETTLING STATE CHANGE, Settling failed
+INFO: Guiding parameter change, MultiStar = true
+
+Guiding Begins at 2026-11-08 00:34:28
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 2
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 432.848, 163.698, Star position = 432.848, 163.698, HFD = 1.51 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.366,"Mount",0.032,0.040,-0.040,0.032,0.000,0.000,0,,0,,,,195552,34.34,0
+2,4.579,"Mount",-0.024,0.008,0.021,0.013,0.000,0.000,0,,0,,,,192229,35.28,0
+3,6.800,"Mount",-0.005,0.003,0.004,0.004,0.000,0.000,0,,0,,,,200021,34.32,0
+4,9.020,"Mount",0.152,-0.096,-0.125,-0.125,0.000,0.000,0,,0,,,,179539,35.48,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.258,"Mount",0.092,-0.071,-0.072,-0.089,0.000,0.000,0,,0,,,,169842,31.15,0
+6,13.472,"Mount",-0.058,-0.193,0.103,-0.176,0.000,0.000,0,,0,,,,185914,33.92,0
+7,15.667,"DROP",,,,,,,,,,,,,0,0.00,4,"Star lost - low HFD"
+Guiding Ends at 2026-11-08 00:34:44
+
+Guiding Begins at 2026-11-08 00:37:55
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 9
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 433.815, 160.343, Star position = 433.815, 160.343, HFD = 1.69 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.519,"Mount",-0.001,-0.110,0.027,-0.107,0.000,0.000,0,,0,,,,197188,33.71,1
+Guiding Ends at 2026-11-08 00:37:58
+INFO: SETTLING STATE CHANGE, Settling failed
+INFO: SETTLING STATE CHANGE, Settling started
+Guiding Ends at 2026-11-08 00:43:01
+INFO: SETTLING STATE CHANGE, Settling failed
+
+Guiding Begins at 2026-11-08 00:44:18
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 8
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 673.670, 203.124, Star position = 673.670, 203.124, HFD = 1.51 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.490,"Mount",0.038,-0.063,-0.022,-0.070,0.000,0.000,0,,0,,,,146938,28.01,0
+2,4.719,"DROP",,,,,,,,,,,,,0,0.00,4,"Star lost - low HFD"
+Guiding Ends at 2026-11-08 00:44:23
+INFO: SETTLING STATE CHANGE, Settling failed
+INFO: Guiding parameter change, MultiStar = true
+
+Guiding Begins at 2026-11-08 00:51:07
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 12
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 428.220, 179.852, Star position = 428.220, 179.852, HFD = 1.71 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.391,"Mount",0.000,-0.004,0.001,-0.004,0.000,0.000,0,,0,,,,183500,32.74,0
+2,4.599,"Mount",0.092,0.021,-0.094,0.001,0.000,0.000,0,,0,,,,167824,33.07,0
+3,6.803,"Mount",0.006,0.042,-0.016,0.040,0.000,0.000,0,,0,,,,194272,35.19,0
+4,9.013,"Mount",-0.063,0.056,0.048,0.068,0.000,0.000,0,,0,,,,163702,32.04,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.232,"Mount",0.079,0.073,-0.094,0.055,0.000,0.000,0,,0,,,,192749,33.96,0
+6,13.506,"Mount",-0.048,-0.079,0.066,-0.068,0.000,0.000,0,,0,,,,190726,32.58,0
+7,15.714,"Mount",0.032,-0.049,-0.019,-0.054,0.000,0.000,0,,0,,,,188214,32.69,0
+8,17.928,"Mount",0.084,-0.104,-0.056,-0.119,0.000,0.000,0,,0,,,,189982,32.57,0
+Guiding Ends at 2026-11-08 00:51:27
+
+Guiding Begins at 2026-11-08 00:51:34
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 12
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 673.548, 203.095, Star position = 673.548, 203.095, HFD = 1.36 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.493,"Mount",0.096,-0.033,-0.086,-0.052,0.000,0.000,0,,0,,,,133845,26.61,0
+2,4.723,"Mount",0.028,-0.058,-0.013,-0.063,0.000,0.000,0,,0,,,,139352,28.39,0
+3,6.938,"Mount",0.166,-0.072,-0.144,-0.105,0.000,0.000,0,,0,,,,140437,26.19,0
+4,9.151,"Mount",0.027,0.029,-0.033,0.023,0.000,0.000,0,,0,,,,145570,25.88,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.358,"Mount",-0.034,0.009,0.031,0.015,0.000,0.000,0,,0,,,,139416,25.77,0
+6,13.621,"Mount",0.135,0.007,-0.133,-0.021,0.000,0.000,0,,0,,,,142107,28.82,0
+7,15.822,"Mount",-0.029,-0.018,0.032,-0.012,0.000,0.000,0,,0,,,,143558,27.10,0
+8,18.024,"Mount",0.046,0.002,-0.045,-0.008,0.000,0.000,0,,0,,,,135454,29.07,0
+Guiding Ends at 2026-11-08 00:51:53
+
+Guiding Begins at 2026-11-08 00:55:07
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 12
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 89.606, 458.707, Star position = 89.606, 458.707, HFD = 1.54 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.391,"Mount",0.058,-0.043,-0.046,-0.054,0.000,0.000,0,,0,,,,192031,33.61,0
+2,4.619,"Mount",0.044,-0.026,-0.037,-0.035,0.000,0.000,0,,0,,,,189176,33.27,0
+3,6.826,"Mount",-0.016,-0.100,0.040,-0.094,0.000,0.000,0,,0,,,,204091,33.48,0
+4,9.115,"Mount",0.015,-0.070,0.002,-0.071,0.000,0.000,0,,0,,,,191362,32.62,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.332,"Mount",0.068,-0.053,-0.053,-0.066,0.000,0.000,0,,0,,,,168711,30.14,0
+Guiding Ends at 2026-11-08 00:55:19
+
+Guiding Begins at 2026-11-08 00:56:10
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 12
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 428.255, 179.896, Star position = 428.255, 179.896, HFD = 1.70 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.561,"Mount",0.030,-0.022,-0.024,-0.028,0.000,0.000,0,,0,,,,179673,32.70,0
+2,4.781,"Mount",-0.062,-0.123,0.090,-0.108,0.000,0.000,0,,0,,,,183420,35.15,0
+3,7.062,"Mount",0.032,-0.044,-0.021,-0.050,0.000,0.000,0,,0,,,,176655,33.92,0
+4,9.324,"Mount",-0.012,0.036,0.003,0.038,0.000,0.000,0,,0,,,,182956,34.39,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.664,"Mount",0.092,-0.095,-0.067,-0.111,0.000,0.000,0,,0,,,,189718,31.99,0
+6,13.909,"Mount",-0.018,-0.153,0.054,-0.146,0.000,0.000,0,,0,,,,191323,35.18,0
+7,16.120,"Mount",-0.049,-0.034,0.055,-0.023,0.000,0.000,0,,0,,,,169396,35.30,0
+8,18.340,"Mount",-0.033,-0.005,0.033,0.002,0.000,0.000,0,,0,,,,178396,33.60,0
+9,20.544,"Mount",-0.037,0.004,0.035,0.011,0.000,0.000,0,,0,,,,180496,32.77,0
+Guiding Ends at 2026-11-08 00:56:31
+
+Guiding Begins at 2026-11-08 00:56:38
+Equipment Profile = DSG PA GUIDED INTERNAL SIM 20261108
+Dither = both axes, Dither scale = 1.000, Image noise reduction = none, Guide-frame time lapse = 0, Server enabled
+Pixel scale = 4.83 arc-sec/px, Binning = 1, Focal length = 160 mm
+Search region = 15 px, Star mass tolerance = 50.0%, Multi-star mode, list size = 12
+ Camera = Simulator, gain = 5, full size = 752 x 580, no dark, no defect map, pixel size = 3.8 um
+Exposure = 2000 ms
+Mount = On Camera, connected, guiding enabled, xAngle = -166.2, xRate = 2.782, yAngle = 105.6, yRate = 3.028, parity = ?/?
+Norm rates RA = 13.4"/s @ dec 0, Dec = 14.6"/s; ortho.err. = 1.8 deg
+X guide algorithm = Hysteresis, Hysteresis = 0.100, Aggression = 0.700, Minimum move = 0.180
+Y guide algorithm = Resist Switch, Minimum move = 0.180 Aggression = 100% FastSwitch = enabled
+Backlash comp = disabled, pulse = 20 ms
+Max RA duration = 2500, Max DEC duration = 2500, DEC guide mode = Auto
+RA Guide Speed = Unknown, Dec Guide Speed = Unknown, Cal Dec = Unknown, Last Cal Issue = None, Timestamp = 08/11/2026 00:24:23
+RA/Dec = Unknown, Hour angle = Unknown, Pier side = Unknown, Rotator pos = N/A, Alt = Unknown, Az = Unknown
+Lock position = 184.390, 344.241, Star position = 184.390, 344.241, HFD = 1.63 px
+Frame,Time,mount,dx,dy,RARawDistance,DECRawDistance,RAGuideDistance,DECGuideDistance,RADuration,RADirection,DECDuration,DECDirection,XStep,YStep,StarMass,SNR,ErrorCode
+INFO: SETTLING STATE CHANGE, Settling started
+1,2.420,"Mount",-0.018,-0.094,0.040,-0.088,0.000,0.000,0,,0,,,,165999,31.54,0
+2,4.656,"Mount",0.004,0.051,-0.016,0.049,0.000,0.000,0,,0,,,,168161,29.94,0
+3,6.875,"Mount",0.079,0.119,-0.105,0.101,0.000,0.000,0,,0,,,,156390,28.84,0
+4,9.158,"Mount",0.077,-0.009,-0.073,-0.025,0.000,0.000,0,,0,,,,161940,29.11,0
+INFO: SETTLING STATE CHANGE, Settling complete
+5,11.364,"Mount",0.104,-0.035,-0.092,-0.056,0.000,0.000,0,,0,,,,147860,28.02,0
+6,13.578,"Mount",0.021,0.019,-0.025,0.014,0.000,0.000,0,,0,,,,167821,28.00,0
+7,15.793,"Mount",-0.103,-0.027,0.106,-0.005,0.000,0.000,0,,0,,,,159511,30.43,0
+8,18.011,"Mount",-0.058,-0.035,0.064,-0.023,0.000,0.000,0,,0,,,,156886,29.73,0
+9,20.322,"Mount",0.096,-0.066,-0.077,-0.084,0.000,0.000,0,,0,,,,168128,29.75,0
+Guiding Ends at 2026-11-08 00:56:59
+
+Log Summary: calcnt:1 gcnt:13 gdur:476 gacnt:0
+Log closed at 2026-11-08 01:38:26
