@@ -6,6 +6,10 @@ Questa guida descrive la fondazione di sviluppo, i contratti canonici e il primo
 
 ## Prerequisiti
 
+Per diagnosticare console transitorie dei lavori locali consultare il
+[runbook degli avvii nascosti](local-background-launch.md), con le verifiche
+distinte di discovery/import OneDrive e SpatialLag.
+
 - .NET SDK `10.0.302`, selezionato tramite `global.json`;
 - Python 3.13 per la documentazione MkDocs;
 - Git con supporto ai nomi di file UTF-8.

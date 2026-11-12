@@ -1,5 +1,16 @@
 # Digital StarGate AI Bootstrap
 
+## SpatialLag locale — dotnet nascosto e lotto 40, 12 novembre 2026
+
+Leggere il [handover circoscritto](docs/project/HANDOVER_2026-11-12-DOTNET-HIDDEN-LOT40.md)
+per la correzione `CREATE_NO_WINDOW` dell'adapter locale, distinta dal launcher
+OneDrive. Nessun arresto o riavvio imposto; conservata la nota di provenienza
+della transizione del lotto 39. Lotto 40 avviato naturalmente alle 22:10:43
+Europe/Rome con il sorgente corretto: 2.106 campioni senza finestre rilevate,
+tre blocchi controllati e sette completati al riscontro delle 22:20:39.
+Snapshot iniziale, non completamento del lotto o nuova validazione scientifica.
+Questa pubblicazione documentale non avvia elaborazioni o distribuzioni runtime.
+
 ## Discovery/import locale — avvio nascosto, 12 novembre 2026
 
 Per l'attività Windows `Digital StarGate - OneDrive Import` leggere il
