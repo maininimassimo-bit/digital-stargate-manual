@@ -5,7 +5,7 @@ description: Snapshot privato della configurazione Allsky e copia pubblica sanif
 
 # Allsky: backup della configurazione
 
-Snapshot corrente acquisito il **31/10/2026 alle 18:50 Europe/Rome**, senza fermare l'acquisizione. Baseline Allsky Git `2b2c7b1347d076a489df5e614acf27de450738fb`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
+Snapshot corrente acquisito il **12/11/2026 alle 18:31 Europe/Rome**, dopo l’aggiornamento verificato e senza fermare l’acquisizione per il backup. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
 
 ## Due copie con finalità diverse
 
@@ -18,16 +18,20 @@ La copia privata **non è pubblicata su GitHub**. Include autenticazione, databa
 
 ## Download pubblico e integrità
 
-- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261031-185033.tar.gz).
-- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261031-185033.tar.gz.sha256).
+- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261112-183125.tar.gz).
+- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261112-183125.tar.gz.sha256).
 
-SHA-256 pubblico: `031b57fdd948ca77a728b30462d3d502125002c971e636c0dbc76e5c9523b87b`.
+SHA-256 pubblico: `e6f8d26b7971140265d316f331f86d786f4a969e951a0bad8ff0577e495ef73c` (4.932.772 byte).
 
-L'archivio pubblico contiene **140 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **356 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
+L'archivio pubblico contiene **140 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **357 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
 
 ## Snapshot precedenti conservati
 
-La copia del **31/10/2026 alle 18:21** resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261031-182122.tar.gz), [checksum](../assets/backups/allsky-public-20261031-182122.tar.gz.sha256). Contiene 356 file privati e 140 pubblici; SHA-256 pubblico `c125bd2226d2e7f0a6da58844cbe3e6e59734a548208708cfce7c1b73107593e`. Include la ricalibrazione, ma precede l’integrazione vento. Lo snapshot corrente delle 18:50 include entrambe.
+Prima dell’aggiornamento del 12 novembre è stato acquisito alle **18:15** lo snapshot privato `configuration-backup-20261112-181517`, 356 file oltre al manifest, e un archivio privato aggiuntivo per il ripristino di programma/binari/configurazioni precedenti. Sono conservati separatamente su Raspberry e PC Owner; non vengono pubblicati. Il dettaglio dell’intervento e del ripristino predisposto è nel [§27.35](../chapters/27-sistema-allsky.md#2735-aggiornamento-allsky-v20261001_01-12-novembre-2026).
+
+La copia del **31/10/2026 alle 18:50** resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261031-185033.tar.gz), [checksum](../assets/backups/allsky-public-20261031-185033.tar.gz.sha256). Contiene 356 file privati e 140 pubblici; SHA-256 pubblico `031b57fdd948ca77a728b30462d3d502125002c971e636c0dbc76e5c9523b87b`. Include vento e ricalibrazione, ma precede l’aggiornamento Allsky del 12 novembre.
+
+La copia del **31/10/2026 alle 18:21** resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261031-182122.tar.gz), [checksum](../assets/backups/allsky-public-20261031-182122.tar.gz.sha256). Contiene 356 file privati e 140 pubblici; SHA-256 pubblico `c125bd2226d2e7f0a6da58844cbe3e6e59734a548208708cfce7c1b73107593e`. Include la ricalibrazione, ma precede l’integrazione vento. Lo snapshot storico delle 18:50 include entrambe.
 
 La copia del 27/10/2026 alle 08:01 resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261027-080114.tar.gz), [checksum](../assets/backups/allsky-public-20261027-080114.tar.gz.sha256). Conteneva 140 file pubblici e 355 privati; SHA-256 pubblico `50516b2eeb7653678f43fc1a7b02b6b357f47d0476fd2bb417abfec1cf3809d9`. Include il retry live, ma la geometria overlay precede lo spostamento della camera del 31 ottobre.
 
@@ -38,7 +42,7 @@ La copia del 10/10/2026 alle 01:48 resta immutata: [archivio pubblico precedente
 ## Contenuto privato
 
 - `allsky/config`: impostazioni, pipeline moduli, overlay, logo, maschere, moduli personalizzati, calibrazione e dati di configurazione presenti. Esclusi cache `tmp`, log, bytecode Python e file di lock.
-- Moduli `scripts/modules/allsky_pistatus.py` e `allsky_shared.py` inclusi nella sola copia privata: preservano la baseline della telemetria dopo l’annullamento della prova del 27 ottobre.
+- Moduli `scripts/modules/allsky_pistatus.py` e `allsky_shared.py` inclusi nella sola copia privata: seguono ora la release v2026.10.01_01; la prova locale non risolutiva del 27 ottobre resta annullata.
 - Collegamento fisico fra i due file settings della camera preservato nella copia privata quando presente nell’installazione; verificato anche nel TAR.
 - Database SQLite acquisiti attraverso l'API di backup SQLite, invece di affidarsi alla sola copia del file in uso.
 - File del sito selezionati: Home, configurazione del sito, controller, CSS originali modificati e pannelli aggiunti, footer, immagini grafiche, favicon, sitemap, robots.txt e pagina meteore. Incluse le personalizzazioni amministrative `html/includes/meteors.php` e `html/js/jquery-allskysensor/jquery-allskysensor.js`.
@@ -63,13 +67,13 @@ La licenza MIT Allsky è mantenuta nel file `ALLSKY-LICENSE`; i file derivati co
 
 ## Verifiche effettuate e limiti
 
-Nel nuovo snapshot sono presenti soglia startrail 0,30, `mouse=false`, catalogo completo di 110 anteprime e retry singolo del caricamento live del 27 ottobre. Il modulo PiStatus è quello originale ripristinato: la prova non risolutiva non è inclusa. Sono inclusi anche pannello vento, JavaScript e collector con fallback diagnostico CloudWatcher in km/h, come descritto nella [guida pannelli](allsky-live-panels.md). La geometria overlay corrente è quella ricalibrata il 31 ottobre (§27.33), con evidenza completa inclusa nel privato. Gli snapshot precedenti descrivono l’orientamento anteriore allo spostamento; non usarli come calibrazione corrente. Le opzioni fotografiche e la decisione di mantenere la modalità USB corrente restano quelle documentate nei §§27.30–27.31 del Capitolo 27. I due database hanno superato `quick_check`; l’hardlink settings è conservato nell’archivio privato. Sono stati verificati checksum dei due archivi, hash di tutti i file nei manifest, percorsi interni senza attraversamenti `..`, JSON del pacchetto pubblico, parsing dei due script Python, sintassi JavaScript e PHP della Home/footer sanificati. La revisione del pacchetto pubblico ha controllato assenza di database, chiavi/certificati, indirizzi privati ed email e sostituzione dei campi riservati. Il servizio di acquisizione e il timer dei pannelli risultavano attivi dopo la copia.
+Nel nuovo snapshot v2026.10.01_01 sono presenti soglia startrail 0,30, `mouse=false`, catalogo completo di 110 anteprime e retry singolo del caricamento live del 27 ottobre. La prova locale PiStatus del 27 ottobre non è inclusa; i moduli nativi nel privato sono quelli della release aggiornata. Sono inclusi anche pannello vento, JavaScript e collector con fallback diagnostico CloudWatcher in km/h, come descritto nella [guida pannelli](allsky-live-panels.md). Il controller include l’integrazione della release e il riferimento di cache finale `dsg-upgrade-20261112-v2`; i metadati del sito sono a ConfigVersion 6. La geometria overlay corrente è quella ricalibrata il 31 ottobre (§27.33), con evidenza completa inclusa nel privato. Gli snapshot precedenti alla ricalibrazione del 31 ottobre descrivono l’orientamento anteriore allo spostamento; non usarli come calibrazione corrente. Le opzioni fotografiche e la decisione di mantenere la modalità USB corrente restano quelle documentate nei §§27.30–27.31 del Capitolo 27. I due database hanno superato `quick_check`; l’hardlink settings è conservato nell’archivio privato. Sono stati verificati checksum dei due archivi, hash di tutti i file nei manifest, percorsi interni senza attraversamenti `..`, JSON del pacchetto pubblico, parsing dei due script Python, sintassi JavaScript e PHP della Home/footer sanificati. La revisione del pacchetto pubblico ha controllato assenza di database, chiavi/certificati, indirizzi privati ed email e sostituzione dei campi riservati. Il servizio di acquisizione e il timer dei pannelli risultavano attivi dopo la copia.
 
 Lo snapshot dei file è stato acquisito con applicazione in funzione: non è una transazione atomica dell'intera installazione. Per i database è stata usata una copia consistente SQLite, ma non è attestata una transazione comune fra database differenti e file JSON. **Non è stato eseguito un ripristino**, né su Raspberry di prova né sull'impianto. Il collaudo di recupero su supporto separato resta da effettuare prima di considerare il pacchetto una soluzione di disaster recovery validata.
 
 ## DSG-PROC-027-04 — Ripristino controllato
 
-1. Procurarsi l'archivio privato e il suo checksum dalla copia consegnata all'owner o dalla directory privata `configuration-backup-20261031-185033` del Raspberry. Conservarne una copia fuori dal Raspberry per coprire un guasto della scheda.
+1. Procurarsi l'archivio privato e il suo checksum dalla copia consegnata all'owner o dalla directory privata `configuration-backup-20261112-183125` del Raspberry. Conservarne una copia fuori dal Raspberry per coprire un guasto della scheda.
 2. Controllare SHA-256 dell'archivio; estrarlo in una directory di lavoro privata, senza sovrascrivere direttamente percorsi di sistema. Verificare `SHA256SUMS` dalla directory `private` estratta.
 3. Preparare Allsky compatibile con la baseline indicata, sistema/SDK camera e dipendenze Python. La lista dei pacchetti è un inventario, non un installer da eseguire alla cieca. Conservare una nuova copia della configurazione di destinazione per il rollback.
 4. In una finestra di manutenzione fermare acquisizione, servizi periodici/sensor server pertinenti e timer dei pannelli. Confrontare e ripristinare soltanto i file necessari di `config` e del sito, con proprietà e permessi corretti. Non sovrascrivere indiscriminatamente autenticazione o database su un host diverso. Su questa installazione `settings.json` e `settings_ZWO_ASI290MC.json` condividono lo stesso inode: dopo un ripristino conservare o ricreare il collegamento fisico verificato; una copia dei soli contenuti non garantisce il mantenimento degli hardlink.

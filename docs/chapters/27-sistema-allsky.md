@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.3 — vento CloudWatcher in km/h e snapshot delle 18:50 del 31/10/2026
+**Revisione:** 1.4 — aggiornamento Allsky v2026.10.01_01 e backup del 12/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -21,12 +21,12 @@ Il sistema non sostituisce i sensori di sicurezza certificati o dedicati, ma cos
 | rete | LAN/Wi-Fi dell'osservatorio |
 | funzione | immagini, monitoraggio e timelapse |
 | sistema operativo | Raspberry Pi OS / Raspbian 11 Bullseye, userland armhf e kernel aarch64 |
-| software | AllskyTeam/allsky v2026.10.01, aggiornato il 09/10/2026 |
+| software | AllskyTeam/allsky v2026.10.01_01, aggiornato il 12/11/2026; commit `f1406ea78ba969313abd1ddd14a4272967081a06` |
 | fotogramma | 1936 × 1096 pixel |
 | directory applicazione | `/home/pi/allsky` |
 | sito locale | `/home/pi/allsky/html/allsky`, pagina `/allsky/index.php` |
 
-I dati derivano dalla verifica del sistema e della configurazione effettuata il 09/10/2026. Indirizzi LAN, coordinate precise, seriali, credenziali e chiavi private restano nella documentazione operativa riservata e non sono pubblicati nel manuale.
+La baseline hardware deriva dalla verifica del 09/10/2026; la versione software e la conservazione delle personalizzazioni sono state verificate dopo l’aggiornamento del 12/11/2026 (§27.35). Indirizzi LAN, coordinate precise, seriali, credenziali e chiavi private restano nella documentazione operativa riservata e non sono pubblicati nel manuale.
 
 ## 27.3 Architettura funzionale
 
@@ -546,3 +546,41 @@ Il pannello **Meteo locale · CloudWatcher** include la velocità del vento in k
 Home, `js/dsg-live-panels.js` e collector sono i soli componenti runtime interessati; esportatore e clone EAGLE non sono stati modificati. Nessun parametro fotografico, geometria overlay, USB, soglia meteo o Safety Authority è cambiato. Misure aggiornate sono state verificate nel JSON pubblico HTTPS; non è stata eseguita una calibrazione metrologica del vento.
 
 Lo snapshot `configuration-backup-20261031-185033`, acquisito alle **18:50 Europe/Rome** senza fermare la camera, comprende la configurazione corrente con vento e ricalibrazione. **356 file privati e 140 pubblici** oltre ai manifest, SHA-256 verificati, due database SQLite `quick_check` OK, hardlink settings preservato e sintassi verificata. Il privato è separato su Raspberry/PC Owner con accesso limitato; nel repository è pubblicata soltanto la copia sanificata. Gli snapshot delle 18:21 e precedenti restano immutati. [Download, checksum e perimetro](../operations/allsky-configuration-backup.md). Il backup non è un’immagine SD; ripristino integrale non collaudato.
+
+
+## 27.35 Aggiornamento Allsky v2026.10.01_01 — 12 novembre 2026
+
+### Baseline, confronto e migrazione
+
+Installata la [release ufficiale v2026.10.01_01](https://github.com/AllskyTeam/allsky/releases/tag/v2026.10.01_01), pubblicata il 1° novembre, passando dal commit `2b2c7b1347d076a489df5e614acf27de450738fb` al commit `f1406ea78ba969313abd1ddd14a4272967081a06`. Sistema operativo Bullseye e SDK ZWO sono rimasti invariati.
+
+Il confronto ha individuato **319 percorsi modificati** dalla release, inclusa la documentazione generata. Un solo file modificato sia localmente sia a monte richiedeva integrazione: `html/allsky/js/controller.js`. Il confronto a tre vie, dopo normalizzazione dei ritorni a capo, ha mantenuto il retry singolo del §27.30, il messaggio sul fotogramma precedente, la sincronizzazione al `Last-Modified`, l’avvio notturno della mappa e il dimensionamento calibrato. Sono state integrate le altre correzioni ufficiali, incluso l’uso di `imageName` dallo scope. Nel sito finale 315 file presenti coincidevano con la release, tre percorsi erano stati eliminati dalla release e il controller era la sola integrazione locale fra i file aggiornati a monte. Le altre personalizzazioni locali sono rimaste nei rispettivi file.
+
+`capture_ZWO`, `capture_RPi`, `keogram` e `startrails` sono stati compilati nell’area privata di prova mentre l’acquisizione continuava, con percorsi di produzione nell’header generato. Dopo backup e controlli è stato eseguito il fast-forward al tag verificato; sono stati installati i binari già compilati e usata la rigenerazione ufficiale dei file Allsky. La lista per la rigenerazione escludeva la compilazione già conclusa e la sostituzione del Lighttpd personalizzato. Gli header generati sono stati confrontati identici. Non è stata eseguita una reinstallazione indiscriminata del sito.
+
+Sono stati aggiornati gli elenchi nativi dei formati dell’editor, `ConfigVersion` a 6 e `config.AllskyVersion`. Il nuovo collegamento keolapse è presente ma **disabilitato**; nessun nuovo modulo è stato installato o abilitato. Il modulo meteore precedente è conservato: il sorgente di questa release ne aggiunge il metadato di deprecazione dalla versione `v2026.10.01_02`, senza rimuoverlo in quella installata. Non è stata migrata automaticamente l’analisi verso un rilevatore diverso.
+
+### Conservazione e controlli
+
+| Elemento | Esito del controllo del 12 novembre |
+|---|---|
+| Parametri fotografici | Settings identici byte per byte; collegamento fisico tra i due settings camera preservato |
+| Mappa | Geometria del §27.33 invariata, `mouse=false`, catalogo con 110 anteprime conservato; stesso `data-frame-time` per JPEG e mappa nel browser |
+| Sito e pannelli | Logo, sfondo, layout, collegamento al portale e pannelli conservati; CloudWatcher con vento, scatto e Raspberry aggiornati nel browser |
+| Meteore | Flussi e modulo archivio personalizzato conservati; 293 immagini candidate pubbliche prima e dopo |
+| Startrails | Soglia di luminosità 0,30 conservata |
+| Accesso e orario | Lighttpd/TLS e sudoers identici alla situazione precedente; NTP sincronizzato |
+| Dati e servizi | Due database SQLite con `quick_check` OK; acquisizione, periodic, server Allsky, Lighttpd e timer pannelli attivi |
+| Pubblicazione | HTTPS con verifica ordinaria del certificato: Home, JPEG e galleria meteore HTTP 200; amministrazione `/index.php` HTTP 403 dall’esterno |
+
+Il controllo preliminare comprendeva compilazione dei quattro programmi, sintassi di 27 script shell, 17 file PHP, 28 file Python e 15 file JavaScript aggiornati, import dei moduli comuni/meteore/archivio personalizzato/condizioni overlay e test isolato del retry. La finestra registrata va dall’arresto delle **18:27:45** al riavvio dei servizi delle **18:27:49 Europe/Rome**; i log confermano la prima acquisizione effettiva alle **18:28:04** e altre immagini fino alle **18:32:04**, senza errori di acquisizione riconosciuti nella finestra. Non è una garanzia di assenza di ogni difetto o disponibilità futura.
+
+Durante la verifica, la maschera di permessi restrittiva usata per gli archivi privati aveva inizialmente reso illeggibili al web server alcuni sorgenti pubblici appena riscritti da Git. Sono stati corretti i soli sorgenti tracciati ufficiali e schemi pubblici: file 0644, eseguibili e directory 0755. Permessi degli archivi privati e dati sensibili conservati. Il riferimento finale `js/controller.js?v=dsg-upgrade-20261112-v2` evita il riuso della risposta precedente. La pagina è stata quindi verificata completa, senza espressioni Angular irrisolte, con JPEG 1936 × 1096 e clock mappa/fotogramma coincidente. Questa correzione non modifica calibrazione o parametri fotografici.
+
+### Backup, ripristino e limiti
+
+Prima del passaggio è stato acquisito lo snapshot delle **18:15**, `configuration-backup-20261112-181517`, con 356 file privati verificati oltre al manifest. Un ulteriore archivio privato conserva i file sostituiti del programma, binari, configurazione e controlli di accesso precedenti; il processo di aggiornamento aveva predisposto il ripristino su errore, che non è stato attivato né collaudato con un guasto deliberato. Questi archivi e i log grezzi rimangono fuori dal repository.
+
+Dopo l’esito positivo è stato acquisito lo snapshot delle **18:31**, `configuration-backup-20261112-183125`: **357 file privati e 140 pubblici verificati**, oltre ai manifest. Repository e portale ospitano soltanto il TAR pubblico sanificato e il suo SHA-256; il privato è conservato separatamente sul Raspberry e sul PC Owner con accesso limitato. [Download aggiornato, checksum, perimetro e procedura di ripristino](../operations/allsky-configuration-backup.md). Tutti gli archivi pubblici precedenti restano immutati e rappresentano le rispettive baseline storiche.
+
+La generazione completa di startrails, keogram e timelapse alla successiva chiusura della notte **non è stata eseguita nella finestra di verifica**; resta un controllo operativo residuo, senza promessa di un monitoraggio automatico aggiuntivo. Le [limitazioni ufficiali della release](https://github.com/AllskyTeam/allsky/blob/v2026.10.01_01/docs/source/allsky_guide/known_issues.md) segnalano inoltre l’indisponibilità dei grafici nativi su Bullseye; non è stato aggiornato il sistema operativo per risolverla. Non sono state ricalibrate la mappa o le maschere, né modificati modalità e parametri USB. Il backup non è un’immagine SD e il ripristino integrale resta da collaudare su supporto separato.
