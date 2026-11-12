@@ -1,5 +1,16 @@
 # Digital StarGate AI Bootstrap
 
+## Discovery/import locale — avvio nascosto, 12 novembre 2026
+
+Per l'attività Windows `Digital StarGate - OneDrive Import` leggere il
+[handover circoscritto](docs/project/HANDOVER_2026-11-12-HIDDEN-DISCOVERY-IMPORT.md).
+Launcher locale WScript, comando PowerShell originale e schedulazione ogni
+5 minuti conservata. Successivo ciclo automatico concluso con codice 0:
+905 file già presenti e 905 ricevute verificate; nessuna finestra CLI rilevata
+nei campioni dell'avvio. Nessuna nuova immagine disponibile, quindi nessuna
+nuova copia collaudata. Conservare la directory locale del launcher/rollback.
+Gli handover e gli stati degli altri package restano invariati.
+
 ## BKL-051 — dispersione locale dei dark, 15 ottobre 2026
 
 Misurata localmente la dispersione dei 50 dark del2024, con tre mappe Float64,
