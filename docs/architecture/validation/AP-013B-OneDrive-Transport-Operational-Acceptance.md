@@ -225,6 +225,30 @@ PC: verificare OneDrive, convergenza XISF+READY, hash e import. EAGLE: il partia
 
 Nuova validazione obbligatoria per batch >30, modifica path, principal/logon type, hash/READY/staging, cleanup automatico, semantica COPY_ONLY o riattivazione permanente SMB/VPN.
 
+### 7.10 Avvio nascosto del wrapper discovery/import — 12 novembre 2026
+
+Sul PC principale l'azione di `Digital StarGate - OneDrive Import` usa ora
+`wscript.exe //B //NoLogo` con `Start-DSGOneDriveImportHidden.vbs` per evitare
+la comparsa della console all'avvio. Il launcher attende il comando PowerShell
+originale, lo avvia con stile finestra `0` e ne restituisce il codice di uscita.
+Restano invariati script schedulato, `-MaxFilesPerRun 30`, trigger ogni **5 minuti**,
+principal Interactive/Limited, `IgnoreNew` e timeout 30 minuti.
+
+Il successivo avvio automatico del 12 novembre, 18:58:49–19:16:01 Europe/Rome,
+ha concluso discovery e verifica di 905 file/905 ACK esistenti con risultato 0.
+Nessuna finestra CLI rilevata nei 73 campioni dell'avvio. Non c'erano nuove
+immagini: la copia di nuovi file non è stata esercitata. La durata superiore
+alla periodicità non implica un blocco: verificare attività/processo e report;
+`IgnoreNew` impedisce avvii sovrapposti. Valutare il risultato del ciclo concluso,
+distinguendolo dai trigger rifiutati mentre il ciclo è attivo.
+
+Conservare il launcher e i backup locali in `DSG-Inventory\HiddenLaunch-20261112`:
+l'attività richiama questa directory. Il rollback del solo launcher usa
+`Restore-PreviousLaunch.ps1`, dopo verifica dell'azione e con i privilegi Windows
+richiesti; non è il rollback generale del trasporto del §7.8.
+[Evidenze, limiti e dettagli del ripristino](../evidence/AP-013B-Hidden-Discovery-Import-2026-11-12.md).
+Questo addendum non modifica retroattivamente i gate storici o la promotion AP-013B.
+
 ## 8. Evidence bundle
 
 Conservare manifest JSON, results CSV, transfer plan, timestamp, conteggi, sample hash, partial inventory e configurazione non-secret.
