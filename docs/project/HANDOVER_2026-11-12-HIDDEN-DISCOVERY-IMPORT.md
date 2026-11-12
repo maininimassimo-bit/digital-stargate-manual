@@ -18,7 +18,7 @@ nuove immagini: il trasferimento di nuovi file non è stato esercitato.
 ## Riferimenti e continuità
 
 - [Evidenza operativa, configurazione e rollback](../architecture/evidence/AP-013B-Hidden-Discovery-Import-2026-11-12.md).
-- [Runbook AP-013B aggiornato](../architecture/validation/AP-013B-OneDrive-Transport-Operational-Acceptance.md#710-avvio-nascosto-del-wrapper-discoveryimport--12-novembre-2026).
+- [Runbook AP-013B aggiornato](../architecture/validation/AP-013B-OneDrive-Transport-Operational-Acceptance.md#710-avvio-nascosto-del-wrapper-discoveryimport-12-novembre-2026).
 
 Launcher e backup sono conservati nella directory locale
 `DSG-Inventory\HiddenLaunch-20261112`, che deve restare disponibile perché
