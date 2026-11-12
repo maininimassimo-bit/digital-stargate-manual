@@ -13,7 +13,7 @@ import math
 
 from tools.pixinsight.local_pilot.broker import decode, encode, opaque, require
 from tools.scientific_registry.ingestion_storage import Conflict
-from tools.scientific_transients.queue import fields, digest
+from tools.scientific_transients.queue import fields, digest, BINDING_FIELDS, TransientQueue
 
 PROTOCOL = 'DSG_CONFIRMATORY_CAMPAIGNS_V1'
 LIMIT = 8 * 1024 * 1024
@@ -92,7 +92,10 @@ class ConfirmatoryCampaigns:
                     'inputs': [], 'plans': [], 'lastRecordedUTC': None, 'stateSha256': None}, generation
         require(len(raw) <= LIMIT, 'CAMPAIGN_STORAGE_LIMIT')
         state = decode(raw)
-        fields(state, {'protocol', 'workerId', 'ownerRef', 'inputs', 'plans', 'lastRecordedUTC', 'stateSha256'})
+        fields(state, {'protocol', 'workerId', 'ownerRef', 'inputs', 'plans', 'lastRecordedUTC', 'stateSha256'}
+               | ({'queueNamespaceSha256'} if 'queueNamespaceSha256' in state else set()))
+        require('queueNamespaceSha256' not in state or digest(state['queueNamespaceSha256']),
+                'CAMPAIGN_QUEUE_NAMESPACE')
         require(state['workerId'] == self.worker_id and state['ownerRef'] == self.owner_ref
                 and state['stateSha256'] == fingerprint({k:v for k,v in state.items() if k != 'stateSha256'}),
                 'CAMPAIGN_STATE_IDENTITY_OR_INTEGRITY')
@@ -294,6 +297,302 @@ class ConfirmatoryCampaigns:
                                 'inputReviewSnapshotSha256':request['expectedInputReviewSha256']})
         return self._mutate(operation)
 
+    def dispatch_context(self, ref, witness_ref):
+        """Owner-only read port for exact frozen inputs, never a launch permit.
+
+        The snapshot is stable across other cases' execution records. A caller
+        must recheck current authority separately; this read does not serialize
+        revocation with queue writes or native process creation.
+        """
+        require(opaque(witness_ref), 'CAMPAIGN_DISPATCH_CONTEXT_WITNESS')
+        return self._mutate(lambda state, _: self._dispatch_context(state, ref, witness_ref))
+
+    def _dispatch_context(self, state, ref, witness_ref):
+        p = self._plan(state, ref)
+        require(p['frozenUTC'] is not None and not p['revoked']
+                and not self._sample_blockers(state, p), 'CAMPAIGN_DISPATCH_CONTEXT_BLOCKED')
+        require(witness_ref in p['request']['inputWitnessRefs'], 'CAMPAIGN_DISPATCH_CONTEXT_WITNESS')
+        freezes = [e for e in p['events'] if e['kind'] == 'FREEZE']
+        require(len(freezes) == 1, 'CAMPAIGN_DISPATCH_CONTEXT_FREEZE')
+        freeze = freezes[0]
+        require(freeze['facts']['inputReviewSnapshotSha256'] == self._selected_reviews_sha(state, p),
+                'CAMPAIGN_DISPATCH_CONTEXT_REVIEW_CHANGED')
+        require(not any(e['request']['witnessRef'] == witness_ref for e in p['executions']),
+                'CAMPAIGN_DISPATCH_CONTEXT_ALREADY_EXECUTED')
+        w = self._input(state, witness_ref)
+        value = {'protocol': 'DSG_CONFIRMATORY_DISPATCH_CONTEXT_V1',
+                 'planRef': ref, 'planSha256': p['planSha256'],
+                 'freezeEventSha256': freeze['sha256'], 'frozenUTC': p['frozenUTC'],
+                 'inputReviewSnapshotSha256': freeze['facts']['inputReviewSnapshotSha256'],
+                 'witnessRef': witness_ref, 'witnessSha256': w['sha256'],
+                 'inputReportSha256': w['request']['reportSha256'],
+                 'frames': copy.deepcopy(w['request']['frames']),
+                 'launchAuthorized': False, 'scientificValidation': 'NOT_VALIDATED'}
+        for key in ('algorithmRef', 'algorithmSha256', 'contractRef', 'contractSha256'):
+            value[key] = p['request'][key]
+        value['contextSha256'] = fingerprint(value)
+        return value
+
+    @staticmethod
+    def _dispatch_event(plan, kind, sha):
+        matches = [e for e in plan['events'] if e['kind'] == kind and e['sha256'] == sha]
+        require(len(matches) == 1, 'CAMPAIGN_DISPATCH_EVENT_NOT_FOUND')
+        return matches[0]
+
+    @staticmethod
+    def _open_admissions(plan):
+        closed = {e['request']['admissionSha256'] for e in plan['events']
+                  if e['kind'] in {'FRAME_CLOSURE', 'UNRESERVED_FENCED_CLOSURE'}}
+        return [e for e in plan['events'] if e['kind'] == 'START_ADMISSION' and e['sha256'] not in closed]
+
+    def _dispatch_namespace(self, state, intent, guard):
+        namespace = intent['request'].get('queueNamespaceSha256')
+        configured = getattr(self, '_queue_namespace_sha', None)
+        if namespace is not None or configured is not None or 'queueNamespaceSha256' in state:
+            require(namespace is not None and namespace == configured == state.get('queueNamespaceSha256')
+                    and guard is getattr(self, '_queue_guard', None) and guard is not None
+                    and self.job_reader == self._queue_job_reader, 'CAMPAIGN_QUEUE_NAMESPACE_MISMATCH')
+
+    def prepare_dispatch(self, ref, request, *, queue_guard=None):
+        """Owner application port: durable intent only, with no queue side effects.
+
+        Not wired to HTTP until guarded queue projection and the local runner
+        are implemented. All checks use the same campaign CAS as revocation.
+        """
+        fields(request, {'decisionId', 'contextSha256', 'witnessRef', 'jobs',
+                         'workerId', 'rootId', 'archiveSha256'})
+        configured = getattr(self, '_queue_namespace_sha', None)
+        if configured is not None:
+            require(queue_guard is getattr(self, '_queue_guard', None) and queue_guard is not None
+                    and self.job_reader == self._queue_job_reader, 'CAMPAIGN_QUEUE_TRUSTED_PREPARATION_REQUIRED')
+            request = copy.deepcopy(request)
+            request['queueNamespaceSha256'] = configured
+        require(all(opaque(request[k]) for k in ('decisionId', 'witnessRef', 'workerId', 'rootId'))
+                and request['workerId'] == self.worker_id
+                and digest(request['contextSha256']) and digest(request['archiveSha256'])
+                and type(request['jobs']) is list and len(request['jobs']) == 3,
+                'CAMPAIGN_DISPATCH_INTENT')
+        for job in request['jobs']:
+            fields(job, {'requestId', 'binding'})
+            fields(job['binding'], BINDING_FIELDS)
+            require(opaque(job['requestId']) and all(opaque(v) for v in job['binding'].values()),
+                    'CAMPAIGN_DISPATCH_JOB')
+        require(len({j['requestId'] for j in request['jobs']}) == 3
+                and len({j['binding']['bindingRef'] for j in request['jobs']}) == 3,
+                'CAMPAIGN_DISPATCH_DUPLICATE_JOB')
+        def operation(state, stamp):
+            require(state.get('queueNamespaceSha256') in {None, configured}, 'CAMPAIGN_QUEUE_NAMESPACE_MISMATCH')
+            p = self._plan(state, ref)
+            repeat = self._repeat(p['events'], request)
+            if repeat:
+                require(repeat['kind'] == 'DISPATCH_INTENT', 'CAMPAIGN_DISPATCH_DECISION_KIND')
+                return repeat
+            context = self._dispatch_context(state, ref, request['witnessRef'])
+            require(context['contextSha256'] == request['contextSha256'], 'CAMPAIGN_DISPATCH_CONTEXT_CHANGED')
+            require(not any(e['kind'] == 'DISPATCH_INTENT' and
+                            e['request']['witnessRef'] == request['witnessRef'] for e in p['events']),
+                    'CAMPAIGN_DISPATCH_CASE_ALREADY_PREPARED')
+            used = {j['requestId'] for other in state['plans'] for e in other['events']
+                    if e['kind'] == 'DISPATCH_INTENT' for j in e['request']['jobs']}
+            require(not used.intersection(j['requestId'] for j in request['jobs']),
+                    'CAMPAIGN_DISPATCH_REQUEST_REUSED')
+            for job, frame in zip(request['jobs'], context['frames']):
+                binding = job['binding']
+                require(binding['inputRef'] == frame['frameRef']
+                        and binding['algorithmRef'] == context['algorithmRef']
+                        and binding['contractRef'] == context['contractRef'], 'CAMPAIGN_DISPATCH_JOB_BINDING')
+            if configured is not None:
+                state['queueNamespaceSha256'] = configured
+            return self._event(p, 'DISPATCH_INTENT', request, stamp, 'AUTHENTICATED_OWNER_REQUEST',
+                               {'context': context, 'queueProjectionPerformed': False, 'launchAuthorized': False})
+        return self._mutate(operation)
+
+    def admit_frame(self, ref, request, *, queue_guard=None):
+        """Consume one exact admission; an existing admission never reissues a grant.
+
+        Admission is in-flight intent, not evidence that an OS process started
+        or stopped. No HTTP exposure or native launch is supplied by this port.
+        """
+        fields(request, {'decisionId', 'dispatchIntentSha256', 'ordinal', 'workerId', 'rootId'})
+        require(all(opaque(request[k]) for k in ('decisionId', 'workerId', 'rootId'))
+                and request['workerId'] == self.worker_id and digest(request['dispatchIntentSha256'])
+                and type(request['ordinal']) is int and 0 <= request['ordinal'] < 3,
+                'CAMPAIGN_START_ADMISSION')
+        def operation(state, stamp):
+            p = self._plan(state, ref)
+            intent = self._dispatch_event(p, 'DISPATCH_INTENT', request['dispatchIntentSha256'])
+            self._dispatch_namespace(state, intent, queue_guard)
+            repeat = self._repeat(p['events'], request)
+            if repeat:
+                require(repeat['kind'] == 'START_ADMISSION', 'CAMPAIGN_DISPATCH_DECISION_KIND')
+                return {'disposition': 'RECONCILIATION_REQUIRED', 'admission': None}
+            owner = intent['request']; ordinal = request['ordinal']
+            require(request['rootId'] == owner['rootId'] and request['workerId'] == owner['workerId'],
+                    'CAMPAIGN_ADMISSION_WORKER_ROOT')
+            context = self._dispatch_context(state, ref, owner['witnessRef'])
+            require(context == intent['facts']['context'], 'CAMPAIGN_DISPATCH_CONTEXT_CHANGED')
+            require(not any(e['kind'] == 'START_ADMISSION' and
+                            e['request']['dispatchIntentSha256'] == intent['sha256'] and
+                            e['request']['ordinal'] == ordinal for e in p['events']),
+                    'CAMPAIGN_FRAME_ALREADY_ADMITTED')
+            # One in-flight fence for this worker across all campaigns. It is
+            # intentionally not removed by lease expiry, cancellation or revoke.
+            require(not any(self._open_admissions(other) for other in state['plans']),
+                    'CAMPAIGN_NATIVE_IN_FLIGHT_OR_UNCERTAIN')
+            if ordinal:
+                previous = [e for e in p['events'] if e['kind'] == 'START_ADMISSION' and
+                            e['request']['dispatchIntentSha256'] == intent['sha256'] and
+                            e['request']['ordinal'] == ordinal - 1]
+                closures = [e for e in p['events'] if e['kind'] == 'FRAME_CLOSURE' and previous and
+                            e['request']['admissionSha256'] == previous[0]['sha256']]
+                require(len(previous) == len(closures) == 1 and
+                        closures[0]['request']['technicalState'] == 'COMPLETED',
+                        'CAMPAIGN_PREVIOUS_FRAME_NOT_COMPLETED_AND_CLOSED')
+            admission = self._event(p, 'START_ADMISSION', request, stamp,
+                'AUTHENTICATED_WORKER_TECHNICAL_ADMISSION_UNDER_OWNER_INTENT',
+                {'jobId': 'TRN_' + owner['jobs'][ordinal]['requestId'],
+                 'binding': owner['jobs'][ordinal]['binding'],
+                 'inputSha256': context['frames'][ordinal]['sha256'],
+                 'queueNamespaceSha256': owner.get('queueNamespaceSha256'),
+                 'inFlightOrUncertain': True, 'nativeStoppedAttested': False})
+            return {'disposition': 'CREATED', 'admission': admission}
+        return self._mutate(operation)
+
+    def close_frame(self, ref, request, *, queue_guard=None):
+        """Retain exact worker-reported stop evidence; never scientific acceptance.
+
+        Read the technical queue snapshot once outside the CAS callback, whose
+        retries must not perform queue operations. The local runner must check
+        actual retained process-closure evidence before submitting this report.
+        """
+        fields(request, {'decisionId', 'admissionSha256', 'jobId', 'attemptId',
+                         'reportSha256', 'nativeStopEvidenceSha256', 'technicalState', 'processStoppedReported'})
+        require(opaque(request['decisionId']) and opaque(request['attemptId'])
+                and digest(request['admissionSha256']) and digest(request['nativeStopEvidenceSha256'])
+                and type(request['jobId']) is str and request['jobId'].startswith('TRN_')
+                and opaque(request['jobId'][4:]) and request['processStoppedReported'] is True
+                and type(request['technicalState']) is str
+                and request['technicalState'] in {'COMPLETED', 'FAILED', 'CANCELLED', 'RECOVERY_REQUIRED'}
+                and (request['reportSha256'] is None or digest(request['reportSha256'])),
+                'CAMPAIGN_FRAME_CLOSURE')
+        current, _ = self._read()
+        current_plan = self._plan(current, ref)
+        current_admission = self._dispatch_event(current_plan, 'START_ADMISSION', request['admissionSha256'])
+        current_intent = self._dispatch_event(current_plan, 'DISPATCH_INTENT',
+                                              current_admission['request']['dispatchIntentSha256'])
+        self._dispatch_namespace(current, current_intent, queue_guard)
+        job = copy.deepcopy(self.job_reader(request['jobId']))
+        def operation(state, stamp):
+            p = self._plan(state, ref)
+            admission = self._dispatch_event(p, 'START_ADMISSION', request['admissionSha256'])
+            intent = self._dispatch_event(p, 'DISPATCH_INTENT', admission['request']['dispatchIntentSha256'])
+            self._dispatch_namespace(state, intent, queue_guard)
+            repeat = self._repeat(p['events'], request)
+            if repeat:
+                require(repeat['kind'] == 'FRAME_CLOSURE', 'CAMPAIGN_DISPATCH_DECISION_KIND')
+                return repeat
+            require(admission in self._open_admissions(p),
+                    'CAMPAIGN_FRAME_ALREADY_CLOSED')
+            result = job.get('result')
+            require(request['jobId'] == admission['facts']['jobId'] == job['jobId']
+                    and job['binding'] == admission['facts']['binding']
+                    and job.get('rootId') == intent['request']['rootId']
+                    and job.get('attemptId') == request['attemptId']
+                    and job['state'] == request['technicalState']
+                    and utc(job['createdAt']) >= utc(intent['recordedUTC'])
+                    and utc(job['updatedAt']) >= utc(admission['recordedUTC'])
+                    and (None if result is None else result['reportSha256']) == request['reportSha256']
+                    and (request['technicalState'] != 'COMPLETED' or result is not None),
+                    'CAMPAIGN_FRAME_CLOSURE_JOB_MISMATCH')
+            if request['technicalState'] == 'COMPLETED':
+                require(result['bindingRef'] == admission['facts']['binding']['bindingRef']
+                        and type(result['qualityCounts']['incomplete']) is int
+                        and result['qualityCounts']['incomplete'] == 0
+                        and type(result['qualityCounts']['measured']) is int
+                        and result['qualityCounts']['measured'] > 0,
+                        'CAMPAIGN_FRAME_RESULT_INCOMPLETE')
+            if request['technicalState'] == 'RECOVERY_REQUIRED':
+                require(not TransientQueue._blocks_reservation(job), 'CAMPAIGN_OWNER_RECOVERY_CLOSURE_REQUIRED')
+                require(job['recoveryClosure']['request']['evidenceSha256'] == request['nativeStopEvidenceSha256'],
+                        'CAMPAIGN_OWNER_RECOVERY_EVIDENCE_MISMATCH')
+            return self._event(p, 'FRAME_CLOSURE', request, stamp,
+                'AUTHENTICATED_WORKER_REPORTED_NOT_ATTESTED',
+                {'scientificValidation': 'NOT_VALIDATED', 'stopEvidence': 'WORKER_REPORTED_NOT_ATTESTED',
+                 'ownerRecoveryClosure': copy.deepcopy(job.get('recoveryClosure'))})
+        return self._mutate(operation)
+
+    def _close_unreserved(self, ref, request, snapshot, *, queue_guard):
+        """Trusted Owner reconciliation of a stable cancelled/unreserved queue.
+
+        Snapshot must come from the configured private queue port before this
+        CAS. This records a terminal queue barrier, never an OS stop assertion.
+        """
+        require(queue_guard is not None and queue_guard is getattr(self, '_queue_guard', None),
+                'CAMPAIGN_QUEUE_TRUSTED_RECONCILIATION_REQUIRED')
+        fields(request, {'decisionId', 'admissionSha256', 'jobId', 'fenceSnapshotSha256',
+                         'cancellationEvidenceSha256'})
+        require(opaque(request['decisionId']) and all(digest(request[k]) for k in
+                ('admissionSha256', 'fenceSnapshotSha256', 'cancellationEvidenceSha256'))
+                and request['fenceSnapshotSha256'] == fingerprint(snapshot), 'CAMPAIGN_UNRESERVED_PROOF')
+        snapshot = copy.deepcopy(snapshot)
+        def operation(state, stamp):
+            p = self._plan(state, ref)
+            admission = self._dispatch_event(p, 'START_ADMISSION', request['admissionSha256'])
+            intent = self._dispatch_event(p, 'DISPATCH_INTENT', admission['request']['dispatchIntentSha256'])
+            self._dispatch_namespace(state, intent, queue_guard)
+            repeat = self._repeat(p['events'], request)
+            if repeat:
+                require(repeat['kind'] == 'UNRESERVED_FENCED_CLOSURE', 'CAMPAIGN_DISPATCH_DECISION_KIND')
+                return repeat
+            require(admission in self._open_admissions(p), 'CAMPAIGN_FRAME_ALREADY_CLOSED')
+            origin = snapshot['campaignOrigin']; ordinal = admission['request']['ordinal']
+            selected = intent['request']['jobs'][ordinal]
+            require(snapshot['jobId'] == request['jobId'] == admission['facts']['jobId']
+                    and snapshot['binding'] == selected['binding'] == admission['facts']['binding']
+                    and snapshot['request'] == {'requestId': selected['requestId'],
+                                               'bindingRef': selected['binding']['bindingRef']}
+                    and origin['namespaceSha256'] == intent['request']['queueNamespaceSha256']
+                    == admission['facts']['queueNamespaceSha256']
+                    and origin['intentSha256'] == intent['sha256'] and origin['ordinal'] == ordinal
+                    and origin['rootId'] == intent['request']['rootId']
+                    and utc(snapshot['createdAt']) >= utc(intent['recordedUTC'])
+                    and utc(snapshot['updatedAt']) >= utc(snapshot['createdAt'])
+                    and utc(snapshot['updatedAt']) <= utc(stamp), 'CAMPAIGN_UNRESERVED_BINDING')
+            # Queue APIs do not reset/delete terminal jobs. A cancelled job
+            # without reservation fields cannot later commit a stale reserve.
+            fields(snapshot, {'jobId', 'request', 'binding', 'state', 'cancelRequested', 'sequence',
+                              'result', 'reviews', 'createdAt', 'updatedAt', 'campaignOrigin'})
+            require(snapshot['state'] == 'CANCELLED' and snapshot['cancelRequested'] is True
+                    and type(snapshot['sequence']) is int and snapshot['sequence'] == 0
+                    and snapshot['result'] is None and snapshot['reviews'] == [],
+                    'CAMPAIGN_UNRESERVED_NOT_FENCED')
+            return self._event(p, 'UNRESERVED_FENCED_CLOSURE', request, stamp,
+                'AUTHENTICATED_OWNER_TECHNICAL_RECONCILIATION',
+                {'status': 'NOT_STARTED_FENCED', 'queueNamespaceSha256': origin['namespaceSha256'],
+                 'queueFenceSnapshot': snapshot, 'nativeStoppedAttested': False,
+                 'scientificValidation': 'NOT_VALIDATED'})
+        return self._mutate(operation)
+
+    def dispatch_receipt(self, ref, intent_sha):
+        """Owner read-only reconciliation; no admission/lease can be recovered."""
+        require(digest(intent_sha), 'CAMPAIGN_DISPATCH_RECEIPT')
+        def snapshot(state, _):
+            p = self._plan(state, ref)
+            intent = self._dispatch_event(p, 'DISPATCH_INTENT', intent_sha)
+            admissions = [e for e in p['events'] if e['kind'] == 'START_ADMISSION' and
+                          e['request']['dispatchIntentSha256'] == intent_sha]
+            shas = {e['sha256'] for e in admissions}
+            closures = [e for e in p['events'] if e['kind'] in {'FRAME_CLOSURE', 'UNRESERVED_FENCED_CLOSURE'} and
+                        e['request']['admissionSha256'] in shas]
+            closed = {e['request']['admissionSha256'] for e in closures}
+            return {'intent': intent, 'admissions': admissions, 'closures': closures,
+                    'queueNamespaceSha256': state.get('queueNamespaceSha256'),
+                    'headSha256': p['headSha256'], 'revoked': p['revoked'],
+                    'pendingAdmissionSha256': [e['sha256'] for e in admissions if e['sha256'] not in closed],
+                    'pendingDisposition': 'STOP_PENDING_RECONCILIATION' if p['revoked'] else 'IN_FLIGHT_OR_UNCERTAIN',
+                    'launchAuthorized': False, 'scientificValidation': 'NOT_VALIDATED'}
+        return self._mutate(snapshot)
+
     def record_execution(self, ref, request):
         fields(request, {'executionRef','planSha256','witnessRef','algorithmSha256','contractSha256',
                          'scienceEvidenceSha256','pipelineStatus','outcome','jobs'})
@@ -311,8 +610,11 @@ class ConfirmatoryCampaigns:
                     and (job['attemptId'] is None or opaque(job['attemptId']))
                     and (job['reportSha256'] is None or digest(job['reportSha256'])), 'CAMPAIGN_EXECUTION_JOB')
         require(len({j['jobId'] for j in request['jobs']})==3, 'CAMPAIGN_JOB_REUSED')
-        def operation(state, stamp):
+        def authority(state):
             p=self._plan(state,ref);v=p['request']
+            if 'queueNamespaceSha256' in state:
+                require(state['queueNamespaceSha256'] == getattr(self, '_queue_namespace_sha', None)
+                        and self.job_reader == self._queue_job_reader, 'CAMPAIGN_QUEUE_NAMESPACE_MISMATCH')
             require(p['frozenUTC'] is not None and not p['revoked']
                     and request['planSha256']==p['planSha256']
                     and request['algorithmSha256']==v['algorithmSha256']
@@ -320,15 +622,49 @@ class ConfirmatoryCampaigns:
                     and request['witnessRef'] in v['inputWitnessRefs'], 'CAMPAIGN_EXECUTION_BINDING')
             previous=[e for e in p['executions'] if e['request']['executionRef']==request['executionRef']]
             if previous:
-                require(previous[0]['request']==request,'CAMPAIGN_EXECUTION_CONFLICT');return self._worker_record(previous[0])
+                require(previous[0]['request']==request,'CAMPAIGN_EXECUTION_CONFLICT');return p, v, None, previous[0]
             require(not any(e['request']['witnessRef']==request['witnessRef'] for e in p['executions']),
                     'CAMPAIGN_CASE_EXECUTION_ALREADY_RECORDED')
-            w=self._input(state,request['witnessRef']); technical=True; snapshots=[]
+            w=self._input(state,request['witnessRef'])
             require([j['frameRef'] for j in request['jobs']]==[f['frameRef'] for f in w['request']['frames']],
                     'CAMPAIGN_FRAME_BINDING')
-            for item,frame in zip(request['jobs'],w['request']['frames']):
+            if 'queueNamespaceSha256' in state:
+                intents = [e for e in p['events'] if e['kind'] == 'DISPATCH_INTENT'
+                           and e['request']['witnessRef'] == request['witnessRef']]
+                require(len(intents) == 1, 'CAMPAIGN_EXECUTION_DISPATCH_BINDING')
+                intent = intents[0]
+                self._dispatch_namespace(state, intent, self._queue_guard)
+                require([j['jobId'] for j in request['jobs']] ==
+                        ['TRN_' + j['requestId'] for j in intent['request']['jobs']],
+                        'CAMPAIGN_EXECUTION_DISPATCH_BINDING')
+                if request['outcome'] != 'INCONCLUSIVE':
+                    for ordinal, item in enumerate(request['jobs']):
+                        admissions = [e for e in p['events'] if e['kind'] == 'START_ADMISSION'
+                                      and e['request']['dispatchIntentSha256'] == intent['sha256']
+                                      and e['request']['ordinal'] == ordinal]
+                        closures = [e for e in p['events'] if e['kind'] == 'FRAME_CLOSURE' and admissions
+                                    and e['request']['admissionSha256'] == admissions[0]['sha256']]
+                        require(len(admissions) == len(closures) == 1
+                                and closures[0]['request']['technicalState'] == 'COMPLETED'
+                                and closures[0]['request']['attemptId'] == item['attemptId']
+                                and closures[0]['request']['reportSha256'] == item['reportSha256'],
+                                'CAMPAIGN_EXECUTION_FRAME_CLOSURE_MISSING')
+            return p, v, w, None
+        initial, _ = self._read()
+        prior = authority(initial)[3]
+        reader = self.job_reader
+        # Read once outside the retriable CAS. Positive terminal queue reports
+        # are immutable; inconclusive snapshots remain point-in-time evidence.
+        jobs = [] if prior is not None else [copy.deepcopy(reader(item['jobId'])) for item in request['jobs']]
+        def operation(state, stamp):
+            p, v, w, previous = authority(state)
+            if previous is not None:
+                return self._worker_record(previous)
+            require(len(jobs) == 3, 'CAMPAIGN_EXECUTION_SNAPSHOT_MISSING')
+            technical = True; snapshots = []
+            for item,frame,job in zip(request['jobs'],w['request']['frames'],jobs):
                 require(item['inputSha256']==frame['sha256'], 'CAMPAIGN_INPUT_DIGEST')
-                job=self.job_reader(item['jobId']); binding=job['binding']
+                binding=job['binding']
                 require(job['jobId']==item['jobId'] and job.get('attemptId')==item['attemptId']
                         and binding['inputRef']==item['frameRef'] and binding['algorithmRef']==v['algorithmRef']
                         and binding['contractRef']==v['contractRef'] and utc(job['createdAt'])>utc(p['frozenUTC'])
