@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.5 — maschere riallineate e automatismi camera disabilitati, 12/11/2026
+**Revisione:** 1.6 — affiancamento privato del rilevatore temporale, 12/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -637,3 +637,16 @@ Il backup successivo delle **19:25**, `configuration-backup-20261112-192507`, co
 Le prove coprono quattro riferimenti e il funzionamento immediato notturno, non un intero ciclo stagionale, tutte le posizioni degli apparati o un confronto fotometrico diurno/notturno. I flag diurni sono caricati correttamente nei log, ma il comportamento in luce diurna va verificato al successivo passaggio. Il controllo programmato dall’Owner per il **13 novembre alle 09:00** comprende i prodotti completi della notte e la visualizzazione pubblica; la notte contiene fotogrammi prima e dopo questi interventi. Non attribuire ogni differenza di luminosità alla sola disabilitazione degli automatismi: esposizione, nuvole e condizioni cambiano.
 
 Per annullare l’intervento, in manutenzione autorizzata confrontare le modifiche successive e ripristinare le sole due maschere e i quattro flag precedenti dal backup mirato, aggiornando `lastchanged` e preservando l’hardlink; riavviare le componenti pertinenti e controllare nuovi fotogrammi. Non ripristinare l’intero sito o la calibrazione per annullare maschere/flag. Ripristino integrale non collaudato. Eventuali correzioni successive alle anomalie del collaudo richiedono la proposta e l’autorizzazione Owner già richieste.
+
+
+## 27.37 Valutazione e affiancamento privato delle meteore 12 novembre 2026
+
+Dopo la prova su tre notti complete l’Owner ha autorizzato l’affiancamento privato, mantenendo il rilevatore ordinario e vietando la pubblicazione dei nuovi candidati. Dal **12/11/2026 alle 22:03 Europe/Rome** `dsg-meteor-shadow.service` legge i JPEG notturni già salvati, con soglia privata 100 px, stato/registro/contatori separati e rete disabilitata. Non è stato aggiunto un modulo al flusso di acquisizione. [Guida operativa, isolamento e disattivazione](../operations/allsky-meteor-shadow.md).
+
+Il confronto offline copre **2.176 immagini**, circa 38 ore e 21 minuti, con **2.170 fotogrammi confrontabili**. Il rilevatore attuale, riprodotto sulle stesse immagini e con la maschera aggiornata, segnala 76 fotogrammi candidati; il temporale ne conserva 20 a 100 px e 28 a 50 px. Sono candidati non confermati, non conteggi della galleria né una misura di sensibilità. La notte completa aiuta a scartare riflessi e nubi ricorrenti, ma restano tracce compatibili con aerei/satelliti e non è disponibile un campione indipendente di meteore confermate. Il profilo da 50 px non è stato attivato.
+
+Il modulo upstream è v1.0.1, commit `ee0b6567b829e3bf86cd1e2190e4e0c59e5e2b31`; sorgente immutato, checksum verificato e licenza MIT conservata. L’adattatore privato impedisce l’uso delle variabili, del database e delle funzioni di pubblicazione dell’applicazione. Risultati in `/var/lib/dsg-meteor-shadow`, permessi 0700 e nessun accesso dal sito. Il limite applicativo di 2 GiB mette in pausa l’analisi senza cancellare immagini; una modifica alla maschera ordinaria richiede una revisione esplicita della copia privata.
+
+Backup prima dell’intervento alle **21:53**, 358 file privati e 140 pubblici oltre ai manifest; snapshot successivo alle **22:07**, 366 privati e 147 pubblici. Le copie private sono conservate separatamente su Raspberry/PC e soltanto l’export sanificato entra nel repository. Lo snapshot comprende codice/profilo/unit del servizio, ma non il suo archivio di candidati o il registro persistente. [Backup aggiornato e limiti di recupero](../operations/allsky-configuration-backup.md).
+
+Le prove isolate hanno verificato un candidato sintetico, assenza di modifica ai JPEG sorgenti, riavvio senza duplicati, reset per divario temporale e blocco degli effetti esterni. L’unit reale ha verificato tre scritture negate ai file di produzione, socket IPv4 bloccato e stato non leggibile dall’utente web; sono stati elaborati nuovi fotogrammi prima e dopo un riavvio del solo servizio privato. Il servizio ordinario conserva l’avvio delle **19:23:47** del §27.36, senza interruzione per questo intervento; checksum di settings, flusso notturno, maschera e mappa/controller invariati. La classificazione scientifica e il comportamento su un riavvio fisico restano da validare. La galleria pubblica e i contatori precedenti continuano a dipendere dal rilevatore ordinario.

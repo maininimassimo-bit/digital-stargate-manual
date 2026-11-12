@@ -5,7 +5,7 @@ description: Snapshot privato della configurazione Allsky e copia pubblica sanif
 
 # Allsky: backup della configurazione
 
-Snapshot corrente acquisito il **12/11/2026 alle 19:25 Europe/Rome**, dopo l’aggiornamento verificato di maschere e flag camera e senza fermare l’acquisizione per il backup. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
+Snapshot corrente acquisito il **12/11/2026 alle 22:07 Europe/Rome**, dopo l’attivazione verificata dell’affiancamento privato delle meteore e senza fermare l’acquisizione per il backup. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
 
 ## Due copie con finalità diverse
 
@@ -18,14 +18,18 @@ La copia privata **non è pubblicata su GitHub**. Include autenticazione, databa
 
 ## Download pubblico e integrità
 
-- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261112-192507.tar.gz).
-- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261112-192507.tar.gz.sha256).
+- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261112-220710.tar.gz).
+- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261112-220710.tar.gz.sha256).
 
-SHA-256 pubblico: `c154b198ec380527d950f14421549119fcff9819a9579008f0e29698d1c7fa53` (4.926.932 byte).
+SHA-256 pubblico: `5b79bf465b3ad3b583b73a8ee445ba689348caa24a1b85da7c7267525b9ba634` (4.974.956 byte).
 
-L'archivio pubblico contiene **140 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **358 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
+L'archivio pubblico contiene **147 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **366 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
 
 ## Snapshot precedenti conservati
+
+Prima dell’affiancamento è stato creato alle **21:53 del 12/11/2026** `configuration-backup-20261112-215352`: 358 file privati e 140 pubblici oltre ai manifest, conservati separatamente su Raspberry/PC. L’export intermedio non è aggiunto al repository.
+
+La copia delle **19:25 del 12/11/2026** rimane immutata: [archivio pubblico](../assets/backups/allsky-public-20261112-192507.tar.gz), [checksum](../assets/backups/allsky-public-20261112-192507.tar.gz.sha256), SHA-256 `c154b198ec380527d950f14421549119fcff9819a9579008f0e29698d1c7fa53`. Include maschere/flag camera, ma precede il nuovo servizio privato.
 
 Prima delle modifiche a maschere/flag è stato creato lo snapshot delle **19:16 del 12/11/2026**, `configuration-backup-20261112-191658`: 357 file privati e 140 pubblici oltre ai manifest, conservato separatamente sul Raspberry/PC Owner; il relativo export intermedio non è aggiunto al repository. Il backup mirato `masks-autoflags-20261112` conserva settings e PNG originali. [Intervento, verifiche e rollback mirato](../chapters/27-sistema-allsky.md#2736-maschere-aggiornate-e-flag-camera-coerenti-con-snapshot-12-novembre-2026).
 
@@ -52,15 +56,17 @@ La copia del 10/10/2026 alle 01:48 resta immutata: [archivio pubblico precedente
 - Database SQLite acquisiti attraverso l'API di backup SQLite, invece di affidarsi alla sola copia del file in uso.
 - File del sito selezionati: Home, configurazione del sito, controller, CSS originali modificati e pannelli aggiunti, footer, immagini grafiche, favicon, sitemap, robots.txt e pagina meteore. Incluse le personalizzazioni amministrative `html/includes/meteors.php` e `html/js/jquery-allskysensor/jquery-allskysensor.js`.
 - Renderer `virtualsky/virtualsky.js`, catalogo Messier arricchito, 110 miniature DSS2 e relativi crediti: inclusi nelle copie privata e pubblica.
-- Configurazione lighttpd, directory HTTPS compresa; servizi `allsky`, `allskyperiodic`, `allskyserver` e servizio/timer `dsg-live-telemetry`.
+- Configurazione lighttpd, directory HTTPS compresa; servizi `allsky`, `allskyperiodic`, `allskyserver` e servizio/timer `dsg-live-telemetry` e unit `dsg-meteor-shadow`.
 - Configurazione `systemd-timesyncd`, eventuali drop-in, fuso e lista dei pacchetti Python del virtual environment.
 - Metadati con istante di acquisizione e commit Allsky, manifest dei file e checksum dell'archivio.
 
 **Non è un'immagine completa della scheda SD.** Non include sistema operativo, intero sorgente Allsky, virtual environment eseguibile, librerie native/SDK camera, immagini e video scientifici, storico delle gallerie, configurazione del router, chiavi SSH dell'operatore o snapshot completi di EAGLE/CloudWatcher. Queste componenti richiedono installazione o backup separati. Eventuali cartelle di supporto esterne al perimetro elencato non sono implicitamente incluse.
 
+Sono inclusi codice, profilo e maschera fissata di `config/myFiles/meteor-shadow`, insieme al tool `config/myFiles/backup/capture-configuration.py` nella copia privata. **Archivio candidati, registro SQLite e stato del servizio in `/var/lib/dsg-meteor-shadow` non sono inclusi**: occorre una copia privata separata per recuperarli fuori dal Raspberry. [Perimetro del servizio e disattivazione](allsky-meteor-shadow.md).
+
 ## Contenuto pubblico e sanificazione
 
-L'esportazione pubblica è una lista esplicita di file: impostazioni camera sanificate, pipeline principali giorno/notte/periodica, configurazione overlay Digital Stargate, logo e maschere, configurazione del sito, Home/controller/CSS/footer, modulo archivio meteore, collector dei pannelli e relativi servizi systemd.
+L'esportazione pubblica è una lista esplicita di file: impostazioni camera sanificate, pipeline principali giorno/notte/periodica, configurazione overlay Digital Stargate, logo e maschere, configurazione del sito, Home/controller/CSS/footer, modulo archivio meteore, collector dei pannelli e relativi servizi systemd. Il nuovo export aggiunge worker/profilo/maschera, modulo upstream e sua licenza/provenienza, oltre alla unit del rilevatore temporale privato; non aggiunge i risultati o i candidati della prova.
 
 Valori riservati sono sostituiti da `__PRIVATE_VALUE__`, `__PRIVATE_IP__`, `__PRIVATE_EMAIL__` o `__PRIVATE_RELAY_HOST__`. Coordinate precise, localizzazione configurata, credenziali e impostazioni di trasferimento sono rimosse; il riferimento pubblico Aircraft all'area approssimata di Manciano resta quello già documentato. Non sono inclusi database, token di sessione, password iniziali, certificati, chiavi, configurazione lighttpd privata, dati live o font di sistema. Il modulo Solar System e le dipendenze si ripristinano dalla copia privata o dal rispettivo progetto, non da questo export ridotto.
 
@@ -72,13 +78,13 @@ La licenza MIT Allsky è mantenuta nel file `ALLSKY-LICENSE`; i file derivati co
 
 ## Verifiche effettuate e limiti
 
-Nel nuovo snapshot v2026.10.01_01 sono presenti le maschere del §27.36 e i quattro flag Auto-Gain/Auto White Balance disabilitati, oltre a soglia startrail 0,30, `mouse=false`, catalogo completo di 110 anteprime e retry singolo del caricamento live del 27 ottobre. La prova locale PiStatus del 27 ottobre non è inclusa; i moduli nativi nel privato sono quelli della release aggiornata. Sono inclusi anche pannello vento, JavaScript e collector con fallback diagnostico CloudWatcher in km/h, come descritto nella [guida pannelli](allsky-live-panels.md). Il controller include l’integrazione della release e il riferimento di cache finale `dsg-upgrade-20261112-v2`; i metadati del sito sono a ConfigVersion 6. La geometria overlay corrente è quella ricalibrata il 31 ottobre (§27.33), con evidenza completa inclusa nel privato. Gli snapshot precedenti alla ricalibrazione del 31 ottobre descrivono l’orientamento anteriore allo spostamento; non usarli come calibrazione corrente. Le opzioni fotografiche e la decisione di mantenere la modalità USB corrente restano quelle documentate nei §§27.30–27.31 del Capitolo 27. I due database hanno superato `quick_check`; l’hardlink settings è conservato nell’archivio privato. Sono stati verificati checksum dei due archivi, hash di tutti i file nei manifest, percorsi interni senza attraversamenti `..`, JSON del pacchetto pubblico, parsing dei due script Python, sintassi JavaScript e PHP della Home/footer sanificati. La revisione del pacchetto pubblico ha controllato assenza di database, chiavi/certificati, indirizzi privati ed email e sostituzione dei campi riservati. Il servizio di acquisizione e il timer dei pannelli risultavano attivi dopo la copia.
+Il nuovo snapshot v2026.10.01_01 aggiunge codice/profilo/unit dell’affiancamento privato (§27.37). Mantiene le maschere del §27.36 e i quattro flag Auto-Gain/Auto White Balance disabilitati, la soglia startrail 0,30, `mouse=false`, catalogo completo di 110 anteprime e retry singolo del caricamento live del 27 ottobre. La prova locale PiStatus del 27 ottobre non è inclusa; i moduli nativi nel privato sono quelli della release aggiornata. Sono inclusi anche pannello vento, JavaScript e collector con fallback diagnostico CloudWatcher in km/h, come descritto nella [guida pannelli](allsky-live-panels.md). Il controller include l’integrazione della release e il riferimento di cache finale `dsg-upgrade-20261112-v2`; i metadati del sito sono a ConfigVersion 6. La geometria overlay corrente è quella ricalibrata il 31 ottobre (§27.33), con evidenza completa inclusa nel privato. Gli snapshot precedenti alla ricalibrazione del 31 ottobre descrivono l’orientamento anteriore allo spostamento; non usarli come calibrazione corrente. Le opzioni fotografiche e la decisione di mantenere la modalità USB corrente restano quelle documentate nei §§27.30–27.31 del Capitolo 27. I due database hanno superato `quick_check`; l’hardlink settings è conservato nell’archivio privato. Sono stati verificati checksum dei due archivi, hash di tutti i file nei manifest, percorsi interni senza attraversamenti `..`, JSON del pacchetto pubblico, parsing degli script Python, sintassi JavaScript e PHP della Home/footer sanificati. La revisione del pacchetto pubblico ha controllato assenza di database, chiavi/certificati, indirizzi privati ed email e sostituzione dei campi riservati. Il servizio di acquisizione e il timer dei pannelli risultavano attivi dopo la copia.
 
 Lo snapshot dei file è stato acquisito con applicazione in funzione: non è una transazione atomica dell'intera installazione. Per i database è stata usata una copia consistente SQLite, ma non è attestata una transazione comune fra database differenti e file JSON. **Non è stato eseguito un ripristino**, né su Raspberry di prova né sull'impianto. Il collaudo di recupero su supporto separato resta da effettuare prima di considerare il pacchetto una soluzione di disaster recovery validata.
 
 ## DSG-PROC-027-04 — Ripristino controllato
 
-1. Procurarsi l'archivio privato e il suo checksum dalla copia consegnata all'owner o dalla directory privata `configuration-backup-20261112-192507` del Raspberry. Conservarne una copia fuori dal Raspberry per coprire un guasto della scheda.
+1. Procurarsi l'archivio privato e il suo checksum dalla copia consegnata all'owner o dalla directory privata `configuration-backup-20261112-220710` del Raspberry. Conservarne una copia fuori dal Raspberry per coprire un guasto della scheda.
 2. Controllare SHA-256 dell'archivio; estrarlo in una directory di lavoro privata, senza sovrascrivere direttamente percorsi di sistema. Verificare `SHA256SUMS` dalla directory `private` estratta.
 3. Preparare Allsky compatibile con la baseline indicata, sistema/SDK camera e dipendenze Python. La lista dei pacchetti è un inventario, non un installer da eseguire alla cieca. Conservare una nuova copia della configurazione di destinazione per il rollback.
 4. In una finestra di manutenzione fermare acquisizione, servizi periodici/sensor server pertinenti e timer dei pannelli. Confrontare e ripristinare soltanto i file necessari di `config` e del sito, con proprietà e permessi corretti. Non sovrascrivere indiscriminatamente autenticazione o database su un host diverso. Su questa installazione `settings.json` e `settings_ZWO_ASI290MC.json` condividono lo stesso inode: dopo un ripristino conservare o ricreare il collegamento fisico verificato; una copia dei soli contenuti non garantisce il mantenimento degli hardlink.
@@ -91,3 +97,5 @@ La procedura non interviene su cupola, montatura, interlock o Safety Authority. 
 ## Aggiornamenti futuri
 
 Dopo una modifica verificata a moduli, maschere, overlay, calibrazione o pubblicazione, creare un nuovo snapshot con data, checksum e perimetro. Conservare separatamente il privato; produrre e rivedere una nuova esportazione sanificata prima di qualunque commit. Non copiare mai l'archivio privato nel working tree Git, nemmeno temporaneamente: rimuoverlo in un commit successivo non lo eliminerebbe dalla cronologia.
+
+Per i nuovi snapshot di questo perimetro usare il tool aggiornato `config/myFiles/backup/capture-configuration.py`, che comprende la unit privata. L’arresto o il ripristino del solo affiancamento non richiede di fermare Allsky.

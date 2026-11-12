@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "mode": "private-shadow",
+  "module_version": "v1.0.1",
+  "upstream_commit": "ee0b6567b829e3bf86cd1e2190e4e0c59e5e2b31",
+  "module_sha256": "b6a8993125373aa466257a8831f0fbf683042c170c8d88884a691075cdd83447",
+  "mask_sha256": "631fbb2035a829ba9becbed470aa486ff82bfbe08864237dfbf30c66683b6d31",
+  "settings_path": "/home/pi/allsky/config/settings.json",
+  "images_path": "/home/pi/allsky/images",
+  "production_mask_path": "/home/pi/allsky/config/overlay/images/meteor-digital-stargate-mask.png",
+  "data_path": "/var/lib/dsg-meteor-shadow",
+  "runtime_path": "/run/dsg-meteor-shadow",
+  "poll_seconds": 5,
+  "max_source_age_seconds": 300,
+  "max_gap_seconds": 180,
+  "max_storage_bytes": 2147483648,
+  "min_length": 100,
+  "publish": false
+}

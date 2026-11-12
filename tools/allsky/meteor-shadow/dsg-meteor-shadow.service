@@ -1,0 +1,42 @@
+[Unit]
+Description=Digital Stargate private temporal meteor review
+After=allsky.service
+ConditionPathExists=/home/pi/allsky/config/myFiles/meteor-shadow/config.json
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+ExecStart=/home/pi/allsky/venv/bin/python /home/pi/allsky/config/myFiles/meteor-shadow/worker.py
+WorkingDirectory=/home/pi/allsky/config/myFiles/meteor-shadow
+Environment=PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+StateDirectory=dsg-meteor-shadow
+StateDirectoryMode=0700
+RuntimeDirectory=dsg-meteor-shadow
+RuntimeDirectoryMode=0700
+RuntimeDirectoryPreserve=restart
+UMask=0077
+Nice=15
+IOSchedulingClass=idle
+CPUQuota=50%
+MemoryMax=384M
+TasksMax=32
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/dsg-meteor-shadow /run/dsg-meteor-shadow
+PrivateTmp=yes
+PrivateNetwork=yes
+PrivateDevices=yes
+RestrictAddressFamilies=AF_UNIX
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target

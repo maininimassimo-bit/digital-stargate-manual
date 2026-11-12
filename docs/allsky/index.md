@@ -27,3 +27,5 @@ La ripresa include data e ora. Se la rete o la camera non sono disponibili, l’
 ## Il progetto Digital Stargate
 
 L’Allsky usa una camera ZWO ASI290MC con obiettivo da 1,8 mm e un Raspberry Pi. Acquisizione, archivio e visualizzazione sono descritti nel [capitolo tecnico sul sistema AllSky](../chapters/27-sistema-allsky.md). Per esplorare l’osservatorio, visita la [Home](../index.md) e lo [Stato osservatorio](../status/index.md).
+
+La ricerca temporale aggiuntiva è attiva soltanto in [affiancamento privato](../operations/allsky-meteor-shadow.md): i suoi candidati non alimentano la galleria pubblica.
