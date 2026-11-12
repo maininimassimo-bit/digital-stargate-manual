@@ -1,6 +1,6 @@
 # Allsky: pannelli informativi esterni alla ripresa
 
-Baseline dei pannelli verificata il **09/10/2026**, estensione vento verificata il **31/10/2026**, in Europe/Rome. Riferimento: [Capitolo 27 — Sistema Allsky](../chapters/27-sistema-allsky.md#2726-pannelli-informativi-esterni-alla-ripresa).
+Baseline dei pannelli verificata il **09/10/2026**, estensione vento verificata il **31/10/2026**, compatibilità con Allsky **v2026.10.01_01 verificata il 12/11/2026**, in Europe/Rome. Riferimento: [Capitolo 27 — Sistema Allsky](../chapters/27-sistema-allsky.md#2726-pannelli-informativi-esterni-alla-ripresa).
 
 ## Disposizione e contenuto
 
@@ -115,3 +115,10 @@ Questa compatibilità vale per l’unità locale confermata: se cambia l’unit�
 Verificati sintassi Python/JavaScript/PHP della Home, presenza della voce HTML e comportamento numerico per dato assente, zero, decimali e valori negativi. Il collector locale e il JSON HTTPS pubblico hanno mostrato misure aggiornate, fra cui **18 e 16,6 km/h** negli istanti controllati; non sono valori fissi attesi. La camera è rimasta attiva. Non è stato effettuato un confronto metrologico con un anemometro indipendente o un collaudo di tutti i browser.
 
 Backup mirati precedenti: `weather-wind-20261031-183945` per Home/JavaScript/collector e `wind-source-20261031-184840` per il collector prima del fallback. Directory nella sola area privata del Raspberry. Per annullare l’intera funzione confrontare e ripristinare i soli tre file, aggiornando il riferimento cache; non sovrascrivere `configuration.json` o la calibrazione. Per annullare il solo fallback ripristinare il collector precedente: con il produttore attuale il pannello tornerebbe a mostrare “Non disponibile”. Il successivo [snapshot delle 18:50](allsky-configuration-backup.md) conserva la funzione completa; quello delle 18:21 conserva la ricalibrazione ma precede l’aggiunta del vento.
+
+
+## Verifica dopo aggiornamento Allsky — 12 novembre 2026
+
+Dopo l’installazione della v2026.10.01_01, collector, JavaScript/CSS dei pannelli, moduli periodici e relativa configurazione risultavano conservati. Nel browser sono stati verificati il meteo corrente con vento in km/h, dati di scatto e Raspberry, insieme al JPEG e alla mappa con timestamp coincidenti. La lettura meteo può apparire temporaneamente indisponibile quando la sorgente è scaduta: i controlli di freschezza non sono stati rimossi. La prova non equivale a validazione metrologica o a rilevamento fotografico di ISS/aircraft.
+
+La Home usa per il controller integrato `js/controller.js?v=dsg-upgrade-20261112-v2`; il riferimento del JavaScript dei pannelli resta `js/dsg-live-panels.js?v=20261031-wind`. Geometria e sorgenti restano quelle documentate. [Intervento e limiti del controllo](../chapters/27-sistema-allsky.md#2735-aggiornamento-allsky-v20261001_01-12-novembre-2026); [backup corrente del 12 novembre](allsky-configuration-backup.md).
