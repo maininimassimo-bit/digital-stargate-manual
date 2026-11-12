@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.4 — aggiornamento Allsky v2026.10.01_01 e backup del 12/11/2026
+**Revisione:** 1.5 — maschere riallineate e automatismi camera disabilitati, 12/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -583,4 +583,57 @@ Prima del passaggio è stato acquisito lo snapshot delle **18:15**, `configurati
 
 Dopo l’esito positivo è stato acquisito lo snapshot delle **18:31**, `configuration-backup-20261112-183125`: **357 file privati e 140 pubblici verificati**, oltre ai manifest. Repository e portale ospitano soltanto il TAR pubblico sanificato e il suo SHA-256; il privato è conservato separatamente sul Raspberry e sul PC Owner con accesso limitato. [Download aggiornato, checksum, perimetro e procedura di ripristino](../operations/allsky-configuration-backup.md). Tutti gli archivi pubblici precedenti restano immutati e rappresentano le rispettive baseline storiche.
 
-La generazione completa di startrails, keogram e timelapse alla successiva chiusura della notte **non è stata eseguita nella finestra di verifica**; resta un controllo operativo residuo, senza promessa di un monitoraggio automatico aggiuntivo. Le [limitazioni ufficiali della release](https://github.com/AllskyTeam/allsky/blob/v2026.10.01_01/docs/source/allsky_guide/known_issues.md) segnalano inoltre l’indisponibilità dei grafici nativi su Bullseye; non è stato aggiornato il sistema operativo per risolverla. Non sono state ricalibrate la mappa o le maschere, né modificati modalità e parametri USB. Il backup non è un’immagine SD e il ripristino integrale resta da collaudare su supporto separato.
+La generazione completa di startrails, keogram e timelapse alla successiva chiusura della notte **non è stata eseguita nella finestra di verifica**; resta un controllo operativo residuo, senza promessa di un monitoraggio automatico aggiuntivo. Le [limitazioni ufficiali della release](https://github.com/AllskyTeam/allsky/blob/v2026.10.01_01/docs/source/allsky_guide/known_issues.md) segnalano inoltre l’indisponibilità dei grafici nativi su Bullseye; non è stato aggiornato il sistema operativo per risolverla. Nel solo aggiornamento di versione non erano state ricalibrate la mappa o le maschere, né modificati modalità e parametri USB. Il successivo aggiornamento delle sole maschere e dei flag camera è nel §27.36. Il backup non è un’immagine SD e il ripristino integrale resta da collaudare su supporto separato.
+
+
+## 27.36 Maschere aggiornate e flag camera coerenti con Snapshot — 12 novembre 2026
+
+L’Owner ha autorizzato il rifacimento delle maschere di analisi e la disabilitazione di Auto-Gain e Auto White Balance giorno/notte, con backup preliminare e **calibrazione della mappa invariata**. La migrazione del rilevatore meteore e quella del sistema operativo restano proposte separate non applicate.
+
+### Maschere e perimetro
+
+Le maschere del 9 ottobre precedevano lo spostamento della camera. Sono state confrontate riprese successive allo spostamento: il riferimento stellato del 31 ottobre usato dalla calibrazione, una ripresa dell’11 novembre e due del 12 novembre. Le nuove PNG conservano 1936 × 1096 pixel, escludono apparati a sinistra, logo e bordo, con margini prudenti. Sono usate soltanto per l’analisi: **non oscurano il JPEG pubblico e non cambiano la mappa**.
+
+La regione base è un cerchio di analisi di raggio **700 pixel**, centro immagine X **1048,433** / Y **510,933**, meno un poligono di esclusione degli apparati. Questi parametri descrivono la maschera, non sostituiscono il raggio/orientamento della calibrazione VirtualSky. La maschera meteore ha sfumatura di **16 pixel verso l’interno**, senza valori non nulli fuori dalla regione consentita; quella stelle è binaria e usa un margine interno aggiuntivo di **20 pixel**. Resta il filtro preesistente del modulo archivio meteore, che esclude contorni a contatto con il bordo tramite erosione 31 × 31.
+
+| PNG di analisi | Area precedente | Area aggiornata |
+|---|---:|---:|
+| Stelle, pixel non nulli | 14,49% del fotogramma | 51,68% del fotogramma |
+| Meteore, intensità maggiore di 127/255 | 18,74% del fotogramma | 53,43% del fotogramma |
+
+Il nucleo meteore sopra 250/255 è il 52,28%; il filtro di sicurezza applica poi altre esclusioni. Le percentuali sono riferite ai pixel del fotogramma, **non alla superficie celeste, al campo angolare o all’area effettiva dopo tutti i filtri dell’algoritmo**. Il conteggio stelle Fast esclude inoltre parte del bordo inferiore e applica i propri criteri. Non confrontare direttamente i conteggi precedenti e successivi senza annotare il cambio di maschera.
+
+La ricetta geometrica, il poligono e i riferimenti sono conservati in `config/myFiles/masks/analysis-masks-20261112.json`, incluso nel backup privato. È una generazione da dati geometrici, non un progetto modificabile nativamente dal nuovo Mask Editor: le PNG sono operative e ripristinabili, ma per modificarne le forme occorre usare la ricetta o ricreare il progetto nell’editor. La copia pubblica ridotta include le due PNG, non le fotografie di prova o la ricetta privata. [Indicazioni ufficiali sulle maschere](https://github.com/AllskyTeam/allsky/blob/v2026.10.01_01/docs/source/allsky_guide/overlays/interface.md#the-mask-editor).
+
+### Automatismi camera
+
+La [documentazione della release](https://github.com/AllskyTeam/allsky/blob/v2026.10.01_01/docs/source/allsky_guide/known_issues.md) segnala che Auto-Gain e Auto White Balance non operano nella modalità ZWO Snapshot. Sono stati modificati solo i quattro flag e il metadato `lastchanged` del settings, mantenendo il collegamento fisico fra i due file settings della camera.
+
+| Impostazione | Prima | Dopo |
+|---|---|---|
+| `dayautogain`, `nightautogain` | `true` | `false` |
+| `dayawb`, `nightawb` | `true` | `false` |
+| Guadagno giorno / notte | 0 / 300 | 0 / 300 |
+| Bilanciamento rosso / blu, giorno e notte | 52 / 95 | 52 / 95 |
+| Auto-esposizione, massimo notte, ritardi | Abilitata, 30 s, 30 s | Invariati |
+| Modalità ZWO | Snapshot | Snapshot |
+
+Il valore `gaintransitiontime=5` minuti è rimasto invariato. Con entrambi i flag Auto-Gain disabilitati, il sorgente ZWO torna a consentire la transizione graduale fra i guadagni diurni e notturni; prima era inibita da Auto-Gain. È un effetto della configurazione richiesta, non un ulteriore cambio di parametro: va considerato nel controllo del passaggio all’alba.
+
+`configuration.json` del sito e `js/controller.js` hanno SHA-256 identici prima e dopo: geometria, calibrazione del §27.33, dimensionamento, clock, `mouse=false` e avvio notturno conservati. Nessuna modifica a SDK, parametri USB, soglia startrails 0,30, detector, flussi o formati video.
+
+### Prove e applicazione
+
+Il test offline ha richiamato gli stessi algoritmi configurati (Star Count Fast, scala 0,5, minimo 6 pixel; rilevatore meteore con minimo 100 pixel e filtro di bordo), su copie delle quattro immagini e con entrambe le versioni delle maschere. Sul fotogramma stellato del 31 ottobre i rilevamenti passano da **13 a 40**; sugli altri tre, nuvolosi/crepuscolari, sono rispettivamente **1→1, 0→0 e 0→0**. Nessuna traccia candidata meteore è stata restituita nei quattro test. Originali, database e galleria non sono stati modificati dal test. Sono risultati del rilevatore, non identificazioni stellari confermate, misure di magnitudine o una stima validata di sensibilità/falsi positivi.
+
+Backup preliminare alle **19:16 Europe/Rome**, `configuration-backup-20261112-191658`: 357 file privati e 140 pubblici oltre ai manifest, integrità verificata; il privato è copiato separatamente sul PC Owner. Backup mirato precedente in `/home/pi/allsky-private-archive/masks-autoflags-20261112`, con settings e due PNG originali.
+
+Acquisizione e servizio periodico sono stati fermati per il passaggio e avviati alle **19:23:47**; il nuovo processo camera è partito alle **19:23:51**. Il primo scatto iniziale è nei log alle 19:24:02 e un nuovo fotogramma scientifico salvato alle **19:24:34**, con elaborazione stelle riuscita. I log mostrano Auto: No per guadagno e bilanciamento, con i valori numerici conservati. Nel browser il JPEG 1936 × 1096 e la mappa avevano lo stesso timestamp, **18:25:41 UTC**, con pannelli aggiornati. HTTPS pubblico per pagina, JPEG e galleria meteore HTTP 200; amministrazione esterna HTTP 403.
+
+Il backup successivo delle **19:25**, `configuration-backup-20261112-192507`, comprende **358 file privati e 140 pubblici** oltre ai manifest; nel privato si aggiunge la ricetta delle maschere. Le due copie hanno manifest/checksum verificati, database SQLite `quick_check` OK e hardlink settings conservato. Nel repository entra soltanto il nuovo export sanificato con checksum; precedenti immutati. [Download e ripristino controllato](../operations/allsky-configuration-backup.md).
+
+### Limiti e ripristino
+
+Le prove coprono quattro riferimenti e il funzionamento immediato notturno, non un intero ciclo stagionale, tutte le posizioni degli apparati o un confronto fotometrico diurno/notturno. I flag diurni sono caricati correttamente nei log, ma il comportamento in luce diurna va verificato al successivo passaggio. Il controllo programmato dall’Owner per il **13 novembre alle 09:00** comprende i prodotti completi della notte e la visualizzazione pubblica; la notte contiene fotogrammi prima e dopo questi interventi. Non attribuire ogni differenza di luminosità alla sola disabilitazione degli automatismi: esposizione, nuvole e condizioni cambiano.
+
+Per annullare l’intervento, in manutenzione autorizzata confrontare le modifiche successive e ripristinare le sole due maschere e i quattro flag precedenti dal backup mirato, aggiornando `lastchanged` e preservando l’hardlink; riavviare le componenti pertinenti e controllare nuovi fotogrammi. Non ripristinare l’intero sito o la calibrazione per annullare maschere/flag. Ripristino integrale non collaudato. Eventuali correzioni successive alle anomalie del collaudo richiedono la proposta e l’autorizzazione Owner già richieste.
