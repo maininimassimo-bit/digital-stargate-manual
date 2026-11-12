@@ -1,0 +1,46 @@
+{
+  "scope": "Private asynchronous meteor review; no public candidates or device commands",
+  "owner_authorized": "2026-11-12",
+  "first_started_local": "2026-11-12T22:03:08+01:00",
+  "profile": {
+    "min_length_px": 100,
+    "publish": false,
+    "upstream_version": "v1.0.1",
+    "commit": "ee0b6567b829e3bf86cd1e2190e4e0c59e5e2b31"
+  },
+  "offline_full_nights": {
+    "images": 2176,
+    "comparison_frames": 2170,
+    "native_candidate_frames": 76,
+    "temporal100_candidate_frames": 20,
+    "temporal50_candidate_frames": 28,
+    "native_baseline_frames_reproduced": 360,
+    "native_baseline_mismatches": 0,
+    "counts_are_not_confirmed_meteors": true
+  },
+  "tests": {
+    "synthetic_candidate_private_archive": true,
+    "source_jpegs_unchanged": true,
+    "duplicate_restart_idempotence": true,
+    "long_gap_reset": true,
+    "storage_and_mask_pause_guards": true,
+    "upload_webui_subprocess_blocked": true,
+    "live_environment_fallback_absent": true,
+    "systemd_production_write_probes_denied": 3,
+    "systemd_ipv4_socket_denied": true,
+    "web_user_private_status_unreadable": true,
+    "real_new_frames_after_private_service_restart": true,
+    "ordinary_allsky_service_restarted": false,
+    "physical_raspberry_reboot_tested": false
+  },
+  "backup": {
+    "pre": "20261112-215352",
+    "post": "20261112-220710",
+    "private_files": 366,
+    "public_files": 147,
+    "public_sha256": "5b79bf465b3ad3b583b73a8ee445ba689348caa24a1b85da7c7267525b9ba634",
+    "private_candidate_data_in_configuration_backup": false,
+    "full_restore_tested": false
+  },
+  "privacy": "Aggregate evidence only; private candidates, source photos, ledger, credentials, precise coordinates and raw logs omitted"
+}

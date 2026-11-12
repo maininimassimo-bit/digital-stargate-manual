@@ -30,3 +30,10 @@ tools/pixinsight/local_pilot/research_executor.jsh -text
 
 infrastructure/bkl-031-f3-a3-gcp/container/** text eol=lf
 infrastructure/bkl-031-f3-a3-gcp/.dockerignore text eol=lf
+
+# Upstream meteor source and license are verified by their original byte hashes.
+tools/allsky/meteor-shadow/vendor/allsky_meteordetect.py -text
+tools/allsky/meteor-shadow/vendor/LICENSE -text
+tools/allsky/meteor-shadow/*.py text eol=lf
+tools/allsky/meteor-shadow/*.service text eol=lf
+docs/assets/backups/allsky-public-20261112-220710.tar.gz.sha256 text eol=lf
