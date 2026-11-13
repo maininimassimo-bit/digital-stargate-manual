@@ -2,24 +2,24 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H53** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H54** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v53.json` |
-| SHA-256 del file | `01b00280da96caaa73894f8630c9b95f95d53eecaa9ca45870f1abc8cf2ecb58` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v5.py` |
-| SHA-256 del lettore | `7c703e4dae0706fd3b03abed5eb13084a83bcadfa9d441f624a9bdf54d6d1f4d` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v54.json` |
+| SHA-256 del file | `df06e52a008c910fcdff6d5061c75de3d97cd738f2ac6abc01b162350ac83792` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v6.py` |
+| SHA-256 del lettore | `29d9cccdfa3b1667013bd945cfe58a4713449f13df494b928f8078d1c1c6f69f` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 170 |
+| Schede di evidenza | 173 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
-Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H53. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
+Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H54. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
 
 Questa proposta pubblica la documentazione del formato. I file JSON, i lettori e gli archivi grezzi identificati dagli hash non sono caricati da questa pagina: il loro trasferimento completo e recupero remoto restano da attestare.
 
@@ -47,20 +47,20 @@ Ogni record conserva:
 - `additionalScopedEvidenceIds`: supplementi consultabili per quel requisito;
 - l'eventuale `documentaryAttestation`, con la portata documentale dichiarata.
 
-I supplementi non riscrivono automaticamente gli stati canonici. H52 ha collegato 17 requisiti esatti alle nuove evidenze; H53 ha aggiunto collegamenti per l'oggetto File e quattro suoi membri. Gli altri campi dei requisiti sono stati confrontati nella loro rappresentazione canonica: matrici, criteri, disposizioni e storia non vengono promossi tramite l'aggiunta di una scheda.
+I supplementi non riscrivono automaticamente gli stati canonici. H52 ha collegato 17 requisiti esatti alle nuove evidenze; H53 ha aggiunto collegamenti per l'oggetto File e quattro suoi membri; H54 collega agli stessi cinque requisiti anche il recupero locale della capsula File IO. H54 aggiunge inoltre il contesto operativo successivo ai vecchi gate del backend e il riesame delle fonti primarie di pubblicazione, conservando le conclusioni storiche nel loro ambito. Gli altri campi dei requisiti sono stati confrontati nella loro rappresentazione canonica: matrici, criteri, disposizioni e storia non vengono promossi tramite l'aggiunta di una scheda.
 
 ## Consultazione riproducibile
 
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v5.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v5.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v5.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v5.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v6.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v6.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v6.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v6.py --workflow pjsr_object:File
 ```
 
-Il lettore predefinito verifica l'impronta esatta di H53 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
+Il lettore predefinito verifica l'impronta esatta di H54 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
 
 Sono disponibili anche `--requirement`, `--axis`, `--family` e `--evidence`, con identificatori esatti. Per esempio, `--evidence FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` restituisce la scheda della composizione nativa circoscritta.
 
@@ -110,6 +110,8 @@ Nella console della seconda istanza sono stati osservati anche due messaggi di e
 
 Le schede `FILE_DEFAULT_TEXT_BINARY_NATIVE_DISCREPANCIES`, `FILE_SELECTED_PCL_UTF_CONVERSION_SOURCE_MODEL`, `FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` e `FILE_COMPOSITION_RUN_OBSERVED_RUNTIME_STARTUP_ANOMALIES` devono essere lette insieme.
 
+La capsula locale File IO conserva 121 file, inclusi tentativi falliti, composizioni successive e verifiche. Estrazione isolata e replay dei byte/ricevute sono passati. Il suo ZIP ha SHA-256 `17e8bd7a13e8344e1b551bb4d4fe2dfce10f14bc7973c02d94fe835016edd209`. Questo recupero locale non attesta un recupero da GitHub.
+
 ## Produzione, verifica e aggiornamento
 
 Una nuova evidenza deve mantenere la catena:
@@ -143,8 +145,39 @@ Per ogni artefatto restano necessari ruolo, versione, percorso storico, dimensio
 
 Le condizioni di pubblicazione dei materiali di terzi e dei dati privati devono essere risolte sul perimetro effettivo. Non si eliminano tali oggetti dallo storico per far risultare completo il trasferimento. La documentazione curata e gli hash pubblicati restano distinti dai byte degli archivi non ancora trasferiti.
 
+## Riconciliazione corrente e pubblicazione documentale preparata
+
+Il censimento dei tre alberi di studio su H registra **2.006.773 file regolari** e **1.810.646.631.304 byte logici**. È una scansione di metadati completata, non uno snapshot atomico: la directory del censimento stesso è esclusa e un percorso reparse non viene seguito. File creati successivamente, fixture di qualificazione e nuovi recuperi richiedono una ricognizione finale aggiuntiva.
+
+Il primo confronto con lo storico usava stringhe con separatori Windows diversi e produceva false assenze. Quel risultato resta conservato come errore di confronto. La riconciliazione corretta normalizza solo i separatori, conserva i percorsi originali e non introduce confronti senza distinzione tra maiuscole e minuscole; nessuna collisione normalizzata è stata osservata.
+
+Dei 1.982.768 record storici, 1.982.764 hanno un percorso corrente: 1.982.762 conservano anche la dimensione e due hanno dimensione diversa; quattro percorsi risultano ritirati. Stessa dimensione e stesso percorso non provano l'identità dei byte. I due casi mutati hanno copie esatte precedenti; i quattro ritirati sono ricostruibili dal contenitore e dal decoder identificati. La composizione conclusiva delle sei fonti supplementari attende il termine dell'audit completo su 498.056 identità di contenuto storico.
+
+Un controllo distinto del manifest autorevole v599 ha individuato 1.990 contenuti unici ancora rappresentati da fonti storiche su C. Sono stati copiati su H e ricontrollati sull'origine e sulla destinazione: **7.355.344.930 byte**, conservando nomi, provenienza e identità dei file. Le fonti C e il registro preesistente restano al loro posto. Si tratta di archiviazione dei dati dello studio, senza migrazione dell'installazione Codex.
+
+La proposta documentale per i 239 oggetti PJSR ha tutte le **1.789 identità di citazione diretta** collegate a fonti correnti verificate, corrispondenti a 1.524 identità di contenuto. Questa verifica non è una nuova revisione semantica di ogni contenuto né una chiusura transitiva delle dipendenze.
+
+Il pacchetto preparato comprende 1.462 artefatti e 239 modifiche di riga. Una verifica indipendente ha riletto tutti i 204.573.660 byte sorgente e riprodotto la trasformazione: le altre 4.681 righe restano invariate. I dati grezzi che rappresentano input falliti sono conservati come byte opachi, con le citazioni originali nel relativo indice.
+
+Durante la qualificazione è emerso un difetto nel publisher H v2: aggiungeva una lista vuota `reviewEvidence` anche quando non erano previste evidenze comuni. Il caso isolato e la differenza non attesa sono conservati. Il publisher H v3 evita quell'aggiunta; ha superato 12 controlli isolati e quattro controlli dei vincoli di avvio. Una prova distinta con registro sintetico su H ha riprodotto tutte le 4.920 righe e le 239 modifiche reali.
+
+Anche il verificatore successivo alla pubblicazione è stato qualificato su metadati reali completi e registro isolato: 11.217 elementi previsti, rilettura delle due copie dei 1.462 nuovi artefatti e rifiuto di una modifica estranea al registro. Questi esiti qualificano controlli di pubblicazione nel perimetro dichiarato; non sono prove native o scientifiche.
+
+**L'incremento di produzione non è ancora avviato.** La base autorevole resta publisher v599 e conoscenza v1.171. Il futuro avvio è subordinato all'esito storico completo, alle fonti supplementari esatte, alle impronte congelate e a una nuova verifica del registro. Il controllo di avvio rifiuta correttamente la mancanza della prova storica conclusiva. Il registro è protetto da verifica dell'identità precedente, blocco e scrittura con sincronizzazione; questa modalità non viene descritta come una transazione resistente a ogni interruzione.
+
+| Evidenza locale | SHA-256 |
+| --- | --- |
+| Verifica indipendente H54 e lettore | `b5268f04a0b7d59288b0b28f69db4a2c34ca04a3ad429de9a984b76d1cb85b9c` |
+| Riconciliazione normalizzata dei percorsi | `080f02221e5046cbfba592faa63e1173efdf8f5396572ce53b01addf7979f1b0` |
+| Archiviazione esatta dei 1.990 contenuti da C | `9ba12c80d15800c6478273ab83e6302c56b2b9d53d8c4844fe96e7bdafdcaa94` |
+| Collegamento delle 1.789 citazioni dirette | `1df6779c88819d33947b2287c6cae5784f77b22cdd78c291fc02d3e02b60f2f7` |
+| Controllo indipendente del pacchetto prima della pubblicazione | `494ccb85341ff894b64b981c8645a05c70583504862fd44b7ec37fa70abdddfc` |
+| Qualificazione isolata del verificatore successivo | `b35a552d67ada9c86ff19268a10b3cdefb7202740490cc97ff36391e88aac96c` |
+
+Le impronte identificano evidenze locali. Non affermano che gli archivi grezzi siano già caricati su GitHub.
+
 ## Gate ancora aperti
 
-H53 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
+H54 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
 
 I conteggi di file, schede, casi, blocchi o controlli CI non sono la percentuale della milestone. La pubblicazione di questa documentazione non attiva il portale, non modifica master o script installati e non riprende M27.
