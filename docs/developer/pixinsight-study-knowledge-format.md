@@ -262,3 +262,18 @@ Le impronte identificano evidenze locali. Non affermano che gli archivi grezzi s
 H57 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
 
 I conteggi di file, schede, casi, blocchi o controlli CI non sono la percentuale della milestone. La pubblicazione di questa documentazione non attiva il portale, non modifica master o script installati e non riprende M27.
+
+## Rendiconto v40 e recupero locale della prova Timer
+
+Il rendiconto v40 riconcilia tutti i **4.920 requisiti e 14.521 criteri letterali** con H57 e con le righe effettivamente pubblicate in v600. Conserva separatamente gli hash dei record locali e pubblicati: le 1.623 integrazioni locali non vengono presentate come nuove pubblicazioni canoniche. I 239 ruoli documentali sono attestati solo nella loro portata documentale. Tutti i 19 criteri Owner restano non soddisfatti; sette famiglie e 25 assi restano incompleti, con zero chiusure scientifiche.
+
+La verifica indipendente confronta le 4.920 impronte direttamente con la matrice v600, conserva i criteri e controlla i conteggi delle ricevute. SHA-256 del rendiconto: `8f49f96d32c1c86a592fa2123e643763add0ff47960ef2523af589dcebd91cdf`; della verifica: `00eb259efc0840b85ce7fe0738e7b774c7381d24e34b43bd320d0e9bd4ea13f7`.
+
+La capsula `Prove-Timer-nativo-congelato-contatore-precisione-H-v1.zip` conserva 31 file sorgente e un manifest, inclusi preparazione storica, ricevuta nativa, discrepanze, console, chiusura normale e programmi di classificazione. I byte sono stati recuperati in una cartella isolata e il classificatore archiviato ha riprodotto esattamente i risultati: 20 controlli conformi, cinque discrepanti e due confronti di azzeramento non identificabili, separati dai 25 controlli.
+
+| Evidenza locale | SHA-256 |
+| --- | --- |
+| Capsula Timer, 43.049 byte | `2749e6a9ac7d410d7f52b13b921d68bf1af57b648b0fb015e76b27189b297209` |
+| Verifica di recupero e replay isolato | `518888e2fa7843574e1c2d0930b3a963ef3e8b341ec1aa69f7d6b208484140a7` |
+
+Il replay legge soltanto i file recuperati e non avvia PixInsight, non consulta il registro corrente e non esegue chiamate API. È un recupero locale della prova, non una nuova esecuzione nativa, una calibrazione temporale o un recupero remoto da GitHub. Il contenuto completo della capsula non è caricato da questo aggiornamento documentale.
