@@ -2,24 +2,24 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H58** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H62** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v58.json` |
-| SHA-256 del file | `b4e57205ef437d669a8973b63d02e60f917d92214732d8eb10e159579dd9e6ca` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v10.py` |
-| SHA-256 del lettore | `0e1ff134e9619f2fa22e1d376e81ab7009bb3e71eb9df9463830fc59392900ba` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v62.json` |
+| SHA-256 del file | `abc86a6c7dae381c61c36c698eed0753296e2ac5bd7ce821e672abc1c7e2f53b` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v14.py` |
+| SHA-256 del lettore | `a8aeff415833bc335964d2798479dcced1a166833ffd57d24653ba11bd1fca28` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 183 |
+| Schede di evidenza | 192 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
-Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H57. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
+Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H62. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
 
 Questa proposta pubblica la documentazione del formato. I file JSON, i lettori e gli archivi grezzi identificati dagli hash non sono caricati da questa pagina: il loro trasferimento completo e recupero remoto restano da attestare.
 
@@ -70,13 +70,13 @@ H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega al
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v10.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v10.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v10.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v10.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v14.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v14.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v14.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v14.py --workflow pjsr_object:File
 ```
 
-Il lettore predefinito verifica l'impronta esatta di H57 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
+Il lettore predefinito verifica l'impronta esatta di H62 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
 
 Sono disponibili anche `--requirement`, `--axis`, `--family` e `--evidence`, con identificatori esatti. Per esempio, `--evidence FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` restituisce la scheda della composizione nativa circoscritta.
 
@@ -365,3 +365,26 @@ Il protocollo di implementazione della riduzione dichiara esplicitamente di esse
 Riferimenti locali: riconciliazione pattern/colore `62975546ed555dc33db25b2d98c0ae408a0083266fd2bfb99f74a21dc2d698e2`; copertura/registrazione/pesi `b3659e4dc67d234edb7bf2516c8f8d985ec445c890cc3996cb6efbe3a8a693f4`; banco completo precedente `f4909475eebf36265da81a21d4c03de0f19ec5a8b0be1fe9a81fc52639ca99b0`; protocollo nuovo `6a04a506a0006957d00eaaf8fa4cead960e5e28152e8608f941d4f6e821af416`; verifica geometrica `e7255e928591e3fc2b6cdfd08c096305311877940d9dfd7b377a7c11d019a3ff`; verifica input `6b0557d3455d703477697548cb3b8e8982caf779fd92e665afbd5973b200e097`; riduzione `55e05f28f09bf673d7cab5b2392f958a822a10caea31f07c433badf0d4b85972`. Prove indipendenti dei due gruppi: `65b66d418f69e75492b1e4006170a68b57dcf69bf16b5cf22503c682f76c76e0` e `a1bb6e5c17344b014983e51c0e7685258f3be1ae70b8000fdf6c7ce1df603724`.
 
 Zero chiusure scientifiche; sette famiglie/25assi e19criteri Owner restano aperti. Conoscenza finale e trasferimento integrale degli archivi con recupero remoto non attestati. Nessuna attivazione del portale, modifica a master/script PixInsight installati o ripresa M27.
+
+
+## H62: otto gruppi verificati, sospensione e ripresa esatta
+
+H62 conserva tutti i 4.920 requisiti e le 191 schede H61; aggiunge una scheda circoscritta, per 192 totali. Il lettore v14 ha superato audit, query della scheda, requisito DrizzleIntegration e asse CFA/3; un'impronta errata viene respinta. Lo snapshot autorevole resta v600 e la conoscenza registrata v1.171: nessuna v1.172 o conoscenza finale attestata.
+
+Su richiesta Owner, la prima istanza è stata fermata e chiusa normalmente, senza viste residue. Sono conservati 2.235 casi conclusi e 133 tentativi interrotti; 18.352 casi non erano ancora avviati. I tentativi interrotti non sono classificati come fallimenti scientifici. Il comando di interruzione nativo era intercettato dal ciclo: un blocco intenzionale del successivo percorso di checkpoint ha attivato il gestore d'errore soltanto dopo la ricevuta del caso e la chiusura delle viste. La directory di blocco resta documentata; la ricevuta originale conserva lo stato di errore, senza trasformarlo in successo.
+
+Otto gruppi uniformi completi, 2.072 casi, sono stati ridotti e verificati: 655.360 coefficienti, 21.888 endpoint di covarianza condizionale e 66 confronti di apertura supportati. Una verifica iniziale supera la tolleranza assoluta numerica 1e-14: differenza 1,4210854715202004e-14 su una varianza di circa 60,25. Il fallimento resta conservato. Un successivo calcolo razionale ricostruisce esattamente i residui di conversione, somme e prodotti; un protocollo distinto deriva limiti conservativi e controlla 18.948 somme e 1.035.648 prodotti delle valutazioni finite. Il controllo revisionato conserva gli altri criteri e usa i limiti numerici qualificati solo per le aperture. Non cambia il limite scientifico Owner del 5% e non prova universalmente il comportamento delle somme su ogni piattaforma.
+
+L'archivio locale degli otto gruppi contiene 4.200 file sorgente e il manifest; ogni membro è stato ricontrollato per dimensione e SHA256, insieme alla stabilità delle fonti. SHA256 ZIP: `e0278da0266cfc2f376e6e5ad302ec6bd6913c009f8fd49db2a6ee3b88d2d6cb`. Restano dipendenze esterne conservate su H: non è un ambiente di replay scientifico autonomo né un recupero remoto.
+
+La ripresa congela esattamente 18.485 casi, escludendo tutti i 2.235 conclusi. Sono stati riletti 73.940 sidecar e 269 input originali. La nuova versione del worker supera 16 prove simulate, incluse esclusione dei casi conclusi, duplicati, omissioni, pin alterati e arresto dopo il primo caso fallito; l'host supera 12 prove simulate su ricevute immutabili e assenza di retry automatici. La nuova istanza separata è stata osservata viva con checkpoint di 64 casi, 64 osservati e zero fallimenti operativi. Questo è uno snapshot storico di avanzamento, non il totale corrente o l'esito finale.
+
+| Identità locale | SHA256 |
+| --- | --- |
+| Conoscenza H62 | `abc86a6c7dae381c61c36c698eed0753296e2ac5bd7ce821e672abc1c7e2f53b` |
+| Lettore v14 | `a8aeff415833bc335964d2798479dcced1a166833ffd57d24653ba11bd1fca28` |
+| Piano esatto di ripresa | `364913e61959f941d7352e17c691b077e8b3b8067778e0d1bcd2da809eddba96` |
+| Sigillo di ripresa | `bb14b27183e83a27811cbcdbd57e86012524d0474a5949f3badb3336379ee03b` |
+| Qualificazione dei limiti numerici | `fe55f4793fac42a03f3bf6f5d792c289559bb4cb7a4a01aa2aba40977300e57d` |
+
+Tutti i sette controlli CI del precedente commit `825e78032bb2188ce24ec31470c1b5b7e126ff4a` sono conclusi con successo; non attestano quelli di questo nuovo aggiornamento. Questa pubblicazione riguarda documentazione tecnica: nessun merge, deploy, caricamento degli archivi grezzi o attivazione del portale. Sette famiglie e 25 assi restano incompleti, zero chiusure scientifiche; file finale, criteri Owner e trasferimento completo su GitHub con recupero indipendente restano aperti.
