@@ -2,7 +2,7 @@
 
 Stato osservato il **13 novembre 2026**. BKL-046 resta **aperta**: sette famiglie scientifiche incomplete, zero chiusure scientifiche. Questo documento registra risultati circoscritti e limiti; non costituisce accettazione Owner, rilascio del portale o trasferimento completo degli archivi.
 
-Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H55. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
+Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H56. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
 
 ## Campagna spaziale congelata
 
@@ -79,7 +79,9 @@ L'aggiornamento tecnico H54 conserva 173 schede e documenta il recupero locale d
 
 H55 aggiunge la riconciliazione di una prova Timer esistente: quattro casi e nove callback, con default `precise=true` diverso dalla guida. Tre osservazioni retrospettive mostrano `count=0` dopo callback già registrate; restano distinte dai 23 controlli congelati originari. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#timer-ricevuta-esistente-e-osservazioni-retrospettive) descrive condizioni e limiti. Nessuna nuova esecuzione è stata avviata.
 
-La verifica del contenuto storico resta in corso su 498.056 oggetti unici, 854.043.191.084 byte. Le sei differenze note conservano l'esito originale e le fonti supplementari esatte; la loro composizione conclusiva attende l'audit completo. Il pacchetto di 239 aggiornamenti documentali è verificato e il publisher H v3 è qualificato nel perimetro dichiarato, ma nessun nuovo incremento di produzione è stato avviato. Il riferimento tecnico conserva anche il difetto riscontrato nella versione precedente e la correzione verificata.
+L'audit storico e la composizione delle fonti esatte sono conclusi: 498.056 identità e 854.043.191.084 byte unici coperti, mantenendo gli esiti negativi originali. Questa disponibilità locale non chiude lo staging immutabile, il perimetro corrente/finale o il recupero remoto.
+
+È inoltre terminata la pubblicazione documentale v600, con un solo avvio e postverifica indipendente positiva: 239 oggetti aggiornati, altre 4.681 righe invariate, 11.217 artefatti e 19.604 posizioni fisiche preesistenti verificate. H56 separa tutte le 4.920 righe pubblicate dai record locali conservati; 1.623 di questi contengono solo supplementi non pubblicati. La conoscenza registrata resta v1.171 e non viene attestata una v1.172. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#stato-pubblicato-e-valutazioni-locali) documenta i livelli di autorità e i limiti del lettore.
 
 Restano: applicabilità e verifiche scientifiche nel dominio completo, confronto della conoscenza finale, gate Owner, completamento dell'audit storico e del perimetro corrente/virtuale, file di conoscenza finale e trasferimento integrale su GitHub con recupero indipendente dei byte. La percentuale complessiva e le ore residue della milestone non sono calibrate dai conteggi dei blocchi.
 

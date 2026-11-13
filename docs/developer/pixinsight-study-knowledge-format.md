@@ -2,26 +2,38 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H55** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H56** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v55.json` |
-| SHA-256 del file | `1e1f01810bf2226d975a79fdf3d87702ed9c906622a5fcf493a498f027adf695` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v7.py` |
-| SHA-256 del lettore | `a159fdb9d2f7a28cf84c8ad590a7ebc1e2c7ee11c89230e1551cd8deea7aabb8` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v56.json` |
+| SHA-256 del file | `106f262d87ba542b999c5486f76f30e0c053a01e6cdd5b1916fccfd23d4a7ad4` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v8.py` |
+| SHA-256 del lettore | `1f5839ecdd81ad85f09696274f5452bbb0f5b68ce40ccd59c049fcafa5f50030` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 174 |
+| Schede di evidenza | 179 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
-Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H55. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
+Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H56. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
 
 Questa proposta pubblica la documentazione del formato. I file JSON, i lettori e gli archivi grezzi identificati dagli hash non sono caricati da questa pagina: il loro trasferimento completo e recupero remoto restano da attestare.
+
+## Stato pubblicato e valutazioni locali
+
+H56 contiene lo snapshot esatto della matrice **pubblicata v600 nel registro locale dello studio**, separato dai record locali ereditati da H55. Il confronto completo trova 3.297 righe coincidenti e 1.623 righe con soli campi aggiuntivi o ampliamenti di liste locali: nove processi, un file di script e 1.613 membri PJSR. Nessun campo pubblicato è rimosso o sostituito nei record locali.
+
+L'incremento v600 pubblica le attestazioni documentali dei 239 oggetti e lascia invariate le altre 4.681 righe. Non pubblica automaticamente i supplementi locali delle 1.623 righe. H56 conserva entrambi i livelli e aggiunge uno snapshot di autorità per ciascuno dei 4.920 requisiti.
+
+Il lettore distingue l'autorità **al momento dello snapshot identificato** da una consultazione del registro corrente: non legge il registro durante le query. `canonicalMatrixRecord` indica ora il record pubblicato; `localRecordedMatrixRecord`, `localSemanticRecord` e `localVersusPublishedRelation` espongono i dati locali e il loro rapporto con lo snapshot. I vecchi nomi di hash contenuti nei record semantici conservati restano riferimenti locali, con una precisazione esplicita nella risposta.
+
+`--role` può attestare la pubblicazione documentale degli oggetti nello snapshot v600, conservando come storico il testo dell'attestazione originariamente preparata in staging. Non attesta comportamento nativo, chiusura scientifica o autorizzazione all'esecuzione. Il lettore rifiuta un file privo del livello di autorità richiesto e rileva la modifica di una riga pubblicata rispetto alla sua impronta.
+
+H56 non aggiorna la conoscenza registrata v1.171 e non attesta una versione v1.172. Rimane un consolidamento provvisorio.
 
 ## Struttura del file
 
@@ -41,13 +53,15 @@ I requisiti comprendono 125 processi, 368 file di script, 239 oggetti PJSR e 4.1
 
 Ogni record conserva:
 
-- `residual`: identificatore, criteri letterali, impronta della riga autorevole, disposizione e azione residua;
-- `matrixRecord`: stato canonico e relativo contesto;
-- `semanticRecord`: lettura semantica e storia delle matrici precedenti;
+- `residual`: identificatore, criteri letterali, impronta del record locale conservato, disposizione e azione residua;
+- `matrixRecord`: record locale H55 conservato, che può includere supplementi non pubblicati;
+- `authoritativePublishedMatrixRecord`: riga esatta dello snapshot pubblicato v600, con la propria impronta separata;
+- `localVersusPublishedRelation`: coincidenza o campi/liste locali aggiuntivi, senza confondere i livelli;
+- `semanticRecord`: lettura semantica locale e storia conservata, distinta dalla prova di pubblicazione;
 - `additionalScopedEvidenceIds`: supplementi consultabili per quel requisito;
 - l'eventuale `documentaryAttestation`, con la portata documentale dichiarata.
 
-I supplementi non riscrivono automaticamente gli stati canonici. H52 ha collegato 17 requisiti esatti alle nuove evidenze; H53 ha aggiunto collegamenti per l'oggetto File e quattro suoi membri; H54 collega agli stessi cinque requisiti anche il recupero locale della capsula File IO. H54 aggiunge inoltre il contesto operativo successivo ai vecchi gate del backend e il riesame delle fonti primarie di pubblicazione, conservando le conclusioni storiche nel loro ambito. Gli altri campi dei requisiti sono stati confrontati nella loro rappresentazione canonica: matrici, criteri, disposizioni e storia non vengono promossi tramite l'aggiunta di una scheda.
+I supplementi non riscrivono automaticamente gli stati canonici. H52 ha collegato 17 requisiti esatti alle nuove evidenze; H53 ha aggiunto collegamenti per l'oggetto File e quattro suoi membri; H54 collega agli stessi cinque requisiti anche il recupero locale della capsula File IO. H54 aggiunge inoltre il contesto operativo successivo ai vecchi gate del backend e il riesame delle fonti primarie di pubblicazione, conservando le conclusioni storiche nel loro ambito. Gli altri campi dei requisiti sono stati confrontati nella loro rappresentazione canonica: matrici locali, criteri, disposizioni e storia non vengono promossi tramite l'aggiunta di una scheda. H56 conserva questi campi e aggiunge i record pubblicati separati. Le cinque nuove schede riguardano audit storico, pubblicazione documentale, provenienza delle note, confronto dei livelli Timer e componenti offline della prova successiva; aggiunge collegamenti a 249 requisiti.
 
 H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega all'oggetto e ai suoi dieci membri canonici. La scheda temporale precedente conserva tutti i dati e riceve un contesto operativo esplicito, così che il vecchio testo «prove native da eseguire» non provochi una ripetizione automatica.
 
@@ -56,13 +70,13 @@ H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega al
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v7.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v7.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v7.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v7.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v8.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v8.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v8.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v8.py --workflow pjsr_object:File
 ```
 
-Il lettore predefinito verifica l'impronta esatta di H55 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
+Il lettore predefinito verifica l'impronta esatta di H56 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
 
 Sono disponibili anche `--requirement`, `--axis`, `--family` e `--evidence`, con identificatori esatti. Per esempio, `--evidence FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` restituisce la scheda della composizione nativa circoscritta.
 
@@ -134,6 +148,10 @@ Per il dominio osservato, mantenere un registro esplicito dei callback invece di
 
 Il rapporto retrospettivo ha SHA-256 `74c35f36220ab75310497ca832a06b971fa9b8cf3d1b2ff91e9e8efacc76b8a5`; la verifica indipendente di H55 e del lettore ha SHA-256 `a783322da099d7214718511c0bddd3a01bc04b17f86838cf7f52b9d839720575`. I dieci file sorgente della rilettura sono conservati localmente con le impronte originali. Nessuna nuova chiamata nativa o API è stata eseguita per questo aggiornamento.
 
+La lettura completa dei file client PCL Timer conferma che il contatore C++ viene incrementato prima del gestore e azzerato da operazioni specifiche. Quel codice descrive un'interfaccia client, non prova l'identità del binding PJSR: default di intervallo e stato dopo mutazione differiscono tra i livelli documentati e osservati. Non si attribuisce automaticamente al wrapper la semantica del client.
+
+Sono preparati quattro casi nuovi su transizioni `precise=false,true,false`, contatore dopo callback prima delle mutazioni, scadenze singole e identificabilità degli azzeramenti. Una lettura zero prima e dopo una mutazione non prova che il contatore sia stato azzerato. L'entry congelata e il classificatore hanno superato modelli deterministici e nove controlli offline, inclusi mancate consegne e informazioni di chiusura incomplete. **La prova successiva non è ancora eseguita nativamente**: il controller di avvio esclusivo e la relativa qualificazione restano da completare. Nessuna taratura temporale viene dedotta dai mock.
+
 ## Produzione, verifica e aggiornamento
 
 Una nuova evidenza deve mantenere la catena:
@@ -173,7 +191,9 @@ Il censimento dei tre alberi di studio su H registra **2.006.773 file regolari**
 
 Il primo confronto con lo storico usava stringhe con separatori Windows diversi e produceva false assenze. Quel risultato resta conservato come errore di confronto. La riconciliazione corretta normalizza solo i separatori, conserva i percorsi originali e non introduce confronti senza distinzione tra maiuscole e minuscole; nessuna collisione normalizzata è stata osservata.
 
-Dei 1.982.768 record storici, 1.982.764 hanno un percorso corrente: 1.982.762 conservano anche la dimensione e due hanno dimensione diversa; quattro percorsi risultano ritirati. Stessa dimensione e stesso percorso non provano l'identità dei byte. I due casi mutati hanno copie esatte precedenti; i quattro ritirati sono ricostruibili dal contenitore e dal decoder identificati. La composizione conclusiva delle sei fonti supplementari attende il termine dell'audit completo su 498.056 identità di contenuto storico.
+Dei 1.982.768 record storici, 1.982.764 hanno un percorso corrente: 1.982.762 conservano anche la dimensione e due hanno dimensione diversa; quattro percorsi risultano ritirati. Stessa dimensione e stesso percorso non provano l'identità dei byte. I due casi mutati hanno copie esatte precedenti; i quattro ritirati sono ricostruibili dal contenitore e dal decoder identificati. L'audit completo ha verificato 498.051 identità attraverso gli alias registrati e ha lasciato cinque identità uniche irrisolte. Le sei osservazioni negative sui candidati restano conservate: i byte precedenti dell'adapter sono stati infine trovati anche in un altro alias registrato. Le due copie regolari supplementari e i quattro originali ricostruiti dal contenitore aggiungono quindi cinque identità nuove. La composizione copre tutte le **498.056 identità storiche e 854.043.191.084 byte unici**, senza ripristinare o sovrascrivere i percorsi originali.
+
+Un controllo indipendente confronta l'intero insieme di identità e dimensioni con l'indice storico verificato e vincola le ricevute delle letture e delle ricostruzioni effettive. Riusa esplicitamente quelle osservazioni: non dichiara una seconda rilettura di tutti i payload. Disponibilità storica verificata, staging immutabile, copertura corrente/finale e recupero remoto sono eventi distinti.
 
 Un controllo distinto del manifest autorevole v599 ha individuato 1.990 contenuti unici ancora rappresentati da fonti storiche su C. Sono stati copiati su H e ricontrollati sull'origine e sulla destinazione: **7.355.344.930 byte**, conservando nomi, provenienza e identità dei file. Le fonti C e il registro preesistente restano al loro posto. Si tratta di archiviazione dei dati dello studio, senza migrazione dell'installazione Codex.
 
@@ -185,7 +205,9 @@ Durante la qualificazione è emerso un difetto nel publisher H v2: aggiungeva un
 
 Anche il verificatore successivo alla pubblicazione è stato qualificato su metadati reali completi e registro isolato: 11.217 elementi previsti, rilettura delle due copie dei 1.462 nuovi artefatti e rifiuto di una modifica estranea al registro. Questi esiti qualificano controlli di pubblicazione nel perimetro dichiarato; non sono prove native o scientifiche.
 
-**L'incremento di produzione non è ancora avviato.** La base autorevole resta publisher v599 e conoscenza v1.171. Il futuro avvio è subordinato all'esito storico completo, alle fonti supplementari esatte, alle impronte congelate e a una nuova verifica del registro. Il controllo di avvio rifiuta correttamente la mancanza della prova storica conclusiva. Il registro è protetto da verifica dell'identità precedente, blocco e scrittura con sincronizzazione; questa modalità non viene descritta come una transazione resistente a ogni interruzione.
+**L'incremento v600 è pubblicato e verificato indipendentemente.** Dopo l'effettiva uscita dei processi storici e il controllo delle fonti supplementari, la coda ha congelato il job e avviato il publisher una sola volta. Sono state verificate 19.604 posizioni fisiche preesistenti; il manifest contiene 11.217 artefatti. Le due copie dei 1.462 nuovi artefatti sono state rilette e confrontate. Publisher e controllo successivo sono terminati con codice zero.
+
+Il registro preesistente resta nella propria posizione e la copia prima dell'aggiornamento è conservata su H. La conoscenza registrata resta v1.171; l'incremento riguarda la matrice documentale. Il registro è protetto da verifica dell'identità precedente, blocco e scrittura con sincronizzazione; questa modalità non viene descritta come una transazione resistente a ogni interruzione.
 
 | Evidenza locale | SHA-256 |
 | --- | --- |
@@ -196,10 +218,18 @@ Anche il verificatore successivo alla pubblicazione è stato qualificato su meta
 | Controllo indipendente del pacchetto prima della pubblicazione | `494ccb85341ff894b64b981c8645a05c70583504862fd44b7ec37fa70abdddfc` |
 | Qualificazione isolata del verificatore successivo | `b35a552d67ada9c86ff19268a10b3cdefb7202740490cc97ff36391e88aac96c` |
 
+| Evidenza aggiunta in H56 | SHA-256 |
+| --- | --- |
+| Matrice pubblicata v600 | `8edad5a01e6df245af5631fb7b33f1274cf295abba92cd62c468220ad8437035` |
+| Manifest pubblicato v600 | `0b72cb301dfcad9f55197d61b60137861c57a394b612b12ec73ef4bdc9a29cbb` |
+| Postverifica indipendente della pubblicazione | `d7c9d0d6335bda667da0d15b219dc978b32b4ac7dd8dc0b81cff5fd7178ddf2f` |
+| Copertura storica composta | `2d19bfd7116c87a5779d112e9add4dd50e25130668f64b84ed75a73c0f83ac90` |
+| Verifica indipendente H56 e lettore con livelli separati | `e77285ceb2cfb57754d0b9383c971756746206ac5a1412f5dd99c3e3a0ac95f7` |
+
 Le impronte identificano evidenze locali. Non affermano che gli archivi grezzi siano già caricati su GitHub.
 
 ## Gate ancora aperti
 
-H55 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
+H56 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
 
 I conteggi di file, schede, casi, blocchi o controlli CI non sono la percentuale della milestone. La pubblicazione di questa documentazione non attiva il portale, non modifica master o script installati e non riprende M27.
