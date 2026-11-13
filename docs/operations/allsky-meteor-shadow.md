@@ -85,3 +85,25 @@ sudo systemctl disable --now dsg-meteor-shadow.service
 ```
 
 L’archivio privato viene conservato e la pipeline ordinaria continua a funzionare. Non serve ripristinare settings, calibrazione o intero sito per disattivare il servizio. Ogni cambio di soglia/versione, integrazione nella pipeline o abilitazione della pubblicazione richiede una nuova valutazione e autorizzazione dell’Owner.
+
+
+## Esame privato dei primi sei candidati — 13 novembre 2026
+
+L’Owner ha confermato di continuare l’affiancamento privato dopo l’esame dei sei fotogrammi candidati acquisiti il 13 novembre. Sono stati confrontati originali, coordinate dei segmenti, due immagini precedenti e due successive per candidato (**23 JPEG distinti**) e file/metadati già prodotti dal rilevatore ordinario. Non sono stati rieseguiti i rilevatori nella pipeline. Gli orari della tabella sono locali, Europe/Rome.
+
+| Scatto | Segnalato anche dall’ordinario | Esito dell’esame visivo |
+|---|---|---|
+| 18:18:45 | No | Traccia sottile reale, isolata nella regione nei frame vicini; origine incerta, satellite o meteora non distinguibili con certezza. |
+| 18:20:48 | No | Probabile falso positivo da struttura nuvolosa diffusa alle coordinate selezionate. Un’altra traccia nell’immagine si trova in posizione diversa e non identifica il segmento candidato. |
+| 18:34:53 | No | Traccia luminosa vicina al bordo della maschera; plausibilmente collegata alla traccia più a destra nel successivo scatto. |
+| 18:35:55 | Sì | Accordo sullo stesso oggetto, con centri distanti circa 5 px. Il quasi allineamento con il candidato precedente dopo 62 s suggerisce un transito artificiale; identità satellite/aereo non dimostrata. |
+| 19:11:19 | No | Traccia sottile reale, apparentemente isolata nella regione; classificazione incerta. |
+| 19:30:54 | Sì | Accordo sullo stesso oggetto, con centri distanti circa 3 px, vicino al bordo superiore; origine incerta. |
+
+**Due fotogrammi su sei sono condivisi e quattro sono aggiuntivi del temporale. Nessuna meteora è confermata.** Un candidato è probabilmente nuvoloso; due fotogrammi possono appartenere allo stesso passaggio artificiale; tre restano non classificati. Si tratta di valutazioni visive preliminari, non di identificazioni mediante effemeridi. Le diverse lunghezze registrate dai due algoritmi non sono direttamente equivalenti: per lo scatto 18:35:55 sono 244,1 e 314,1 px, per 19:30:54 sono 111,2 e 127,3 px.
+
+Il campione è selezionato fra i candidati del temporale: non comprende tutte le segnalazioni dell’ordinario né una verità di riferimento indipendente, quindi **non misura precisione, sensibilità o superiorità**. La voce `Leonids` nei metadati, con `radiant=null` e senza i filtri geometrici calibrati attivi, non costituisce un’associazione verificata allo sciame.
+
+Il controllo operativo al termine dell’analisi ha trovato entrambi i servizi attivi e `publication_enabled=false`. Configurazione, soglie, maschere e calibrazione restano invariate. Nessuna immagine candidata, ritaglio, miniatura o metadato individuale è aggiunto al repository o alla galleria: qui si pubblica soltanto il resoconto testuale autorizzato. Le prove visive e il confronto dettagliato rimangono nell’archivio privato dell’Owner.
+
+La decisione è **continuare l’affiancamento privato**, raccogliendo altre notti e contesto temporale prima di proporre modifiche o attivazione pubblica. Questa analisi non comporta un nuovo backup di configurazione, perché non modifica l’impianto; restano validi gli snapshot del 12 novembre descritti sotto. L’eventuale aggiornamento di versione o pubblicazione richiede una successiva autorizzazione. La verifica upstream del 13 novembre ha trovato il ramo ufficiale identico al commit v1.0.1 già installato, senza aggiornamenti da applicare.
