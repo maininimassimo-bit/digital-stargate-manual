@@ -46,7 +46,7 @@ function normalizeKnownDryWeather(projection) {
     assert.match(await sky.innerText(),/Nuvole medie 0,0%/);
     await scenario('clear',d=>d.hourly.forEach(row=>{row.weather.precipitationNumericalTraceMm=2.946505750977754e-16;}));
     assert.match(await sky.innerText(),/Pioggia totale 0,000 mm/);
-    assert.match(await sky.innerText(),/0\/16 campioni con pioggia/);
+    assert((await sky.innerText()).includes(`0/${original.hourly.length} campioni con pioggia`));
     await scenario('clear', d=>d.hourly.forEach(r=>r.weather.cloudCoverPct=20));
     await scenario('cloudy', d=>d.hourly.forEach(r=>r.weather.cloudCoverPct=75));
     await scenario('rain', d=>d.hourly[0].weather.precipitationMm=0.01);
@@ -62,6 +62,7 @@ function normalizeKnownDryWeather(projection) {
     await scenario('unknown', d=>d.hourly[1].validAtUtc=d.hourly[0].validAtUtc);
     await scenario('unknown', d=>d.hourly[0].weather.cloudCoverPct=null);
     await scenario('unknown', d=>d.hourly[0].weather.precipitationMm=-1);
+    await scenario('unknown', d=>d.hourly[0].weather.precipitationUncertain=true);
     await scenario('unknown', d=>d.forecast.freshnessState='STALE');
     unavailable=true; await scenario('unknown'); unavailable=false;
     imageError=true; await scenario('clear');
