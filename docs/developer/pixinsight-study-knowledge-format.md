@@ -2,24 +2,24 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H63** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H64** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v63.json` |
-| SHA-256 del file | `9cfbbdf266028b55282f5847ccc39c14d457cae775dc4ae6ed201b7029e57ccc` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v15.py` |
-| SHA-256 del lettore | `d864c5e896388f50b0dcfee39a025e8552f17f5a56c0cdf3eeaaf3c3c5302027` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v64.json` |
+| SHA-256 del file | `7bd122781df154cccf0a50332619417b3e9462f351ea55db4f64abe747739301` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v16.py` |
+| SHA-256 del lettore | `4d4ecf4f3f898cb4a539b2a39ebaf3e2d1d7ced8d6107407b88a0463e6dcb1aa` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 195 |
+| Schede di evidenza | 198 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
-Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H63. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
+Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H64. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
 
 Questa proposta pubblica la documentazione del formato. I file JSON, i lettori e gli archivi grezzi identificati dagli hash non sono caricati da questa pagina: il loro trasferimento completo e recupero remoto restano da attestare.
 
@@ -70,13 +70,13 @@ H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega al
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v15.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v15.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v15.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v15.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v16.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v16.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v16.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v16.py --workflow pjsr_object:File
 ```
 
-Il lettore predefinito verifica l'impronta esatta di H63 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
+Il lettore predefinito verifica l'impronta esatta di H64 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
 
 Sono disponibili anche `--requirement`, `--axis`, `--family` e `--evidence`, con identificatori esatti. Per esempio, `--evidence FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` restituisce la scheda della composizione nativa circoscritta.
 
@@ -416,3 +416,24 @@ La terza scheda H63 riassume i primi 13 gruppi uniformi pesati: 10.992 varianze 
 | Riepilogo dei 13 gruppi pesati | `1a886f87bc49a0662df0d63a1ad448c192e7f8a46f408fcddebc8905b21b0aef` |
 
 Il conflitto della PR con main è stato risolto integrando il main esatto `25d03e492f514058a4e7d7a9bc947462735f1d6a`: due blocchi di un test meteo sintetico, conservando helper di normalizzazione e casi di incertezza. Tutti i sette CI del successivo commit `a69371d76acc8e9b8812d53f4b763f599f8e8ad5` sono riusciti. Non attestano i CI del presente aggiornamento H63. La PR resta in bozza; nessun merge verso main o deploy. Sette famiglie/25assi incompleti, zero chiusure scientifiche, conoscenza finale e trasferimento integrale con recupero remoto ancora aperti.
+
+
+## H64: evidenze osservate già disponibili e profilo uniforme completo
+
+H64 conserva 4.920 requisiti e tutte le 195 schede H63; aggiunge tre schede, per 198 totali. File SHA256 `7bd122781df154cccf0a50332619417b3e9462f351ea55db4f64abe747739301`; lettore v16 `4d4ecf4f3f898cb4a539b2a39ebaf3e2d1d7ced8d6107407b88a0463e6dcb1aa`. Audit, query della scheda filtri, dei 20 gruppi uniformi e dell'asse FILTER_COLOR/3 riusciti; impronta errata respinta. Rendiconto v46 `19468f7c37669e2cd087bed8c651741c698524804fcb9225da8dd8d95920ea3d`: 14.521 criteri letterali e 19 criteri Owner preservati, solo due righe con collegamenti aggiunti. Autorità registrata sempre v600/v1.171, senza nuova v1.172 o conoscenza finale.
+
+La revisione storica dei soli studi nominali non stabiliva assenza di prove cromatiche nell'intero corpus. Sono state riconciliate quattro schede successive, ricontrollando otto fonti e dodici transizioni appaiate: coppie osservate NGSL/Gaia, sostituzione NGSL/LOWLIB sullo stesso cohort, supporto comune CALSPEC e 256 campi cromatici sintetici con 36 riferimenti separati. Le vecchie richieste di cercare queste prove vanno lette nel loro contesto storico, senza ripeterle per riempire un'etichetta generica.
+
+Le coppie NGSL/Gaia restano selezionate da metadati, con supporto nominale parziale, epoche e risoluzioni diverse. Nella variante con RVS riportata, R/G conserva 147 confronti entro5% e uno oltre su148; senza velocità ne conserva154entro e2oltre su156. Le dimensioni diverse non consentono di attribuire causalmente la differenza alla correzione di velocità. La sostituzione LOWLIB/NGSL riusa osservazioni HST e72intestazioni di visita corrispondenti;720confronti per convenzione non sono720nuove acquisizioni indipendenti. CALSPEC esclude intervalli accanto a DATAQUAL=0 senza imputarli. Non sono attestate indipendenza dalla calibrazione Gaia/SPCC, distribuzioni misurate della risposta filtri/QE o calibrazione assoluta.
+
+Le prove cromatiche conservano casi in cui la correzione di apertura stimata migliora il confronto e casi in cui la deriva della PSF peggiora il risultato rispetto al grezzo. L'esatta frazione del simulatore rimane un controllo analitico. Restano separati i riferimenti reali, i campioni indipendenti e l'incertezza di PSF, fondo e registrazione. SHA256 della riconciliazione `1ba5a793d7eba5dbe171d428a3ee07deff017dfec233ca4412d3475c6a7339c7`.
+
+Sono completati i controlli indipendenti su **tutti i20gruppi del profilo uniforme**:5.180casi,2.129.920coefficienti,71.136endpoint di covarianza condizionale e192confronti di apertura supportati. Coprono MONO e quattro pattern Bayer, scale1/2 e due larghezze Square nelle geometrie congelate. Aperture senza supporto completo restano senza stima. Questo completa quel profilo finito, non l'intero studio, il rumore empirico o una qualificazione universale. Riepilogo SHA256 `403286778135dfc28a104d4ca1d2fdf9281edb371da4373b88975a7ddcc0379d`.
+
+Il primo gruppo non uniforme, nella medesima geometria00, conserva529coefficienti differenti rispetto all'uniforme e supera il confronto indipendente. Il rapporto fra varianze complete dell'apertura, non uniforme/uniforme, vale circa2,6795nel modello di varianza crescente,0,5268in quello decrescente e1,4202con varianza unitaria. Sono effetti condizionali sui medesimi input di base, non misure del rumore reale né evidenza di un miglioramento generale. Rapporto SHA256 `f882de7be069c87c2801a7802d8cf110c5c583a8108110c7fdd453d0b8a0538b`.
+
+È attivo un controllore separato per l'analisi dei soli gruppi completi. Sei prove di flusso verificano esclusione di gruppi incompleti e già verificati, blocco su risultati esistenti non verificati e arresto al primo errore di analisi senza retry. Il primo collaudo da stdin mancava del percorso dei moduli: il controllo precedente all'avvio ha respinto la qualificazione assente prima della prenotazione; il collaudo salvato corretto è passato. Il controllore non avvia né termina PixInsight e non riscrive le ricevute native; ogni lotto congela indice delle fonti e programmi. Nell'osservazione successiva risultano27gruppi verificati, non lo stato permanente della campagna ancora in corso.
+
+La capsula locale H63,35file e9.502.844byte, ha superato estrazione, rehash completo e audit del lettore recuperato identico all'originale: SHA256 `f275c4cb2c5727fcaea41e9683a05080a8f7592f5cadd50f14bb4073d8ab8eee`. È autosufficiente per le query offline della conoscenza e contiene alcuni input scalari dei riesami; non contiene ogni evidenza esterna delle195schede o tutto l'ambiente nativo. Non attesta recupero remoto. La successiva capsula dei lotti001–006 conserva nove gruppi,2.331casi e4.756file con tutti i membri verificati: SHA256 `605c0972f4da7420b85a10259a8ce346d8738afd8f350d1efc9a9297154031eb`; anche questa mantiene dipendenze esterne dichiarate.
+
+Tutti i sette CI del precedente commit H63 `44c908a9fc50c41db8b2c1c92fc87d32633f5d74` sono riusciti; verificare quelli del nuovo aggiornamento separatamente. PR in bozza, nessun merge verso main, deploy o attivazione del portale. Sette famiglie e25assi restano incompleti, zero chiusure scientifiche; conoscenza finale e trasferimento completo su GitHub con recupero indipendente ancora aperti.
