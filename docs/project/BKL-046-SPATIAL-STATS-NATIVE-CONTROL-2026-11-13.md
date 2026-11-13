@@ -2,7 +2,7 @@
 
 Stato osservato il **13 novembre 2026**. BKL-046 resta **aperta**: sette famiglie scientifiche incomplete, zero chiusure scientifiche. Questo documento registra risultati circoscritti e limiti; non costituisce accettazione Owner, rilascio del portale o trasferimento completo degli archivi.
 
-Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H56. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
+Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H57. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
 
 ## Campagna spaziale congelata
 
@@ -77,7 +77,9 @@ Gli hash identificano evidenze conservate localmente; questa tabella non afferma
 
 L'aggiornamento tecnico H54 conserva 173 schede e documenta il recupero locale della capsula File IO, il contesto operativo dei vecchi gate backend e il perimetro delle condizioni di pubblicazione. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#riconciliazione-corrente-e-pubblicazione-documentale-preparata) registra inoltre il censimento corrente, la correzione dei falsi assenti dovuti ai separatori dei percorsi, i 1.990 contenuti storici copiati da C a H e le 1.789 citazioni documentali dirette verificate.
 
-H55 aggiunge la riconciliazione di una prova Timer esistente: quattro casi e nove callback, con default `precise=true` diverso dalla guida. Tre osservazioni retrospettive mostrano `count=0` dopo callback già registrate; restano distinte dai 23 controlli congelati originari. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#timer-ricevuta-esistente-e-osservazioni-retrospettive) descrive condizioni e limiti. Nessuna nuova esecuzione è stata avviata.
+H55 aggiunge la riconciliazione di una prova Timer esistente: quattro casi e nove callback, con default `precise=true` diverso dalla guida. Tre osservazioni retrospettive mostrano `count=0` dopo callback già registrate; restano distinte dai 23 controlli congelati originari. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#timer-ricevuta-esistente-e-osservazioni-retrospettive) conserva condizioni e limiti di quella rilettura.
+
+H57 aggiunge una prova successiva distinta e congelata, eseguita una sola volta in un'istanza nativa vuota: quattro casi, nove callback, 25 controlli con 20 corrispondenze e cinque discrepanze. Conferma il default `precise=true` diverso dalla guida e quattro letture di `count=0` fuori dal callback dopo consegne note. Le transizioni `false,true,false` vengono rilette correttamente; azzeramenti con base zero restano non identificabili. L'istanza è stata chiusa normalmente con codice zero. Questi esiti rimangono supplementi locali, senza modificare lo snapshot autorevole v600 o qualificare l'accuratezza temporale.
 
 L'audit storico e la composizione delle fonti esatte sono conclusi: 498.056 identità e 854.043.191.084 byte unici coperti, mantenendo gli esiti negativi originali. Questa disponibilità locale non chiude lo staging immutabile, il perimetro corrente/finale o il recupero remoto.
 

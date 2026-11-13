@@ -2,30 +2,30 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H56** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H57** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v56.json` |
-| SHA-256 del file | `106f262d87ba542b999c5486f76f30e0c053a01e6cdd5b1916fccfd23d4a7ad4` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v8.py` |
-| SHA-256 del lettore | `1f5839ecdd81ad85f09696274f5452bbb0f5b68ce40ccd59c049fcafa5f50030` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v57.json` |
+| SHA-256 del file | `c41e2969c1d508a19b7af2bd81246b98c87cf670ac997824212437b13ec76387` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v9.py` |
+| SHA-256 del lettore | `b29f616bf1c7c8d00898112917b1f666142b90999fc4967523f37ccce9ec789b` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 179 |
+| Schede di evidenza | 180 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
-Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H56. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
+Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H57. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
 
 Questa proposta pubblica la documentazione del formato. I file JSON, i lettori e gli archivi grezzi identificati dagli hash non sono caricati da questa pagina: il loro trasferimento completo e recupero remoto restano da attestare.
 
 ## Stato pubblicato e valutazioni locali
 
-H56 contiene lo snapshot esatto della matrice **pubblicata v600 nel registro locale dello studio**, separato dai record locali ereditati da H55. Il confronto completo trova 3.297 righe coincidenti e 1.623 righe con soli campi aggiuntivi o ampliamenti di liste locali: nove processi, un file di script e 1.613 membri PJSR. Nessun campo pubblicato è rimosso o sostituito nei record locali.
+H57 conserva lo snapshot esatto della matrice **pubblicata v600 nel registro locale dello studio**, separato dai record locali ereditati da H55. Il confronto completo trova 3.297 righe coincidenti e 1.623 righe con soli campi aggiuntivi o ampliamenti di liste locali: nove processi, un file di script e 1.613 membri PJSR. Nessun campo pubblicato è rimosso o sostituito nei record locali.
 
 L'incremento v600 pubblica le attestazioni documentali dei 239 oggetti e lascia invariate le altre 4.681 righe. Non pubblica automaticamente i supplementi locali delle 1.623 righe. H56 conserva entrambi i livelli e aggiunge uno snapshot di autorità per ciascuno dei 4.920 requisiti.
 
@@ -33,7 +33,7 @@ Il lettore distingue l'autorità **al momento dello snapshot identificato** da u
 
 `--role` può attestare la pubblicazione documentale degli oggetti nello snapshot v600, conservando come storico il testo dell'attestazione originariamente preparata in staging. Non attesta comportamento nativo, chiusura scientifica o autorizzazione all'esecuzione. Il lettore rifiuta un file privo del livello di autorità richiesto e rileva la modifica di una riga pubblicata rispetto alla sua impronta.
 
-H56 non aggiorna la conoscenza registrata v1.171 e non attesta una versione v1.172. Rimane un consolidamento provvisorio.
+H57 non aggiorna la conoscenza registrata v1.171 e non attesta una versione v1.172. Rimane un consolidamento provvisorio. Rispetto a H56 aggiunge la nuova evidenza Timer a undici requisiti e un contesto successivo a tre schede storiche: i testi di preparazione restano conservati e non sono interpretati come nuove richieste da eseguire.
 
 ## Struttura del file
 
@@ -70,13 +70,13 @@ H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega al
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v8.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v8.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v8.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v8.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v9.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v9.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v9.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v9.py --workflow pjsr_object:File
 ```
 
-Il lettore predefinito verifica l'impronta esatta di H56 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
+Il lettore predefinito verifica l'impronta esatta di H57 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
 
 Sono disponibili anche `--requirement`, `--axis`, `--family` e `--evidence`, con identificatori esatti. Per esempio, `--evidence FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` restituisce la scheda della composizione nativa circoscritta.
 
@@ -150,7 +150,36 @@ Il rapporto retrospettivo ha SHA-256 `74c35f36220ab75310497ca832a06b971fa9b8cf3d
 
 La lettura completa dei file client PCL Timer conferma che il contatore C++ viene incrementato prima del gestore e azzerato da operazioni specifiche. Quel codice descrive un'interfaccia client, non prova l'identità del binding PJSR: default di intervallo e stato dopo mutazione differiscono tra i livelli documentati e osservati. Non si attribuisce automaticamente al wrapper la semantica del client.
 
-Sono preparati quattro casi nuovi su transizioni `precise=false,true,false`, contatore dopo callback prima delle mutazioni, scadenze singole e identificabilità degli azzeramenti. Una lettura zero prima e dopo una mutazione non prova che il contatore sia stato azzerato. L'entry congelata e il classificatore hanno superato modelli deterministici e nove controlli offline, inclusi mancate consegne e informazioni di chiusura incomplete. **La prova successiva non è ancora eseguita nativamente**: il controller di avvio esclusivo e la relativa qualificazione restano da completare. Nessuna taratura temporale viene dedotta dai mock.
+### Prova successiva congelata ed eseguita
+
+Dopo la pubblicazione v600 e i controlli di esclusività è stata avviata **una sola nuova istanza nativa**, vuota, su build 1706. La prova distinta comprende quattro casi composti e nove callback registrate. Dei **25 controlli congelati, 20 coincidono con l'atteso e cinque sono discrepanti**. Non vengono trasformati in un successo generale perché il processo è terminato con codice zero.
+
+| Osservazione nativa | Risultato e portata |
+| --- | --- |
+| Due costruttori nel caso di precisione | `precise=true` iniziale, diverso dal default `false` documentato. |
+| Scritture e riletture `false,true,false` | Coincidono nei tre punti; il controllo non modificato conserva lo stato. Questo non calibra il clock. |
+| Periodico, dopo tre callback e prima di stop o altre mutazioni | `count=0`, contro il limite inferiore di tre eventi già consegnati. |
+| Singolo, dopo il primo e dopo il secondo avvio | Una callback per ciascun avvio nella finestra osservata; entrambe le letture successive di `count` sono zero. |
+| Prima del cambio di intervallo, dopo due callback | `count=0`, contro il limite inferiore di due eventi consegnati. |
+| Contatore prima e dopo cambio di intervallo o gestore | La base è già zero: l'azzeramento resta **non identificabile**, non viene classificato come dimostrato. |
+
+Le quattro letture discrepanti del contatore avvengono fuori dal callback, dopo il ritorno del ciclo di elaborazione degli eventi e prima delle mutazioni pertinenti. Il risultato precedente retrospettivo e questa nuova prova congelata restano separati: condividono il dominio e non costituiscono prove indipendenti di accuratezza fisica.
+
+Avvio, scadenze singole, stop, rilettura dell'intervallo e sostituzione del gestore hanno esiti finiti conservati. L'assenza di ulteriori callback nella finestra quieta non prova un'assenza universale dopo qualsiasi stop. Le letture zero immediatamente dopo un nuovo avvio non dimostrano l'azzeramento di un contatore precedentemente positivo.
+
+Per il dominio osservato, usare un registro esplicito dei callback e identità/ricevute dei processi per monitorare il lavoro, senza affidarsi a `Timer.count`. Stato del timer, proprietà di precisione e completamento scientifico restano contratti distinti. Parentela con `Control`, argomenti non provati, altri carichi, altre build e calibrazione temporale rimangono fuori da questi risultati.
+
+L'istanza è stata chiusa normalmente tramite i controlli supportati della finestra, dopo la ricevuta con zero immagini; uscita effettiva zero e impronta del registro invariata sono verificate. La console conservata segnala che `msleep()` è deprecato e indica `System.msleep()`. Il sorgente congelato resta immutato: l'avviso non è una spiegazione causale dei controesempi.
+
+| Evidenza della nuova prova | SHA-256 |
+| --- | --- |
+| Protocollo congelato | `229ee32fd2c432422aca527a789766d2e7c4b56765735cd5cacd8dffa31f0013` |
+| Entry nativa | `b1e3005f138afb007454a74c79163c5cb5645bbf349576d70142804bcbe7af69` |
+| Ricevuta nativa | `6c13e55af5a19b70de1c84b3c27649e67a0f8d21de8f2db3fca9483d9d347962` |
+| Verifica indipendente degli esiti e della provenienza | `3417a71eadcb6be0fde12e3df04c6caa2b9be60e1b57c989ca9696ac5773f711` |
+| Verifica indipendente H57 e lettore | `41b0c7291c4d26272d8a1f29ddf80c295c7df5018c0038318de42ce1cc930465` |
+
+I modelli e i nove controlli offline restano qualificazioni del codice di prova. La nuova ricevuta è evidenza nativa circoscritta, senza taratura del tempo, causalità del binding o promozione delle famiglie scientifiche.
 
 ## Produzione, verifica e aggiornamento
 
@@ -230,6 +259,6 @@ Le impronte identificano evidenze locali. Non affermano che gli archivi grezzi s
 
 ## Gate ancora aperti
 
-H56 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
+H57 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
 
 I conteggi di file, schede, casi, blocchi o controlli CI non sono la percentuale della milestone. La pubblicazione di questa documentazione non attiva il portale, non modifica master o script installati e non riprende M27.
