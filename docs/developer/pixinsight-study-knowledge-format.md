@@ -2,20 +2,20 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H64** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H65** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
-Snapshot del 13 novembre 2026:
+Snapshot del 14 novembre 2026 (le sezioni successive conservano anche gli stati storici):
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v64.json` |
-| SHA-256 del file | `7bd122781df154cccf0a50332619417b3e9462f351ea55db4f64abe747739301` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v16.py` |
-| SHA-256 del lettore | `4d4ecf4f3f898cb4a539b2a39ebaf3e2d1d7ced8d6107407b88a0463e6dcb1aa` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v65.json` |
+| SHA-256 del file | `5e336770d868b4e912b10dc378ef62566067a900f5fc006905ee954e61a73de6` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v17.py` |
+| SHA-256 del lettore | `e2daa8ddcd6f36e2104822bf3c7ca84f8de090bce9588b74d9d99f3898b188d7` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 198 |
+| Schede di evidenza | 200 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
@@ -437,3 +437,24 @@ Il primo gruppo non uniforme, nella medesima geometria00, conserva529coefficient
 La capsula locale H63,35file e9.502.844byte, ha superato estrazione, rehash completo e audit del lettore recuperato identico all'originale: SHA256 `f275c4cb2c5727fcaea41e9683a05080a8f7592f5cadd50f14bb4073d8ab8eee`. È autosufficiente per le query offline della conoscenza e contiene alcuni input scalari dei riesami; non contiene ogni evidenza esterna delle195schede o tutto l'ambiente nativo. Non attesta recupero remoto. La successiva capsula dei lotti001–006 conserva nove gruppi,2.331casi e4.756file con tutti i membri verificati: SHA256 `605c0972f4da7420b85a10259a8ce346d8738afd8f350d1efc9a9297154031eb`; anche questa mantiene dipendenze esterne dichiarate.
 
 Tutti i sette CI del precedente commit H63 `44c908a9fc50c41db8b2c1c92fc87d32633f5d74` sono riusciti; verificare quelli del nuovo aggiornamento separatamente. PR in bozza, nessun merge verso main, deploy o attivazione del portale. Sette famiglie e25assi restano incompleti, zero chiusure scientifiche; conoscenza finale e trasferimento completo su GitHub con recupero indipendente ancora aperti.
+
+
+## H65: saturazione, rischio decisionale e ripresa dopo esaurimento della memoria
+
+Aggiornamento del 14 novembre 2026. H65 conserva tutte le 198 schede H64 e aggiunge due schede, per 200 totali. Il lettore v17 usa H65 come riferimento verificato e aggiunge `--policy` per leggere criteri e limiti senza autorizzare esecuzioni. Sette prove CLI verificano audit, riepilogo, policy, entrambe le nuove schede, asse VERSION_BACKEND/3 e rifiuto dell'impronta errata. Prova SHA256 `457b29391c80e7db4bc3e3929c13a84fbded18b98f8f86b098be0933b2ec774d`. Rendiconto v47 SHA256 `9788f33cecb5dc51adb6a6bb5003aac0f907dd8bda8341dde2e7194d2f67a1dc`: conserva 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner; solo due righe ricevono collegamenti aggiuntivi.
+
+L'Owner ha confermato un massimo dell'1% di decisioni scientificamente errate, da verificare con limite superiore di confidenza del 95%. Il criterio è **definito, non ancora validato**: popolazione, campionamento, dipendenza, molteplicità e adjudicazione devono essere congelati prima del collaudo confermativo. Le 32 risposte descrittive precedenti restano escluse. La scelta non autorizza nuove chiamate a pagamento. Restano invariati il 5% sulle misure relative e il 5% della FWHM iniziale per la posizione sulla stessa griglia; le violazioni operative comportano sempre rifiuto.
+
+Il riesame saturazione ricolloca le prove già presenti: 80 target held-out, otto campi di calibrazione separati e 64 scene sovrapposte. Il fit congiunto a due componenti rientra nei criteri in 13 scene su64; quello singolo in nessuna. Il prior di puntamento grossolano e le varianti post hoc della PSF non diventano rilevamento completamente cieco o nuove osservazioni indipendenti. Nelle 384 aperture appaiate di ricomposizione mascherata, tutte le undici nuove violazioni di flusso oltre5% compaiono anche nel ramo con solo bordo e smoothing fissato. La conformità della posizione non dimostra conservazione del flusso. Riconciliazione SHA256 `c1564cd53067d298504f26743c65b41d8d32d293800577020e5e5923e59bab30`.
+
+La scheda dei primi30gruppi pesati (20 uniformi e10 crescenti) conserva 96.339 classificazioni scalari verificate con aritmetica intera indipendente: 26.256 varianze diagonali e38.619 covarianze con riferimento non nullo entro5%; 31.317 riferimenti nulli restano indefiniti. Aperture:147 confrontabili entro5%,75 senza supporto completo. La varianza completa rispetto alla diagonale varia da circa1,1435 a4,9540 sotto i modelli dichiarati: non è rumore empirico. Riepilogo SHA256 `b76551b22e5942bfd7c786c8abe1708e83e9122e6922426784b2292b8a32cdb0`.
+
+### Incidente di memoria e nuovo segmento limitato
+
+La seconda sessione lunga è stata fermata dopo un effettivo avviso nativo «Out of memory»:6.412 tentativi,6.411 casi OBSERVED e un'interruzione NativeReturnedFalse, tutti preservati. Un'analisi indipendente del lotto019 aveva inoltre registrato MemoryError prima della lettura del piano mentre erano attivi più lavori; non viene attribuita una causa esclusiva. Dopo l'uscita normale di PixInsight con codice0, l'analisi invariata del lotto019 è stata eseguita una sola volta e ha superato il verificatore originale. Il fallimento iniziale resta conservato. Sono verificati33gruppi completi, non tutti gli80.
+
+Il successivo programma limita ogni sessione a128casi e osserva contatori Windows in sola lettura: richiede arresto al successivo confine salvato fra casi se la memoria privata raggiunge2GiB, la riserva di commit scende sotto4GiB, la memoria fisica disponibile sotto2GiB o i contatori diventano indisponibili. Ventisette fixture del programma e18fixture del worker verificano il controllo operativo, senza garanzia di prevenire ogni errore di allocazione. Nessun kill, retry automatico o modifica all'installazione.
+
+Il primo segmento limitato ha concluso128casi, con ricevute, History, hash dei campioni binari e chiusura delle viste verificati; uscita normale codice0. Massimo privato campionato985.718.784byte su74campioni, nessuna richiesta di arresto; il massimo campionato non è il picco assoluto del sistema operativo. L'audit esclude duplicazioni con le precedenti8.646conclusioni: **8.774 casi unici conservati e11.946rimanenti su20.720**. Questo conteggio misura l'integrità dei risultati conservati, non l'accettazione scientifica. Audit e piano esatto rimanente: `weighted-bounded128-case-audit-h-v1/report-and-exact-pending-cases.json`, SHA256 `eaf0c92e58342b2e633f0f4765959aadbef2ee39f4df5d9cb3cf05f503a14541`.
+
+Le sezioni H64 e precedenti descrivono gli stati osservati allora; la loro indicazione di sessione in corso è superata dal presente aggiornamento. Tutti i sette CI del precedente head H64 `065b7ba575bb70126d86e9cd6d96739837fed2ea` sono riusciti; i CI di questo nuovo aggiornamento richiedono una verifica separata. PR ancora in bozza; nessun merge verso main o attivazione del portale. Sette famiglie e25assi incompleti, zero chiusure scientifiche. Conoscenza finale e trasferimento integrale su GitHub con recupero dei byte restano aperti.
