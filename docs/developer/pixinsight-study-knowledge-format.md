@@ -2,20 +2,20 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H57** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H58** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v57.json` |
-| SHA-256 del file | `c41e2969c1d508a19b7af2bd81246b98c87cf670ac997824212437b13ec76387` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v9.py` |
-| SHA-256 del lettore | `b29f616bf1c7c8d00898112917b1f666142b90999fc4967523f37ccce9ec789b` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v58.json` |
+| SHA-256 del file | `b4e57205ef437d669a8973b63d02e60f917d92214732d8eb10e159579dd9e6ca` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v10.py` |
+| SHA-256 del lettore | `0e1ff134e9619f2fa22e1d376e81ab7009bb3e71eb9df9463830fc59392900ba` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 180 |
+| Schede di evidenza | 183 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
@@ -70,10 +70,10 @@ H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega al
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v9.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v9.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v9.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v9.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v10.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v10.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v10.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v10.py --workflow pjsr_object:File
 ```
 
 Il lettore predefinito verifica l'impronta esatta di H57 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
@@ -259,7 +259,7 @@ Le impronte identificano evidenze locali. Non affermano che gli archivi grezzi s
 
 ## Gate ancora aperti
 
-H57 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
+H58 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
 
 I conteggi di file, schede, casi, blocchi o controlli CI non sono la percentuale della milestone. La pubblicazione di questa documentazione non attiva il portale, non modifica master o script installati e non riprende M27.
 
@@ -277,3 +277,36 @@ La capsula `Prove-Timer-nativo-congelato-contatore-precisione-H-v1.zip` conserva
 | Verifica di recupero e replay isolato | `518888e2fa7843574e1c2d0930b3a963ef3e8b341ec1aa69f7d6b208484140a7` |
 
 Il replay legge soltanto i file recuperati e non avvia PixInsight, non consulta il registro corrente e non esegue chiamate API. È un recupero locale della prova, non una nuova esecuzione nativa, una calibrazione temporale o un recupero remoto da GitHub. Il contenuto completo della capsula non è caricato da questo aggiornamento documentale.
+
+## H58: ponte nativo PSF, esiti non validi e recupero
+
+H58 aggiunge tre schede e collegamenti a 27 requisiti, conservando tutti i record locali e pubblicati di H57. La verifica indipendente confronta tutte le 4.920 righe, le 180 schede precedenti e le query del lettore: le schede correnti sono 183. Registro, conoscenza registrata v1.171 e matrice pubblicata v600 restano distinti; nessuna v1.172 o conoscenza finale è attestata.
+
+La prova usa gli stessi **216 ritagli sintetici già valutati dall’ottimizzatore Python**, ricostruiti con identità esatta dei pixel Float64. Gaussiane e Moffat con beta 2,4 e 5,2 sono provate con due larghezze. Ogni campo riceve otto richieste native: Gaussian e Moffat circolari, due rettangoli richiesti e due punti iniziali. Queste varianti sono appaiate sullo stesso campo; non sono nuove acquisizioni indipendenti. L’ottimizzatore Python della molteplicità non è stato portato nativamente.
+
+Il primo tentativo conserva **120 campi e 960 chiamate**, poi fallisce con errore Win32 32 durante una riscrittura della ricevuta. Il monitor leggeva periodicamente lo stesso file mutabile: questo meccanismo va evitato, ma non è provato come causa esclusiva e non sono esclusi altri partecipanti alla condivisione. Non si attribuisce il guasto all’hardware.
+
+Il recupero congelato esegue soltanto i **96 campi e 768 chiamate residui**. Usa nomi distinti scritti una sola volta per checkpoint e avanzamento; scrive la ricevuta finale una volta e solo dopo crea un marcatore separato. Il monitor legge la ricevuta dopo il marcatore. Le due istanze sono chiuse normalmente, con uscita effettiva zero. **Il primo script resta fallito**; il risultato completo è una composizione esplicita di due epoche, senza ripetere il prefisso.
+
+| Esito circoscritto | Conteggio e denominatore |
+| --- | --- |
+| Profili nativi finiti confrontabili | 1.310 su 1.728 slot previsti |
+| Fit nativi non validi | 418 su 1.728; stato 0, «Not fitted», causa del solver non stabilita |
+| Slot di sorgenti isolate | 576 previsti: 472 confrontabili e 104 non validi |
+| Posizione negli isolati confrontabili | 468 entro e quattro oltre il 5% della FWHM iniziale |
+| Flusso totale analitico del modello negli isolati confrontabili | 299 entro e 173 oltre il 5% |
+| Entrambe le soglie negli isolati confrontabili | 299 su 472, senza eliminare i 104 invalidi dai 576 previsti |
+
+I conteggi condizionali non stimano un tasso generale di successo. Un `PSF.isValid` vero non qualifica fotometria o astrometria. Volume infinito del modello, `flux` nativo, `signal`, somme su pixel selezionati e energia in un disco continuo restano quantità distinte. Un singolo profilo adattato a una coppia di sorgenti è un controllo di stress, non un recupero fotometrico delle due componenti.
+
+In tutti i 1.310 fit validi, `b0` differisce dall’angolo del rettangolo passato alla chiamata. La guida installata lo descrive come angolo della regione di campionamento. Non si usa quindi `b0` come attestazione della regione interna effettivamente impiegata: causa nel binding, correttezza della descrizione e regione interna restano da stabilire. Le formule scalari di FWHM e volume, dove definite, coincidono invece con i riferimenti nei casi confrontati.
+
+| Evidenza locale | SHA-256 |
+| --- | --- |
+| Rapporto composito dei due segmenti | `c0370e353a2073fcc5e76daa525f6aa065f5351f7b934c30a19e6b62fb86a2c7` |
+| Verifica indipendente dei due segmenti e delle soglie | `71a667c05ae45cfbc1c0d100a2bc50656ac4ac63bd74b835b17e4b7023a55701` |
+| Verifica indipendente H58 e lettore | `94788b8c392f98c3336ddcc7bde59def7085c530f2301869ac36591bb775ba31` |
+
+La costruzione iniziale H58 si è fermata prima di creare il file, per una chiave di percorso con separatori diversi da quelli della mappa Windows congelata. Sorgente ed errata restano conservati; la revisione corretta usa la chiave nativa e ha superato i confronti completi. Nessuna prova nativa è stata ripetuta per correggere questo errore documentale.
+
+Le tre schede sono `PSF_NATIVE_CIRCULAR_SAME216_TWO_EPOCHS_SCOPED_MEASUREMENTS`, `PSF_NATIVE_RECEIPT_SHARING_FAILURE_AND_EXACT_SUFFIX96_RECOVERY` e `PSF_NATIVE_B0_DIFFERS_FROM_REQUESTED_REGION_CORNER`. Questa prova non esegue convoluzione, denoise o restauro e non chiude i residui di profilo, campionamento, incertezza, dominio fisico o decisione IA. Sette famiglie scientifiche restano incomplete, con zero chiusure. I byte grezzi sono conservati su H e non sono trasferiti da questo aggiornamento documentale.

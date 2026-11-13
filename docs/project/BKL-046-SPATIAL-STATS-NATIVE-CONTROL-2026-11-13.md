@@ -2,7 +2,7 @@
 
 Stato osservato il **13 novembre 2026**. BKL-046 resta **aperta**: sette famiglie scientifiche incomplete, zero chiusure scientifiche. Questo documento registra risultati circoscritti e limiti; non costituisce accettazione Owner, rilascio del portale o trasferimento completo degli archivi.
 
-Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H57. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
+Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H58. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
 
 ## Campagna spaziale congelata
 
@@ -90,3 +90,13 @@ Restano: applicabilità e verifiche scientifiche nel dominio completo, confronto
 Questa pubblicazione è solo documentale: non avvia il portale, non riprende M27, non modifica master o script PixInsight installati e non interviene sui materiali BKL-051.
 
 Il rendiconto v40 conserva 4.920 requisiti e 14.521 criteri letterali, con verifica indipendente sulle righe pubblicate v600. La nuova capsula locale della prova Timer ha superato estrazione e replay isolato dei 25 controlli e dei due confronti non identificabili. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#rendiconto-v40-e-recupero-locale-della-prova-timer) riporta identità, condizioni e limiti. Questi aggiornamenti non chiudono criteri scientifici o di trasferimento remoto.
+
+## Aggiornamento H58: misura PSF nativa e fallimenti conservati
+
+La conoscenza provvisoria H58 conserva 4.920 requisiti e 183 schede, con record pubblicati v600 separati dai supplementi locali. Il nuovo ponte usa 216 ritagli sintetici già esistenti, con pixel Float64 verificati, e 1.728 richieste native di fit circolari.
+
+Il tentativo originale fallisce per condivisione della ricevuta dopo 120 campi e 960 chiamate. Il recupero esegue solo i 96 campi e 768 chiamate rimanenti, con file di avanzamento distinti e lettura della ricevuta finale dopo un marcatore separato. Entrambe le istanze sono chiuse normalmente; l’uscita zero non trasforma il primo script in un successo. I due segmenti restano espliciti e il prefisso non viene ripetuto.
+
+Sono conservati 1.310 profili finiti confrontabili e **418 fit nativi non validi**. Negli isolati, 472 slot sono confrontabili e 104 non validi, su 576 previsti; fra i confrontabili quattro posizioni e 173 flussi totali analitici superano la soglia del 5%. `b0` differisce dall’angolo del rettangolo richiesto in tutti i 1.310 fit validi: non certifica quindi la regione interna usata. Il [riferimento tecnico H58](../developer/pixinsight-study-knowledge-format.md#h58-ponte-nativo-psf-esiti-non-validi-e-recupero) conserva denominatori, impronte e limiti.
+
+Queste misure appaiate su pixel riutilizzati non portano nativamente l’ottimizzatore Python, non sono nuove acquisizioni indipendenti e non chiudono famiglie scientifiche o gate Owner. Conoscenza registrata v1.171 e trasferimento integrale degli archivi restano distinti da questo aggiornamento curato.
