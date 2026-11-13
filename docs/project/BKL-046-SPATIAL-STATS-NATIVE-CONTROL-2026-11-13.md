@@ -2,7 +2,7 @@
 
 Stato osservato il **13 novembre 2026**. BKL-046 resta **aperta**: sette famiglie scientifiche incomplete, zero chiusure scientifiche. Questo documento registra risultati circoscritti e limiti; non costituisce accettazione Owner, rilascio del portale o trasferimento completo degli archivi.
 
-Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H54. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
+Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H55. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
 
 ## Campagna spaziale congelata
 
@@ -76,6 +76,8 @@ La conoscenza consolidata **provvisoria H51** contiene 4.920 righe di requisito 
 Gli hash identificano evidenze conservate localmente; questa tabella non afferma che i relativi byte siano già pubblicati o recuperabili da GitHub.
 
 L'aggiornamento tecnico H54 conserva 173 schede e documenta il recupero locale della capsula File IO, il contesto operativo dei vecchi gate backend e il perimetro delle condizioni di pubblicazione. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#riconciliazione-corrente-e-pubblicazione-documentale-preparata) registra inoltre il censimento corrente, la correzione dei falsi assenti dovuti ai separatori dei percorsi, i 1.990 contenuti storici copiati da C a H e le 1.789 citazioni documentali dirette verificate.
+
+H55 aggiunge la riconciliazione di una prova Timer esistente: quattro casi e nove callback, con default `precise=true` diverso dalla guida. Tre osservazioni retrospettive mostrano `count=0` dopo callback già registrate; restano distinte dai 23 controlli congelati originari. Il [riferimento tecnico](../developer/pixinsight-study-knowledge-format.md#timer-ricevuta-esistente-e-osservazioni-retrospettive) descrive condizioni e limiti. Nessuna nuova esecuzione è stata avviata.
 
 La verifica del contenuto storico resta in corso su 498.056 oggetti unici, 854.043.191.084 byte. Le sei differenze note conservano l'esito originale e le fonti supplementari esatte; la loro composizione conclusiva attende l'audit completo. Il pacchetto di 239 aggiornamenti documentali è verificato e il publisher H v3 è qualificato nel perimetro dichiarato, ma nessun nuovo incremento di produzione è stato avviato. Il riferimento tecnico conserva anche il difetto riscontrato nella versione precedente e la correzione verificata.
 

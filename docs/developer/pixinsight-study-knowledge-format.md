@@ -2,24 +2,24 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H54** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H55** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v54.json` |
-| SHA-256 del file | `df06e52a008c910fcdff6d5061c75de3d97cd738f2ac6abc01b162350ac83792` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v6.py` |
-| SHA-256 del lettore | `29d9cccdfa3b1667013bd945cfe58a4713449f13df494b928f8078d1c1c6f69f` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v55.json` |
+| SHA-256 del file | `1e1f01810bf2226d975a79fdf3d87702ed9c906622a5fcf493a498f027adf695` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v7.py` |
+| SHA-256 del lettore | `a159fdb9d2f7a28cf84c8ad590a7ebc1e2c7ee11c89230e1551cd8deea7aabb8` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 173 |
+| Schede di evidenza | 174 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
-Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H54. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
+Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H55. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
 
 Questa proposta pubblica la documentazione del formato. I file JSON, i lettori e gli archivi grezzi identificati dagli hash non sono caricati da questa pagina: il loro trasferimento completo e recupero remoto restano da attestare.
 
@@ -49,18 +49,20 @@ Ogni record conserva:
 
 I supplementi non riscrivono automaticamente gli stati canonici. H52 ha collegato 17 requisiti esatti alle nuove evidenze; H53 ha aggiunto collegamenti per l'oggetto File e quattro suoi membri; H54 collega agli stessi cinque requisiti anche il recupero locale della capsula File IO. H54 aggiunge inoltre il contesto operativo successivo ai vecchi gate del backend e il riesame delle fonti primarie di pubblicazione, conservando le conclusioni storiche nel loro ambito. Gli altri campi dei requisiti sono stati confrontati nella loro rappresentazione canonica: matrici, criteri, disposizioni e storia non vengono promossi tramite l'aggiunta di una scheda.
 
+H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega all'oggetto e ai suoi dieci membri canonici. La scheda temporale precedente conserva tutti i dati e riceve un contesto operativo esplicito, così che il vecchio testo «prove native da eseguire» non provochi una ripetizione automatica.
+
 ## Consultazione riproducibile
 
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v6.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v6.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v6.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v6.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v7.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v7.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v7.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v7.py --workflow pjsr_object:File
 ```
 
-Il lettore predefinito verifica l'impronta esatta di H54 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
+Il lettore predefinito verifica l'impronta esatta di H55 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
 
 Sono disponibili anche `--requirement`, `--axis`, `--family` e `--evidence`, con identificatori esatti. Per esempio, `--evidence FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` restituisce la scheda della composizione nativa circoscritta.
 
@@ -111,6 +113,26 @@ Nella console della seconda istanza sono stati osservati anche due messaggi di e
 Le schede `FILE_DEFAULT_TEXT_BINARY_NATIVE_DISCREPANCIES`, `FILE_SELECTED_PCL_UTF_CONVERSION_SOURCE_MODEL`, `FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` e `FILE_COMPOSITION_RUN_OBSERVED_RUNTIME_STARTUP_ANOMALIES` devono essere lette insieme.
 
 La capsula locale File IO conserva 121 file, inclusi tentativi falliti, composizioni successive e verifiche. Estrazione isolata e replay dei byte/ricevute sono passati. Il suo ZIP ha SHA-256 `17e8bd7a13e8344e1b551bb4d4fe2dfce10f14bc7973c02d94fe835016edd209`. Questo recupero locale non attesta un recupero da GitHub.
+
+## Timer: ricevuta esistente e osservazioni retrospettive
+
+La rilettura di una prova già acquisita su build 1706 identifica quattro casi composti e nove callback registrate. I 23 controlli originari restano immutati: 22 conformi e uno discrepante. Le tre etichette di caso conformi riguardano quei controlli specifici e non validano tutti i contratti dei membri Timer.
+
+La proprietà `precise` è inizialmente `true`, mentre la guida conservata dichiara `false` come default. La successiva assegnazione di `true` a un valore già vero non verifica una transizione da falso a vero; nessuna accuratezza temporale è stata calibrata.
+
+Un'analisi **retrospettiva distinta** considera il contratto documentato di `count`, numero di eventi generati dall'ultimo `start()`. Nei tre punti seguenti la ricevuta registra già callback e il codice acquisito non contiene un nuovo avvio, cambio di intervallo o sostituzione del gestore prima della lettura:
+
+| Punto di lettura | Callback già registrate almeno | `count` letto |
+| --- | ---: | ---: |
+| Dopo la prima scadenza singola | 1 | 0 |
+| Prima dello stop periodico | 2 | 0 |
+| Prima del cambio di intervallo attivo | 2 | 0 |
+
+Questi tre punti appartengono alla stessa esecuzione composta; non sono tre prove indipendenti e non vengono aggiunti retroattivamente agli endpoint congelati. Il classificatore originario non controllava l'incremento di `count` in questi punti e resta conservato.
+
+Per il dominio osservato, mantenere un registro esplicito dei callback invece di usare `Timer.count` come prova di consegna degli eventi. Stato del timer, callback e completamento di un processo esterno restano contratti distinti. Non è stabilita la causa nell'implementazione o nel binding, né l'applicabilità ad altre build, piattaforme o condizioni di carico.
+
+Il rapporto retrospettivo ha SHA-256 `74c35f36220ab75310497ca832a06b971fa9b8cf3d1b2ff91e9e8efacc76b8a5`; la verifica indipendente di H55 e del lettore ha SHA-256 `a783322da099d7214718511c0bddd3a01bc04b17f86838cf7f52b9d839720575`. I dieci file sorgente della rilettura sono conservati localmente con le impronte originali. Nessuna nuova chiamata nativa o API è stata eseguita per questo aggiornamento.
 
 ## Produzione, verifica e aggiornamento
 
@@ -178,6 +200,6 @@ Le impronte identificano evidenze locali. Non affermano che gli archivi grezzi s
 
 ## Gate ancora aperti
 
-H54 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
+H55 conserva sette famiglie scientifiche incomplete e i gate finali Owner. Restano, secondo la loro portata: studio dei contratti residui, applicabilità fisica e incertezza nel dominio finale, confronto della proiezione di conoscenza finale, qualificazione delle decisioni IA e accettazione dei relativi criteri, inventario completo corrente/storico/virtuale, file finale e trasferimento integrale con recupero remoto.
 
 I conteggi di file, schede, casi, blocchi o controlli CI non sono la percentuale della milestone. La pubblicazione di questa documentazione non attiva il portale, non modifica master o script installati e non riprende M27.
