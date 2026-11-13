@@ -2,24 +2,24 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H62** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H63** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 13 novembre 2026:
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v62.json` |
-| SHA-256 del file | `abc86a6c7dae381c61c36c698eed0753296e2ac5bd7ce821e672abc1c7e2f53b` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v14.py` |
-| SHA-256 del lettore | `a8aeff415833bc335964d2798479dcced1a166833ffd57d24653ba11bd1fca28` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v63.json` |
+| SHA-256 del file | `9cfbbdf266028b55282f5847ccc39c14d457cae775dc4ae6ed201b7029e57ccc` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v15.py` |
+| SHA-256 del lettore | `d864c5e896388f50b0dcfee39a025e8552f17f5a56c0cdf3eeaaf3c3c5302027` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 192 |
+| Schede di evidenza | 195 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
-Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H62. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
+Il registro autorevole preesistente, attestato alla versione v1.171, resta distinto da H63. Una versione provvisoria non aggiorna quel registro e non riavvia il publisher. Tutti i vincoli su portale, master, installazione, migrazione Codex e M27 restano applicabili.
 
 Questa proposta pubblica la documentazione del formato. I file JSON, i lettori e gli archivi grezzi identificati dagli hash non sono caricati da questa pagina: il loro trasferimento completo e recupero remoto restano da attestare.
 
@@ -70,13 +70,13 @@ H55 aggiunge una scheda riferita alla prova Timer già esistente e la collega al
 I comandi seguenti si eseguono sul pacchetto recuperato contenente file e lettore verificati. Non sono endpoint del portale.
 
 ```text
-python consult_provisional_dsg_knowledge_h_v5_v14.py --audit
-python consult_provisional_dsg_knowledge_h_v5_v14.py --workflow process:ACDNR
-python consult_provisional_dsg_knowledge_h_v5_v14.py --role pjsr_object:File
-python consult_provisional_dsg_knowledge_h_v5_v14.py --workflow pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v15.py --audit
+python consult_provisional_dsg_knowledge_h_v5_v15.py --workflow process:ACDNR
+python consult_provisional_dsg_knowledge_h_v5_v15.py --role pjsr_object:File
+python consult_provisional_dsg_knowledge_h_v5_v15.py --workflow pjsr_object:File
 ```
 
-Il lettore predefinito verifica l'impronta esatta di H62 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
+Il lettore predefinito verifica l'impronta esatta di H63 prima della consultazione. Per un altro file occorre fornire esplicitamente `--file` e `--sha256`; l'impronta di una versione diversa non è accettata.
 
 Sono disponibili anche `--requirement`, `--axis`, `--family` e `--evidence`, con identificatori esatti. Per esempio, `--evidence FILE_ASCII_ESCAPED_JSON_AND_BINARY_NATIVE_COMPOSITIONS` restituisce la scheda della composizione nativa circoscritta.
 
@@ -388,3 +388,31 @@ La ripresa congela esattamente 18.485 casi, escludendo tutti i 2.235 conclusi. S
 | Qualificazione dei limiti numerici | `fe55f4793fac42a03f3bf6f5d792c289559bb4cb7a4a01aa2aba40977300e57d` |
 
 Tutti i sette controlli CI del precedente commit `825e78032bb2188ce24ec31470c1b5b7e126ff4a` sono conclusi con successo; non attestano quelli di questo nuovo aggiornamento. Questa pubblicazione riguarda documentazione tecnica: nessun merge, deploy, caricamento degli archivi grezzi o attivazione del portale. Sette famiglie e 25 assi restano incompleti, zero chiusure scientifiche; file finale, criteri Owner e trasferimento completo su GitHub con recupero indipendente restano aperti.
+
+
+## H63: riesame dei fondi diffusi e classificazioni relative esatte
+
+H63 conserva tutti i 4.920 requisiti e le 192 schede precedenti; aggiunge tre schede, per 195 totali. SHA256 conoscenza `9cfbbdf266028b55282f5847ccc39c14d457cae775dc4ae6ed201b7029e57ccc`; lettore v15 `d864c5e896388f50b0dcfee39a025e8552f17f5a56c0cdf3eeaaf3c3c5302027`. Audit, query ABE e asse diffuse/2 riusciti; impronta errata respinta. Il rendiconto v45 conserva 14.521 criteri letterali e tutti i 19 criteri Owner, aggiungendo soltanto collegamenti a tre requisiti. SHA256 rendiconto `c18894ae4e38d42a207ee0251987e4d303e5cfc5ffab1ccf524e0e15d394ff5a`. È precisata anche la provenienza del produttore: v44 aveva ereditato il pin precedente; v45 identifica il proprio programma salvato senza riscrivere i documenti storici.
+
+Sono stati ricontrollati 22 intervalli condizionali di flusso già conservati e nove fonti storiche sui byte presenti su H, lasciando intatti i percorsi G storici. Per un flusso positivo compatibile con [L,U], esiste una sola stima entro il 5% per ogni verità compatibile se e solo se 19U ≤ 21L. Dieci intervalli soddisfano il criterio, dodici no. Il controesempio di due mondi con la stessa immagine richiede un errore relativo minimax di circa 8,038%: nessun successo del processo identifica automaticamente la decomposizione additiva/moltiplicativa. Le garanzie più strette richiedono le ipotesi dichiarate di calibrazione, linearità, cielo e apertura nota; non attestano una camera reale.
+
+Il riesame dei 3.304 campi ABE held-out usa solo i flussi scalari originali, senza nuove chiamate native o estrazioni casuali. La classificazione relativa al 5% è **retrospettiva**, distinta dai 96 indicatori di ordinamento congelati originariamente. Sono mantenuti due gradi, due regioni e due estimandi sugli stessi campi: le varianti non sono acquisizioni indipendenti.
+
+| Confronti sui flussi conservati | Entro 5% | Oltre 5% | Indefiniti: verità zero | Totale |
+| --- | ---: | ---: | ---: | ---: |
+| Varianti native ABE | 486 | 19.338 | 6.608 | 26.432 |
+| Controllo non corretto con fondo vero noto all'analisi | 1.492 | 3.464 | 1.652 | 6.608 |
+
+Le 10.818 stime native negative sono un sottoinsieme sovrapposto alle classificazioni, non un denominatore aggiuntivo. La prima versione del nuovo conteggio si era fermata prima dell'output perché assumeva flusso positivo in ogni regione; i profili compatti hanno invece regioni a flusso esattamente zero. La versione separata conserva tali casi come indefiniti. Una verifica indipendente con prodotti interi controlla tutte le 33.040 classificazioni e tutti i conteggi. Il controllo non corretto dispone del fondo vero del generatore: non è un estimatore operativo disponibile su una foto reale. Nessuna politica di scelta dei gradi viene validata selezionando i risultati favorevoli dopo averli osservati.
+
+Il riesame non misura nuovamente morfologia, appartenenza dei pixel ai campioni, perdita di segnale nel modello o incertezza al bordo. Questi restano requisiti da confrontare con le altre evidenze del dominio, mantenendo separati controlli di solo fondo, segnale senza gradiente e correzione omessa.
+
+La terza scheda H63 riassume i primi 13 gruppi uniformi pesati: 10.992 varianze diagonali e 16.284 covarianze fra vicini con riferimento non nullo rientrano nel 5%; 12.612 riferimenti nulli restano indefiniti. Sono conservate 63 aperture confrontabili e 30 senza stima per supporto incompleto. La varianza completa di apertura è da 1,1435 a 4,4814 volte la stima diagonale nel modello dichiarato. Il controllo indipendente riclassifica 39.951 endpoint scalari; non dimostra covarianza empirica o indipendenza fisica. Fuori da questa scheda storica sono già verificati altri cinque gruppi, per 18 su 80; campagna nativa ancora in corso nella stessa istanza, senza riavvii automatici.
+
+| Evidenza locale | SHA256 |
+| --- | --- |
+| Limiti condizionali di flusso diffuso | `513844a524faa454ffa77a62190cd8607c48b1ca0efbf983c0c77b342b8695bd` |
+| Conteggio ABE retrospettivo completo | `ab718e1ecb4e88643a73f16ec016807a34dcf3a2a75ba8c476774b8aa6ed41d5` |
+| Riepilogo dei 13 gruppi pesati | `1a886f87bc49a0662df0d63a1ad448c192e7f8a46f408fcddebc8905b21b0aef` |
+
+Il conflitto della PR con main è stato risolto integrando il main esatto `25d03e492f514058a4e7d7a9bc947462735f1d6a`: due blocchi di un test meteo sintetico, conservando helper di normalizzazione e casi di incertezza. Tutti i sette CI del successivo commit `a69371d76acc8e9b8812d53f4b763f599f8e8ad5` sono riusciti. Non attestano i CI del presente aggiornamento H63. La PR resta in bozza; nessun merge verso main o deploy. Sette famiglie/25assi incompleti, zero chiusure scientifiche, conoscenza finale e trasferimento integrale con recupero remoto ancora aperti.
