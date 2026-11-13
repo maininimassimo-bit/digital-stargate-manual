@@ -3,6 +3,16 @@ const fs = require('node:fs');
 const {chromium} = require('playwright');
 const base = process.env.DSG_TEST_BASE_URL || 'http://127.0.0.1:8766/digital-stargate-manual/';
 const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-current-night.json', 'utf8'));
+// These are synthetic known-weather scenarios, not edits to the governed forecast.
+// Reset inherited uncertainty explicitly; uncertain inputs are tested separately below.
+function normalizeKnownDryWeather(projection) {
+  projection.hourly.forEach(row => {
+    row.weather.cloudCoverPct = 0;
+    row.weather.precipitationMm = 0;
+    row.weather.precipitationUncertain = false;
+    delete row.weather.precipitationNumericalTraceMm;
+  });
+}
 (async () => {
   const browser = await chromium.launch({headless:true, ...(process.env.DSG_BROWSER_CHANNEL ? {channel:process.env.DSG_BROWSER_CHANNEL} : {})});
   const page = await browser.newPage({viewport:{width:1157,height:828}});
@@ -22,7 +32,7 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
   const sky = page.locator('[data-weather-sky]');
   async function scenario(state, mutate=()=>{}) {
     fixture=structuredClone(original);
-    fixture.hourly.forEach(row=>{row.weather.cloudCoverPct=0;row.weather.precipitationMm=0;delete row.weather.precipitationNumericalTraceMm;});
+    normalizeKnownDryWeather(fixture);
     mutate(fixture); requests=0;
     await page.goto(base+'observation-planner/');
     await page.waitForFunction(s=>document.querySelector('[data-weather-sky]')?.dataset.skyState===s,state);
@@ -44,6 +54,10 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
     assert.match(await sky.innerText(),new RegExp(`1/${original.hourly.length} campioni`));
     await page.setViewportSize({width:390,height:844});
     assert(await sky.isVisible()); assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
+    await scenario('clear', d=>d.hourly.forEach(row=>delete row.weather.precipitationUncertain));
+    await scenario('unknown', d=>d.hourly[0].weather.precipitationUncertain=true);
+    await scenario('unknown', d=>d.hourly[0].weather.precipitationUncertain=null);
+    await scenario('unknown', d=>d.hourly[0].weather.precipitationUncertain='false');
     await scenario('unknown', d=>d.hourly.pop());
     await scenario('unknown', d=>d.hourly[1].validAtUtc=d.hourly[0].validAtUtc);
     await scenario('unknown', d=>d.hourly[0].weather.cloudCoverPct=null);
@@ -59,6 +73,6 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
     assert.equal(await sky.getAttribute('data-sky-state'),'unknown');
     assert.equal(await sky.locator('img').getAttribute('src'),null);
     assert.deepEqual(errors,[]);
-    console.log('PASS planner sky: clear/cloud/rain, average boundary, precipitation priority, single fetch, mobile, missing/duplicate/invalid/stale data, unavailable image, expiry.');
+    console.log('PASS planner sky: clear/cloud/rain, average boundary, precipitation priority, single fetch, mobile, explicit precipitation uncertainty, legacy absence, missing/duplicate/invalid/stale data, unavailable image, expiry.');
   } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
