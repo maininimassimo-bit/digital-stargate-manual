@@ -2,6 +2,8 @@
 
 Stato osservato il **13 novembre 2026**. BKL-046 resta **aperta**: sette famiglie scientifiche incomplete, zero chiusure scientifiche. Questo documento registra risultati circoscritti e limiti; non costituisce accettazione Owner, rilascio del portale o trasferimento completo degli archivi.
 
+Per la struttura del file, le query e le regole di aggiornamento vedere il [riferimento tecnico della conoscenza](../developer/pixinsight-study-knowledge-format.md), aggiornato allo snapshot provvisorio H53. Il consuntivo sotto conserva il precedente snapshot H51 e le sue impronte.
+
 ## Campagna spaziale congelata
 
 Sono completati 4.794 blocchi nativi. La ricomputazione finale copre tutti i 24 strati, 1.104 regole congelate e 192 confronti appaiati. La verifica delle ricevute di provenienza copre tutti i 4.794 blocchi: 3.735 dell'epoca precedente e 1.059 della successiva; il confronto di appartenenza agli archivi riusa esplicitamente 3.760 verifiche precedenti ed esegue 1.034 confronti nuovi.
