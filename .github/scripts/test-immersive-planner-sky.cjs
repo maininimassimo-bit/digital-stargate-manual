@@ -22,7 +22,8 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
   const sky = page.locator('[data-weather-sky]');
   async function scenario(state, mutate=()=>{}) {
     fixture=structuredClone(original);
-    fixture.hourly.forEach(row=>{row.weather.cloudCoverPct=0;row.weather.precipitationMm=0;delete row.weather.precipitationNumericalTraceMm;});
+    // Synthetic clear weather must not inherit uncertainty from the changing live forecast.
+    fixture.hourly.forEach(row=>{row.weather.cloudCoverPct=0;row.weather.precipitationMm=0;row.weather.precipitationUncertain=false;delete row.weather.precipitationNumericalTraceMm;});
     mutate(fixture); requests=0;
     await page.goto(base+'observation-planner/');
     await page.waitForFunction(s=>document.querySelector('[data-weather-sky]')?.dataset.skyState===s,state);
@@ -36,7 +37,7 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
     assert.match(await sky.innerText(),/Nuvole medie 0,0%/);
     await scenario('clear',d=>d.hourly.forEach(row=>{row.weather.precipitationNumericalTraceMm=2.946505750977754e-16;}));
     assert.match(await sky.innerText(),/Pioggia totale 0,000 mm/);
-    assert.match(await sky.innerText(),/0\/16 campioni con pioggia/);
+    assert((await sky.innerText()).includes(`0/${original.hourly.length} campioni con pioggia`));
     await scenario('clear', d=>d.hourly.forEach(r=>r.weather.cloudCoverPct=20));
     await scenario('cloudy', d=>d.hourly.forEach(r=>r.weather.cloudCoverPct=75));
     await scenario('rain', d=>d.hourly[0].weather.precipitationMm=0.01);
@@ -48,6 +49,7 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
     await scenario('unknown', d=>d.hourly[1].validAtUtc=d.hourly[0].validAtUtc);
     await scenario('unknown', d=>d.hourly[0].weather.cloudCoverPct=null);
     await scenario('unknown', d=>d.hourly[0].weather.precipitationMm=-1);
+    await scenario('unknown', d=>d.hourly[0].weather.precipitationUncertain=true);
     await scenario('unknown', d=>d.forecast.freshnessState='STALE');
     unavailable=true; await scenario('unknown'); unavailable=false;
     imageError=true; await scenario('clear');
@@ -59,6 +61,6 @@ const original = JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-cu
     assert.equal(await sky.getAttribute('data-sky-state'),'unknown');
     assert.equal(await sky.locator('img').getAttribute('src'),null);
     assert.deepEqual(errors,[]);
-    console.log('PASS planner sky: clear/cloud/rain, average boundary, precipitation priority, single fetch, mobile, missing/duplicate/invalid/stale data, unavailable image, expiry.');
+    console.log('PASS planner sky: clear/cloud/rain, average boundary, precipitation priority, single fetch, mobile, missing/duplicate/invalid/uncertain/stale data, unavailable image, expiry.');
   } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

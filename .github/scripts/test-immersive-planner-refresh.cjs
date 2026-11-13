@@ -6,6 +6,8 @@ const base=process.env.DSG_TEST_BASE_URL||'http://127.0.0.1:8766/digital-stargat
  const browser=await chromium.launch({headless:true,...(process.env.DSG_BROWSER_CHANNEL?{channel:process.env.DSG_BROWSER_CHANNEL}:{})});
  try{
   const page=await browser.newPage(),original=JSON.parse(fs.readFileSync('docs/data/observation-planner-f9-current-night.json'));
+  // Exercise expiry/recovery with certain synthetic weather; live uncertainty is tested separately.
+  original.hourly.forEach(row=>{row.weather.precipitationUncertain=false;});
   const run=Date.parse(original.forecast.runInitialisationUtc), now=run+18*3600000-120000;
   await page.clock.install({time:now});let fixture=structuredClone(original), requests=0;
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
