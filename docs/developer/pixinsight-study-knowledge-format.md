@@ -857,3 +857,42 @@ Tutti i nuovi materiali BKL-046 restano su H:. I criteri originali e il dominio 
 La verifica locale è terminata: 5.997 file estratti in un albero nuovo, ogni dimensione e SHA-256 confrontati con il manifest e con le sorgenti; l’audit del lettore recuperato coincide byte per byte con quello originale. Archivio H77: 23.183.318 byte, SHA-256 `7a4910c4dd51c4b362117f0750c6c328fc07c9dedebc44823d3461e6da9c0f53`; manifest SHA-256 `f4e1a8410cd32ebe64cbf168829fc5bc219bc0aeb7a2bcaa89dd84d9af8be2c5`; audit recuperato SHA-256 `23c42f33d2fa537a65feb8b79743448d35f04b43f6bfe732fcc00cefa79f41c0`.
 
 La capsula conserva conoscenza, lettore, rendiconto, ricevute delle epoche 023–027 e 029, 80 rapporti di matrici con verifiche indipendenti e il recupero pedestal circoscritto. Capsula genitore H76, dipendenze delle schede storiche, input grezzi e ambiente installato/licenziato restano separati. Il risultato attesta recupero locale e consultazione; non un replay nativo completo o recupero remoto degli archivi GitHub.
+
+
+## BKL-046: H78 — riepilogo completo e controlli combinati (2026-11-14)
+
+H78 è una conoscenza provvisoria di 226 schede. Conserva tutte le 224 schede H77, i 4.920 requisiti, i 14.521 criteri letterali e i 19 criteri Owner. Il lettore v30 ha superato 33 controlli CLI, compreso il rifiuto dell’impronta errata. Il rendiconto v60 aggiunge collegamenti alla sola voce DrizzleIntegration, senza modificare criteri o dichiarare chiusure scientifiche.
+
+| Artefatto | SHA-256 |
+| --- | --- |
+| Conoscenza H78 | `d8a143dddd3c6f158f652099542878a2fbb94d96edf133cebb41331ddc4944c8` |
+| Lettore v30 | `f6a99da4e3197f5b5e6ecd246eec5b44e9a9f28c835a9e32dc7b4267d5720893` |
+| Rendiconto v60 | `957795a3b5a55e7edcae013995e69bc5cdaca74c8b68406f19c74a02f1ca6ec7` |
+
+### Riepilogo degli 80 gruppi
+
+Il secondo calcolo intero conferma 284.928 confronti sugli endpoint conservati. Le 384 varianze d’apertura supportate sono entro il 5%; 240 aperture restano senza stima. Restano indefiniti 23.808 riferimenti diagonali nulli e 73.680 riferimenti nulli fra vicini: non sono contati come successi relativi.
+
+La capsula del riepilogo è stata estratta in un albero nuovo: 165 file, verificatore intero invariato, ricevuta rigenerata identica byte per byte. Archivio SHA-256 `3356192278b633d40ac3e07449341c4d8245527ae94584f77d0ec2425e8d3ce4`. Sono confronti di operatori finiti e covarianze condizionate, non una dimostrazione della legge di rumore delle acquisizioni reali.
+
+### Sedici controlli combinati di pesatura, rigetto e XNML
+
+Due campi deterministici monocromatici da 64×64 pixel sono riusati nei sedici incroci dei tre interruttori. Si usano griglia identità, kernel Square, coefficienti affini XNML costanti forniti e maschere fissate prima del confronto. La prova non stima coefficienti o maschere dai dati.
+
+Il primo tentativo è stato rifiutato durante l’apertura del primo XISF Float64: mancava l’attributo obbligatorio bounds. Il verificatore offline limitato non controllava tale requisito. Il tentativo, i file e il controllo incompleto restano conservati; l’audit attesta zero chiamate di elaborazione, nessun caso rivendicato e tutti i sedici casi ancora pendenti. Il generatore e il verificatore corretti aggiungono bounds 0:1. Un confronto separato attesta 262.144 byte di pixel invariati; nei sidecar cambiano soltanto i percorsi verso la nuova versione.
+
+Il secondo tentativo, vincolato all’audit del primo, completa sedici chiamate una sola volta. Le ricevute conservano identità degli otto input, parametri prima/dopo, intenti precedenti alle chiamate, campioni, History e chiusure delle sole viste possedute. PixInsight esce normalmente con codice zero e nessuna immagine aperta.
+
+L’analisi razionale e il verificatore intero indipendente concordano su 65.536 pixel: 65.528 pixel supportati rispettano l’ipotesi congelata entro la tolleranza numerica 1e-6 e il confronto relativo descrittivo del 5%; otto pixel interamente rigettati restano senza stima. Non ci sono discrepanze nel supporto previsto. I 24 contrasti appaiati sui controlli grezzi rendono osservabile l’effetto dei sei bit pubblici di rigetto.
+
+L’accordo con l’operatore non equivale all’accuratezza rispetto al segnale noto. Con normalizzazione fornita ma rigetto disabilitato, restano oltre il 5% quattro pixel contaminati senza pesatura e tre con pesatura. I controlli con rigetto e normalizzazione mantengono entro il 5% tutti i 4.095 pixel supportati di ciascuna configurazione contaminata; il pixel interamente rigettato non diventa una misura di flusso zero. Questi confronti non identificano pesi universalmente migliori.
+
+La capsula della prova combinata è stata realmente recuperata: 246 file, verificatore intero invariato e ricevuta identica sui 65.536 pixel. Archivio: 394.125 byte, SHA-256 `1883e1bc88f58ccfcc29c3675ad84615d338318a4ff4a877cc034ee74a6c6c7c`. Il recupero include il rifiuto iniziale; non lo converte retroattivamente in successo.
+
+### Recupero H78 e perimetro residuo
+
+La capsula H78 contiene 100 file / 15.182.895 byte, tutti estratti e verificati in un albero nuovo; l’audit del lettore recuperato coincide con l’originale. Archivio SHA-256 `cc525a24285e5da1da565a42bdc9fb4faf576a489ab47ef8c9291477b4d7dbc3`; manifest SHA-256 `7a9fa69eeea7c7144e113bb5ced8521d1ff61cc819c68c0a4d5cef6cc0ef1a04`.
+
+Le prove native XNML precedenti, i 162 file storici, le verifiche ai bordi e le distinzioni fra livello medio e contrasto restano evidenze esistenti. Non vengono dichiarate mancanti né ripetute per cambiare etichetta. Restano da riconciliare gli effetti combinati nel dominio originale: CFA/Variable15, geometrie non identità, coefficienti spazialmente variabili e incertezza dei modelli effettivamente stimati. Nessuna FWHM stellare è definita nei due campi correnti, quindi non si dichiara accettazione di posizione.
+
+Autorità separata ancora v600 / conoscenza 1.171; sette famiglie e 25 assi incompleti, zero chiusure scientifiche. I criteri originali non impongono che ogni controllo intenzionalmente errato rispetti il 5%; richiedono esiti, limiti ed eventuali esclusioni motivati nel dominio previsto. Dipendenze delle schede storiche, capsula genitore H77, input grezzi e installazione restano separati. Il recupero locale circoscritto non è replay nativo completo né trasferimento integrale GitHub con recupero dei byte. Tutti i nuovi materiali restano su H:; nessun merge, deploy o attivazione del portale.
