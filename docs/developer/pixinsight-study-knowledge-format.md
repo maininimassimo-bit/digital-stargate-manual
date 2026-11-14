@@ -939,3 +939,37 @@ Anche la diagnostica del bordo è recuperata e ricalcolata: 33 file, 8.192 endpo
 La capsula H79 contiene 102 file / 14.663.005 byte, tutti estratti e verificati; l’audit del lettore recuperato coincide con quello originale. Archivio SHA-256 `3546220bafb052f118ab4a5e5f5c68232a1a9771bdfa7d964e501bd2f49d1b1b`; manifest SHA-256 `c22e9c8961adaa0cadbd09fbac8593d58d2f0c4984ffdeafedae5ed32b3d6c48`.
 
 Autorità separata ancora v600 / conoscenza 1.171. H79 non è il file finale. Capsula genitore H78, dipendenze storiche delle schede, input grezzi e ambiente installato/licenziato rimangono separati. Questi recuperi locali non attestano un replay nativo completo né il trasferimento integrale GitHub con recupero remoto dei byte. Tutti i nuovi materiali BKL-046 restano su H:. Nessun merge, deploy o attivazione del portale.
+
+
+## H80 — campionamento gaussiano condizionale, isolamento e arrotondamento (14 novembre 2026)
+
+H80 conserva tutte le 228 schede H79 e aggiunge tre schede, per **231 schede**. Rimangono integri **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Tutte le sette famiglie e i 25 assi scientifici rimangono aperti, senza chiusure scientifiche.
+
+### Disegno statistico: certificato ideale, nessun nuovo esperimento
+
+Per 384 endpoint supportati ad apertura fissa, con media nota e contrasti gaussiani ideali indipendenti fra ripetizioni, è stato derivato il limite di Chernoff e applicata l'unione di Bonferroni. Con N=65.536 e delta=1/40, il limite superiore conservativo sulla probabilità di mancata copertura simultanea è 0,027739236849192408, inferiore a 0,05. Un verificatore indipendente con parametri di Chernoff diversi produce anch'esso un limite inferiore a 0,05. Non occorre indipendenza fra endpoint; resta necessaria quella fra ripetizioni per ogni endpoint.
+
+Questo N è sufficiente per il certificato scelto: non è un minimo dimostrato, una garanzia di potenza o la promessa che i dati supereranno la soglia. Per contenere l'intero intervallo ideale di varianza nel ±5% Owner, il rapporto osservato T/V0 deve cadere in [779/800,819/800]. Nessun rumore nuovo è stato generato. Il criterio Owner sul rischio di decisione IA (1% con confidenza 95%) resta distinto.
+
+Certificato SHA-256: `d93cd6f0f4505b9015429dcf5957a4c9c395a4d954165efafb0dd17ebba3f261`. Il riferimento primario per la distribuzione chi-quadro è il [NIST Engineering Statistics Handbook](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3666.htm); limiti e aritmetica del disegno sono derivati e verificati localmente.
+
+### Isolamento geometrico e margine numerico
+
+Il modello Square esatto sulle aperture centrali ricostruisce 6.784 righe supportate, mantiene 1.536 righe prive di supporto e non trova contributi da tile esterni. La verifica indipendente usa una griglia intera a 120 unità e controlla 480 margini geometrici, includendo i parametri arrotondati binary64/binary32. Traslazioni di otto pixel preservano la parità CFA. L'indipendenza dei contrasti di riferimento segue solo condizionatamente a variabili d'ingresso indipendenti; non è una prova dell'indipendenza di un generatore pseudocasuale o dell'operatore nativo su immagini più grandi.
+
+Per 128 aperture supportate sono stati calcolati esattamente i moltiplicatori degli errori assoluti d'ingresso e d'uscita; 80 configurazioni di apertura non supportate restano escluse. Se la discrepanza RMS fra contrasto reale e ideale è limitata da epsilon, la disuguaglianza triangolare propaga tale margine nell'intervallo statistico. Il verificatore intero indipendente ricostruisce coefficienti e sei esempi di propagazione. **Il limite effettivo dell'errore nativo e il collegamento fra generatore e distribuzione ideale non sono ancora dimostrati.**
+
+Rapporto isolamento SHA-256: `55df58cc4656ff42566980921e1682664767b61e2c9cef04307da7fd5a91f1bd`.
+Rapporto margine numerico SHA-256: `c498d4f7ea2d54083cd9ca6e751dce105b94450faa3ee127ae18571638788153`.
+
+Il candidato a tile richiederebbe 240 chiamate native per tre modelli, quattro profili e venti geometrie; questo numero è distinto dai 65.536 contrasti per endpoint. Non è stato rilasciato all'esecuzione. Prima occorrono qualificazione del generatore e dei suoi limiti, margini numerici verificati e una prova nativa limitata di traslazione/supporto, formato, memoria e scrittura. Restano separati acquisizioni fisiche, rumore non gaussiano, normalizzazione stimata e validazione delle decisioni IA. I casi già completati non vanno duplicati.
+
+### Conoscenza, lettore e conservazione
+
+- H80 SHA-256: `f934cce8bbffa0a358f9f324cedd9f51575cb451fda100fc93a719e45b3db9ef`.
+- Lettore v32 SHA-256: `53b15901edde1a9db6ce4293effcf72f16302141620aa1d5bf2f464fcaa33c45`; tutti i 38 controlli CLI superati, inclusi i 35 precedenti e il rifiuto di impronta errata.
+- Rendiconto v62 SHA-256: `9175edf59e14ee1920736e86309504949226415917df6b1780d7a655021c4081`; una sola riga di requisito riceve collegamenti aggiuntivi, senza modificare criteri o ammissione scientifica.
+- Capsula locale H80: 105 file, 9.591.483 byte; SHA-256 `07463b058137921bc58afa18ac2a5a89eaa1d10103729f1fbdc58f5f0121c8f8`, manifest `94d647f990b1bc6391cf08f1a483ccfc85837f10b0014b5cd5586b531e8190c4`. File estratti e riverificati; audit del lettore recuperato identico.
+- Capsula del margine numerico: nove file, 579.036 byte; SHA-256 `35934f1f0b4d274848eddb287a6d1db19ee5cf036717b7ecbd57d9158265a115`. Verificatore indipendente eseguito dai file recuperati, prova identica all'originale.
+
+Autorità separata verificata: v600 / conoscenza 1.171, nessun publisher attivo al controllo. H80 è provvisoria. Genitore H79, dipendenze storiche, input grezzi e ambiente installato/licenziato restano esterni alla capsula incrementale. Recupero locale e controlli GitHub non provano il trasferimento completo con recupero remoto dei byte. Nessuna nuova chiamata nativa, nessun nuovo campione di rumore, nessun merge o deploy in questo incremento. Materiali BKL-046 conservati su H:.
