@@ -1,6 +1,70 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Supplemento offline dopo H85: recupero dell'intervallo e prerequisiti
+## Stato corrente: H86 revisione 2 provvisoria e rendiconto v68
+
+La conoscenza corrente è **H86 revisione 2, provvisoria**, con **244 schede**, lettore v38 e rendiconto v68. Sono preservate le 241 schede H85, tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**; autorità **v600 / 1.171** invariata. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. H86 non è un incremento della pubblicazione autorevole a 1.172.
+
+Il lettore ha superato **7 controlli CLI specifici**: audit, riepilogo, policy, tre nuove schede e rifiuto dell'impronta errata. Il suo codice operativo è identico al lettore precedente, salvo nome e impronta della conoscenza predefinita. Restano conservati i **48 controlli storici H85**, senza presentarli come rieseguiti sulla nuova versione.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H86 revisione 2 | `6f51cfd784dc813c13924421fb37a70d51d393eb27712d4856557e6a763e2f10` |
+| Lettore v38 | `7b1074fe365133e616dce8864930a84350445a1a70947ff7b0a8203d7709d78d` |
+| Controlli CLI specifici H86r2 | `e704896f555a5954585672abe44623ca99fe894b6f5f2f44c4ecd0797ec6f183` |
+| Rendiconto v68 | `5fd65de864fd18ec3784d6f4c60cceeda61554d8494953a37eda41ac57580b5c` |
+| Progetto del ramo reversibile | `c6a07e508da22b11eec4728b789d47fe778a65df61ec1320a3adf6c4ca47e367` |
+| Verifica indipendente del progetto | `87d27de755fe8104f8dae9fe11138e77bdfd88953b303f873bb6bed8e03574bc` |
+| Revisione del contratto dei metadati esportati | `0bfe020c2a602e2bb1e1a4876ea15af65a7df5b0bfedb2852ef1791c6c51e37c` |
+
+### Ramo reversibile proposto: conservare la grandezza originale
+
+Il nuovo progetto riguarda il **collaudo sintetico**, non una ricetta da applicare alle fotografie. Conserva i sorgenti originali con media **1/8** e propone di aggiungere **3/8 soltanto a copie di lavoro distinte**, con lettura esplicita `no-normalize`. Dopo l'integrazione, una compensazione fissa e dichiarata deve riportare le misure alla grandezza originaria. Nessuna copia spostata o immagine compensata è stata ancora prodotta; nessun processo nativo è stato avviato.
+
+Per un endpoint con coefficienti originali `a_j`, il termine aggiunto è `(3/8) × somma(a_j)`. Sottrarre esattamente quel termine nel modello lineare conserva la media originale, i coefficienti e la varianza. Non si stima una nuova media dai risultati e non si cambia l'oracolo dei vecchi test. La lettura diretta RGGB precedente resta **non conforme** al suo riferimento originario.
+
+La verifica copre l'intero dominio congelato:
+
+| Grandezza | Endpoint supportati |
+| --- | ---: |
+| Pixel | 728 |
+| Media di una coppia | 728 |
+| Differenza di una coppia | 728 |
+| Media rettangolare | 448 |
+| Totale | 2.632 |
+
+Le **280 condizioni senza stima** restano identiche. Conservate 280 configurazioni logiche e 260 configurazioni native canoniche pianificate; nessuna selezione ridotta per ottenere un risultato favorevole.
+
+Un secondo calcolo verifica **7.896 identità su vettori razionali**, compresi valori negativi, e **5.264 disuguaglianze quadratiche** per i budget. Sono verifiche matematiche sullo stesso dominio, non nuovi campi astronomici o repliche indipendenti.
+
+### Margini di ingresso e budget ancora parziale
+
+Con la costruzione Float64 separata già prevista, il vincolo esplicito `|z| ≤ 16` e il modello IEEE di arrotondamento dichiarato, le copie lette in Float32 restano strettamente fra **0,047 e 0,953** per tutti e quattro i livelli di varianza. Questo margine evita zeri e valori fuori intervallo **nel modello d'ingresso proposto**. L'intervallo dell'uscita lineare ideale resta anch'esso nominale sui pixel supportati; i pixel senza supporto conservano la maschera.
+
+Il massimo budget calcolato per sorgente, aggiunta della costante e lettura Float32 è circa **2,523×10⁻⁵ in unità della deviazione standard teorica dell'endpoint**. Non è una percentuale di errore sul flusso e **non include un limite verificato per l'integrazione nativa**. Sono separati la compensazione razionale usata nell'analisi e il budget di un'eventuale futura correzione Float64 dell'immagine.
+
+Restano da qualificare codice reale di preparazione, byte prodotti e riletti, comportamento nativo, geometria e aritmetica, ramo d'uscita, History e propagazione delle incertezze prima dell'inferenza sul rumore. Nessuna nuova parola casuale, campagna gaussiana o autorizzazione nativa deriva da questa algebra. Non si applica una correzione indiscriminata ai pixel senza supporto trasformandoli in misure.
+
+### Metadati esportati: fattibilità condizionale, non certificazione
+
+I testi conservati contengono otto valori di intervallo. Assumendo un errore di stampa non superiore all'ultima unità decimale mostrata **e** che il valore sia un estremo Float32 esatto, ciascuno identifica un unico candidato Float32. Il sorgente client installato di `ProcessInstance::ToSource` delega però al nucleo `GetProcessInstanceSourceCode`: non stabilisce il contratto di precisione del formatter o il tipo effettivo del risultato nel binario corrente.
+
+Con questi candidati, un'analisi **successiva alla prova** del caso RGGB `no-normalize` riporta tutte le 480 righe supportate entro 10⁻⁶ dal riferimento con segno, con errore massimo circa 1,437×10⁻⁸; conserva le 288 righe senza stima. È un controllo di fattibilità numerica sui byte già salvati: **non certifica i metadati, non modifica l'accettazione originaria e non è una replica prospettica**. Per promuovere il recupero servono il contratto verificato oppure nuove ricevute dirette e un piano nativo qualificato.
+
+### Correzioni conservate e recupero reale
+
+Il primo prototipo del progetto si è fermato perché il registro contiene **2.912 record**, dei quali 2.632 supportati e 280 senza stima. La revisione corretta conserva entrambe le parti.
+
+Il primo prototipo H86 conservava correttamente schede e criteri, ma assegnava al campo dell'azione precedente il nuovo testo. È conservato e **rifiutato come conoscenza corrente**. H86 revisione 2 registra prima l'azione H85 e verifica esplicitamente il collegamento; il lettore v38 punta soltanto alla revisione corretta. Un controllo riuscito sulla conservazione dei dati non bastava a provare la correttezza di quel campo storico.
+
+La capsula del ramo reversibile e dei metadati contiene **31 file**, 1.490.381 byte compressi, SHA256 `f9b355de5c209332c75406169836a9f9415af13a2bf856e572fd4ebb824a2c51`. Estrazione, impronte e ricalcolo indipendente sui 2.632 endpoint sono riusciti, con prova identica.
+
+La capsula H86r2 contiene **55 file**, 21.489.860 byte compressi, SHA256 `099636c4cefb9489a88cb10ecb6f7eaddcf4059c090a64f2d45865cdf894e78e`. Tutti i membri sono stati estratti e ricontrollati e l'audit del lettore recuperato coincide con quello locale. Include il prototipo rifiutato e la correzione; conserva le dipendenze esterne dichiarate, inclusi i genitori storici e l'ambiente installato.
+
+Il precedente supplemento condizionale — limite sul segno delle sorgenti ideali, modello per intervalli con 21 controlli/5.631 esempi e dieci prerequisiti — è ora collegato dalla conoscenza H86r2. Le sezioni successive conservano i precedenti stati storici.
+
+**Conoscenza finale, validazione scientifica completa e trasferimento integrale su GitHub restano pending.** Questa pubblicazione aggiorna soltanto la documentazione tecnica: non carica le capsule e non attesta un recupero dei loro byte da GitHub. Nessun portale, deploy o merge attivato.
+
+## Storico: supplemento offline dopo H85: recupero dell'intervallo e prerequisiti
 
 La conoscenza **H85 e il rendiconto v67 restano invariati**. Questo supplemento conserva nuove dimostrazioni, verifiche e prerequisiti separati, da includere nel prossimo consolidamento additivo. Nessuna nuova esecuzione PixInsight, immagine derivata o realizzazione del rumore. Restano sette famiglie e 25 assi aperti, zero chiusure scientifiche.
 
@@ -41,7 +105,7 @@ La capsula contiene **26 file**, 496.706 byte compressi. Tutti i membri sono sta
 
 Questo aggiornamento pubblica soltanto la documentazione. Il supplemento resta esterno alla capsula H85 già congelata; il suo consolidamento nella conoscenza è pending. Nessuna validazione scientifica, attivazione del portale, deploy, merge o trasferimento integrale degli archivi è attestato da queste prove.
 
-## Stato corrente: H85 provvisoria e rendiconto v67
+## Storico: H85 provvisoria e rendiconto v67
 
 La conoscenza corrente è **H85, provvisoria**, con **241 schede**, lettore v37 e **48 controlli CLI riusciti**. Preservati tutti i 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner, le 239 schede precedenti e l'autorità **v600 / 1.171**. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. Le osservazioni precedenti restano nello storico e non vengono riscritte.
 
