@@ -973,3 +973,61 @@ Il candidato a tile richiederebbe 240 chiamate native per tre modelli, quattro p
 - Capsula del margine numerico: nove file, 579.036 byte; SHA-256 `35934f1f0b4d274848eddb287a6d1db19ee5cf036717b7ecbd57d9158265a115`. Verificatore indipendente eseguito dai file recuperati, prova identica all'originale.
 
 Autorità separata verificata: v600 / conoscenza 1.171, nessun publisher attivo al controllo. H80 è provvisoria. Genitore H79, dipendenze storiche, input grezzi e ambiente installato/licenziato restano esterni alla capsula incrementale. Recupero locale e controlli GitHub non provano il trasferimento completo con recupero remoto dei byte. Nessuna nuova chiamata nativa, nessun nuovo campione di rumore, nessun merge o deploy in questo incremento. Materiali BKL-046 conservati su H:.
+
+
+## H81 — prova nativa di traslazione a tile e controllo Float32 (14 novembre 2026)
+
+H81 conserva tutte le 231 schede H80 e aggiunge due schede, per **233 schede**. Il lettore v33 supera **40 controlli CLI**, inclusi i 38 precedenti. Il rendiconto v63 conserva **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**; aggiunge collegamenti su una sola riga di requisito, senza promozioni scientifiche. Sette famiglie e 25 assi rimangono aperti.
+
+### Dalla previsione al controllo nativo a 64 pixel
+
+È stata conclusa la prova deterministica prima indicata come prerequisito: quattro ingressi monocromatici a 64×64 pixel, organizzati in 64 tile di lato otto, venti geometrie Square e quattro profili di peso, per **80 integrazioni native uniche**. Le geometrie includono mono e quattro pattern CFA, scale 1/2 e drop 11/20 o 17/20. Un ingresso RGB sentinella distinto controlla l'associazione del vero ingresso CFA; non costituisce una quinta esposizione scientifica.
+
+I valori attesi sono congelati prima dell'esecuzione. Il verificatore indipendente ricostruisce la geometria su griglia intera a 120 unità, senza leggere la matrice dei coefficienti salvata. La prova usa valori positivi deterministici esattamente rappresentabili in Float64: non genera rumore e non produce ripetizioni statisticamente indipendenti.
+
+Esiti nativi, controllati anche con un secondo verificatore a interi sui valori binari salvati:
+
+| Misura nel perimetro congelato | Esito |
+| --- | --- |
+| Valori supportati confrontati | 434.176, tutti entro 10⁻⁶ assoluto e il 5% del modello |
+| Valori previsti senza supporto | 98.304, conservati senza stima |
+| Aperture supportate | 8.192, tutte entro il 5% del modello e il limite numerico propagato |
+| Aperture senza stima | 5.120 |
+| Discrepanze di supporto | 0 |
+| Valori nativi di uscita ricostruiti e verificati mediante SHA-256 | 4.259.840 |
+
+Lo scostamento assoluto massimo dal riferimento nominale è esattamente 627527/14857902489600, circa 4,22352347809×10⁻⁸. Le 532.480 decisioni sui pixel selezionati e le 13.312 decisioni sulle aperture sono state ricalcolate indipendentemente. Il conteggio include esplicitamente i casi senza stima; questi non diventano successi o verità scientifiche pari a zero.
+
+L'istanza isolata è stata chiusa normalmente dopo il salvataggio, senza viste residue e senza ripetere casi già conclusi. Massimo impegno privato osservato nei 169 campionamenti del controllo: 970.457.088 byte. È un massimo campionato su questa sessione, non un picco OS certificato né una previsione per immagini di lato 2.048.
+
+Rapporto esatto SHA-256: `7c05abae563605a4b60593115c9a0d42dab3ece8363d2ea6cbd99b4bcf3e2e92`.
+Verifica intera indipendente: `5e4bc0aacfb18785918039bf0e7bc6dfe6bb33295329459f431b99f3d310a188`.
+Audit di integrità e partizione senza ripetizioni: `2f7228bae17a3cb0496a14a2a1d576d8b016f5bbdac86c723bcdaae4f5ae8425`.
+
+### Errore emerso e correzione circoscritta
+
+Il primo tentativo ha letto correttamente i cinque file d'ingresso ma si è fermato al controllo del parametro, con **zero integrazioni native**. Il getter di dropShrink restituisce 0,550000011920929 e 0,8500000238418579: valori osservati uguali alla conversione Float32 dei nominali 0,55 e 0,85.
+
+Il nuovo controllo accetta esclusivamente questa rappresentazione verificata per dropShrink e conserva separatamente valore richiesto e valore nativo. Nessuna tolleranza generica viene aggiunta agli altri parametri. Geometria razionale, risultati attesi e soglie restano invariati. Il primo tentativo, la lettura del getter e la chiusura normale rimangono conservati, con audit SHA-256 `8c277657c765e373f69186f8b98fc08b0752926f6031cb28c6f9672d37d4612e`.
+
+Prima del secondo tentativo sono superati, in simulazione, 147 controlli di configurazione, 22 dell'esecutore, 56 del processo ospite e 14 del rilascio. Questi controlli attestano i rispettivi vincoli operativi; i risultati numerici derivano invece dalle 80 esecuzioni reali e dai verificatori separati.
+
+### Riuso dei componenti gaussiani già conservati
+
+Sono stati riletti e verificati tramite impronte il controllo dei quantili, il decoder dei valori binari e le ricevute storiche della sorgente Windows CNG. Non vengono descritti come mancanti né rigenerati. Le prove storiche comprendono 65.536 fixture deterministiche del controllo dei quantili e 132.452 confronti esatti del decoder.
+
+Per le 128 configurazioni di apertura supportate risultano al massimo 81 variabili d'ingresso. Condizionatamente al limite di approssimazione del quantile 2⁻⁴² per variabile standardizzata, Cauchy–Schwarz limita il solo contributo normalizzato di quel termine a **9/4398046511104**. Questo non esaurisce discretizzazione dei valori binari casuali, code, conversioni, scaling, somma e aritmetica nativa. Provenienza e replay CNG non provano indipendenza, uniformità ideale o trasferimento quantitativo della probabilità di errore.
+
+Rapporto di riuso SHA-256: `45575beb5e4138059a7164ac5279591e8f7d3bbe99f15a9902287a3a792ff322`. Nessun nuovo valore casuale generato da questa riconciliazione.
+
+### Conoscenza e archivi locali recuperati
+
+- H81 SHA-256: `82577399813cc352552ff9b97d4aabada39ef52f4768872159af736a27a20ade`.
+- Lettore v33 SHA-256: `f878ec2c2fe9b5e18578759dc661dfacb7c90632fee7227f2e017a89537df17e`; verifica dei 40 controlli `e060c7e265d5fbab8f6aa420a7c2b213ac90bdc6860e855b1f6fe24e4f6ab86e`.
+- Rendiconto v63 SHA-256: `6713bb6495356aad2b30c6bf3d468f0f2d8bdf3b0401afc0338678b373e62de3`.
+- Capsula delle prove native: 795 file, 19.368.696 byte; SHA-256 `24a5750e496fb2acbc53499c578f50b89969c82055fdcbbb83eace97fed1ac82`, manifest `c7189c15a465270b594a78dcbaf3e6bf2510251b3a66a45e512197afbd7ee907`. Estrazione effettiva, impronte verificate e ricalcolo intero identico dai file recuperati.
+- Capsula incrementale H81: 118 file, 28.571.138 byte; SHA-256 `ca32a605573f915285a0baecf22fa37731b0bd58701c6bae5fb40bfdf72e5bf8`, manifest `dd1aa62127123a1fc34063516f34ee5f19eee470c351a04b245703655dfa5ed8`. Estrazione effettiva e audit del lettore recuperato identico.
+
+La prova di traslazione deterministica a 64 pixel è conclusa e non va ripetuta. Rimangono da qualificare comportamento e risorse su immagini di lato 2.048, limiti numerici sull'intervallo di ampiezze pertinente e collegamento statistico completo del generatore alla campagna sul rumore. Restano distinti rumore fisico delle camere, normalizzazione stimata e rischio delle decisioni IA. Questa prova non convalida tali ambiti.
+
+H81 resta provvisoria; l'autorità separata rimane v600 / conoscenza 1.171. Genitore H80, dipendenze storiche e ambiente installato/licenziato rimangono esterni alla capsula incrementale. Il recupero locale non attesta il trasferimento integrale degli archivi su GitHub con recupero remoto. Tutti i nuovi materiali BKL-046 rimangono su H:. Nessun merge, deploy o attivazione del portale.
