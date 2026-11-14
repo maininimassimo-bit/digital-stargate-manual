@@ -643,3 +643,32 @@ La capsula `ABE-controlli-originali17-nativi-misure-esatte-verificate-H-v1.zip` 
 Il recupero è locale. Restano esterni installazione/licenza PixInsight, ambiente Windows/PJSR, registro autorevole, dipendenze dei controlli del supervisore e piena provenienza dell'archivio heldout storico. La capsula include verità numerica, input, parametri, output, ricevute e fallimento precedente; non è dichiarata replay nativo autonomo o recupero da GitHub.
 
 Questi nove campi deterministici impiegano profili già studiati: non sono nuove osservazioni fisiche, campioni rumorosi indipendenti o una coorte morfologica mai vista. Le violazioni del 5% e i ritorni negativi impediscono una promozione generalizzata. **Sette famiglie e 25 assi rimangono incompleti, zero chiusure scientifiche**. Conoscenza finale e passaggio integrale su GitHub con verifica dei byte recuperati restano aperti; pubblicazione autorevole invariata **v600 / conoscenza registrata 1.171**. I CI di questo nuovo aggiornamento devono essere osservati separatamente dai sette successi dell'head H72 precedente. Nessun merge, deploy o attivazione del portale.
+
+## Conoscenza provvisoria H73, rendiconto v55 e recupero verificato
+
+H73 aggiunge due schede alle 212 di H72, preservandole tutte: **214 schede**, gli stessi **4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner**. Una scheda riconcilia i 17 tentativi ABE, i 3 ritorni negativi e le 186 diagnostiche verificate; l'altra fotografa Drizzle chiuso alla sessione 016, con 15.046 casi unici, 5.674 pendenti e 58 gruppi completi. Le sessioni successive attive o preparate non sono conteggiate.
+
+| Artefatto | SHA256 |
+| --- | --- |
+| Conoscenza H73 | `c29d620f8472e379469e41792fd9c222d7e6b15ff0133ba7b29854235363cd13` |
+| Lettore v25 | `ae78ae41f3db6f7a71836c6a4bd74f7ebd0bb201b8b79575481f7cc379851845` |
+| Verifica CLI H73 corretta, versione 2 | `9b4a49d1cbb4442a2ff5da254091ba7b80af8f76f515e0861229734e54d05e70` |
+| Rendiconto v55 | `6571e16646a31989f269885453dff0438143f288f39e66adfd4ea190bdd23058` |
+| Capsula H73 recuperata localmente | `fd40e119247149ab39d143a1d32125d28c93167482ad193f187ceff3b5d8b8f4` |
+
+Il lettore v25 supera 21 controlli CLI, inclusi audit, criteri dell'Owner, interrogazioni storiche e nuove schede e rifiuto di un'impronta errata. La prima ricevuta del qualificatore riportava erroneamente l'impronta H72 nel campo conclusivo, pur avendo interrogato il lettore H73. La riconciliazione del rendiconto ha rifiutato questa discrepanza prima di scrivere. La ricevuta originaria è conservata; il qualificatore corretto ha rieseguito gli stessi 21 controlli in una cartella distinta e registrato l'impronta H73 corretta. Nessun caso nativo ripetuto. Rendiconto v55 prodotto soltanto dopo questa correzione, senza promuovere criteri o stati scientifici.
+
+La capsula H73 contiene **2.531 file / 27.007.075 byte**, compresi conoscenza, lettore, rendiconto, ricevute originali e corrette, evidenze delle sessioni chiuse 015/016, 58 matrici con verifiche e capsula ABE nativa. Ogni membro è stato estratto e ricalcolato, confrontando le sorgenti stabili. L'audit del lettore recuperato coincide esattamente con quello originale: SHA256 stdout `ea888e18c9caabeb94b13ed58ffc7fe8b91425827f0ab7112e2ac6a0bbbefc35`. Manifest `c137ecfd5b8b2f19cd105589c4db6f67aad0175ff58c26a67023b2be4cdb4b8d`. Restano dipendenze esterne della capsula H72 e delle schede storiche, input grezzi e installazione/licenza nativa. Non è recupero da GitHub o replay nativo completo.
+
+### Implicazioni operative ABE circoscritte
+
+La riconciliazione `abe-original-controls-workflow-implications-h-v1/report.json` (SHA256 `bb03d8a0837a690a194e68d9684d5054f1b5ea4af2052836279156f4e6e2e56e`) collega quattro precauzioni ai valori esatti già verificati, senza nuove prove native o selezione retroattiva di parametri:
+
+- Nel profilo Cauchy senza fondo o gradiente, sia grado 1 sia grado 4 superano il 5% su flusso e L2 del campo completo. L'assenza di gradiente non protegge automaticamente il segnale diffuso dalla sottrazione.
+- Nelle creste compatte con fondo lineare, il grado 1 passa la diagnostica L2 ma non il flusso; il grado 4 passa il flusso ma non L2. Un grado maggiore o un solo indicatore non selezionano una correzione valida.
+- Per creste compatte su fondo zero, il grado 4 passa il flusso su Y nativa meno mediana del modello, ma non su X meno modello. Conservare entrambi gli estimandi; questa differenza non identifica da sola clipping o normalizzazione come causa esclusiva.
+- La risposta controllata M(B+S)-M(B) resta disponibile solo per quattro coppie e non è una frazione del flusso totale sottratto, un'inferenza sui campioni accettati o un'incertezza empirica.
+
+Nessuna delle 34 combinazioni caso/estimando dispone di tutte e tre le regioni con flusso e L2 definiti ed entrambi entro il 5%: **questo include regioni con riferimento nullo o modello mancante, che restano indefiniti e non sono automaticamente fallimenti numerici**. L'intersezione descrittiva non sostituisce criteri originari, una validazione morfologica completa o una ricetta universale. Queste sono precauzioni derivate dall'evidenza, non un nuovo algoritmo validato di mascheratura o scelta del grado.
+
+Tutti i sette CI dell'head documentale precedente `d8ed6efa4b6f7ca117125e94bf6442b2b117bda6` sono riusciti; ricevuta `69db0f12c6961c57ddf53c311fcafc288177b4ec9ec906d5caa69cdac62a253b`. I controlli del presente aggiornamento richiedono osservazione separata. **H73 resta provvisoria; sette famiglie e 25 assi incompleti, zero chiusure scientifiche.** Pubblicazione autorevole invariata v600 / conoscenza registrata 1.171. Archivio locale, documentazione remota e CI non provano accettazione scientifica o trasferimento integrale dei byte su GitHub. Nessun merge, deploy o attivazione del portale.
