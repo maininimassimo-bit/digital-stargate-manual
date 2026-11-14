@@ -1,8 +1,23 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Stato corrente: H87 provvisoria, lettore v39 e rendiconto v69
+
+**H87 contiene 246 schede**, incluse le due nuove schede dei quattro casi nativi prospettici con traslazione reversibile e del loro recupero verificato. La verifica preserva tutte le 244 schede H86r2, tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità **v600 / 1.171** invariata; sette famiglie e 25 assi aperti, **zero chiusure scientifiche**. H87 non è il file di conoscenza finale né una pubblicazione autorevole 1.172.
+
+Il lettore v39 conserva la logica del v38 e cambia soltanto nome e impronta della conoscenza predefinita. Sono stati eseguiti **sei controlli CLI mirati**: audit, riepilogo, policy, due nuove schede e rifiuto di un'impronta errata. Le verifiche storiche dei lettori precedenti sono conservate e non sono dichiarate rieseguite. Il rendiconto v69 conserva ciascun criterio originale; soltanto la riga DrizzleIntegration riceve i due collegamenti aggiuntivi alle nuove evidenze.
+
+- Conoscenza H87 SHA-256: `2245a1b578592e25350dc65e659f78bda7a0c355c5126daf52d4cfe64de970ad`.
+- Lettore v39: `80e3e548a604a96e2d20d0aecdd89e073c9a8648a4d5f2335c5b8b8859366161`; verifica CLI: `516053b69b52d2fc12f7abaf61da54fd6b24938a652e6b0c8f80bd92a719cc1e`.
+- Rendiconto v69: `b7416f25695000abd9267bd60974f91a0cef15e25a8a5a0ccf8a60916bbea599`; verifica: `bfdc8647c63f112e8db75eb10201cfd9745781378c9ccbde8a93411a944284ce`.
+- Capsula incrementale H87: **24 file, 10.940.841 byte**, SHA-256 `2112d7a53ef98d9da5a4dc90ed6c6f3e986b0167ed15478f3453f8b445cbb228`, manifest `79d2420c0055ea11893ec1673184d0214b93a5be65fd16b52219046ae40984a1`.
+- Estrazione di tutti i byte e audit del lettore sui file recuperati identico; verifica `65526666a76211a4049392ddf87465a47566a31e6618146c6f7881be122b0689`. La capsula include quella dei 162 file nativi già verificati. Archivi storici genitori e ambiente nativo licenziato restano esterni.
+
+I quattro casi attestano i risultati finiti descritti sotto. Rimangono aperti il limite uniforme dell'errore nativo, il collegamento completo alla campagna dei 2.632 estimandi, le altre famiglie, il rischio delle decisioni IA, la conoscenza finale e il trasferimento integrale degli archivi con effettivo recupero remoto. Il recupero locale non chiude questi requisiti.
+
+
 ## Supplemento verificato: quattro nuovi casi con traslazione reversibile
 
-Dopo il congelamento di H86 revisione 2 sono state prodotte quattro nuove copie di lavoro deterministiche, distinte dagli originali e dai quattro casi diretti già conclusi. Alle copie è aggiunto 3/8; la compensazione è applicata nell'analisi razionale dei risultati salvati. I byte degli originali e gli esiti negativi della precedente via diretta restano conservati. H86r2 resta la conoscenza corrente a 244 schede: questo supplemento documenta evidenze successive, senza presentarle come già integrate nel file di conoscenza.
+Dopo il congelamento di H86 revisione 2 sono state prodotte quattro nuove copie di lavoro deterministiche, distinte dagli originali e dai quattro casi diretti già conclusi. Alle copie è aggiunto 3/8; la compensazione è applicata nell'analisi razionale dei risultati salvati. I byte degli originali e gli esiti negativi della precedente via diretta restano conservati. Al momento della prima registrazione di questo supplemento H86r2 era corrente a 244 schede; le evidenze successive sono ora integrate in H87, conservando H86r2 immutata.
 
 I quattro casi prospettici mono/RGGB, ciascuno con lettura predefinita e con `no-normalize`, sono stati eseguiti una sola volta sotto il custode comune R4, con prenotazione `d0f6e462-19cc-4237-9935-375beeb5f1b8`. Le due verifiche di avvio, le identità del parent e dell'istanza, le ricevute prima della chiusura delle viste, l'uscita normale di PixInsight, l'uscita zero del parent e il rilascio comune sono riconciliati. Quattro tentativi nativi, quattro ricevute complete, nessun caso rimanente per questa prova; nessuna ripetizione dei casi diretti precedenti.
 
@@ -19,9 +34,9 @@ La capsula locale dei risultati contiene **162 file, 1.363.957 byte**, SHA-256 `
 **Limiti:** quattro casi finiti non dimostrano un limite uniforme dell'errore nativo né convalidano tutti i 2.632 estimandi della campagna. Nessun nuovo rumore estratto, nessuna campagna statistica ammessa, nessuna immagine corretta prodotta come ricetta generale, zero chiusure scientifiche. La capsula è su H:; il recupero locale e questa documentazione su GitHub non attestano il trasferimento integrale degli archivi con recupero remoto. Le sette famiglie e i 25 assi restano aperti.
 
 
-## Stato corrente: H86 revisione 2 provvisoria e rendiconto v68
+## Baseline precedente: H86 revisione 2 provvisoria e rendiconto v68
 
-La conoscenza corrente è **H86 revisione 2, provvisoria**, con **244 schede**, lettore v38 e rendiconto v68. Sono preservate le 241 schede H85, tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**; autorità **v600 / 1.171** invariata. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. H86 non è un incremento della pubblicazione autorevole a 1.172.
+La precedente conoscenza H86 è **H86 revisione 2, provvisoria**, con **244 schede**, lettore v38 e rendiconto v68. Sono preservate le 241 schede H85, tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**; autorità **v600 / 1.171** invariata. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. H86 non è un incremento della pubblicazione autorevole a 1.172.
 
 Il lettore ha superato **7 controlli CLI specifici**: audit, riepilogo, policy, tre nuove schede e rifiuto dell'impronta errata. Il suo codice operativo è identico al lettore precedente, salvo nome e impronta della conoscenza predefinita. Restano conservati i **48 controlli storici H85**, senza presentarli come rieseguiti sulla nuova versione.
 
