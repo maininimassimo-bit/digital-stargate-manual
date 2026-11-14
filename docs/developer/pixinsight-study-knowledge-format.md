@@ -1,8 +1,39 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H88 provvisoria, lettore v40 e rendiconto v70
+## Stato corrente: H89 provvisoria, lettore v41 e rendiconto v71
 
-**H88 contiene 249 schede**: conserva tutte le 246 schede H87 e aggiunge tre schede sui modelli condizionali dell'inferenza, dell'aritmetica e della geometria. Restano preservati **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità **v600 / 1.171** invariata; sette famiglie e 25 assi aperti, **zero chiusure scientifiche**. H88 è provvisoria e non è una pubblicazione autorevole 1.172.
+**H89 contiene 251 schede**, preservando tutte le 249 schede H88, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Il lettore v41 conserva la logica del v40 e cambia soltanto nome e impronta della conoscenza predefinita. Sono riusciti **sei controlli CLI mirati**: audit, riepilogo, policy, due nuove schede e rifiuto dell'impronta errata. Il rendiconto v71 conserva tutti i criteri originali; soltanto DrizzleIntegration riceve i due collegamenti aggiuntivi.
+
+Autorità **v600 / 1.171** invariata. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. H89 non è la conoscenza finale né la pubblicazione autorevole 1.172.
+
+### Origine effettiva e applicabilità del modello
+
+L'audit strutturale di **336 sidecar** già conservati (8 delle prove pedestal, 320 tile64 e 8 tile2048) rileva origine di allineamento **(1/2, 1/2)**. Il modello H88 con requisito di origine zero **non è applicabile a questi metadati**. È conservato come modello condizionale storico, senza cambiare gli esiti nativi.
+
+Il nuovo modello esplicito con origine 1/2 mantiene il budget condizionale: sottrazione esatta dell'origine diadica dalle coordinate diadiche, traslazione e riaggiunta dell'origine coperte dal margine di arrotondamento dichiarato. La verifica comprende **12.291 casi di coordinate** e **1.152 ordinamenti dei vertici nel modello sorgente**, oltre ai budget dei 2.632 estimandi. L'audit dei metadati e questi calcoli non attestano la corrispondenza al modulo installato né il comportamento della banca futura.
+
+### Costruttore delle copie di lavoro
+
+Il costruttore ristretto accetta soltanto immagini mono Float64 little-endian non compresse, con intestazione e allegato nel formato congelato. Preserva tutti i byte dell'intestazione e dell'originale; aggiunge 3/8 su una copia distinta, verifica per ogni valore l'arrotondamento al più vicino con parità nei casi di equidistanza e rifiuta valori fuori dal margine di lavoro. Usa output immutabili su H: e rifiuta sovrascritture.
+
+**24 controlli** verificano valori e casi limite, rifiuti dei formati e produzione immutabile; le copie riproducono i **256 valori** dei quattro input nativi già conservati, senza rieseguire i processi. Un collaudo separato su un file deterministico **2048 × 2048** verifica tutti i **4.194.304 valori** con identità intere indipendenti dalla formula originaria e dalla traslazione. Nessun nuovo rumore viene estratto.
+
+La costruzione con verifica esatta e rilettura ha richiesto circa **86 secondi per quel file**. Questo dato non è una garanzia di throughput, una misura del picco di memoria o una stima dell'intera campagna. È collaudata la costruzione della copia deterministica; restano da qualificare la banca di rumore effettiva, la legge della sorgente, la lettura nativa, i metadati completi, la tassellazione, gli alias e il percorso del modulo installato.
+
+### Impronte e recupero locale H89
+
+- Conoscenza H89: `bda61523498d16e3b72cb79044d8cbbd5484fd30ab9f727f6662919ce78bef82`.
+- Lettore v41: `9f7cc863006298796df795eef19ccb67acd8cf282c5ba8b04e3d66aaccac2576`; verifica CLI: `3f3a552a3227597494468d603ada07c4a4be90c191a1ad0c23e71e07b0e6bb63`.
+- Rendiconto v71: `08f79326a20f67cbcfe3a1b9e85179125158806445e84388d6c49a1f84b7e436`; verifica: `7202ea63023e6f327e9d7d560b3357e6eec3910184ff6d38d9d23d743ea31759`.
+- Capsula H89: **36 file, 34.440.213 byte**, SHA-256 `41fa5fea4da93790f50d6029591d15c652658cbee6afe1baa714b83d0b0d69cf`, manifest `23d0d4c13a5e92ac4616d7bfbcd87c75e5a039dd84a5475a4ad38d7fde12cb86`.
+- Estrazione effettiva, impronte di tutti i file verificate e audit del lettore identico: verifica `aff10a845592058e4db2cfcc9a608ea2a560f6419557091441f0cd7232e722e0`. La capsula include i due archivi già recuperati del modello/costruttore e del collaudo 2048. La ricevuta dell'audit dei 336 sidecar è inclusa; tutti i loro file originali non sono inglobati in questi archivi circoscritti.
+
+Archivi storici genitori e ambiente nativo restano esterni. Il recupero locale non è il trasferimento integrale su GitHub con recupero remoto dei byte. La campagna statistica non è ammessa da questo incremento; la soglia Owner del 5% e gli esiti delle prove precedenti restano invariati.
+
+
+## Baseline precedente: H88 provvisoria, lettore v40 e rendiconto v70
+
+La baseline **H88 contiene 249 schede**: conserva tutte le 246 schede H87 e aggiunge tre schede sui modelli condizionali dell'inferenza, dell'aritmetica e della geometria. Restano preservati **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità **v600 / 1.171** invariata; sette famiglie e 25 assi aperti, **zero chiusure scientifiche**. H88 è provvisoria e non è una pubblicazione autorevole 1.172.
 
 Il lettore v40 cambia soltanto nome e impronta della conoscenza predefinita rispetto al v39. Sono riusciti **sette controlli CLI mirati**: audit, riepilogo, policy, tre nuove schede e rifiuto dell'impronta errata. Il rendiconto v70 conserva ciascun criterio originale; soltanto DrizzleIntegration riceve i tre collegamenti aggiuntivi. I controlli storici precedenti sono conservati, senza dichiararli rieseguiti.
 
