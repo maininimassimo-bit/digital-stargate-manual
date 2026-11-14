@@ -1,6 +1,41 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H76 provvisoria e rendiconto v58
+## Stato corrente: H83 provvisoria e rendiconto v65
+
+La conoscenza corrente è **H83, provvisoria**, con **237 schede**, lettore v35 e **44 controlli CLI riusciti**. Conservati tutti i 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner. Autorità invariata: **v600 / 1.171**. Le sezioni successive documentano stati storici: sette famiglie e 25 assi restano aperti, zero chiusure scientifiche.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v83.json` | `fde27abdd69abe9840e85eafca9eec5634b9c2ab2a54debe167ce4fce7fbc11f` |
+| `consult_provisional_dsg_knowledge_h_v5_v35.py` | `589445cb743fa93d9f87f803afbe1cb95fd12aa5bcb33e4a87aef0b72e6f97ad` |
+| Qualificazione CLI H83 | `c3c57ee1efca19220d05407e32422c3a487333d9debc5ac4ccee54ba7461261e` |
+| Rendiconto v65 | `ed416af0dd29083fcdcb74021adfa7f93498c9f82dd827122972762252dc3858` |
+
+### Dominio del rumore e riuso delle esecuzioni
+
+Il manifest completo conserva i 376 osservabili originari e tutte le quattro classi PIXEL, PAIR_MEAN, PAIR_DIFFERENCE e RECTANGLE_MEAN. Comprende 280 configurazioni logiche, **2.632 endpoint supportati** e **280 selettori senza stima**, senza sostituzioni adattive. Verifica indipendente: 2.256 nuovi coefficienti ricostruiti dai selettori e 71.680 varianze sorgente controllate.
+
+Le fixture deterministiche con valori anche negativi producono 260 pacchetti distinti; la rilettura XML/XISF verifica 71.680 valori logici. I 20 possibili riusi sono una partizione delle fixture, **non identità già qualificata degli ingressi futuri e dei parametri nativi**. Prima di condividere un'esecuzione occorrono identità effettiva dei file e controllo dei valori letti dal processo installato.
+
+### Copertura condizionale e margine numerico
+
+Per l'intera famiglia K=2.632, N=131.072 repliche per endpoint è sufficiente secondo il certificato gaussiano ideale a media nota; il limite simultaneo conservativo è circa 7,064×10^-6. Una verifica indipendente con diverso parametro MGF e arrotondamenti diretti conferma la sufficienza. N=65.536 non soddisfa questo particolare certificato completo; non si dimostra che N=131.072 sia minimo né si garantisce potenza o accettazione al 5%.
+
+La proposta corrisponde a due banchi di 65.536 tile e, soltanto se tutte le qualifiche sono soddisfatte, 520 chiamate native. Le 344.981.504 osservazioni scalari logiche condividono **33.554.432 variabili gaussiane unitarie**: non sono test indipendenti né acquisizioni fisiche.
+
+Il collegamento tra parole discrete e gaussiane continue è dimostrato **condizionatamente a parole ideali uniformi e indipendenti**, con 345 fixture algebriche esatte. L'esclusione simultanea delle code estreme aggiunge un limite 2^-54. Questo non prova che Windows CNG abbia quella legge: resta un'ipotesi esplicita del modello.
+
+Per i 2.632 endpoint il margine condizionale complessivo della sorgente è inferiore a 2,13×10^-12 della deviazione standard di riferimento. Comprende trasporto del quantile e costruzione Float64 specificata con moltiplicazione e somma separate. Verifica esatta indipendente per tutti gli endpoint. **Non comprende errore nativo PixInsight, qualificazione effettiva del generatore, lettura nativa degli ingressi con segno o legge della varianza della popolazione in uscita**. Nessun nuovo campione casuale o processo nativo è stato avviato per questi certificati. Il criterio IA 1%/95% è distinto.
+
+### Recupero locale e attività ancora aperte
+
+- Capsula delle evidenze sorgente: 528 file, 2.475.349 byte, SHA256 `17c3145a6d4b8ac877ce4e116eab73fa70552324a82403181002e46424d7f0d7`. Estrazione e hash verificati; il controllo dei margini ricostruisce la ricevuta identica.
+- Capsula H83: 117 file, 13.736.493 byte, SHA256 `7fbd885591f8786bcb14c752fcc8aa570d1992695e0bd674199faed828e7a3b8`. Estrazione e hash verificati; audit del lettore recuperato identico.
+- Gli archivi restano sotto `H:/Codex/Produzione/2026-10-13/Digital-StarGate-PixInsight/work`; genitore H82, dipendenze storiche e ambiente installato/licenziato rimangono separati. Recupero locale circoscritto, non replay nativo completo né recupero remoto GitHub.
+- Prima di nuovi campioni: qualificare decoder/guard e ambiente effettivi, operazioni Float64 e lettura nativa con segno, identità delle configurazioni condivise e ambito dell'inferenza/errore nativo.
+- File di conoscenza finale, validazione scientifica dell'intero dominio, criterio decisionale IA e trasferimento integrale con recupero remoto degli archivi restano aperti. Nessun merge, deploy o attivazione del portale.
+
+## Stato storico: H76 provvisoria e rendiconto v58
 
 La conoscenza corrente è **H76, provvisoria**, con **221 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Conserva integralmente le 219 schede H75. L'autorità registrata resta **v600 / 1.171**; sette famiglie e 25 assi incompleti, **zero chiusure scientifiche**.
 
