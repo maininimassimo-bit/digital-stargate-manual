@@ -564,3 +564,18 @@ La riconciliazione `e26dcbccb831a3eff34e79e46db0252765c55d5a94118941ffc868ef1d60
 Capsula selezionata locale: **137 file / 19.071.999 byte**, SHA256 `99846530a7dd4e86ca229b0fb9e44402767d653cd372195b3fc77008eb88b38a`, tutti estratti e ricontrollati. Include i pixel selezionati; il manifest storico del genitore cita anche membri assenti. Non è il replay completo dei 3.304 campi, un ambiente nativo autonomo o un recupero remoto. I risultati sono successivi al file H70 e attendono il prossimo consolidamento della conoscenza.
 
 Separatamente, l'epoca Drizzle **012** è chiusa normalmente e sottoposta ad audit: **12.998 casi unici / 7.722 pendenti**, **62,7% della sola campagna**; audit `96052d70edffc06cffe710b79126248641ab59e3bb8a599c9f355aa59056826c`. La verifica indipendente dei gruppi successivi è separata e non viene anticipata. H70 conserva il proprio snapshot chiuso 011. I sette CI dell'head precedente `3725b223083c32efd82ab6d7e293bdbe3f550ec1` sono riusciti (ricevuta `1abbb7fe33dad3afd194d2132ed47899c8d64da9cb64e7473050aaeacb471e6c`); i controlli di questa nuova revisione richiedono verifica distinta. Nessuna chiusura scientifica o trasferimento integrale degli archivi è dichiarato.
+
+## Consolidamento H71: ABE integrata nella conoscenza, 50 gruppi congelati
+
+La conoscenza provvisoria **H71** integra ora i risultati ABE sopra descritti e lo snapshot Drizzle chiuso **012**. Contiene **210 schede**, conserva integralmente le 208 schede H70 e tutti i 4.920 requisiti, senza cambiare pubblicazione autorevole, decisioni dell'Owner o ammissione scientifica.
+
+- File H71: `6d0019158bea62bba546af3e50995327748664e815d5ce7a91ee823f52a90085`.
+- Lettore v23: `84c6844ab249f00e532aa427aacf704996de02b3922eb35476044741d7110296`; **17 controlli CLI** riusciti, con tutte le interrogazioni storiche, le due nuove schede, audit e rifiuto di un'impronta errata. Ricevuta `0cb450dfe3f40726f81da8d726233de4ac8838196be82b9836cb000a5ebcc9d1`.
+- Rendiconto v53: `4cb39e31b5598ce27f5fa4649573a99004ca0abe9ed7ed1c6a87eef44140ac35`; **14.521 criteri letterali e 19 criteri dell'Owner** preservati. Aggiunge collegamenti soltanto ad `AutomaticBackgroundExtractor` e `DrizzleIntegration`; nessuna chiusura di gate.
+- Snapshot H71: **12.998 casi unici verificati, 7.722 pendenti, 50 gruppi indipendentemente verificati**. Undici capsule locali coprono 12.950 casi disgiunti dei gruppi completi e 48 casi parziali separati; copertura `ff62b7fae64acf0a95ee2b8840730957c1e722b6d5e1d6ed1c27c40fc3f1796c`.
+
+La nuova scheda ABE conserva le cinque misure, i tre controlli e i rispettivi limiti: 24 campi storici, 48 varianti, 432 confronti e 216 valori aggiunti dal verificatore indipendente. Nessuna nuova acquisizione indipendente, chiamata nativa ABE o soglia confermativa è stata introdotta dal consolidamento.
+
+Separatamente dallo snapshot H71, l'epoca **013** è già chiusa normalmente e sottoposta ad audit: **13.510 casi unici, 7.210 rimanenti**, **65,2% della sola campagna Drizzle**; audit `9a7f143889847ea113aab8be3e0cb5c5e6448880f4c9fbd774cd8715a09ed7b3`. Sono ora verificati indipendentemente **52 gruppi**: attestazione `724bf2d23c2008a9d40a81373160a1386f8ee28db7e0cf7696cc6d1154ddc110`. L'epoca 014 successiva non è conteggiata. I numeri successivi non riscrivono lo snapshot congelato H71.
+
+Tutti i sette CI dell'head precedente `cd796b383c669ec5deddfd868485c100d35bf004` sono riusciti; ricevuta `8a4079d7d9b5a9a22fec6f4f94e62281b661fe1b34979be4b24890e8c956d5ed`. I controlli di questa revisione restano da verificare separatamente. **v600 / conoscenza registrata 1.171**, sette famiglie e 25 assi incompleti, zero chiusure scientifiche. H71 è provvisoria: file finale e trasferimento integrale su GitHub con recupero remoto rimangono aperti.
