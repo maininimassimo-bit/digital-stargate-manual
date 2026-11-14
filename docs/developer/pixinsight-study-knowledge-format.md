@@ -1,21 +1,21 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H74 provvisoria e rendiconto v56
+## Stato corrente: H75 provvisoria e rendiconto v57
 
-La conoscenza corrente di questo documento è **H74, provvisoria**, con **217 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Conserva tutte le 214 schede H73 e i criteri precedenti. La conoscenza registrata autorevole resta separata, **v600 / 1.171**. Sette famiglie e 25 assi sono incompleti, **zero chiusure scientifiche**.
+La conoscenza corrente è **H75, provvisoria**, con **219 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Tutte le 217 schede H74 sono conservate. L'autorità registrata resta **v600 / 1.171**; sette famiglie e 25 assi incompleti, **zero chiusure scientifiche**.
 
 | Componente corrente | Identità |
 | --- | --- |
-| Conoscenza H74 | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v74.json` |
-| SHA256 conoscenza | `6d27eefa5a4612afabca95ca8985790ba37282bccbb786925754695e35d001d7` |
-| Lettore v26 | `consult_provisional_dsg_knowledge_h_v5_v26.py` |
-| SHA256 lettore | `b6b59e863a9632f74a6868a181c4c06eac2ce314463dff0132a4790d9f1ad412` |
-| Qualificazione CLI | 24 controlli riusciti; ricevuta `423d94d5251577f6e2ecf5c1522fa620601f6eace9ab15ba0161cda3a6f97775` |
-| Rendiconto v56 | SHA256 `9cac86591b85f748be5d12fd98c1360f4e447407e6b0d085a224ae16fcf9a164` |
-| Drizzle chiuso alla sessione 018 | 16.070 casi unici verificati / 20.720; 4.650 pendenti; 62 gruppi completi |
-| Archivi dei gruppi | 17 capsule; 16.058 casi nei gruppi completi e 12 nei parziali |
+| Conoscenza H75 | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v75.json` |
+| SHA256 conoscenza | `f64a9aa40ded82ff2e33d9cb1ed4c700c3169455ae1ae035a67f14b1831fb45d` |
+| Lettore v27 | `consult_provisional_dsg_knowledge_h_v5_v27.py` |
+| SHA256 lettore | `21244d074b6ed7f2b3ccc39a68a17b75bd366a99039151390b2f42b776f83e92` |
+| Qualificazione CLI | 26 controlli riusciti; ricevuta `5a8586e08e7c74b991bd888b448b1560fbc9e62e5e300aa000333b82055f1518` |
+| Rendiconto v57 | SHA256 `930b20c7c80082ecf7f959e05d16a113aaa8a9158b2ce99f67cfacaaed9a842b` |
+| Drizzle chiuso alla sessione 020 | 17.094 casi unici verificati / 20.720; 3.626 pendenti |
+| Gruppi completi e archivi | 66 gruppi / 17.094 casi; 19 capsule, nessun caso concluso in gruppi parziali |
 
-Il **77,6% riguarda soltanto la campagna finita Drizzle**, non la milestone. Sessioni attive successive sono escluse. File di conoscenza finale e trasferimento integrale con recupero remoto dei byte restano aperti; questa pagina documenta gli artefatti e non li carica. Gli snapshot e gli esempi di lettori precedenti conservati nelle sezioni successive sono storici: non sostituiscono le identità correnti della tabella. Nessuna autorizzazione all'esecuzione deriva dalla consultazione della conoscenza.
+L'**82,5% riguarda soltanto la campagna finita Drizzle**, non l'intera milestone. Le sessioni attive successive sono escluse. Le sezioni e gli esempi di lettori precedenti sono snapshot storici. Conoscenza finale e trasferimento integrale con recupero remoto dei byte restano aperti: questa pagina documenta gli artefatti ma non li carica. La consultazione non autorizza nuove esecuzioni.
 
 ## Snapshot storico iniziale: H66
 
@@ -727,3 +727,58 @@ La capsula H74 include **2.440 file / 29.750.082 byte**, con lettore v26, rendic
 La sessione 019 attiva non è inclusa. Restano esterni capsula H73 e dipendenze storiche delle schede, input grezzi e ambiente installato/licenziato. Non è replay nativo autonomo, recupero da GitHub o consegna finale.
 
 I sette CI dell'head H73 precedente `44b2c1b06cf87806f64ca0ab5c00d72cd87c30d4` sono riusciti; ricevuta `e1ef1d4ccf69b5b43ac92269c74a717388a6818c95a0d6f2b2dd04bc6004dd87`. Il nuovo head richiede controlli distinti. Conoscenza finale, condizioni di pubblicazione dei materiali di terzi e caricamento/scaricamento integrale verificato restano aperti. Nessun merge, deploy o attivazione del portale.
+
+## Snapshot storico H74: introduzione conservata
+
+La conoscenza corrente di questo documento è **H74, provvisoria**, con **217 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Conserva tutte le 214 schede H73 e i criteri precedenti. La conoscenza registrata autorevole resta separata, **v600 / 1.171**. Sette famiglie e 25 assi sono incompleti, **zero chiusure scientifiche**.
+
+| Componente corrente | Identità |
+| --- | --- |
+| Conoscenza H74 | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v74.json` |
+| SHA256 conoscenza | `6d27eefa5a4612afabca95ca8985790ba37282bccbb786925754695e35d001d7` |
+| Lettore v26 | `consult_provisional_dsg_knowledge_h_v5_v26.py` |
+| SHA256 lettore | `b6b59e863a9632f74a6868a181c4c06eac2ce314463dff0132a4790d9f1ad412` |
+| Qualificazione CLI | 24 controlli riusciti; ricevuta `423d94d5251577f6e2ecf5c1522fa620601f6eace9ab15ba0161cda3a6f97775` |
+| Rendiconto v56 | SHA256 `9cac86591b85f748be5d12fd98c1360f4e447407e6b0d085a224ae16fcf9a164` |
+| Drizzle chiuso alla sessione 018 | 16.070 casi unici verificati / 20.720; 4.650 pendenti; 62 gruppi completi |
+| Archivi dei gruppi | 17 capsule; 16.058 casi nei gruppi completi e 12 nei parziali |
+
+Il **77,6% riguarda soltanto la campagna finita Drizzle**, non la milestone. Sessioni attive successive sono escluse. File di conoscenza finale e trasferimento integrale con recupero remoto dei byte restano aperti; questa pagina documenta gli artefatti e non li carica. Gli snapshot e gli esempi di lettori precedenti conservati nelle sezioni successive sono storici: non sostituiscono le identità correnti della tabella. Nessuna autorizzazione all'esecuzione deriva dalla consultazione della conoscenza.
+
+
+## H75: quantili certificati e robustezza dei risultati conservati
+
+Le sessioni native 019 e 020 sono chiuse normalmente con uscita 0, zero immagini residue e successivo audit. I 1.024 casi aggiunti non ripetono le identità precedenti. La sessione 021 attiva è esclusa dalla conoscenza H75 e dai conteggi chiusi. Riconciliazione dei 19 archivi contro le identità dei 66 gruppi: SHA256 `4f7c2c96f860211101084f006f5b74598a154a66d135b05a3ff3e7d4c9bf453d`.
+
+### Audit numerico del protocollo statistico a 128 gruppi
+
+I 5.120 casi nativi storici erano già stati confrontati con il rispettivo operatore e le 376 osservabili avevano già superato la compatibilità del modello: non sono ripetuti. Questa compatibilità resta distinta dall'equivalenza entro il 5%.
+
+Il protocollo conservato usa chi-quadro con **128 gradi di libertà** e probabilità per coda **1/15040**. Due metodi distinti con aritmetica razionale certificano un intervallo attorno a ciascuno dei due quantili memorizzati, raggio esatto **2^-30** (circa 9,31323e-10):
+
+1. Serie positiva dell'esponenziale attraverso il termine 256 e limite geometrico della coda.
+2. Serie alternata dopo riduzione dell'argomento, con limiti razionali elevati alla potenza intera 128.
+
+Si usa la relazione tra chi-quadro e gamma incompleta e la formula finita per parametro intero, documentate da [NIST](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3666.htm) e [DLMF 8.4](https://dlmf.nist.gov/8.4). Report `da8662602a3eee149c829abcf5b85fd9df5cd5c39ae80695a04153e4f24a7c9d`; verifica con metodo alternativo `cdc6cd98de21dd768a905d9f97ca8b107db2fbb3123fbd2449234e2fd0b8ecee`.
+
+Il punto binary64 inferiore conservato è leggermente sopra il quantile esatto; quello superiore è leggermente sotto. I punti e il protocollo originali restano immutati. Non si dichiarano numeri approssimati come quantili esatti.
+
+Anche usando il rapporto minimo consentito dai due intervalli certificati, il rapporto fra estremi dell'intervallo di varianza è maggiore di **2,6205371884**. È superiore al rapporto **21/19** della banda di equivalenza ±5%, e al suo quadrato per l'RMS. Per uno statistico positivo nessun intervallo ottenuto con questa inversione a 128 gruppi può quindi stare interamente nella banda ±5%; le espansioni di arrotondamento conservate non lo restringono. È una dimostrazione condizionata al modello e a questa costruzione di intervallo, non una prova sul rumore fisico o su ogni possibile metodo statistico.
+
+Separatamente, tutte le **376 decisioni positive memorizzate** restano positive anche nell'intervallo di accettazione più stretto consentito dai quantili certificati. Verifiche: disuguaglianze razionali con isolamento del termine a radice e confronto mediante limiti di radice quadrata su griglia 2^-80 ricavati da radici intere. Report `71409baf200d8dbf983e40601d433d20fe79c5fe6388ab1553aa1de791d04f70`. Questo controllo riguarda lo statistico e il margine binary64 conservati e l'incertezza del quantile; **non certifica nuovamente gli arrotondamenti a monte**, l'indipendenza PRNG, il modello gaussiano o la copertura fisica. Nessuna soglia riscritta, nuovo dato confermativo o nuova esecuzione nativa.
+
+La capsula dei quantili contiene 9 file / 133.526 byte, tutti decompressi e ricalcolati: SHA256 `96f81fb3a4badbafb4b4ecf2fab1bab985abc3aeca231ebc1ca0ec1331e9c092`. Il successivo audit delle 376 decisioni è conservato nella capsula H75.
+
+### Recupero H75 e requisiti residui
+
+La capsula H75 contiene **2.471 file / 17.276.996 byte**, con lettore v27, rendiconto v57, ricevute chiuse 019/020, rapporti delle 66 matrici, prove sui quantili e audit delle 376 decisioni. Ogni membro è estratto e ricalcolato; l'audit del lettore recuperato coincide con l'originale.
+
+| Identità | SHA256 |
+| --- | --- |
+| Archivio H75 | `e7d5a2b3a47d4a320cb516126713ddae6afa64e639105df1f5088f0e9c9e12aa` |
+| Manifest | `52c6b31c4d0bcafb86df55bce6b9bb650bd1ed14db51618eea71d2daf329df4b` |
+| Audit del lettore recuperato | `a1c69887564d7869f755517ceeccc08569cc6304e279582e6b38c31f02e36375` |
+
+Restano esterni la capsula H74 e le dipendenze delle schede precedenti, gli input grezzi e l'ambiente installato/licenziato. Non è replay nativo autonomo o recupero da GitHub. Tutti i sette CI dell'head H74 precedente `d427a2554c0607add35f6c875530428030020547` sono riusciti; ricevuta `4d9f97dd657f754399afa11ea342f9b4621f253f309894cef7cc2495f4f848af`. Il nuovo aggiornamento richiede verifiche CI distinte.
+
+**H75 resta provvisoria; sette famiglie e 25 assi incompleti, zero chiusure scientifiche.** Condizioni di pubblicazione dei materiali di terzi, conoscenza finale e trasferimento integrale con verifica dei byte recuperati restano aperti. Nessun merge, deploy o attivazione del portale.
