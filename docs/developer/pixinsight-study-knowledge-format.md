@@ -815,3 +815,38 @@ Il rendiconto v58 aggiunge soltanto collegamenti circoscritti alle righe Drizzle
 
 
 Tutti i sette CI dell'head H75 precedente `eb87ea0257cb11fff8cdce6ddc39bc4063649d29` sono riusciti; ricevuta `9cbea93fb91e05f44d7fbec201889ef9cc3a8301e84c03261204bc1d6e0e6b56`. Questo aggiornamento richiede verifiche distinte. Il recupero locale della capsula H76 è completato: **2.483 file / 17.455.215 byte**, ogni membro estratto e ricalcolato, con audit del lettore recuperato identico all'originale. Archivio SHA256 `a5423680c27e855c1aa56c976a4d43f30e2511276c1360c20061fb60a6e8a6e2`; manifest `5d52c3f34d528fc8ca75bee7467891846bb3e5ac86fd4432a25a1514c03496e3`; audit recuperato `4cfc3a09053daf9e84fd6867ac7f1f0adf03343e880991a6ef51d5bf65c57872`. Include conoscenza, lettore, rendiconto, ricevute 021/022, rapporti delle 69 matrici e revisioni circoscritte. Restano esterni la capsula H75, le dipendenze delle schede precedenti, gli input grezzi e l'ambiente installato/licenziato; non è replay nativo autonomo o recupero remoto. Non è avvenuto un trasferimento integrale degli archivi su GitHub.
+
+
+## BKL-046: H77 — campagna finita Drizzle completa e pedestal circoscritto (2026-11-14)
+
+Questo aggiornamento supera lo snapshot operativo H76 per le attività qui elencate; conserva le sezioni precedenti come storico. L’autorità pubblicata separata resta v600 / conoscenza 1.171. H77 è provvisoria, non la conoscenza finale: sette famiglie e 25 assi restano incompleti, zero chiusure scientifiche.
+
+- Conoscenza H77: 224 schede; SHA-256 `8b65bca444ee8ba6375d9a965972bb328a9540f058cfe97c7f894569ad0b26b2`.
+- Lettore v29: SHA-256 `faafaf4ff1e6cf0cc84861200b100b026aca8aac813b6996a2500153c3c44c39`. Superati 31 controlli CLI, inclusi audit, criteri Owner, interrogazioni delle nuove evidenze e rifiuto dell’impronta errata.
+- Rendiconto v59: SHA-256 `40e15482d4f14fd1a4c3bfe0c20efe3078116b73ec6abc48a1a89ed53c51cd98`. Conservati 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner. Collegamenti aggiunti soltanto a DrizzleIntegration, ImageCalibration e DynamicBackgroundExtraction.
+
+### Drizzle: 20.720 casi e 80 gruppi, nessun caso pendente nel banco congelato
+
+Le esecuzioni effettive terminano con l’epoca 029: 20.720 casi unici su 20.720, 80 gruppi su 80 verificati indipendentemente. Le 27 capsule locali coprono tutti i casi senza sovrapposizioni; nessun caso resta in gruppi parziali. L’ultima istanza PixInsight è uscita normalmente con codice zero, ricevuta conservata e nessuna immagine aperta.
+
+La percentuale del banco finito è 100%; non è la percentuale dell’intera milestone. Le verifiche di matrici, covarianze condizionate e aperture congelate non dimostrano automaticamente accuratezza fotometrica, rumore fisico o validità universale del workflow. Nessuna ripetizione del banco già concluso è richiesta.
+
+La preparazione 028 è stata interrotta prima della qualificazione Node e di qualsiasi avvio nativo: il percorso storico dell’ambiente non esisteva più. Il preparatore v6 cambia soltanto tale percorso; 029 usa gli stessi 42 identificativi ancora pendenti. Conservato anche il fallimento dell’analisi 044, che enumerava impropriamente 028; la revisione successiva esclude esplicitamente questa preparazione senza esecuzione, verificando gli stessi casi e la catena degli audit. L’analisi 045 completa l’ultimo gruppo. Nessun errore è convertito in successo retroattivo.
+
+### ImageCalibration: pedestal, residui con segno e metadati
+
+Sono state completate 24 celle congelate: sei campi deterministici monocromatici Float64 da 128×128 pixel, quattro modalità di pedestal. I 12 oracoli numerici letterali rientrano nella tolleranza numerica prefissata, distinta dal limite scientifico Owner del 5%.
+
+Cinque casi a pedestal letterale zero mantengono il flusso totale entro il 5% ma perdono oltre tale limite nel sottoinsieme dei residui inizialmente negativi. Un residuo di calibrazione negativo non rappresenta fotoni incidenti negativi. Cinque uscite Auto non hanno un header PEDESTAL numerico: assenza e zero restano distinti. Due discrepanze rispetto alla sola frazione negativa non identificano un difetto della documentazione, che cita anche pixel insignificanti la cui definizione interna non è stata dimostrata.
+
+Il primo tentativo è stato rifiutato prima di qualsiasi chiamata di elaborazione: il parametro autoPedestalLimit nominale 0,0001 è restituito in rappresentazione Float32. Una sonda separata di soli setter/getter, senza elaborare immagini, ha attestato tale rappresentazione; il factory corretto usa il confronto Float32 esatto solo per questo parametro. Non è stata introdotta una tolleranza generica.
+
+Una ricostruzione descrittiva successiva, condizionata al valore DN registrato e alla sua normalizzazione Float32, coincide con tutti i pixel di 19 celle ammissibili. Non sostituisce l’oracolo congelato, non identifica l’intero algoritmo e non autorizza una raccomandazione universale di 128 DN.
+
+La capsula pedestal è stata realmente estratta in un albero nuovo: 434 file recuperati e verificati; il verificatore intero portabile, invariato, ha ricalcolato 24 casi e 147 confronti di sottoinsiemi, producendo una ricevuta identica byte per byte. Archivio: 663.397 byte, SHA-256 `2d24cbf312cf4081992543af2f790f0eae9e190cc710fae4b360bcbfc14794a3`. È recupero locale e ricalcolo sui campioni conservati, non replay nativo completo né caratterizzazione fisica delle camere.
+
+### Requisiti residui e conservazione
+
+La mappa dei controlli già esistenti distingue fondo additivo e sensibilità moltiplicativa, dati grezzi X, riferimento X−B, uscita nativa normalizzata Y e sottrazione con segno X−M. Le iniezioni additive e i flat a una sola dose non attestano accuratezza moltiplicativa o linearità del sensore. Le prove ImageCalibration precedenti, la disposizione dei 70 parametri e i relativi falsi ritorni/eccezioni restano conservati.
+
+Tutti i nuovi materiali BKL-046 restano su H:. I criteri originali e il dominio non vengono ridotti; le esclusioni motivate vanno riconciliate con il requisito originale, senza chiudere automaticamente gli assi. File di conoscenza finale e trasferimento integrale GitHub con recupero effettivo dei byte restano aperti. Questo commit documenta gli esiti; non costituisce upload di tutti gli archivi, merge, deploy o attivazione del portale.
