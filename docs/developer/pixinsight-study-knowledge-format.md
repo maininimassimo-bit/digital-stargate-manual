@@ -1,6 +1,47 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H83 provvisoria e rendiconto v65
+## Stato corrente: H84 provvisoria e rendiconto v66
+
+La conoscenza corrente è **H84, provvisoria**, con **239 schede**, lettore v36 e **46 controlli CLI riusciti**. Conservati 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner; autorità **v600 / 1.171** invariata. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. Le sezioni successive conservano lo storico.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H84 | `f9b2ca6b320b231252c98d535ab0120e4866f3be4377311f9a9b2d5b95ab34a5` |
+| Lettore v36 | `f144b813f96181d07d924f60200435755891b1bb7333052795700ab78d487137` |
+| Qualificazione CLI H84 | `b8c51579f890cbc62927e538b51a639c0abec8a3b311592567bb0e67a7b55ba7` |
+| Rendiconto v66 | `e15b5ac6b0d00dd89cb8ddae6d4aff8875780a72d18c61cd679f838f3e057925` |
+
+### Errore osservato e lettura XISF con segno
+
+Sul primo file monocromatico della prova, la chiamata predefinita `ImageWindow.open(path)`, con fixture Float64 e metadato bounds 0:1, ha portato **quattro valori negativi a zero**; gli altri 60 sono rimasti identici. Il controllo ha fermato la prova, conservando input, piani binari letti, History e ricevuta di errore.
+
+La [sorgente ufficiale del modulo XISF](https://gitlab.com/pixinsight/PCL/-/raw/master/src/modules/file-formats/XISF/XISFInstance.cpp) documenta il read hint `no-normalize` e la sua applicazione all'opzione di lettura. La sorgente è stata congelata localmente con SHA256; non si assume equivalenza completa tra sorgente pubblica e binario installato.
+
+Il confronto nativo sul medesimo file, cambiando il solo hint in `ImageWindow.open(path, "", "no-normalize")`, conserva esattamente tutti i 64 valori, inclusi i quattro negativi. La successiva prova comprende soltanto i 25 file mai aperti: **1.600 valori e 140 negativi identici agli input**. L'identità del percorso del modulo XISF caricato e l'hash del relativo file su disco sono attestati prima di quest'ultima prova; non è un confronto delle pagine rilocate in memoria.
+
+Il gruppo completo comprende **27 file distinti, 1.856 valori e 144 negativi conservati**: 26 file mono letti con no-normalize e un sentinella RGB positivo verificato con la lettura predefinita. Il file RGB concluso non è stato riaperto. Le letture native complessive sono 28 perché il caso monocromatico alterato è stato confrontato sotto due condizioni diverse.
+
+Resta conservato anche il primo arresto del controllo di identità: PixInsight restituisce wrapper distinti della medesima vista. Prima di chiuderla sono stati verificati percorso, identificatore nativo, pixel e History; i controlli successivi usano tali identità stabili. Tutte le istanze possedute sono uscite normalmente. Nessun master o script installato modificato.
+
+Questa prova circoscritta dimostra il trasporto dei pixel delle fixture; non dimostra il percorso interno di lettura di Drizzle, ogni formato, file grandi futuri o validazione fisica. Prima di estendere il riscontro alle campagne storiche occorre verificarne gli effettivi intervalli dei pixel e gli hint conservati.
+
+### Esecuzione attuale del decoder e prossimi controlli Drizzle
+
+Su H: sono stati ricontrollati **2.462 file numerici**, senza differenze dall'inventario storico, prima degli import. Con le parole deterministiche già archiviate, il decoder riproduce gli stessi quantili su **132.452 target**; sei fallback iniettati coincidono con l'oracolo scalare e quattro stream invalidi sono rifiutati. Le operazioni Float64 separate producono **529.808 valori** entro i margini esatti dichiarati. Nessuna nuova parola casuale e nessuna prova di legge CNG ideale o di indipendenza fisica.
+
+Sono congelati **quattro controlli Drizzle non ancora eseguiti**: due coppie mono/RGGB con identici ingressi firmati, geometria e pesi, distinguendo hint predefinito e no-normalize. Le previsioni includono lettura firmata, clipping dell'ingresso e clipping dell'uscita. Verifica indipendente della geometria: **1.472 righe supportate, 576 senza stima**. Il configuratore supera 44 contratti simulati; il dispatcher 27, inclusi salvataggio prima della chiusura, stop al confine salvato, ricevute fallite e viste trattenute. Questi controlli simulati non sono chiamate native né validazione scientifica.
+
+Il gate comune R4 ha ora approvazioni ARB e RQ verificate sul manifest SHA256 `3507d07d0e6ceac970644447971b64c479970a80c48777dfd9da5263b1b2c37e`; include BKL-046, BKL-049 e BKL-051 sulla stessa prenotazione. L'integrazione nei nostri nuovi piani resta da qualificare e revisionare prima del rilascio. L'osservazione di coordinamento incorporata in H84 precede queste approvazioni e resta storica; una ricevuta separata su H: attesta lo stato successivo. Gli avvii passati e i piani congelati restano intatti; il lavoro offline continua.
+
+### Conservazione e limiti di consegna
+
+- Capsula delle letture native: **981 file, 664.555 byte**, SHA256 `7f191acd19648308608f80e07e539d1d8c038c1d56b06e063eeb46db20391450`. Estrazione/hash verificati e audit di tutti i pixel riprodotto identico, rebasing esplicito dei percorsi storici verso i file estratti.
+- Capsula H84: **134 file, 11.424.080 byte**, SHA256 `e7f87c92e02370c892a58a9f520001b3950713b36a4a291c377075774ad4aa9b`. Estrazione/hash verificati e audit del lettore identico.
+- Archivi e lavoro di questa chat restano sotto `H:/Codex/Produzione/2026-10-13/Digital-StarGate-PixInsight`. Il registro autorevole su C: resta nel proprio percorso; i materiali degli altri progetti non sono spostati.
+- Genitore H83, dipendenze storiche, sorgente terza e ambiente installato/licenziato restano separati. Le capsule attestano recuperi locali circoscritti, non un nuovo replay nativo o il recupero remoto integrale GitHub.
+- Restano aperti i quattro controlli Drizzle, la campagna del rumore con il suo intero margine numerico e statistico, le altre famiglie scientifiche, il criterio IA, il file finale e il trasferimento integrale con ricostruzione dei byte remoti. Nessun merge, deploy o attivazione del portale.
+
+## Stato storico: H83 provvisoria e rendiconto v65
 
 La conoscenza corrente è **H83, provvisoria**, con **237 schede**, lettore v35 e **44 controlli CLI riusciti**. Conservati tutti i 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner. Autorità invariata: **v600 / 1.171**. Le sezioni successive documentano stati storici: sette famiglie e 25 assi restano aperti, zero chiusure scientifiche.
 
