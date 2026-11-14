@@ -1,21 +1,21 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H75 provvisoria e rendiconto v57
+## Stato corrente: H76 provvisoria e rendiconto v58
 
-La conoscenza corrente è **H75, provvisoria**, con **219 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Tutte le 217 schede H74 sono conservate. L'autorità registrata resta **v600 / 1.171**; sette famiglie e 25 assi incompleti, **zero chiusure scientifiche**.
+La conoscenza corrente è **H76, provvisoria**, con **221 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Conserva integralmente le 219 schede H75. L'autorità registrata resta **v600 / 1.171**; sette famiglie e 25 assi incompleti, **zero chiusure scientifiche**.
 
 | Componente corrente | Identità |
 | --- | --- |
-| Conoscenza H75 | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v75.json` |
-| SHA256 conoscenza | `f64a9aa40ded82ff2e33d9cb1ed4c700c3169455ae1ae035a67f14b1831fb45d` |
-| Lettore v27 | `consult_provisional_dsg_knowledge_h_v5_v27.py` |
-| SHA256 lettore | `21244d074b6ed7f2b3ccc39a68a17b75bd366a99039151390b2f42b776f83e92` |
-| Qualificazione CLI | 26 controlli riusciti; ricevuta `5a8586e08e7c74b991bd888b448b1560fbc9e62e5e300aa000333b82055f1518` |
-| Rendiconto v57 | SHA256 `930b20c7c80082ecf7f959e05d16a113aaa8a9158b2ce99f67cfacaaed9a842b` |
-| Drizzle chiuso alla sessione 020 | 17.094 casi unici verificati / 20.720; 3.626 pendenti |
-| Gruppi completi e archivi | 66 gruppi / 17.094 casi; 19 capsule, nessun caso concluso in gruppi parziali |
+| Conoscenza H76 | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v76.json` |
+| SHA256 conoscenza | `92bb40df598e9ac37e61ed11e78a595161e5c258b60a12def1fea18ce8ed591a` |
+| Lettore v28 | `consult_provisional_dsg_knowledge_h_v5_v28.py` |
+| SHA256 lettore | `489067d9f869202382287e17db509794416b120ee91d4d17a4e5bcd4d060adf7` |
+| Qualificazione CLI | 28 controlli riusciti; ricevuta `3aff43044330434a0e2c0a93e0b94bf44d99529a2f78d3d3c98565d95d241442` |
+| Rendiconto v58 | SHA256 `ffeb78489af42461a7f0c12ac982781084b90318fd0f6c0b11fbbbed031f5f25` |
+| Drizzle chiuso alla sessione 022 | 18.118 casi unici verificati / 20.720; 2.602 pendenti |
+| Gruppi e archivi | 69 gruppi completi / 17.871 casi in 21 capsule; altri 247 casi conclusi in gruppi parziali |
 
-L'**82,5% riguarda soltanto la campagna finita Drizzle**, non l'intera milestone. Le sessioni attive successive sono escluse. Le sezioni e gli esempi di lettori precedenti sono snapshot storici. Conoscenza finale e trasferimento integrale con recupero remoto dei byte restano aperti: questa pagina documenta gli artefatti ma non li carica. La consultazione non autorizza nuove esecuzioni.
+L'**87,4% riguarda soltanto la campagna finita Drizzle**, non l'intera milestone. La sessione 023 e le eventuali successive restano escluse da questo snapshot. Le sezioni precedenti conservate sono storiche. Conoscenza finale e trasferimento integrale con recupero remoto dei byte restano aperti: questa pagina documenta gli artefatti ma non li carica. La consultazione non autorizza nuove esecuzioni.
 
 ## Snapshot storico iniziale: H66
 
@@ -782,3 +782,36 @@ La capsula H75 contiene **2.471 file / 17.276.996 byte**, con lettore v27, rendi
 Restano esterni la capsula H74 e le dipendenze delle schede precedenti, gli input grezzi e l'ambiente installato/licenziato. Non è replay nativo autonomo o recupero da GitHub. Tutti i sette CI dell'head H74 precedente `d427a2554c0607add35f6c875530428030020547` sono riusciti; ricevuta `4d9f97dd657f754399afa11ea342f9b4621f253f309894cef7cc2495f4f848af`. Il nuovo aggiornamento richiede verifiche CI distinte.
 
 **H75 resta provvisoria; sette famiglie e 25 assi incompleti, zero chiusure scientifiche.** Condizioni di pubblicazione dei materiali di terzi, conoscenza finale e trasferimento integrale con verifica dei byte recuperati restano aperti. Nessun merge, deploy o attivazione del portale.
+
+## Snapshot storico H75: introduzione conservata
+
+La conoscenza corrente è **H75, provvisoria**, con **219 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Tutte le 217 schede H74 sono conservate. L'autorità registrata resta **v600 / 1.171**; sette famiglie e 25 assi incompleti, **zero chiusure scientifiche**.
+
+| Componente corrente | Identità |
+| --- | --- |
+| Conoscenza H75 | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v75.json` |
+| SHA256 conoscenza | `f64a9aa40ded82ff2e33d9cb1ed4c700c3169455ae1ae035a67f14b1831fb45d` |
+| Lettore v27 | `consult_provisional_dsg_knowledge_h_v5_v27.py` |
+| SHA256 lettore | `21244d074b6ed7f2b3ccc39a68a17b75bd366a99039151390b2f42b776f83e92` |
+| Qualificazione CLI | 26 controlli riusciti; ricevuta `5a8586e08e7c74b991bd888b448b1560fbc9e62e5e300aa000333b82055f1518` |
+| Rendiconto v57 | SHA256 `930b20c7c80082ecf7f959e05d16a113aaa8a9158b2ce99f67cfacaaed9a842b` |
+| Drizzle chiuso alla sessione 020 | 17.094 casi unici verificati / 20.720; 3.626 pendenti |
+| Gruppi completi e archivi | 66 gruppi / 17.094 casi; 19 capsule, nessun caso concluso in gruppi parziali |
+
+L'**82,5% riguarda soltanto la campagna finita Drizzle**, non l'intera milestone. Le sessioni attive successive sono escluse. Le sezioni e gli esempi di lettori precedenti sono snapshot storici. Conoscenza finale e trasferimento integrale con recupero remoto dei byte restano aperti: questa pagina documenta gli artefatti ma non li carica. La consultazione non autorizza nuove esecuzioni.
+
+
+## H76: sessioni 021/022 e separazione dei problemi del fondo
+
+Le due sessioni native sono chiuse normalmente con uscita 0, senza immagini residue e con audit successivo alla ricevuta terminale dell'host. Aggiungono 1.024 identità di caso senza ripetere quelle precedenti. Il punto di ripresa esatto è il rapporto `weighted-bounded-epoch-022-case-audit-h-v1/report-and-exact-pending-cases.json`, SHA256 `450799a9dd3071cd350835f4fc87ff4c54f7281fe16e80f2ff32ce0cf30f94ed`. Il successo nativo non è ammissione scientifica.
+
+La revisione dell'asse DIFFUSE_BACKGROUND/2 corregge un'azione successiva troppo generica, prima concentrata sulle prove ABE. L'asse originario distingue **fondo additivo e variazione moltiplicativa della sensibilità**. La conoscenza aveva già risultati su ambiguità e limiti condizionati nel modello Y=g*S+B, identificabilità con dithering/ancore, bilanci di incertezza su 231 pixel sintetici e ripetibilità dei flat LDN1320 a un solo livello. Questi risultati vanno riutilizzati con i rispettivi domini e limiti, prima di proporre altre prove.
+
+La ripetibilità a un solo livello non dimostra accuratezza del flat, guadagno o linearità del sensore. Il trasferimento ai dati fisici richiede i vincoli misurati di dose ottica e fondo indipendente dichiarati dal protocollo pertinente; non diventano prerequisiti universali per affermazioni matematiche finite. Le prove additive ABE su 3.304 campi e i 17 tentativi senza rumore rimangono evidenze distinte dalla calibrazione moltiplicativa. Revisione conservata: `b0df1654f72135ef42f6e4f2c31d4404930182921c2bb013ed82688aea53d18b`.
+
+La riconciliazione semantica conserva il criterio originale dei processi: validare gli effetti per i domini previsti **oppure documentare un'esclusione esplicita e motivata**. Un risultato negativo può essere una conclusione scientifica utile; non equivale automaticamente a studio non svolto. Questo non autorizza a ridurre il dominio originario o a chiudere automaticamente gli assi: restano da soddisfare controlli, misure, incertezze e limiti previsti. Revisione `615cef78f6f157d4e1b93f4e2393adb7719bb092a124609436e5e81ec49fbfe9`.
+
+Il rendiconto v58 aggiunge soltanto collegamenti circoscritti alle righe DrizzleIntegration e DynamicBackgroundExtraction e aggiorna le azioni operative. Tutti i criteri sono conservati. Il primo produttore v58 si è fermato prima di scrivere il rendiconto per un nome di archivio generato erroneamente; il produttore v2 corregge il riferimento e supera i controlli. Tentativo e correzione restano conservati; nessuna prova nativa ripetuta.
+
+
+Tutti i sette CI dell'head H75 precedente `eb87ea0257cb11fff8cdce6ddc39bc4063649d29` sono riusciti; ricevuta `9cbea93fb91e05f44d7fbec201889ef9cc3a8301e84c03261204bc1d6e0e6b56`. Questo aggiornamento richiede verifiche distinte. Il recupero locale della capsula H76 è in corso e non è ancora attestato in questa revisione. Non è avvenuto un trasferimento integrale degli archivi su GitHub.
