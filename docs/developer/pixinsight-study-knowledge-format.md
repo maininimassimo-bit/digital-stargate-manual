@@ -1,6 +1,23 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato e perimetro
+## Stato corrente: H74 provvisoria e rendiconto v56
+
+La conoscenza corrente di questo documento è **H74, provvisoria**, con **217 schede**, 4.920 requisiti, 14.521 criteri letterali e 19 criteri dell'Owner. Conserva tutte le 214 schede H73 e i criteri precedenti. La conoscenza registrata autorevole resta separata, **v600 / 1.171**. Sette famiglie e 25 assi sono incompleti, **zero chiusure scientifiche**.
+
+| Componente corrente | Identità |
+| --- | --- |
+| Conoscenza H74 | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v74.json` |
+| SHA256 conoscenza | `6d27eefa5a4612afabca95ca8985790ba37282bccbb786925754695e35d001d7` |
+| Lettore v26 | `consult_provisional_dsg_knowledge_h_v5_v26.py` |
+| SHA256 lettore | `b6b59e863a9632f74a6868a181c4c06eac2ce314463dff0132a4790d9f1ad412` |
+| Qualificazione CLI | 24 controlli riusciti; ricevuta `423d94d5251577f6e2ecf5c1522fa620601f6eace9ab15ba0161cda3a6f97775` |
+| Rendiconto v56 | SHA256 `9cac86591b85f748be5d12fd98c1360f4e447407e6b0d085a224ae16fcf9a164` |
+| Drizzle chiuso alla sessione 018 | 16.070 casi unici verificati / 20.720; 4.650 pendenti; 62 gruppi completi |
+| Archivi dei gruppi | 17 capsule; 16.058 casi nei gruppi completi e 12 nei parziali |
+
+Il **77,6% riguarda soltanto la campagna finita Drizzle**, non la milestone. Sessioni attive successive sono escluse. File di conoscenza finale e trasferimento integrale con recupero remoto dei byte restano aperti; questa pagina documenta gli artefatti e non li carica. Gli snapshot e gli esempi di lettori precedenti conservati nelle sezioni successive sono storici: non sostituiscono le identità correnti della tabella. Nessuna autorizzazione all'esecuzione deriva dalla consultazione della conoscenza.
+
+## Snapshot storico iniziale: H66
 
 Questo riferimento descrive la conoscenza consolidata **provvisoria H66** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
@@ -672,3 +689,41 @@ La riconciliazione `abe-original-controls-workflow-implications-h-v1/report.json
 Nessuna delle 34 combinazioni caso/estimando dispone di tutte e tre le regioni con flusso e L2 definiti ed entrambi entro il 5%: **questo include regioni con riferimento nullo o modello mancante, che restano indefiniti e non sono automaticamente fallimenti numerici**. L'intersezione descrittiva non sostituisce criteri originari, una validazione morfologica completa o una ricetta universale. Queste sono precauzioni derivate dall'evidenza, non un nuovo algoritmo validato di mascheratura o scelta del grado.
 
 Tutti i sette CI dell'head documentale precedente `d8ed6efa4b6f7ca117125e94bf6442b2b117bda6` sono riusciti; ricevuta `69db0f12c6961c57ddf53c311fcafc288177b4ec9ec906d5caa69cdac62a253b`. I controlli del presente aggiornamento richiedono osservazione separata. **H73 resta provvisoria; sette famiglie e 25 assi incompleti, zero chiusure scientifiche.** Pubblicazione autorevole invariata v600 / conoscenza registrata 1.171. Archivio locale, documentazione remota e CI non provano accettazione scientifica o trasferimento integrale dei byte su GitHub. Nessun merge, deploy o attivazione del portale.
+
+## Evidenze aggiunte in H74: pesi, covarianza e recupero
+
+H74 aggiunge tre schede: sessioni chiuse 017/018 senza duplicazioni; confronto dei tre profili di peso e diagnostica dell'omissione della covarianza sui 60 gruppi precedenti; precauzioni ABE legate ai 17 controlli già eseguiti. Le righe dei requisiti restano identiche salvo collegamenti aggiuntivi a due processi. Nessun criterio o gate scientifico è promosso. I 24 controlli del lettore includono query storiche, nuove schede, audit, criteri dell'Owner e rifiuto di un'impronta errata, con controllo esplicito dell'impronta H74 nella ricevuta.
+
+### Confronto dei tre profili sulle stesse 20 geometrie
+
+Sono ora conservati tutti i confronti a coppie tra uniforme, crescente e decrescente. Ciascun nuovo confronto verifica 2.129.920 coefficienti memorizzati e 156 coppie di aperture tramite un programma indipendente che decodifica binary64 in interi. Le tre coppie riusano le stesse 60 matrici e basi deterministiche: non sono tre campioni indipendenti.
+
+La riconciliazione controlla l'identità esatta delle medesime varianze nelle tre coppie: **96 confronti a tre supportati, 60 senza stima**. Sui valori memorizzati sia di riferimento sia dell'operatore misurato, l'ordine crescente della varianza è:
+
+| Modello dichiarato | Ordine / frequenza sui 32 confronti supportati |
+| --- | --- |
+| ascending-independent | decrescente < uniforme < crescente: 32 |
+| descending-independent | crescente < uniforme < decrescente: 32 |
+| unit | uniforme < crescente < decrescente: 4; decrescente < uniforme < crescente: 14; uniforme < decrescente < crescente: 14 |
+
+Non è un ordinamento empirico con incertezza separata né una scelta di pesi ottimali; il risultato cambia con il modello. Report SHA256 `fcb56e814c9ccadc9eee3617264e683d3f88ac8974d611b29089792e72824871`. Capsula di 206 file / 4.614.836 byte, ogni membro decompresso e ricalcolato: `ae3bd1926ef02999c2998f72afc5b1a2480731d4d66861c36d7206998ebf0020`.
+
+### Omissione della covarianza nelle aperture
+
+Un confronto esaustivo posthoc sui 60 gruppi conserva 468 record: **288 combinazioni apertura/modello supportate e 180 senza stima**. Per ciascuna combinazione supportata sono confrontati separatamente riferimento e operatore misurato; questi rami non sono ulteriori osservazioni indipendenti.
+
+Ignorando la covarianza, l'errore supera il 5% in **286/288 confronti sulla varianza** e **280/288 sull'RMS**, con gli stessi conteggi nei due rami. Il calcolo razionale è verificato indipendentemente con prodotti tra interi, 576 rapporti controllati: varianza, 20*abs(diagonale-completa) <= completa; RMS, 361*completa <= 400*diagonale <= 441*completa. Questi sono confronti esatti sui binary64 memorizzati, non varianze analitiche razionali esatte, intervalli di confidenza o prove sul rumore reale.
+
+Report `a6df5dad6628f16b715092814320f19379774971417e753e96a871c5b0569886`; verifica indipendente `30850e2c6df9ff98052d22c9f8fc7bc224af8ece6b7777420adf6e355bdccbca`. Capsula di 135 file / 8.667.066 byte, inclusa senza modifiche la capsula delle matrici: `bb1a33d8ba4c163dbd3ff29f24b41e23f0947174ba1239cb991a8468f9a0cac9`. Modelli dichiarati, maschere fisse e supporto limitano le conclusioni; nessuna accettazione empirica, fisica, adattiva o con normalizzazione locale è inferita.
+
+### H74 recuperata localmente
+
+La capsula H74 include **2.440 file / 29.750.082 byte**, con lettore v26, rendiconto v56, ricevute chiuse 017/018, rapporti di 62 matrici e nuove capsule. Tutti i membri sono estratti e ricalcolati; audit del lettore recuperato identico all'originale.
+
+- Archivio: `2fb614b800e09b2f07708c52c80facb907dfb9c4c27caecbc72b52b8926013c7`.
+- Manifest: `65bc66fc815fb0b80b9d5980b1c6e36b3fb408a35d1f6b0674f2ac574dbf2e80`.
+- Audit recuperato: `93bb1a60ebd668fcab316329fbfd13dc81db4fa6584ae9ba55de504dc0496eb4`.
+
+La sessione 019 attiva non è inclusa. Restano esterni capsula H73 e dipendenze storiche delle schede, input grezzi e ambiente installato/licenziato. Non è replay nativo autonomo, recupero da GitHub o consegna finale.
+
+I sette CI dell'head H73 precedente `44b2c1b06cf87806f64ca0ab5c00d72cd87c30d4` sono riusciti; ricevuta `e1ef1d4ccf69b5b43ac92269c74a717388a6818c95a0d6f2b2dd04bc6004dd87`. Il nuovo head richiede controlli distinti. Conoscenza finale, condizioni di pubblicazione dei materiali di terzi e caricamento/scaricamento integrale verificato restano aperti. Nessun merge, deploy o attivazione del portale.
