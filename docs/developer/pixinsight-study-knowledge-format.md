@@ -850,3 +850,10 @@ La capsula pedestal è stata realmente estratta in un albero nuovo: 434 file rec
 La mappa dei controlli già esistenti distingue fondo additivo e sensibilità moltiplicativa, dati grezzi X, riferimento X−B, uscita nativa normalizzata Y e sottrazione con segno X−M. Le iniezioni additive e i flat a una sola dose non attestano accuratezza moltiplicativa o linearità del sensore. Le prove ImageCalibration precedenti, la disposizione dei 70 parametri e i relativi falsi ritorni/eccezioni restano conservati.
 
 Tutti i nuovi materiali BKL-046 restano su H:. I criteri originali e il dominio non vengono ridotti; le esclusioni motivate vanno riconciliate con il requisito originale, senza chiudere automaticamente gli assi. File di conoscenza finale e trasferimento integrale GitHub con recupero effettivo dei byte restano aperti. Questo commit documenta gli esiti; non costituisce upload di tutti gli archivi, merge, deploy o attivazione del portale.
+
+
+### Recupero locale della capsula H77 attestato
+
+La verifica locale è terminata: 5.997 file estratti in un albero nuovo, ogni dimensione e SHA-256 confrontati con il manifest e con le sorgenti; l’audit del lettore recuperato coincide byte per byte con quello originale. Archivio H77: 23.183.318 byte, SHA-256 `7a4910c4dd51c4b362117f0750c6c328fc07c9dedebc44823d3461e6da9c0f53`; manifest SHA-256 `f4e1a8410cd32ebe64cbf168829fc5bc219bc0aeb7a2bcaa89dd84d9af8be2c5`; audit recuperato SHA-256 `23c42f33d2fa537a65feb8b79743448d35f04b43f6bfe732fcc00cefa79f41c0`.
+
+La capsula conserva conoscenza, lettore, rendiconto, ricevute delle epoche 023–027 e 029, 80 rapporti di matrici con verifiche indipendenti e il recupero pedestal circoscritto. Capsula genitore H76, dipendenze delle schede storiche, input grezzi e ambiente installato/licenziato restano separati. Il risultato attesta recupero locale e consultazione; non un replay nativo completo o recupero remoto degli archivi GitHub.
