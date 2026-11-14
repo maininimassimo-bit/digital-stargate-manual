@@ -1,8 +1,39 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H87 provvisoria, lettore v39 e rendiconto v69
+## Stato corrente: H88 provvisoria, lettore v40 e rendiconto v70
 
-**H87 contiene 246 schede**, incluse le due nuove schede dei quattro casi nativi prospettici con traslazione reversibile e del loro recupero verificato. La verifica preserva tutte le 244 schede H86r2, tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità **v600 / 1.171** invariata; sette famiglie e 25 assi aperti, **zero chiusure scientifiche**. H87 non è il file di conoscenza finale né una pubblicazione autorevole 1.172.
+**H88 contiene 249 schede**: conserva tutte le 246 schede H87 e aggiunge tre schede sui modelli condizionali dell'inferenza, dell'aritmetica e della geometria. Restano preservati **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità **v600 / 1.171** invariata; sette famiglie e 25 assi aperti, **zero chiusure scientifiche**. H88 è provvisoria e non è una pubblicazione autorevole 1.172.
+
+Il lettore v40 cambia soltanto nome e impronta della conoscenza predefinita rispetto al v39. Sono riusciti **sette controlli CLI mirati**: audit, riepilogo, policy, tre nuove schede e rifiuto dell'impronta errata. Il rendiconto v70 conserva ciascun criterio originale; soltanto DrizzleIntegration riceve i tre collegamenti aggiuntivi. I controlli storici precedenti sono conservati, senza dichiararli rieseguiti.
+
+### Risultati condizionali e limite della loro applicazione
+
+Il collegamento matematico riguarda tutti i **2.632 estimandi supportati**, mantenendo **280 record senza stima** e tutte le **280 configurazioni logiche**, comprese quelle storiche. La prima proposta di budget normalizzato pari a 1/1000 non è certificata dal modello prudenziale di accumulo Float32 per 103 estimandi. Questo non dimostra che il modulo installato fallisca: il limite analitico è conservativo.
+
+Una proposta alternativa interna di **1/400**, che lascia invariata la soglia Owner del **5%**, produce una finestra interna prudenziale del secondo momento circa **[0,97869019; 1,01869722]**. Nel modello ristretto di traslazioni pure e rettangoli, il limite condizionale massimo è circa **0,00220510**. Questa alternativa non è stata adottata da un protocollo nativo e non autorizza una campagna.
+
+Il calcolo separa arrotondamento del parametro drop, coordinate, ordinamento dei vertici e area del poligono. La verifica indipendente ricostruisce 20 geometrie, 2.310 sovrapposizioni positive e 13.050 nulle, riconcilia due letture native già conservate del parametro e verifica 1.152 ordinamenti dei vertici nel modello sorgente. La distanza nominale minima dai bordi è **7/120**; non è, da sola, un certificato degli errori geometrici nativi.
+
+**Ipotesi ancora da attestare:** corrispondenza fra il modello del sorgente storico e il modulo installato, comportamento numerico effettivo, costruzione e lettura dei dati, metadati di traslazione, origine nulla, scala 1 o 2, supporto e percorsi senza spline, rejection o normalizzazione locale, coordinate limitate e invarianti di tassellazione/alias. Il sorgente storico Drizzle e l'header Homography installato sono fonti distinte: la loro lettura non prova il comportamento del binario.
+
+La correzione del margine sul quantile usa l'evento ideale abs(Z) <= 15 più il limite di trasporto, per garantire il limite effettivo 16; il primo rapporto è conservato come respinto. Anche il primo produttore che richiedeva un geometryId assente nelle configurazioni storiche è conservato: la revisione include tutte le identità, senza rimuovere casi.
+
+Non sono stati generati nuovi campi di rumore né eseguite nuove chiamate PixInsight in questo incremento. Non è attestato un limite uniforme del modulo installato, non è ammessa la campagna statistica e non è validata la varianza di un operatore nativo arbitrariamente non lineare. Le prove native precedenti e i loro esiti restano invariati.
+
+### Impronte e recupero locale H88
+
+- Conoscenza H88: `962263669759486452154ce2361d95580e8c9e31c8aa6f01bdfc570e5e00393e`.
+- Lettore v40: `b9dc20b46315af27f311d6fb829f7862e282e3e99c10f71114275756922459d5`; verifica CLI: `335fa87bd4296c0e898766846f2767f6df9ade1ecb5953d746c4d29208973268`.
+- Rendiconto v70: `1d56997cbdad8a5dd1f215909c2494b6ac4c1b17dde0e3a02af4ef17441641fd`; verifica: `51ce54bb6d88441111b6a4853aa9539a733354a771384a34e152c32cc46ad319`.
+- Capsula H88: **46 file, 15.678.601 byte**, SHA-256 `fd33d16ecbf29abcd434d5b79ed92a5885215284e6a808072bc646d9d897a8b0`, manifest `21d168d92a8da65ae48cc0673c46a6100a68525859b74951ec0ed2803e135e24`.
+- Tutti i file sono stati estratti e verificati; l'audit del lettore sui file recuperati è identico. Verifica: `17080b9b18c97135738f63b09d76495425f042fc61d1a86eb7ea6b203ce6397d`. La capsula include tre archivi dei modelli, ciascuno già estratto con riproduzione identica delle rispettive verifiche.
+
+I dati restano su H:. Gli archivi storici genitori e l'ambiente nativo licenziato rimangono esterni alla capsula incrementale. Documentazione su GitHub e recupero locale non costituiscono trasferimento integrale degli archivi con recupero remoto. Sono ancora richiesti la validazione nel dominio completo, il file di conoscenza finale e il trasferimento completo verificato.
+
+
+## Baseline precedente: H87 provvisoria, lettore v39 e rendiconto v69
+
+La baseline **H87 contiene 246 schede**, incluse le due nuove schede dei quattro casi nativi prospettici con traslazione reversibile e del loro recupero verificato. La verifica preserva tutte le 244 schede H86r2, tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità **v600 / 1.171** invariata; sette famiglie e 25 assi aperti, **zero chiusure scientifiche**. H87 non è il file di conoscenza finale né una pubblicazione autorevole 1.172.
 
 Il lettore v39 conserva la logica del v38 e cambia soltanto nome e impronta della conoscenza predefinita. Sono stati eseguiti **sei controlli CLI mirati**: audit, riepilogo, policy, due nuove schede e rifiuto di un'impronta errata. Le verifiche storiche dei lettori precedenti sono conservate e non sono dichiarate rieseguite. Il rendiconto v69 conserva ciascun criterio originale; soltanto la riga DrizzleIntegration riceve i due collegamenti aggiuntivi alle nuove evidenze.
 
