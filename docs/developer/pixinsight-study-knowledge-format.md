@@ -1,5 +1,24 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Supplemento verificato: quattro nuovi casi con traslazione reversibile
+
+Dopo il congelamento di H86 revisione 2 sono state prodotte quattro nuove copie di lavoro deterministiche, distinte dagli originali e dai quattro casi diretti già conclusi. Alle copie è aggiunto 3/8; la compensazione è applicata nell'analisi razionale dei risultati salvati. I byte degli originali e gli esiti negativi della precedente via diretta restano conservati. H86r2 resta la conoscenza corrente a 244 schede: questo supplemento documenta evidenze successive, senza presentarle come già integrate nel file di conoscenza.
+
+I quattro casi prospettici mono/RGGB, ciascuno con lettura predefinita e con `no-normalize`, sono stati eseguiti una sola volta sotto il custode comune R4, con prenotazione `d0f6e462-19cc-4237-9935-375beeb5f1b8`. Le due verifiche di avvio, le identità del parent e dell'istanza, le ricevute prima della chiusura delle viste, l'uscita normale di PixInsight, l'uscita zero del parent e il rilascio comune sono riconciliati. Quattro tentativi nativi, quattro ricevute complete, nessun caso rimanente per questa prova; nessuna ripetizione dei casi diretti precedenti.
+
+- **1.472 confronti supportati**: tutti entro la tolleranza assoluta congelata di 1e-6 e il limite relativo Owner del 5%, sia sulle copie traslate sia dopo la compensazione verso il riferimento originale.
+- **576 punti senza stima** conservati come tali; nessuna discrepanza di supporto. Il supporto deriva dai pesi, non dall'intensità.
+- Errore assoluto massimo compensato: circa 1,328373e-7 per mono e 3,734152e-8 per RGGB.
+- In questi quattro casi i valori binari delle proprietà di intervallo esposti a PJSR coincidono esattamente con gli estremi dei pixel supportati, strettamente dentro (0,1). I sentinelli attestano il formato little-endian delle ricevute; non attestano precisione interna non esposta.
+- Le due letture producono risultati identici nelle rispettive coppie. Questi confronti non sono repliche scientifiche indipendenti.
+
+Il rapporto numerico ha impronta SHA-256 `0b19a9622b0a46232ceef77c63933bc5e20a77d17dd5dd4665a4afb329fa3733`; la ricevuta nativa `4f62f39e480cc3b7fa4c4b29edd0202befe663d60b6e63bd931e9e2e6c6a0d2f`; il rilascio comune `ab53cb3ba337063f599267b37d428c09ed1c36bf0e5d49b20e4ed06ae95a2792`. Il campo `newNativeCalls: 0` del rapporto riguarda l'analizzatore offline; l'operazione nativa documentata comprende quattro chiamate.
+
+La capsula locale dei risultati contiene **162 file, 1.363.957 byte**, SHA-256 `d7da99a2abca554db8200b06530e6a932d452d73819bb8a2cdc65db405386fed`, manifest `d7c6a2a96cf050ea68f554dbd2c0715dd2dbceb65aac9d8092cd0a394bb2d0ed`. Tutti i byte sono stati effettivamente estratti e verificati; l'analisi sui file recuperati riproduce il rapporto identico, senza eseguire PixInsight.
+
+**Limiti:** quattro casi finiti non dimostrano un limite uniforme dell'errore nativo né convalidano tutti i 2.632 estimandi della campagna. Nessun nuovo rumore estratto, nessuna campagna statistica ammessa, nessuna immagine corretta prodotta come ricetta generale, zero chiusure scientifiche. La capsula è su H:; il recupero locale e questa documentazione su GitHub non attestano il trasferimento integrale degli archivi con recupero remoto. Le sette famiglie e i 25 assi restano aperti.
+
+
 ## Stato corrente: H86 revisione 2 provvisoria e rendiconto v68
 
 La conoscenza corrente è **H86 revisione 2, provvisoria**, con **244 schede**, lettore v38 e rendiconto v68. Sono preservate le 241 schede H85, tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**; autorità **v600 / 1.171** invariata. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. H86 non è un incremento della pubblicazione autorevole a 1.172.
