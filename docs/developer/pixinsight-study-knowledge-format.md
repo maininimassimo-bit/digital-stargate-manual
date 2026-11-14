@@ -1,6 +1,56 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H84 provvisoria e rendiconto v66
+## Stato corrente: H85 provvisoria e rendiconto v67
+
+La conoscenza corrente è **H85, provvisoria**, con **241 schede**, lettore v37 e **48 controlli CLI riusciti**. Preservati tutti i 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner, le 239 schede precedenti e l'autorità **v600 / 1.171**. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. Le osservazioni precedenti restano nello storico e non vengono riscritte.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H85 | `5c3f0fddd7e14776fbee4b9e53640a3a35881efd1758472a360c4088cdbd5093` |
+| Lettore v37 | `386d4779fbf4a35eeab07250e8f4d6e4e4a744d410cb58eb598c021d533be041` |
+| Qualificazione CLI H85 | `58acf16cbc66fd339184a5b0e1ac529a2fc51b587497490d2855b914b9193545` |
+| Rendiconto v67 | `4dc980c9b16da308b8c4685e22e6c27334f47629f837c312353fda7ff82aec31` |
+| Analisi delle ipotesi originali | `1775df3bb9ddf945faa6146cc525283a7b19f3e57de14fd40f9ddcf0d39df84e` |
+| Diagnosi successiva alla prova | `47c916b01d15562d6dcd5f5c18c33df71979e6cb2d7cc60947ebf82408bad798` |
+| Verifica indipendente della diagnosi | `c69b3c9a608736482ae2d60434950a624228870c54c06bbb8a31aa58d10788ba` |
+
+### Quattro controlli nativi conclusi: risultato originario conservato
+
+Eseguiti una sola volta i quattro casi congelati: monocromatico e RGGB, ciascuno con lettura predefinita e con hint `no-normalize`. Stesse sorgenti Float64 con segno, quattro esposizioni, geometrie e pesi prefissati; nessuna nuova parola o realizzazione gaussiana. Conservati parametri richiesti e riletti, piani binari, History, intenti, ricevute e chiusure. Tutti i casi sono conclusi; nessun caso residuo in questo protocollo finito. Questo non conclude la campagna del rumore né lo studio.
+
+| Caso | Esito rispetto al riferimento lineare originario |
+| --- | --- |
+| Mono, lettura predefinita | Controllo descrittivo: 116/256 righe oltre 10⁻⁶; 88 oltre il 5% relativo |
+| Mono, `no-normalize` | 256/256 righe entro 10⁻⁶ e 5%, nel solo caso finito |
+| RGGB, lettura predefinita | 84/480 righe oltre 10⁻⁶ e 5%; 15 righe perdono supporto |
+| RGGB, `no-normalize` | **480/480 righe oltre 10⁻⁶ e 5%: accordo originario NON soddisfatto** |
+
+La console del quarto caso segnala un riscalamento dell'immagine in uscita, con intervallo precedente circa −0,0306354…0,1062604. Il hint `no-normalize` controlla la lettura in ingresso; **non disattiva il trattamento dell'intervallo in uscita**. La documentazione installata descrive il riscalamento quando sono presenti valori fuori [0,1] e `truncateOnOutOfRange=false`.
+
+### Spiegazione successiva, distinta dall'accettazione
+
+Una ricostruzione razionale separata combina geometria su griglia intera 120, selezione CFA e pesi, esclusione dei contributi azzerati dalla lettura predefinita e riscalamento finale. Il [sorgente ufficiale storico ImageIntegration 1.5.1](https://gitlab.com/pixinsight/PCL/-/raw/03b86b51a6628d1459fc3e9b49faa065c491eca0/src/modules/processes/ImageIntegration/DrizzleIntegrationInstance.cpp) mostra l'esclusione dei valori prossimi a zero e il trattamento dell'intervallo. La copia locale conserva URL, data e hash; **non prova l'equivalenza fra quel sorgente del 2023 e il modulo installato nel 2026**.
+
+La diagnosi ricostruisce tutti i **2.048 pixel e 2.048 pesi** entro 10⁻⁶, con errore massimo sui pixel inferiore a 8,65×10⁻⁸ e sui pesi inferiore a 1,36×10⁻⁷. Un secondo calcolo, basato sul riferimento sparso già congelato e senza riusare la routine geometrica della diagnosi, verifica tutti i 2.048 pixel e le maschere di supporto. Sette esempi scalari con risultato calcolato a mano controllano esclusione della soglia, segno e rami di trasformazione.
+
+Nella lettura predefinita RGGB il supporto effettivo scende da 480 a 465 righe. Nel caso RGGB `no-normalize`, il riscalamento affine rende **non nulli tutti i 288 pixel senza contributi**, mentre i pesi restano zero. Per distinguere una misura disponibile da una zona senza stima occorre conservare e consultare la mappa dei pesi: l'intensità non nulla da sola non basta.
+
+Questa è una **spiegazione ottenuta dopo aver osservato gli esiti**. Non sostituisce l'oracolo originario, non trasforma il quarto caso in un successo scientifico e non costituisce una replica prospettica. Non è un limite uniforme dell'errore nativo né una verifica della distribuzione della popolazione. Prima di produrre nuovo rumore occorre congelare prospetticamente lettura, supporto dipendente dai valori, trattamento dell'intervallo e grandezza che si intende misurare; resta da giustificare il collegamento fra sorgenti, aritmetica nativa e inferenza statistica. I riferimenti a zero mantengono il relativo indefinito; le righe senza supporto non diventano misure valide.
+
+### Coordinamento comune verificato nell'operazione reale
+
+Il pacchetto comune **R4** include BKL-046, BKL-049 e BKL-051 e conserva le approvazioni ARB/RQ del coordinamento. Il nuovo collegamento operativo BKL-046 è stato verificato con prove offline e revisione statica dell'autore, **senza rivendicare una nuova revisione indipendente**. Il custode ha preceduto il processo originale, che ha mantenuto la proprietà dell'istanza PixInsight fino a ricevute, chiusura normale e analisi. Uscite native, originale e custode a zero; rilascio della stessa prenotazione riconciliato. Nessuna adozione, interruzione o modifica dei processi di altre milestone. La riserva comune non sostituisce i controlli scientifici o di provenienza.
+
+### Recupero locale effettivo e limiti del trasferimento
+
+La capsula dei quattro controlli contiene **173 file**, 1.073.688 byte compressi, SHA256 `2f0d68fc078a3c904b05bc79a3867591b0d9042186f76426cb087d250e13edbb`. Tutti i membri sono stati estratti e ricontrollati; il recupero riproduce identicamente la classificazione originaria e la prova sparsa della diagnosi. Include una copia storica del coordinamento R4 e della ricevuta di rilascio pertinente: **non è un secondo lock operativo**. Il modulo installato, licenza, sistema operativo e campagne precedenti restano dipendenze esterne dichiarate.
+
+La capsula H85 contiene **130 file**, 12.035.725 byte compressi, SHA256 `732e03e3de7d380910096bc9541028dd9e95cf3fc774d0350e2855fc25fcde72`, con conoscenza, lettore, rendiconto e delta delle evidenze. Estrazione, impronte e audit del lettore recuperato verificati realmente.
+
+Le capsule sono locali su H:. Questo aggiornamento pubblica la documentazione tecnica: **non è il trasferimento completo degli archivi né un recupero dei byte da GitHub**. Rimangono i gate della baseline scientifica finale, conoscenza finale, dipendenze e diritti, caricamento degli archivi e riscaricamento integrale verificato. Nessun portale, deploy o merge attivato.
+
+
+## Storico: H84 provvisoria e rendiconto v66
 
 La conoscenza corrente è **H84, provvisoria**, con **239 schede**, lettore v36 e **46 controlli CLI riusciti**. Conservati 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner; autorità **v600 / 1.171** invariata. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. Le sezioni successive conservano lo storico.
 
