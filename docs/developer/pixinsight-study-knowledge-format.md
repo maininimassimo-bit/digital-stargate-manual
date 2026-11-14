@@ -597,3 +597,49 @@ Successivamente al congelamento H72 sono stati preparati **nove input di control
 Sull'head H71 precedente `aad508526e2516754c3184afde2da08750fd6a5d`, il primo controllo browser è fallito per timeout nell'ultima asserzione del planner sintetico. Test invariato e diff limitato alla documentazione; log e fallimento sono conservati. **Un solo nuovo tentativo del job è riuscito**, e tutti i sette CI dell'head sono poi risultati riusciti: ricevuta `c67b8cc60d0c68e6b450ffba9e7f778c2771255e0928fb07665dd5e2ecc6b8a1`. La causa non è stabilita e non è dichiarata una correzione del codice o un tasso di affidabilità. I controlli del presente aggiornamento richiedono una verifica distinta.
 
 Pubblicazione autorevole **v600 / conoscenza registrata 1.171**; **sette famiglie e 25 assi incompleti, zero chiusure scientifiche**. H72 resta provvisoria; conoscenza finale e trasferimento integrale su GitHub con recupero remoto rimangono aperti. Nessun merge, deploy o attivazione del portale.
+
+## Aggiornamento verificato: epoca Drizzle 016 e controlli ABE originali eseguiti
+
+Lo snapshot H72 precedente rimane immutato. Dopo la sua creazione, l'epoca Drizzle 016 è terminata e l'istanza è stata chiusa normalmente, con ricevute native e del supervisore e uscita 0. L'audit conta **15.046 casi unici conclusi e 5.674 pendenti su 20.720 (72,6% della sola campagna)**. Non è la percentuale della milestone. Audit: `a3faa8a8fa730206ea67b375f85a970c7a4fca8f092e83270c5cdca416988c1c`.
+
+Sono verificati indipendentemente **58 gruppi completi / 15.022 casi**, più 24 casi conclusi in gruppi parziali. Quindici capsule locali hanno identità e appartenenze disgiunte riconciliate con questa partizione: `Weighted-Drizzle-copertura-archivi58gruppi15022casi-H-v1.json`, SHA256 `4e54bcc8f7a6a4f3344ba4f5d081b3708662f277fe4eded0280e5346838c4947`. Questi controlli non provano calibrazione del rumore reale o recupero remoto.
+
+### Controlli ABE: esecuzione e integrità
+
+I nove input deterministici senza rumore, congelati prima della generazione, hanno prodotto **17 nuovi tentativi nativi**. Il precedente zero/grado 1 con ritorno negativo è escluso e conservato: nessuna ripetizione e nessun modello inventato. I 17 tentativi sono terminati con **14 ritorni positivi e 3 negativi**, senza eccezioni native, con 17 ricevute di caso e di chiusura, zero immagini residue e uscita ordinaria 0. I negativi sono `CTRL_F00_D4`, `CTRL_F01_D1` e `CTRL_F01_D4` (fondo zero/grado 4 e fondo costante/gradi 1 e 4).
+
+Prima dell'esecuzione: worker qualificato con 41 prove simulate, supervisore con 59 e controllo di rilascio con 14; ricostruzione indipendente dei launcher e controllo della versione installata. La fase iniziale è tornata al ciclo eventi senza processi scientifici; due console complete osservate a tempi distinti, identità PID/creazione e percorso del modulo BackgroundModelization caricato con impronta del corrispondente file su disco sono stati verificati prima dell'unico comando nativo. Questo non equivale a verifica delle pagine binarie in memoria o prova generale di affidabilità dell'avvio.
+
+Un primo verificatore statico ha rilevato un confronto dipendente dall'ordine delle chiavi JSON; la versione successiva confronta sorgenti esatte e configurazione JSON strutturale. Errore originario e decisione sono conservati; launcher e casi non sono stati modificati o ripetuti.
+
+L'audit successivo alla vera uscita del supervisore ha riletto **62 immagini XISF e 1.015.808 valori**, verificando payload rispetto ai campioni nativi, input prima/dopo immutati, parametri effettivi rispetto ai blueprint, History iniziale/corrente, ricevute e partizione di non ripetizione. SHA256 audit `15026718749ae6573a7c6a94438221b5da80e28af453eaffcf14011ec1ab0347`. Il decoder è circoscritto ai formati effettivamente riscontrati; non è una certificazione generale XISF.
+
+### Cinque misure e tre ruoli di controllo: risultati circoscritti
+
+L'analisi usa aritmetica razionale esatta sui binary64 conservati, senza errore di somma, nelle regioni whole128, central64 e outer16. Separa X meno modello e uscita nativa Y meno mediana del modello; confronta anche X grezzo con S (correzione omessa) e l'oracolo X meno fondo noto. La correzione omessa resta distinta dall'oracolo. Il limite esatto dell'arrotondamento iniziale S+B è registrato separatamente e non chiamato incertezza stocastica.
+
+| Esito sui rami nativi | Conteggio |
+| --- | ---: |
+| Varianti per regione complessive | 84 |
+| Confronti relativi di flusso con riferimento non nullo | 60 |
+| Flusso entro il 5% | 16 |
+| Flusso oltre il 5% | 44 |
+| Diagnostiche relative L2 con riferimento non nullo | 60 |
+| L2 entro il 5% | 18 |
+| L2 oltre il 5% | 42 |
+| Confronti controllati di modello disponibili | 4 |
+| Confronti controllati di modello indisponibili | 8 |
+
+I 24 confronti nativi per ciascuna misura con riferimento nullo restano indefiniti, senza trasformarli in successi. Il quadrato L2 verifica esattamente 400 volte energia residua <= energia del segnale; è una diagnostica di forma nelle regioni dichiarate, non una validazione completa della morfologia. Il flusso verifica 20 volte errore assoluto <= valore assoluto del riferimento. Le diagnostiche del modello sui pixel a segnale esattamente zero non identificano i campioni accettati da ABE.
+
+Le differenze M(B+S)-M(B), proiettate su S, esistono solo dove entrambi i modelli nativi sono realmente disponibili: quattro coppie, tre regioni ciascuna. Le altre otto coppie restano indisponibili a causa del modello di fondo assente, compreso il precedente zero/grado 1. Nessuna sostituzione con zero, inferenza sui campioni accettati o calibrazione stocastica.
+
+Un secondo programma, senza importare il produttore dell'analisi, ricostruisce gli stessi valori tramite interi su una scala comune potenza di due e verifica **186 risultati per misura/regione, 42 diagnostiche del fondo e 12 proiezioni regionali**, incluse indisponibilità e violazioni. Report SHA256 `a456ca233c40581e99ff82ec946f8c036cd770f4b4d2be6e6845598b49f0b5cc`; verifica indipendente `83cf28d08bedea3292c8f895055da8514e228bb189fcb59e0d766fa18f2e4e73`. Nessuna nuova chiamata nativa dall'analisi o dai verificatori.
+
+### Conservazione e requisiti ancora aperti
+
+La capsula `ABE-controlli-originali17-nativi-misure-esatte-verificate-H-v1.zip` contiene **351 file / 10.785.090 byte**. Tutti i membri sono stati estratti e ricalcolati, con confronto alle sorgenti stabili. SHA256 archivio `9c2fba2d18bfd20e1561a7f4895ccf8b8037ad391801e5976c3fd2424a411abf`; manifest `7377217d768cbab7b4554345f0a8887ce200660b6c8390f2af90d2ee580b581f`.
+
+Il recupero è locale. Restano esterni installazione/licenza PixInsight, ambiente Windows/PJSR, registro autorevole, dipendenze dei controlli del supervisore e piena provenienza dell'archivio heldout storico. La capsula include verità numerica, input, parametri, output, ricevute e fallimento precedente; non è dichiarata replay nativo autonomo o recupero da GitHub.
+
+Questi nove campi deterministici impiegano profili già studiati: non sono nuove osservazioni fisiche, campioni rumorosi indipendenti o una coorte morfologica mai vista. Le violazioni del 5% e i ritorni negativi impediscono una promozione generalizzata. **Sette famiglie e 25 assi rimangono incompleti, zero chiusure scientifiche**. Conoscenza finale e passaggio integrale su GitHub con verifica dei byte recuperati restano aperti; pubblicazione autorevole invariata **v600 / conoscenza registrata 1.171**. I CI di questo nuovo aggiornamento devono essere osservati separatamente dai sette successi dell'head H72 precedente. Nessun merge, deploy o attivazione del portale.
