@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.6 — affiancamento privato del rilevatore temporale, 12/11/2026
+**Revisione:** 1.7 — collaudo prodotti della notte 12–13 novembre, completato 14/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -583,7 +583,7 @@ Prima del passaggio è stato acquisito lo snapshot delle **18:15**, `configurati
 
 Dopo l’esito positivo è stato acquisito lo snapshot delle **18:31**, `configuration-backup-20261112-183125`: **357 file privati e 140 pubblici verificati**, oltre ai manifest. Repository e portale ospitano soltanto il TAR pubblico sanificato e il suo SHA-256; il privato è conservato separatamente sul Raspberry e sul PC Owner con accesso limitato. [Download aggiornato, checksum, perimetro e procedura di ripristino](../operations/allsky-configuration-backup.md). Tutti gli archivi pubblici precedenti restano immutati e rappresentano le rispettive baseline storiche.
 
-La generazione completa di startrails, keogram e timelapse alla successiva chiusura della notte **non è stata eseguita nella finestra di verifica**; resta un controllo operativo residuo, senza promessa di un monitoraggio automatico aggiuntivo. Le [limitazioni ufficiali della release](https://github.com/AllskyTeam/allsky/blob/v2026.10.01_01/docs/source/allsky_guide/known_issues.md) segnalano inoltre l’indisponibilità dei grafici nativi su Bullseye; non è stato aggiornato il sistema operativo per risolverla. Nel solo aggiornamento di versione non erano state ricalibrate la mappa o le maschere, né modificati modalità e parametri USB. Il successivo aggiornamento delle sole maschere e dei flag camera è nel §27.36. Il backup non è un’immagine SD e il ripristino integrale resta da collaudare su supporto separato.
+La generazione completa non era stata verificata nella finestra dell’aggiornamento. Il collaudo della notte **20261112**, con generazione del 13 novembre e verifica conclusiva locale/pubblica del 14 novembre, è registrato nel §27.38; comprende anche limiti e anomalie residue, senza correzioni all’impianto. Le [limitazioni ufficiali della release](https://github.com/AllskyTeam/allsky/blob/v2026.10.01_01/docs/source/allsky_guide/known_issues.md) segnalano inoltre l’indisponibilità dei grafici nativi su Bullseye; non è stato aggiornato il sistema operativo per risolverla. Nel solo aggiornamento di versione non erano state ricalibrate la mappa o le maschere, né modificati modalità e parametri USB. Il successivo aggiornamento delle sole maschere e dei flag camera è nel §27.36. Il backup non è un’immagine SD e il ripristino integrale resta da collaudare su supporto separato.
 
 
 ## 27.36 Maschere aggiornate e flag camera coerenti con Snapshot — 12 novembre 2026
@@ -657,3 +657,38 @@ Le prove isolate hanno verificato un candidato sintetico, assenza di modifica ai
 L’esame di sei fotogrammi del 13 novembre e dei vicini (23 JPEG distinti) trova due segnalazioni condivise con il rilevatore ordinario e quattro aggiuntive del temporale. Un candidato è un probabile falso positivo da nube; due scatti consecutivi sono compatibili con lo stesso transito artificiale; tre tracce restano non classificate. **Nessuna meteora confermata**, nessuna misura di precisione o sensibilità ricavabile da questo campione selezionato. [Metodo, orari, risultati e limiti del confronto](../operations/allsky-meteor-shadow.md#esame-privato-dei-primi-sei-candidati-13-novembre-2026).
 
 L’Owner ha autorizzato la prosecuzione del solo affiancamento privato: configurazione, calibrazione e rilevatore ordinario invariati, nuovi candidati non pubblicati. Entrambi i servizi risultavano attivi al controllo e la pubblicazione privata era disabilitata. Il repository conserva soltanto questo esito testuale, senza immagini o metadati individuali. Nessun aggiornamento upstream disponibile al controllo del 13 novembre; resta fissata la v1.0.1. Nessun nuovo snapshot necessario per il solo aggiornamento documentale.
+
+
+## 27.38 Collaudo prodotti della notte 12–13 novembre, concluso 14 novembre 2026
+
+Il controllo iniziato il 13 novembre è stato completato il **14 novembre dalle 09:00 Europe/Rome**, recuperando i log della notte corretta e verificando i medesimi file, senza rigenerarli. Non si tratta dei prodotti della notte 13–14 novembre. La cartella `20261112` contiene **743 JPEG**, dal 12/11 alle 17:26:07 al 13/11 alle 06:30:10: 53 precedono il riavvio dell’aggiornamento delle 18:27, 52 sono successivi all’aggiornamento ma precedenti al cambio maschere/flag delle 19:23 e 638 seguono quest’ultimo. Il prodotto misto non costituisce un confronto fotometrico controllato fra le tre fasi.
+
+### Generazione, integrità e visualizzazione pubblica
+
+| Prodotto | Risultato locale e log del 13/11, ora locale | Verifica pubblica nel browser del 14/11 |
+|---|---|---|
+| Keogram | JPEG **2229 × 1096**, 807.520 byte, decodificato; completamento alle **06:31:40** | Galleria raggiunta dalla Home, data 2026-11-12 e miniatura visibili, immagine completa correttamente aperta |
+| Startrails | JPEG **1936 × 1096**, 904.472 byte, decodificato; completamento alle **06:32:14**, archi stellari visibili | Galleria raggiunta dalla Home, data e miniatura corrette, immagine completa visualizzata |
+| Timelapse | MP4 H.264 **1936 × 1096**, **743 frame**, 25 fps, **29,72 s**, 19.422.301 byte; completamento alle **06:36:40** | Galleria raggiunta dalla Home; miniatura/data corrette, video aperto e riproduzione avviata con il comando del lettore; tempo osservato da **10,30 a 23,69 s**, fotogrammi diversi effettivamente visibili, nessun errore media riportato |
+
+I tre originali HTTPS rispondono HTTP 200 e i rispettivi SHA-256 coincidono con i file locali. Le miniature pubbliche rispondono HTTP 200 e sono decodificate dal browser: startrails 100 × 56, keogram 100 × 49, timelapse 200 × 113. Le miniature locali dei due JPEG sono più grandi (200 × 113 e 200 × 98): è un ridimensionamento della galleria, non un disallineamento dei prodotti. Il keogram riporta la data civile finale 11-13-2026 nell’immagine, mentre la voce della galleria usa la cartella della notte 2026-11-12.
+
+La decodifica non distruttiva dell’intero video con FFmpeg a un thread, priorità e I/O ridotti, termina con **743 frame, zero duplicati/scarti e nessun errore di decodifica**. Anche tutti i 743 JPEG sorgenti sono stati decodificati durante il riconteggio diagnostico. Non sono emersi difetti di generazione o visualizzazione di questi tre prodotti; nessuna ripubblicazione, pulizia cache o rigenerazione è stata eseguita.
+
+### Luminosità startrails e registrazione delle statistiche
+
+Soglia **0,30** conservata. Un riconteggio diagnostico in sola lettura sui JPEG salvati, usando la media del canale RGB massimo normalizzata a 255 come il sorgente C++, trova **726 immagini sotto soglia e 17 sopra**, minimo 0,09150 e massimo 0,38374. Nessun valore coincide esattamente con la soglia. Questi sono **conteggi ricostruiti**, non il recupero dell’output originale del processo di generazione.
+
+**Anomalia residua:** al controllo SQLite in sola lettura non è presente la riga `allsky_startrails` per `20261112`, pur essendo il JPEG valido. Sono presenti la notte precedente e la successiva; la riga `20261113` non va usata per attestare i conteggi della notte richiesta. Lo schema corrente include `starttime` e `endtime`. `scripts/generateForDay.sh` salva le statistiche dopo la generazione, mentre `scripts/endOfNight.sh` può riportare successo del prodotto senza rendere visibile tutto l’output catturato della registrazione. Nei log disponibili non è recuperato l’errore SQLite originario: un problema di schema precedente o di salvataggio rimane un’ipotesi, non una causa dimostrata. Non si è scritto o migrato il database per completare il collaudo.
+
+Proposta **non applicata, in attesa di autorizzazione**: backup coerente del database, riproduzione del solo salvataggio statistico su copia privata con lo schema pertinente e verifica di `generateForDay.sh`, `utilities/db.py` e backend database; rendere esplicito l’eventuale errore senza rigenerare media. Il recupero della riga storica andrebbe valutato separatamente, distinguendo dati ricostruiti da statistiche originali. Nessuna interruzione dell’acquisizione prevista per la prova isolata; eventuale modifica operativa richiede una proposta definitiva e rollback dei soli file/database coinvolti dal backup, mai dell’intero sito.
+
+### Ripresa diurna e transizione del guadagno
+
+I log dopo il riavvio delle 19:23 confermano Auto-Gain e AWB **No** per giorno/notte, gain **0/300**, WB **52/95** e transizione **5 minuti**. Il 13/11 la cattura diurna parte alle **06:31:11**; il gain scende gradualmente da 270 a 0, raggiunto alle **06:36:20**. Alle 09:00 sono presenti acquisizioni diurne regolari, gain 0 e autoesposizione attiva, con media circa 0,50.
+
+**Limite osservato:** durante la discesa del gain vengono scartati quattro fotogrammi diurni alle **06:35:18, 06:36:20, 06:36:50 e 06:37:21**, con medie 0,0898/0,0820/0,0898/0,0977 sotto il gate 0,1000. L’esposizione è al limite diurno **100 ms** mentre il cielo è ancora poco luminoso; il primo successivo accettato è delle 06:37:52. Il fenomeno segue l’ultimo JPEG notturno delle 06:30:10 e non rende incompleti i prodotti della notte qui verificati. È coerente con il limite di esposizione e la rampa del gain, non con un guasto USB dimostrato.
+
+Proposta **non applicata, in attesa di autorizzazione**: se si desidera continuità anche in questa breve fase, valutare su prova controllata l’aumento di `daymaxautoexposure` da 100 a **1000 ms**, conservando gain, rampa, WB e gate di scarto. Effetto atteso: maggiore margine all’alba; possibili tempi di esposizione diurni fino a 1 s, quindi modifica fotografica da approvare. Sarebbero necessari backup mirato, eventuale riavvio della sola acquisizione per caricare il parametro e verifica all’alba successiva; rollback al valore 100 e riavvio controllato. In alternativa mantenere il comportamento attuale accettando quei transitori. Nessuna delle opzioni è stata applicata.
+
+Il collaudo è diagnostico: configurazione, USB, mappa, meteore private e pubblicazione dei media restano invariate. Log grezzi, copie di lavoro ed evidenze dettagliate rimangono nell’archivio privato dell’Owner; il repository contiene soltanto questo riepilogo. Nessun nuovo backup di configurazione è necessario per le sole letture; rimane corrente lo snapshot del 12/11 alle 22:07.

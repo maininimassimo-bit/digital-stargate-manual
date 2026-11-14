@@ -99,3 +99,8 @@ La procedura non interviene su cupola, montatura, interlock o Safety Authority. 
 Dopo una modifica verificata a moduli, maschere, overlay, calibrazione o pubblicazione, creare un nuovo snapshot con data, checksum e perimetro. Conservare separatamente il privato; produrre e rivedere una nuova esportazione sanificata prima di qualunque commit. Non copiare mai l'archivio privato nel working tree Git, nemmeno temporaneamente: rimuoverlo in un commit successivo non lo eliminerebbe dalla cronologia.
 
 Per i nuovi snapshot di questo perimetro usare il tool aggiornato `config/myFiles/backup/capture-configuration.py`, che comprende la unit privata. L’arresto o il ripristino del solo affiancamento non richiede di fermare Allsky.
+
+
+## Collaudo successivo dello snapshot — 14 novembre 2026
+
+Il [collaudo dei prodotti della notte 12–13 novembre](../chapters/27-sistema-allsky.md#2738-collaudo-prodotti-della-notte-1213-novembre-concluso-14-novembre-2026) verifica generazione e visualizzazione pubblica di startrails, keogram e timelapse, inclusa riproduzione effettiva nel browser. Registra separatamente una riga statistica storica assente e quattro scarti diurni durante la rampa all’alba, con proposte non applicate e soggette ad autorizzazione. È una diagnosi senza modifiche: non sostituisce il backup corrente del 12 novembre alle 22:07 e non attesta un ripristino integrale della scheda SD.
