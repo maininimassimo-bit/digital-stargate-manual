@@ -1031,3 +1031,84 @@ Rapporto di riuso SHA-256: `45575beb5e4138059a7164ac5279591e8f7d3bbe99f15a990228
 La prova di traslazione deterministica a 64 pixel è conclusa e non va ripetuta. Rimangono da qualificare comportamento e risorse su immagini di lato 2.048, limiti numerici sull'intervallo di ampiezze pertinente e collegamento statistico completo del generatore alla campagna sul rumore. Restano distinti rumore fisico delle camere, normalizzazione stimata e rischio delle decisioni IA. Questa prova non convalida tali ambiti.
 
 H81 resta provvisoria; l'autorità separata rimane v600 / conoscenza 1.171. Genitore H80, dipendenze storiche e ambiente installato/licenziato rimangono esterni alla capsula incrementale. Il recupero locale non attesta il trasferimento integrale degli archivi su GitHub con recupero remoto. Tutti i nuovi materiali BKL-046 rimangono su H:. Nessun merge, deploy o attivazione del portale.
+
+
+## H82 — due casi nativi a 2.048 pixel e dominio statistico originario (14 novembre 2026)
+
+H82 conserva tutte le 233 schede H81 e aggiunge due schede, per **235 schede**. Il lettore v34 supera **42 controlli CLI**, inclusi tutti i 40 precedenti. Il rendiconto v64 conserva **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**; una sola riga riceve collegamenti aggiuntivi. Le sette famiglie e i 25 assi scientifici restano aperti, senza chiusure scientifiche.
+
+### Risorse e trasporto nativo su immagini più grandi
+
+Sono conclusi due casi deterministici con quattro ingressi mono di lato 2.048 e un distinto file RGB sentinella per controllare la selezione CFA:
+
+- mono, geometria 03, scala 2, drop nominale 17/20, pesi descending-common;
+- RGGB, geometria 06, scala 2, drop nominale 11/20, pesi channel-skew.
+
+Il sentinella non è una quinta esposizione scientifica. I 29.360.128 valori dei cinque file d'ingresso sono verificati indipendentemente mediante lettura binaria a righe. Le aspettative geometriche sono congelate prima dell'esecuzione e ricostruite indipendentemente su griglia intera a 120 unità.
+
+Ogni caso produce immagini di lato 4.096. I valori nativi sono conservati in otto piani Float32, un canale alla volta, con rilettura e verifica SHA-256 prima di salvare la ricevuta e chiudere le viste. Sono conservati separatamente History, metadati, parametri nominali e valori restituiti nativamente. Questo evita di costruire grandi liste JSON contenenti tutti i campioni.
+
+L'audit ricostruisce **536.870.912 byte / 134.217.728 valori di uscita**, senza valori non finiti. Questi sono valori decodificati, non altrettanti test o acquisizioni indipendenti.
+
+Nei 123 campionamenti del controllo del processo, il massimo impegno privato osservato è **1.614.733.312 byte**. Non è stato richiesto alcun arresto per memoria. È un massimo campionato dell'istanza, non un picco OS certificato o una garanzia per tutte le configurazioni della campagna futura. L'istanza è uscita normalmente, senza immagini residue e senza ripetere casi conclusi.
+
+### Confronto limitato alle regioni congelate
+
+Per ciascun caso sono prefissati 16 tile diagnostici, comprendenti bordi, angoli e regioni interne. Il confronto esatto e il verificatore indipendente che decodifica i bit Float32 concordano:
+
+| Quantità nel perimetro dichiarato | Esito |
+| --- | --- |
+| Valori supportati selezionati | 3.072, tutti entro 10⁻⁶ assoluto e il 5% del modello |
+| Valori senza supporto | 1.024, conservati senza stima |
+| Aperture supportate | 16, tutte entro il 5% del modello e il limite numerico propagato |
+| Aperture prive di stima | 48 |
+| Discrepanze di supporto | 0 |
+
+Massimo errore assoluto nel caso mono: 100709/2476317081600, circa 4,06688629450×10⁻⁸. Nel caso RGGB: 9039/973078528000, circa 9,28907558836×10⁻⁹. I casi privi di stima non vengono convertiti in successi, zeri scientifici o aperture adattivamente ridotte.
+
+Le verifiche geometriche coprono **4.096 decisioni sui valori selezionati e 64 decisioni sulle aperture**, includendo i casi senza stima. Non costituiscono un confronto numerico di tutti i 65.536 tile, né di tutte le configurazioni del candidato statistico.
+
+Audit dei piani nativi SHA-256: `c2efc082084e3f06a6e72a1ca57f4c6a01a07400214dfac17e101dd1ff7e8ae5`.
+Rapporto del confronto selezionato: `f6f6fe31c213eff62d1ddb26c19a89d732959cbb168b386ad118b87fe02e4ae1`.
+Verifica intera indipendente: `de80da8019233bb28b8ad7396d2f80cec71f3a77802f3794e5d2f3e5805c4a09`.
+
+### Definizione mancante e diagnosi conservata
+
+Il primo tentativo è terminato con ReferenceError per UndoFlag_NoSwapFile, prima di creare immagini o eseguire i due casi grandi. Mancava nel lanciatore il caricamento di `pjsr/UndoFlag.jsh`. Il file installato è stato letto e verificato tramite impronta, senza modificarlo.
+
+Una diagnosi separata nella stessa istanza, con l'include esplicito, verifica il formato little-endian e il salvataggio/rilettura di quattro immagini piccole: mono/RGB a 32/64 bit, otto piani e 96 valori esatti, oltre ai due test di layout binario. Tutte le viste vengono chiuse dopo la conservazione. La sessione corretta ripete il controllo preliminare nel proprio processo prima dei due casi grandi. Sono verifiche tecniche di trasporto, distinte dalle integrazioni scientifiche.
+
+L'errore iniziale, la diagnosi e la nuova sessione rimangono separati. Un ulteriore errore nel test simulato di arresto parziale — tre casi su un piano da due — è conservato e corretto a un caso concluso. Il controllo del processo supera 61 fixture e il rilascio 14; non vengono allentate le soglie numeriche o sostituiti gli ingressi.
+
+Audit del tentativo iniziale e della diagnosi SHA-256: `a227394c94a548090a2f6c134b19f8607cd6a7fdf61941235b6865997e5596d6`.
+
+### Le quattro classi originarie del rumore restano nel piano
+
+La rilettura del protocollo statistico originario conserva:
+
+| Osservabile | Endpoint originari disponibili |
+| --- | ---: |
+| PIXEL | 104 |
+| PAIR_MEAN | 104 |
+| PAIR_DIFFERENCE | 104 |
+| RECTANGLE_MEAN | 64 |
+
+Restano inoltre le 40 aperture originarie non disponibili. Le **5.120 integrazioni native storiche e i 376 esiti di compatibilità** sono preservati; non devono essere rigenerati o descritti come mancanti.
+
+Il certificato ideale sui 384 endpoint ad apertura fissa conserva la propria validità condizionale, ma **non copre da solo le tre classi pixel/coppie del dominio originario**. L'analogia fra aperture nuove e RECTANGLE_MEAN non dimostra l'identità dei selettori, delle varianze d'ingresso o delle configurazioni. Restano esplicite anche le 16 configurazioni CFA storiche a pesi disuguali che non hanno un abbinamento di metadati con i quattro nuovi profili.
+
+Prima di nuovi valori casuali occorre congelare un manifest completo degli endpoint, riconciliare selettori, colonne sorgenti, modelli di varianza e pesi, ricalcolare numerosità e copertura simultanea per quella famiglia e completare il margine del generatore e dell'aritmetica nativa. Non si riusa 384 come conteggio globale. Nessuna nuova campagna sul rumore viene rilasciata da questi due casi di risorse.
+
+Rapporto di riconciliazione del dominio SHA-256: `1d63d588b0ab07fbaaf4ef81535f17f19ae17a88b7bb7c21c7ff1c54c47c2548`.
+
+### Conoscenza e recupero effettivo degli archivi locali
+
+- H82 SHA-256: `518d8c2075ee54999b5b197b5be498e424918424b896c2b92ca4024c0170e57f`.
+- Lettore v34 SHA-256: `00931a900c3870310bf0a78bdb2302aede9050176310d33775cb291abb3e7bec`; verifica dei 42 controlli `5a05a83bb75c58530d636ca8f90591396dd29e1ef3972f8d1c8845cb6255c41b`.
+- Rendiconto v64 SHA-256: `546e96e260c3b940b090656f292d8f5c254979cd63d9e94c959fecd091d8b03c`.
+- Capsula delle prove native: 190 file, 226.113.010 byte; SHA-256 `41082896799b8b21d7b963923e8ab719d46f0c669ba21f2ee0d9fdbd4197c8dc`, manifest `2b3299d27d59f485b8b944bf5f968f14270594656b8cd21ee65dae6db6d8987c`. Estrazione effettiva e impronte verificate; ricalcolo intero selezionato identico dai file recuperati.
+- Capsula incrementale H82: 124 file, 233.981.932 byte; SHA-256 `490147f62b4641c550876a648c4d802d0e33ed0427dc704252df058e9cf9c533`, manifest `161ae61d8d9929a60794afda0be5136397681f1de17d8c0822dab4a9555fec63`. File recuperati e audit del lettore identico.
+
+H82 resta provvisoria; autorità separata v600 / conoscenza 1.171. La capsula genitore H81, le dipendenze storiche e l'ambiente installato/licenziato rimangono esterni alla capsula incrementale. Il recupero locale non attesta un replay nativo completo né il trasferimento integrale degli archivi su GitHub con recupero remoto dei byte.
+
+Questa fase conclude due casi deterministici di risorse e i loro confronti selezionati. Non convalida il rumore fisico delle camere, errori numerici per ampiezze generali, normalizzazione stimata, tutte le configurazioni statistiche o il rischio delle decisioni IA. Tutti i nuovi materiali BKL-046 restano su H:. Nessun merge, deploy o attivazione del portale.
