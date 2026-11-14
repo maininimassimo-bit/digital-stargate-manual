@@ -896,3 +896,46 @@ La capsula H78 contiene 100 file / 15.182.895 byte, tutti estratti e verificati 
 Le prove native XNML precedenti, i 162 file storici, le verifiche ai bordi e le distinzioni fra livello medio e contrasto restano evidenze esistenti. Non vengono dichiarate mancanti né ripetute per cambiare etichetta. Restano da riconciliare gli effetti combinati nel dominio originale: CFA/Variable15, geometrie non identità, coefficienti spazialmente variabili e incertezza dei modelli effettivamente stimati. Nessuna FWHM stellare è definita nei due campi correnti, quindi non si dichiara accettazione di posizione.
 
 Autorità separata ancora v600 / conoscenza 1.171; sette famiglie e 25 assi incompleti, zero chiusure scientifiche. I criteri originali non impongono che ogni controllo intenzionalmente errato rispetti il 5%; richiedono esiti, limiti ed eventuali esclusioni motivati nel dominio previsto. Dipendenze delle schede storiche, capsula genitore H77, input grezzi e installazione restano separati. Il recupero locale circoscritto non è replay nativo completo né trasferimento integrale GitHub con recupero dei byte. Tutti i nuovi materiali restano su H:; nessun merge, deploy o attivazione del portale.
+
+
+## BKL-046: H79 — XNML spaziale, aperture e ipotesi al bordo (2026-11-14)
+
+La conoscenza provvisoria H79 contiene 228 schede e conserva tutte le 226 schede H78, i 4.920 requisiti, i 14.521 criteri letterali e i 19 criteri Owner. Il lettore v31 supera 35 controlli CLI. Il rendiconto v61 aggiunge soltanto evidenze alla voce DrizzleIntegration; sette famiglie e 25 assi restano incompleti, zero chiusure scientifiche.
+
+| Artefatto | SHA-256 |
+| --- | --- |
+| Conoscenza H79 | `bda25f8dd59c7fdfee96c17f7777f2b25209b3914c2c19fa46fc9e95e48cc47b` |
+| Lettore v31 | `fbe218273f30ae15854cad361fc6a286c9a301fcc856b69c93cb16c080811fba` |
+| Rendiconto v61 | `385bdc56e4705fc5a6aa40e8bd2fdf906e73af13d4b60e547de56ef8fd308d63` |
+
+### Nuovo controllo combinato con coefficienti spazialmente variabili
+
+Sedici nuove configurazioni incrociano pesatura, rigetto e normalizzazione su due campi mono 64×64 con piani Scale e ZeroOffset variabili da 4×4 nodi. Il riferimento usa l’interpolazione B-spline pubblica, comprese le regole ai bordi; fonte pubblica e identità del binario installato restano affermazioni distinte. Il modello e l’alternativa diagnostica sono congelati prima dell’esecuzione.
+
+Sono condizioni diverse dal precedente controllo a coefficienti costanti: non vengono ripetuti i vecchi casi né conteggiate le varianti come acquisizioni indipendenti. Coefficienti e maschere sono forniti, non stimati sui dati. Restano separati CFA/Variable15, geometrie non identità, stima dei modelli reali e rumore fisico.
+
+Gli input registrano i valori ideali e quelli realmente salvati, con limiti di mezzo ULP verificati indipendentemente per entrambe le operazioni: inversione della trasformazione e aggiunta del contaminante. Due incrementi nominali di 1/16 differiscono dalla quantità effettivamente salvata dopo l’addizione Float64. Il riferimento usa i campioni conservati; questa differenza non è presentata come rumore del sensore.
+
+PixInsight completa sedici chiamate e chiude normalmente senza immagini residue. Sono conservati 131.072 valori di uscita con ricostruzione dei relativi hash. L’analisi razionale e il verificatore intero indipendente concordano sui 65.536 pixel: 65.528 supportati rispettano il modello congelato entro 1e-6; otto pixel interamente rigettati restano senza stima. Interno, ultima cella orizzontale dei coefficienti e altri bordi sono rendicontati separatamente, senza selezionare soltanto le regioni favorevoli.
+
+### Aperture: accordo con l’operatore e accuratezza del segnale
+
+Le 32 aperture fissate prima del test mantengono geometria e denominatori originali. Le 24 supportate concordano con l’operatore entro il confronto relativo del 5%; dodici concordano anche con il segnale noto, mentre dodici controlli intenzionalmente privi di normalizzazione superano tale soglia. Otto aperture di campo completo contengono il pixel interamente rigettato e restano senza stima. L’apertura centrale è fissata a priori e non sostituisce retroattivamente quella completa.
+
+Questi esiti verificano una composizione finita di coefficienti forniti, pesi e maschere. Non attestano l’accuratezza dei coefficienti stimati da immagini reali, una legge di rumore o la risposta fisica delle camere. Nei campi non esiste una FWHM stellare di riferimento: nessuna accettazione di posizione è dedotta da queste prove.
+
+### Il 5% non identifica l’interpolazione
+
+L’alternativa CLAMP_ALL era prevista dal protocollo come diagnostica. Nella cella orizzontale finale, su otto configurazioni con normalizzazione attiva, sono confrontati 8.192 endpoint conservati. Il modello primario rispetta la tolleranza numerica in tutti; CLAMP_ALL la supera in 6.656. Tuttavia entrambi restano entro il 5% relativo su questi endpoint.
+
+Un secondo verificatore ricostruisce CLAMP_ALL con polinomi e tabelle intere dei bordi e conferma tutti i conteggi. L’alternativa non sostituisce l’ipotesi primaria; il confronto mostra perché identità numerica dell’implementazione e soglia scientifica relativa vanno dichiarate separatamente. Gli endpoint condividono due campi deterministici e non sono 8.192 osservazioni indipendenti.
+
+### Recuperi locali e stato del passaggio GitHub
+
+La capsula della prova spaziale è stata realmente estratta: 184 file, ricalcolo intero invariato dei 65.536 pixel e delle 32 aperture, ricevuta identica. Archivio: 3.105.990 byte, SHA-256 `6d29d0574cd09630befabebb44675d0a9535899812725ed519909429cbb5259d`.
+
+Anche la diagnostica del bordo è recuperata e ricalcolata: 33 file, 8.192 endpoint, ricevuta identica; archivio SHA-256 `7c14dbfc32d48eeb98798a5bfbf565895907eabd3e5c667be25f62b8ade7207a`.
+
+La capsula H79 contiene 102 file / 14.663.005 byte, tutti estratti e verificati; l’audit del lettore recuperato coincide con quello originale. Archivio SHA-256 `3546220bafb052f118ab4a5e5f5c68232a1a9771bdfa7d964e501bd2f49d1b1b`; manifest SHA-256 `c22e9c8961adaa0cadbd09fbac8593d58d2f0c4984ffdeafedae5ed32b3d6c48`.
+
+Autorità separata ancora v600 / conoscenza 1.171. H79 non è il file finale. Capsula genitore H78, dipendenze storiche delle schede, input grezzi e ambiente installato/licenziato rimangono separati. Questi recuperi locali non attestano un replay nativo completo né il trasferimento integrale GitHub con recupero remoto dei byte. Tutti i nuovi materiali BKL-046 restano su H:. Nessun merge, deploy o attivazione del portale.
