@@ -2,20 +2,20 @@
 
 ## Stato e perimetro
 
-Questo riferimento descrive la conoscenza consolidata **provvisoria H65** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
+Questo riferimento descrive la conoscenza consolidata **provvisoria H66** dello studio BKL-046. Il suo formato rende consultabili risultati, condizioni, errori ed evidenze; non costituisce un'autorizzazione a eseguire processi PixInsight né una baseline scientifica finale.
 
 Snapshot del 14 novembre 2026 (le sezioni successive conservano anche gli stati storici):
 
 | Componente | Identità |
 | --- | --- |
-| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v65.json` |
-| SHA-256 del file | `5e336770d868b4e912b10dc378ef62566067a900f5fc006905ee954e61a73de6` |
-| Lettore | `consult_provisional_dsg_knowledge_h_v5_v17.py` |
-| SHA-256 del lettore | `e2daa8ddcd6f36e2104822bf3c7ca84f8de090bce9588b74d9d99f3898b188d7` |
+| File di conoscenza | `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v66.json` |
+| SHA-256 del file | `6986087d5f6096bdb2f3a250a54a8035d5f00ed274da02bce40a13a0860e2319` |
+| Lettore | `consult_provisional_dsg_knowledge_h_v5_v18.py` |
+| SHA-256 del lettore | `e921152787ed5e2c2e6741ae6b03a4d7de952980df852e3fb3f5308d625e8fa6` |
 | Formato | `schemaVersion: 1` |
 | Stato | `PROVISIONAL_CONSOLIDATED_QUERYABLE_NO_SCIENTIFIC_PROMOTION` |
 | Requisiti | 4.920 |
-| Schede di evidenza | 200 |
+| Schede di evidenza | 201 |
 | Famiglie / assi / criteri Owner | 7 / 25 / 19 |
 | Chiusure scientifiche | 0 |
 
@@ -458,3 +458,20 @@ Il successivo programma limita ogni sessione a128casi e osserva contatori Window
 Il primo segmento limitato ha concluso128casi, con ricevute, History, hash dei campioni binari e chiusura delle viste verificati; uscita normale codice0. Massimo privato campionato985.718.784byte su74campioni, nessuna richiesta di arresto; il massimo campionato non è il picco assoluto del sistema operativo. L'audit esclude duplicazioni con le precedenti8.646conclusioni: **8.774 casi unici conservati e11.946rimanenti su20.720**. Questo conteggio misura l'integrità dei risultati conservati, non l'accettazione scientifica. Audit e piano esatto rimanente: `weighted-bounded128-case-audit-h-v1/report-and-exact-pending-cases.json`, SHA256 `eaf0c92e58342b2e633f0f4765959aadbef2ee39f4df5d9cb3cf05f503a14541`.
 
 Le sezioni H64 e precedenti descrivono gli stati osservati allora; la loro indicazione di sessione in corso è superata dal presente aggiornamento. Tutti i sette CI del precedente head H64 `065b7ba575bb70126d86e9cd6d96739837fed2ea` sono riusciti; i CI di questo nuovo aggiornamento richiedono una verifica separata. PR ancora in bozza; nessun merge verso main o attivazione del portale. Sette famiglie e25assi incompleti, zero chiusure scientifiche. Conoscenza finale e trasferimento integrale su GitHub con recupero dei byte restano aperti.
+
+
+## H66: recupero controllato e primi36gruppi pesati verificati
+
+H66 conserva tutte le200schede H65, aggiungendo una scheda operativa e scientifica circoscritta, per201totali. File SHA256 `6986087d5f6096bdb2f3a250a54a8035d5f00ed274da02bce40a13a0860e2319`; lettore v18 SHA256 `e921152787ed5e2c2e6741ae6b03a4d7de952980df852e3fb3f5308d625e8fa6`. Otto prove CLI verificano audit, riepilogo, policy, schede di saturazione/pesi/ripresa, asse del rischio IA e rifiuto dell'impronta errata. Prova SHA256 `702664d68ff87d861d0bd634c02e28dee7d0716a5dc88507aaaa80cdd91b4060`. Il rendiconto v48 `c0970cc535f9056255ed2ea4b2545aacae2f9c15cba4ab779597e3e9845dcaa6` conserva4.920requisiti,14.521criteri letterali e19criteri Owner; una sola riga riceve un collegamento aggiuntivo. Registro v600/v1.171 invariato; H66 è una conoscenza locale provvisoria, non una nuova versione registrata o finale.
+
+Lo snapshot della scheda termina all'uscita normale dell'epoca003: **9.414casi unici con integrità verificata,11.306rimanenti su20.720**. Dei casi conservati,9.324appartengono a36gruppi completi verificati indipendentemente;90sono in un gruppo incompleto. La frazione45,4% riguarda il completamento dei casi nativi della campagna finita, non la milestone o l'accettazione scientifica. L'attestazione lega i gruppi ai loro rapporti e verificatori esatti, senza pretendere un nuovo replay di tutti i verificatori precedenti: SHA256 `4b4e528dc4dd53e791a2e8281653d2d2802d9bad9ba86c5af36b02fde9504b4d`.
+
+Dopo due segmenti da128casi, l'epoca003 ha completato512casi senza errori dichiarati, con hash binari dei campioni, History e cleanup ricontrollati e uscita normale codice0. Il massimo privato campionato è1.212.624.896byte su550campioni, senza richiesta di arresto. Audit e partizione esatta rimanente: `weighted-bounded-epoch-003-case-audit-h-v1/report-and-exact-pending-cases.json`, SHA256 `60b2131e2b29aced286839bc1004ff1dd2cd95ae4398d2a4a7e6143faaed4342`. I due nuovi gruppi14/15 del profilo crescente completano tutte le fasi di riduzione, certificazione numerica e verifica indipendente del lotto021. La verifica resta condizionata agli operatori, input e modelli di covarianza congelati.
+
+La nuova preparazione genera programmi immutabili da template verificati, controlla l'esatto prefisso dei casi rimanenti e riesegue18fixture del worker e27fixture del programma di avvio per la configurazione effettiva. Il massimo è512casi per segmento; resta il limite privato2GiB e la richiesta di arresto al successivo confine salvato se mancano le riserve di memoria o i contatori. Le prove effettuate non garantiscono sicurezza di memoria in ogni carico e non identificano una causa esclusiva dell'incidente precedente. Nessun kill, riavvio automatico o ripetizione dei casi conclusi.
+
+La successiva epoca004 è separata e non è conteggiata nello snapshot H66. Ogni suo risultato richiede ricevuta finale, controllo delle viste, uscita effettiva e audit prima dell'inclusione. Le vecchie ricevute di errore e gli avvisi Out of memory/MemoryError restano conservati.
+
+La capsula locale H65 ha inoltre superato estrazione e rehash di318file e riproduzione identica dell'audit del lettore recuperato:9.627.483byte, SHA256 `6965403533ac9f2b8b8595f0eaeaac66dfd6d12aeeabc1f23002a1eb774f7627`. Include conoscenza, lettore, riesami selezionati e ricevute del primo segmento128; non tutti gli input esterni delle200schede, i sidecar/pixel originali, le epoche storiche o l'intero ambiente scientifico. Non attesta recupero remoto degli archivi.
+
+Tutti i sette CI del precedente head H65 `5f57c81afefaa6a73b8a2100643ec79359e772dc` sono riusciti. I CI del presente aggiornamento vanno verificati separatamente. PR in bozza; nessun merge verso main, deploy o attivazione del portale. Sette famiglie/25assi incompleti, zero chiusure scientifiche; file finale di conoscenza e trasferimento integrale con recupero remoto restano aperti.
