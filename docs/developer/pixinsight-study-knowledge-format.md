@@ -1,5 +1,46 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Supplemento offline dopo H85: recupero dell'intervallo e prerequisiti
+
+La conoscenza **H85 e il rendiconto v67 restano invariati**. Questo supplemento conserva nuove dimostrazioni, verifiche e prerequisiti separati, da includere nel prossimo consolidamento additivo. Nessuna nuova esecuzione PixInsight, immagine derivata o realizzazione del rumore. Restano sette famiglie e 25 assi aperti, zero chiusure scientifiche.
+
+### Perché non si può presumere che gli ingressi siano tutti positivi
+
+Un secondo calcolo verifica il certificato sul segno delle sorgenti del piano originale, mantenendo media 1/8 e varianze invariate. Sotto la sola ipotesi di variabili gaussiane ideali indipendenti, 64 posizioni alla varianza 8/10.000 per ciascuno dei 131.072 campi previsti danno **8.388.608 variabili distinte condivise**. Una minorazione analitica conservativa porta la probabilità di almeno un ingresso ideale negativo sopra **999/1.000**. Profili, canali, endpoint e altri banchi non vengono conteggiati come repliche indipendenti aggiuntive.
+
+La verifica usa un'identità di integrale positivo per il limite su π e una maggiorazione razionale diretta dell'esponenziale, distinta dalla derivazione iniziale. **È una conseguenza condizionale del modello ideale**, non una misura sul generatore CNG, sulle camere o sugli output nativi; non è la probabilità di riscalamento in PixInsight e non sostituisce il criterio Owner dell'1% con confidenza 95%.
+
+### Recupero per intervalli, senza inventare i bit persi
+
+È stato costruito un modello matematico separato della relazione `y = RN32((x-L)/(H-L)+e)`, con estremi esatti assunti e limite esplicito su `|e|`. Il modello usa le celle di arrotondamento Float32 per racchiudere il valore precedente in un intervallo razionale. Non promette di ricostruire esattamente bit eliminati dall'arrotondamento.
+
+Sono riusciti **21 controlli**, con **5.631 racchiudimenti sintetici deterministici**, quattro celle verificate a mano, sette confini di arrotondamento e rifiuti di ingressi non validi. Sono controllati i rami affine, moltiplicativo e identità, mantenendo i pesi zero come **nessuna stima**, anche per intensità osservate non nulle. I numeri degli esempi non rappresentano campioni astronomici o repliche statistiche indipendenti.
+
+Il modello richiede esplicitamente il limite dell'errore del calcolo normalizzato in avanti: **non è stato stabilito un limite per l'implementazione nativa**. Un valore zero nelle sole prove sintetiche non autorizza ad assumerlo per PixInsight. Restano separati gli errori di integrazione, geometria, compilazione e normalizzazione.
+
+### Metadati mancanti e dieci prerequisiti congelati
+
+Nelle ricevute dei quattro casi esistenti, `outputRangeLow` e `outputRangeHigh` compaiono nel testo dei parametri esportati; **manca una ricevuta diretta dei due valori nei loro byte binary64**. Il supplemento non li promuove a metadati esatti e non ripete quei casi.
+
+Il sorgente storico Drizzle inizializza gli estremi a 1 e 0 e aggiorna le statistiche sui pixel supportati. Il sorgente PCL installato descrive invece un riscalamento basato sugli estremi della selezione. Non è quindi lecito presumere che i due valori del processo coincidano sempre con gli estremi globali effettivamente usati: casi tutti negativi, selezione dei canali e pixel senza supporto richiedono verifiche esplicite. Le copie dei sorgenti restano locali; equivalenza con il binario installato e implementazione della funzione di basso livello non sono dimostrate.
+
+Il protocollo congela **dieci prerequisiti**: conservazione del dominio originale completo; provenienza e ricevute native; cattura diretta binary64 degli estremi; verifica di pixel e canali selezionati; rifiuto dei rami irreversibili o ambigui; limite dell'errore in avanti; conservazione delle maschere dei pesi; eventuale ramo derivato dichiarato con History; propagazione delle incertezze e distinzione delle grandezze misurate; futuro piano nativo qualificato senza duplicazione dei quattro casi conclusi. **Non rilascia un adattatore nativo né la produzione del rumore.**
+
+Il dominio resta **280 configurazioni logiche, 260 configurazioni native canoniche pianificate e 2.632 endpoint supportati**. Media delle sorgenti, criteri e ipotesi originarie non vengono cambiati per evitare i valori negativi. Un eventuale prodotto derivato deve preservare l'output finale originale e non trasformare l'esito RGGB originario in un successo.
+
+### Evidenze locali e recupero effettivo
+
+| Artefatto locale | SHA256 |
+| --- | --- |
+| Verifica indipendente del limite sul segno, revisione corretta | `3713ef1253715dc0cd2059a34b2c43beeb5aa07af51db2d6f889657663d07303` |
+| Verifica del modello per intervalli, 21 controlli | `9d2cfc710f8415c0eaf1e4be8f8737897d79485e495b7909667a0e0b5fb389cb` |
+| Protocollo dei dieci prerequisiti | `810aa3f377f70b72f52acf4a9e9fcd19e53fd5a6d3e95a6c0df0f2b13ca74235` |
+| Capsula locale del supplemento | `7fd1a4c5ff5d91c97be370ae2b045d9739687795cf916c000750e6abfaaf72bd` |
+
+La capsula contiene **26 file**, 496.706 byte compressi. Tutti i membri sono stati estratti e ricontrollati; i due ricalcoli offline hanno prodotto prove identiche. Conservati anche il primo verificatore con annotazione d'integrità ridondante, la sua correzione e il rifiuto del primo conteggio degli esempi: nessun risultato nativo è stato modificato. I sorgenti installati inclusi nella capsula sono copie locali, non caricamenti pubblici.
+
+Questo aggiornamento pubblica soltanto la documentazione. Il supplemento resta esterno alla capsula H85 già congelata; il suo consolidamento nella conoscenza è pending. Nessuna validazione scientifica, attivazione del portale, deploy, merge o trasferimento integrale degli archivi è attestato da queste prove.
+
 ## Stato corrente: H85 provvisoria e rendiconto v67
 
 La conoscenza corrente è **H85, provvisoria**, con **241 schede**, lettore v37 e **48 controlli CLI riusciti**. Preservati tutti i 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner, le 239 schede precedenti e l'autorità **v600 / 1.171**. Sette famiglie e 25 assi restano aperti, **zero chiusure scientifiche**. Le osservazioni precedenti restano nello storico e non vengono riscritte.
