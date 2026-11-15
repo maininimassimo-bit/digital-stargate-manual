@@ -1,5 +1,43 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Nota operativa successiva a H92: correzione delle scale e piano principale a 520 richieste
+
+**Correzione esplicita:** il manifest congelato contiene scale **1 e 2**. La scala 4 era stata indicata erroneamente come configurata nel dimensionamento; il valore 100.663.296 byte era quindi un margine conservativo per la sorgente 512, quattro volte il massimo effettivo. I file e gli archivi H92/v74 restano conservati byte per byte. La correzione separata è `full-noise-scale-sizing-correction-h-v1/correction.json`, SHA256 `5519ca1acb32299bd27a8c2ee6724f6fe076522617785e0205c1a699df9079ff`.
+
+| Lato sorgente | Campi per immagine | Banche fisiche | Richieste canoniche | Massimo nominale integrazione + pesi |
+| --- | ---: | ---: | ---: | ---: |
+| 512 | 4.096 | 32 | 8.320 | 25.165.824 byte |
+| 1024 | 16.384 | 8 | 2.080 | 100.663.296 byte |
+| 2048 | 65.536 | 2 | 520 | 402.653.184 byte |
+
+Tutti i layout mantengono **131.072 campi, sette profili di varianza e 2.632 endpoint logici**. Il volume nominale di pixel d'uscita dell'intera famiglia è invariato: 118.782.689.280 byte, senza contare History, metadati o archivi. Ridurre il numero di chiamate non riduce il campione e non dimostra un tempo totale di esecuzione.
+
+Il piano principale prepara due banche 2048 mediante **permutazione esatta dei bit** degli originali 512, delle copie di lavoro e delle predizioni Float32 già congelate. Non ricalcola sigma o offset, non arrotonda nuovamente i dati, non acquisisce altri campioni e non scarta campi. Il materiale 512, i suoi pacchetti e i controlli restano disponibili come alternativa conservativa. La scelta precede qualunque nuovo risultato d'integrazione nativa.
+
+### Dati principali ricomposti e richieste verificate
+
+Sono salvate 56 triple logiche, con **52 originali, 52 copie di lavoro e 52 predizioni Float32 distinti**. Una verifica inversa basata sulle coordinate confronta tutti i **234.881.024 pixel logici delle triple** con i genitori 512 e verifica la copertura biunivoca delle posizioni. Le 258 occorrenze logiche negative originali rimangono conservate. La permutazione degli input non prova l'equivalenza dei risultati nativi fra i layout.
+
+- Manifest dei dati 2048: `081394df2f9b6b1fed750d1c94c8fb1261880a81030571d5c0200b93b18e209a`.
+- Verifica inversa completa: `384a39421865de6a0b6fffb23c52a0bc69a6cb3277c4e1603265867744f2e4b8`.
+- Manifest dei pacchetti 2048: `750a4cc2820af0ea093fc483a95854647545037cec1d4ffec737fc6d5f39fdfe`.
+
+Il confronto indipendente esamina **560 pacchetti logici, 520 richieste canoniche, 2.240 riferimenti a sidecar, 404 sidecar distinti e 40 identità di alias dichiarati**, oltre a tutti i byte del segnaposto RGB 2048. Sono verificati i pacchetti richiesti e i file effettivi. Simboli enum, setter e letture native non sono osservati da questo controllo.
+
+### Controlli del materiale 512 conservato
+
+Le 32 factory di configurazione 512 superano 199.680 controlli con oggetti simulati, su tutte le 8.320 richieste. Coprono parametri mutati, geometrie errate, namespace di blocco sbagliati, enum mancanti e anomalie di setter/getter, senza esecuzioni native.
+
+Le predizioni Float32 dei 832 sorgenti sono calcolate con scarto dei bit, regola di parità e riporto interi. Confronto di 3.780 frontiere con conversione scalare e di tutti i **218.103.808 valori fisici** con una conversione vettoriale distinta; nove input fuori dominio sono rifiutati. Le 32 routine di lettura con allowlist congelata superano 2.144 controlli simulati, inclusi tutti i 832 casi positivi e la conservazione delle risorse irrisolte. Non sono letture effettuate da PixInsight.
+
+### Risorse e limiti di ammissione
+
+Due precedenti casi deterministici 2048, entrambi a scala 2 e uno a tre canali, registrano un massimo campionato di memoria privata di 1.614.733.312 byte in 123 campioni, senza richiesta di arresto. I relativi input hints erano vuoti: non costituiscono un limite per tutti i nuovi casi gaussiani con `no-normalize`, per i picchi non campionati o per un'intera sessione.
+
+Prima di avviare i nuovi casi servono ancora factory e lettura tipizzata del layout principale, trasporto raw/range, analisi completa e controller originale, con ammissione comune R4, controllo delle risorse e conservazione di ogni caso concluso. Nessuna nuova integrazione PixInsight è eseguita in questa preparazione. Il precedente punto al 15,16% relativo resta NOT_MET; soglie Owner e dominio scientifico restano invariati.
+
+Questa nota è successiva a H92 e non è una nuova conoscenza finale. I nuovi artefatti devono ancora essere consolidati e archiviati nella consegna completa; non sono inclusi retroattivamente nella capsula H92. Tutti i nuovi dati sono su H:. Zero chiusure scientifiche, nessun trasferimento remoto integrale attestato.
+
 ## Stato corrente: H92 provvisoria, lettore v44 e rendiconto v74
 
 **H92 contiene 258 schede** e conserva tutte le 255 schede H91, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Il lettore cambia soltanto nome e impronta predefiniti; otto controlli CLI verificano audit, riepilogo, policy, le tre nuove schede, l'asse del rumore e il rifiuto dell'impronta errata. Il rendiconto v74 aggiunge tre collegamenti a DrizzleIntegration e conserva ogni criterio. Autorità v600 / 1.171 invariata. **Sette famiglie, 25 assi e milestone restano aperti, zero chiusure scientifiche.**
@@ -14,7 +52,7 @@ La sorgente originale usa moltiplicazione e addizione binary64 separate, con med
 
 La ripartizione preserva tutti i campi e i 2.632 endpoint logici del certificato, senza selezione dai risultati. La precedente proposta di due immagini 2048 e 520 chiamate non è eseguita. Con 32 blocchi, le chiamate prospettiche diventano **8.320**, soltanto se gli alias effettivamente serializzati sono qualificati per ciascun blocco. Non sono 8.320 casi scientifici indipendenti.
 
-Alla scala massima 4 e tre canali, integrazione e pesi richiedono nominalmente 100.663.296 byte di pixel. Questo non limita la memoria privata complessiva di PixInsight e non sostituisce le guardie di risorse, ownership e prenotazione comune R4. Nessuna nuova istanza PixInsight viene avviata da questa preparazione.
+Correzione successiva: le scale congelate sono 1 e 2. Per sorgenti 512 e tre canali, integrazione e pesi richiedono al massimo 25.165.824 byte di pixel; il precedente 100.663.296 era un margine per scala 4 non configurata. La nota operativa iniziale conserva e corregge esplicitamente questo errore. Questo non limita la memoria privata complessiva di PixInsight e non sostituisce le guardie di risorse, ownership e prenotazione comune R4. Nessuna nuova istanza PixInsight viene avviata da questa preparazione.
 
 ### Costruzione e confronto riproducibile
 
