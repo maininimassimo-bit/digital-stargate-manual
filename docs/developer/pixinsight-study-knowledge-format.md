@@ -1,5 +1,19 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Primi 33 casi: scostamenti relativi conservati e analisi della coda — 15 novembre 2026
+
+Uno snapshot post hoc dei primi 33 casi salvati contiene 208 endpoint e 13.631.488 confronti endpoint-campo: 253 superano il limite relativo Owner del 5%, mentre tutti rispettano il controllo assoluto di 10^-6. Alias, profili e campi condivisi rendono questi confronti dipendenti: non sono milioni di prove indipendenti né una stima del rischio delle decisioni IA. L'analisi completa dei 64 casi conservati è ancora in corso sul genitore originale; il controllo successivo ha osservato 41 file di analisi salvati.
+
+Sono ricontati tutti i byte di stato e le impronte dei blocchi dei 33 casi, e ricontrollate le identità razionali di tutti i testimoni di errore salvati. Un campo effettivamente fallito è ricostruito separatamente dai byte Float64 originali, Float32 previsti e Float32 nativi, con decodifica diretta degli offset e valutazione frazionaria dei coefficienti congelati. Caso 0000, campo globale 20418: errore relativo 9,247521645%, su riferimento piccolo ma non nullo; l'errore assoluto è inferiore a 10^-6. Il passaggio assoluto non annulla il fallimento relativo. Non sono ricostruite istruzioni interne del compilato o tutte le referenze raw degli altri campi; i coefficienti del modello sono riutilizzati, non nuovamente derivati. Nessuna soglia è modificata e nessun riferimento non nullo è dichiarato indefinito perché piccolo.
+
+Rapporto: `primary2048-bank00-first33-failure-diagnostic-h-v1/report.json`, SHA256 `724cd1f10c93853d90b3cbef2b4a24f7ac2771284e2af89b36c0ca58685c1cd5`. È uno snapshot descrittivo prima del controllo finale delle sorgenti da parte del genitore; non è un sottoinsieme confermativo né una chiusura scientifica.
+
+L'analisi della coda da 196 casi conserva il modello completo di 2.912 endpoint e seleziona esplicitamente i 2.352 endpoint di quei casi: i 560 dei 64 casi precedenti restano distinti. Sono riusciti 21 controlli simulati dell'orchestrazione e cinque controlli del filesystem, incluso un replay con zero nuovi casi che ricontrolla le 26 letture storiche effettive. Non sono nuovi risultati nativi. Sono conservati separatamente anche i 42 controlli simulati dell'esecutore, i 30 degli intervalli, i 33 delle ricevute e le versioni iniziali fallite con le correzioni. Restano necessari genitore originale, ammissione comune, prova nativa dell'hash incrementale e provenienza composita prima della ripresa; i 64 casi non saranno ripetuti.
+
+La capsula di questa analisi e della diagnostica contiene 684 file, 25.176.838 byte di ZIP, SHA256 `042a6cc82d3b0d7582bfd55087bac645b3b0470f101adf82ef659c147108c5e4`; ogni file estratto coincide. Include stati, errori, blocchi e metadati dei primi 33 casi, con i byte IEEE del punto ricostruito nel rapporto. Dieci file di immagini/input selezionati restano esterni e identificati dalle loro impronte. Non è un recupero autosufficiente di tutti i raw, non riesegue PixInsight e non è caricata su GitHub.
+
+H94/lettore46/rendiconto76 restano provvisori: questi nuovi risultati non sono ancora consolidati nel file semantico. Zero chiusure scientifiche; restano intero dominio, confronto IA, conoscenza finale e passaggio completo con recupero GitHub. I sette workflow riusciti del precedente `b726b831e2285228bebd4982179effae1594b34d` restano evidenza separata dai controlli del nuovo commit. Nessun merge, deploy, portale, modifica di master/script installati o M27.
+
 ## Banco 00 fermato in sicurezza dopo 64 casi — 15 novembre 2026
 
 Questo stato supera le precedenti indicazioni di banco ancora in esecuzione; gli snapshot precedenti restano immutati. Il controllo di memoria ha richiesto un arresto al confine di un caso salvato: memoria privata osservata 2.158.915.584 byte, limite previsto 2 GiB. Non è un fallimento scientifico né una prova di esaurimento della RAM dell'host.
