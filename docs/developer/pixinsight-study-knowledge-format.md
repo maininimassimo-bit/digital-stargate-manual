@@ -1,5 +1,28 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## H99: ricostruzione completa dei 580 scostamenti e stato del recupero — 15 novembre 2026
+
+Per tutti i 580 scostamenti salvati sono state decodificate separatamente le coppie di uscita native: 1.160 letture di campioni da 114 file raw verificati. Per i riferimenti sorgente, 8.596 richieste corrispondono a 6.318 campioni distinti su 20 file. Tutti i 580 scalari originali e previsti sono ricostruiti dai byte con XML, decodifica IEEE e frazioni esatte e coincidono con l'analisi salvata. I coefficienti congelati sono riutilizzati: la verifica non ne deriva nuovamente la validità fisica o geometrica.
+
+Il limite sul reticolo di rappresentazione esclude il 5% in 173 confronti, mantenendo per ciascun campione Float32 segno/intervallo di esponente osservato, selettore, compensazione e unità. Per 407 confronti il reticolo non esclude l'intervallo ammesso, ma ciò non dimostra che una coppia valida o l'implementazione lo raggiungano: restano tutti fallimenti effettivi oltre il 5%. Nessun confronto è rimosso e le osservazioni dipendenti non diventano prove indipendenti. Non è una validazione dell'intero workflow.
+
+La correzione dell'header aggiunge un'inclusione esplicita dei byte installati di DataType.jsh. Sono riusciti 25 controlli offline, senza iniettare implicitamente la costante nel contesto simulato. La risoluzione lessicale limitata non è il preprocessore PJSR: File e Hash restano simulati e la correzione non ha ancora una prova nativa.
+
+Il controllo Windows sul file esatto del tentativo fallito ha negato una sola apertura esclusiva in lettura con errore di condivisione 32. Non prova quale processo detenga il file e non attesta assenza di risorse aperte. La documentazione installata precisa che v8-private conserva il runtime per lo stesso file eseguibile dello script: l'ispezione eseguita da un file diverso non accedeva a quella cache. Il suo risultato non dimostra mancata persistenza del runtime originale. Nessun eseguibile congelato è modificato o rieseguito; restano il parent originale e la prenotazione in attesa di una procedura di recupero separata e revisionata.
+
+H99 contiene 280 schede. Lettore 51 e rendiconto 81 hanno superato 10 controlli, preservando tutte le 4.920 righe, i 14.521 criteri letterali, i 19 criteri Owner e le quattro correzioni interpretative attive. L'archivio locale contiene 51 file, 214.828.678 byte ZIP; tutti recuperati con impronte identiche e audit del lettore identico all'originale. I raw, lo storico precedente e le dipendenze operative restano esterni e identificati.
+
+SHA256:
+- ricostruzione dei riferimenti: `19eb0bd8cbdf06595b67c8bd95e2e7e6eeee5158b9dc193f305c0fe6a7f9f83d`;
+- decodifica nativa e limiti per tutti i confronti: `57806a46f56c5e9b8cef70c06bc89fa5aafe4b5915f1a4212d9ef5be37b48420`;
+- documentazione del runtime e limiti del recupero: `e4161879ef4fec6e24092821d0b302a9509c729c361d25787dbd522b76c20357`;
+- H99: `0d9077664cd08f965d2bb7c355abdba625644cd8f8caa7cacb0350bc6436e252`;
+- lettore 51: `44473ba56c4809472a2888cce7050ca37f344969eb37355bc5016f78d41de292`;
+- rendiconto 81: `23ca4b29e64c0ff43aecdaf386c78de531c223d3fb34e06415bcd63f76726f25`;
+- archivio H99: `79a7b6fac8203cba3e9fa7415a1a7747174a7060e540ac6a39afab122d345bbe`.
+
+Zero nuovi casi nativi, zero chiamate API e zero chiusure scientifiche in queste verifiche. Restano 196 casi del primo banco e il secondo banco non avviato, tutte le altre verifiche del dominio, il collaudo IA, la conoscenza finale e il trasferimento completo su GitHub con recupero. Registro v600/conoscenza1.171 invariati; nessuna1.172 attestata. Questo aggiornamento documentale non costituisce la chiusura della milestone.
+
 ## H97–H98: differenze tra punti, limite Float32 e criterio IA corrente — 15 novembre 2026
 
 L'analisi completa dei 64 casi riconta tutti i byte di stato, le impronte dei blocchi e le 580 identità razionali degli scostamenti salvati. Tutti i 580 riguardano il selettore PAIR_DIFFERENCE: 407 alla scala 1 e 173 alla scala 2. Questi sono confronti dipendenti, non 580 prove statisticamente indipendenti. Il termine nativo meno previsto e l'errore noto di conversione sono residui osservabili che possono compensarsi; non ricostruiscono le istruzioni interne del compilato.
