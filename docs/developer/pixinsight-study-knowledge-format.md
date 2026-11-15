@@ -1,5 +1,27 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## R005: rilascio certificato effettivamente eseguito
+
+Questo aggiornamento supera gli stati di attesa della revisione e del recupero riportati nei resoconti storici sottostanti. Il rapporto indipendente completo R005, SHA256 `8b74dfcffa4cae5c30c828100d821362151336a2bf4abb8826d181fc3d18159c`, ha approvato l'implementazione senza rilievi bloccanti. Rapporto e tutte le 35 evidenze sono stati autenticati e copiati identici su H:. Il consenso umano originale `ca47b65a108e571bfbbbff3bb99850c2a17f8e917b7448407080927ffd2364b1` e rimasto invariato: la review tecnica non e una nuova approvazione umana di hash o effetti.
+
+L'unica esecuzione operativa della continuazione finale e terminata con codice 0 e stato `FINAL_CERTIFIED_NAMESPACE_RELEASE_COMMITTED`. Sono stati applicati i controlli del soggetto congelato con 19 moduli e otto radici: identita e ricevute originali, codice effettivamente compilato, osservazioni fresche, quota globale monouso, riconciliazione dei casi, archivi recuperati e autorizzazione completa sotto il lock preesistente.
+
+Il witness esclusivo in sola lettura ha verificato il file originale da 603 byte, SHA256 `1912a87f78a2b96a50f10de07e87eb1c32b85e04047e29c088d3a486441a584c`, e ha chiuso il proprio handle. La richiesta di witness e stata una sola; le successive letture previste per archiviazione e verifica delle capsule non sono nuovi witness esclusivi. Non si afferma un conteggio globale degli handle.
+
+Il certificato condiviso e la copia permanente H: coincidono byte per byte, SHA256 `2865f1fc9b2c90cccd70a57b05564fa9657ca816f297b77cbf118be47c31c2a9`. La sola rinomina finale senza sostituzione ha conservato il vecchio record originale di 266 byte, SHA256 `9b59f3939f91aeed1d5914c5d097666fff6d17dc7300c16e4cd6963df3461ff9`, nella destinazione di archiviazione della prenotazione. La classificazione readonly successiva e `FINAL_RELEASE_COMMITTED`. L'assenza di active osservata in quel momento non garantisce disponibilita futura: una nuova prenotazione valida resta intoccabile.
+
+### Conservazione e limiti del risultato reale
+
+Le capsule dell'esecuzione contengono 86 file preazione e 180 precommit; i loro ZIP e file recuperati sono stati nuovamente verificati come evidenza storica, senza riaprire il sidecar originale. L'archivio locale selezionato dell'esito reale contiene 350 file recuperati identici, ZIP 2.433.377 byte, SHA256 `c459c0cb322045869c2b61ce500f306292173630ca5c60017ead416edfaa7a1a`. La conferma readonly ha SHA256 `fdbc2aeaaff93297c2470d7b1b55fedea2ba37d98968ae47af72a8e92be8b32f`.
+
+La quota globale resta consumata e conservata. Non ripetere R005, il precedente EXACT004, il witness o la rinomina. Nell'intera sequenza resta un solo arresto forzato, quello originariamente autorizzato e gia eseguito prima di R005; R005 non ha arrestato processi ne avviato PixInsight. Tutte le attivita critiche per il rilascio sono precedenti alla rinomina; conferma e archivio successivi sono conservazione non critica.
+
+Il recupero certifica la disposizione di un tentativo abortito prima dei casi scientifici. Non trasforma l'uscita nativa precedente in successo del contratto ordinario, RETAIN riuscito o salvataggio dimostrato di tutti i documenti. Stato precedente di interfaccia, documenti e risorse resta ignoto. Restano i limiti accettati di crash del controllore, senza garanzie per guasti del sistema o perdita di alimentazione.
+
+I 64 casi conclusi e i loro 580 fallimenti relativi restano conservati; rimangono 196 casi del primo banco e 260 del secondo. Nessun caso e stato duplicato da R005 e nessuna chiusura scientifica e promossa. Il prossimo diagnostico nativo dell'header dovra avere nuova operazione, prenotazione e piano revisionato: il vecchio script riporta la prenotazione precedente e non va riutilizzato. Il rilascio non concede una nuova ammissione nativa.
+
+H102/lettore54/rendiconto84 restano l'ultima conoscenza provvisoria consolidata, precedente a questo esito reale; il nuovo evento dovra essere riconciliato senza alterarne le schede storiche. Registro autorevole ancora v600/conoscenza 1.171; nessuna 1.172 attestata. File finale di conoscenza, completamento delle sette famiglie e trasferimento completo degli archivi su GitHub con download/ricostruzione restano aperti. Questo commit pubblica testo tecnico. Il precedente `0738060f98679a283e6ee8deb4faae2fac952963` ha superato sette workflow, sette job e tutti i 199 step; la CI di questo nuovo commit e distinta.
+
 ## H102: esito reale parziale e continuazione finale congelata
 
 H102 e ancora conoscenza **provvisoria**: conserva integralmente le 287 schede H101 e aggiunge tre schede, per 290 totali. Conserva anche i precedenti collegamenti di correzione e aggiunge due collegamenti successivi, per sette. Il lettore54 espande le correzioni annidate e rifiuta cicli o riferimenti invalidi: una vecchia correzione che riportava review e consenso ancora pendenti si consulta ora insieme al loro successivo esito autentico. Nessuna scheda storica viene riscritta.
