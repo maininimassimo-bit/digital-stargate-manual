@@ -1,5 +1,27 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Aggiornamento operativo: EXACT004 parziale e continuazione finale in preparazione
+
+Questo aggiornamento supera soltanto le indicazioni temporali precedenti sul recupero operativo; conserva integralmente i resoconti storici sottostanti. La revisione completa dell'implementazione EXACT004 e stata approvata nel suo perimetro, seguita dal consenso umano esplicito ai suoi effetti e limiti.
+
+L'arresto dell'unico helper originale autorizzato e stato eseguito una volta, con identita verificata sullo stesso handle ed uscita 45126; gli altri due helper sono usciti naturalmente con codice 1. Il canale originale e realmente terminale con codice 1 e non deve essere ricreato o rappresentato come vivo. La ricevuta dell'arresto ha SHA256 `d976f057ee8ea10de24dfdb57319245b36bb5e458ada6103ecd601ec273978e6`; il consenso originale resta immutato, SHA256 `ca47b65a108e571bfbbbff3bb99850c2a17f8e917b7448407080927ffd2364b1`.
+
+Il tentativo finale si e fermato prima del witness sul file e prima di certificato o rinomina condivisi. Il processo nativo originale aveva gia una ricevuta autentica di uscita 0; una successiva query sul suo oggetto Windows ha restituito identica nascita ed uscita 0, ma la richiesta del nome eseguibile e fallita con errore 31. Questo errore, da solo, non prova l'uscita. Il vecchio controllo interrogava il nome prima del codice di uscita e ha correttamente mantenuto la prenotazione in caso indeterminato. La ricevuta autentica del rifiuto finale ha SHA256 `6034326e2eedc041f40b916675de624ba1bb3ba06e20e3fd81824922897a007d`.
+
+Sono conservati 64 casi conclusi; restano 196 casi del primo banco e 260 del secondo. Nessun caso e stato duplicato da questo recupero. L'uscita 0 non attesta salvataggio completo dei documenti, stato delle risorse, contratto ordinario di successo o validazione scientifica. Restano accettati soltanto i limiti dichiarati: stato precedente di documenti e risorse ignoto e protezione dal crash del controllore, senza garanzie per guasto del sistema o perdita di alimentazione. BKL-051 e esclusa dagli interventi.
+
+### Correzione separata, senza ripetere il tentativo consumato
+
+La revisione del disegno ha esito `APPROVED_DESIGN_WITH_CONDITIONS_NOT_IMPLEMENTATION_OR_EXECUTION`, SHA256 `5b0349462eba64b52b7fe53cac54e7ce7eed0018b406ccc713e1a93e449731e2`. Consente di progettare una continuazione solo finale entro gli effetti residui del consenso autentico, senza attribuire all'Owner l'approvazione di nuovi hash. La bozza separata di collegamento al consenso ha SHA256 `fbf197f1b28d2e427c0b6f4387b53fae8fbdd4e22b9aef95f18046ff4b3ddf0a`; non e autorita operativa e non sostituisce manifest congelato, revisione completa e controlli applicabili.
+
+La nuova query raccoglie nascita e codice di uscita sul medesimo handle prima di chiedere il nome, preservando valore nullo ed errore effettivo quando il nome manca. Il predicato ristretto richiede identita originale, uscita intera 0, query e chiusura riuscite, ricevute storiche autenticate e successivi controlli completi e freschi. Uscita 259, identita incongruente, errori sconosciuti, valori booleani al posto di interi o chiusura non confermata devono bloccare il percorso.
+
+Evidenze locali dei componenti: 41 fixture della query, 60 del predicato e 26 dell'adattatore metadati. Il verificatore storico ha autenticato 58 fonti e il gruppo separato di 127 prove copre alterazioni/assenze delle fonti e il contenitore monouso degli effetti, inclusa creazione esclusiva concorrente su file di prova H:. Sono prove software circoscritte, con callback e metadati inventati dove dichiarato; non sono prove scientifiche, esecuzioni della continuazione o revisione indipendente dell'implementazione completa. Il segnaposto operativo globale non e stato creato.
+
+Restano da completare l'integrazione concreta di consenso, nuovo codice congelato e revisione, i controlli freschi, l'unico witness, archivio recuperato, certificato, copia H:, lock preesistente e rinomina finale senza sostituzione. Nessuna ripetizione del vecchio tentativo, nuovo arresto o ammissione PixInsight deriva dai test dei componenti. Il primo archivio locale dei dieci componenti e stato recuperato byte per byte, ZIP SHA256 `8cefd583f487f72ace10244446cd519a71ee4ece295e29ff9619576b110852b9`; le dipendenze esterne e le evidenze storiche referenziate restano dichiarate.
+
+Questo aggiornamento pubblica documentazione tecnica. La conoscenza H101 resta provvisoria; il registro autorevole e ancora v600/conoscenza 1.171 e non attesta 1.172. Restano aperte tutte le sette famiglie scientifiche, con zero chiusure. Il file finale di conoscenza e il trasferimento completo degli archivi su GitHub, con download e ricostruzione verificati, non sono ancora completati.
+
 ## H101: correzioni consultabili e conservazione della conoscenza provvisoria
 
 H101 e una revisione locale **provvisoria**, non il file finale di conoscenza e non una pubblicazione del registro autorevole. Conserva tutte le 283 schede di H100 e aggiunge quattro schede, per un totale di 287. Restano invariati 4.920 requisiti, 14.521 criteri letterali, 19 criteri Owner, sette famiglie e 25 assi; zero chiusure scientifiche.
