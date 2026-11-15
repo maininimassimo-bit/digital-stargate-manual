@@ -1,5 +1,33 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Aggiornamento BKL-046: recupero gia uscito, subject EXACT004 (2026-11-15)
+
+Questa sezione aggiorna lo stato operativo riportato nelle sezioni storiche sottostanti, i cui byte restano conservati. Non promuove H100 a conoscenza finale: registro v600 / conoscenza 1.171 invariati; nessuna 1.172 attestata. Restano aperti sette famiglie, 25 assi, 4.920 requisiti, 14.521 criteri e 19 criteri Owner; zero chiusure scientifiche.
+
+### Revisione, errori e perimetro delle prove
+
+Il primo pacchetto di recupero ha ricevuto CHANGES_REQUIRED: FULL-001 rilevava che OPEN_ALWAYS poteva creare host.lock se assente. Il namespace corretto usa OPEN_EXISTING e rifiuta l'assenza senza creare o riparare il lock. La successiva revisione di execution002 ha individuato FULL-002: sei nomi di root obsoleti erano assenti dai 25 moduli pinnati. Le precedenti suite 51/16/7 ricostruivano un source-set differente e **non qualificavano il subject concreto execution002**. I report precedenti restano storia, non approvazioni del pacchetto corrente.
+
+EXACT004 conserva 28 moduli, 35 riferimenti di controllo e sette root coerenti. Manifest SHA256 `d8120a1f7da81be4f64ca1bbda83cb3c1b07559585f9e50bc4d4706c15c33df5`. L'indice delle qualifiche, SHA256 `4543291adc1b99aa9fe4b57917bc10a085677f6b26830bd59f05d78531c80235`, registra 56 casi certificato, otto scenari collegati, 13 casi bootstrap, 16 controlli runtime e nove prove del lancio minimo. Il percorso collegato carica i 28 sorgenti da byte verificati e comprende il nuovo controllore precedente all'arresto. Consuma manifest e source-set concreti byte per byte; non ricostruisce le root della prova positiva. I fatti Owner/review, tool, OS, backend di arresto e witness rimangono inventati nelle fixture: nessun recupero reale e nessuna validazione scientifica ne derivano.
+
+Due errori del generatore di prove sono conservati separatamente: il confronto Python false == 0 annullava una mutazione negativa, e un source-set corrotto era correttamente rifiutato prima del blocco di gestione dell'errore della fixture. La serie corretta distingue i tipi tramite JSON canonico e registra il rifiuto precoce alla costruzione dell'archivio. Il codice operativo non e stato reso permissivo per ottenere il risultato positivo.
+
+### Uscita nativa e prerequisiti residui
+
+L'osservazione originale host-observation-00003, SHA256 `dcd24a60403fa431531d1dbae65e86a24c6c44ff2097114c892782324370fc91`, attesta l'uscita nativa 0 in HOLD_NATIVE_EXIT_BEFORE_SUPPORTED_CLOSE_REVIEW. Non attesta la causa dell'uscita, un RETAIN riuscito, documenti salvati, handle globali assenti, analisi o rilascio ordinario. Nessuna chiusura retroattiva o nuova istanza PixInsight viene fabbricata.
+
+Il contratto V4 gia uscito, SHA256 `d8c82bfeb98224a723a20babea879a1510b5d826020cb89e6d97fe82b35b36ec`, ammette solo stop/finalRelease. Il comando preClose e rifiutato dal codice, anche se il campo descrittivo trailingArguments del piano minimo conserva una menzione storica da riconciliare. Il disegno ha ricevuto una review limitata al design; la whole implementation review di EXACT004 e richiesta e rimane pendente, distinta dalla successiva concreta eccezione Owner, inclusa l'accettazione dello stato UI/documenti/risorse ignoto al momento dell'uscita.
+
+Il capture precedente all'arresto e legato come sesto pin al risultato del controllore. La scansione precedente all'arresto e un input esplicito del certificato e dell'archivio recuperato; la sua freschezza viene verificata al cut storico, senza equipararla alla scansione finale fresca. Restano obbligatori identita esatte, canale originale genuino, nessun nuovo PixInsight, unico witness dopo le uscite, riconciliazione e archivi verificati prima del certificato/copia H e della singola rinomina finale. Nessun effetto reale di arresto, apertura del sidecar trattenuto o modifica del coordinamento e stato eseguito.
+
+### Conservazione e trasferimento GitHub
+
+La capsula locale selezionata EXACT004 conserva 53 file recuperati con byte identici: ZIP 310.507 byte, SHA256 `8c78d3409aa407492f8f204c65d3c610cdc1826d41b4133dfe01046b91261535`; manifest SHA256 `bfb70340760a80ce90a154ab7e003dec71066ce3058716e212d31b7ad7ab362e`. Include sorgenti e report selezionati; alberi completi delle fixture, ambiente, dati originali e storia integrale restano dipendenze esterne dichiarate. Questo aggiornamento trasferisce il testo tecnico, non la capsula o l'archivio completo.
+
+I 64 casi originali e i 580 scostamenti relativi oltre il 5% restano conservati; zero nuovi casi scientifici, 196 + 260 ancora non eseguiti. Lo studio completo, il file di conoscenza finale e il trasferimento effettivo integrale su GitHub con download e ricostruzione verificati restano da completare. PR in bozza; nessun merge, deploy o attivazione del portale.
+
+---
+
 ## H100: limite della conversione successiva a 64 bit e pacchetto di recupero — 15 novembre 2026
 
 H100 è una revisione semantica locale **provvisoria**, con 283 schede: tutte le 280 precedenti sono preservate e tre sono aggiunte. Lettore52 e rendiconto82 hanno superato 11 controlli CLI, incluso il rifiuto dell'impronta errata. Restano identici 4.920 requisiti, 14.521 criteri letterali, 19 criteri Owner, le soglie e le quattro correzioni interpretative attive. La sola riga DrizzleIntegration riceve nuovi collegamenti di evidenza; nessuna chiusura scientifica è promossa.
