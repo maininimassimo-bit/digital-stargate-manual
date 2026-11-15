@@ -1,5 +1,29 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## H103: recupero reale consultabile senza riscrivere lo storico
+
+H103 e la nuova conoscenza locale **provvisoria**, non il file finale. Conserva integralmente le 290 schede H102 e aggiunge tre schede, per 293 totali. Conserva tutti i precedenti collegamenti di correzione e ne aggiunge due, per nove. Il lettore55 segue ora anche la catena dalla vecchia qualifica del recupero fino all'esito reale R005, mantenendo intatto ogni contenuto storico.
+
+File `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v103.json`, SHA256 `09e76058c632ca46338cc906d98b885721f5fce9d5af0d9deeb9df97891ab20f`; lettore55 `consult_provisional_dsg_knowledge_h_v5_v55.py`, SHA256 `7537dee8009c38ac1b263ede67c866226f34c23ebf58abc6527cea952f24fd69`. Undici consultazioni CLI hanno superato le verifiche, comprese le catene di correzione fino al rilascio reale, il riferimento ai dati Owner e il rifiuto di un'impronta errata.
+
+Il rendiconto85 ha SHA256 `beb6881ab616d41c888c8282471f93e1beb7beba7338cfc08dc33ae180903512`. Tutti i 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner restano conservati con le loro disposizioni canoniche. Sette famiglie, 25 assi, zero chiusure scientifiche. I 64 casi conclusi, i 580 fallimenti relativi e i 196+260 casi ancora da eseguire non cambiano.
+
+Le nuove schede separano tre fatti: R005 e realmente concluso come recupero certificato di un tentativo abortito; le sei fonti correnti del dominio sono identiche alle copie precedenti e i dati Owner recuperati restano utilizzabili entro i limiti dichiarati; il futuro diagnostico dell'header e ancora un prototipo offline. Il rilascio non prova il successo ordinario precedente, il salvataggio di tutti i documenti, la linearita fisica o una nuova ammissione PixInsight.
+
+### Dati Owner e prossimo diagnostico
+
+Il controllo corrente del repository usa il commit `f0239cab6133d4968c6b92f1baca179e04c2bb13`. Le 80 righe nei tre fogli sensori e le 621 celle selezionate dell'Excel Owner sono dati effettivamente recuperati, non materiale mancante. I 20 frame ATR294C gia studiati documentano un solo punto operativo: non identificano da soli risposta su piu livelli, incertezza, seriale fisico o conversione DN/elettroni. Un esempio ASI2600 in un modello dati non viene sostituito al contesto delle camere configurate.
+
+Il generatore del nuovo script header-only ha superato 20 prove di costruzione; il codice generato ha superato 11 prove con API simulate. Un ulteriore componente offline verifica la ricevuta prodotta da quel codice simulato: 42 prove coprono contesto, impronte, tipi numerici, dichiarazioni non supportate e intervallo temporale. Tale componente non osserva il parent, l'interfaccia o il runtime nativo e non autorizza chiusura, rilascio o avvio. Le 42 prove sono evidenza aggiuntiva dell'archivio selezionato, non una nuova prova scientifica o un pacchetto parent completo.
+
+Restano da implementare e revisionare il parent originale, il controllo completo delle sequenze di successo/errore/ricevuta assente, l'osservazione dell'interfaccia vuota e l'uscita normale. Ogni futuro avvio richiede una nuova ammissione R4 e un legame reale con la nuova prenotazione; lo stato di disponibilita non si deduce dal precedente rilascio. Nessuna operazione nativa e stata eseguita per questi nuovi componenti.
+
+### Archivio selezionato e consegna ancora aperta
+
+La capsula H103/lettore55/rendiconto85 conserva 60 file, ZIP 183.254.808 byte, SHA256 `aba5549ee2912b97063348655742f0092c0a60732de2456ed60c5803b318c010`. Tutti sono stati recuperati identici. Audit e consultazione della vecchia scheda con catena fino al risultato reale producono lo stesso output dalla copia recuperata. Questa autonomia vale per le due consultazioni dimostrate: rigenerare H103 richiede ancora H102 e altre dipendenze esterne conservate separatamente.
+
+Questo commit pubblica testo tecnico, non H103 o i suoi archivi binari. Registro autorevole ancora v600/conoscenza 1.171; nessuna 1.172 attestata. Restano aperti lo studio scientifico completo, il file finale di conoscenza e il passaggio completo su GitHub con download e ricostruzione verificati. Il precedente commit `9ea40e8842eacacda14c5569b586f4db8ee41d49` ha superato sette workflow, sette job e tutti i 199 step elencati; la CI di questo nuovo aggiornamento e distinta.
+
 ## R005: rilascio certificato effettivamente eseguito
 
 Questo aggiornamento supera gli stati di attesa della revisione e del recupero riportati nei resoconti storici sottostanti. Il rapporto indipendente completo R005, SHA256 `8b74dfcffa4cae5c30c828100d821362151336a2bf4abb8826d181fc3d18159c`, ha approvato l'implementazione senza rilievi bloccanti. Rapporto e tutte le 35 evidenze sono stati autenticati e copiati identici su H:. Il consenso umano originale `ca47b65a108e571bfbbbff3bb99850c2a17f8e917b7448407080927ffd2364b1` e rimasto invariato: la review tecnica non e una nuova approvazione umana di hash o effetti.
