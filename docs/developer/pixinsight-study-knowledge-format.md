@@ -1,6 +1,52 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H90 provvisoria, lettore v42 e rendiconto v72
+## Stato corrente: H91 provvisoria, lettore v43 e rendiconto v73
+
+**H91 contiene 255 schede**, preservando tutte le 253 schede H90, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità v600 / 1.171 invariata, sette famiglie e 25 assi ancora aperti, zero chiusure scientifiche. Il lettore v43 cambia soltanto nome e impronta predefiniti e supera sei controlli CLI mirati. Il rendiconto v73 conserva ogni criterio originale e aggiunge due collegamenti a DrizzleIntegration. H91 resta una conoscenza provvisoria.
+
+### Esiti nativi del prefisso archiviato
+
+Sono osservate **26 letture esplicite in Float32** e **260 integrazioni Drizzle**; restano **0 casi mai reclamati**. Le letture esplicite sono testimoni del tipo e dei byte restituiti da FileFormat; non sono il conteggio delle letture interne eseguite dal modulo Drizzle. Le configurazioni, sorgenti e previsioni erano congelate prima dell'invio singolo del comando.
+
+L'analisi verifica 168448 estimandi tecnici supportati e conserva 17920 record senza stima, senza inventare selettori. Esito finito: **NOT_MET_IN_COMPLETED_FINITE_FIXTURES**. Il confronto finito presenta scostamenti o incoerenze: gli esiti sono conservati e non vengono riclassificati come accettati.
+
+| Controllo finito | Record |
+| --- | ---: |
+| Oltre 1e-6 di errore assoluto | 0 |
+| Oltre 5% di errore relativo | 1 |
+| Errore relativo indefinito a riferimento zero | 0 |
+| Supporto richiesto mancante | 0 |
+
+Errore previsto della lettura, scarto aritmetico successivo, errore assoluto e confronto relativo sono mantenuti separati. Ogni intervallo binario64 è confrontato con gli estremi effettivi dei pixel supportati dai pesi. Le righe dettagliate, inclusi gli scostamenti, sono conservate nelle analisi immutabili dei singoli casi. Questi confronti puntuali su un prefisso tecnico fisso **non validano la varianza di popolazione**, la legge IID della sorgente, un limite uniforme del modulo o tutte le fotografie del dominio.
+
+Il singolo scostamento è nel caso `archived-prefix--canonical-0236`, BGGR, scala1, drop nominale11/20, canale blu, differenza tra pixel nel riquadro(6,6). L'errore relativo è circa **15,16%**, con errore assoluto circa **2,746×10⁻⁸** su un riferimento nonzero molto piccolo. La scomposizione esatta distingue circa1,04% relativo della sola lettura e circa14,12% dello scarto successivo. Il confronto resta oltre il5% congelato. Le ricostruzioni geometriche controfattuali, dichiarate posthoc, non spiegano lo scarto usando soltanto l'arrotondamento finale dei due pixel; non isolano ogni passaggio del modulo compilato e non sostituiscono l'oracolo originario. La sola griglia locale Float32 non rende impossibile il5%. Nessun campione è scartato o rigenerato, nessuna soglia è cambiata. Un punto di questa raccolta correlata non è una stima del rischio di popolazione o del rischio decisionale IA.
+
+Il primo replay della capsula ha prodotto CRLF anziché i terminatori LF originali nel primo file JSON, con contenuto identico dopo la normalizzazione delle righe. Il tentativo fallito è conservato; un nuovo replay con scrittura LF esplicita verifica l'identità esatta di tutti i file di analisi e del rapporto. Nessuna prova nativa viene rilanciata per questa correzione del recupero.
+
+### Custodia, motore privato ed errori conservati
+
+Il piano vincola 881 file al custode comune R4. I controlli simulati comprendono guardia24, fasi43, confini del parent32, percorso completo del parent10, ciclo di osservazione17, operatore39, rilascio startup19 e ownership18. Il parent conserva l'oggetto Popen originale; errori di osservazione, scrittura o analisi mantengono parent e custode, con nessun retry o chiusura automatica. Due osservazioni complete della console, sorgenti, identità, moduli caricati e risorse sono verificate prima dell'invio UI singolo.
+
+È conservata una correzione precedente all'ammissione: la documentazione primaria installata specifica che `#engine v8` equivale a `v8-new`, il cui contesto termina con lo script. Il prototipo con quella direttiva non è stato eseguito nativamente. La fase corretta usa `v8-private`, con definizioni locali e contenitore globale degli oggetti trattenuti. Le prove NodeVM verificano la logica e il rifiuto di una seconda esecuzione; non sono presentate come dimostrazione autonoma della durata del motore nativo. Nessuna installazione o script installato è stato modificato.
+
+Una nota immutabile documenta un arrotondamento di cinque tick da 100 ns nei due registri accessori prodotti da JSON Number nell'interfaccia. Le verifiche operative Python/CIM e le impronte delle ricevute mantengono i valori esatti; gli originali sono conservati e i valori a 64 bit vengono riferiti come stringhe decimali o byte verificati. Nessun invio è ripetuto.
+
+Il parent originale verifica l'uscita nativa zero prima dell'analisi esatta e termina soltanto dopo averla salvata. L'operatore riconcilia UUID, PID e nascita, ricevute, partizione completati/rimanenti e rilascio del medesimo custode. Non richiede di interferire con una prenotazione successiva di un'altra milestone.
+
+### Recupero dei byte e della conoscenza
+
+La capsula nativa contiene 3181 file e 53861343 byte, SHA256 `90c098a3603b3103b0d6370c1ddb5fa98ff5851b915d9f094da74bcbf5fb559f`. Tutti i byte sono estratti; tutte le analisi dei casi vengono rigenerate dai dati recuperati e risultano identiche byte per byte. Il rapporto del nucleo analitico recuperato è identico; il replay offline non riavvia PixInsight e non ricrea artificialmente la custodia originale.
+
+La capsula H91 contiene 50 file e 75075866 byte, SHA256 `0391739c26c75de97c172dbc69a848e44a73ac20b1c82efc2a08c92a63834cc1`. L'audit del lettore recuperato coincide con quello originale. Genitori storici e ambiente nativo con licenza restano dipendenze esterne dichiarate.
+
+- Conoscenza H91: `0904428bc7fb40b1f5425913d8a18033302a41e4f5dc2bedcb3531f951834ab0`.
+- Lettore v43: `d65f9f8c3b09bd4fe7418a8186db3247232ceb459a4f6705147cdd3e58a68349`.
+- Rendiconto v73: `4177c85578764133d331202503beeee50120e85ea542ff11ee34654dffef44a6`.
+- Rapporto dei risultati nativi: `4053f7889ebe8ca629cb233455b34cfdae3fca9ea5a755437758462e16b67b2d`.
+
+Le prove native precedenti e i tentativi respinti restano conservati; nessun caso già concluso è ripetuto. Restano aperti il dominio scientifico delle sette famiglie, la caratterizzazione fisica, il rischio decisionale IA, la conoscenza finale e il trasferimento integrale su GitHub con recupero remoto di ogni byte. Le capsule locali e la documentazione tecnica non attestano quel trasferimento. Materiali BKL-046 su H:, PR in bozza; nessun merge, deploy, portale, modifica ai master, migrazione Codex o ripresa di M27.
+
+## Stato storico: H90 provvisoria, lettore v42 e rendiconto v72
 
 **H90 contiene 253 schede**, preservando tutte le 251 schede H89, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Il lettore v42 conserva la logica del v41 salvo nome e impronta predefiniti; sei controlli CLI mirati sono riusciti. Il rendiconto v72 conserva tutti i criteri e aggiunge soltanto due collegamenti di evidenza a DrizzleIntegration. Autorità **v600 / 1.171** invariata: sette famiglie e 25 assi aperti, zero chiusure scientifiche. La conoscenza resta provvisoria.
 
