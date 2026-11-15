@@ -1,5 +1,21 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Conoscenza H94 e unione esatta dei due banchi — 15 novembre 2026
+
+H94/lettore46/rendiconto76 costituiscono lo stato provvisorio successivo a H93. Restano invariati il registro v600/conoscenza1.171, tutti i 4.920 requisiti,14.521 criteri e19 criteri Owner, le schede storiche e gli stati scientifici. H94 contiene268 schede; SHA256 `061780651bbfb63b048bea90c9171dacc8c09540068bbbd987eab5257edb911d`. Il lettore46, SHA256 `550561fce1a0f0e5cd1eb42c1765479f0cc9052f4ae7bc691273c59c62862d9d`, supera12 prove effettive, inclusi audit completo, viste correnti, correzione storica e rifiuto dell'impronta errata. Il rendiconto76 ha SHA256 `b8da4258722d7acbdcd0385105a46c761a8b42c2e32003061dd16865eb370425`.
+
+L'unione richiede i due banchi completi,260 casi e26letture ciascuno, e verifica impronte dei piani/modello e dei520file di caso. Conserva ordine, alias, identità dei2.912endpoint, intervalli globali e tutti gli stati dei campi. La media dei momenti centrati dei banchi non sostituisce la varianza complessiva: il calcolo razionale esatto conserva anche la differenza fra le medie. Identità dei momenti noti, contributo incrociato dell'errore, conteggi e partizione contigua sono verificati. Un solo campo senza supporto o trattenuto per fallimento dell'audit impedisce i momenti completi; i momenti di sottoinsieme restano distinti. Riferimenti nulli restano indefiniti per l'errore relativo e tutti i fallimenti Owner vengono conservati.
+
+Sono riusciti22controlli dei momenti,17delle coppie di endpoint,17dell'orchestrazione completa e10del filesystem. Una prova composta usa il filesystem e il calcolo effettivi su520file simulati,5.824righe di endpoint in ingresso e260file di risultato: tutti i2.912endpoint mantengono131.072stati ciascuno,381.681.664stati scalari. Questi non sono prove indipendenti né nuove misure native. Esito: `primary2048-full-saved-merge-filesystem-qualification-h-v1/verification.json`; rapporto composto SHA256 `f26fa4bfebd0396103109e30ac0b153348bd9d79c3c7ede076ec70ae7d2416b0`.
+
+L'ingresso operativo `merge_original_completed_banks` ricontrolla le ricevute originali di chiusura, uscita, analisi e rilascio comune di entrambi i banchi; non avvia, adotta o chiude processi. Non è ancora stato applicato a due banchi nativi conclusi. Il salvataggio su H: è esclusivo e conserva gli esiti parziali in caso di errore; il replay offline resta esplicito e non attesta custodia nativa.
+
+L'archivio locale della preparazione contiene836file/12.902.000byte, SHA256 `e464c5e6a3f80e235cefef961cf5fff23af8ef20269191d4b6d1bebb6a14db68`, estratti con impronte identiche. La capsula H94/lettore46/rendiconto76 contiene36file/209.097.066byte, SHA256 `0a81ea6ec4df69635b6ca243072e16d8da435c10f7f410237a04ccf09a691925`: tutti i file recuperati coincidono e l'audit del lettore recuperato è identico byte per byte. Dipendenze esterne e storia precedente restano dichiarate e distinte. Nessuna delle due capsule è ancora caricata su GitHub.
+
+La stessa operazione nativa del banco00 continua senza riavvii: lo snapshot immutabile di35casi salvati e ripuliti è `Handover-BKL046-unione-due-banchi-filesystem-completo-mock-20261115-H-v1.json`, SHA256 `c7786926c2cc0b754d3a84fd20f813cf7aa00921c62cf6e2346b44acf56e86bb`. Il successivo controllo ha osservato44casi salvati/ripuliti e nessun arresto richiesto o fallimento trattenuto; l'audit numerico degli endpoint è ancora da eseguire dopo la chiusura prevista. Il banco01 non è avviato. Il precedente errore relativo del caso0236 rimane conservato.
+
+Zero chiusure scientifiche. Restano inferenza e applicabilità scientifica del dominio completo, confronto IA, conoscenza finale e trasferimento completo con recupero da GitHub. I sette workflow riusciti del precedente commit `cb2b3ff8ab42076a615f680710c30c207a872dbc` hanno evidenza separata; gli esiti del nuovo commit sono da verificare. Nessun merge, deploy, attivazione del portale, modifica di master/script installati o ripresa M27.
+
 ## Stato operativo verificato — 15 novembre 2026, banco primario 00 avviato
 
 Questo aggiornamento supera le indicazioni operative precedenti «avvio non ancora ammesso» e H92/lettore44/rendiconto74 correnti; i testi storici sottostanti e tutti gli artefatti congelati restano conservati.
