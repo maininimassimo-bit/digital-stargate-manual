@@ -1,5 +1,23 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Banco 00 fermato in sicurezza dopo 64 casi — 15 novembre 2026
+
+Questo stato supera le precedenti indicazioni di banco ancora in esecuzione; gli snapshot precedenti restano immutati. Il controllo di memoria ha richiesto un arresto al confine di un caso salvato: memoria privata osservata 2.158.915.584 byte, limite previsto 2 GiB. Non è un fallimento scientifico né una prova di esaurimento della RAM dell'host.
+
+Sono conservati 26 controlli di lettura e 64 integrazioni native, tutte con ricevuta del caso e della chiusura delle immagini; zero casi di esecuzione falliti, zero immagini e zero handle trattenuti. Dopo verifica della finestra effettivamente appartenente al processo originale, console inattiva e assenza di immagini, PixInsight è stato chiuso normalmente: uscita 0. Il testo accessibile della console è troncato e questa limitazione è registrata; non si dichiara una cattura testuale integrale. Il genitore originale conserva la custodia e sta analizzando i pixel salvati. Non sono ancora attestati completamento dell'analisi o rilascio comune.
+
+I 196 casi successivi non hanno né ricevuta né intento di esecuzione: non sono stati richiesti. Una proposta conserva esattamente questi casi, parametri e ordine, escludendo i 64 conclusi. Quindici controlli rifiutano ambiguità, duplicazioni, ricevute incoerenti o un caso successivo già reclamato. La proposta non autorizza il dispatch: occorrono analisi/rilascio originali e nuovi esecutori, controlli di risorsa e riconciliazione della provenienza composita qualificati. Il nuovo limite di 4 GiB è soltanto una proposta per un controllo futuro, con ulteriori limiti di memoria disponibile; il vecchio controllo di 2 GiB resta immutato. Non si garantisce che la coda termini con questa risorsa.
+
+La guida Global installata indica che `gc()` è deprecato e non ha effetto nel runtime V8 corrente. Non viene usato come rimedio. È preparato un helper che legge al massimo 1 MiB per blocco e aggiorna SHA-256 incrementale tramite le API documentate File/CryptographicHash, trattenendo il File in caso di errore e chiudendolo solo dopo successo verificato. Ventuno controlli su API simulate e byte effettivi su H:, incluso un file da 100.667.392 byte, sono riusciti. Restano da osservare i metodi PJSR reali e il consumo di memoria: non sono dimostrati né la causa dell'aumento precedente né un beneficio nativo della nuova implementazione.
+
+Dieci ulteriori controlli simulati dell'ingresso di unione verificano il rifiuto prima del salvataggio in caso di uscita non nulla, identità discordanti, ricevute cambiate, banca incompleta, casi rimanenti o analisi offline. I postcheck degli operatori sono simulati in queste prove: nessuna nuova custodia o uscita nativa è attestata.
+
+Evidenza del confine sicuro: `Handover-BKL046-banco00-stop64-chiuso-analisi-originale-attiva-20261115-H-v1.json`, SHA256 `028dd87654a9a0fdb59acdd1c4987c920ee156d12e932273e47f0afd2373949b`. Proposta dei soli 196 casi: `primary2048-bank00-suffix64-proposal-h-v1/candidate-suffix-protocol.json`, SHA256 `e0de7167e406dad8d0561837457a5dfd21f5049eae7fd9f16e767f8ddc6644d8`.
+
+La capsula locale di questo passaggio contiene 234 file e 15.083.224 byte di ZIP, SHA256 `86af76eb8c33b8202c738ea4b8681a99289110a5824f76d3df6877db4d2e2f83`; ogni file estratto coincide con l'originale. I raw nativi e l'analisi in corso restano esterni e conservati nei loro percorsi. La capsula non è caricata su GitHub e non è l'archivio completo.
+
+H94/lettore46/rendiconto76 restano provvisori. I sette workflow e relativi job del commit `b0245ba1428e885a646c046724c1e6ccc212a0a2` sono tutti riusciti e documentati separatamente; il nuovo commit richiede controlli propri. Nessuna seconda istanza, modifica di master/script installati, ripresa M27, merge, deploy o attivazione del portale. Zero chiusure scientifiche; tutto il dominio e il trasferimento finale restano richiesti.
+
 ## Conoscenza H94 e unione esatta dei due banchi — 15 novembre 2026
 
 H94/lettore46/rendiconto76 costituiscono lo stato provvisorio successivo a H93. Restano invariati il registro v600/conoscenza1.171, tutti i 4.920 requisiti,14.521 criteri e19 criteri Owner, le schede storiche e gli stati scientifici. H94 contiene268 schede; SHA256 `061780651bbfb63b048bea90c9171dacc8c09540068bbbd987eab5257edb911d`. Il lettore46, SHA256 `550561fce1a0f0e5cd1eb42c1765479f0cc9052f4ae7bc691273c59c62862d9d`, supera12 prove effettive, inclusi audit completo, viste correnti, correzione storica e rifiuto dell'impronta errata. Il rendiconto76 ha SHA256 `b8da4258722d7acbdcd0385105a46c761a8b42c2e32003061dd16865eb370425`.
