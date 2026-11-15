@@ -1,5 +1,30 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## H97–H98: differenze tra punti, limite Float32 e criterio IA corrente — 15 novembre 2026
+
+L'analisi completa dei 64 casi riconta tutti i byte di stato, le impronte dei blocchi e le 580 identità razionali degli scostamenti salvati. Tutti i 580 riguardano il selettore PAIR_DIFFERENCE: 407 alla scala 1 e 173 alla scala 2. Questi sono confronti dipendenti, non 580 prove statisticamente indipendenti. Il termine nativo meno previsto e l'errore noto di conversione sono residui osservabili che possono compensarsi; non ricostruiscono le istruzioni interne del compilato.
+
+Il maggiore errore relativo salvato, selezionato post hoc, è circa 940,5839%. È stato ricostruito separatamente da 20 campioni raw mediante decodifica binaria/XML e frazioni esatte, riutilizzando i coefficienti congelati. Caso canonico 0037, campo 39903, canale 1: riferimento circa 1,77×10^-9, errore assoluto circa 1,67×10^-8. Il controllo assoluto resta rispettato; il 5% relativo resta fallito. Non è un errore del 940% sulla fotografia, sul flusso totale, sul colore o sulla posizione.
+
+Per quello stesso punto è dimostrato un limite di rappresentazione condizionato. Il selettore è la differenza esatta di due campioni Float32 positivi nell'intervallo [1/8,1/4), con compensazione nulla. Ogni campione, e quindi ogni differenza, è multiplo di 2^-26. L'intervallo ammesso dal 5% attorno al riferimento non nullo non contiene alcun multiplo: l'indice intero minimo è 1 e il massimo 0. Anche il multiplo più vicino, zero, produce il 100% di errore relativo. La conclusione vale mantenendo quelle condizioni di formato, intervallo, unità e selettore; non è un'impossibilità universale per PixInsight né una dimostrazione su tutti i 580 scostamenti. La soglia Owner non è modificata e il caso non è escluso.
+
+H97 integra questi risultati in 277 schede; lettore 49 e rendiconto 79 hanno superato 10 verifiche CLI. H98 aggiunge una correzione corrente a tre schede storiche del backend, lasciandone intatti i contenuti: il criterio IA è già definito dall'Owner all'1% con limite superiore di confidenza del 95%. Le precedenti indicazioni «soglia da definire» sono storiche. Il criterio non è ancora validato sperimentalmente: campionamento, dipendenze, molteplicità e giudizio in cieco restano da congelare. Le 32 risposte descrittive non entrano nel campione confermativo; la definizione della soglia non aggiunge autorizzazioni di spesa.
+
+H98 contiene 278 schede; lettore 50 e rendiconto 80 hanno superato 9 verifiche CLI. Le correzioni interpretative attive sono quattro, inclusa quella precedente sulle scale. Tutte le 4.920 righe dei requisiti, i 14.521 criteri letterali e i 19 criteri Owner restano invariati.
+
+SHA256:
+- analisi dei 64 casi: `e9232664c42ebe2446ea184f2be6b7cc32e38b6c4c2cdce3cb95e9afea998ad5`;
+- verifica raw del punto peggiore: `6c088d1bbd5cc29008ba320cbe4df573eba330d88cec146f6b4cd4576c84d1b2`;
+- prova condizionata del reticolo Float32: `267b6a41148b91a63a169dea586197189e28052625ad9a33b96638ccdc3ee7cd`;
+- H97: `91521205bc1f73bb593863c2f9afe5b69b7f2e54e54dd5cd66d7d65d0f09dae1`;
+- H98: `d4bbcbd26b89a42da6042282310d9b6ba69341279c30d80a1c99cab01832c465`;
+- lettore 50: `a7ff99555554d9a2be2d7557272542cda5315ce3e56d45012ddf7bf5ca9c9b32`;
+- rendiconto 80: `669fbd2ee6addde6026ab8780ce43a99ca8509d3b05d2095adca299a925f2adb`.
+
+L'archivio locale H96 conserva 63 file, 209.567.455 byte ZIP, SHA256 `df0e9c26849fe6b8c9e71ee7104a0e25ab0eaa2494425546d20f72458054967e`: recupero con impronte identiche e audit del lettore recuperato identico all'originale. Le dipendenze esterne restano dichiarate; non è il trasferimento completo su GitHub.
+
+Il recupero del tentativo nativo successivo rimane aperto: zero dei 196 casi eseguiti, parent originale e custode mantenuti, nessun tentativo concorrente. Registro v600/conoscenza 1.171 invariati. H97 e H98 sono revisioni provvisorie; zero chiusure scientifiche, nessuna conoscenza finale o 1.172 attestata. Tutte le famiglie e la consegna completa restano nel perimetro.
+
 ## Tentativo della coda: errore nativo prima dei casi e recupero aperto — 15 novembre 2026
 
 Questa sezione aggiorna il precedente stato «nessuna ripresa avviata». Il nuovo tentativo della coda è stato ammesso dal coordinamento condiviso e ha superato due osservazioni di avvio, identità esatta e moduli caricati. La prova nativa di hash a blocchi, precedente al worker scientifico, è però terminata con `ReferenceError: DataType_ByteArray is not defined`. Il worker non è entrato: zero casi richiesti, zero executeGlobal e zero immagini aperte. I 64 casi conclusi del tentativo precedente non sono stati ripetuti.
