@@ -1,5 +1,28 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Recupero del tentativo vuoto: review e revisione V2 ancora aperte — 15 novembre 2026
+
+Il tentativo dei 196 casi resta fallito prima del worker: zero nuovi casi scientifici. La richiesta di review è stata autorizzata dall'Owner e inviata al coordinamento; questa autorizzazione riguarda il messaggio tecnico, non interventi sui processi o sulla prenotazione.
+
+La review indipendente richiede modifiche al disegno. Nella prima bozza, dopo la rinomina di active.json e la perdita del lock, il coordinatore R4 può ammettere un altro lavoro senza verificare il certificato o la riconciliazione residua. Il problema è stato riprodotto usando una copia byte-identica del vero Lease.acquire con stato inventato esclusivamente su H: e scanner simulato vuoto. Nessun processo nativo avviato e nessuna modifica allo stato condiviso reale.
+
+La review corregge inoltre un'attribuzione del ramo corrente: il parent è in HOLD_RETAINED_FAILURE e osserva ancora il Popen originale; può conservare un'autentica futura uscita del figlio, ma non dispone di un percorso supportato per completare il proprio terminale e rilasciare la prenotazione. Il precedente parere resta conservato con correzione esplicita.
+
+La bozza V2 propone di completare TUTTE le verifiche e la riconciliazione necessarie prima del certificato finale. La rinomina senza sovrascrittura sarebbe il rilascio finale intenzionale; dopo non resterebbe lavoro critico per l'ammissione. Questa scelta è ancora da revisionare e approvare. Copre soltanto l'interruzione del processo controllore: non dimostra durabilità dopo crash del sistema o perdita di alimentazione. Se serve tale copertura occorre una barriera comune riconosciuta da tutti i clienti, separatamente progettata e revisionata.
+
+Sono state rilevate anche l'identità e la provenienza dell'operatore tramite il custode originale ancora vivo. Il controllo del file trattenuto proposto prevede una singola apertura in sola lettura dopo l'uscita dei processi: qualsiasi errore o contenuto diverso mantiene il blocco. Non equivale a contare tutti gli handle del sistema o a dichiarare riuscito il RETAIN nativo.
+
+Le prove disponibili sono circoscritte: 53 controlli di modello; nove prove Windows su file inventati con punti di interruzione simulati; 36 combinazioni del classificatore di sola lettura, 16 mutazioni del certificato rifiutate e tre controlli di pin; query reali di sola lettura delle quattro identità originali con sette controlli; quattro prove del witness su file inventato. Non sono il collaudo del controllore operativo completo, una prova di crash reale o una validazione scientifica. Nessuna ripetizione della sonda sul vero file trattenuto.
+
+Impronte SHA256:
+- review con modifiche richieste: `6c76b984a6701b1dfd705a42ebea0305c48768c8f08ef8370a5a8165ea54dbaf`;
+- bozza V2: `8e095fbd20dda063c135029c04798e36b866184740fcc0a8085e7ac0afb2f3e0`;
+- indice dei componenti e dei limiti: `b6ba0e70a5979cb0b09d9ee9ce0d28f69c9585acc61118b571a2361bb95eaaa4`;
+- copia del coordinatore usata per il controesempio: `a07b2614414c399181f4ffbf07750f870fdfdf159987539f7e1de3d9b3c0c613`;
+- capsula delle prime prove inventate, recuperata con byte identici: `8de05ae88fdef0b5241614597ea5d3e9a1cc580363aa091af3aec1a3765114ef`.
+
+Restano necessari il parere sul disegno V2, il controllore completo con la matrice di errori richiesta, la review dell'implementazione e una distinta approvazione Owner della concreta eccezione operativa. Nessuna chiusura di PixInsight, terminazione del parent o modifica della prenotazione è stata eseguita. H99/lettore51/rendiconto81 e registro v600/conoscenza1.171 restano le baseline precedenti; zero chiusure scientifiche. Questo aggiornamento della documentazione non completa il trasferimento degli archivi su GitHub né la milestone.
+
 ## H99: ricostruzione completa dei 580 scostamenti e stato del recupero — 15 novembre 2026
 
 Per tutti i 580 scostamenti salvati sono state decodificate separatamente le coppie di uscita native: 1.160 letture di campioni da 114 file raw verificati. Per i riferimenti sorgente, 8.596 richieste corrispondono a 6.318 campioni distinti su 20 file. Tutti i 580 scalari originali e previsti sono ricostruiti dai byte con XML, decodifica IEEE e frazioni esatte e coincidono con l'analisi salvata. I coefficienti congelati sono riutilizzati: la verifica non ne deriva nuovamente la validità fisica o geometrica.
