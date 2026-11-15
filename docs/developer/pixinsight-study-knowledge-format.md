@@ -1,5 +1,25 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Consuntivo definitivo dei 64 casi e ripresa circoscritta — 15 novembre 2026
+
+Questa sezione aggiorna il precedente stato «analisi in corso»; le sezioni storiche sottostanti conservano il proprio perimetro temporale. L'analisi originale dei 64 casi è conclusa: 560 endpoint logici, di cui 548 con stima e 12 senza stima. Dei 35.913.728 confronti stimati, 580 superano il limite relativo Owner del 5%; tutti rispettano il controllo assoluto di 10^-6. I 786.432 confronti non applicabili restano distinti. Il passaggio assoluto non annulla gli scostamenti relativi; i riferimenti piccoli ma non nulli non vengono esclusi. Sono confronti dipendenti, non prove indipendenti né una misura del rischio IA.
+
+PixInsight, genitore originale e custode sono usciti con codice 0; il rilascio della prenotazione comune è verificato. Il primo banco resta incompleto: 196 casi, dagli indici 64 a 259, non furono richiesti nel tentativo originale. Il secondo banco non è avviato. Il censimento dei figli diretti dell'area controllata trova soltanto il primo tentativo concluso; non afferma un inventario di attività manuali o esterne arbitrarie e non concede ammissione nativa.
+
+L'archivio locale del prefisso comprende 2.676 file, 7.547.591.105 byte prima della compressione e 2.981.985.578 byte ZIP. Tutti i file estratti coincidono per SHA256 con le sorgenti archiviate. La verifica successiva collega al rapporto originale 330 file raw/intervalli/input, 247 metadati nativi e i 64 artefatti di analisi. Non ripete tutte le analisi numeriche. Gli input esterni e le capsule storiche restano dipendenze dichiarate; nessun caricamento completo su GitHub è attestato.
+
+Impronte SHA256:
+- rapporto originale dei 64 casi: `453a22d0d4003b77197993b1988be8d834d0b10cbd28fcfe6320a9583362b50d`;
+- ZIP raw, analisi e chiusura: `bb9514866dc59298100bf2a70d998d6def65a951c6d94546561bd8239e3839d1`;
+- manifest dell'archivio: `0e1937cf0fbb627fef472d7938a35a13d1aed4d7b4dd154be32930ad3a1900f6`;
+- contabilità composita del solo prefisso: `6f4c318112fc90b5bc586e29838ce92b646afe1a35f7d7c53155aa0181527b28`;
+- censimento circoscritto: `b781e63c9bccb3dd45d3eb6c50b8328008b121d8586b407067cffe14de0b8579`;
+- consolidamento della ripresa: `45989d162a14f65d07ca79f7d69605cc84928bc33e44d57d94da7f60bdc2b870`.
+
+La contabilità composita dispone di 29 controlli simulati e di un'applicazione ai 64 casi reali; non trasforma tentativi distinti in un'unica esecuzione originale da 260 casi. Prima della coda servono ancora genitore e custode qualificati per i 196 casi, collegamento agli esiti e al rilascio originali, censimento aggiornato, prova nativa dell'hash incrementale e nuova ammissione comune con verifica delle risorse. Nessuna nuova chiamata nativa è eseguita da questi consolidamenti.
+
+H95, lettore 47 e rendiconto 77 sono provvisori e preservati; il loro snapshot dei primi 33 casi contiene 253 scostamenti e non sostituisce il consuntivo dei 64. Registro v600 e conoscenza 1.171 restano autorevoli: nessuna 1.172 attestata. Restano 4.920 requisiti, 14.521 criteri e 19 criteri Owner nell'intero dominio; zero chiusure scientifiche. I 64 casi su 520 rappresentano il 12,3% delle esecuzioni di questa campagna, non il completamento della milestone. Restano validazione scientifica e IA, conoscenza finale e trasferimento completo su GitHub con recupero verificato.
+
 ## Primi 33 casi: scostamenti relativi conservati e analisi della coda — 15 novembre 2026
 
 Uno snapshot post hoc dei primi 33 casi salvati contiene 208 endpoint e 13.631.488 confronti endpoint-campo: 253 superano il limite relativo Owner del 5%, mentre tutti rispettano il controllo assoluto di 10^-6. Alias, profili e campi condivisi rendono questi confronti dipendenti: non sono milioni di prove indipendenti né una stima del rischio delle decisioni IA. L'analisi completa dei 64 casi conservati è ancora in corso sul genitore originale; il controllo successivo ha osservato 41 file di analisi salvati.
