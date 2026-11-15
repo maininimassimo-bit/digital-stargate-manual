@@ -1,5 +1,8 @@
 # AP-013B — Avvio nascosto discovery/import: verifica del 12 novembre 2026
 
+Riscontro successivo: [controllo del 15 novembre, configurazione e ricevute](Local-Background-Script-Health-2026-11-15.md).
+La prova iniziale e il suo perimetro sotto riportati restano invariati.
+
 | Campo | Valore |
 |---|---|
 | Tipo | Evidenza operativa locale e aggiornamento runbook |

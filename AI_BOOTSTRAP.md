@@ -1,5 +1,16 @@
 # Digital StarGate AI Bootstrap
 
+## Avvii locali — riscontro del 15 novembre 2026
+
+Leggere il [riscontro successivo di discovery/import e SpatialLag](docs/architecture/evidence/Local-Background-Script-Health-2026-11-15.md).
+Alle 19:36 Europe/Rome: 80 import conclusi nelle 24 ore precedenti senza errori,
+905 file e 905 ricevute esistenti nell'ultimo ciclo, nessuna nuova copia; un ciclo ancora
+attivo resta senza esito finale. Adapter e binario SpatialLag invariati;
+ricevute successive al recupero del lotto 43 e audit tecnico di 4.794 blocchi
+riusciti. Nessuna nuova prova visiva, esecuzione o chiusura scientifica:
+nell'audit consultato `completeStudy = false`, `scientificClosures = 0`.
+Questa nota non aggiorna lo stato complessivo dei package. Gli snapshot sotto restano storici.
+
 ## SpatialLag locale — dotnet nascosto e lotto 40, 12 novembre 2026
 
 Leggere il [handover circoscritto](docs/project/HANDOVER_2026-11-12-DOTNET-HIDDEN-LOT40.md)
