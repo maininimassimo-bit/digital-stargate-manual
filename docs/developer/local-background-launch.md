@@ -55,6 +55,13 @@ non indicatori live né acceptance dell'intero lotto.
 
 ## Verifica e ripristino
 
+Il [riscontro successivo del 15 novembre](../architecture/evidence/Local-Background-Script-Health-2026-11-15.md)
+registra 80 import conclusi nelle 24 ore precedenti senza errori, avvisi FWHM
+distinti dai guasti e le ricevute tecniche successive della campagna SpatialLag
+fino a 4.794 blocchi. È un controllo di configurazione e ricevute, non una nuova
+prova visiva o la chiusura dello studio. Il ciclo OneDrive ancora attivo allo
+snapshot non è incluso nei cicli conclusi.
+
 Per verificare un successore, controllare la nuova identità del processo,
 il suo orario rispetto alla correzione, l'hash dell'adapter nel protocollo,
 le ricevute dei blocchi, il log errori e un intervallo dichiarato di osservazione

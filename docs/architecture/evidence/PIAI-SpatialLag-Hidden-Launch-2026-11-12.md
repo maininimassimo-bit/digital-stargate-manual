@@ -1,5 +1,8 @@
 # SpatialLag — Avvio dotnet nascosto e verifica del lotto 40
 
+Riscontro successivo: [controllo del 15 novembre e ricevute dopo il recupero del lotto 43](Local-Background-Script-Health-2026-11-15.md).
+La prova campionata del lotto 40 sotto riportata resta uno snapshot iniziale.
+
 | Campo | Valore |
 |---|---|
 | Data | 12 novembre 2026 |
