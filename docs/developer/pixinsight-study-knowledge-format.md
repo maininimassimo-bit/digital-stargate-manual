@@ -1518,3 +1518,47 @@ Rapporto di riconciliazione del dominio SHA-256: `1d63d588b0ab07fbaaf4ef81535f17
 H82 resta provvisoria; autorità separata v600 / conoscenza 1.171. La capsula genitore H81, le dipendenze storiche e l'ambiente installato/licenziato rimangono esterni alla capsula incrementale. Il recupero locale non attesta un replay nativo completo né il trasferimento integrale degli archivi su GitHub con recupero remoto dei byte.
 
 Questa fase conclude due casi deterministici di risorse e i loro confronti selezionati. Non convalida il rumore fisico delle camere, errori numerici per ampiezze generali, normalizzazione stimata, tutte le configurazioni statistiche o il rischio delle decisioni IA. Tutti i nuovi materiali BKL-046 restano su H:. Nessun merge, deploy o attivazione del portale.
+
+
+## Supplemento del 15 novembre 2026: sensibilità finita e sorgente prospettica completa
+
+Questo supplemento è successivo alla conoscenza provvisoria H91 e al rendiconto v73: non modifica retroattivamente quei byte, non costituisce H92 e non promuove una chiusura scientifica. Autorità v600 / 1.171 invariata. Il pilota BKL046_ARCHIVED_PREFIX_FULL260_001 resta concluso e rilasciato; non viene ripetuto.
+
+### Audit descrittivo dei momenti sui risultati già salvati
+
+Tutti i 2.632 endpoint logici supportati, inclusi gli alias, sono riesaminati sugli stessi 64 riquadri tecnici: 168.448 coppie. La media nota e la varianza condizionale provengono dal manifest congelato. Sono calcolati esattamente media, secondo momento rispetto alla media nota e varianza centrata finita, entrambi con denominatore 64. L'identità di perturbazione e Cauchy sono verificate con frazioni; una seconda formulazione a denominatore comune e somme intere ricostruisce tutti i momenti.
+
+- Massimo errore numerico standardizzato: circa 0,0000518727 deviazioni standard del modello.
+- Massima variazione assoluta del secondo momento rispetto alla media nota, divisa per la varianza del modello: circa 0,000383211, ossia 0,0383211%.
+- Massima variazione assoluta della varianza centrata finita, divisa per la varianza del modello: circa 0,0000171599, ossia 0,00171599%.
+
+Questi rapporti descrivono la sensibilità numerica delle stesse osservazioni finite; non sono errori di stima della varianza di popolazione né intervalli di confidenza. I riquadri, le configurazioni e gli alias sono correlati. Il singolo confronto che supera il 5% relativo resta NOT_MET: nessuna soglia cambiata, esclusione, nuova acquisizione o prova nativa ripetuta.
+
+Evidenze locali: `archived-prefix-finite-noise-moments-posthoc-h-v1/report.json`, SHA256 `0a0dca3b2f5504e1de5c60ef63c4f5dfabf51e4b9b999870273a7b42f45e41d8`; `integer-oracle-verification.json`, SHA256 `db790e489817bcf9270557e064701961728768aa7e068f5e571d85db83f52297`. La seconda formulazione è dello stesso autore e usa gli stessi dati: non è una review scientifica indipendente.
+
+### Acquisizione prospettica unica, prima delle misure native
+
+È congelato il protocollo `complete-noise-prospective-gaussian-word-source-h-v1/protocol.json`, SHA256 `9709f0250d9c2e6ab9daa8b343f2e94bfd03725af6ff809f59e981fe2a7e6b8f`. Gli endpoint e le 260 configurazioni canoniche del manifest completo precedono l'acquisizione. La mappa è `((bank*65536+tile)*4+exposure)*64+local`: due banche, 131.072 campi previsti, con riuso intenzionale degli stessi variati tra sette modelli di varianza.
+
+La libreria Windows corrente ha SHA256 `fb658b74aea2fc655d86e6f567c69e251a527c413a750d3952a7830fc715b446`, versione 10.0.26100.9949 e firma Authenticode verificata Microsoft Windows. L'impronta storica resta conservata nei vecchi programmi: nessuna libreria o script installato è modificato. Il binding corrente usa BCryptGenRandom con flag 2 e provider preferito dal sistema, secondo la [documentazione primaria Microsoft](https://learn.microsoft.com/en-us/windows/win32/api/bcrypt/nf-bcrypt-bcryptgenrandom). Firma e API documentata non provano una legge IID.
+
+Prima della chiamata reale sono verificati con stream deterministici ordine e confini delle code, scrittura incompleta, eccezioni, rifiuto dei duplicati completi e parziali, conteggi non validi, raffinamento vuoto, frontiera di 65.536 byte e conservazione del primario quando fallisce il raffinamento. Un intento esclusivo e durabile precede il caricamento della DLL e ogni chiamata casuale. Nessun riavvio o ridisegno automatico è previsto.
+
+L'unica acquisizione completata conserva:
+
+| Stream | Byte | Valori | SHA256 |
+| --- | ---: | ---: | --- |
+| primario UInt64 little endian | 268.435.456 | 33.554.432 | `9714f8caec91ce4d4f2373a3adb9f1c09a86bc4a5631f6c54c76e31839362b1f` |
+| raffinamenti UInt80 little endian | 2.622.240 | 262.224 | `5ee7c0bf31bc310d956e19f38bc566518819fd7d05d23e04615ce883e4676d69` |
+
+Un secondo conteggio mediante complemento intero verifica tutti i primari, i raffinamenti richiesti e 32 intervalli di byte contigui per il replay: `block-replay-verification.json`, SHA256 `85a054925de7a173381d21ac9fdcb6e3d5f87d9e26f78b51f54ac75d63ea3857`. La riproduzione rilegge i byte archiviati; non acquisisce un nuovo campione.
+
+### Conversione e limiti di ammissione
+
+I 32 blocchi sono convertiti usando il decodificatore e la tabella già qualificati. I 2.462 file della dipendenza numerica vengono riverificati prima degli import. Ogni output Float64 little endian è salvato e riletto; tutti i 33.554.432 valori sono finiti e nel dominio del certificato. Nessun fallback scalare è richiesto. Il report di conversione è `complete-noise-prospective-gaussian-decoded-h-v1/report.json`, SHA256 `40d09b652b99e7a18dba1deb75cbe3284054c333ab66f5174d399942f702b6ec`.
+
+La verifica successiva ricostruisce i target mediante interi Python e arrotondamento del punto medio, con formulazione diversa dal decodificatore vettoriale; controlla segno e certificato di quantile per ogni valore salvato. Esito: tutti i 33.554.432 valori verificati, con gli stessi byte sorgente e nessun nuovo prelievo casuale. Evidenza: `integer-target-verification.json`, SHA256 `e103cf6be277e88705c17cef65b0a45db92302823a83c040cace87ec6ef39855`. È una seconda formulazione dello stesso autore, con certificato comune; non una review scientifica indipendente.
+
+La legge IID uniforme di CNG resta un'ipotesi esplicita del modello di simulazione, non una proprietà dimostrata da file, firma o test finiti. La conversione usa il certificato di errore del quantile e non afferma arrotondamento corretto di ogni proposta vettoriale. Questo passo non costruisce ancora le immagini dei sette modelli di varianza, non prova le identità dei parametri serializzati o degli alias nativi e non autorizza automaticamente la campagna PixInsight. Occorrono ancora costruzione degli input, trasporto Float32, confronto numerico, misure native e inferenza condizionale secondo il protocollo congelato.
+
+Tutti i nuovi byte sono su H:. Questi dati e programmi non sono ancora trasferiti integralmente su GitHub; questo documento è soltanto documentazione tecnica, con verifiche remote del testo. Nessuna nuova chiamata PixInsight o API di IA, nessun merge, deploy o attivazione del portale. Conoscenza finale e trasferimento remoto integrale restano aperti insieme alle sette famiglie e ai 25 assi.
