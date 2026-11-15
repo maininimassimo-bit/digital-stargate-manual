@@ -1,5 +1,28 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## H100: limite della conversione successiva a 64 bit e pacchetto di recupero — 15 novembre 2026
+
+H100 è una revisione semantica locale **provvisoria**, con 283 schede: tutte le 280 precedenti sono preservate e tre sono aggiunte. Lettore52 e rendiconto82 hanno superato 11 controlli CLI, incluso il rifiuto dell'impronta errata. Restano identici 4.920 requisiti, 14.521 criteri letterali, 19 criteri Owner, le soglie e le quattro correzioni interpretative attive. La sola riga DrizzleIntegration riceve nuovi collegamenti di evidenza; nessuna chiusura scientifica è promossa.
+
+Per tutti i 580 confronti già falliti sono stati incorporati esattamente in Float64 i 1.160 valori Float32 già decodificati e conservati nel rapporto verificato. Le differenze di coppia e tutti gli errori relativi rimangono identici: convertire il formato **dopo** il calcolo non recupera l'informazione persa prima. Una seconda formulazione decodifica IEEE32/IEEE64 soltanto con interi e frazioni, senza float Python o struct, e conferma lo stesso risultato. È una verifica dello stesso autore, sugli stessi riferimenti e coefficienti congelati: non una review scientifica indipendente.
+
+Sono rilette e verificate le impronte delle 64 ricevute native, con 128 snapshot di uscita a 32 bit. Questa nuova verifica riusa i byte decodificati del precedente rapporto; non rilegge i 114 piani raw. L'assenza di campi espliciti di precisione fra i nomi delle proprietà serializzate non dimostra l'assenza di ogni opzione non osservata né la precisione interna del compilato. Un'elaborazione nativa interna diversa resta da scoprire con API supportate e da confrontare con un protocollo prospettico distinto; non è stata eseguita né autorizzata da questa analisi.
+
+H100 conserva anche il pacchetto concreto di recupero descritto sotto: manifest `79607889a6c0d12674833c84f6aac36c925c1d829bf8a9f764d3689570c30c06`, 25 moduli e 33 riferimenti di controllo. La review tecnica completa è stata richiesta con autorizzazione esplicita, ma il relativo esito completo e la distinta eccezione operativa Owner non sono attestati. La lettura nativa di zero finestre immagine resta un'osservazione al tempo registrato, da rinnovare prima dell'eventuale chiusura. Nessun processo originale è stato terminato e nessuna prenotazione reale è stata rilasciata.
+
+La capsula locale H100 conserva **119 file**, 212.076.111 byte sorgente e 212.128.026 byte ZIP. Tutti i file sono stati recuperati con impronte identiche e l'audit del lettore recuperato coincide byte per byte con quello originale. Il recupero ripete la consultazione portabile della conoscenza, non tutte le analisi scientifiche o le chiamate native. Include 64 ricevute selezionate e la capsula di review da 77 file come byte invariati; raw, modelli, storico precedente, fixture complete, installazione e custodia viva dei processi restano dipendenze esterne dichiarate.
+
+SHA256:
+
+- H100: `af2c6b9a2dc141b7dec3fbff8d7532cecbb1513173c249a29eb07edee60c297e`;
+- lettore52: `e6ad81ad8a629a1e5b1e82eed1028d58b6136f9bc448830110be0957cf1903e4`;
+- rendiconto82: `82b62409d11210d924a0ed4b629fb8c3b3a2a52118ea0db2f71b8e474ea217ad`;
+- rapporto sulla conversione: `65012f9c279d492595ea4a94545eb7aaf02f5ba03580f58ba96173d466852885`;
+- ZIP H100: `734c1a7ff5f2734cd6c1c92ba547ef75a49d6fe78ef34e138c9028f6e169201b`;
+- manifest ZIP H100: `d5c1e7a104c40ba4855ab2a36c9f0aa262642c254fd0a5f63accba1805a86ef2`.
+
+I sette workflow, sette job e tutti gli step elencati del precedente commit documentale `71b2f21bc6a48d66b8cb8e1c5878a53feac10e5b` sono riusciti. Attestano quel controllo del repository, non la validazione scientifica o il recupero operativo. H100 resta distinta dall'autorità v600/conoscenza1.171: nessuna1.172 o conoscenza finale attestata. Restano 196 + 260 casi della campagna, tutte le sette famiglie e i 25 assi, la valutazione IA, la consegna finale e il trasferimento integrale su GitHub con recupero dei byte. La pubblicazione di questo testo non carica l'archivio H100. Nessun merge, deploy, attivazione del portale o nuova elaborazione scientifica.
+
 ## Pacchetto concreto di recupero: collaudi collegati e review completa richiesta — 15 novembre 2026
 
 Il disegno V2 ha ricevuto un parere di accettabilità del disegno, distinto dall'approvazione operativa. Le correzioni mirate del lettore dei percorsi e della conservazione dei fatti parziali sono state revisionate separatamente. Il pacchetto completo corrente è ora fissato e inviato alla review tecnica autorizzata: il suo esito completo e la distinta decisione Owner sull'eccezione operativa restano da attestare.
