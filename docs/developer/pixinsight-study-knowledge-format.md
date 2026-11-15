@@ -1,5 +1,25 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## H101: correzioni consultabili e conservazione della conoscenza provvisoria
+
+H101 e una revisione locale **provvisoria**, non il file finale di conoscenza e non una pubblicazione del registro autorevole. Conserva tutte le 283 schede di H100 e aggiunge quattro schede, per un totale di 287. Restano invariati 4.920 requisiti, 14.521 criteri letterali, 19 criteri Owner, sette famiglie e 25 assi; zero chiusure scientifiche.
+
+Il file locale `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v101.json` ha SHA256 `962e77af5f6834bd4ce2924f55afc57e93818cb5b43edb0af99ee2ab4fa1effc`. Il lettore53 `consult_provisional_dsg_knowledge_h_v5_v53.py`, SHA256 `04026f1553eef5539c3153f366cd39ea0ee7e43d96636f11f7e7d4b9b8eebe0b`, conserva il controllo dell'impronta e ha superato otto prove CLI. Il rendiconto v83, SHA256 `a602d3efc54f77d12eb4606166b72b16cc1b20a652aad663befe4a0f7e3eebd9`, riconcilia tutti i requisiti senza cambiarne criteri o disposizioni canoniche.
+
+### Interpretazione delle schede storiche
+
+La vecchia scheda `BKL046_CONCRETE_RECOVERY_PACKAGE_QUALIFIED_FULL_REVIEW_PENDING` resta intatta. Una nuova associazione in `activeEvidenceCorrections` porta a cinque il totale dei collegamenti di correzione. La consultazione restituisce `currentInterpretationCorrections`, `historicalCardContentPreserved` e `useCurrentCorrectionsForOperationalInterpretation`: il contenuto storico non viene cancellato, ma la sua precedente dichiarazione di qualifica non puo essere usata senza le correzioni FULL-001/FULL-002.
+
+Le altre nuove schede distinguono l'uscita nativa gia avvenuta dal recupero autorizzato, le prove autore EXACT004 dalla review indipendente ancora pendente nello snapshot, e la copia locale selezionata dal trasferimento integrale remoto. Il nuovo approfondimento sui sorgenti storici registra 64 parametri Drizzle nel commit pubblico PCL `03b86b51a6628d1459fc3e9b49faa065c491eca0` del 2023: `generate64BitResult` appartiene in quella fonte a ImageIntegration, e non va trasferito per analogia a DrizzleIntegration. Il sorgente Instance e riutilizzato dallo studio precedente, non una replica indipendente. Il risultato non dimostra assenza di opzioni nel binario attuale, equivalenza sorgente/binario o correzione dei 580 scostamenti.
+
+### Recupero locale e stato GitHub
+
+La capsula H101 selezionata contiene 27 file, 179.840.322 byte sorgente; ZIP 179.845.928 byte, SHA256 `eea7fd9cfaeb36e7d34c66f07bcafbbc3c4806446c344cfaacaa2098cca9e4e4`; manifest SHA256 `6e2c421e816a0d183aa069396b5b37938feaf751cc3136100ba58f5d2b779d57`. Ogni file selezionato e stato recuperato con impronta identica. Audit e consultazione della vecchia scheda corretta sono stati ripetuti con il lettore recuperato: stdout identico byte per byte. Questo qualifica la consultazione portabile di quella selezione; la ricostruzione dello studio richiede anche H100, dati, fixture complete e ambiente, dichiarati esterni.
+
+Il commit documentale precedente `0593900e041e20916e86fe176395555df78ae9b5` ha superato sette workflow, sette job e tutti i passi elencati. Questo esito riguarda documentazione e integrazione. Il presente aggiornamento trasferisce il testo descrittivo H101, non i byte del file di conoscenza o dello ZIP; la CI del nuovo commit deve essere osservata separatamente. Registro v600 / conoscenza 1.171 invariati, nessuna 1.172 attestata. Conoscenza finale, studio completo e trasferimento integrale su GitHub con recupero remoto restano aperti.
+
+---
+
 ## Aggiornamento BKL-046: recupero gia uscito, subject EXACT004 (2026-11-15)
 
 Questa sezione aggiorna lo stato operativo riportato nelle sezioni storiche sottostanti, i cui byte restano conservati. Non promuove H100 a conoscenza finale: registro v600 / conoscenza 1.171 invariati; nessuna 1.172 attestata. Restano aperti sette famiglie, 25 assi, 4.920 requisiti, 14.521 criteri e 19 criteri Owner; zero chiusure scientifiche.
