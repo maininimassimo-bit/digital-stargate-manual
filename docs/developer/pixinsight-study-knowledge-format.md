@@ -1,6 +1,39 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H89 provvisoria, lettore v41 e rendiconto v71
+## Stato corrente: H90 provvisoria, lettore v42 e rendiconto v72
+
+**H90 contiene 253 schede**, preservando tutte le 251 schede H89, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Il lettore v42 conserva la logica del v41 salvo nome e impronta predefiniti; sei controlli CLI mirati sono riusciti. Il rendiconto v72 conserva tutti i criteri e aggiunge soltanto due collegamenti di evidenza a DrizzleIntegration. Autorità **v600 / 1.171** invariata: sette famiglie e 25 assi aperti, zero chiusure scientifiche. La conoscenza resta provvisoria.
+
+### Prefisso archiviato, sorgenti e riferimenti congelati
+
+Il prefisso di 16.384 posizioni già archiviate è fissato prima della materializzazione. Sette banche tecniche contengono 28 riferimenti logici, corrispondenti a 26 originali e 26 copie Float64 traslate distinti: tutti i **114.688 valori logici** sono verificati, con **2.335 valori originali negativi conservati**. Non sono nuove estrazioni né campioni scientifici IID.
+
+Sono serializzati 280 pacchetti completi, con 1.120 riferimenti a 202 sidecar. Le 20 identità di byte previste sono verificate nei 260 gruppi nominali; non si riducono ulteriormente i gruppi in base agli esiti. I 2.912 estimandi logici sono mantenuti sui 64 riquadri tecnici: **168.448 riferimenti esatti supportati e 17.920 record senza stima**, preservati senza inventare selettori. Una verifica indipendente su griglia intera ricostruisce 4.360 righe primitive.
+
+L'analisi esatta della sola conversione prevista delle sorgenti Float64 in Float32 mantiene tutti i 168.448 riferimenti entro 1e-6 assoluto e 5% relativo. Questi sono errori previsti della lettura, non risultati misurati di Drizzle, né una verifica della varianza di popolazione. Non sono cambiati soglie, campioni o riferimenti.
+
+### Componenti e analizzatore: qualificazione simulata
+
+La factory completa supera **5.720 controlli simulati** sui pacchetti, gli enum, la conservazione delle copie e la rilettura finale di tutti i parametri. Il lettore esplicito Float32 supera 40 controlli, la cattura binaria delle proprietà di intervallo 30, il dispatcher 53 e l'integrazione dei componenti nove scenari. Un errore può trattenere oggetti nativi anche senza ImageWindow: lo stato di zero finestre non viene usato come prova del rilascio delle risorse. Nessun errore abilita un tentativo automatico o una chiusura normale.
+
+Il nucleo numerico esatto usa i pesi per il supporto e sottrae soltanto la compensazione analitica fissata. Controlla tutti i selettori congelati, 27 casi limite e rifiuti, oltre a **1.024 confronti indipendenti con valori distinti per posizione e canale**, a scala 1 e 2. Il confronto relativo a riferimento zero resta indefinito. Errore assoluto, errore relativo, errore previsto della lettura e scarto successivo sono registrati separatamente.
+
+La riconciliazione delle ricevute supera 36 controlli simulati: completamento, prefissi interrotti, conservazione dei casi rimanenti, conteggi, risorse, tipi booleani, impronte, History, parametri e ricevute di chiusura. L'analizzatore integrato supera **42 controlli**, inclusi tutti i 260 casi simulati e il rifiuto di byte cambiati dopo la riconciliazione. I piani, le sorgenti e i riferimenti sono ricontrollati prima dell'analisi. I valori sintetici di questi collaudi non sono presentati come esiti nativi o scientifici.
+
+### Recupero, impronte e lavoro residuo
+
+La capsula dei componenti contiene **834 file, 11.957.902 byte**, SHA256 `d47e442b4ebba22659795aeed1c9aeafa3f0047b8f47dce808bc36ea72e2fb80`. Tutti i byte sono estratti e le cinque qualificazioni simulate producono prove identiche. Restano dichiarate le dipendenze dei genitori e dell'ambiente PixInsight con licenza.
+
+- Conoscenza H90: `a052f4cfdf3043deeee4ab8b5d3ac10998b80adfac0076efcfaf86c4f22bd50a`.
+- Lettore v42: `95877f93f0a629894dd6e7e32d0de963b0f2fdb24644025cce71e7cd2bdfab61`.
+- Rendiconto v72: `274b1c8b0fb38a180b275f72781f8e7cb02eccb662b8b16bc210fa47a02d49a2`.
+- Prova integrata dell'analizzatore simulato: `07147311b90e435c70e43e4b5183985213cea0cef0bfbb3f93bc2f33356dfc71`.
+
+**Nessuna nuova chiamata PixInsight e nessuna nuova estrazione di rumore.** Il piano di 26 letture native e 260 casi è preparato; l'avvio richiede ancora qualificazione del processo originale, del custode e del binding comune, gestione sicura degli errori e verifiche correnti del pacchetto R4, delle identità, risorse e startup. Non si ripetono le quattro prove native già chiuse. Il pilota tecnico finito non sostituisce la campagna scientifica di 131.072 campi né prova un limite uniforme del modulo installato.
+
+Restano aperti validazione delle sette famiglie, caratterizzazione fisica, rischio decisionale IA, conoscenza finale e **trasferimento integrale su GitHub con recupero remoto dei byte**. Documentazione e capsule locali non attestano quel trasferimento. Materiali BKL-046 su H:, PR in bozza; nessun merge, deploy, portale, modifica ai master o agli script installati.
+
+## Stato storico: H89 provvisoria, lettore v41 e rendiconto v71
 
 **H89 contiene 251 schede**, preservando tutte le 249 schede H88, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Il lettore v41 conserva la logica del v40 e cambia soltanto nome e impronta della conoscenza predefinita. Sono riusciti **sei controlli CLI mirati**: audit, riepilogo, policy, due nuove schede e rifiuto dell'impronta errata. Il rendiconto v71 conserva tutti i criteri originali; soltanto DrizzleIntegration riceve i due collegamenti aggiuntivi.
 
