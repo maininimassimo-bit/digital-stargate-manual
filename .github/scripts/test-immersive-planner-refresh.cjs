@@ -36,7 +36,10 @@ function knownWeatherPublication(source) {
   await page.clock.fastForward(300001);await page.waitForSelector('#dsg-f9-status');
   assert.notEqual(await page.locator('[data-weather-sky]').getAttribute('data-sky-state'),'unknown');
   await page.selectOption('#dsg-f9-status','NOT_YET_ACQUIRED');
-  const before=requests;await page.clock.fastForward(300001);
+  const before=requests;
+  // The filter already has this value: await the actual async poll response first.
+  const polled=page.waitForResponse(response=>response.url().includes('/data/observation-planner-f9-current-night.json')&&response.status()===200);
+  await page.clock.fastForward(300001);await polled;
   await page.waitForFunction(()=>document.querySelector('#dsg-f9-status')?.value==='NOT_YET_ACQUIRED');
   assert(requests>before,'poll checked the published projection');
   fixture.hourly[0].weather.precipitationUncertain=true;
