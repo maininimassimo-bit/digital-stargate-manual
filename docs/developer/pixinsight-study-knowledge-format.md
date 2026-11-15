@@ -1,5 +1,19 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Stato operativo verificato — 15 novembre 2026, banco primario 00 avviato
+
+Questo aggiornamento supera le indicazioni operative precedenti «avvio non ancora ammesso» e H92/lettore44/rendiconto74 correnti; i testi storici sottostanti e tutti gli artefatti congelati restano conservati.
+
+Il piano mantiene 131.072 campi, due banchi da 2048 pixel, scale 1 e 2 e 520 richieste canoniche. I nuovi genitori originali, gli osservatori, gli stadi privati PJSR e le procedure di ammissione/rilascio sono stati collegati al coordinamento R4 e qualificati offline. Il sigillo dei controlli (602 pin per banco) è `Verifica-seal-controlli-primari2048-H-v1.json`, SHA256 `e92658c2cf6c48408076178dba6a10cd1effa3abe538e10c387a09645eb5b81d`. Le qualifiche simulate e la review dello stesso autore non sono una validazione scientifica indipendente.
+
+L'operazione `BKL046_PRIMARY2048_BANK00_FULL260_001` è stata ammessa una sola volta. Due osservazioni separate della console inattiva e le identità effettive del processo, del genitore originale e del custode precedono l'unico invio dello script. Il banco è in elaborazione: lo snapshot immutabile `Handover-BKL046-primario2048-banco00-nativo-attivo-20261115-H-v1.json`, SHA256 `05fb5a2c3e59d26cb305cc33f23b484bdc8e0463f46695c05838ec0d1681c30e`, conserva sette letture native Float32 concluse con byte uguali alle previsioni e risorse rilasciate. Il successivo controllo diretto ha osservato 17 ricevute di lettura riuscite su 26; non sono ancora disponibili esiti delle 260 integrazioni di questo banco. Lo snapshot di sette letture resta immutato. Nessun secondo banco è avviato, nessun processo è riavviato e il precedente errore relativo del caso 0236 resta conservato.
+
+La conoscenza provvisoria corrente è H93, SHA256 `2e6421f4cc79363ad7462f1ab8c40782a1aa7d64993f352974003b53d075b627`, con 264 schede, lettore45 SHA256 `ba89fc468ff7b8a2feef1df8b0592354dceb8b134aa91ffbb1678c127ddd4663` e rendiconto75 SHA256 `e53a20923b30c5832531139090a663480491e400c6bf794eda65aafbcf6f8743`. Restano invariati 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner. Il lettore45 espone la correzione corrente della vecchia scheda sorgente512 senza modificarne il contenuto storico; 14 prove effettive della sua interfaccia sono concluse.
+
+La capsula supplementare `Conoscenza-H93-lettore45-v75-controlli-snapshot7-H-v1.zip` contiene 549 file, 329.568.907 byte, SHA256 `c79b18dba921aa187c3591b2ba24dc818aaed65fd77b1adf42ce629ef0daec1b`. Tutti i file estratti coincidono e l'audit del lettore recuperato è identico byte per byte. Sono esclusi gli output mutabili dell'operazione in corso; le dipendenze esterne sono dichiarate. Non è l'archivio dell'intera storia e non è ancora caricato su GitHub.
+
+Il registro autorevole resta v600/conoscenza 1.171: H93 non è una pubblicazione 1.172 e non è il file finale. Sette famiglie e 25 assi restano aperti, zero chiusure scientifiche. Restano analisi dei nuovi esiti, valutazione scientifica nell'intero dominio, confronto IA secondo il criterio Owner, conoscenza finale e trasferimento completo degli archivi con download, ricomposizione e recupero verificati da GitHub. Nessun merge, deploy, modifica di master o script installati, attivazione del portale o ripresa M27.
+
 ## Collegamento dei banchi, ricevute e salvataggio delle evidenze: preparazione successiva
 
 Sono congelati due piani distinti, ciascuno con **26 letture degli input, 260 integrazioni e 65.536 campi**. Le richieste effettive, i file sorgente e gli alias restano quelli verificati in precedenza. Nessuna nuova cartella di esecuzione nativa è stata creata.
