@@ -1,5 +1,26 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Tentativo della coda: errore nativo prima dei casi e recupero aperto — 15 novembre 2026
+
+Questa sezione aggiorna il precedente stato «nessuna ripresa avviata». Il nuovo tentativo della coda è stato ammesso dal coordinamento condiviso e ha superato due osservazioni di avvio, identità esatta e moduli caricati. La prova nativa di hash a blocchi, precedente al worker scientifico, è però terminata con `ReferenceError: DataType_ByteArray is not defined`. Il worker non è entrato: zero casi richiesti, zero executeGlobal e zero immagini aperte. I 64 casi conclusi del tentativo precedente non sono stati ripetuti.
+
+L'header installato `pjsr/DataType.jsh` definisce la costante, ma il launcher non lo includeva. I precedenti controlli simulati fornivano il simbolo e non coprivano questa inizializzazione nativa. Sono stati inoltre individuati e corretti prima dell'avvio i terminatori LF dei launcher: la revisione realmente avviata usa CRLF. Versioni, impronte, qualifiche ed errori sono conservati separatamente.
+
+La ricevuta al momento dell'errore registra un handle File trattenuto. Una successiva ispezione in sola lettura, in una nuova esecuzione `v8-private`, non accede al retainer originale e termina con `OriginalPrivateRetainerUnavailableNoAdoption`, prima di leggere o chiudere il File. La persistenza fra esecuzioni ipotizzata dai mock non è dimostrata dal runtime reale. Il conteggio storico della ricevuta non attesta il numero corrente di handle del sistema operativo.
+
+Il parent originale conserva il proprio Popen e il custode mantiene la prenotazione in stato di attesa dopo l'errore. Il programma congelato non dispone di un canale di recupero per questo stato; il contratto condiviso non fornisce un comando di recupero. Non sono stati inviati segnali, adottati processi, cancellati record attivi o avviati tentativi concorrenti. È preparata una richiesta separata di review; al momento di questo snapshot non è stata inviata. Il recupero operativo resta incompleto e non autorizza ulteriori prove native.
+
+Conoscenza provvisoria H96: 275 schede, tutti i 4.920 requisiti e i 14.521 criteri letterali preservati, insieme ai 19 criteri Owner. Lettore48: 11 verifiche CLI effettive riuscite, incluso rifiuto dell'impronta errata. Rendiconto78 riconciliato; soltanto i collegamenti di evidenza di DrizzleIntegration sono estesi, senza chiusure scientifiche.
+
+SHA256:
+- H96: `545eb3067cead371297f4ddb4da2c8d5122bc4fffaec2e18d27c5d7871c45f72`;
+- lettore48: `55c7c898c01561225fb867268f9cd4ce7bcd35cbfa835a344cacc6029176af9d`;
+- rendiconto78: `9c305e18aee6d34cb67e4bcc4bea46e8d823de636a52b7a473acbe59d70096ca`;
+- diagnosi dell'errore precedente al worker: `ec6a414757bdfaad37fff26ceaf95fc8651492a9f006a612781110a20c36c286`;
+- richiesta di review preparata: `cf8b88d479537410a4bb0d63a3e5a043622295da986da4f460fe0b092c705070`.
+
+Restano validi i 580 scostamenti relativi del consuntivo precedente: il controllo assoluto non li annulla. Registro v600/conoscenza1.171 invariati; nessuna1.172 attestata. H96 non è la conoscenza finale. Restano tutte le famiglie scientifiche, la valutazione IA e il trasferimento completo su GitHub con recupero verificato. Nessun merge, deploy o attivazione del portale.
+
 ## Consuntivo definitivo dei 64 casi e ripresa circoscritta — 15 novembre 2026
 
 Questa sezione aggiorna il precedente stato «analisi in corso»; le sezioni storiche sottostanti conservano il proprio perimetro temporale. L'analisi originale dei 64 casi è conclusa: 560 endpoint logici, di cui 548 con stima e 12 senza stima. Dei 35.913.728 confronti stimati, 580 superano il limite relativo Owner del 5%; tutti rispettano il controllo assoluto di 10^-6. I 786.432 confronti non applicabili restano distinti. Il passaggio assoluto non annulla gli scostamenti relativi; i riferimenti piccoli ma non nulli non vengono esclusi. Sono confronti dipendenti, non prove indipendenti né una misura del rischio IA.
