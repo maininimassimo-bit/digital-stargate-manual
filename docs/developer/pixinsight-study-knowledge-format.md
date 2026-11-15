@@ -1,6 +1,53 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
-## Stato corrente: H91 provvisoria, lettore v43 e rendiconto v73
+## Stato corrente: H92 provvisoria, lettore v44 e rendiconto v74
+
+**H92 contiene 258 schede** e conserva tutte le 255 schede H91, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Il lettore cambia soltanto nome e impronta predefiniti; otto controlli CLI verificano audit, riepilogo, policy, le tre nuove schede, l'asse del rumore e il rifiuto dell'impronta errata. Il rendiconto v74 aggiunge tre collegamenti a DrizzleIntegration e conserva ogni criterio. Autorità v600 / 1.171 invariata. **Sette famiglie, 25 assi e milestone restano aperti, zero chiusure scientifiche.**
+
+Le tre schede aggiunte raccolgono la sorgente gaussiana completa con replay dei byte, gli originali e le copie di lavoro 512×512 con la ripartizione fisica, e la sensibilità finita dei momenti mantenendo il fallimento relativo. I criteri del 5% relativo, posizione 5% FWHM iniziale e rischio IA 1% con confidenza 95% restano invariati.
+
+### Stessi campi, immagini fisiche più piccole
+
+I 33.554.432 campioni gaussiani già acquisiti e verificati sono materializzati senza nuovi prelievi casuali: **32 blocchi di 4.096 campi, totale 131.072 campi**, sette profili di varianza e quattro esposizioni. Ogni immagine contiene una griglia 64×64 di riquadri 8×8, per un lato di 512 pixel.
+
+La sorgente originale usa moltiplicazione e addizione binary64 separate, con media nota 1/8 e sigma congelati. Ogni originale, compresi i negativi, è conservato; una copia distinta aggiunge 3/8 e verifica l'intervallo stretto 47/1000..953/1000. Sono salvate **896 coppie logiche**, corrispondenti a **832 originali e 832 copie fisicamente distinti**. Le condivisioni sono identità effettive dei byte; non attestano gli alias delle future configurazioni native.
+
+La ripartizione preserva tutti i campi e i 2.632 endpoint logici del certificato, senza selezione dai risultati. La precedente proposta di due immagini 2048 e 520 chiamate non è eseguita. Con 32 blocchi, le chiamate prospettiche diventano **8.320**, soltanto se gli alias effettivamente serializzati sono qualificati per ciascun blocco. Non sono 8.320 casi scientifici indipendenti.
+
+Alla scala massima 4 e tre canali, integrazione e pesi richiedono nominalmente 100.663.296 byte di pixel. Questo non limita la memoria privata complessiva di PixInsight e non sostituisce le guardie di risorse, ownership e prenotazione comune R4. Nessuna nuova istanza PixInsight viene avviata da questa preparazione.
+
+### Costruzione e confronto riproducibile
+
+La copia di lavoro usa operazioni vettoriali binary64 materializzate separatamente e il residuo TwoSum. La base matematica condizionale è l'Algoritmo 3.1 e il Teorema 3.4 di [Ogita, Rump e Oishi (2005)](https://ogilab.w.waseda.jp/ogita/math/doc/2005_OgRuOi.pdf), sotto aritmetica IEEE e assenza di overflow. Il teorema non valida questa implementazione, l'ambiente o PixInsight.
+
+La verifica software confronta **4.562.944 pixel congelati** con risultati precedenti e residui esatti a interi, include il nuovo ritaglio 512, 4.114 valori di frontiera con oracolo Fraction e 11 rifiuti di input/formati non validi. Le operazioni vettoriali della prova richiedono circa 0,296 secondi; non è una previsione della durata della campagna o delle scritture.
+
+Dopo la materializzazione, una seconda formula basata sulle coordinate lineari raccoglie i valori direttamente dai blocchi sorgente, senza usare il reshape/transpose del costruttore. Tutti i **234.881.024 valori logici originali e le rispettive copie** coincidono byte per byte con la costruzione dichiarata; tutti i 1.048.576 indirizzi per blocco sono coperti e i campi globali sono preservati. Sono conservate 258 occorrenze logiche negative negli originali. Conteggi logici e alias non diventano repliche indipendenti.
+
+La legge IID uniforme di CNG resta un'ipotesi del modello di simulazione. Queste verifiche non misurano ancora rumore o varianza di popolazione all'uscita di PixInsight. L'audit finito dei momenti non riclassifica il singolo confronto del pilota a circa 15,16% relativo: quel risultato resta NOT_MET, senza modifiche di soglia o ripetizioni.
+
+### Integrità e consegna locale
+
+La capsula H92 contiene **1.741 file, 4.239.217.941 byte sorgente**; ZIP di 4.240.622.348 byte, SHA256 `0a8fea3e8ae96767492cc8c52b9b3f205ef9c19020f4f335cad70f2c3c4ac3ff`. Tutti i file sono estratti e confrontati; i 141 membri della capsula annidata di dati grezzi e gaussiani sono verificati. L'audit del lettore recuperato coincide con l'originale, SHA256 `f88b753b3eba115201daa14ab610eb5c253c7314ded8ebe6031f8cbe1dce5dc4`.
+
+Cinque parti di trasporto (quattro da 1.000.000.000 byte e una da 240.622.348) sono ricomposte localmente: impronta identica al ZIP. Non sono ancora caricate su GitHub. Runtime Python, pacchetti numerici, Windows/PixInsight e antenati storici non inclusi restano dipendenze esterne esplicite. Non sono rieseguiti CNG, conversione gaussiana o lifecycle nativo. La capsula copre questi dati e controlli, non tutta la storia dello studio.
+
+H92/v74 sono congelati prima di questa verifica e registrano prudentemente la capsula 512 come pendente. Questo recupero è un evento successivo: non modifica retroattivamente quei file. La conoscenza resta provvisoria.
+
+Impronte SHA256:
+
+| Artefatto | SHA256 |
+| --- | --- |
+| conoscenza H92 | `757264939496daf13da900999919e67fa0fb63c4ced309903d4ca53fd40a558c` |
+| lettore v44 | `7ca6eb643aadf5a29c894a2c670038aca8c40adea304804c7c167a68152131cd` |
+| rendiconto v74 | `78473091f8a293047e07d9efaa951ded9f9d5c8646d284c1a7ab20588de078af` |
+| protocollo 32 blocchi 512 | `4c01d75955bd98e0933ed0044e1eae713ae9571272479676032b04a402537be0` |
+| manifest degli input 512 | `46d6166f258d0fbb16e08b2445f75361b5d617d2eb2ae64a13758412c3b45718` |
+| confronto completo indipendente | `db55770672f482470e1296dbd36e75de66ae87573346d0bed9653a4d2af1e645` |
+
+Restano da qualificare gli alias effettivi dei parametri e file serializzati, la lettura nativa Float32, i nuovi controlli di esecuzione e le misure/inferenze dell'intera famiglia congelata. Restano inoltre il dominio completo delle sette famiglie, la caratterizzazione fisica, il collaudo decisionale IA, la conoscenza finale e il trasferimento integrale degli archivi su GitHub con recupero remoto verificato. Tutti i nuovi materiali sono su H:. Nessun merge, deploy, portale, modifica di master/script installati, M27 o migrazione Codex.
+
+## Stato storico: H91 provvisoria, lettore v43 e rendiconto v73
 
 **H91 contiene 255 schede**, preservando tutte le 253 schede H90, i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Autorità v600 / 1.171 invariata, sette famiglie e 25 assi ancora aperti, zero chiusure scientifiche. Il lettore v43 cambia soltanto nome e impronta predefiniti e supera sei controlli CLI mirati. Il rendiconto v73 conserva ogni criterio originale e aggiunge due collegamenti a DrizzleIntegration. H91 resta una conoscenza provvisoria.
 
