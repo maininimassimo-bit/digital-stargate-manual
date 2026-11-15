@@ -1,5 +1,29 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## H102: esito reale parziale e continuazione finale congelata
+
+H102 e ancora conoscenza **provvisoria**: conserva integralmente le 287 schede H101 e aggiunge tre schede, per 290 totali. Conserva anche i precedenti collegamenti di correzione e aggiunge due collegamenti successivi, per sette. Il lettore54 espande le correzioni annidate e rifiuta cicli o riferimenti invalidi: una vecchia correzione che riportava review e consenso ancora pendenti si consulta ora insieme al loro successivo esito autentico. Nessuna scheda storica viene riscritta.
+
+Il file `Conoscenza-consolidata-provvisoria-DSG-PixInsight-IA-h-v102.json` ha SHA256 `e8156313c02a7caf601bf3d5d1d7f7a553821f502ad2b42471e6e76e71159362`. Il lettore54 `consult_provisional_dsg_knowledge_h_v5_v54.py`, SHA256 `f5b74df23f2c14974ec8022012d422609c326591fd98a680901412710f04b474`, ha superato nove prove CLI e dieci prove del grafo delle correzioni. Queste ultime verificano soltanto il lettore e non costituiscono evidenza scientifica.
+
+Il rendiconto84 ha SHA256 `e9a2f1fb4ef40716fcd3576ef5b97a7c7b0547c68dfc778ecb62b83dba94d550` e riconcilia tutti i 4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner. Criteri, disposizioni canoniche, sette famiglie e 25 assi restano invariati; zero chiusure scientifiche.
+
+### R005: intera implementazione candidata, revisione indipendente avviata
+
+La continuazione solo finale dispone ora di un soggetto completo congelato con 19 moduli e otto radici concrete. Manifest SHA256 `33d2d93658fe58affa6da2741d4526d711256b52e171ed11a5ad2e11f6928177`; source-set SHA256 `7ed2e39ba40b910073f1395961ef97e1d4c1ad988a5fb98e5f59a8ab9e049076`. La revisione tecnica indipendente ha preso in carico il pacchetto; il suo rapporto completo non e ancora attestato da questo aggiornamento.
+
+Il percorso comprende verifica delle evidenze e del consenso originali, collegamento esplicito al nuovo soggetto e alla nuova review, contenitore globale monouso per gli effetti residui, osservazioni fresche, unico witness, rendiconto dei casi, archivi preazione e precommit recuperati, certificato, lock preesistente, copia H: e rinomina finale senza sostituzione. I moduli precedenti che arrestavano processi non sono importati dalla nuova chiusura di sorgenti. Il consenso originale resta byte per byte invariato e non viene presentato come approvazione umana dei nuovi hash.
+
+Le prove autore comprendono un positivo integrato, 21 esiti di guasto o perdita della risposta dopo commit simulato e 11 prove di avvio isolato/contesto runtime. I positivi compilano il source-set concreto con il FrozenOwnedLoader; i negativi verificano anche rifiuti precedenti alla compilazione. Review, metadati di processo e namespace sono inventati nelle fixture. Percorsi di output, prenotazione monouso locale e impronta del file di prova H: sono adattati e dichiarati. L'unico witness realmente eseguito dalle prove apre un file inventato da 603 byte; il sidecar originale resta non aperto. La prima versione del test di avvio aveva un difetto nel collegamento del lettore di prova: e conservata; la seconda corregge il test senza cambiare la produzione.
+
+L'archivio selezionato per la review contiene 495 file recuperati identici, ZIP 10.843.741 byte, SHA256 `f3d1217f4f09212133c56003d4ea140d00b959becdebde88734d46e7f022a48e`. Non e l'intero storico e conserva dipendenze esterne dichiarate. Nessuna review indipendente completa, avvio operativo R005, prenotazione globale degli effetti, witness originale, certificato condiviso o rilascio reale viene dedotto da queste prove. Restano conservati 64 casi; rimangono 196 casi del primo banco e 260 del secondo.
+
+### Conservazione e stato della consegna
+
+La capsula locale H102/lettore54/rendiconto84 contiene 65 file, ZIP 191.152.497 byte, SHA256 `5f920cae1d51fef1d45af0ed76dc1792e51735e1724b4b4a927e12e169e6092d`. Tutti sono stati recuperati identici e due consultazioni dalla copia recuperata producono lo stesso risultato dell'originale: audit e vecchia scheda con correzioni annidate. Questa autonomia dimostrata riguarda quelle consultazioni; la ricostruzione dal programma generatore richiede ancora H101 e altre dipendenze conservate separatamente.
+
+Il commit pubblica il testo tecnico, non il file H102 o i suoi ZIP. Il precedente commit `bf664d8311ffa6860f8280470beb67dbec664098` ha superato sette workflow, sette job e tutti i 199 step elencati; la CI di questo nuovo aggiornamento e distinta. Il registro resta v600/conoscenza 1.171: nessuna attestazione di 1.172. File finale di conoscenza e passaggio completo su GitHub, inclusi download e ricostruzione verificati, restano da completare.
+
 ## Aggiornamento operativo: EXACT004 parziale e continuazione finale in preparazione
 
 Questo aggiornamento supera soltanto le indicazioni temporali precedenti sul recupero operativo; conserva integralmente i resoconti storici sottostanti. La revisione completa dell'implementazione EXACT004 e stata approvata nel suo perimetro, seguita dal consenso umano esplicito ai suoi effetti e limiti.
