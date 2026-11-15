@@ -1,5 +1,20 @@
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
+## Analisi per blocchi e lettura dei file grandi: verifiche offline successive
+
+Il piano principale da 2048 pixel dispone ora di un calcolo lineare esatto per blocchi di massimo 1.024 campi. Usa interi e denominatori comuni per valutare originali Float64, previsioni di lettura Float32, risultati nativi e momenti finiti; conserva il riferimento nullo come errore relativo non definito. Non richiede una riga JSON con frazioni per ogni punto. I file originali e i risultati grezzi restano necessari per il recupero.
+
+La qualificazione offline ha riletto **tutti i 260 casi nativi già conclusi**, senza eseguirli nuovamente. Coincidono esattamente i 168.448 valori supportati, la decomposizione fra errore di lettura e aritmetica nativa, e i momenti finiti dei 2.632 endpoint supportati. Sono conservati i 17.920 record senza stima. Restano **168.447 confronti entro il 5% e un confronto oltre il 5%**: il nuovo analizzatore non riclassifica quel fallimento. Controlli aggiuntivi coprono coordinate non costanti fino al lato 4096, valori subnormali/estremi, riferimento nullo, suddivisione dei blocchi e input non validi.
+
+- `large-cohort-exact-linear-qualification-h-v1/verification.json`: SHA256 `e3a717b1369a51342746998da0159ffea53fa5a0812ca831cde3a7a847c51330`.
+- `large-cohort-readonly-plane-qualification-h-v1/verification.json`: SHA256 `597d4475263fb1bd6818c7f7a4483314da574ee0f37e41074ba185adb73425f4`.
+
+Il lettore in sola lettura ha verificato le impronte integrali dei **156 file fisici** primari, 160.680 campioni confrontati bit per bit con letture separate e 64 combinazioni lineari esatte su sorgenti reali da 2048 pixel. Sono verificati rifiuto di indici/file non validi, rilevamento della modifica di una sola fixture dedicata e chiusura degli handle. I pixel non vengono materializzati come grandi tuple Python. La riserva di memoria virtuale e la paginazione del sistema operativo restano distinte da una misura della memoria massima dell'analisi completa.
+
+Le factory primarie hanno inoltre superato **12.480 controlli simulati su 520 richieste**; i lettori nativi predisposti hanno superato **134 controlli simulati sui 52 sorgenti**. Questi controlli non osservano enum, setter o lettura effettivi in PixInsight.
+
+**Limiti:** si tratta di preparazione e qualificazione offline. Nessuna nuova chiamata nativa, estrazione casuale o API a pagamento; nessuna osservazione dell'integrazione dei nuovi banchi, nessuna garanzia del tempo o della memoria dell'intera campagna, nessuna validazione della varianza di popolazione o chiusura delle sette famiglie scientifiche. La capsula H92 resta invariata e non contiene questi nuovi programmi, controlli e dati primari. Il file di conoscenza finale e il trasferimento completo con recupero da GitHub restano aperti.
+
 ## Nota operativa successiva a H92: correzione delle scale e piano principale a 520 richieste
 
 **Correzione esplicita:** il manifest congelato contiene scale **1 e 2**. La scala 4 era stata indicata erroneamente come configurata nel dimensionamento; il valore 100.663.296 byte era quindi un margine conservativo per la sorgente 512, quattro volte il massimo effettivo. I file e gli archivi H92/v74 restano conservati byte per byte. La correzione separata è `full-noise-scale-sizing-correction-h-v1/correction.json`, SHA256 `5519ca1acb32299bd27a8c2ee6724f6fe076522617785e0205c1a699df9079ff`.
