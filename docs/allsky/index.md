@@ -29,3 +29,12 @@ La ripresa include data e ora. Se la rete o la camera non sono disponibili, l’
 L’Allsky usa una camera ZWO ASI290MC con obiettivo da 1,8 mm e un Raspberry Pi. Acquisizione, archivio e visualizzazione sono descritti nel [capitolo tecnico sul sistema AllSky](../chapters/27-sistema-allsky.md). Per esplorare l’osservatorio, visita la [Home](../index.md) e lo [Stato osservatorio](../status/index.md).
 
 La ricerca temporale aggiuntiva è attiva soltanto in [affiancamento privato](../operations/allsky-meteor-shadow.md): i suoi candidati non alimentano la galleria pubblica.
+
+
+## Allsky Pocket sul telefono Android
+
+[Apri Allsky Pocket](https://digital-stargate-allsky-pocket.vibrantbadge.chatgpt.site/){ .md-button }
+
+Il prototipo pubblico permette di consultare **Live, Meteo e Archivio**, senza accedere con ChatGPT. Aprilo in Chrome su Android e usa **Installa app**, oppure il menu **⋮ → Aggiungi a schermata Home → Installa**, se disponibile. [Istruzioni complete e stato delle verifiche](../operations/allsky-pocket-pwa.md).
+
+La PWA usa soltanto sorgenti già pubbliche e non modifica la configurazione Allsky. **I candidati privati del rilevatore temporale restano esclusi**; nella PWA non è presente una sezione meteore.

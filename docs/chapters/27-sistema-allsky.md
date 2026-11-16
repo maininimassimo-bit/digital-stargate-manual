@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.7 — collaudo prodotti della notte 12–13 novembre, completato 14/11/2026
+**Revisione:** 1.8 — progetto PWA Allsky Pocket e accesso pubblico, 16/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -207,6 +207,11 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 1.1 | 27/10/2026 | Snapshot aggiornato delle 08:01, backup privato 355 file e pubblico 140 file, hardlink settings preservato, checksum e guida aggiornati |
 | 1.2 | 31/10/2026 | Camera spostata circa 14:30: nuova geometria overlay, verifica su secondo fotogramma e snapshot 18:21 separato privato/pubblico |
 | 1.3 | 31/10/2026 | Vento dal relay diagnostico CloudWatcher, unità km/h confermata, controlli validità/freschezza e nuovo snapshot 18:50 |
+| 1.4 | 12/11/2026 | Aggiornamento Allsky v2026.10.01_01, personalizzazioni conservate e snapshot separati |
+| 1.5 | 12/11/2026 | Maschere aggiornate e Auto-Gain/AWB disabilitati, calibrazione invariata |
+| 1.6 | 12/11/2026 | Affiancamento privato del rilevatore temporale, isolamento e backup dedicati |
+| 1.7 | 14/11/2026 | Collaudo dei prodotti della notte 12–13 novembre e verifica pubblica, anomalie residue documentate |
+| 1.8 | 16/11/2026 | Allsky Pocket: PWA pubblica, istruzioni Android e candidati privati esclusi |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -692,3 +697,12 @@ I log dopo il riavvio delle 19:23 confermano Auto-Gain e AWB **No** per giorno/n
 Proposta **non applicata, in attesa di autorizzazione**: se si desidera continuità anche in questa breve fase, valutare su prova controllata l’aumento di `daymaxautoexposure` da 100 a **1000 ms**, conservando gain, rampa, WB e gate di scarto. Effetto atteso: maggiore margine all’alba; possibili tempi di esposizione diurni fino a 1 s, quindi modifica fotografica da approvare. Sarebbero necessari backup mirato, eventuale riavvio della sola acquisizione per caricare il parametro e verifica all’alba successiva; rollback al valore 100 e riavvio controllato. In alternativa mantenere il comportamento attuale accettando quei transitori. Nessuna delle opzioni è stata applicata.
 
 Il collaudo è diagnostico: configurazione, USB, mappa, meteore private e pubblicazione dei media restano invariate. Log grezzi, copie di lavoro ed evidenze dettagliate rimangono nell’archivio privato dell’Owner; il repository contiene soltanto questo riepilogo. Nessun nuovo backup di configurazione è necessario per le sole letture; rimane corrente lo snapshot del 12/11 alle 22:07.
+
+
+## 27.39 Allsky Pocket: PWA pubblica per Android — 16 novembre 2026
+
+Disponibile il prototipo [Allsky Pocket](https://digital-stargate-allsky-pocket.vibrantbadge.chatgpt.site/), con tre schede **Live, Meteo e Archivio** e accesso pubblico **senza login ChatGPT**. La prima anteprima era privata; l’Owner ha successivamente autorizzato l’accesso libero. L’hosting è distinto dal Raspberry: il passaggio non modifica acquisizione, parametri fotografici, mappa, rilevatori o configurazione Allsky.
+
+Il client React/TypeScript legge tramite un servizio separato soltanto JPEG, proiezione telemetrica selezionata e tre gallerie già pubbliche (timelapse, startrails, keogram). **I candidati temporali privati restano esclusi** e non è prevista una sezione meteore nella PWA. Nessun accesso amministrativo o comando all’impianto è introdotto.
+
+[Progetto tecnico, link, istruzioni Android e limiti di collaudo](../operations/allsky-pocket-pwa.md). Su Android aprire il link in Chrome e usare **Installa app**, oppure **⋮ → Aggiungi a schermata Home → Installa**, quando disponibile. Manifest standalone e fallback offline sono predisposti; installazione su telefono fisico ancora da verificare dall’Owner. Browser mobile simulato, immagini e video sono stati verificati, così come il successivo accesso pubblico senza schermata di login. Il progetto PWA ha un proprio sorgente/versionamento e non è automaticamente incluso nei backup Allsky.
