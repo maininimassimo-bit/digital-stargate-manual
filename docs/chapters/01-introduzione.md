@@ -1,13 +1,24 @@
+---
+title: Digital Stargate · gestione e configurazione corrente
+description: "Osservatorio Digital Stargate a Manciano, gestito da Massimo Mainini. Configurazione corrente, inventario verificato e riferimenti tecnici aggiornati al 16 novembre 2026."
+---
+
 # Capitolo 1 – Introduzione
 
 **Codice documento:** DSG-TM-001-01  
-**Revisione:** 0.2 Draft  
+**Revisione:** 0.3 — presentazione aggiornata al 16/11/2026<br>
 **Classificazione:** Engineering Documentation  
 **Stato:** In sviluppo
 
 ## 1.1 Scopo
 
 Il presente manuale costituisce il riferimento tecnico e operativo dell’Osservatorio Astronomico Remoto **Digital StarGate**, installato a Manciano (GR) presso l’Agriturismo La Svolta.
+
+**Gestione attuale: Massimo Mainini.** La presentazione della configurazione corrente è aggiornata al **16 novembre 2026**. Questo portale e il relativo repository costituiscono il riferimento documentale del progetto Digital Stargate gestito da Massimo Mainini a Manciano.
+
+La configurazione documentata comprende computer PrimaLuceLab **EAGLE3**, montatura **Celestron CGX-L**, sistemi ottici **Celestron C8 XLT** e **Sky-Watcher Quattro 200P**, software **N.I.N.A., PHD2, CPWI e ASCOM**. L’Allsky usa una **ZWO ASI290MC**, obiettivo fisheye **1,8 mm** e **Raspberry Pi 4 con 4 GB RAM**; il meteo locale è fornito da **CloudWatcher**. I sistemi ottici elencati sono componenti dell’inventario: la loro presenza non implica impiego contemporaneo nella singola sessione scientifica.
+
+Per modelli, stato e date di verifica consultare l’[inventario hardware](22-inventario-asset-management.md#225-inventario-iniziale); per il cielo live e le relative funzioni consultare la [pagina Allsky](../allsky/index.md) e il [Capitolo 27](27-sistema-allsky.md). La data editoriale di questa presentazione non rinnova automaticamente le verifiche fisiche dei singoli componenti. Descrizioni pubblicate in date differenti possono riguardare altre versioni dell’impianto: usare questi riferimenti aggiornati per identificare l’assetto corrente.
 
 Il documento descrive l’architettura generale dell’impianto, i sottosistemi hardware e software, le procedure di conduzione, le modalità di accesso remoto, i controlli di sicurezza, le attività di manutenzione e le procedure di ripristino in caso di anomalia.
 

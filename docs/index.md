@@ -1,6 +1,6 @@
 ---
 title: Osservatorio astronomico e cielo live a Manciano
-description: Digital Stargate, osservatorio astronomico remoto a Manciano, in Toscana. Guarda il cielo live con Allsky e scopri immagini, sessioni scientifiche e il progetto.
+description: "Digital Stargate di Massimo Mainini: osservatorio astronomico remoto a Manciano, Toscana. Cielo live Allsky, configurazione corrente e documentazione tecnica aggiornata."
 hide:
   - toc
 ---
@@ -24,6 +24,7 @@ hide:
       <a class="md-button" href="./scientific-session-catalog/">Esplora le sessioni</a>
       <a class="md-button" href="https://digital-stargate-allsky-pocket.vibrantbadge.chatgpt.site/" target="_blank" rel="noopener noreferrer">Apri Allsky Pocket ↗</a>
     </div>
+    <p class="dsg-pocket-install">Gestione attuale: <strong>Massimo Mainini</strong> · Presentazione aggiornata al <time datetime="2026-11-16">16 novembre 2026</time>. <a href="./chapters/01-introduzione/#11-scopo">Configurazione corrente e riferimenti tecnici</a>.</p>
     <p class="dsg-pocket-install">Live, meteo e archivio sul telefono, senza login. <a href="./operations/allsky-pocket-pwa/#installazione-e-prova-su-android">Come installarla su Android</a>.</p>
   </div>
   <div class="dsg-hero__trust" aria-label="Garanzie del portale">
