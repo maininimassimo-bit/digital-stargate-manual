@@ -1,3 +1,50 @@
+<!-- BKL046-H106-ROUNDING-CELLS-20261116 -->
+## H106: ingressi, arrotondamenti finali e limiti delle spiegazioni numeriche
+
+La conoscenza **provvisoria H106** contiene **299 schede**: conserva tutte le 297 schede H105, i dieci collegamenti di correzione e ogni disposizione scientifica precedente. Il lettore58 supera undici verifiche; il rendiconto88 riconcilia tutti i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Il punto di ripresa conserva l'intero piano di **sette famiglie e 25 assi**. Nessuna chiusura scientifica è promossa; il registro autorevole resta v600 / 1.171.
+
+| Artefatto su H: | SHA256 |
+| --- | --- |
+| Conoscenza H106 | 9143eaa584130f08a8df0c7e2ccc1a88448f63575255ac3393bfb3832c8f987e |
+| Lettore58 | 7530e65d8bc85d08863b19914827bcd190482d318b5f799a7764baabe220de31 |
+| Rendiconto88 | a75d530e2d7d1d14583cec2ae72d13e8d0df0a2a60d8002f1049f53729451639 |
+
+Sono stati letti e verificati tramite hash dieci file degli ingressi Float32 previsti. Tutti i **3.159 campioni esaminati** coincidono con l'arrotondamento esatto al più vicino, con parità nei casi a metà, di **originale Float64 + 3/8**. Questa verifica riguarda quei campioni; non sostituisce una prova dell'intero piano di conversione.
+
+Due modelli ideali espliciti, con ingressi convertiti e solo arrotondamento finale Float32, sono stati confrontati con i risultati nativi conservati. Il primo mantiene la geometria nominale; il secondo usa l'ipotesi della larghezza Float32 e delle fasi binary64. Nessun parametro è adattato per singolo campione e nessun dato nativo viene modificato.
+
+| Confronto sui 580 fallimenti conservati | Geometria nominale | Geometria codificata ipotizzata |
+| --- | ---: | ---: |
+| Differenza tra coppie identica alla differenza nativa | 105 | 107 |
+| Entrambi i singoli valori identici a quelli nativi | 66 | 66 |
+| Differenza identica nonostante almeno un valore diverso | 39 | 41 |
+| Differenza del modello entro il 5% del riferimento congelato, mentre quella nativa fallisce | 329 | 346 |
+
+La corrispondenza di una differenza può quindi nascondere compensazioni tra errori dei due valori. Le 105/107 corrispondenze non identificano l'algoritmo compilato di PixInsight e non trasformano i fallimenti in successi. I due modelli e le varianti non sono esperimenti indipendenti; tutti i **580 fallimenti originali rimangono tali**.
+
+Un audit autonomo ricostruisce la geometria con un diverso ordine di intersezione/pesatura e verifica **2.320 arrotondamenti di uscita** mediante un algoritmo interamente intero, più tre fixture esatte sui casi a metà. Il replay originale e quello recuperato producono stdout identico; dati alterati e assert disabilitati sono respinti. Capsula selezionata: **8 file, 829.570 byte**, SHA256 **eff6aa5aaee33788dd8ccaab3b71c8367ae1953e3323f7c14aa314422c79ddc9**.
+
+Per ogni valore nativo è stata inoltre costruita esattamente la sua cella di arrotondamento, usando i punti medi rispetto ai codici Float32 precedente e successivo. I conteggi includono riusi tra endpoint e sono separati dagli indirizzi nativi distinti:
+
+| Celle dei valori nativi | Nominale | Codificata ipotizzata |
+| --- | ---: | ---: |
+| Confronti scalari con riuso | 1.160 | 1.160 |
+| Confronti fuori dalla cella del valore nativo | 681 | 688 |
+| Indirizzi scalari nativi distinti | 992 | 992 |
+| Indirizzi distinti fuori dalla cella | 583 | 584 |
+
+Questi risultati escludono il solo salvataggio finale correttamente arrotondato del modello ideale come spiegazione sufficiente di quei valori. Non stabiliscono precisione degli accumulatori, ordine di somma o altra causa interna. Le distanze sono limiti condizionati al modello: nelle celle di codici dispari i confini sono esclusi. Due osservazioni nominali hanno distanza infima zero ma si trovano su un confine escluso; non si deve confondere un infimo con una perturbazione sufficiente effettivamente raggiunta.
+
+Il secondo audit usa decodifica intera dei bit e confronti razionali esatti, verifica tutte le **2.320 celle**, i confini e i conteggi degli indirizzi distinti. Capsula selezionata: **7 file, 1.281.332 byte**, SHA256 **310f2db731dd1d095778aa80548d6886f23015da7affa096a55131499a8245ea**. Recupero e audit sono identici; le due prove negative sono rifiutate. Gli algoritmi distinti condividono l'autore: non costituiscono review esterna indipendente.
+
+La capsula H106 contiene **79 file, 190.983.426 byte**, SHA256 **7dffd919a3e575e0230bf77a96122f622fd97d3e68c9727df5c16059addb82f1**. Il recupero preserva i byte e riproduce tre consultazioni del lettore. L'autosufficienza riguarda quelle consultazioni e gli audit dichiarati; la ricostruzione completa richiede H105 e le ulteriori dipendenze storiche. Le capsule selezionate non comprendono tutta la storia grezza.
+
+Il riesame completo mantiene separati tre prerequisiti: **review genuina del controllo e successiva ammissione R4 per nuovi test nativi; risposta fisica applicabile delle camere/filtri per estendere le conclusioni alle acquisizioni reali; casi significativi indipendenti con campionamento e giudizio congelati per il criterio IA 1% con limite superiore al 95%**. Le 80 righe delle tabelle Owner e i 20 frame ATR294C sono evidenze reali e conservate; questa revisione non nega l'esistenza di altri dati, ma non ne deduce una caratterizzazione fisica completa.
+
+Il parent header-only candidato di 21 sorgenti resta non approvato: i tre artefatti di review/origine genuina mancano e il nuovo percorso nativo non è creato. La nuova richiesta di review offline resta non inviata, in attesa del consenso specifico. EXACT004/R005 sono conclusi e non vanno ripetuti; restano conservati i 64 casi e rimangono aperti **196 + 260 casi nativi**. Nessuna nuova esecuzione PixInsight, azione BKL-051, modifica a master/script installati, merge o attivazione del portale.
+
+Questo commit pubblica **solo testo tecnico**, non i file H106, le immagini, i sorgenti o gli ZIP. Studio completo, conoscenza finale e trasferimento integrale GitHub con download/hash/ricostruzione restano da completare. La CI verifica il repository entro il proprio ambito e non è validazione scientifica.
+
 <!-- BKL046-H105-REFERENCE-ENCODING-20261116 -->
 ## H105: riferimenti ricostruiti e sensibilità della geometria codificata
 
