@@ -17,6 +17,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
@@ -37,7 +38,7 @@ internal fun SkyMapScreen() {
     val context = LocalContext.current
     var reload by remember { mutableIntStateOf(0) }
     var loading by remember { androidx.compose.runtime.mutableStateOf(true) }
-    val webView = remember(reload) {
+    val webView = remember {
         WebView(context).apply {
             settings.javaScriptEnabled = true // Allsky's VirtualSky overlay is rendered by its own page scripts.
             settings.domStorageEnabled = false
@@ -69,6 +70,12 @@ internal fun SkyMapScreen() {
                 }
             }
             loadUrl(MAP_URL)
+        }
+    }
+    LaunchedEffect(reload, webView) {
+        if (reload > 0) {
+            loading = true
+            webView.reload()
         }
     }
     DisposableEffect(webView) {

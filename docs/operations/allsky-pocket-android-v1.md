@@ -5,7 +5,7 @@ description: Sorgenti, integrazione, verifiche e limiti della beta Android nativ
 
 # Allsky Pocket: Android nativo v0.2
 
-**Stato al 16 novembre 2026:** beta 0.2.0 installata via USB sul Motorola G84, Android 15/API 35. Integra la galleria pubblica delle meteore candidate e la mappa VirtualSky originale calibrata/sincronizzata da Allsky. Build e 9 test JUnit superati. La verifica visiva via USB sul G84 ha confermato caricamento elenco, miniatura, immagine candidata completa e overlay celeste sul fotogramma live. L’Owner ha confermato le prove di rotazione, rete dati, rete lenta e stato offline (messaggio “Connessione non disponibile”). L’integrazione è proposta nella PR #639; resta la verifica della rotazione specifica della vista WebView. Toolchain portabile locale in `android/.local-toolchain/`, esclusa da Git.
+**Stato al 16 novembre 2026:** beta 0.2.1 installata via USB sul Motorola G84, Android 15/API 35. Integra la galleria pubblica delle meteore candidate e la mappa VirtualSky originale calibrata/sincronizzata da Allsky. Build e 9 test JUnit superati. Sul G84 è stato riprodotto e corretto il difetto per cui il pulsante “Ricarica mappa e fotogramma” lasciava bianca la vista: la WebView ora mantiene la stessa istanza durante il reload. La verifica visiva USB dopo il tocco conferma mappa e fotogramma ancora visibili. La verifica precedente aveva confermato galleria meteore, immagine candidata completa e overlay celeste; l’Owner ha confermato rotazione generale, rete dati, rete lenta e stato offline (“Connessione non disponibile”). Modifica proposta nella PR #640. Toolchain portabile locale in `android/.local-toolchain/`, esclusa da Git.
 
 ## Baseline e fonti
 
@@ -51,7 +51,7 @@ Toolchain riportata come effettivamente usata nel primo build. Il wrapper è inc
 
 ## Stato prove e limiti
 
-**Eseguito:** fetch HTTPS della galleria meteore con 324 link e miniature, pagina live Allsky 200 con VirtualSky/configurazione corrente, risposta 200 per l’immagine candidata più recente e relativa miniatura. `testDebugUnitTest assembleDebug` PASS, 9 test, zero failure. APK `release/allsky-pocket-v0.2.0-debug.apk`, package `it.digitalstargate.allskypocket`, versionCode 2/versionName 0.2.0, min SDK 26, target SDK 36, SHA-256 `ba876ef52af766cbc7a2bdcf35bfde99ddf4bcafaec92dd6c22222ee2b1c48a2`, dimensione 14,676,793 byte; firma APK v2 verificata. **Motorola G84 reale, Android 15/API35:** beta 0.2 installata via USB e verificata a schermo sbloccato: la scheda Meteore carica le candidate e apre l’originale; la scheda Mappa rende l’overlay calibrato sopra il live. Avvio, timelapse e startrail/keogramma della beta precedente erano già stati confermati dall’Owner.
+**Eseguito:** fetch HTTPS della galleria meteore con 324 link e miniature, pagina live Allsky 200 con VirtualSky/configurazione corrente, risposta 200 per l’immagine candidata più recente e relativa miniatura. `testDebugUnitTest assembleDebug` PASS, 9 test, zero failure. APK `release/allsky-pocket-v0.2.1-debug.apk`, package `it.digitalstargate.allskypocket`, versionCode 3/versionName 0.2.1, min SDK 26, target SDK 36, SHA-256 `d3c2bcf42c15eca03445273b13fd65458b783580d208e1caceda93c8b3b65617`, dimensione 14,558,718 byte; firma APK v2 verificata. **Motorola G84 reale, Android 15/API35:** beta 0.2.1 installata via USB. Toccando “Ricarica mappa e fotogramma”, la mappa VirtualSky e il fotogramma live sono rimasti visibili anche dopo 10 secondi; la precedente versione 0.2.0 diventava bianca nello stesso scenario. La galleria meteore e overlay erano già stati verificati sul dispositivo nella beta 0.2.0.
 
 La cartella sorgente Sites individuata in `C:\Users\MassimoMainini\Documents\Codex\2026-10-09\ti\work\sites\allsky-pocket` è un progetto Next/Vinext con API server e hosting autonomo. La scheda pubblica PWA documenta che il relay seleziona weather/camera/astronomy e inoltra i media via GET/range; non si introduce dipendenza dell’app dal dominio Sites.
 
@@ -75,7 +75,7 @@ La firma `debug` è locale e solo per test; non è una release Play. Non salvare
 
 ## APK e installazione Owner
 
-Distribuire `release/allsky-pocket-v0.2.0-debug.apk` al telefono tramite USB o trasferimento file privato. Verificare il checksum con `Get-FileHash allsky-pocket-v0.2.0-debug.apk -Algorithm SHA256`, che deve risultare `ba876ef52af766cbc7a2bdcf35bfde99ddf4bcafaec92dd6c22222ee2b1c48a2`. Aprire il file, autorizzare temporaneamente l’app sorgente richiesta da Android e completare l’installazione. La firma è di debug e non va usata per Google Play.
+Distribuire `release/allsky-pocket-v0.2.1-debug.apk` al telefono tramite USB o trasferimento file privato. Verificare il checksum con `Get-FileHash allsky-pocket-v0.2.1-debug.apk -Algorithm SHA256`, che deve risultare `d3c2bcf42c15eca03445273b13fd65458b783580d208e1caceda93c8b3b65617`. Aprire il file, autorizzare temporaneamente l’app sorgente richiesta da Android e completare l’installazione. La firma è di debug e non va usata per Google Play.
 
 ## Checklist Owner
 
@@ -89,6 +89,7 @@ Sul simulatore sono già state viste le tre schede, meteo, live, cataloghi timel
 - [ ] Archivio: catalogo vuoto/errore.
 - [x] Passaggio orientamento, rete dati, rete lenta e modalità offline: Owner riferisce esito positivo; offline appare “Connessione non disponibile”.
 - [x] Beta 0.2 sul G84: caricare galleria Meteore e immagine originale; aprire Mappa con overlay visibile sul fotogramma live.
+- [x] Beta 0.2.1 sul G84: usare “Ricarica mappa e fotogramma”; mappa e fotogramma restano visibili dopo il reload.
 - [ ] Rotazione specifica con WebView Mappa visibile; confermare che immagine/overlay restino allineati.
 - [ ] Ritorno dal background, catalogo meteore vuoto/errore e ripresa dopo timeout.
 
