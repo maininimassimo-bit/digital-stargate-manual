@@ -4,4 +4,4 @@ Il testo bilingue destinato alla pubblicazione è mantenuto nella pagina tecnica
 
 <https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/>
 
-**Stato:** URL non ancora live. Verificarne l’accessibilità pubblica dopo il normale merge e deploy; non inserirlo in Play Console prima di tale controllo. I log Allsky sono gestiti dal titolare e conservati sei mesi, come confermato dall’Owner. La Data Safety resta da compilare nel modulo corrente di Play Console.
+**Stato:** URL non ancora live. Verificarne l’accessibilità pubblica dopo il normale merge e deploy; non inserirlo in Play Console prima di tale controllo. Il titolare ha confermato uso dei log solo per gestione tecnica e sicurezza, conservazione di sei mesi, senza analytics o geolocalizzazione IP. La Data Safety resta da compilare nel modulo corrente di Play Console.

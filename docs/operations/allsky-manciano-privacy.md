@@ -15,7 +15,7 @@ Questa informativa descrive il trattamento dei dati nell’app **AllSky Manciano
 
 L’app mostra immagini live, dati meteo pubblici, archivio, immagini candidate di meteore e mappa celeste tramite connessioni HTTPS al server AllSky. Non crea account, non include pubblicità o SDK di analytics, non offre moduli di invio e non richiede accesso alla posizione, alla fotocamera o al microfono. L’app non usa l’indirizzo IP per ricavare la posizione dell’utente.
 
-Quando il dispositivo richiede contenuti al server, il server riceve l’indirizzo IP e i dati tecnici necessari alla richiesta. I log di accesso sono amministrati dal titolare e conservati per **sei mesi**, quindi eliminati tramite la rotazione dei log configurata sul server. Il titolare usa i log per la gestione tecnica, la sicurezza e la diagnosi di problemi del servizio; non li usa per pubblicità o profilazione.
+Quando il dispositivo richiede contenuti al server, il server riceve l’indirizzo IP e i dati tecnici necessari alla richiesta. I log di accesso sono amministrati dal titolare e conservati per **sei mesi**, quindi eliminati tramite la rotazione dei log configurata sul server. Come confermato dal titolare, i log sono usati solo per gestione tecnica e sicurezza; non sono usati per analytics, geolocalizzazione, pubblicità o profilazione.
 
 ### Titolare, finalità e base giuridica
 
@@ -35,7 +35,7 @@ Per esercitare i diritti di accesso, rettifica, cancellazione, limitazione del t
 
 The app displays live images, public weather data, archive products, candidate meteor images and a sky map through HTTPS requests to the AllSky server of the Manciano observatory. It does not create accounts, include ads or analytics SDKs, provide submission forms, or request access to location, camera or microphone. The app does not use IP addresses to infer a user’s location.
 
-When a device requests content, the server receives its IP address and the technical data needed to handle the request. Access logs are managed by the controller and kept for **six months**, then removed through the server’s configured log rotation. The controller uses these logs for technical operation, security and troubleshooting; they are not used for advertising or profiling.
+When a device requests content, the server receives its IP address and the technical data needed to handle the request. Access logs are managed by the controller and kept for **six months**, then removed through the server’s configured log rotation. As confirmed by the controller, the logs are used only for technical operation and security; they are not used for analytics, location inference, advertising or profiling.
 
 ### Controller, purposes and legal basis
 
