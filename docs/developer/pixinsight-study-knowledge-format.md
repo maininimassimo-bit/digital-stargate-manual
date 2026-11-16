@@ -1,3 +1,41 @@
+<!-- BKL046-H110-HEADER-CLEANUP-REVIEW-20261116 -->
+## H110: review V2 respinta, correzione V3 congelata e nuova review offline inviata
+
+La conoscenza **provvisoria H110** contiene **306 schede**: tutte le 304 schede H109 restano invariate, con due nuove evidenze e **13 collegamenti di correzione aciclici**. Il lettore62 supera **13 verifiche**; il rendiconto92 conserva **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. I byte della sezione requisiti sono identici a H109. Restano **sette famiglie, 25 assi e zero chiusure scientifiche**; registro autorevole v600 / 1.171.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H110 | e429fcdaf4d595ec64cdec29584306b8012f5a8cf9feca865be8605ae9813f6e |
+| Lettore62 | 57152122e1a5a98a8b928b6260ec74e707243901d529f62664506f9ccec9519a |
+| Rendiconto92 | 7875b8a32e2a912c79e3e634dcb3fa13bf50e6fc2d3c7d47dc893241267ad9c8 |
+
+L’Owner ha autorizzato la review offline aggiornata; l’invio è avvenuto realmente e la ricevuta è conservata su H:. **Le precedenti indicazioni “consenso mancante / richiesta non inviata” nelle sezioni storiche sono superate.** Il consenso riguarda la review offline e i suoi seguiti tecnici, senza autorizzare esecuzioni native o interventi sui materiali BKL-051.
+
+La review indipendente V2, report SHA256 **44dfbeafe8db1c889e5e4df2d703af404a220cc5af5f1393c24035146a421332**, ha letto tutti i 22 sorgenti e ha deciso **REJECTED_WITH_BLOCKERS**, blocco **BKL046-HDR-V2-01**. Il lettore conserva l’errore di lettura iniziale in una variabile, ma una eccezione generata dalla successiva chiusura può sostituirlo al chiamante e al controllo finale. La prova del reviewer chiude una sola volta il proprio handle reale e poi inietta KeyboardInterrupt: non dimostra uscita di PixInsight, rilascio della prenotazione, alterazione di evidenze o perdita di ogni riferimento; l’errore iniziale resta incidentalmente nei locali del traceback. Report, tutte le 35 evidenze nominate e archivio del reviewer sono copiati byte-identici su H:.
+
+La **V3 a 23 sorgenti** resta separata dai candidati respinti. Un contenitore esplicito conserva errore iniziale, errore di chiusura, contesto e proprietario della risorsa, senza stringificare gli errori annidati. Il tentativo di chiusura viene consumato prima della chiamata; un esito incerto impedisce letture o chiusure automatiche successive. Reader, osservatore connesso, wrapper persistente e RetentionGuard conservano lo stesso oggetto di errore. Sono corretti anche i percorsi analoghi di LocalFree, formattazione degli errori delle query e conservazione dell’eccezione originale di Popen. Nessun vecchio helper o archivio R005 viene modificato.
+
+| Nuova verifica | Perimetro effettivo |
+| --- | --- |
+| 6 scenari Reader e un caso assente | File e handle reali propri; errori di lettura/chiusura iniettati, nessun retry |
+| 6 scenari argv + 3 query | Allocazioni argv reali proprie liberate una volta; query interamente simulate |
+| 2 scenari connessi di errore | Identità dell’errore da Reader/capture a observer/durable/guard; owner e store esplicitamente simulati |
+| 16 scenari del flusso e main guard | 12 figli Python privati, un exit23 previsto, due richieste SIGINT solo nel qualificatore |
+| 35 regressioni di persistenza rieseguite | Nuove dipendenze; controller privati exit71/72 previsti e figlio originale exit0 |
+| 2 avvii a freddo | Rifiuto prima dell’ingresso operativo per review genuina mancante |
+
+I dati positivi UI/header/lease dei fixture sono inventati. Il metodo di conservazione è osservato anche su thread daemon di prova, non sul main produttivo con PixInsight; il main guard usa un corpo main sostituito. Non sono attestate ereditarietà dei segnali nativi, tutte le tempistiche asincrone, resistenza a guasti OS/alimentazione o writer ostili.
+
+Il dossier V3 ha subject **882aa40359ad0a13bab290348eb64d39f02f31fe28ebfb93e327ac0284a5ca6d** e source-set **8c0ec0549afef804d85ab5ee7d1f36d148eda6466d0a436c1081470cd710f256**. L’archivio recuperato contiene **67 file / 149.032 byte**, SHA256 **46b0d02e77e0e4c1b89e5f8b4292bbcdfa5bb364558628e0aac758b887ff667f**. Il seguito della review offline autorizzata è stato effettivamente inviato alla stessa chat indipendente. **Questo aggiornamento non attesta ancora un’approvazione V3**; i file di approvazione non sono sostituiti da stub e il root nativo non è creato.
+
+La capsula selezionata H110 contiene **151 file / 187.256.838 byte**, SHA256 **4ddc1d97a11ca44de59f62c109f4549174548755de8dddb34724505ea2e5b8d9**. Quattro consultazioni del lettore recuperato sono identiche agli originali. È autonoma per queste consultazioni; rigenerazione completa e storia scientifica dipendono ancora da H109 e dagli altri materiali dichiarati.
+
+Resta valido il perimetro cooperativo del normale coordinatore R4, distinto dai prototipi Namespace/TxF. Nessuna modifica al coordinatore, nessuna query di processi o stato operativo BKL-051. EXACT004/R005 sono conclusi e non ripetibili. I 64 casi e 580 fallimenti restano conservati; i successivi **196 + 260 casi nativi** e la qualificazione del loro controllo restano aperti. Nessuna nuova esecuzione PixInsight o API di IA, modifica di master/script installati, merge, deploy o portale.
+
+Questa pubblicazione trasferisce **solo testo tecnico**: file di conoscenza, sorgenti, rapporti grezzi, immagini e ZIP restano su H:. Studio completo, conoscenza finale e passaggio integrale su GitHub con download/hash/ricostruzione restano aperti. Le sette CI del precedente head9e287f88 erano riuscite; la CI del nuovo commit va verificata separatamente e non costituisce validazione scientifica.
+
+Le sezioni seguenti sono conservate come storico; per lo stato della review header e del consenso usare questa sezione e le correzioni H110.
+
 <!-- BKL046-H109-STATIC-PEER-RELEASE-SCOPE-20261116 -->
 ## H109: riscontro tecnico statico, limiti della procedura e nessuna promozione operativa
 
