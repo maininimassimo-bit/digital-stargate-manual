@@ -1,3 +1,45 @@
+<!-- BKL046-H115-TRUTH-FREE-FLUX-COMPATIBILITY-20261116 -->
+## H115: compatibilità necessaria del flusso senza verità sintetica
+
+La conoscenza **provvisoria H115** preserva tutte le 312 schede H114 e i byte della sezione requisiti: **313 schede, 19 collegamenti di correzione invariati**. Il lettore67 supera sette verifiche; il rendiconto97 riconcilia **4.920 requisiti, 14.521 criteri e 19 criteri Owner**. Nessuna chiusura scientifica. La nuova scheda aggiunge un controllo distinto: non sostituisce i confronti H114 con riferimento noto.
+
+| Artefatto locale H: | SHA256 |
+| --- | --- |
+| Conoscenza H115 | 40efbe4a2b22c8be0acb53f30cf602ffdcefc339c66fa20c34207055c28840f6 |
+| Lettore67 | d7c4cc36799a7f79a751b3ac9bfe048725b2f57d251ad5dff54910b7540398b5 |
+| Rendiconto97 | f1c512e93af16a122f6686f78f32bd6e03ab92b0890fb0aa086d1021938cc891 |
+| Capsula H115, 34 file / 11.330.962 byte | c51c186376a439df461e4da91f20e2d9f61fb3142f656d5d7e205b054a9c107a |
+
+### Regola applicabile senza conoscere il flusso vero
+
+Per una stima f e un unico flusso positivo ignoto F, il limite del 5% richiede **19F/20 ≤ f ≤ 21F/20**. Per un insieme finito di stime, i valori possibili di F appartengono all’intersezione **[max(20f/21), min(20f/19)]**. Questa intersezione contiene un valore positivo se e soltanto se **min(f)>0 e 19max(f)≤21min(f)**. L’uguaglianza è ammessa; il confronto è razionale esatto sui binary64 salvati.
+
+Sono letti soltanto i due artefatti dei fit già salvati, senza leggere il file della verità sintetica o usare ruoli, flusso vero, posizione vera o PSF vera. Per il modello complesso sugli stessi80 campi:
+
+| Insieme di stime | Campi incompatibili con un unico riferimento positivo entro5% |
+| --- | ---: |
+| Avvii vicini, PSF nominale | 20/80 |
+| Soluzioni selezionate alle tre PSF | 2/80 |
+| Tutti gli avvii vicini alle tre PSF | 22/80 |
+
+**field-0029 e field-0047** sono incompatibili soltanto combinando le due variazioni, rispetto ai due controlli separati. Il controllo **non individua l’errore noto di field-0073**: le stime possono essere compatibili fra loro ma tutte distanti dal vero. Un controesempio esatto con stime entrambe200 e riferimento100 dimostra perché una concordanza interna non certifica accuratezza.
+
+Una formulazione separata ricostruisce i candidati dai due artefatti originali e verifica **240 insiemi finiti**:196 compatibili, con un riferimento positivo costruttivo che soddisfa tutte le disuguaglianze;44 incompatibili, con estremi che separano gli intervalli. Questi240 insiemi sono tre controlli sugli stessi80 campi, non240 osservazioni indipendenti. Verificati anche il confine esatto21/19 e un valore razionale appena superiore.
+
+La prima versione dell’audit condivideva erroneamente l’elenco nominale con quello ampliato dalle varianti PSF. La verifica separata ha respinto il conteggio dei candidati; programma e risultato V1 restano conservati e non sono mai stati qualificati nella conoscenza. V2 separa le liste e supera tutte le verifiche. Il conteggio nominale corretto è20; quello combinato22. Questa correzione non modifica i fit originali o H114.
+
+Capsula scalari: **6 file /172.459 byte**, SHA256 **d58b0c7601cf51f0aea18f834927c10593c846330efc518d58e3d20613ab5b5b**. Due programmi riprodotti con output identici dalla copia recuperata; modalità ottimizzata e sorgenti alterate respinte. Capsula H115: quattro consultazioni recuperate identiche; include riferimenti e prove selezionate, senza ricopiare ricorsivamente gli archivi completi precedenti.
+
+### Limiti e stato operativo
+
+L’incompatibilità prova soltanto che le stime finite considerate non possono essere tutte entro5% da un unico valore positivo; non identifica la stima errata né il flusso reale. La compatibilità è una condizione necessaria, non una validazione. Nessuna verifica di posizione, intervallo di confidenza, rischio IA, scelta automatica del modello o validazione fisica delle camere. Nessun nuovo fit, pixel, rumore, campo indipendente, processo PixInsight o chiamata API.
+
+H114 resta lo stato operativo qualificato: review indipendente V4 approvata per l’implementazione, tentativo ordinario terminato1 prima del lease con HOST_BUSY_OR_LOCK_UNAVAILABLE, nessun avvio nativo. Una successiva sola lettura del registro condiviso ha osservato la prenotazione BKL-051 4fca5d24-4580-4273-873c-c025d1404382; un record non dimostra la vitalità del processo o l’identità del titolare del lock. Nessun processo, prenotazione o file BKL-051 modificato.
+
+Le sette CI della head H114 **87b0ad3c26021922f7eca08349f5ceb79215f6fa** sono concluse con successo: sette job,199 passaggi. Questa evidenza non anticipa l’esito CI H115 e non valida scientificamente lo studio. Restano 456 casi nativi e gli altri requisiti della milestone, conoscenza finale e trasferimento integrale dei byte su GitHub. Solo documentazione tecnica aggiornata in PR bozza, senza merge/deploy/portale.
+
+---
+
 <!-- BKL046-H114-JOINT-PSF-STARTS-GENUINE-V4-20261116 -->
 ## H114: sensibilità congiunta PSF e avvii; review V4 approvata, avvio nativo rifiutato
 
