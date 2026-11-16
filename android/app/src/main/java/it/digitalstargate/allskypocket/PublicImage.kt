@@ -41,7 +41,7 @@ internal fun PublicImage(key: String, url: String, description: String, onError:
         when (state) {
             ImageLoadState.Loading -> CircularProgressIndicator()
             is ImageLoadState.Ready -> Image(state.bitmap.asImageBitmap(), description, Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
-            is ImageLoadState.Failed -> Text("Immagine non disponibile", color = MaterialTheme.colorScheme.onSurfaceVariant)
+            is ImageLoadState.Failed -> Text(localized("Immagine non disponibile", "Image unavailable"), color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
