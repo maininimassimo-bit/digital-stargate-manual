@@ -5,7 +5,7 @@ description: Prima versione Android nativa con Live, Meteo e Archivio, da provar
 
 # Allsky Pocket: prima versione Android nativa
 
-**Aggiornamento:** 16 novembre 2026. **Stato:** perimetro e passaggio alla chat di sviluppo definiti; app nativa, APK e collaudo Android ancora da realizzare. Gestione del progetto: Massimo Mainini.
+**Aggiornamento:** 16 novembre 2026. **Stato:** APK debug v0.1.0 disponibile; build, 7 test e navigazione Live/Meteo/Archivio verificati su emulatore Android 16/API 36. Prova fisica Owner ancora da completare. Gestione del progetto: Massimo Mainini. Vedi [rapporto tecnico v0.1](allsky-pocket-android-v1.md) per posizione APK e checksum.
 
 Questo documento prepara una chat Work dedicata alla realizzazione della prima versione installabile sul telefono dell’Owner. La [PWA pubblica esistente](allsky-pocket-pwa.md) resta separata e disponibile: non è la nuova app nativa. Questo aggiornamento del manuale non modifica il Raspberry, l’acquisizione o l’hosting della PWA.
 
@@ -22,6 +22,8 @@ Client Android in **Kotlin e Jetpack Compose**, con interfaccia nativa e tre sch
 Il live è una successione di fotografie, non un flusso video continuo. Le date archivio rappresentano l’inizio della notte. Nessun controllo dell’osservatorio, login amministrativo, galleria meteore, overlay astronomico nativo, push, analisi scientifica o archivio offline completo è richiesto alla prima versione. L’overlay resta consultabile sul sito Allsky esistente.
 
 ## Confini di dati e integrazione
+
+Le sorgenti pubbliche sono state verificate il 16 novembre 2026: i cinque endpoint ammessi hanno risposto correttamente; ciascun catalogo conteneva 605 link validi e i tre media recenti erano scaricabili. Dettagli e campioni sono nel rapporto tecnico.
 
 Baseline da verificare nella chat di sviluppo: [contratto della PWA](allsky-pocket-pwa.md#architettura-e-percorsi-ammessi), codice PWA se disponibile e comportamento delle sorgenti pubbliche. Origine Allsky: `https://digitalstargate.freeddns.it:23232`.
 
@@ -59,9 +61,9 @@ Fonti: [account Google Play](https://support.google.com/googleplay/android-devel
 4. Installazione, avvio, Live, Meteo e almeno un’immagine e un filmato d’archivio verificati su telefono reale. La prova con emulatore o build riuscita non sostituisce il riscontro dell’Owner.
 5. Documentare esiti reali, limiti e problemi aperti nel repository, mantenendo invariata la configurazione Allsky. La rimozione dell’app dal telefono è il rollback del client; non ripristinare il Raspberry.
 
-La chat di sviluppo deve verificare gli strumenti Android effettivamente disponibili. Se manca un SDK o serve un intervento sul telefono, descrivere il requisito e completare nel frattempo il lavoro indipendente. Non dichiarare che APK o test esistano finché non sono stati realmente prodotti.
+Il toolchain portabile usato per la build resta sotto `android/.local-toolchain/` e non è incluso in Git. Per installare l’APK, trasferirlo sul telefono, consentire temporaneamente l’installazione da quella sorgente e aprire il file; i passaggi dettagliati e il checksum sono nel rapporto tecnico. La firma debug è destinata alla prova.
 
-## Prompt per la chat Work dedicata
+## Prompt iniziale per la chat Work (archiviato)
 
 Avvia lo sviluppo della prima versione Android nativa di **Allsky Pocket – Digital Stargate**, da installare e provare sul mio telefono. Usa Kotlin e Jetpack Compose, con schede Live, Meteo e Archivio. Leggi prima questa guida, la guida PWA, il Capitolo 27 e le istruzioni del repository `maininimassimo-bit/digital-stargate-manual`. Usa un branch/worktree isolato, preserva il lavoro esistente e verifica gli strumenti Android disponibili.
 
