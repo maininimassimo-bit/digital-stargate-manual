@@ -5,6 +5,7 @@ import android.net.Uri
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
+import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,8 +18,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -36,12 +35,12 @@ private fun isAllowedMapResource(uri: Uri): Boolean =
 @Composable
 internal fun SkyMapScreen() {
     val context = LocalContext.current
-    var reload by remember { mutableIntStateOf(0) }
     var loading by remember { androidx.compose.runtime.mutableStateOf(true) }
     val webView = remember {
         WebView(context).apply {
             settings.javaScriptEnabled = true // Allsky's VirtualSky overlay is rendered by its own page scripts.
-            settings.domStorageEnabled = false
+            // Allsky's page and VirtualSky use browser storage for page state and assets.
+            settings.domStorageEnabled = true
             settings.allowFileAccess = false
             settings.allowContentAccess = false
             settings.javaScriptCanOpenWindowsAutomatically = false
@@ -51,6 +50,8 @@ internal fun SkyMapScreen() {
             settings.loadWithOverviewMode = true
             settings.builtInZoomControls = true
             settings.displayZoomControls = false
+            setBackgroundColor(android.graphics.Color.TRANSPARENT)
+            webChromeClient = WebChromeClient()
             android.webkit.CookieManager.getInstance().setAcceptThirdPartyCookies(this, false)
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean =
@@ -65,17 +66,15 @@ internal fun SkyMapScreen() {
 
                 override fun onPageFinished(view: WebView, url: String?) {
                     loading = false
-                    // Use the Allsky page's own calibrated, frame-synchronized overlay and turn it on.
-                    view.evaluateJavascript("(function(){var b=document.getElementById('overlayBtn');if(b&&!b.classList.contains('active'))b.click();})()", null)
+                    // Wait until Angular has attached its handler, then use the real page button.
+                    // A synthetic click before Angular bootstrap is silently ignored.
+                    view.evaluateJavascript(
+                        "(function(){var n=0,t=setInterval(function(){var a=window.angular,b=document.getElementById('overlayBtn'),s=a&&b&&a.element(b).scope();if(b&&b.classList.contains('active')){clearInterval(t);return;}if(s&&typeof s.toggleOverlay==='function'){clearInterval(t);b.click();return;}if(++n>=80)clearInterval(t);},250);})()",
+                        null,
+                    )
                 }
             }
             loadUrl(MAP_URL)
-        }
-    }
-    LaunchedEffect(reload, webView) {
-        if (reload > 0) {
-            loading = true
-            webView.reload()
         }
     }
     DisposableEffect(webView) {
@@ -88,7 +87,17 @@ internal fun SkyMapScreen() {
         Text("Mappa celeste calibrata sul fotogramma live Allsky. I radianti degli sciami sono riferimenti del catalogo, non rilevazioni né previsioni verificate.",
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-        OutlinedButton(onClick = { reload++ }, modifier = Modifier.fillMaxWidth()) { Text("Ricarica mappa e fotogramma") }
+        OutlinedButton(
+            onClick = {
+                loading = true
+                // A fresh document URL bypasses WebView's page cache and reliably re-runs
+                // Allsky's Angular/VirtualSky bootstrap after a manual refresh.
+                webView.loadUrl("${MAP_URL}?mobileReload=${System.currentTimeMillis()}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(if (loading) "Caricamento mappa…" else "Ricarica mappa e fotogramma")
+        }
         AndroidView(factory = { webView }, modifier = Modifier.weight(1f).fillMaxWidth())
     }
 }
