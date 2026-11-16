@@ -1,11 +1,11 @@
 ---
 title: Allsky Pocket · progetto Android nativo
-description: Prima versione Android nativa con Live, Meteo e Archivio, da provare sul telefono, senza modificare Allsky e con candidati privati esclusi.
+description: App Android nativa Allsky Pocket con Live, Meteo, Archivio, galleria meteore candidate pubblica e mappa VirtualSky calibrata.
 ---
 
 # Allsky Pocket: prima versione Android nativa
 
-**Aggiornamento:** 16 novembre 2026. **Stato:** beta APK debug v0.1.0 installata su Motorola G84, Android 15/API35; l’Owner conferma avvio, riproduzione timelapse e apertura immagini startrail/keogramma. Il decoder AVC e il dialogo immagini sono stati corretti dopo la prova reale. Restano da completare le prove di resilienza e l’integrazione della PR #638. La pubblicazione Google Play è separata e non compresa. Gestione del progetto: Massimo Mainini. Vedi [rapporto tecnico v0.1](allsky-pocket-android-v1.md) per APK e checksum.
+**Aggiornamento:** 16 novembre 2026. **Stato:** beta APK debug v0.2.0 installata e verificata via USB su Motorola G84, Android 15/API35; la galleria pubblica meteore carica immagini e la mappa Allsky visualizza l’overlay VirtualSky. Build e 9 test JUnit passati; resta da controllare la rotazione mentre la WebView Mappa è attiva. Rotazione generale, rete dati/lenta e messaggio offline sono già stati verificati dall’Owner. La pubblicazione Google Play è separata e non compresa. Gestione del progetto: Massimo Mainini. Vedi [rapporto tecnico](allsky-pocket-android-v1.md) per APK e checksum.
 
 Questo documento prepara una chat Work dedicata alla realizzazione della prima versione installabile sul telefono dell’Owner. La [PWA pubblica esistente](allsky-pocket-pwa.md) resta separata e disponibile: non è la nuova app nativa. Questo aggiornamento del manuale non modifica il Raspberry, l’acquisizione o l’hosting della PWA.
 
@@ -18,8 +18,10 @@ Client Android in **Kotlin e Jetpack Compose**, con interfaccia nativa e tre sch
 | Live | Ultimo JPEG, ora dello scatto, aggiornamento automatico mentre visibile e manuale, zoom/schermo intero, stato connessione e immagine scaduta |
 | Meteo | Temperatura ambiente, umidità, punto di rugiada e vento km/h CloudWatcher; ora della misura, scadenza e indisponibilità |
 | Archivio | Timelapse, startrails e keogrammi pubblici, elenco dal più recente, selezione data/notte, immagini complete e video con controlli |
+| Meteore | Consultazione delle immagini e miniature candidate già pubbliche; sempre etichettate da verificare, mai come conferme |
+| Mappa | Pagina Allsky originale con overlay VirtualSky, calibrazione e clock sincronizzato sul fotogramma corrente |
 
-Il live è una successione di fotografie, non un flusso video continuo. Le date archivio rappresentano l’inizio della notte. Nessun controllo dell’osservatorio, login amministrativo, galleria meteore, overlay astronomico nativo, push, analisi scientifica o archivio offline completo è richiesto alla prima versione. L’overlay resta consultabile sul sito Allsky esistente.
+Il live è una successione di fotografie, non un flusso video continuo. Le date archivio rappresentano l’inizio della notte. Nessun controllo dell’osservatorio, login amministrativo, push, analisi scientifica o archivio offline completo. La mappa è visualizzata dal sito Allsky esistente dentro WebView; la calibrazione resta gestita dalla pagina originale.
 
 ## Confini di dati e integrazione
 
@@ -32,10 +34,12 @@ Baseline da verificare nella chat di sviluppo: [contratto della PWA](allsky-pock
 | `/current/image.jpg` | Immagine corrente |
 | `/allsky/dsg-live-data.json` | Selezione dei soli campi camera, weather e astronomy necessari; non riversare il JSON completo nell’app |
 | `/allsky/videos/`, `/allsky/startrails/`, `/allsky/keograms/` | Cataloghi e relativi file/miniature, con nomi e percorsi validati |
+| `/allsky/meteors/` | Catalogo HTML e JPEG pubblici con timestamp validati; esclusi JSON, metadati e contatori riservati |
+| `/allsky/` | Pagina live per mappa e overlay calibrato, caricata in WebView con limite host/porta HTTPS |
 
 L’accessibilità reale e la stabilità del formato vanno provate prima di fissare l’architettura. Il client nativo può leggere le sorgenti HTTPS pubbliche direttamente; un eventuale servizio intermedio va motivato e proposto separatamente, senza introdurre implicitamente canoni o modificare l’impianto. Non assumere che l’hosting PWA sia utilizzabile come API stabile senza verificarlo. I percorsi sono una allowlist, non un invito a esplorare altre risorse.
 
-Sono esclusi candidati meteore privati, immagini/ritagli/miniature, metadati individuali, contatori e registro del rilevatore temporale. Non leggere `/var/lib/dsg-meteor-shadow`, non accedere alla WebUI e non usare SSH per collegare l’app. Anche la galleria meteore già pubblica resta fuori dal prototipo, così da limitare il contratto alle tre categorie concordate. Non copiare backup privati o chiavi nel progetto, nell’APK o nei log.
+Sono esclusi candidati meteore privati, metadati individuali, contatori e registro del rilevatore temporale. La galleria inclusa nell’app è soltanto quella pubblica; non leggere `/var/lib/dsg-meteor-shadow`, non accedere alla WebUI e non usare SSH per collegare l’app. Non copiare backup privati o chiavi nel progetto, nell’APK o nei log.
 
 TLS ordinario, origine fissata, nessuna disabilitazione dei certificati e nessun URL arbitrario. Ridurre le letture al necessario, sospendere il polling quando l’app non è visibile, introdurre timeout e attesa crescente dopo gli errori. La baseline PWA aggiorna ogni 30 s, accetta proiezione entro 150 s e scatto entro 180 s, con controlli sugli orari futuri e scadenza meteo: riusare queste regole dove applicabili e documentare eventuali differenze. Dati mancanti/scaduti non devono diventare zero o condizioni meteo attuali. Un’immagine conservata è etichettata come ultimo fotogramma.
 

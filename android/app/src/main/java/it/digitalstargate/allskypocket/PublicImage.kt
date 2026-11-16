@@ -28,6 +28,7 @@ import java.net.URL
 private const val IMAGE_CONNECT_TIMEOUT_MS = 8_000
 private const val IMAGE_READ_TIMEOUT_MS = 12_000
 private const val MAX_IMAGE_BYTES = 12_000_000
+private const val MAX_THUMBNAIL_BYTES = 1_000_000
 
 @Composable
 internal fun PublicImage(key: String, url: String, description: String, onError: (Boolean) -> Unit = {}, modifier: Modifier = Modifier) {
@@ -52,7 +53,7 @@ private sealed interface ImageLoadState {
 }
 
 private suspend fun loadImage(url: String, targetWidth: Int, targetHeight: Int): ImageLoadState {
-    if (!url.matches(Regex("https://digitalstargate\\.freeddns\\.it:23232/(?:current/image\\.jpg\\?refresh=\\d+|allsky/(?:startrails/startrails|keograms/keogram)-20\\d{6}\\.jpg)"))) {
+    if (!url.matches(Regex("https://digitalstargate\\.freeddns\\.it:23232/(?:current/image\\.jpg\\?refresh=\\d+|allsky/(?:startrails/startrails|keograms/keogram)-20\\d{6}\\.jpg|allsky/meteors/(?:thumbnails/)?meteors-20\\d{12}\\.jpg)"))) {
         return ImageLoadState.Failed("Invalid image URL")
     }
     val connection = (URL(url).openConnection() as HttpURLConnection).apply {
@@ -64,7 +65,8 @@ private suspend fun loadImage(url: String, targetWidth: Int, targetHeight: Int):
         check(connection.responseCode == 200 && connection.url.toString() == url)
         check(connection.contentType.orEmpty().startsWith("image/jpeg"))
         val length = connection.contentLengthLong
-        check(length == -1L || length in 1..MAX_IMAGE_BYTES.toLong())
+        val byteLimit = if (url.contains("/thumbnails/")) MAX_THUMBNAIL_BYTES else MAX_IMAGE_BYTES
+        check(length == -1L || length in 1..byteLimit.toLong())
         val bytes = connection.inputStream.use { stream ->
             val output = java.io.ByteArrayOutputStream(if (length > 0) length.toInt() else 64 * 1024)
             val buffer = ByteArray(16 * 1024)
@@ -74,7 +76,7 @@ private suspend fun loadImage(url: String, targetWidth: Int, targetHeight: Int):
                 val count = stream.read(buffer)
                 if (count < 0) break
                 total += count
-                check(total <= MAX_IMAGE_BYTES)
+                check(total <= byteLimit)
                 output.write(buffer, 0, count)
             }
             output.toByteArray()
@@ -84,6 +86,8 @@ private suspend fun loadImage(url: String, targetWidth: Int, targetHeight: Int):
         val sample = calculateInSampleSize(bounds.outWidth, bounds.outHeight, targetWidth, targetHeight)
         val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size, BitmapFactory.Options().apply { inSampleSize = sample }) ?: error("Invalid JPEG")
         ImageLoadState.Ready(bitmap)
+    } catch (e: kotlinx.coroutines.CancellationException) {
+        throw e
     } catch (e: Exception) {
         ImageLoadState.Failed(e.javaClass.simpleName)
     } finally { connection.disconnect() }

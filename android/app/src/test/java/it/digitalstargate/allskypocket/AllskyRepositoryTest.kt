@@ -64,6 +64,28 @@ class AllskyRepositoryTest {
         assertFalse(runCatching { AllskyRepository.archivePath("meteors") }.isSuccess)
     }
 
+    @Test fun publicMeteorCatalogParsesOnlyValidUniqueImageCandidatesNewestFirst() {
+        val html = """
+            <a href='./meteors-20261009195138.jpg'>candidate</a>
+            <img src='./thumbnails/meteors-20261009195138.jpg'>thumbnail must not duplicate the item
+            <a href='./meteors-20261116213231.jpg'>newer candidate</a>
+            <a href='./meteors-20260230213231.jpg'>invalid timestamp</a>
+            <a href='../private/meteors-20261116213232.jpg'>private path</a>
+            <a href='./meteors-20261116213231.json'>metadata is not public media</a>
+        """.trimIndent()
+        val candidates = AllskyRepository.parseMeteorCatalog(html)
+        assertEquals(listOf("meteors-20261116213231.jpg", "meteors-20261009195138.jpg"), candidates.map { it.file })
+        assertEquals(Instant.parse("2026-10-09T17:51:38Z"), candidates.last().timestamp)
+    }
+
+    @Test fun meteorMediaUrlsAreRestrictedToPublicOriginalsAndThumbnails() {
+        val candidate = AllskyRepository.parseMeteorCatalog("<a href='./meteors-20261116213231.jpg'>x</a>").single()
+        assertEquals("$ORIGIN/allsky/meteors/meteors-20261116213231.jpg", AllskyRepository.meteorMediaUrl(candidate))
+        assertEquals("$ORIGIN/allsky/meteors/thumbnails/meteors-20261116213231.jpg", AllskyRepository.meteorThumbnailUrl(candidate))
+        assertFalse(runCatching { AllskyRepository.meteorMediaUrl(candidate.copy(file = "../private.jpg")) }.isSuccess)
+        assertEquals("/allsky/meteors/", AllskyRepository.meteorCatalogPath())
+    }
+
     @Test fun liveProjectionFreshnessUsesBoundariesAndRejectsMissingOrFutureTimes() {
         val now = Instant.parse("2026-11-16T17:00:00Z")
         assertTrue(isProjectionFresh(Instant.parse("2026-11-16T16:59:00Z"), now))

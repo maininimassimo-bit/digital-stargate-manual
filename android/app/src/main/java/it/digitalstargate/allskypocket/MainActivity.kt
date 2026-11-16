@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
 private val zone = ZoneId.of("Europe/Rome")
 private val timeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss", java.util.Locale.ITALY).withZone(zone)
 private val skyTop = Color(0xFF0B1B2D)
-private val skyPanel = Color(0xFF11263A)
+internal val skyPanel = Color(0xFF11263A)
 private val aurora = Color(0xFF72E0CF)
 private val starlight = Color(0xFFFFC77A)
 
@@ -64,7 +64,7 @@ private fun NightSkyBackdrop(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun PocketApp() {
-    val tabs = listOf("Live", "Meteo", "Archivio")
+    val tabs = listOf("Live", "Meteo", "Archivio", "Meteore", "Mappa")
     var selected by remember { mutableIntStateOf(0) }
     MaterialTheme(colorScheme = darkColorScheme(
         primary = aurora, onPrimary = Color(0xFF062A2A), secondary = starlight,
@@ -79,7 +79,7 @@ private fun PocketApp() {
         }, colors = TopAppBarDefaults.topAppBarColors(containerColor = skyTop)) }, bottomBar = {
             NavigationBar { tabs.forEachIndexed { index, title ->
                 NavigationBarItem(selected = selected == index, onClick = { selected = index },
-                    icon = { Text(listOf("◉", "☼", "▤")[index]) }, label = { Text(title) })
+                    icon = { Text(listOf("◉", "☼", "▤", "✦", "◎")[index]) }, label = { Text(title) })
             } }
         }) { padding ->
             Box(Modifier.fillMaxSize().padding(padding)) {
@@ -87,7 +87,9 @@ private fun PocketApp() {
                 when (selected) {
                     0 -> LiveScreen(active = true)
                     1 -> WeatherScreen(active = true)
-                    else -> ArchiveScreen()
+                    2 -> ArchiveScreen()
+                    3 -> MeteorsScreen()
+                    else -> SkyMapScreen()
                 }
             }
         }
