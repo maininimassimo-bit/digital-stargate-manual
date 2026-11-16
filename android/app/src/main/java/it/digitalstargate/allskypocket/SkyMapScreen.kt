@@ -5,6 +5,7 @@ import android.net.Uri
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
+import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -41,7 +42,8 @@ internal fun SkyMapScreen() {
     val webView = remember {
         WebView(context).apply {
             settings.javaScriptEnabled = true // Allsky's VirtualSky overlay is rendered by its own page scripts.
-            settings.domStorageEnabled = false
+            // Allsky's page and VirtualSky use browser storage for page state and assets.
+            settings.domStorageEnabled = true
             settings.allowFileAccess = false
             settings.allowContentAccess = false
             settings.javaScriptCanOpenWindowsAutomatically = false
@@ -51,6 +53,8 @@ internal fun SkyMapScreen() {
             settings.loadWithOverviewMode = true
             settings.builtInZoomControls = true
             settings.displayZoomControls = false
+            setBackgroundColor(android.graphics.Color.TRANSPARENT)
+            webChromeClient = WebChromeClient()
             android.webkit.CookieManager.getInstance().setAcceptThirdPartyCookies(this, false)
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean =
@@ -65,8 +69,12 @@ internal fun SkyMapScreen() {
 
                 override fun onPageFinished(view: WebView, url: String?) {
                     loading = false
-                    // Use the Allsky page's own calibrated, frame-synchronized overlay and turn it on.
-                    view.evaluateJavascript("(function(){var b=document.getElementById('overlayBtn');if(b&&!b.classList.contains('active'))b.click();})()", null)
+                    // Wait until Angular has attached its handler, then use the real page button.
+                    // A synthetic click before Angular bootstrap is silently ignored.
+                    view.evaluateJavascript(
+                        "(function(){var n=0,t=setInterval(function(){var a=window.angular,b=document.getElementById('overlayBtn'),s=a&&b&&a.element(b).scope();if(b&&b.classList.contains('active')){clearInterval(t);return;}if(s&&typeof s.toggleOverlay==='function'){clearInterval(t);b.click();return;}if(++n>=80)clearInterval(t);},250);})()",
+                        null,
+                    )
                 }
             }
             loadUrl(MAP_URL)
