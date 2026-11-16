@@ -1,3 +1,57 @@
+<!-- BKL046-H111-V3-REJECTED-V4-DRAFT-NATIVE64-DEVELOPMENT-20261116 -->
+## H111: review V3 respinta, correzioni V4 e casi IA di sviluppo ricavati dalle evidenze native
+
+La conoscenza **provvisoria H111** contiene **308 schede**, preservando tutte le 306 schede H110 e i byte dell’intera sezione requisiti. Il lettore63 supera **13 verifiche**, con **14 collegamenti di correzione aciclici**. Il rendiconto93 conserva **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**, senza cambiare disposizioni scientifiche. Restano **sette famiglie, 25 assi e zero chiusure scientifiche**. Registro autorevole v600 / 1.171.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H111 | 2fe5996078043cfebd7ec51019ef3b876392cb3ac1f81fb2752eb4289211f245 |
+| Lettore63 | 420b05cd9f058babff2606f85bdde8fd808b8f1f2da93fe5b7d9446c1a22755a |
+| Rendiconto93 | 9fd768eea06f8db6af7f987d92645777125cc4fd93373a4da780689f530c835e |
+
+**La review V3 non è più in attesa: è REJECTED_WITH_BLOCKERS.** Il rapporto indipendente ha SHA256 **b454ffea70a7a04163e959289953ced053ffc7dc620653eb3c2b41a061a5758f**, riferito esattamente al subject882aa40359ad0a13bab290348eb64d39f02f31fe28ebfb93e327ac0284a5ca6d e source-set8c0ec0549afef804d85ab5ee7d1f36d148eda6466d0a436c1081470cd710f256. Tutti i 23 sorgenti sono coperti e invariati prima/dopo; rapporto, **205 evidenze nominate** e archivio del reviewer sono copiati byte-identici su H:.
+
+Il precedente blocco **BKL046-HDR-V2-01 è CLOSED_IN_READER_V2_ONLY**: il reviewer conferma sul proprio handle il contenitore esplicito, la propagazione identica e l’assenza di un secondo close. Il nuovo **BKL046-HDR-V3-01** riguarda SessionStore: la chiusura del file può sostituire l’errore iniziale di write/flush. Tre controesempi connessi su file propri del reviewer mantengono HOLD e riferimenti originali host/owner/store/identity; l’errore iniziale rimane nel contesto implicito dell’eccezione, ma manca un contenitore esplicito con entrambi gli errori e la risorsa. Non sono osservate uscita del processo, parent-zero, rilascio della prenotazione o alterazione storica. La V3 resta esclusa dall’esecuzione.
+
+La **bozza V4 a 24 sorgenti** introduce una gestione esplicita delle risorse: operazione e chiusura sono protette separatamente; errori iniziale/secondario, contesto e proprietario restano conservati senza retry. Le scritture esclusive sono binarie senza buffering, per evitare che la chiusura ripeta dati rimasti in un buffer dopo un errore. Store4, archive2 e letture operative del controllo di ambito usano questa gestione. Lo ZIP viene costruito in memoria prima della singola scrittura esclusiva, separando il suo cleanup dalla scrittura su disco.
+
+L’audit statico ha anche rilevato che il precedente operatore usava subprocess.run sul custode: la libreria Python installata chiama kill quando comunica un’eccezione. L’operatore4 conserva invece il Popen originale, applica le proprie callback nonraising e mantiene il riferimento in caso di errore. **È una correzione preventiva di un ramo letto nel codice, non la ricostruzione di un custode realmente terminato in passato.** Le query ausiliarie e il coordinatore comune non sono modificati.
+
+| Verifica della bozza V4 | Perimetro effettivo |
+| --- | --- |
+| 5 scenari Store4 | File H propri; write/flush e close prima/dopo effetto, formattazione ostile; stesso contenitore fino al vero HOLD |
+| 3 scenari archive2 | Recupero reale di ZIP proprio e due errori primario/cleanup iniettati |
+| 4 scenari operatore4 | Figli Python privati, uscite naturali 0/23, errore di attesa e richiesta propria SIGINT; osservazione del ciclo di conservazione con seam esplicito |
+| 16 scenari del flusso/main guard | Nuovi sorgenti, 12 figli Python privati e due richieste SIGINT solo del qualificatore |
+| 35 regressioni Store/durable | Rieseguite; nessuna sovrascrittura, stesso errore esplicito e nessuna seconda osservazione dopo il guasto |
+
+Le prime due regressioni V4 si erano fermate perché i vecchi fixture attendevano un errore generico o un dizionario HOLD, mentre il nuovo contratto propaga il contenitore esplicito. I tentativi falliti restano conservati; i fixture rivisti controllano FileExistsError originale, identità del contenitore e assenza di nuovi tentativi. Una vecchia prova interrotta non ha registrato l’uscita terminale del proprio figlio Python basato su readline: non viene inventata una ricevuta né riaperto quel PID. Il fixture rivisto conserva il Popen e completa normalmente il proprio figlio in finally.
+
+**La V4 non è ancora un nuovo subject congelato e non ha una review genuina.** Restano verifiche della guardia main dell’operatore, propagazione degli errori nelle letture del controllo e nelle risorse esterne dell’archivio, sequenza dei log, congelamento del dossier, rifiuti a freddo e review dell’intero controllo. I fixture non attestano GUI, acquisizione R4 reale, segnali ereditati da PixInsight o tutte le tempistiche asincrone.
+
+È inoltre disponibile un **corpus IA di sviluppo con tutte le 64 schede native storiche e risposte attese separate**. Nessuna selezione dipende dall’esito. Il ricontrollo dei byte di stato e dei 580 testimoni razionali conferma:
+
+| Confronti definiti già acquisiti | Esito |
+| --- | ---: |
+| Totale | 35.913.728 |
+| Entro la soglia relativa del 5% | 35.913.148 |
+| Oltre la soglia relativa del 5% | 580 |
+| Casi con almeno un superamento relativo | 63 su 64 |
+| Casi con tutti i confronti definiti e supportati entro soglia | 1 su 64 |
+| Confronti oltre la soglia assoluta di 10⁻⁶ | 0 |
+
+La soglia assoluta non annulla quella relativa confermata dall’Owner. Questi sono endpoint numerici condizionali, comprese differenze firmate vicine a zero: **non indicano errori di flusso stellare**. Quattro casi comprendono endpoint non supportati; l’esito positivo dei confronti supportati non ammette automaticamente gli altri. Né un confronto entro soglia né il numero di pixel dimostrano validità della varianza di popolazione o del workflow.
+
+La capsula del corpus contiene **1.322 file / 1.218.788 byte**, SHA256 **35f1888fb6716e3068d026cb566cadeed36be0e5de23ba1db042fc5e174b5a9a**. Un verificatore autonomo riconta gli stati e usa una formulazione intera alternativa sui testimoni; l’output recuperato coincide con l’originale. Sono respinti sia un digest errato sia una risposta attesa deliberatamente errata con manifesto ricostruito nella sola copia di prova. È una seconda formulazione dello stesso autore, non un’adjudication scientifica indipendente. La capsula contiene quanto serve a questo replay di stati/testimoni/risposte, non tutti i piani immagine o la rigenerazione numerica nativa.
+
+Le 64 schede hanno esiti già noti e dipendenze comuni: **zero nuove unità confermative indipendenti**, zero chiamate al provider e nessuna stima del rischio IA all’1%/95%. Le quote alternative 721/957/1159 non vengono trasferite a questo corpus. Il dominio delle sette famiglie e 25 assi resta più ampio di questo singolo insieme di confronti.
+
+La capsula selezionata H111 contiene **382 file / 190.889.506 byte**, SHA256 **da1dcc3f46f77cbf6fe4033a40f3672755aca78cf660d79084beb4805bb8a70c**; quattro consultazioni del lettore recuperato sono identiche. La rigenerazione completa dipende ancora da H110 e dalla storia dichiarata. Le sei fonti del dominio nel nuovo snapshot main25d03e492f514058a4e7d7a9bc947462735f1d6a sono byte-identiche alle sei fonti già analizzate; questo confronto circoscritto non è un audit dell’intero repository né una caratterizzazione misurata delle camere.
+
+EXACT004/R005 sono conclusi e non ripetibili; restano conservati 64 casi e 580 fallimenti, con **196 + 260 casi nativi** ancora aperti. Nessun nuovo PixInsight/API, modifica master/script installati, query di stato/processi BKL-051, intervento sul coordinatore comune, merge, deploy o portale. Questa pubblicazione trasferisce **solo testo tecnico**; conoscenza finale e trasferimento integrale di sorgenti, immagini, rapporti e ZIP con download/hash/ricostruzione restano aperti. Le sette CI / 199 passaggi del precedente head35bd4a42 sono riuscite; quelle del nuovo commit vanno verificate separatamente e non costituiscono validazione scientifica.
+
+Le sezioni seguenti restano storico immutato: per lo stato attuale della V3, della bozza V4 e del corpus di sviluppo usare questa sezione e le correzioni H111.
+
 <!-- BKL046-H110-HEADER-CLEANUP-REVIEW-20261116 -->
 ## H110: review V2 respinta, correzione V3 congelata e nuova review offline inviata
 
