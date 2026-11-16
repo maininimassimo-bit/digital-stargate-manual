@@ -1,3 +1,38 @@
+<!-- BKL046-H107-OWNER-ONE-PERCENT-FIXED-QUOTA-20261116 -->
+## H107: criterio IA all'1% e uso corretto delle quote storiche
+
+La conoscenza **provvisoria H107** contiene **301 schede** e conserva tutte le 299 schede H106, i dieci collegamenti di correzione e i byte dell'intera sezione requisiti. Il lettore59 supera **dodici verifiche**; il rendiconto89 preserva **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**. Restano sette famiglie, 25 assi e **zero chiusure scientifiche**. Registro autorevole: v600 / 1.171; H107 non è una nuova pubblicazione del registro o la conoscenza finale.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H107 | 4471a09654a730ca1b6c1790ab4c5d11e58316103355fedc2401d4b6a660f51f |
+| Lettore59 | a04ffe6ebb3ac18dea02c1ac358f79aa5c0d7d97ddbbfbfd39910b1094da272b |
+| Rendiconto89 | 1c89bda0ffb009cd166feeac038f2d4ad3d6a468d65e8a41d050cfb863f3c502 |
+
+Il criterio Owner è **probabilità di decisione scientificamente errata al massimo 1%, verificata con limite superiore unilaterale al 95%**. Le violazioni operative restano sempre motivo di rifiuto. Le illustrazioni storiche al 5% non sono questo criterio e sono preservate con il loro significato originale. Il valutatore storico dell'evento combinato include sia errore accertato sia caso non giudicabile: non basta verificare separatamente ciascuna componente all'1% per ottenere l'1% sulla loro unione.
+
+Il ramo all'1% era già presente negli archivi. La riconciliazione lo seleziona e ne riverifica con aritmetica intera la numerosità minima e il confine del limite arrotondato alla parte per milione. Nel disegno storico sono preservati 56 endpoint e aggiunti 14 eventi combinati, per **70 confronti simultanei** e livello per confronto **1/1400**.
+
+| Eventi combinati ammessi nel piano a quota fissata | Unità indipendenti minime per condizione storica | Limite superiore arrotondato, ppm |
+| --- | ---: | ---: |
+| 0 | 721 | 9.998 |
+| 1 | 957 | 9.993 |
+| 2 | 1.159 | 9.993 |
+
+Sono **alternative di pianificazione da fissare prima del test**, non un programma che prima osserva 721 risposte e poi decide se prolungare a 957 o 1.159. Le sette fixture sintetiche storiche non rappresentano le sette famiglie fisiche dello studio. Le unità indipendenti non equivalgono automaticamente a chiamate API: richieste correlate, riuso di contesto o gruppi dipendenti richiedono il trattamento già previsto dal precedente studio sui ticket raggruppati. Le 32 risposte reali descrittive restano escluse dall'inferenza confermativa.
+
+Un controesempio costruito mostra il rischio dello stop adattivo: su sequenze Bernoulli indipendenti con rischio vero 1%, fermarsi alla prima delle tre quote che soddisfa rispettivamente zero, uno o due eventi porta la probabilità per confronto a circa **0,00158010**, contro il livello nominale **1/1400 = 0,000714286**. Con 70 copie indipendenti del controesempio, la probabilità di non copertura simultanea è circa **10,4788%**, superiore al 5%. Questi numeri descrivono una costruzione matematica, non il rischio reale di OpenAI o una violazione osservata del valutatore. La probabilità è verificata esattamente sia tramite eventi disgiunti sia con una ricorrenza sugli stati. Il disegno storico richiedeva già quota fissa: il risultato ne spiega la necessità, senza introdurre una nuova prova empirica.
+
+La capsula statistica selezionata contiene **7 file, 20.589 byte**, SHA256 **50970967b4f372f5feb6d9c62b3136cd3b104c5fb2efd7ffa80e432156ddad0c**. L'audit autonomo standard-library produce risultati identici sui dati originali e recuperati; dati alterati e assert disabilitati sono respinti. È un replay della matematica dichiarata, non della risposta del provider o dell'indipendenza dei casi reali.
+
+La capsula H107 contiene **86 file, 186.402.287 byte**, SHA256 **b2982738ba1fa753888016ddb63fbe35139c4c3fd6248146a476d937aec43449**. Il recupero preserva i byte e riproduce **quattro consultazioni** del lettore, compreso l'asse IA all'1%. È autosufficiente per le consultazioni dichiarate; la rigenerazione completa richiede H106 e ulteriori dipendenze storiche.
+
+Restano da congelare casi reali significativi indipendenti, dominio, campionamento, molteplicità, proiezioni finali dei due bracci e giudizio in cieco prima del collaudo. Nessuna nuova chiamata API è autorizzata dalla riconciliazione delle quote. L'autorizzazione Owner all'uso della via OpenAI a pagamento resta distinta dal protocollo di un nuovo esperimento.
+
+Il candidato di controllo header-only di 21 sorgenti resta senza review genuina; la nuova richiesta offline non è inviata in attesa del consenso specifico. EXACT004/R005 sono conclusi e non vanno ripetuti. I 64 casi e tutti i 580 fallimenti restano preservati; 196 + 260 casi nativi sono ancora aperti. Nessuna nuova esecuzione PixInsight, intervento BKL-051, modifica a master/script installati, merge o attivazione del portale.
+
+Questo aggiornamento pubblica **solo documentazione tecnica**. Il file H107, i sorgenti, le immagini e gli ZIP non sono trasferiti integralmente su GitHub. Studio completo, conoscenza finale e archivio completo con download/hash/ricostruzione restano da completare. La CI del repository non sostituisce la validazione scientifica.
+
 <!-- BKL046-H106-ROUNDING-CELLS-20261116 -->
 ## H106: ingressi, arrotondamenti finali e limiti delle spiegazioni numeriche
 
