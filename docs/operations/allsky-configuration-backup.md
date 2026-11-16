@@ -5,7 +5,7 @@ description: Snapshot privato della configurazione Allsky e copia pubblica sanif
 
 # Allsky: backup della configurazione
 
-Snapshot corrente acquisito il **16/11/2026 alle 15:25 Europe/Rome**, dopo la correzione autorizzata dell’avvio del rilevatore temporale privato, senza fermare l’acquisizione. Conserva i collegamenti ad Allsky Pocket e alla guida Android. La procedura di backup include ora anche `css/dsg-pocket-links.css` nelle due copie. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
+Snapshot corrente acquisito il **16/11/2026 alle 15:49 Europe/Rome**, dopo l’aggiunta della presentazione HTML e dei collegamenti testuali per la ricerca Google, senza fermare l’acquisizione. La unit privata conserva la correzione di avvio delle 15:24. Conserva i collegamenti ad Allsky Pocket e alla guida Android. La procedura di backup include ora anche `css/dsg-pocket-links.css` nelle due copie. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
 
 ## Due copie con finalità diverse
 
@@ -18,14 +18,16 @@ La copia privata **non è pubblicata su GitHub**. Include autenticazione, databa
 
 ## Download pubblico e integrità
 
-- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261116-152502.tar.gz).
-- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261116-152502.tar.gz.sha256).
+- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261116-154934.tar.gz).
+- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261116-154934.tar.gz.sha256).
 
-SHA-256 pubblico: `9c84385610ddcf698571d7d642e006828390e2e5932979f17fb9bd4ec871a8e7` (4.975.858 byte).
+SHA-256 pubblico: `a64716ecb83a8dd09478d28c5297ae1d0b1d0406384c57f9750ff3a147ce5dd5` (4.976.412 byte).
 
 L'archivio pubblico contiene **148 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **367 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
 
 ## Snapshot precedenti conservati
+
+La copia delle **15:25 del 16 novembre** con avvio privato corretto resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261116-152502.tar.gz), [checksum](../assets/backups/allsky-public-20261116-152502.tar.gz.sha256). Prima della presentazione SEO è stato acquisito lo snapshot delle **15:47:45**, `configuration-backup-20261116-154745`, conservato su Raspberry/PC; il suo export intermedio non è aggiunto al repository.
 
 La copia Pocket delle **14:57 del 16/11/2026** resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261116-145705.tar.gz), [checksum](../assets/backups/allsky-public-20261116-145705.tar.gz.sha256). Prima della correzione di avvio è stato acquisito anche lo snapshot delle **15:24**, `configuration-backup-20261116-152406`, conservato separatamente su Raspberry/PC; il suo export intermedio non viene aggiunto al repository. Entrambi contengono 367 file privati e 148 pubblici oltre ai manifest.
 
@@ -88,7 +90,7 @@ Lo snapshot dei file è stato acquisito con applicazione in funzione: non è una
 
 ## DSG-PROC-027-04 — Ripristino controllato
 
-1. Procurarsi l'archivio privato e il suo checksum dalla copia consegnata all'owner o dalla directory privata `configuration-backup-20261116-152502` del Raspberry. Conservarne una copia fuori dal Raspberry per coprire un guasto della scheda.
+1. Procurarsi l'archivio privato e il suo checksum dalla copia consegnata all'owner o dalla directory privata `configuration-backup-20261116-154934` del Raspberry. Conservarne una copia fuori dal Raspberry per coprire un guasto della scheda.
 2. Controllare SHA-256 dell'archivio; estrarlo in una directory di lavoro privata, senza sovrascrivere direttamente percorsi di sistema. Verificare `SHA256SUMS` dalla directory `private` estratta.
 3. Preparare Allsky compatibile con la baseline indicata, sistema/SDK camera e dipendenze Python. La lista dei pacchetti è un inventario, non un installer da eseguire alla cieca. Conservare una nuova copia della configurazione di destinazione per il rollback.
 4. In una finestra di manutenzione fermare acquisizione, servizi periodici/sensor server pertinenti e timer dei pannelli. Confrontare e ripristinare soltanto i file necessari di `config` e del sito, con proprietà e permessi corretti. Non sovrascrivere indiscriminatamente autenticazione o database su un host diverso. Su questa installazione `settings.json` e `settings_ZWO_ASI290MC.json` condividono lo stesso inode: dopo un ripristino conservare o ricreare il collegamento fisico verificato; una copia dei soli contenuti non garantisce il mantenimento degli hardlink.
@@ -132,3 +134,10 @@ Collaudo diurno: servizio attivo, nessun riavvio automatico o errore, stato aggi
 Snapshot corrente **15:25:02**, `configuration-backup-20261116-152502`: 367 file privati e 148 pubblici oltre ai manifest. Verificati entrambi gli archivi, manifest, database SQLite, hardlink settings e sanificazione. La copia privata è separata su Raspberry e PC (`outputs/allsky-shadow-fixed-20261116/private` fuori da Git, ACL limitate); il repository contiene solo il nuovo export sanificato con checksum. Candidati e registro privato restano fuori dal perimetro del backup di configurazione.
 
 Rollback mirato, se necessario: fermare soltanto `dsg-meteor-shadow`, ripristinare la unit da `configuration-backup-20261116-152406/private/etc/systemd/system/dsg-meteor-shadow.service` e ricaricare le definizioni. Non toccare Allsky o il rilevatore attuale. La vecchia unit reintroduce il conflitto al boot e va conservata come evidenza, non usata come soluzione definitiva.
+
+
+## Presentazione HTML e Google — 16 novembre 2026, 15:49
+
+Lo snapshot corrente `configuration-backup-20261116-154934` include la presentazione visibile sotto la ripresa e il CSS dedicato, insieme ai collegamenti Pocket e alla unit privata corretta. [Diagnosi Search Console e richiesta accettata](allsky-search-indexing.md#verifica-e-migliorie-del-16-novembre-2026). Nessuna modifica all’acquisizione o pubblicazione di candidati privati.
+
+Le copie pre/post hanno checksum e manifest verificati, database SQLite `quick_check` positivo, hardlink settings conservato e export pubblico sanificato. Copia privata su Raspberry e PC (`outputs/allsky-seo-post-20261116/private`, fuori da Git con accesso limitato); solo TAR pubblico e checksum pubblicati. Il backup preventivo è `configuration-backup-20261116-154745`; per annullare la presentazione ripristinare soltanto pagina e CSS da quel privato. Non è stato collaudato un ripristino integrale e la conferma di richiesta Google non equivale a indicizzazione.

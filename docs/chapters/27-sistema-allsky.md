@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 2.0 — correzione avvio affiancamento privato e backup, 16/11/2026
+**Revisione:** 2.1 — presentazione HTML Allsky e nuova richiesta Google, 16/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -214,6 +214,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 1.8 | 16/11/2026 | Allsky Pocket: PWA pubblica, istruzioni Android e candidati privati esclusi |
 | 1.9 | 16/11/2026 | Richiamo Pocket sul sito Allsky e snapshot privato/pubblico aggiornato delle 14:57 |
 | 2.0 | 16/11/2026 | Ciclo di avvio corretto, servizio temporale privato riattivato e snapshot 15:25 |
+| 2.1 | 16/11/2026 | Presentazione HTML e gallerie testuali, diagnosi Search Console, richiesta accettata e backup 15:49 |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -728,3 +729,12 @@ L’inattività rilevata nel §27.40 era dovuta a un ciclo nell’ordine di avvi
 Servizio privato attivo e senza errori, in attesa di fotogrammi notturni durante il controllo diurno. Pubblicazione disabilitata, rete IPv4 e scritture alla produzione bloccate; rilevatore attuale abilitato, acquisizione sullo stesso PID. Profilo, codice, maschere e calibrazione invariati. La verifica dopo un riavvio reale e l’elaborazione dei nuovi fotogrammi notturni restano da osservare; non sono dedotte dalla sola validazione statica.
 
 Nuovo snapshot **15:25:02**, 367 file privati e 148 pubblici oltre ai manifest, include la unit corretta e i collegamenti Pocket. Privato separato su Raspberry/PC, pubblico sanificato con checksum nel repository; candidati privati esclusi. [Diagnosi, verifiche, archivi e rollback mirato](../operations/allsky-configuration-backup.md#avvio-del-rilevatore-temporale-privato-16-novembre-2026-1524).
+
+
+## 27.42 Presentazione Allsky e richiesta Google — 16 novembre 2026
+
+Search Console conferma 0 pagine indicizzate, Home scansionata ma non indicizzata e quattro gallerie rilevate ma non indicizzate. Sitemap letta con successo il 10 novembre; sicurezza e azioni manuali senza problemi. Test pubblico positivo. Non è dimostrata una causa tecnica specifica dell’esclusione.
+
+Con autorizzazione Owner e backup **15:47:45**, aggiunto sotto il live un titolo principale, testo descrittivo stabile e link alle gallerie pubbliche, leggibili anche senza JavaScript. Modificati solo pagina e relativo CSS; acquisizione, calibrazione, maschere e rilevatori invariati. La nuova richiesta della Home canonica è stata **accettata da Google nella coda prioritaria**; indicizzazione effettiva ancora da verificare.
+
+Snapshot **15:49:34**, 367 file privati e 148 pubblici oltre ai manifest, verificato e archiviato con separazione privato/pubblico; candidati privati esclusi. [Dettagli, controlli e rollback](../operations/allsky-search-indexing.md#verifica-e-migliorie-del-16-novembre-2026).
