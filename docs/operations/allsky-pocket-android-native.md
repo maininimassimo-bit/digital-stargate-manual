@@ -5,7 +5,7 @@ description: Prima versione Android nativa con Live, Meteo e Archivio, da provar
 
 # Allsky Pocket: prima versione Android nativa
 
-**Aggiornamento:** 16 novembre 2026. **Stato:** perimetro e passaggio alla chat di sviluppo definiti; app nativa, APK e collaudo Android ancora da realizzare. Gestione del progetto: Massimo Mainini.
+**Aggiornamento:** 16 novembre 2026. **Stato:** beta APK debug v0.1.0 installata su Motorola G84, Android 15/API35; l’Owner conferma avvio, riproduzione timelapse e apertura immagini startrail/keogramma. Il decoder AVC e il dialogo immagini sono stati corretti dopo la prova reale. Restano da completare le prove di resilienza e l’integrazione della PR #638. La pubblicazione Google Play è separata e non compresa. Gestione del progetto: Massimo Mainini. Vedi [rapporto tecnico v0.1](allsky-pocket-android-v1.md) per APK e checksum.
 
 Questo documento prepara una chat Work dedicata alla realizzazione della prima versione installabile sul telefono dell’Owner. La [PWA pubblica esistente](allsky-pocket-pwa.md) resta separata e disponibile: non è la nuova app nativa. Questo aggiornamento del manuale non modifica il Raspberry, l’acquisizione o l’hosting della PWA.
 
@@ -22,6 +22,8 @@ Client Android in **Kotlin e Jetpack Compose**, con interfaccia nativa e tre sch
 Il live è una successione di fotografie, non un flusso video continuo. Le date archivio rappresentano l’inizio della notte. Nessun controllo dell’osservatorio, login amministrativo, galleria meteore, overlay astronomico nativo, push, analisi scientifica o archivio offline completo è richiesto alla prima versione. L’overlay resta consultabile sul sito Allsky esistente.
 
 ## Confini di dati e integrazione
+
+Le sorgenti pubbliche sono state verificate il 16 novembre 2026: i cinque endpoint ammessi hanno risposto correttamente; ciascun catalogo conteneva 605 link validi e i tre media recenti erano scaricabili. Dettagli e campioni sono nel rapporto tecnico.
 
 Baseline da verificare nella chat di sviluppo: [contratto della PWA](allsky-pocket-pwa.md#architettura-e-percorsi-ammessi), codice PWA se disponibile e comportamento delle sorgenti pubbliche. Origine Allsky: `https://digitalstargate.freeddns.it:23232`.
 
@@ -56,12 +58,12 @@ Fonti: [account Google Play](https://support.google.com/googleplay/android-devel
 1. Build ripetibile con versioni documentate e APK di prova installabile, identificativo/versione e checksum SHA-256. Chiavi di firma e dati locali fuori da Git; chiarire che la firma di debug è per la prova e non è una release Play.
 2. Tre schede funzionanti con dati reali, gestione di rete assente/lenta, JSON parziale, misure scadute, errori JPEG/video e archivio vuoto. Fotogrammi e misure con orari distinti; nessuna condizione meteo inventata.
 3. Test mirati dei parser, della selezione dei campi e delle regole di freschezza, più prova di navigazione, rotazione e passaggio Wi-Fi/rete mobile. Verificare che richieste, modello dati e log escludano meteore e percorsi privati.
-4. Installazione, avvio, Live, Meteo e almeno un’immagine e un filmato d’archivio verificati su telefono reale. La prova con emulatore o build riuscita non sostituisce il riscontro dell’Owner.
+4. Installazione e avvio, riproduzione timelapse e apertura immagini startrail/keogramma verificati su telefono reale; Live e Meteo sono stati verificati su emulatore. Il riscontro dell’Owner sul Motorola è registrato nel rapporto tecnico. Restano rotazione, cambio Wi-Fi/mobile, background e condizioni di errore/rete.
 5. Documentare esiti reali, limiti e problemi aperti nel repository, mantenendo invariata la configurazione Allsky. La rimozione dell’app dal telefono è il rollback del client; non ripristinare il Raspberry.
 
-La chat di sviluppo deve verificare gli strumenti Android effettivamente disponibili. Se manca un SDK o serve un intervento sul telefono, descrivere il requisito e completare nel frattempo il lavoro indipendente. Non dichiarare che APK o test esistano finché non sono stati realmente prodotti.
+Il toolchain portabile usato per la build resta sotto `android/.local-toolchain/` e non è incluso in Git. Per installare l’APK, trasferirlo sul telefono, consentire temporaneamente l’installazione da quella sorgente e aprire il file; i passaggi dettagliati e il checksum sono nel rapporto tecnico. La firma debug è destinata alla prova.
 
-## Prompt per la chat Work dedicata
+## Prompt iniziale per la chat Work (archiviato)
 
 Avvia lo sviluppo della prima versione Android nativa di **Allsky Pocket – Digital Stargate**, da installare e provare sul mio telefono. Usa Kotlin e Jetpack Compose, con schede Live, Meteo e Archivio. Leggi prima questa guida, la guida PWA, il Capitolo 27 e le istruzioni del repository `maininimassimo-bit/digital-stargate-manual`. Usa un branch/worktree isolato, preserva il lavoro esistente e verifica gli strumenti Android disponibili.
 
