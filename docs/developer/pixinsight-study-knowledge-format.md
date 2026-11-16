@@ -1,3 +1,48 @@
+<!-- BKL046-H108-V1-HOLD-DEFECT-V2-REVIEW-20261116 -->
+## H108: candidato precedente escluso e revisione del controllo da sottoporre a review
+
+**Il candidato header-only V1 di 21 sorgenti non deve essere eseguito.** Tre prove isolate sul corpo effettivo del suo metodo di conservazione mostrano eccezioni che possono propagarsi: errore del canale diagnostico, interruzione dell'attesa ed errore nella conversione in testo della diagnosi. Non è un incidente nativo osservato: il metodo è estratto dai byte congelati e provato con errori iniettati, senza PixInsight o stato condiviso.
+
+L'analisi del codice mostra inoltre che un errore propagato può raggiungere il tentativo di rifiuto/uscita del parent, anche dopo l'ingresso operativo. Quel tentativo diagnostico può fallire a sua volta: non è stato misurato un codice di uscita effettivo del parent V1. Un esito nonzero che conservi la prenotazione non garantisce da solo la conservazione degli oggetti Python, degli handle e dei canali dopo la terminazione del controllore. I sei fixture precedenti usavano una conservazione propria del test con cleanup privato e non dimostravano il metodo produttivo V1.
+
+I sorgenti e il dossier V1 restano immutati come evidenza storica. La conoscenza **provvisoria H108** conserva tutte le **301 schede H107**, ne aggiunge due e registra un **undicesimo collegamento di correzione**: le consultazioni del candidato storico ora conducono al difetto e alla revisione distinta V2. Il lettore60 supera **13 verifiche**, comprese le catene storiche, il criterio IA all'1% e il rifiuto di un hash errato.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H108, 303 schede | d2a5828ce996ce2e533a8f69ac88bc2a5e349d3759df1e76b30dbd45ed0cd502 |
+| Lettore60 | 23b05e6370d0e4a705fc7bcf7020e2cc064fe3629fb07d2914c8e76eb1e3d273 |
+| Rendiconto90 | f4331e4c0fef0c90942cc4ed0e3f716a290d5d96efcfe07c45d2a26969725a40 |
+
+Il rendiconto90 preserva i **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**, con le stesse disposizioni scientifiche. Le nuove evidenze di controllo sono collegate alla riga Drizzle senza modificarne i criteri. Restano sette famiglie, 25 assi e **zero chiusure scientifiche**. Il registro autorevole resta v600 / 1.171; nessuna attestazione 1.172 è introdotta.
+
+La revisione V2 aggiunge un componente di conservazione, callback proprie del parent che registrano l'interruzione senza sollevare eccezioni dal callback, un solo tentativo diagnostico protetto e un riferimento forte all'host originale nella gestione degli errori tardivi. Il primo errore resta conservato. L'attesa può continuare dopo errori simulati, ma non viene ritentata alcuna operazione su file, avvio nativo, chiusura di stream o rilascio.
+
+| Evidenza dell'autore | Ambito verificato |
+| --- | --- |
+| 3 scenari del componente | Errori diagnostici/stringificazione/attesa; callback SIGINT/SIGBREAK nel solo processo privato; riferimenti al figlio originale preservati |
+| 16 scenari connessi | Flusso condiviso, metodo reale V2 di conservazione e blocco effettivo di gestione errori dell'entry |
+| 12 figli Python privati | Uscite naturali: undici con codice zero, uno con codice 23 previsto dal test |
+| 2 richieste SIGINT nelle prove connesse | Solo al qualificatore privato; nessun segnale a gruppi, figli nativi o processi estranei |
+| 35 regressioni preesistenti dello store | Evidenza conservata senza ripeterne l'esecuzione |
+| 2 rifiuti a freddo | Entry isolata e operatore rifiutano la review mancante prima dell'ingresso operativo |
+| Controllo in sola lettura | Pin di 22 sorgenti, Python, PixInsight, header, registro e sorgenti R4; nessun publisher osservato |
+
+I limiti sono determinanti: le osservazioni UI/header/finestre/prenotazione dei fixture sono inventate; la conservazione senza ritorno è osservata su thread daemon privati. Il blocco di gestione errori dell'entry è eseguito con un corpo main sostituito. Non sono attestati il main produttivo con PixInsight, ammissione R4 positiva, UI reale, ereditarietà nativa dei segnali o ogni possibile temporizzazione asincrona. Le interruzioni sono osservate ai checkpoint sicuri: non si dichiara la cancellazione atomica di un avvio che avvenga contemporaneamente alla richiesta. Guasti del controllore/interprete, sistema, alimentazione e terminazione esterna restano fuori dalle garanzie dimostrate.
+
+La revisione V2 è congelata con **22 sorgenti**:
+
+- Subject SHA256: **6331d3c098e7bdd67e3eedadc994ab5de440d3d5cc9f4ed204c81f56d22533b4**.
+- Source-set SHA256: **73aeb10e9c4a3b416df37b6580efa7d94a99fa05dbc6abf251f462fcdceacde8**.
+- Dossier recuperato: **59 file, ZIP 133.633 byte**, SHA256 **b2d8ef6fbcb3bfafd25a4212567f458e97305f01ab033e148ac40a14ad2f6ac9**.
+
+La nuova richiesta di review offline è preparata; quella del candidato V1 è superata e non va inviata. La richiesta aggiornata resta **non inviata, in attesa del consenso specifico**. I tre artefatti di review/origine/tool genuini sono assenti; nessun file fittizio di approvazione è creato. Le prove dell'autore non equivalgono alla review indipendente e **la V2 non è ammessa all'esecuzione nativa**. L'eventuale consenso al messaggio non è approvazione del codice o del suo avvio.
+
+La capsula H108 selezionata contiene **100 file, 186.676.816 byte**, SHA256 **64878cc8087bc219277f1b40e1d170d2f034aa8c0e52055eca02bde4725609c4**. Il recupero preserva i byte e riproduce quattro consultazioni identiche. L'autosufficienza è limitata alle consultazioni dichiarate; la rigenerazione completa dipende da H107 e dalla storia indicata. Non è un archivio integrale dello studio.
+
+EXACT004/R005 restano conclusi e non ripetibili. I 64 casi originali e i 580 fallimenti relativi sono conservati; restano aperti 196 + 260 casi. Questo controllo è solo header-only: non qualifica il parent della campagna Drizzle, memoria/streaming/FileAPI, dominio fisico o validazione scientifica. Nessuna nuova esecuzione PixInsight, chiamata API, modifica a master/script installati, azione BKL-051, merge o attivazione del portale.
+
+Questo commit pubblica **solo documentazione tecnica**. Conoscenza finale e trasferimento integrale dei file su GitHub con download/hash/ricostruzione restano aperti; i file H108, i sorgenti, le immagini e gli ZIP non sono qui trasferiti. La CI del repository non sostituisce la review del controllo o la validazione scientifica.
+
 <!-- BKL046-H107-OWNER-ONE-PERCENT-FIXED-QUOTA-20261116 -->
 ## H107: criterio IA all'1% e uso corretto delle quote storiche
 
