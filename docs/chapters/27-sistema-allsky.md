@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 1.8 — progetto PWA Allsky Pocket e accesso pubblico, 16/11/2026
+**Revisione:** 1.9 — collegamenti Pocket nel sito Allsky e nuovo backup, 16/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -212,6 +212,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 1.6 | 12/11/2026 | Affiancamento privato del rilevatore temporale, isolamento e backup dedicati |
 | 1.7 | 14/11/2026 | Collaudo dei prodotti della notte 12–13 novembre e verifica pubblica, anomalie residue documentate |
 | 1.8 | 16/11/2026 | Allsky Pocket: PWA pubblica, istruzioni Android e candidati privati esclusi |
+| 1.9 | 16/11/2026 | Richiamo Pocket sul sito Allsky e snapshot privato/pubblico aggiornato delle 14:57 |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -696,7 +697,7 @@ I log dopo il riavvio delle 19:23 confermano Auto-Gain e AWB **No** per giorno/n
 
 Proposta **non applicata, in attesa di autorizzazione**: se si desidera continuità anche in questa breve fase, valutare su prova controllata l’aumento di `daymaxautoexposure` da 100 a **1000 ms**, conservando gain, rampa, WB e gate di scarto. Effetto atteso: maggiore margine all’alba; possibili tempi di esposizione diurni fino a 1 s, quindi modifica fotografica da approvare. Sarebbero necessari backup mirato, eventuale riavvio della sola acquisizione per caricare il parametro e verifica all’alba successiva; rollback al valore 100 e riavvio controllato. In alternativa mantenere il comportamento attuale accettando quei transitori. Nessuna delle opzioni è stata applicata.
 
-Il collaudo è diagnostico: configurazione, USB, mappa, meteore private e pubblicazione dei media restano invariate. Log grezzi, copie di lavoro ed evidenze dettagliate rimangono nell’archivio privato dell’Owner; il repository contiene soltanto questo riepilogo. Nessun nuovo backup di configurazione è necessario per le sole letture; rimane corrente lo snapshot del 12/11 alle 22:07.
+Il collaudo è diagnostico: configurazione, USB, mappa, meteore private e pubblicazione dei media restano invariate. Log grezzi, copie di lavoro ed evidenze dettagliate rimangono nell’archivio privato dell’Owner; il repository contiene soltanto questo riepilogo. Nessun nuovo backup di configurazione è necessario per le sole letture; a quella data rimaneva corrente lo snapshot del 12/11 alle 22:07, successivamente sostituito da quello del §27.40.
 
 
 ## 27.39 Allsky Pocket: PWA pubblica per Android — 16 novembre 2026
@@ -706,3 +707,14 @@ Disponibile il prototipo [Allsky Pocket](https://digital-stargate-allsky-pocket.
 Il client React/TypeScript legge tramite un servizio separato soltanto JPEG, proiezione telemetrica selezionata e tre gallerie già pubbliche (timelapse, startrails, keogram). **I candidati temporali privati restano esclusi** e non è prevista una sezione meteore nella PWA. Nessun accesso amministrativo o comando all’impianto è introdotto.
 
 [Progetto tecnico, link, istruzioni Android e limiti di collaudo](../operations/allsky-pocket-pwa.md). Su Android aprire il link in Chrome e usare **Installa app**, oppure **⋮ → Aggiungi a schermata Home → Installa**, quando disponibile. Manifest standalone e fallback offline sono predisposti; installazione su telefono fisico ancora da verificare dall’Owner. Browser mobile simulato, immagini e video sono stati verificati, così come il successivo accesso pubblico senza schermata di login. Il progetto PWA ha un proprio sorgente/versionamento e non è automaticamente incluso nei backup Allsky.
+
+
+## 27.40 Collegamenti Pocket nel sito Allsky e snapshot — 16 novembre 2026
+
+La pagina [Allsky pubblica](https://digitalstargate.freeddns.it:23232/allsky/index.php) include, sotto l’intestazione e fuori dal fotogramma, il pulsante **Apri Allsky Pocket** e il richiamo **Installa su Android**, entrambi in nuova scheda. Le destinazioni sono l’URL pubblico della PWA e la sezione di installazione della [guida Android](../operations/allsky-pocket-pwa.md#installazione-e-prova-su-android). File interessati: `html/allsky/index.php` e nuovo `html/allsky/css/dsg-pocket-links.css`, con riferimento cache dedicato. Nessun cambiamento al rilevatore o alla pubblicazione dei candidati privati.
+
+Prima dell’intervento è stata salvata la pagina nel backup mirato `pocket-links-20261116-145155`. Sintassi PHP e accessibilità HTTPS di pagina/CSS verificate; il browser mostra i collegamenti e il JPEG live 1936 × 1096. Alla larghezza di 390 px il richiamo si dispone su più righe, con collegamenti alti almeno 44 px e senza overflow orizzontale introdotto dal riquadro. Parametri fotografici, flusso notturno, maschere e mappa/controller risultano byte-identici; acquisizione non riavviata.
+
+Nuovo snapshot completo delle **14:57**, `configuration-backup-20261116-145705`: **367 file privati e 148 pubblici**, oltre ai manifest. Include anche il CSS dedicato, aggiunto alla procedura canonica di backup. Verificati manifest, SHA-256 dei due archivi, hardlink settings e integrità dei due database. Export pubblico sanificato: **4.975.850 byte**, SHA-256 `6854332264050c1fccaab0599ef29bb16cc0565141ae38980b4213e5aeb6d1cb`. [Download, separazione delle copie e ripristino](../operations/allsky-configuration-backup.md).
+
+Il privato resta sul Raspberry e sul PC Owner fuori dai checkout Git, con accesso limitato. Il backup non comprende il sorgente/hosting esterno della PWA né le immagini o il registro del rilevatore temporale privato. Quel servizio era già inattivo prima del controllo e non è stato modificato: non dedurre la sua operatività dalla sola presenza della configurazione nello snapshot. Nessun ripristino integrale è stato collaudato.
