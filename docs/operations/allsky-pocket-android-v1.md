@@ -5,7 +5,7 @@ description: Sorgenti, integrazione, verifiche e limiti della beta Android nativ
 
 # Allsky Pocket: Android nativo v0.2
 
-**Stato al 16 novembre 2026:** beta 0.2.0 installata via USB sul Motorola G84, Android 15/API 35. Integra la galleria pubblica delle meteore candidate e la mappa VirtualSky originale calibrata/sincronizzata da Allsky. Build e 9 test JUnit superati. La verifica visiva via USB sul G84 ha confermato caricamento elenco, miniatura, immagine candidata completa e overlay celeste sul fotogramma live. L’Owner ha confermato le prove di rotazione, rete dati, rete lenta e stato offline (messaggio “Connessione non disponibile”). Il codice e la documentazione sono in preparazione per la nuova PR; resta la verifica della rotazione specifica della vista WebView. Toolchain portabile locale in `android/.local-toolchain/`, esclusa da Git.
+**Stato al 16 novembre 2026:** beta 0.2.0 installata via USB sul Motorola G84, Android 15/API 35. Integra la galleria pubblica delle meteore candidate e la mappa VirtualSky originale calibrata/sincronizzata da Allsky. Build e 9 test JUnit superati. La verifica visiva via USB sul G84 ha confermato caricamento elenco, miniatura, immagine candidata completa e overlay celeste sul fotogramma live. L’Owner ha confermato le prove di rotazione, rete dati, rete lenta e stato offline (messaggio “Connessione non disponibile”). L’integrazione è proposta nella PR #639; resta la verifica della rotazione specifica della vista WebView. Toolchain portabile locale in `android/.local-toolchain/`, esclusa da Git.
 
 ## Baseline e fonti
 
