@@ -1,3 +1,43 @@
+<!-- BKL046-H112-V4-FROZEN-REVIEW-SENT-20261116 -->
+## H112: dossier completo V4 congelato, recuperato e inviato alla review offline
+
+La conoscenza **provvisoria H112** contiene **309 schede**. Conserva tutte le 308 schede H111 e i byte dell’intera sezione requisiti; aggiunge l’evento effettivo di congelamento e invio V4 con il quindicesimo collegamento di correzione aciclico. Il lettore64 supera **13 verifiche**, compresa la conservazione del corpus nativo64 di sviluppo e della conclusione storica R005. Il rendiconto94 mantiene **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**, sette famiglie e 25 assi, con **zero chiusure scientifiche**. Registro autorevole invariato: v600 / 1.171.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H112 | 188ed7af3511e45eb1d224d3804fa87366f9000b7d9d9d77dc73a3132daddb99 |
+| Lettore64 | 7997acaaae4763b9dc27e0a297ade66467c8c5be3a832f2f4d58af2b60c9b2ba |
+| Rendiconto94 | 02a010f6c407c3ab80587185aa4011295e5faee131020d9a7f88da65cb5484c5 |
+
+**La V4 è ora congelata e la richiesta di review dell’intero controllo è stata realmente inviata**, come seguito della stessa review offline autorizzata dall’Owner. Le precedenti indicazioni H111 “V4 non congelata / review non richiesta” restano storico e sono superate da questo evento. **L’invio non attesta ancora approvazione V4 o ammissione nativa.** V3 e versioni precedenti restano respinte; il precedente difetto del lettore rimane chiuso soltanto nel Reader V2.
+
+| Dossier V4 su H: | Identità |
+| --- | --- |
+| Sorgenti di produzione | 24 |
+| Copie contestuali byte-identiche | 76 |
+| Subject SHA256 | e6cd9738437f3959843c49a86f337c7aff07a5a45ccbd5c544a33805b4b74da5 |
+| Source-set SHA256 | 329903e1b8391e17be0d43fe6257924b40df635d78467fa1f78b5669c71e29d9 |
+| Archivio recuperato | 87 file / 218.727 byte |
+| Archivio SHA256 | eeb83f441386ba2df94131f6f2cfb1b4b4547fec273a0d1a4777d9f34d7e8c8a |
+
+Ai 16 scenari del flusso e 35 regressioni di persistenza si affiancano cinque scenari Store, tre archivio, quattro custodia dell’operatore, sei letture/controllo runtime/log e sei guardia main dell’operatore/risorse annidate. I conteggi descrivono prove tecniche sovrapposte, non unità scientifiche indipendenti.
+
+Il controllo runtime viene esercitato direttamente su uno Scope non costruito: verifica i 24 sorgenti e i digest di Python, PixInsight, header, registro e fonti R4, con inventario dei publisher. Non costruisce una review approvata né acquisisce una prenotazione. La nota metadati corretta dichiara esplicitamente le query obbligatorie dei publisher; non sono interrogati processi PixInsight/BKL-051 o stato operativo comune.
+
+La prova della guardia main dell’operatore usa il vero blocco AST con main sostituito. La revisione del fixture garantisce che il caso BrokenPipe raggiunga davvero print: una chiamata effettiva, nessun record emesso dopo il guasto iniettato. La prova di risorse annidate conserva il contenitore interno, i suoi due errori e l’errore di chiusura esterno, con una sola chiusura per risorsa. Sono prove dello stesso autore su oggetti privati, senza autorità nativa.
+
+I due avvii a freddo terminano con exit2 prima dell’ingresso operativo, perché manca il rapporto genuino. Il primo produttore del dossier si era fermato dopo aver scritto subject/copie e osservato il rifiuto del parent: attendeva erroneamente un contenitore IO, mentre l’assenza del file è rilevata da lstat prima di aprire una risorsa e genera correttamente FileNotFoundError. Il completamento conserva quei byte e quel risultato, senza ripetere il primo processo; esegue soltanto il rifiuto dell’operatore rimanente. Nessuna fonte di produzione o subject è modificata. I programmi e i risultati sono conservati nel dossier; non esistono stub di approvazione e il root nativo non è creato.
+
+La capsula selezionata H112 contiene **376 file / 190.764.216 byte**, SHA256 **7e8a27161f5bf533ce717da4f37dca655a6d319bdb69e19860cded99ba4d8c29**. Quattro consultazioni del lettore recuperato coincidono con gli originali. È autonoma per queste consultazioni; ricostruire l’intero studio richiede ancora H111 e la storia dichiarata. Il primo qualificatore del lettore si era fermato su un confronto fra alias del caso e ID canonico: output preservato, nuova asserzione vincolata all’ID esatto, conoscenza e lettore invariati.
+
+Restano i limiti dei fixture dichiarati in H111: GUI/header/lease positivi inventati, corpi main sostituiti, osservazioni HOLD su thread daemon, seam esplicito in una prova di conservazione dell’operatore. Non sono dimostrati ereditarietà completa dei segnali nativi, guasti OS/alimentazione, tutte le tempistiche asincrone o protezione contro writer ostili. Il coordinatore comune e i materiali BKL-051 restano invariati.
+
+Il corpus dei 64 casi storici resta **sviluppo con esiti noti e dipendenze comuni**, zero nuove unità confermative e zero API. I 580 superamenti relativi su 63 casi restano conservati. EXACT004/R005 sono conclusi e non ripetibili. La review del controllo HEADER non qualifica il parent dei successivi **196 + 260 casi nativi**, le sette famiglie scientifiche o il rischio IA all’1%/95%.
+
+Questo commit pubblica **solo testo tecnico**. Conoscenza finale e passaggio integrale di sorgenti, immagini, rapporti e ZIP con download/hash/ricostruzione restano aperti. Nessun nuovo PixInsight, modifica master/script installati, merge, deploy o attivazione portale. Le sette CI / 199 passaggi del precedente head2877f968 sono riuscite; la CI del nuovo commit è distinta e non costituisce validazione scientifica.
+
+Le sezioni seguenti restano storico; per il congelamento e l’invio V4 usare questa sezione e le correzioni H112.
+
 <!-- BKL046-H111-V3-REJECTED-V4-DRAFT-NATIVE64-DEVELOPMENT-20261116 -->
 ## H111: review V3 respinta, correzioni V4 e casi IA di sviluppo ricavati dalle evidenze native
 
