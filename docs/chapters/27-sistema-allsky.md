@@ -207,6 +207,11 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 1.1 | 27/10/2026 | Snapshot aggiornato delle 08:01, backup privato 355 file e pubblico 140 file, hardlink settings preservato, checksum e guida aggiornati |
 | 1.2 | 31/10/2026 | Camera spostata circa 14:30: nuova geometria overlay, verifica su secondo fotogramma e snapshot 18:21 separato privato/pubblico |
 | 1.3 | 31/10/2026 | Vento dal relay diagnostico CloudWatcher, unità km/h confermata, controlli validità/freschezza e nuovo snapshot 18:50 |
+| 1.4 | 12/11/2026 | Aggiornamento Allsky v2026.10.01_01, personalizzazioni conservate e snapshot separati |
+| 1.5 | 12/11/2026 | Maschere aggiornate e Auto-Gain/AWB disabilitati, calibrazione invariata |
+| 1.6 | 12/11/2026 | Affiancamento privato del rilevatore temporale, isolamento e backup dedicati |
+| 1.7 | 14/11/2026 | Collaudo dei prodotti della notte 12–13 novembre e verifica pubblica, anomalie residue documentate |
+| 1.8 | 16/11/2026 | Allsky Pocket: PWA pubblica, istruzioni Android e candidati privati esclusi |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
