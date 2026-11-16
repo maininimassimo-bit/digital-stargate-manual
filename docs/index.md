@@ -1,6 +1,6 @@
 ---
 title: Osservatorio astronomico e cielo live a Manciano
-description: Digital Stargate di Massimo Mainini: osservatorio astronomico remoto a Manciano, Toscana. Cielo live Allsky, configurazione corrente e documentazione tecnica aggiornata.
+description: "Digital Stargate di Massimo Mainini: osservatorio astronomico remoto a Manciano, Toscana. Cielo live Allsky, configurazione corrente e documentazione tecnica aggiornata."
 hide:
   - toc
 ---

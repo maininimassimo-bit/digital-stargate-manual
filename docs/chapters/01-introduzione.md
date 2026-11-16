@@ -1,6 +1,6 @@
 ---
 title: Digital Stargate · gestione e configurazione corrente
-description: Osservatorio Digital Stargate a Manciano, gestito da Massimo Mainini. Configurazione corrente, inventario verificato e riferimenti tecnici aggiornati al 16 novembre 2026.
+description: "Osservatorio Digital Stargate a Manciano, gestito da Massimo Mainini. Configurazione corrente, inventario verificato e riferimenti tecnici aggiornati al 16 novembre 2026."
 ---
 
 # Capitolo 1 – Introduzione

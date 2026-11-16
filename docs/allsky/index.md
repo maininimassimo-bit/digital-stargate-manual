@@ -1,6 +1,6 @@
 ---
 title: Allsky live · il cielo di Manciano
-description: Allsky Digital Stargate di Massimo Mainini a Manciano: camera ZWO ASI290MC, fisheye 1,8 mm e Raspberry Pi 4. Configurazione corrente aggiornata al 16 novembre 2026.
+description: "Allsky Digital Stargate di Massimo Mainini a Manciano: camera ZWO ASI290MC, fisheye 1,8 mm e Raspberry Pi 4. Configurazione corrente aggiornata al 16 novembre 2026."
 ---
 
 # Allsky live: il cielo di Manciano
