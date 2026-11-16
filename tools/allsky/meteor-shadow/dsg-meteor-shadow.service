@@ -1,6 +1,5 @@
 [Unit]
 Description=Digital Stargate private temporal meteor review
-After=allsky.service
 ConditionPathExists=/home/pi/allsky/config/myFiles/meteor-shadow/config.json
 StartLimitIntervalSec=300
 StartLimitBurst=3
