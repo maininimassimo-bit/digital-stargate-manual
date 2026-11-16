@@ -116,3 +116,10 @@ Modificati soltanto `html/allsky/index.php` e `html/allsky/css/dsg-pocket-links.
 Dopo l’aggiornamento è stata inviata **una nuova richiesta di indicizzazione della sola Home canonica** tramite Controllo URL. Google ha confermato **Indicizzazione richiesta**, con inserimento nella coda di scansione prioritaria. La conferma non prova la successiva inclusione nell’indice e non garantisce tempi o posizione; non sono stati eseguiti invii ripetuti o nuove richieste di riesame sicurezza.
 
 Backup preventivo `configuration-backup-20261116-154745`; snapshot successivo **15:49:34**, `configuration-backup-20261116-154934`. Entrambi verificati su Raspberry e PC, 367 file privati e 148 pubblici oltre ai manifest; database integri e hardlink settings conservato. [Backup corrente, copia pubblica e limiti](allsky-configuration-backup.md). Privati separati fuori da Git, candidati privati esclusi. Per rollback della sola presentazione ripristinare `index.php` e `css/dsg-pocket-links.css` dal privato preventivo, senza toccare settings o servizi. Le richieste già inviate a Google non si annullano ripristinando i file.
+
+
+## Identità e configurazione corrente del portale — 16 novembre 2026
+
+La Home, la pagina Allsky e l’introduzione al manuale riportano gestione attuale **Massimo Mainini**, data editoriale **16 novembre 2026** e rimandi all’inventario e alla configurazione corrente. La sintesi usa esclusivamente componenti già documentati; non rinnova le date delle verifiche hardware e non attribuisce un setup a una sessione specifica. Titoli e descrizioni delle pagine Allsky/introduzione e descrizione Home sono allineati. Nessun riferimento nominale ad altre gestioni viene aggiunto.
+
+La precisazione risponde a una sovrapposizione osservata nelle fonti di Google AI: la risposta sul live usava il portale corrente, mentre l’approfondimento tecnico riprendeva una descrizione esterna datata 2019. Questo è un rilievo sulla provenienza delle informazioni, non una prova di un guasto Allsky o una garanzia di correzione automatica delle risposte. L’aggiornamento è soltanto documentale: configurazione Allsky, acquisizione e candidati privati restano invariati.
