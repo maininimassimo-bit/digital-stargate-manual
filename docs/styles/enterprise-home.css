@@ -489,3 +489,16 @@
 .dsg-home-refresh{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:.6rem;min-width:0;max-width:100%}
 .dsg-home-refresh .dsg-data-freshness{white-space:normal;overflow-wrap:anywhere}
 .dsg-live-board [data-home-refresh-status]{font-size:.8rem;color:var(--dsg-text-muted);margin:.9rem 0 0}
+
+
+/* Allsky Pocket entry point: scoped to the homepage hero. */
+.dsg-hero__content .dsg-pocket-install {
+  margin: 0.85rem 0 0;
+  color: rgba(238, 247, 255, 0.82);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+.dsg-hero__content .dsg-pocket-install a {
+  color: #a9eaff;
+  text-decoration: underline;
+}

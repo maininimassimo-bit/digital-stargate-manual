@@ -5,7 +5,7 @@ hide:
   - toc
 ---
 
-<link rel="stylesheet" href="./styles/enterprise-home.css?v=d6f2d481">
+<link rel="stylesheet" href="./styles/enterprise-home.css?v=e23a6b72">
 
 <main class="dsg-enterprise-home">
 
@@ -22,7 +22,9 @@ hide:
     <div class="dsg-hero__actions">
       <a class="md-button md-button--primary" href="./mission-control/">Apri Mission Control</a>
       <a class="md-button" href="./scientific-session-catalog/">Esplora le sessioni</a>
+      <a class="md-button" href="https://digital-stargate-allsky-pocket.vibrantbadge.chatgpt.site/" target="_blank" rel="noopener noreferrer">Apri Allsky Pocket ↗</a>
     </div>
+    <p class="dsg-pocket-install">Live, meteo e archivio sul telefono, senza login. <a href="./operations/allsky-pocket-pwa/#installazione-e-prova-su-android">Come installarla su Android</a>.</p>
   </div>
   <div class="dsg-hero__trust" aria-label="Garanzie del portale">
     <span><strong>Read-only first</strong> Nessun comando agli apparati</span>
