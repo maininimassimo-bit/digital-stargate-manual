@@ -90,3 +90,8 @@ Per annullare un aggiornamento della PWA si ridistribuisce una sua versione prec
 ## Accessi dalla Home del portale e dal sito Allsky
 
 Dal 16 novembre la [Home del portale](../index.md) offre **Apri Allsky Pocket** e **Come installarla su Android**. La [pagina Allsky](https://digitalstargate.freeddns.it:23232/allsky/index.php) dispone di un richiamo equivalente sotto l’intestazione, fuori dalla ripresa. Il nuovo [snapshot Allsky delle 14:57](allsky-configuration-backup.md) include la pagina e il CSS di questi collegamenti: non include il sorgente o l’hosting della PWA esterna. Configurazione fotografica e calibrazione restano invariate; candidati privati esclusi.
+
+
+## Evoluzione Android nativa proposta
+
+Il 16 novembre 2026 è stato definito il [progetto della prima versione Android nativa](allsky-pocket-android-native.md), con Live, Meteo e Archivio e consegna iniziale di un APK locale per il telefono dell’Owner. Sviluppo e collaudo nativi sono ancora da eseguire. La PWA rimane separata e invariata; l’app non legge candidati privati e non richiede modifiche alla configurazione Allsky. La guida contiene piano, stime, confini e prompt per la chat Work dedicata.
