@@ -18,8 +18,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -37,7 +35,6 @@ private fun isAllowedMapResource(uri: Uri): Boolean =
 @Composable
 internal fun SkyMapScreen() {
     val context = LocalContext.current
-    var reload by remember { mutableIntStateOf(0) }
     var loading by remember { androidx.compose.runtime.mutableStateOf(true) }
     val webView = remember {
         WebView(context).apply {
@@ -80,12 +77,6 @@ internal fun SkyMapScreen() {
             loadUrl(MAP_URL)
         }
     }
-    LaunchedEffect(reload, webView) {
-        if (reload > 0) {
-            loading = true
-            webView.reload()
-        }
-    }
     DisposableEffect(webView) {
         onDispose {
             webView.stopLoading()
@@ -96,7 +87,17 @@ internal fun SkyMapScreen() {
         Text("Mappa celeste calibrata sul fotogramma live Allsky. I radianti degli sciami sono riferimenti del catalogo, non rilevazioni né previsioni verificate.",
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (loading) LinearProgressIndicator(Modifier.fillMaxWidth())
-        OutlinedButton(onClick = { reload++ }, modifier = Modifier.fillMaxWidth()) { Text("Ricarica mappa e fotogramma") }
+        OutlinedButton(
+            onClick = {
+                loading = true
+                // A fresh document URL bypasses WebView's page cache and reliably re-runs
+                // Allsky's Angular/VirtualSky bootstrap after a manual refresh.
+                webView.loadUrl("${MAP_URL}?mobileReload=${System.currentTimeMillis()}")
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(if (loading) "Caricamento mappa…" else "Ricarica mappa e fotogramma")
+        }
         AndroidView(factory = { webView }, modifier = Modifier.weight(1f).fillMaxWidth())
     }
 }
