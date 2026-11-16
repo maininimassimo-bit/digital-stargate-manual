@@ -1,5 +1,7 @@
 package it.digitalstargate.allskypocket
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -51,6 +53,7 @@ private val skyTop = Color(0xFF0B1B2D)
 internal val skyPanel = Color(0xFF11263A)
 private val aurora = Color(0xFF72E0CF)
 private val starlight = Color(0xFFFFC77A)
+private const val PRIVACY_POLICY_URL = "https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/"
 
 @Composable
 private fun NightSkyBackdrop(modifier: Modifier = Modifier) {
@@ -64,6 +67,7 @@ private fun NightSkyBackdrop(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun PocketApp() {
+    val context = LocalContext.current
     val tabs = listOf(
         localized("Live", "Live"), localized("Meteo", "Weather"), localized("Archivio", "Archive"),
         localized("Meteore", "Meteors"), localized("Mappa", "Sky map"),
@@ -120,6 +124,14 @@ private fun PocketApp() {
                         Text("${BuildConfig.VERSION_CODE} · ${BuildConfig.BUILD_TYPE}")
                         Text(localized("LINGUA", "LANGUAGE"), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                         Text(localizedLanguageName())
+                        TextButton(
+                            onClick = {
+                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(localized("Informativa privacy", "Privacy policy"))
+                        }
                     }
                 },
                 confirmButton = { TextButton(onClick = { showInfo = false }) { Text(localized("Chiudi", "Close")) } },

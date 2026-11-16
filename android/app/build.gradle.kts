@@ -12,12 +12,33 @@ android {
         applicationId = "it.digitalstargate.allskypocket"
         minSdk = 26
         targetSdk = 36
-        versionCode = 7
-        versionName = "0.2.5"
+        versionCode = 8
+        versionName = "0.2.6"
+    }
+
+    signingConfigs {
+        create("playUpload") {
+            val uploadStoreFile = providers.gradleProperty("playUploadStoreFile").orNull
+            val uploadStorePassword = providers.gradleProperty("playUploadStorePassword").orNull
+            val uploadKeyAlias = providers.gradleProperty("playUploadKeyAlias").orNull
+            val uploadKeyPassword = providers.gradleProperty("playUploadKeyPassword").orNull
+            if (uploadStoreFile != null && uploadStorePassword != null && uploadKeyAlias != null && uploadKeyPassword != null) {
+                storeFile = file(uploadStoreFile)
+                storePassword = uploadStorePassword
+                keyAlias = uploadKeyAlias
+                keyPassword = uploadKeyPassword
+            }
+        }
     }
 
     buildTypes {
-        release { isMinifyEnabled = false }
+        release {
+            isMinifyEnabled = false
+            if (listOf("playUploadStoreFile", "playUploadStorePassword", "playUploadKeyAlias", "playUploadKeyPassword")
+                    .all { providers.gradleProperty(it).isPresent }) {
+                signingConfig = signingConfigs.getByName("playUpload")
+            }
+        }
     }
     buildFeatures {
         compose = true

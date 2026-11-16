@@ -1,0 +1,37 @@
+{
+  "package_name": "it.digitalstargate.allskypocket",
+  "version_name": "0.2.6",
+  "version_code": 8,
+  "target_sdk": 36,
+  "min_sdk": 26,
+  "default_language": "it-IT",
+  "contact_email": "maininimassimo@gmail.com",
+  "privacy_policy_url": "https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/",
+  "privacy_policy_url_state": "Candidate GitHub Pages URL; verify that it is live after the documentation pull request is merged and deployed.",
+  "data_safety_draft": {
+    "account_creation": false,
+    "analytics_or_advertising_sdk": false,
+    "app_permissions": [
+      "android.permission.INTERNET"
+    ],
+    "server_access_logs": {
+      "collection_confirmed": true,
+      "data_elements": [
+        "connection IP address",
+        "technical access-request metadata"
+      ],
+      "purposes": [
+        "service operation",
+        "security and troubleshooting"
+      ],
+      "retention": "Six months",
+      "sharing_with_analytics_or_advertising": false,
+      "deletion_request_contact": "maininimassimo@gmail.com",
+      "in_transit_encryption": "HTTPS/TLS",
+      "play_data_type_mapping": "Map the IP and request metadata to the exact current Play Console data types. Google's guidance makes IP handling dependent on actual use; do not declare no collection by default."
+    },
+    "network_access": "The app requests public AllSky Manciano images, weather projection, archive/meteor catalogue pages and the sky-map page over HTTPS. The developer directly manages the AllSky host and confirms access logs are retained for six months for technical operation and security. Requests necessarily expose the connection IP and technical request data to that host. No account, user-submitted content, analytics, advertising, or IP-based location inference is implemented. Map the IP/log handling to the current Play Data safety data types and purposes when the account is cleared to create the app; do not claim that no data is collected."
+  },
+  "release_state": "Draft only; developer account exists but Google identity/phone verification is pending; upload signing key not created",
+  "selected_category": "Photography"
+}
