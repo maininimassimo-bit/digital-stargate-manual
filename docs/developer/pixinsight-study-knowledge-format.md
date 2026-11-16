@@ -1,3 +1,50 @@
+<!-- BKL046-H113-EXACT-FINITE-START-SCIENCE-20261116 -->
+## H113: stabilità dei fit sugli avvii salvati, con tre controesempi nei controlli puntiformi
+
+La conoscenza **provvisoria H113** contiene **310 schede** e preserva tutte le 309 schede H112, i byte della sezione requisiti e le disposizioni scientifiche. Il sedicesimo collegamento di correzione qualifica l’evidenza storica sui fit punto+componente estesa. Il lettore65 supera **15 verifiche**; il rendiconto95 conserva **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**, sette famiglie e 25 assi, con **zero chiusure scientifiche**. Registro autorevole invariato: v600 / 1.171.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H113 | 1cc8f5eb94b9ced5a6335356091363eb24c2b0c28a5e52ea23e4f204aff1946c |
+| Lettore65 | f961bc0da0ddf89a486483be7d88532f3d4b363d3062ed2b96c8b1d8b6c65703 |
+| Rendiconto95 | 6af089cb044218f881138040b9ebca7c9450db4d2329a997b1a1e5f2d59891a4 |
+
+È stato completato un nuovo controllo aritmetico sui **risultati già salvati di 80 campi sintetici, 160 righe modello e otto immagini di calibrazione separate**. Nessun fit viene rieseguito, nessun pixel XISF riletto e nessun nuovo dato, rumore, processo PixInsight o risposta IA viene acquisito. Il controllo usa razionali esatti dei numeri binary64 memorizzati: non afferma di ricostruire l’aritmetica interna dell’ottimizzatore o un optimum globale.
+
+Il protocollo di fit originale stabiliva sei avvii fissi per il modello complesso e conservava quelli convergenti con differenza di log-verosimiglianza negativa non superiore a 0,5 rispetto alla soluzione scelta. La nuova formulazione verifica esattamente **2 × differenza NLL ≤ 1** sui valori salvati. Tutte le appartenenze all’insieme degli avvii e tutti i verdetti di flusso/posizione precedenti coincidono: **zero discrepanze**. Restano i limiti Owner del **5% relativo sul flusso** e del **5% della FWHM iniziale per la posizione**.
+
+| Insieme sintetico e modello | Miglior fit entro entrambe le soglie | Tutti gli avvii quasi equivalenti salvati entro entrambe |
+| --- | ---: | ---: |
+| Sovrapposizione punto+esteso, modello complesso | 13 / 64 | 13 / 64 |
+| Sola stella, modello semplice | 8 / 8 | 8 / 8 |
+| Sola stella, modello complesso | 6 / 8 | 3 / 8 |
+
+Nei **13 casi sovrapposti già positivi**, il risultato resta entro entrambe le soglie per tutti gli avvii quasi equivalenti registrati, mantenendo fissa la PSF stimata. Questa verifica non trasforma i restanti 51 casi in successi e non risolve la sensibilità alla calibrazione PSF già documentata.
+
+Nei controlli con **sola stella**, i casi **field-0080, field-0081 e field-0084** hanno il miglior fit complesso entro entrambe le soglie, ma anche avvii registrati quasi equivalenti con errore di flusso oltre il 5%. La soluzione selezionata corretta non basta quindi a certificare la stabilità della stima rispetto a quegli avvii. Questi tre controesempi riguardano i controlli puntiformi, non i 13 casi sovrapposti positivi.
+
+L’argomento finito è deterministico: per flusso vero positivo F, candidati con intervallo massimo−minimo maggiore di F/10 non possono trovarsi tutti nella banda [19F/20, 21F/20]. Nell’insieme analizzato questo intervallo largo compare anche in 13 casi sovrapposti già non accettabili; non viene contato come un nuovo fallimento dei 13 casi positivi. I casi con flusso puntiforme vero nullo rimangono indefiniti per i relativi endpoint e non vengono promossi a successi.
+
+L’implicazione per la conoscenza è circoscritta: **convergenza e successo del miglior fit non garantiscono da soli una stima fotometrica stabile; aumentare la complessità del modello non è automaticamente preferibile sui controlli puntiformi**. La verità sintetica serve alla verifica, non permette di scegliere il modello di una fotografia reale usando un flusso o una morfologia noti a posteriori.
+
+L’insieme degli avvii non è un intervallo di confidenza, una distribuzione a posteriori o l’insieme di tutti gli optima. I fit condividono gruppi di calibrazione PSF, forme gaussiane e un riferimento grossolano di puntamento. Restano aperti classe morfologica ignota, rilevamento realmente cieco, copertura dell’incertezza, variazione PSF spaziale/temporale e risposta fisica delle camere. **Zero nuove unità indipendenti o confermative IA**, nessuna stima del rischio all’1%/95% e nessuna ammissione del workflow completo.
+
+| Evidenza su H: | SHA256 |
+| --- | --- |
+| Audit esatto dei valori salvati | 63aaf0d1d86ea187a82acd4c4bd85dc837d185a0273330a5c8796a4470a8edcf |
+| Controesempi e implicazione circoscritta | a9feb1eb9eae9787304670696f350bd695b879ca65d996f09ab6b3cd4391777b |
+| Capsula autonoma per il replay degli scalari | 3ed00c990bfcdabe96090aea50cfbd7571ae5a2ca699f646c7d6296b91a0f648 |
+
+La capsula scientifica selezionata contiene **11 file / 97.466 byte**. Entrambi i programmi riproducono dal recupero gli stessi output degli originali, senza dipendere da SciPy o dalle immagini; vengono respinti Python ottimizzato e una modifica dei byte della fonte. La revisione V2 dei programmi aggiunge il rifiuto dell’ottimizzazione prima di accedere ai dati e conserva gli stessi risultati numerici V1. È una seconda formulazione dello stesso autore, non una review scientifica indipendente. Le scale hanno ruoli distinti: ampiezza interna del fit moltiplicata per 1000; conversione dei campioni XISF in elettroni pari a 65.536. Non sono intercambiabili.
+
+La capsula selezionata H113 contiene **387 file / 191.851.442 byte**, SHA256 **8730c7edc11220e698f6f3844b9c088c73ae40f660f671235a9ce1066c823810**. Cinque consultazioni del lettore recuperato coincidono con gli originali, compresa l’interpretazione scientifica aggiornata del vecchio caso punto+esteso. La rigenerazione completa dello studio dipende ancora da H112 e dalla storia dichiarata; il replay degli scalari non ricostruisce le immagini o il fit originale.
+
+Il dossier HEADER V4 resta congelato a 24 sorgenti, subject e6cd9738437f3959843c49a86f337c7aff07a5a45ccbd5c544a33805b4b74da5 e source-set329903e1b8391e17be0d43fe6257924b40df635d78467fa1f78b5669c71e29d9. La review offline autorizzata è stata inviata; **questo aggiornamento non attesta un esito V4 approvato**. V3 resta respinta, la precedente correzione Reader2 resta chiusa soltanto nel Reader, EXACT004/R005 sono conclusi e non vanno ripetuti. I 64 casi Drizzle e 580 fallimenti restano conservati; i **196 + 260 casi nativi** successivi restano aperti.
+
+Questo commit pubblica **solo testo tecnico**. Conoscenza finale e trasferimento integrale su GitHub con download/hash/ricostruzione restano aperti. Nessun nuovo PixInsight/API, modifica master/script installati, azione BKL-051/coordinatore, merge, deploy o portale. Le sette CI / 199 passaggi del precedente heada7632473 sono riuscite; la CI del nuovo commit va verificata separatamente e non costituisce validazione scientifica.
+
+Le sezioni seguenti restano storico; per la qualificazione finita dei fit punto+esteso usare questa sezione e le correzioni H113.
+
 <!-- BKL046-H112-V4-FROZEN-REVIEW-SENT-20261116 -->
 ## H112: dossier completo V4 congelato, recuperato e inviato alla review offline
 
