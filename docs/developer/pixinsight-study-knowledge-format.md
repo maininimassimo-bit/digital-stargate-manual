@@ -1,3 +1,18 @@
+<!-- BKL046-HEADER-ERROR-BUNDLE-20261116 -->
+## Diagnostico header: ricevute d’errore e controllo conservativo (16 novembre 2026)
+
+Il generatore V2, ancora offline con contesto inventato, ha superato **23 casi sul sorgente generato in Node VM**, con direttive rimosse e macro/API simulate. Produce successo V3 oppure un diagnostico distinto, conserva l’errore primario se fallisce la persistenza e non ritenta le scritture. Interruzioni, preprocessing e guasti possono comunque lasciare ricevute assenti o parziali; la persistenza nativa non è garantita.
+
+Il controllo puro delle due ricevute ha superato **59 casi**, inclusi i byte prodotti dallo script simulato, corruzioni, tipi errati e contesti/tempi incoerenti. Ricevute assenti, parziali o contraddittorie mantengono HOLD. Una scrittura di successo tentata ma non confermata mantiene HOLD anche quando esiste un successo completo. Il diagnostico non viene ignorato. Ogni risultato mantiene la custodia e nega retry, chiusura, rilascio comune, nuova ammissione e accettazione scientifica: origine nativa dei byte e stato attuale della UI restano da provare nel controllore completo.
+
+Capsula locale selezionata su H:, **34 file**, ZIP **58.939 byte**, SHA-256 **62544c9aad3cb59421fdf8c3d976ab5e88df0c3f6e2ccea4f5730c583289a28f**. Tutti i byte recuperati sono identici e il qualificatore Python estratto ha riprodotto gli stessi 59 risultati con uscita zero. Il replay usa le ricevute Node archiviate e non riesegue Node o il preprocessore nativo. Il rapporto dei 59 casi ha SHA-256 **0b92c5912d92545987079b6d45bc32d27c366c05ee7240a8fbd245c1d88b30e4**.
+
+Evidenze locali: fresh-native-header-error-contract-qualification-h-v1/generated-error-contract-mocks-verification.json; fresh-header-receipt-bundle-gate-qualification-h-v1/verification.json; fresh-header-error-contract-bundle-gate-local-capsule-h-v1/verification.json.
+
+Restano parent originale, custodia/canali, integrazione R4 e procedure UI/uscita normale complete da implementare e sottoporre a review. Nessuna nuova ammissione o esecuzione nativa; nessuna operazione sulla prenotazione o sui processi BKL-051. EXACT004/R005 sono conclusi e non ripetibili. **H103/lettore55/rendiconto85 restano la baseline provvisoria**, registro v600/conoscenza autorevole 1.171: questi componenti successivi non sono nuove schede H103. Zero nuove chiusure scientifiche; 196 + 260 casi Drizzle restano da eseguire. Conoscenza finale e trasferimento completo GitHub con download/ricostruzione restano aperti. Questo commit pubblica solo testo tecnico, senza sorgenti, conoscenza o ZIP locali; nessun merge o attivazione del portale.
+
+Il precedente head H103 1a90990a89b6d321994e0c0e0ea71280017146c4 ha superato sette workflow, sette job e 199 step; la CI del nuovo commit è distinta.
+
 # Conoscenza dello studio PixInsight e IA: struttura, consultazione e storico
 
 ## H103: recupero reale consultabile senza riscrivere lo storico
