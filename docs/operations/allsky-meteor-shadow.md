@@ -7,6 +7,8 @@ description: Affiancamento asincrono del rilevatore temporale di meteore, con ar
 
 Dal **12 novembre 2026 alle 22:03 Europe/Rome** il servizio `dsg-meteor-shadow.service` analizza le nuove immagini notturne già salvate da Allsky. L’Owner ha autorizzato l’affiancamento dopo la valutazione su tre notti complete. Il rilevatore ordinario rimane nel flusso esistente; **i nuovi candidati temporali non vengono pubblicati** né nella galleria pubblica né nella pagina amministrativa Meteors.
 
+Dopo il riavvio del 16 novembre il servizio non era partito per un ciclo di ordinamento systemd. Corretto e riattivato con autorizzazione Owner alle **15:24:49**; il controllo diurno lo trova attivo in attesa di fotogrammi notturni. [Diagnosi e snapshot aggiornato](allsky-configuration-backup.md#avvio-del-rilevatore-temporale-privato-16-novembre-2026-1524).
+
 Il servizio è esterno alla pipeline di acquisizione: legge i JPEG dopo il salvataggio e lavora a bassa priorità. Non cambia parametri fotografici, maschere della produzione, calibrazione VirtualSky, contatori pubblici o generazione dei prodotti notturni. [Configurazione Allsky e cronologia degli interventi](../chapters/27-sistema-allsky.md#2737-valutazione-e-affiancamento-privato-delle-meteore-12-novembre-2026).
 
 ## Risultati della valutazione precedente
@@ -74,6 +76,8 @@ I test del 12 novembre hanno verificato un candidato sintetico archiviato privat
 
 ## Backup e disattivazione
 
+Snapshot corrente dopo la correzione di avvio del 16 novembre: **15:25:02**, `configuration-backup-20261116-152502`; precedente alla modifica **15:24:06**, `configuration-backup-20261116-152406`. Copie private su Raspberry/PC fuori da Git, solo nuovo export sanificato nel repository. La unit versionata è allineata a quella corretta sul Raspberry: non deve contenere `After=allsky.service`, perché Allsky è a sua volta ordinato dopo `multi-user.target`. Il worker attende autonomamente i nuovi JPEG. Validazione del grafo positiva, riavvio fisico non eseguito.
+
 Backup preliminare **21:53**, `configuration-backup-20261112-215352`; snapshot dopo l’attivazione **22:07**, `configuration-backup-20261112-220710`. [Download sanificato, perimetro e ripristino](allsky-configuration-backup.md). Il privato resta su Raspberry e PC Owner; il repository contiene soltanto l’export sanificato e risultati aggregati. I nuovi candidati non sono inclusi nei file pubblicati.
 
 Lo snapshot di configurazione comprende codice, profilo, maschera e unit. **Non comprende immagini private, registro SQLite o stato in `/var/lib/dsg-meteor-shadow`**: per conservarli fuori dal Raspberry serve una copia privata separata. Il tool di snapshot aggiornato è `config/myFiles/backup/capture-configuration.py`; non esegue il ripristino.
@@ -106,4 +110,4 @@ Il campione è selezionato fra i candidati del temporale: non comprende tutte le
 
 Il controllo operativo al termine dell’analisi ha trovato entrambi i servizi attivi e `publication_enabled=false`. Configurazione, soglie, maschere e calibrazione restano invariate. Nessuna immagine candidata, ritaglio, miniatura o metadato individuale è aggiunto al repository o alla galleria: qui si pubblica soltanto il resoconto testuale autorizzato. Le prove visive e il confronto dettagliato rimangono nell’archivio privato dell’Owner.
 
-La decisione è **continuare l’affiancamento privato**, raccogliendo altre notti e contesto temporale prima di proporre modifiche o attivazione pubblica. Questa analisi non comporta un nuovo backup di configurazione, perché non modifica l’impianto; restano validi gli snapshot del 12 novembre descritti sotto. L’eventuale aggiornamento di versione o pubblicazione richiede una successiva autorizzazione. La verifica upstream del 13 novembre ha trovato il ramo ufficiale identico al commit v1.0.1 già installato, senza aggiornamenti da applicare.
+La decisione è **continuare l’affiancamento privato**, raccogliendo altre notti e contesto temporale prima di proporre modifiche o attivazione pubblica. Questa analisi non comporta un nuovo backup di configurazione, perché non modifica l’impianto; a quella data restavano validi gli snapshot del 12 novembre; quelli successivi sono indicati nella sezione backup. L’eventuale aggiornamento di versione o pubblicazione richiede una successiva autorizzazione. La verifica upstream del 13 novembre ha trovato il ramo ufficiale identico al commit v1.0.1 già installato, senza aggiornamenti da applicare.
