@@ -85,3 +85,8 @@ L’accesso anonimo è stato verificato nel browser. Una richiesta diagnostica a
 Il sorgente e le versioni della PWA sono gestiti separatamente nel progetto Sites. Il manuale documenta l’integrazione: **i backup della configurazione Allsky non includono automaticamente il sorgente o l’hosting PWA**. Nessuna configurazione o immagine privata del Raspberry è stata trasferita nel progetto.
 
 Per annullare un aggiornamento della PWA si ridistribuisce una sua versione precedente. Un eventuale ritorno all’accesso riservato è una modifica distinta della policy di hosting da autorizzare; non è necessario ripristinare Allsky o intervenire sull’acquisizione. Aggiornamenti al solo manuale non modificano app, server o permessi del sito.
+
+
+## Accessi dalla Home del portale e dal sito Allsky
+
+Dal 16 novembre la [Home del portale](../index.md) offre **Apri Allsky Pocket** e **Come installarla su Android**. La [pagina Allsky](https://digitalstargate.freeddns.it:23232/allsky/index.php) dispone di un richiamo equivalente sotto l’intestazione, fuori dalla ripresa. Il nuovo [snapshot Allsky delle 14:57](allsky-configuration-backup.md) include la pagina e il CSS di questi collegamenti: non include il sorgente o l’hosting della PWA esterna. Configurazione fotografica e calibrazione restano invariate; candidati privati esclusi.
