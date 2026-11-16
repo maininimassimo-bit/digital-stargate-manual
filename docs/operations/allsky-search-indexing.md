@@ -101,3 +101,18 @@ Dopo aggiornamenti Allsky controllare che non siano stati sovrascritti metadati 
 - [Google: posizione e interpretazione di robots.txt](https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec).
 - [Google: report Problemi di sicurezza e riesame](https://support.google.com/webmasters/answer/9044101).
 - [Progetto tecnico AllSky](../chapters/27-sistema-allsky.md).
+
+
+## Verifica e migliorie del 16 novembre 2026
+
+Search Console, report aggiornato al **13/11/2026**, mostra **0 pagine indicizzate e 5 non indicizzate**: Home scansionata ma non indicizzata, quattro gallerie rilevate ma non indicizzate. Ultima scansione Home: **25/10/2026 alle 11:59:33**, Googlebot smartphone, recupero riuscito e scansione/indicizzazione consentite. Non è indicato un blocco tecnico specifico né è dimostrata la causa della mancata selezione nell’indice.
+
+La sitemap risulta **Riuscita**, ultima lettura **10/11/2026**, cinque pagine rilevate. I report **Problemi di sicurezza** e **Azioni manuali** mostrano entrambi **Nessun problema rilevato**: la segnalazione iniziale del 9 ottobre non risulta più presente. Il test pubblico Google del **16/11 alle 15:46** conferma URL disponibile e pagina indicizzabile. Restano distinti disponibilità, lettura sitemap e indicizzazione effettiva.
+
+Dopo autorizzazione Owner e backup completo **15:47:45**, aggiunta sotto il fotogramma una presentazione HTML visibile, con un solo titolo `h1` («Allsky live a Manciano · Digital Stargate»), due paragrafi descrittivi e collegamenti testuali alle quattro gallerie pubbliche e alla pagina divulgativa del portale. Non è testo nascosto ai visitatori. Descrive camera, località, timelapse, startrails, keogrammi, overlay e meteo; i candidati meteore sono esplicitamente non confermati. La scarsità di testo stabile era una possibile debolezza, non una causa dimostrata dell’esclusione da Google.
+
+Modificati soltanto `html/allsky/index.php` e `html/allsky/css/dsg-pocket-links.css`; riferimento cache CSS aggiornato a `20261116-2`. PHP valido, Home canonica e quattro gallerie HTTP 200, titolo e link presenti senza esecuzione JavaScript, presentazione verificata visivamente nel browser. Canonical, tag di verifica Google, robots.txt, sitemap e regole di esposizione pubblica invariati. Nessuna apertura di percorsi amministrativi o dati privati. Hash di settings, flusso notturno, maschere, mappa/controller e profilo/worker privato invariati; Allsky resta PID 721 e i due servizi restano attivi.
+
+Dopo l’aggiornamento è stata inviata **una nuova richiesta di indicizzazione della sola Home canonica** tramite Controllo URL. Google ha confermato **Indicizzazione richiesta**, con inserimento nella coda di scansione prioritaria. La conferma non prova la successiva inclusione nell’indice e non garantisce tempi o posizione; non sono stati eseguiti invii ripetuti o nuove richieste di riesame sicurezza.
+
+Backup preventivo `configuration-backup-20261116-154745`; snapshot successivo **15:49:34**, `configuration-backup-20261116-154934`. Entrambi verificati su Raspberry e PC, 367 file privati e 148 pubblici oltre ai manifest; database integri e hardlink settings conservato. [Backup corrente, copia pubblica e limiti](allsky-configuration-backup.md). Privati separati fuori da Git, candidati privati esclusi. Per rollback della sola presentazione ripristinare `index.php` e `css/dsg-pocket-links.css` dal privato preventivo, senza toccare settings o servizi. Le richieste già inviate a Google non si annullano ripristinando i file.
