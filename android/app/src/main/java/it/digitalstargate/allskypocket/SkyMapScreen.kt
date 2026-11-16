@@ -84,7 +84,7 @@ internal fun SkyMapScreen() {
         }
     }
     Column(Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text("Mappa celeste calibrata sul fotogramma live Allsky. I radianti degli sciami sono riferimenti del catalogo, non rilevazioni né previsioni verificate.",
+        Text(localized("Mappa celeste calibrata sul fotogramma live Allsky. I radianti degli sciami sono riferimenti del catalogo, non rilevazioni né previsioni verificate.", "Sky map calibrated to the live Allsky frame. Meteor-shower radiants are catalog references, not detections or verified forecasts."),
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (loading) LinearProgressIndicator(Modifier.fillMaxWidth())
         OutlinedButton(
@@ -96,7 +96,7 @@ internal fun SkyMapScreen() {
             },
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text(if (loading) "Caricamento mappa…" else "Ricarica mappa e fotogramma")
+            Text(if (loading) localized("Caricamento mappa…", "Loading sky map…") else localized("Ricarica mappa e fotogramma", "Refresh map and frame"))
         }
         AndroidView(factory = { webView }, modifier = Modifier.weight(1f).fillMaxWidth())
     }

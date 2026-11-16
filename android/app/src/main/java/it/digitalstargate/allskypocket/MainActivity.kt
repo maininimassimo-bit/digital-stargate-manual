@@ -64,8 +64,12 @@ private fun NightSkyBackdrop(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun PocketApp() {
-    val tabs = listOf("Live", "Meteo", "Archivio", "Meteore", "Mappa")
+    val tabs = listOf(
+        localized("Live", "Live"), localized("Meteo", "Weather"), localized("Archivio", "Archive"),
+        localized("Meteore", "Meteors"), localized("Mappa", "Sky map"),
+    )
     var selected by remember { mutableIntStateOf(0) }
+    var showInfo by remember { mutableStateOf(false) }
     MaterialTheme(colorScheme = darkColorScheme(
         primary = aurora, onPrimary = Color(0xFF062A2A), secondary = starlight,
         background = Color(0xFF081321), surface = Color(0xFF101F31), surfaceVariant = Color(0xFF1C3045),
@@ -73,8 +77,12 @@ private fun PocketApp() {
     )) {
         Scaffold(containerColor = MaterialTheme.colorScheme.background, topBar = { TopAppBar(title = {
             Column {
-                Text("ALLSKY POCKET", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
+                Text("ALLSKY MANCIANO", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
                 Text("DIGITAL STARGATE · MANCIANO", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
+            }
+        }, actions = {
+            IconButton(onClick = { showInfo = true }) {
+                Text("ⓘ", style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
             }
         }, colors = TopAppBarDefaults.topAppBarColors(containerColor = skyTop)) }, bottomBar = {
             NavigationBar { tabs.forEachIndexed { index, title ->
@@ -93,12 +101,38 @@ private fun PocketApp() {
                 }
             }
         }
+        if (showInfo) {
+            AlertDialog(
+                onDismissRequest = { showInfo = false },
+                title = { Text("AllSky Manciano") },
+                text = {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text(localized("AUTORE", "AUTHOR"), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        Text("Massimo Mainini", style = MaterialTheme.typography.titleMedium)
+                        Text(localized(
+                            "Astrofilo e autore di Digital Stargate. A Manciano cura un osservatorio con cupola e camera AllSky, documentando il cielo e condividendo immagini e attività di divulgazione astronomica.",
+                            "Amateur astronomer and creator of Digital Stargate. In Manciano, he runs a dome observatory with an AllSky camera, documenting the sky and sharing images and astronomy outreach.",
+                        ))
+                        Spacer(Modifier.height(4.dp))
+                        Text(localized("VERSIONE", "VERSION"), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        Text(BuildConfig.VERSION_NAME)
+                        Text(localized("BUILD", "BUILD"), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        Text("${BuildConfig.VERSION_CODE} · ${BuildConfig.BUILD_TYPE}")
+                        Text(localized("LINGUA", "LANGUAGE"), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        Text(localizedLanguageName())
+                    }
+                },
+                confirmButton = { TextButton(onClick = { showInfo = false }) { Text(localized("Chiudi", "Close")) } },
+                containerColor = skyPanel,
+            )
+        }
     }
 }
 
 @Composable
 private fun LiveScreen(active: Boolean) {
     val owner = LocalLifecycleOwner.current
+    val context = LocalContext.current
     var visible by remember { mutableStateOf(owner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) }
     var updated by remember { mutableStateOf<Instant?>(null) }
     var shotAt by remember { mutableStateOf<Instant?>(null) }
@@ -129,10 +163,10 @@ private fun LiveScreen(active: Boolean) {
                     cameraFileName = data.camera.fileName
                     imageNonce++
                 }
-                error = if (data.generatedAt == null) "Proiezione senza ora valida" else null
+                error = if (data.generatedAt == null) localized(context, "Proiezione senza ora valida", "Data feed has no valid timestamp") else null
                 backoff = POLL_INTERVAL_MS
             } catch (e: Exception) {
-                error = "Connessione non disponibile: ${e.javaClass.simpleName}"
+                error = "${localized(context, "Connessione non disponibile", "Connection unavailable")}: ${e.javaClass.simpleName}"
                 backoff = (backoff * 2).coerceAtMost(5 * 60_000L)
             } finally { loading = false }
             delay(backoff)
@@ -144,33 +178,33 @@ private fun LiveScreen(active: Boolean) {
     val imageFresh = isProjectionFresh(updated, Instant.now()) && isCameraFresh(shotAt, Instant.now())
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
-            Text("Il cielo, adesso", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-            Text("Manciano · Toscana · Allsky", color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(localized("Il cielo, adesso", "The sky, now"), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            Text(localized("Manciano · Toscana · Allsky", "Manciano · Tuscany · Allsky"), color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         ElevatedCard(colors = CardDefaults.elevatedCardColors(containerColor = skyPanel), modifier = Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("●", color = if (imageFresh && error == null) aurora else starlight)
-                    Text(if (imageFresh && error == null) "PROIEZIONE AGGIORNATA" else "ULTIMO FOTOGRAMMA / NON AGGIORNATO", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+                    Text(if (imageFresh && error == null) localized("PROIEZIONE AGGIORNATA", "LIVE DATA UPDATED") else localized("ULTIMO FOTOGRAMMA / NON AGGIORNATO", "LAST FRAME / NOT UPDATED"), style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
                 }
-                Text("Ultimo aggiornamento dati  ${updated?.let(timeFormat::format) ?: "—"}", style = MaterialTheme.typography.bodySmall)
-                Text("Scatto  ${shotAt?.let(timeFormat::format) ?: "ora non disponibile"}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("${localized("Ultimo aggiornamento dati", "Data last updated")}  ${updated?.let(timeFormat::format) ?: "—"}", style = MaterialTheme.typography.bodySmall)
+                Text("${localized("Scatto", "Captured")}  ${shotAt?.let(timeFormat::format) ?: localized("ora non disponibile", "time unavailable")}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
         ElevatedCard(colors = CardDefaults.elevatedCardColors(containerColor = Color.Black), modifier = Modifier.fillMaxWidth()) {
             Box(Modifier.fillMaxWidth().heightIn(min = 230.dp, max = if (showFull) 700.dp else 380.dp), contentAlignment = androidx.compose.ui.Alignment.Center) {
-                PublicImage(key = imageNonce.toString(), url = "$ORIGIN/current/image.jpg?refresh=$imageNonce", description = "Ultimo fotogramma Allsky", onError = { imageError = it },
+                PublicImage(key = imageNonce.toString(), url = "$ORIGIN/current/image.jpg?refresh=$imageNonce", description = localized("Ultimo fotogramma Allsky", "Latest Allsky frame"), onError = { imageError = it },
                     modifier = Modifier.fillMaxWidth().heightIn(min = 230.dp, max = if (showFull) 700.dp else 380.dp)
                         .pointerInput(showFull) { detectTransformGestures { _, pan, zoom, _ -> imageScale = (imageScale * zoom).coerceIn(1f, 5f); imageOffset += pan } }
                         .graphicsLayer(scaleX = imageScale, scaleY = imageScale, translationX = imageOffset.x, translationY = imageOffset.y))
                 Text("✦", color = starlight, modifier = Modifier.align(androidx.compose.ui.Alignment.TopEnd).padding(12.dp))
             }
         }
-        if (error != null || !imageFresh || imageError) Text(error ?: if (imageError) "Immagine non disponibile: verifica rete o risposta del server." else "La proiezione è scaduta; l’immagine può essere l’ultimo fotogramma disponibile.", color = MaterialTheme.colorScheme.error)
-        Text("Il live è una successione di fotografie, non un flusso video.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (error != null || !imageFresh || imageError) Text(error ?: if (imageError) localized("Immagine non disponibile: verifica rete o risposta del server.", "Image unavailable: check your connection or the server response.") else localized("La proiezione è scaduta; l’immagine può essere l’ultimo fotogramma disponibile.", "The data feed has expired; this may be the latest available frame."), color = MaterialTheme.colorScheme.error)
+        Text(localized("Il live è una successione di fotografie, non un flusso video.", "Live is a sequence of still images, not a video stream."), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            Button(onClick = { imageNonce++; manualRefresh++ }, enabled = !loading) { Text(if (loading) "Aggiorno…" else "Aggiorna") }
-            OutlinedButton(onClick = { showFull = !showFull; imageScale = 1f; imageOffset = Offset.Zero }) { Text(if (showFull) "Adatta" else "Espandi") }
+            Button(onClick = { imageNonce++; manualRefresh++ }, enabled = !loading) { Text(if (loading) localized("Aggiorno…", "Updating…") else localized("Aggiorna", "Refresh")) }
+            OutlinedButton(onClick = { showFull = !showFull; imageScale = 1f; imageOffset = Offset.Zero }) { Text(if (showFull) localized("Adatta", "Fit") else localized("Espandi", "Expand")) }
             Text("Zoom ${"%.1f".format(imageScale)}×", modifier = Modifier.align(androidx.compose.ui.Alignment.CenterVertically), color = aurora)
         }
     }
@@ -179,6 +213,7 @@ private fun LiveScreen(active: Boolean) {
 @Composable
 private fun WeatherScreen(active: Boolean) {
     val owner = LocalLifecycleOwner.current
+    val context = LocalContext.current
     var state by remember { mutableStateOf<WeatherSnapshot?>(null) }
     var error by remember { mutableStateOf<String?>(null) }
     var refresh by remember { mutableIntStateOf(0) }
@@ -193,28 +228,28 @@ private fun WeatherScreen(active: Boolean) {
                     error = null
                     delayMs = POLL_INTERVAL_MS
                 }
-                catch (e: Exception) { state = null; error = "Connessione non disponibile"; delayMs = (delayMs * 2).coerceAtMost(5 * 60_000L) }
+                catch (e: Exception) { state = null; error = localized(context, "Connessione non disponibile", "Connection unavailable"); delayMs = (delayMs * 2).coerceAtMost(5 * 60_000L) }
                 delay(delayMs)
             }
         }
     }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-        Text("Aria e condizioni", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Text("Sensore CloudWatcher · Manciano", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(localized("Aria e condizioni", "Weather and conditions"), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        Text("CloudWatcher ${localized("sensore", "sensor")} · Manciano", color = MaterialTheme.colorScheme.onSurfaceVariant)
         val value = state
-        Text(if (error != null) error!! else if (value?.fresh == true) "Misura aggiornata" else "Misura non disponibile o scaduta",
+        Text(if (error != null) error!! else if (value?.fresh == true) localized("Misura aggiornata", "Measurement is current") else localized("Misura non disponibile o scaduta", "Measurement unavailable or expired"),
             color = if (value?.fresh == true) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)
         ElevatedCard(colors = CardDefaults.elevatedCardColors(containerColor = skyPanel), modifier = Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                Text("MISURA RICEVUTA", style = MaterialTheme.typography.labelLarge, color = starlight, fontWeight = FontWeight.Bold)
-                Text("${value?.observedAt?.let(timeFormat::format) ?: "Ora non disponibile"}  ·  valida fino ${value?.freshUntil?.let(timeFormat::format) ?: "—"}", style = MaterialTheme.typography.bodySmall)
+                Text(localized("MISURA RICEVUTA", "MEASUREMENT RECEIVED"), style = MaterialTheme.typography.labelLarge, color = starlight, fontWeight = FontWeight.Bold)
+                Text("${value?.observedAt?.let(timeFormat::format) ?: localized("Ora non disponibile", "Time unavailable")}  ·  ${localized("valida fino", "valid until")} ${value?.freshUntil?.let(timeFormat::format) ?: "—"}", style = MaterialTheme.typography.bodySmall)
             }
         }
-        WeatherValue("Temperatura", value?.temperatureC?.takeIf { value.fresh }, "°C")
-        WeatherValue("Umidità", value?.humidityPct?.takeIf { value.fresh }, "%")
-        WeatherValue("Punto di rugiada", value?.dewPointC?.takeIf { value.fresh }, "°C")
-        WeatherValue("Vento", value?.windKmh?.takeIf { value.fresh }, "km/h")
-        OutlinedButton(onClick = { refresh++ }) { Text("Aggiorna") }
+        WeatherValue(localized("Temperatura", "Temperature"), value?.temperatureC?.takeIf { value.fresh }, "°C")
+        WeatherValue(localized("Umidità", "Humidity"), value?.humidityPct?.takeIf { value.fresh }, "%")
+        WeatherValue(localized("Punto di rugiada", "Dew point"), value?.dewPointC?.takeIf { value.fresh }, "°C")
+        WeatherValue(localized("Vento", "Wind"), value?.windKmh?.takeIf { value.fresh }, "km/h")
+        OutlinedButton(onClick = { refresh++ }) { Text(localized("Aggiorna", "Refresh")) }
     }
 }
 
@@ -247,14 +282,14 @@ private fun ArchiveScreen() {
         player = null
         try { items = withContext(Dispatchers.IO) { AllskyRepository.archive(category) } }
         catch (e: kotlinx.coroutines.CancellationException) { throw e }
-        catch (_: Exception) { error = "Catalogo non disponibile" }
+        catch (_: Exception) { error = localized(context, "Catalogo non disponibile", "Catalog unavailable") }
         finally { loading = false }
     }
     Column(Modifier.fillMaxSize().padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Text("Memoria del cielo", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Text("Prodotti pubblici · notti recenti", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(localized("Memoria del cielo", "Sky archive"), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        Text(localized("Prodotti pubblici · notti recenti", "Public products · recent nights"), color = MaterialTheme.colorScheme.onSurfaceVariant)
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            listOf("videos" to "Timelapse", "startrails" to "Startrail", "keograms" to "Keogrammi").forEach { (key, label) ->
+            listOf("videos" to "Timelapse", "startrails" to "Startrail", "keograms" to localized("Keogrammi", "Keograms")).forEach { (key, label) ->
                 FilterChip(selected = category == key, onClick = {
                     if (category != key) { player = null; current = null; category = key }
                 }, label = { Text(label) })
@@ -262,17 +297,17 @@ private fun ArchiveScreen() {
         }
         val selected = items.getOrNull(selectedIndex)
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-            TextButton(enabled = selectedIndex > 0, onClick = { selectedIndex--; current = null; player = null }) { Text("‹ Precedente") }
+            TextButton(enabled = selectedIndex > 0, onClick = { selectedIndex--; current = null; player = null }) { Text(localized("‹ Precedente", "‹ Previous")) }
             Text("${selected?.let { prettyDate(it.date) } ?: "—"}  ${if (items.isEmpty()) "" else "(${selectedIndex + 1}/${items.size})"}")
-            TextButton(enabled = selectedIndex < items.lastIndex, onClick = { selectedIndex++; current = null; player = null }) { Text("Successiva ›") }
+            TextButton(enabled = selectedIndex < items.lastIndex, onClick = { selectedIndex++; current = null; player = null }) { Text(localized("Successiva ›", "Next ›")) }
         }
-        TextButton(onClick = { reload++ }, modifier = Modifier.align(Alignment.End)) { Text("Aggiorna catalogo") }
+        TextButton(onClick = { reload++ }, modifier = Modifier.align(Alignment.End)) { Text(localized("Aggiorna catalogo", "Refresh catalog")) }
         if (loading) LinearProgressIndicator(Modifier.fillMaxWidth())
         if (error != null) Text(error!!, color = MaterialTheme.colorScheme.error)
-        if (!loading && error == null && items.isEmpty()) Text("Nessun elemento disponibile.")
+        if (!loading && error == null && items.isEmpty()) Text(localized("Nessun elemento disponibile.", "No items available."))
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             selected?.let { item ->
-                if (item.mediaType == "jpg") PublicImage(key = item.file, url = AllskyRepository.mediaUrl(item), description = "Apri immagine completa ${item.category} ${item.date}", modifier = Modifier.fillMaxWidth().heightIn(min = 180.dp, max = 620.dp).clickable { fullImage = item })
+                if (item.mediaType == "jpg") PublicImage(key = item.file, url = AllskyRepository.mediaUrl(item), description = localized("Apri immagine completa ${item.category} ${item.date}", "Open full image ${item.category} ${item.date}"), modifier = Modifier.fillMaxWidth().heightIn(min = 180.dp, max = 620.dp).clickable { fullImage = item })
                 else Row(Modifier.fillMaxWidth().clickable {
                     if (item.mediaType == "mp4") {
                         current = item
@@ -295,30 +330,30 @@ private fun ArchiveScreen() {
                             .setEnableDecoderFallback(true)
                         player = ExoPlayer.Builder(context, renderersFactory).build().also { p ->
                             p.addListener(object : androidx.media3.common.Player.Listener {
-                                override fun onPlayerError(error: androidx.media3.common.PlaybackException) { videoError = "Video non riproducibile: ${error.errorCodeName}" }
+                                override fun onPlayerError(error: androidx.media3.common.PlaybackException) { videoError = "${localized(context, "Video non riproducibile", "Video playback failed")}: ${error.errorCodeName}" }
                             })
                             p.setMediaItem(MediaItem.fromUri(AllskyRepository.mediaUrl(item))); p.prepare(); p.playWhenReady = true
                         }
                     }
                 }.padding(14.dp), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Text("▶  Riproduci timelapse ${prettyDate(item.date)}", modifier = Modifier.weight(1f), color = aurora)
-                    if (current?.date == item.date) Text("Selezionato", color = MaterialTheme.colorScheme.primary)
+                    Text("▶  ${localized("Riproduci timelapse", "Play timelapse")} ${prettyDate(item.date)}", modifier = Modifier.weight(1f), color = aurora)
+                    if (current?.date == item.date) Text(localized("Selezionato", "Selected"), color = MaterialTheme.colorScheme.primary)
                 }
             }
             if (category == "videos" && selected != null && current?.date == selected.date) player?.let { p ->
-                Text("Notte ${prettyDate(selected.date)}")
+                Text("${localized("Notte", "Night")} ${prettyDate(selected.date)}")
                 AndroidView(factory = { PlayerView(it).apply { this.player = p; useController = true } }, update = { it.player = p }, modifier = Modifier.fillMaxWidth().height(230.dp))
             }
         }
     }
-    if (videoError != null) AlertDialog(onDismissRequest = { videoError = null }, confirmButton = { TextButton(onClick = { videoError = null }) { Text("OK") } }, title = { Text("Errore video") }, text = { Text(videoError!!) })
+    if (videoError != null) AlertDialog(onDismissRequest = { videoError = null }, confirmButton = { TextButton(onClick = { videoError = null }) { Text("OK") } }, title = { Text(localized("Errore video", "Video error")) }, text = { Text(videoError!!) })
     fullImage?.let { item ->
         androidx.compose.ui.window.Dialog(onDismissRequest = { fullImage = null }, properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false)) {
             Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {
                 Column(Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("${if (item.category == "startrails") "Startrail" else "Keogramma"} · ${prettyDate(item.date)}", color = Color.White, style = MaterialTheme.typography.titleMedium)
-                    PublicImage(key = "full-${item.file}", url = AllskyRepository.mediaUrl(item), description = "Immagine completa ${item.category} ${prettyDate(item.date)}", modifier = Modifier.fillMaxWidth().weight(1f))
-                TextButton(onClick = { fullImage = null }) { Text("Chiudi") }
+                    Text("${if (item.category == "startrails") "Startrail" else localized("Keogramma", "Keogram")} · ${prettyDate(item.date)}", color = Color.White, style = MaterialTheme.typography.titleMedium)
+                    PublicImage(key = "full-${item.file}", url = AllskyRepository.mediaUrl(item), description = localized("Immagine completa ${item.category} ${prettyDate(item.date)}", "Full image ${item.category} ${prettyDate(item.date)}"), modifier = Modifier.fillMaxWidth().weight(1f))
+                TextButton(onClick = { fullImage = null }) { Text(localized("Chiudi", "Close")) }
                 }
             }
         }
