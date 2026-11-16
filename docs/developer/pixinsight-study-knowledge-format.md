@@ -1,3 +1,42 @@
+<!-- BKL046-H109-STATIC-PEER-RELEASE-SCOPE-20261116 -->
+## H109: riscontro tecnico statico, limiti della procedura e nessuna promozione operativa
+
+La conoscenza **provvisoria H109** contiene **304 schede**. Conserva tutte le 303 schede H108, gli undici collegamenti di correzione e i byte dell'intera sezione requisiti. Il lettore61 supera **dodici verifiche**; il rendiconto91 mantiene **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**, senza cambiare disposizioni scientifiche. Restano sette famiglie, 25 assi e **zero chiusure scientifiche**. Registro autorevole invariato: v600 / 1.171.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H109 | 67ceac7c0fb5fd78af2f1ed156a1ee71e187dbc1b3d76c5a6e9d29dcc74589a3 |
+| Lettore61 | 3cfdf821b1382650556bacacdbe3948f0b1dec803f44187c543f082e765290aa |
+| Rendiconto91 | 151d7b541e479a752275fdc66a4bfc6e75720d38f15c95d0acfbda3429978ebc |
+
+È stato ricevuto un riscontro tecnico sui soli prototipi privati della procedura di rilascio. Sono stati letti **tre rapporti statici esplicitamente indicati**, verificati contro gli hash forniti e copiati byte-identici su H:. Non sono stati interrogati processi, prenotazioni o stato operativo BKL-051, né modificati materiali su K:.
+
+| Rapporto privato | Decisione riportata |
+| --- | --- |
+| Variante Namespace, revisione R1 | CHANGES_REQUIRED |
+| Disegno di disposizione transazionale, revisione R3 | APPROVED_DESIGN_WITH_CONDITIONS |
+| Implementazione transazionale, revisione R4 | CHANGES_REQUIRED |
+
+**Le revisioni R1/R3/R4 di questi rapporti non sono il coordinatore comune R4. La revisione privata respinta non implica che il coordinatore comune sia stato respinto o modificato.** Il disegno R3 non approva implementazione, piano operativo o recupero: tutti e tre i relativi indicatori sono falsi nel rapporto copiato. Lo stato successivo R5 riferito dal mittente non è stato attestato indipendentemente qui.
+
+I rapporti descrivono, su fixture private, sostituzione con byte identici prima dell'apertura, stato incompleto dopo una verifica fallita, hardlink aggiunti nonostante un handle esclusivo e una continuazione di commit che non ricontrolla adeguatamente lo stato dopo callback rientranti. Questi risultati sono **riferiti dai rapporti verificati nei byte, non riprodotti da questa chat**. La verifica degli hash non equivale a ripetere gli esperimenti del sistema operativo.
+
+Il digest del basis Namespace indicato dal mittente, **8e1310df9c288ae6cfe421a386c70424d7dc10d8c8a9a309870e9402cb08e270**, coincide con la fonte storica conservata da BKL-046. I controesempi sull'apertura/handle del sorgente riguardano però una variante privata derivata; il metodo di apertura riportato non appartiene all'interfaccia del basis storico. Non costituiscono prova che l'esecuzione storica R005 sia stata alterata.
+
+Il normale rilascio del coordinatore comune R4 ha un percorso distinto: verifica del parent originale terminato con zero, scanner vuoto, confronto del JSON active con il record, creazione del record released e rimozione del percorso active. La fonte statica è stata copiata e verificata con SHA256 **a07b2614414c399181f4ffbf07750f870fdfdf159987539f7e1de3d9b3c0c613**; non è stata eseguita alcuna prova di rilascio su stato esistente. Il coordinatore non chiama il basis Namespace storico e resta invariato.
+
+Per le revisioni future occorre esplicitare il perimetro dei writer/cooperazione, la provenienza e freschezza di un'eventuale identità del file attesa separatamente, la topologia degli alias, l'incertezza dopo un effetto e le barriere di stato intorno ai callback. Byte/percorso e identità dell'oggetto hanno ruoli distinti; nessuno di questi dati conferisce autorizzazione Owner. Non si assume che un controllo successivo all'effetto ripristini lo stato precedente o che un handle esclusivo congeli tutta la topologia dei collegamenti.
+
+Non è adottata alcuna dipendenza TxF, alternativa transazionale, modifica ACL, fallback o migrazione del coordinatore. Le evidenze effettive del rilascio R005 sono conservate; nessun replay, revoca automatica, intervento su risorse o disponibilità dell'host è dedotto da questo riscontro.
+
+La capsula statica contiene **6 file, 35.449 byte**, SHA256 **f64403d5e6e4dbc06a393c94220b75c1e047a31d3bfd267f0141fbf101d966d4**. Recupero byte-identico: comprende rapporti copiati, loro verifica e analisi della fonte, non un replay degli esperimenti privati. I rapporti grezzi restano su H: e non sono pubblicati da questo commit.
+
+La capsula H109 selezionata contiene **98 file, 186.888.565 byte**, SHA256 **b409f57968aabdb425cbe5096a845db76293cb6650e2796a48d1cb61fac1efe4**. Il recupero riproduce quattro consultazioni identiche. L'autosufficienza è limitata alle consultazioni dichiarate; la rigenerazione completa richiede H108 e ulteriori dipendenze storiche.
+
+La V1 del controllo header resta esclusa per il difetto HOLD riprodotto. Il subject V2 **6331d3c098e7bdd67e3eedadc994ab5de440d3d5cc9f4ed204c81f56d22533b4** e il source-set **73aeb10e9c4a3b416df37b6580efa7d94a99fa05dbc6abf251f462fcdceacde8** dei 22 sorgenti non cambiano. Il memo statico è aggiunto alla richiesta di review preparata, ancora **non inviata in attesa del consenso specifico**. Il messaggio tecnico ricevuto non sostituisce il consenso Owner al nostro nuovo messaggio, la review genuina o l'ammissione nativa.
+
+Restano conservati i 64 casi e tutti i 580 fallimenti; 196 + 260 casi nativi sono aperti. Nessuna nuova esecuzione PixInsight, chiamata API, modifica a master/script installati, operazione BKL-051, merge o attivazione del portale. Studio completo, conoscenza finale e trasferimento integrale GitHub con download/hash/ricostruzione restano da completare. Questo commit pubblica solo testo tecnico; file conoscenza, sorgenti, immagini e ZIP non sono qui trasferiti. I controlli CI non sono validazione scientifica o approvazione del recupero.
+
 <!-- BKL046-H108-V1-HOLD-DEFECT-V2-REVIEW-20261116 -->
 ## H108: candidato precedente escluso e revisione del controllo da sottoporre a review
 
