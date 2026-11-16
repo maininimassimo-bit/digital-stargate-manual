@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 2.1 — presentazione HTML Allsky e nuova richiesta Google, 16/11/2026
+**Revisione:** 2.2 — piano Android nativo e passaggio alla chat di sviluppo, 16/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -215,6 +215,7 @@ Registrazione aggiornata il 09/10/2026 con lo script ufficiale `postToMap.sh`; r
 | 1.9 | 16/11/2026 | Richiamo Pocket sul sito Allsky e snapshot privato/pubblico aggiornato delle 14:57 |
 | 2.0 | 16/11/2026 | Ciclo di avvio corretto, servizio temporale privato riattivato e snapshot 15:25 |
 | 2.1 | 16/11/2026 | Presentazione HTML e gallerie testuali, diagnosi Search Console, richiesta accettata e backup 15:49 |
+| 2.2 | 16/11/2026 | Perimetro prima app Android nativa, stime e criteri di consegna; implementazione ancora da eseguire |
 
 Inventario correlato: [Capitolo 22](22-inventario-asset-management.md).
 
@@ -738,3 +739,10 @@ Search Console conferma 0 pagine indicizzate, Home scansionata ma non indicizzat
 Con autorizzazione Owner e backup **15:47:45**, aggiunto sotto il live un titolo principale, testo descrittivo stabile e link alle gallerie pubbliche, leggibili anche senza JavaScript. Modificati solo pagina e relativo CSS; acquisizione, calibrazione, maschere e rilevatori invariati. La nuova richiesta della Home canonica è stata **accettata da Google nella coda prioritaria**; indicizzazione effettiva ancora da verificare.
 
 Snapshot **15:49:34**, 367 file privati e 148 pubblici oltre ai manifest, verificato e archiviato con separazione privato/pubblico; candidati privati esclusi. [Dettagli, controlli e rollback](../operations/allsky-search-indexing.md#verifica-e-migliorie-del-16-novembre-2026).
+
+
+## 27.43 Progetto Android nativo — 16 novembre 2026
+
+Definito il perimetro della prima versione nativa Allsky Pocket in Kotlin/Jetpack Compose: Live, Meteo e Archivio pubblico, APK locale da provare sul telefono. Stima iniziale 30–50 ore per la versione essenziale, da affinare dopo la verifica dei contratti e degli strumenti. La PWA esistente è un prodotto separato e resta disponibile.
+
+App, APK e collaudo nativo sono **ancora da realizzare**. Nessuna configurazione Allsky modificata e nessun candidato privato incluso; non occorre un nuovo backup dell’impianto per questa sola documentazione. Pubblicazione Play, acquisti e servizi aggiuntivi sono fasi da autorizzare separatamente. [Piano, confini, stime, criteri di prova e prompt della chat Work](../operations/allsky-pocket-android-native.md).
