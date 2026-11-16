@@ -1,3 +1,44 @@
+<!-- BKL046-H114-JOINT-PSF-STARTS-GENUINE-V4-20261116 -->
+## H114: sensibilità congiunta PSF e avvii; review V4 approvata, avvio nativo rifiutato
+
+La conoscenza **provvisoria H114** conserva tutte le 310 schede H113 e tutti i byte della sezione requisiti; aggiunge due schede, per **312 schede e 19 collegamenti di correzione aciclici**. Il lettore66 supera nove verifiche; il rendiconto96 riconcilia **4.920 requisiti, 14.521 criteri e 19 criteri Owner**, sette famiglie e 25 assi, senza chiusure scientifiche. Le sezioni sottostanti restano storico datato: lo stato corrente è qualificato da questo incremento.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H114 | 6bc6dbb90ce3c27d572266fe50ab71941a3d97a63a1d1a33baca236498cf97ec |
+| Lettore66 | ff80722014771e18eae177c11a5b2477fa56260794e004a162982cff26f7eb78 |
+| Rendiconto96 | 47f2434427c6ada38ca7533e504a73ef968f1fcb1d22baf7e840db493b61288a |
+| Capsula H114, 333 file / 374.379.168 byte | 91e8605c468ede6ca044d4d1bf161da765855657fb0b38a46b8133fcf4af3313 |
+
+### Sensibilità scientifica congiunta dei risultati salvati
+
+L’analisi riguarda gli stessi **80 campi sintetici**, con 240 righe del modello complesso: per ogni campo la PSF nominale e due larghezze distinte già salvate, ottenute escludendo a turno una delle quattro stelle di calibrazione del gruppo. Le identità delle esclusioni che producono la stessa mediana restano conservate. Ricostruite le mediane dei due gruppi e autenticati tutti i 240 vettori di parametri selezionati come primi minimi convergenti salvati.
+
+Per ciascuna larghezza si considerano gli avvii convergenti registrati con **2 × differenza NLL ≤ 1**, usando razionali esatti dei binary64 salvati. La soglia di posizione mantiene sempre il **5% della FWHM del riferimento iniziale**, senza adattarla alla PSF perturbata. Il limite relativo resta 5%.
+
+| Modello complesso | PSF nominale: miglior fit | PSF nominale: tutti gli avvii vicini | Tutte e tre le PSF: migliori fit | Tutte e tre le PSF e tutti gli avvii vicini |
+| --- | ---: | ---: | ---: | ---: |
+| Campi sovrapposti | 13/64 | 13/64 | 12/64 | 12/64 |
+| Controlli solo puntiformi | 6/8 | 3/8 | 6/8 | 2/8 |
+
+Il campo sovrapposto **field-0048** perde la stabilità passando dalla PSF nominale all’insieme delle larghezze salvate. Il controllo puntiforme **field-0073** è un controesempio d’interazione: supera separatamente tutti gli avvii vicini a PSF nominale e i migliori fit delle tre PSF, ma fallisce quando si combinano entrambe le variazioni. Sono conservati i valori esatti delle differenze NLL e del flusso che sostengono il verdetto.
+
+Il risultato H113 di 13 campi sovrapposti stabili **a PSF nominale fissa** resta valido nel suo perimetro. Il risultato nominale 8/8 del modello semplice non è un risultato sulle tre PSF: soltanto il modello complesso dispone di questi fit perturbati. Nessun nuovo fit, pixel, rumore, caso indipendente, chiamata PixInsight o API. Queste verifiche finite e retrospettive non costituiscono regione di confidenza, prova di tutti gli optima, misura del rischio IA o validazione fisica delle camere.
+
+Capsula scalari congiunti: **16 file / 204.237 byte**, SHA256 **f70e687fd11a533e156b12de9f991dd218db83a3db92a28509ffa1e9af337bfa**. Due programmi riprodotti dalla copia recuperata con output identici; esecuzioni ottimizzate e sorgente alterata respinte. La capsula H114 riproduce quattro consultazioni del lettore; non sostituisce l’intero storico scientifico né prova una ricostruzione completa dello studio.
+
+### Review indipendente V4 e tentativo operativo effettivo
+
+La review genuina del completo V4 a **24 sorgenti** ha esito **APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION**, senza blocker. Report SHA256 **789a2f74fe440468639c833c114b33adfa94bd3336f1914a51b236675087a2c6**, subject **e6cd9738437f3959843c49a86f337c7aff07a5a45ccbd5c544a33805b4b74da5**, source set **329903e1b8391e17be0d43fe6257924b40df635d78467fa1f78b5669c71e29d9**. Copiati e verificati tutti i **266 file di evidenza nominati**; il conteggio di 263 nel messaggio indipendente precede le aggiunte integrate del report. Conservata anche l’effettiva evidenza dello strumento che ha consegnato il messaggio, distinta da un’autorizzazione Owner.
+
+Il preflight Scope reale ha verificato i pin senza acquisire prenotazioni. Il successivo **unico tentativo ordinario effettivo** è terminato con codice **1**, errore **HOST_BUSY_OR_LOCK_UNAVAILABLE**, prima di ottenere il lease o invocare il parent nativo. **Nessuna nuova istanza PixInsight, nessuna directory nativa di prova, nessun test eseguito.** Non si deducono identità o disponibilità del titolare della risorsa. Nessuna prenotazione o processo altrui modificato; nessun riavvio automatico, bypass o replay EXACT004/R005.
+
+L’approvazione riguarda l’implementazione: non concede ammissione nativa, autorizzazione operativa autonoma derivante dalla review o validazione scientifica. Restano **196 + 260 = 456 casi nativi**, i protocolli scientifici e IA, la conoscenza finale e il trasferimento completo dei byte su GitHub.
+
+Le sette CI della precedente head H113 **2917695b6295009a27d003a1275c958e7917a82b** sono state osservate concluse con successo: sette job e 199 passaggi elencati. Questa evidenza riguarda quel commit, non anticipa la CI H114 e non valida scientificamente lo studio. Nessun portale attivato, merge o deploy; solo testo tecnico pubblicato nella PR.
+
+---
+
 <!-- BKL046-H113-EXACT-FINITE-START-SCIENCE-20261116 -->
 ## H113: stabilità dei fit sugli avvii salvati, con tre controesempi nei controlli puntiformi
 
