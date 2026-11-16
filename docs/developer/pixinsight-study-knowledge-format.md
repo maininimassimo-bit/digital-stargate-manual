@@ -1,3 +1,25 @@
+<!-- BKL046-ALL580-BOUNDED-PAIR-COUNTERFACTUALS-20261116 -->
+## 580 scostamenti conservati: coppie Float32 controfattuali e limiti del risultato
+
+Analisi supplementare successiva a H104, **senza nuovi casi PixInsight o modifiche alle immagini**. Alle condizioni fissate (due campioni positivi Float32 nello stesso intervallo di esponente osservato, selettore +1/-1, compensazione nulla e riferimenti salvati invariati) il precedente limite lasciava 407 confronti non esclusi e 173 impossibili. È ora costruita una coppia rappresentabile esplicita per ciascuno dei **407**: **404** richiedono una variazione massima minima di un passo Float32 (ULP) per campione e **tre** di due passi. Le variazioni totali minime sono rispettivamente 1 ULP in 349 confronti, 2 in 55 e 3 in tre. I **173** restano impossibili nel medesimo dominio numerico condizionato.
+
+Un verificatore aritmetico separato, dello stesso autore, decodifica i bit e controlla il 5% mediante prodotti interi esatti. Dimostra la variazione massima minima tramite intersezione di due rettangoli di mantisse intere e il limite minimo totale tramite disuguaglianza triangolare, senza riusare l’algoritmo del punto medio del costruttore. È una verifica con metodo distinto, **non una review umana indipendente**. Le coppie alternative dipendono dai riferimenti noti: non costituiscono una procedura lecita per correggere immagini astronomiche.
+
+I totali 407/173 coincidono casualmente con quelli dei fallimenti alle scale 1/2, ma sono partizioni diverse:
+
+| Scala | Coppia controfattuale entro 5% | Impossibile alle condizioni fissate |
+| --- | ---: | ---: |
+| 1 | 293 | 114 |
+| 2 | 114 | 59 |
+
+**Tutti i 580 risultati nativi restano falliti.** L’esistenza di valori alternativi non dimostra che Drizzle o ingressi fisicamente validi li possano produrre, non identifica la causa degli scostamenti e non misura l’errore vero dei singoli campioni. I riferimenti sono scalari salvati riutilizzati: geometria e coefficienti non sono stati ricalcolati con un oracolo indipendente. La soglia Owner del 5% resta invariata; nessuna probabilità, indipendenza statistica o accettazione scientifica è inferita.
+
+Capsula selezionata di **10 file**, ZIP **445.400 byte**, SHA-256 **d7f84408cfc3f12beba4fb8f33b31d0dfb5b439db0955ebaa1459ad1dfbc3419**. L’audit autonomo in sola lettura richiede soltanto Python standard e i tre JSON incorporati, senza PixInsight, registro corrente o moduli del progetto. Audit originale e recuperato producono stdout identico; dati alterati e avvio con assert disattivati vengono respinti. Il rebuild completo del costruttore e lo storico nativo non sono inclusi in questa autonomia limitata.
+
+Rapporto: primary2048-all580-constructive-pair-feasibility-h-v1/report.json, SHA-256 **52ec2eeeeb9f2e00390a9df1419b0f6b66bc4339683918cbbecbb6b3a87b6b6e**. Verifica separata: separate-integer-verification.json nello stesso percorso, SHA-256 **f0a7303f0f3d507d17f20b29892bc243523f11a60fa04c61e426ef813b126e6c**. Cross-tab: crossed-scopes-and-interpretation.json. Recupero: primary2048-constructive-pair-witness-local-capsule-h-v1/verification.json.
+
+H104/lettore56/rendiconto86 restano immutati e provvisori; questa analisi non è ancora una nuova scheda H104. Zero nuove chiusure scientifiche; 196 + 260 casi Drizzle ancora da eseguire. La nuova review del parent21 è ancora in attesa del consenso per il messaggio: nessun invio, ammissione R4, azione BKL-051 o avvio nativo. Questo aggiornamento carica solo testo tecnico, senza sorgenti, conoscenza o archivi grezzi. Il precedente head08804857 ha superato sette workflow/job e 199 passaggi; la CI del nuovo commit è distinta. Studio completo, conoscenza finale e trasferimento integrale GitHub rimangono aperti.
+
 <!-- BKL046-H104-COMPLETE-HEADER-CANDIDATE-20261116 -->
 ## H104: parent completo candidato, review autentica ancora mancante
 
