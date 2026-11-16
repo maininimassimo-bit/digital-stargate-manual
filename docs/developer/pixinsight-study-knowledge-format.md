@@ -1,3 +1,30 @@
+<!-- BKL046-H105-REFERENCE-ENCODING-20261116 -->
+## H105: riferimenti ricostruiti e sensibilità della geometria codificata
+
+La conoscenza provvisoria H105 contiene **297 schede** e conserva tutte le 295 schede H104, i dieci collegamenti di correzione e le disposizioni scientifiche preesistenti. Il lettore57 supera undici consultazioni/verifiche; il rendiconto87 riconcilia **4.920 requisiti, 14.521 criteri letterali e 19 criteri Owner**, senza modificarne le soglie. Le sette famiglie e i 25 assi restano aperti: **zero chiusure scientifiche**. Non è la conoscenza finale e non è una pubblicazione del registro autorevole, che resta v600 / 1.171.
+
+| Artefatto locale su H: | SHA256 |
+| --- | --- |
+| Conoscenza H105 | 57dd2770407b0ec34caf19ea403b6db227b4dcd16289e66558af2b0be9eed9d6 |
+| Lettore57 | fda3d734b2a2ede523dbb24a151e8dce0be766b078766a722f3552b6bb2ba44e |
+| Rendiconto87 | 8f3e053231e4262242cda00c91ea17886bc87e72859236b16051d1ea144497e6 |
+
+Una costruzione geometrica distinta, orientata ai pixel di uscita e basata su funzioni a cerniera, ricostruisce esattamente **8.320 righe nominali** prima di leggere i coefficienti storici. Un secondo calcolo con intersezioni rettangolari min/max verifica **24.960 righe** nelle tre varianti: sola larghezza Float32, sole fasi binary64 e combinazione delle due. La copertura prevista non cambia. Il riferimento pesato è poi ricostruito esattamente per **25.344 righe e 76.032 varianze condizionali**. La massima variazione relativa delle varianze di questi modelli è circa **0,00001363%**; non è una misura empirica della covarianza nativa.
+
+La provenienza è distinta: l'oracolo geometrico non pesato dispone già delle evidenze finite storiche di **5.180 casi nativi, 20 geometrie e 2.129.920 elementi della risposta**. La successiva estensione pesata è algebrica; quelle prove non dimostrano la linearità universale o tutta l'implementazione nativa della pesatura.
+
+Per tutti i **580 confronti falliti**, i riferimenti nominali sono stati ricostruiti dalla geometria, dai pesi e da **3.159 campioni Float64 originali**, letti da dieci immagini sorgente e verificati contro i loro hash. Le 133 configurazioni di endpoint sono ricalcolate anche da un audit autonomo con un diverso ordine di intersezione e pesatura. La geometria codificata ipotizzata sposta i riferimenti fino a circa **1,22322%**, ma **nessuno dei 580 confronti rientra nel limite Owner del 5% neppure rispetto a questa variante**. Tutti i fallimenti originali rimangono fallimenti: nessuna sostituzione a posteriori del riferimento congelato è ammessa.
+
+I valori Float32 della larghezza e le fasi serializzate binary64 definiscono un'analisi di sensibilità, non una traccia dell'aritmetica interna compilata di PixInsight. Le differenze tra coppie possono amplificare piccole perturbazioni per cancellazione. Il risultato esclude questa specifica ipotesi come soluzione sufficiente dei 580 scostamenti; non identifica ancora tutta la loro causa.
+
+La capsula numerica selezionata comprende **15 file, 2.933.921 byte**, SHA256 **ac8b42cdc953ce6f5ebff8c32f87273ddc64994c082958f13ff706debb0ca031**. L'audit standard-library, eseguito dall'originale e dal recuperato, produce stdout identico; dati alterati e assert disabilitati sono rifiutati. Il replay incorpora i campioni decodificati e i metadati, non tutte le immagini originali. I due metodi hanno lo stesso autore: non sono una review esterna indipendente.
+
+La capsula H105 selezionata comprende **74 file, 226.565.070 byte**, SHA256 **1b72df3b57af6813f73d764a0559b5febc6b54abb962fcc767022a1ed5e314f1**. Il recupero è identico nei byte e riproduce tre consultazioni del lettore. È autosufficiente per quelle consultazioni; la ricostruzione completa richiede H104 e le ulteriori dipendenze storiche dichiarate.
+
+Restano validi i limiti della costruzione controfattuale: **407 coppie possibili / 173 impossibili** nelle binade osservate non equivalgono a esiti nativi corretti; la partizione è distinta dai totali per scala. Il parent header-only di 21 sorgenti resta candidato non approvato: la nuova richiesta di review offline non è stata inviata, in attesa del consenso specifico. EXACT004/R005 sono conclusi e non vanno ripetuti; i 64 casi originali sono conservati e **196 + 260 casi** restano aperti. Nessuna nuova esecuzione PixInsight, operazione BKL-051 o modifica a master/script installati.
+
+Questo aggiornamento pubblica **solo documentazione tecnica**: H105, sorgenti, immagini e ZIP non sono ancora trasferiti integralmente su GitHub. Conoscenza finale e archivio completo con download, hash e ricostruzione restano da completare. Nessun merge o avvio del portale.
+
 <!-- BKL046-ALL580-BOUNDED-PAIR-COUNTERFACTUALS-20261116 -->
 ## 580 scostamenti conservati: coppie Float32 controfattuali e limiti del risultato
 
