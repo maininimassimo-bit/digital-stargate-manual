@@ -5,7 +5,7 @@ description: Prima versione Android nativa con Live, Meteo e Archivio, da provar
 
 # Allsky Pocket: prima versione Android nativa
 
-**Aggiornamento:** 16 novembre 2026. **Stato:** APK debug v0.1.0 disponibile; build, 7 test e navigazione Live/Meteo/Archivio verificati su emulatore Android 16/API 36. Prova fisica Owner ancora da completare. Gestione del progetto: Massimo Mainini. Vedi [rapporto tecnico v0.1](allsky-pocket-android-v1.md) per posizione APK e checksum.
+**Aggiornamento:** 16 novembre 2026. **Stato:** beta APK debug v0.1.0 installata su Motorola G84, Android 15/API35; l’Owner conferma avvio, riproduzione timelapse e apertura immagini startrail/keogramma. Il decoder AVC e il dialogo immagini sono stati corretti dopo la prova reale. Restano da completare le prove di resilienza e l’integrazione della PR #638. La pubblicazione Google Play è separata e non compresa. Gestione del progetto: Massimo Mainini. Vedi [rapporto tecnico v0.1](allsky-pocket-android-v1.md) per APK e checksum.
 
 Questo documento prepara una chat Work dedicata alla realizzazione della prima versione installabile sul telefono dell’Owner. La [PWA pubblica esistente](allsky-pocket-pwa.md) resta separata e disponibile: non è la nuova app nativa. Questo aggiornamento del manuale non modifica il Raspberry, l’acquisizione o l’hosting della PWA.
 
@@ -58,7 +58,7 @@ Fonti: [account Google Play](https://support.google.com/googleplay/android-devel
 1. Build ripetibile con versioni documentate e APK di prova installabile, identificativo/versione e checksum SHA-256. Chiavi di firma e dati locali fuori da Git; chiarire che la firma di debug è per la prova e non è una release Play.
 2. Tre schede funzionanti con dati reali, gestione di rete assente/lenta, JSON parziale, misure scadute, errori JPEG/video e archivio vuoto. Fotogrammi e misure con orari distinti; nessuna condizione meteo inventata.
 3. Test mirati dei parser, della selezione dei campi e delle regole di freschezza, più prova di navigazione, rotazione e passaggio Wi-Fi/rete mobile. Verificare che richieste, modello dati e log escludano meteore e percorsi privati.
-4. Installazione, avvio, Live, Meteo e almeno un’immagine e un filmato d’archivio verificati su telefono reale. La prova con emulatore o build riuscita non sostituisce il riscontro dell’Owner.
+4. Installazione e avvio, riproduzione timelapse e apertura immagini startrail/keogramma verificati su telefono reale; Live e Meteo sono stati verificati su emulatore. Il riscontro dell’Owner sul Motorola è registrato nel rapporto tecnico. Restano rotazione, cambio Wi-Fi/mobile, background e condizioni di errore/rete.
 5. Documentare esiti reali, limiti e problemi aperti nel repository, mantenendo invariata la configurazione Allsky. La rimozione dell’app dal telefono è il rollback del client; non ripristinare il Raspberry.
 
 Il toolchain portabile usato per la build resta sotto `android/.local-toolchain/` e non è incluso in Git. Per installare l’APK, trasferirlo sul telefono, consentire temporaneamente l’installazione da quella sorgente e aprire il file; i passaggi dettagliati e il checksum sono nel rapporto tecnico. La firma debug è destinata alla prova.

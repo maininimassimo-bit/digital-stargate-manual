@@ -235,9 +235,11 @@ private fun ArchiveScreen() {
     var videoError by remember { mutableStateOf<String?>(null) }
     val context = LocalContext.current
     var player by remember { mutableStateOf<ExoPlayer?>(null) }
-    var playerGeneration by remember { mutableIntStateOf(0) }
     var current by remember { mutableStateOf<ArchiveItem?>(null) }
-    DisposableEffect(playerGeneration) { onDispose { player?.release() } }
+    DisposableEffect(player) {
+        val ownedPlayer = player
+        onDispose { ownedPlayer?.release() }
+    }
     LaunchedEffect(category, reload) {
         loading = true; error = null; items = emptyList(); selectedIndex = 0; current = null
         player = null
@@ -272,10 +274,24 @@ private fun ArchiveScreen() {
                 else Row(Modifier.fillMaxWidth().clickable {
                     if (item.mediaType == "mp4") {
                         current = item
-                        player?.release()
                         videoError = null
-                        playerGeneration++
-                        player = ExoPlayer.Builder(context).build().also { p ->
+                        val codecSelector = object : androidx.media3.exoplayer.mediacodec.MediaCodecSelector {
+                            override fun getDecoderInfos(
+                                mimeType: String,
+                                requiresSecureDecoder: Boolean,
+                                requiresTunnelingDecoder: Boolean,
+                            ) = androidx.media3.exoplayer.mediacodec.MediaCodecSelector.DEFAULT
+                                .getDecoderInfos(mimeType, requiresSecureDecoder, requiresTunnelingDecoder)
+                                .let { decoders ->
+                                    if (mimeType == androidx.media3.common.MimeTypes.VIDEO_H264) {
+                                        decoders.sortedByDescending { it.softwareOnly }
+                                    } else decoders
+                                }
+                        }
+                        val renderersFactory = androidx.media3.exoplayer.DefaultRenderersFactory(context)
+                            .setMediaCodecSelector(codecSelector)
+                            .setEnableDecoderFallback(true)
+                        player = ExoPlayer.Builder(context, renderersFactory).build().also { p ->
                             p.addListener(object : androidx.media3.common.Player.Listener {
                                 override fun onPlayerError(error: androidx.media3.common.PlaybackException) { videoError = "Video non riproducibile: ${error.errorCodeName}" }
                             })
@@ -296,9 +312,12 @@ private fun ArchiveScreen() {
     if (videoError != null) AlertDialog(onDismissRequest = { videoError = null }, confirmButton = { TextButton(onClick = { videoError = null }) { Text("OK") } }, title = { Text("Errore video") }, text = { Text(videoError!!) })
     fullImage?.let { item ->
         androidx.compose.ui.window.Dialog(onDismissRequest = { fullImage = null }, properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false)) {
-            Column(Modifier.fillMaxSize().clickable { fullImage = null }, verticalArrangement = Arrangement.Center) {
-                PublicImage(key = "full-${item.file}", url = AllskyRepository.mediaUrl(item), description = "Immagine completa ${item.category} ${prettyDate(item.date)}", modifier = Modifier.fillMaxWidth().heightIn(max = 700.dp))
+            Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {
+                Column(Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("${if (item.category == "startrails") "Startrail" else "Keogramma"} · ${prettyDate(item.date)}", color = Color.White, style = MaterialTheme.typography.titleMedium)
+                    PublicImage(key = "full-${item.file}", url = AllskyRepository.mediaUrl(item), description = "Immagine completa ${item.category} ${prettyDate(item.date)}", modifier = Modifier.fillMaxWidth().weight(1f))
                 TextButton(onClick = { fullImage = null }) { Text("Chiudi") }
+                }
             }
         }
     }

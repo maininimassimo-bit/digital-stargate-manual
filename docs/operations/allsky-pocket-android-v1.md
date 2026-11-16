@@ -5,7 +5,7 @@ description: Sorgenti, integrazione, verifiche e limiti del prototipo Android na
 
 # Allsky Pocket: Android nativo v0.1
 
-**Stato al 16 novembre 2026:** branch di sviluppo isolato; build, 7 test JUnit e verifica interattiva su emulatore Android 16/API 36 superati. APK debug verificato e pronto per Motorola G84/Android 15; installazione e collaudo Owner ancora da eseguire. Toolchain portabile locale in `android/.local-toolchain/`, esclusa da Git.
+**Stato al 16 novembre 2026:** beta 0.1 installata e collaudata dall’Owner su Motorola G84, Android 15/API 35. Avvio, riproduzione timelapse e apertura immagini startrail/keogramma confermati in chat. Build e 7 test JUnit superati; restano prove di rete/rotazione/background e revisione/integrazione della PR. Toolchain portabile locale in `android/.local-toolchain/`, esclusa da Git.
 
 ## Baseline e fonti
 
@@ -13,7 +13,7 @@ description: Sorgenti, integrazione, verifiche e limiti del prototipo Android na
 - PWA: [contratto e confini](allsky-pocket-pwa.md), sorgente separato Sites non presente localmente nella cartella attesa. Non è stato modificato.
 - Capitolo 27: [Allsky](../chapters/27-sistema-allsky.md), in particolare acquisizione fotografica, proiezione telemetrica e pubblicazione.
 - Worktree sviluppo: branch `feat/allsky-pocket-android-v1`, directory `C:\Users\MassimoMainini\Documents\Codex\2026-11-16\allsky-pocket-android`.
-- Dispositivo Owner dichiarato: Motorola G84, Android 15 (risposta in chat del 16/11/2026); compatibilità installata ancora da provare.
+- Dispositivo Owner: Motorola G84, Android 15/API 35 (`getprop` via ADB il 16/11/2026); APK v0.1.0 installata e avviata sul dispositivo.
 
 ## Contratto pubblico osservato
 
@@ -35,11 +35,11 @@ I cataloghi sono pagine HTML con singoli link in attributo `href` tra apici sing
 
 ## Implementazione
 
-- Kotlin 2.2.20, Jetpack Compose Material 3, AGP 8.13.1, Gradle wrapper 8.13, minSdk 26, target/compile SDK 36, JDK Temurin 17.0.21. Toolchain locale scaricato; JDK e command-line tools verificati con checksum ufficiale, SDK/build-tools installati. Otto licenze Android SDK accettate dall’Owner in chat. Motorola G84/Android 15 supera il minSdk dichiarato; installazione reale ancora da fare.
+- Kotlin 2.2.20, Jetpack Compose Material 3, AGP 8.13.1, Gradle wrapper 8.13, minSdk 26, target/compile SDK 36, JDK Temurin 17.0.21. Toolchain locale scaricato; JDK e command-line tools verificati con checksum ufficiale, SDK/build-tools installati. Otto licenze Android SDK accettate dall’Owner in chat. Installata sul Motorola G84/Android 15/API35.
 - Solo permesso Internet; TLS di default Android, cleartext disabilitato, redirect HTTP disabilitati, timeout, limite risposta 2 MB e origine/endpoint codificati. Nessun login, cookie, amministrazione o SSH.
 - Live/Meteo: proiezione ogni 30 s soltanto con la relativa scheda selezionata e l’attività RESUMED/STARTED; retry esponenziale dopo errore fino a 5 minuti. Live ha pulsante manuale, immagine JPEG con caricamento/errore esplicito, zoom pinch e modalità espansa. Ora scatto derivata dal nome camera Europe/Rome, ora proiezione separata; badge freschezza 150/180 s.
 - Meteo: campi numerici finiti selezionati, proiezione al massimo 150 s, timestamp non futuro oltre 30 s, `fresh_until_utc` successivo all’istante corrente. Valori assenti/invalidi restano trattino; i valori fuori intervalli plausibili sono omessi. Un campo mancante rende la misura complessiva non aggiornata.
-- Archivio: parser HTML delimitato, directory/categorie allowlist, media costruiti dall’origine fissa e validazione esatta della data/file prima del fetch. Selettore notte successiva/precedente sull’intero archivio (circa 605 link per categoria); la UI richiede un solo media per volta e cancella i fetch quando si cambia categoria/schermata. Immagini JPEG complete tramite loader bounded (8/12 s, massimo 12 MB, content-type verificato, decode ridotto) e visualizzazione espansa; video on-demand tramite Media3 con timeout e controlli nativi.
+- Archivio: parser HTML delimitato, directory/categorie allowlist, media costruiti dall’origine fissa e validazione esatta della data/file prima del fetch. Selettore notte successiva/precedente sull’intero archivio (circa 605 link per categoria); la UI richiede un solo media per volta e cancella i fetch quando si cambia categoria/schermata. Immagini JPEG complete tramite loader bounded (8/12 s, massimo 12 MB, content-type verificato, decode ridotto) e visualizzazione espansa su fondo opaco; chiusura esplicita. Video on-demand tramite Media3 con timeout e controlli nativi; per i filmati H.264 il decoder software viene preferito al decoder hardware Qualcomm che sul G84 ha rifiutato il profilo/dimensione osservati, con fallback MediaCodec attivo.
 - Grafica: palette blu notte, aurora turchese e accento stellare, campo stellato Compose e icone adaptive/monochrome disegnate localmente, senza immagini o font remoti.
 - Nessuna galleria meteore, API meteo esterna, campo telemetrico escluso, miniatura/JSON di archivio, cache applicativa o log payload.
 
@@ -47,15 +47,15 @@ Toolchain riportata come effettivamente usata nel primo build. Il wrapper è inc
 
 ## Stato prove e limiti
 
-**Eseguito:** fetch HTTPS reale dei cinque endpoint ammessi, ispezione JSON/HTML, conteggio cataloghi e HEAD dei tre media del 15/11; `testDebugUnitTest assembleDebug` PASS, 7 test, zero failure. APK `release/allsky-pocket-v0.1.0-debug.apk`, package `it.digitalstargate.allskypocket`, versionCode 1/versionName 0.1.0, min SDK 26, target SDK 36, firma APK v2 verificata, SHA-256 `9a7d00b96e7bb67ad88065a658cfce55185a7d51491c9613efcf7f185b703976`; dimensione 14,302,914 byte. Emulatore Android 16/API36: avvio, fotogramma Live, meteo aggiornato, tre cataloghi e immagini JPEG con navigazione date visivamente verificati. Il player video compare con controlli ma non ha mostrato immagine durante la sessione; logcat non registra errore ExoPlayer/codec, quindi il playback non è attestato. Dopo la verifica è stata corretta la gestione di rilascio del player; il nuovo APK ricompilato mantiene lo stesso hash. Il PC non aveva un telefono ADB collegato; Motorola G84 reale non installato né provato.
+**Eseguito:** fetch HTTPS reale dei cinque endpoint ammessi, ispezione JSON/HTML, conteggio cataloghi e HEAD dei tre media del 15/11; `testDebugUnitTest assembleDebug` PASS, 7 test, zero failure, ripetuto dopo le correzioni. APK `release/allsky-pocket-v0.1.0-debug.apk`, package `it.digitalstargate.allskypocket`, versionCode 1/versionName 0.1.0, min SDK 26, target SDK 36, firma APK v2 verificata, SHA-256 `083a5825ee01726151ca91c12a6b1c22bd50bb8c315004ae8b06a86057a17506`; dimensione 15,302,914 byte. Emulatore Android 16/API36: avvio, fotogramma Live, meteo aggiornato, tre cataloghi e immagini JPEG con navigazione date visivamente verificati. **Motorola G84 reale, Android 15/API35:** installazione e avvio riusciti via ADB; al primo tentativo il decoder Qualcomm ha fallito la configurazione H.264 a 1936×1096/25 fps. Il client ora preferisce il decoder software AVC e abilita il fallback; l’Owner conferma che il timelapse parte. L’Owner conferma anche l’apertura corretta di startrail e keogramma; il dialogo immagini è stato reso opaco e non si chiude più toccando l’immagine. Corretto inoltre il rilascio del player Compose, che poteva terminare il nuovo lettore durante la ricomposizione. Il pacchetto aggiornato è stato ricompilato, installato sul G84 e avviato.
 
 La cartella sorgente Sites individuata in `C:\Users\MassimoMainini\Documents\Codex\2026-10-09\ti\work\sites\allsky-pocket` è un progetto Next/Vinext con API server e hosting autonomo. La scheda pubblica PWA documenta che il relay seleziona weather/camera/astronomy e inoltra i media via GET/range; non si introduce dipendenza dell’app dal dominio Sites.
 
-**Ancora non eseguito:** playback video riuscito, rotazione, passaggio Wi-Fi/mobile, rete assente/lenta e collaudo su telefono fisico; PR/review. API effettiva/build del Motorola da confermare durante l’installazione.
+**Ancora non eseguito:** rotazione, passaggio Wi-Fi/mobile, rete assente/lenta, ritorno dal background e scenari di errore/rete; revisione e merge della PR. La prova fisica conferma le funzioni principali riportate sopra, non questi casi di resilienza.
 
 I test JUnit coprono freshness meteo/proiezione/fotogramma ai limiti, timestamp camera Europe/Rome, JSON parziale/futuro, zero misurato, campi estranei, allowlist archivio, file/date invalidi e catalogo vuoto. Prima compilazione ha trovato errori Kotlin e `org.json` del framework Android non mockato nei test JVM; corretti e ritestati.
 
-Rete assente/lenta, HTTP error, risposta JSON oltre budget e errore del player non sono ancora stati provati come scenari d’integrazione; gli stati di codice non equivalgono a una prova osservata. Registrare i risultati emulator/device senza estenderli al collaudo fisico.
+Rete assente/lenta, HTTP error e risposta JSON oltre budget non sono ancora stati provati come scenari d’integrazione; gli stati di codice non equivalgono a una prova osservata. L’errore reale del decoder sul G84 è stato osservato e corretto, e l’Owner conferma la riproduzione successiva. Non estendere il risultato ad altri dispositivi/codec.
 
 ## Build e installazione
 
@@ -75,13 +75,14 @@ Distribuire `release/allsky-pocket-v0.1.0-debug.apk` al telefono tramite USB o t
 
 ## Checklist Owner
 
-Sul simulatore sono già state viste le tre schede, meteo, live, cataloghi timelapse/startrail/keogrammi, immagini e selezione di notti diverse. Queste verifiche non sostituiscono il collaudo Owner.
+Sul simulatore sono già state viste le tre schede, meteo, live, cataloghi timelapse/startrail/keogrammi, immagini e selezione di notti diverse. Il collaudo Owner ha inoltre confermato l’avvio sul G84, la riproduzione del timelapse e l’apertura ingrandita di startrail e keogramma.
 
-- [x] Modello dichiarato: Motorola G84; Android 15. API level e build specifica da leggere sul telefono.
-- [ ] APK debug installato, schermata app e navigazione tra le tre schede.
+- [x] Modello/API osservati: Motorola G84, Android 15/API35; build ID non raccolto.
+- [x] APK debug installato, schermata app avviata sul Motorola G84/Android 15/API35.
 - [ ] Live: aggiornamento manuale/automatico, immagine non aggiornata, zoom e ritorno all’app dopo background.
 - [ ] Meteo: misura valida, campi assenti e misure scadute/non disponibili; zero vento resta zero solo quando misurato.
-- [ ] Archivio: notte selezionata, apertura immagine completa, controlli video, catalogo vuoto/errore.
+- [x] Archivio sul telefono: timelapse riprodotto; startrail e keogramma aperti correttamente a schermo ingrandito.
+- [ ] Archivio: catalogo vuoto/errore.
 - [ ] Passaggio Wi-Fi/rete mobile, rete lenta/assente, rotazione e ripresa dopo timeout.
 
 ## Vincoli invariati
