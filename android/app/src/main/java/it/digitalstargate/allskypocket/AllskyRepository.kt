@@ -25,6 +25,7 @@ internal data class WeatherSnapshot(
 )
 
 internal data class ArchiveItem(val date: String, val file: String, val category: String, val mediaType: String)
+internal data class MeteorCandidate(val file: String, val timestamp: Instant)
 
 internal data class ProjectionSnapshot(val generatedAt: Instant?, val weather: WeatherSnapshot, val camera: CameraSnapshot)
 internal data class CameraSnapshot(val fileName: String?, val shotAt: Instant?)
@@ -79,6 +80,30 @@ object AllskyRepository {
         return parseArchive(html, category)
     }
 
+    internal fun meteorCandidates(): List<MeteorCandidate> = parseMeteorCatalog(get(meteorCatalogPath()))
+
+    internal fun meteorCatalogPath(): String = "/allsky/meteors/"
+
+    internal fun parseMeteorCatalog(html: String): List<MeteorCandidate> {
+        val links = Regex("""href=['"]\./(meteors-20\d{12}\.jpg)['"]""", RegexOption.IGNORE_CASE)
+        val formatter = DateTimeFormatter.ofPattern("uuuuMMddHHmmss").withResolverStyle(ResolverStyle.STRICT)
+        return links.findAll(html).mapNotNull { match ->
+            val file = match.groupValues[1]
+            val local = runCatching { java.time.LocalDateTime.parse(file.removePrefix("meteors-").removeSuffix(".jpg"), formatter) }.getOrNull()
+            local?.let { MeteorCandidate(file, it.atZone(java.time.ZoneId.of("Europe/Rome")).toInstant()) }
+        }.distinctBy { it.file }.sortedByDescending { it.timestamp }.toList()
+    }
+
+    internal fun meteorMediaUrl(candidate: MeteorCandidate): String {
+        require(candidate.file.matches(Regex("meteors-20\\d{12}\\.jpg")))
+        val parsed = parseMeteorCatalog("<a href='./${candidate.file}'>candidate</a>")
+        require(parsed.singleOrNull()?.file == candidate.file)
+        return "$ORIGIN/allsky/meteors/${candidate.file}"
+    }
+
+    internal fun meteorThumbnailUrl(candidate: MeteorCandidate): String =
+        meteorMediaUrl(candidate).replace("/meteors/", "/meteors/thumbnails/")
+
     internal fun archivePath(category: String): String = when (category) {
         "videos" -> "/allsky/videos/"
         "startrails" -> "/allsky/startrails/"
@@ -117,7 +142,7 @@ object AllskyRepository {
     }
 
     private fun get(path: String): String {
-        require(path in setOf("/allsky/dsg-live-data.json", "/allsky/videos/", "/allsky/startrails/", "/allsky/keograms/"))
+        require(path in setOf("/allsky/dsg-live-data.json", "/allsky/videos/", "/allsky/startrails/", "/allsky/keograms/", meteorCatalogPath()))
         val connection = (URL(ORIGIN + path).openConnection() as HttpURLConnection).apply {
             requestMethod = "GET"
             connectTimeout = CONNECT_TIMEOUT_MS
