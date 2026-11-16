@@ -1,3 +1,12 @@
+<!-- BKL046-HEADER-BUNDLE-FINITE-JSON-CORRECTION-20261116 -->
+## Correzione del controllo ricevute: numeri JSON finiti (16 novembre 2026)
+
+Il controllo V3 sostituisce V2 per gli usi futuri. Una verifica successiva ai 59 casi ha riprodotto un limite di V2: un valore diagnostico espresso come 1e999 veniva convertito da Python in infinito e classificato come diagnostico valido. V2 continuava a negare chiusura, rilascio, retry e ammissione; il limite riguardava la verifica semantica dei dati. I file V2 e il loro archivio restano immutati come evidenza storica.
+
+V3 rifiuta anche l’overflow dei numeri JSON. Ha superato **68 casi**: i precedenti 59, otto prove di overflow positivo/negativo anche insieme a un successo completo, e un valore frazionario finito come diagnostico. Rimangono invariati i divieti operativi e i limiti non nativi già dichiarati. La capsula V3 contiene **34 file**, ZIP **59.902 byte**, SHA-256 **40e2cbe9aeb9fb16584c1769e71e52c9f2c36f9aa531b3d58de30ec53f4b0a5b**. Il qualificatore recuperato ha riprodotto gli stessi 68 risultati con uscita zero, usando le ricevute Node archiviate. Rapporto: fresh-header-receipt-bundle-gate-qualification-h-v3/verification.json, SHA-256 **6ed5ac05532b11f02468e9b8cb1aef29e15e359d9e0b94a39de8ab21255b818c**. Verifica recupero: fresh-header-error-contract-bundle-gate-local-capsule-h-v3/verification.json.
+
+Questa è una correzione di un componente offline. Parent/controllo completi, review e nuova ammissione restano aperti; nessuna esecuzione PixInsight, nessuna chiusura scientifica e nessuna operazione BKL-051. H103/lettore55/rendiconto85 non vengono promossi o riscritti. Il testo seguente conserva lo storico V2 e H103.
+
 <!-- BKL046-HEADER-ERROR-BUNDLE-20261116 -->
 ## Diagnostico header: ricevute d’errore e controllo conservativo (16 novembre 2026)
 
