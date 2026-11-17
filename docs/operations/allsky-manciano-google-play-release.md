@@ -5,7 +5,7 @@ description: Bundle Android, scheda localizzata e requisiti ancora da completare
 
 # AllSky Manciano — preparazione Google Play
 
-**Aggiornato:** 17 novembre 2026. **Stato:** materiale di release candidato 0.2.6 predisposto; nessun bundle caricato. L’account personale `maininimassimo@gmail.com` è attivo e la scheda Play Console è stata creata: ID `4974041146086048690`, package `it.digitalstargate.allskypocket`. I testi italiano e inglese sono salvati come bozza. La scheda inglese ha icona e due screenshot smartphone associati; quella italiana ha due screenshot, ma l’icona e il banner non risultano associati. La Console richiede almeno quattro screenshot smartphone da 1080 px per lato per la promozione. Contatto pubblico confermato: `maininimassimo@gmail.com`.
+**Aggiornato:** 17 novembre 2026. **Stato:** materiale di release candidato 0.2.6 predisposto; nessun bundle caricato. L’account personale `maininimassimo@gmail.com` è attivo e la scheda Play Console è stata creata: ID `4974041146086048690`, package `it.digitalstargate.allskypocket`. Testi, icona, banner e quattro screenshot smartphone per ciascuna localizzazione (it-IT ed en-US) risultano salvati come bozza e verificati dopo un nuovo caricamento della pagina. Contatto pubblico confermato: `maininimassimo@gmail.com`. Nella Console sono state anche salvate le dichiarazioni “nessuna parte soggetta a limitazioni” e “nessun annuncio”, la categoria Fotografia e l’email di contatto.
 
 ## Configurazione del candidato
 
@@ -49,9 +49,9 @@ In `release/play-store/` sono pronti:
 - `privacy-policy-draft.md`: riferimento alla pagina bilingue candidata; l’URL previsto non è ancora stato verificato dal deploy.
 - `listing-manifest.json`: riepilogo candidato e campi console mancanti.
 
-La categoria suggerita è **Fotografia**, ma l’app è stata creata nella categoria generale **App**; la categoria finale va verificata nella Console. Il bundle in questa cartella è solo un candidato unsigned; il file ottenuto dal toolchain locale è stato aggiunto anche a `release/` con checksum per agevolare la successiva firma.
+La scheda è stata creata come **App** (non gioco) e la categoria **Fotografia** è ora salvata in Play Console. Il bundle in questa cartella è solo un candidato unsigned; il file ottenuto dal toolchain locale è stato aggiunto anche a `release/` con checksum per agevolare la successiva firma.
 
-Google richiede l’icona Play in PNG 32-bit con canale alpha, 512×512 e massimo 1 MB; la feature graphic è 1024×500. Per pubblicare la scheda base occorrono almeno due screenshot; per l’idoneità alle superfici di raccomandazione ne occorrono almeno quattro a 1080 px (verticali 1080×1920 o superiori, oppure orizzontali 1920×1080 o superiori). Play Console conferma due screenshot smartphone per ciascuna lingua; i quattro screenshot verticali sono già nel repository e nella raccolta asset, ma mancano da associare alle due schede per raggiungere l’idoneità promozionale. [Requisiti asset Google Play](https://support.google.com/googleplay/android-developer/answer/9866151?hl=en).
+Google richiede l’icona Play in PNG 32-bit con canale alpha, 512×512 e massimo 1 MB; la feature graphic è 1024×500. Per pubblicare la scheda base occorrono almeno due screenshot; per l’idoneità alle superfici di raccomandazione ne occorrono almeno quattro a 1080 px (verticali 1080×1920 o superiori, oppure orizzontali 1920×1080 o superiori). Entrambe le localizzazioni hanno ora quattro screenshot smartphone 1080×2160 e un banner 1024×500 associato. [Requisiti asset Google Play](https://support.google.com/googleplay/android-developer/answer/9866151?hl=en).
 
 ## Dati, privacy e moduli Play
 
@@ -59,12 +59,14 @@ L’app ha il solo permesso `INTERNET`, non include login, pubblicità o SDK di 
 
 Prima di inviare un test o richiedere la pubblicazione, completare:
 
-1. Completare e rivedere la scheda `AllSky Manciano` (italiano, app gratuita, package `it.digitalstargate.allskypocket`): l’italiano ha i due screenshot minimi; per essere idonei alla promozione Google segnala che occorrono quattro screenshot smartphone da almeno 1080 px su ogni lato. Aggiungere l’icona obbligatoria nella lingua predefinita e verificare categoria e associazione Play App Signing. Il banner non è associato. L’Owner ha autorizzato e confermato le dichiarazioni richieste nel modulo di creazione.
+1. Rivedere la scheda `AllSky Manciano` (italiano, app gratuita, package `it.digitalstargate.allskypocket`): testi, icona condivisa, banner localizzati e quattro screenshot per lingua sono salvati. La categoria Fotografia e l’email pubblica sono impostate. Restano da controllare i dettagli asset nella schermata di revisione e l’associazione Play App Signing. L’Owner ha autorizzato e confermato le dichiarazioni richieste nel modulo di creazione.
 2. Il contatto pubblico è `maininimassimo@gmail.com` e il titolare confermato è Massimo Mainini. Pubblicare la pagina privacy con il normale deploy documentale e verificare l’URL dall’esterno.
 3. Completare il modulo Data Safety in Play Console, dichiarando i log di accesso (sei mesi) secondo le definizioni e finalità del modulo corrente.
 4. Selezionare fascia d’età, completare classificazione contenuti e dichiarazioni Console.
 5. Generare la upload key e conservarla in modo sicuro; condividere con il progetto solo il riferimento locale alle credenziali, mai inserirle in Git. Il precedente tentativo locale è stato respinto dalla revisione automatica dell’ambiente; richiedere all’Owner di crearla sul proprio PC tramite il flusso standard Play Console/Android Studio, quindi firmare e verificare il bundle.
 6. Caricare il bundle firmato su una traccia di test e completare la verifica da parte di Play Console prima della produzione.
+
+Le dichiarazioni “nessun annuncio”, accesso non limitato, categoria Fotografia e contatto email sono salvate come modifiche in bozza. Il questionario “Pubblico di destinazione e contenuti” è ancora da completare: scegliere le fasce d’età in base al pubblico effettivamente previsto, poi completare la classificazione dei contenuti. Data Safety rimane da compilare dopo la mappatura esatta dei log IP e dei metadati di richiesta ai tipi e alle finalità del modulo corrente. Nessun invio alla revisione è stato effettuato.
 
 Google richiede inoltre la verifica del possesso del dispositivo Android da parte dei nuovi account personali e la registrazione dei nomi dei package secondo le regole entrate in vigore il 30 settembre 2026. Il Motorola G84 Android 15 soddisfa la soglia tecnica; completare la verifica nell’app Play Console quando richiesto. [Verifica dispositivo](https://support.google.com/googleplay/android-developer/answer/14316361?hl=en), [registrazione dei package](https://support.google.com/googleplay/android-developer/answer/16984799?hl=en).
 
@@ -72,6 +74,6 @@ Per gli account personali creati dopo il 13 novembre 2023 Google richiede un tes
 
 ## Scheda e screenshot
 
-Testi localizzati in italiano e inglese sono stati salvati come bozza nella scheda Play Console `4974041146086048690`. L’icona e due screenshot smartphone sono associati alla scheda inglese; due screenshot sono associati a quella italiana, dove l’icona obbligatoria non risulta ancora selezionata. La Console segnala che per la promozione occorrono quattro screenshot smartphone con almeno 1080 px su ogni lato. Il banner è nella raccolta Play ma non associato. Le immagini preparate esprimono la UI dell’emulatore API 36, non mockup. È esclusa la schermata Mappa dalle immagini promozionali, poiché la pagina Allsky incorporata è in italiano anche con la lingua dell’app impostata a inglese.
+Testi, icona condivisa, banner e quattro screenshot smartphone per ciascuna lingua sono stati salvati come bozza nella scheda Play Console `4974041146086048690`; la persistenza è stata verificata riaprendo la pagina. La categoria Fotografia, il contatto `maininimassimo@gmail.com`, l’assenza di annunci e l’assenza di aree con accesso limitato risultano salvati. Il questionario sul pubblico target è ancora da compilare. Le immagini preparate esprimono la UI dell’emulatore API 36, non mockup. È esclusa la schermata Mappa dalle immagini promozionali, poiché la pagina Allsky incorporata è in italiano anche con la lingua dell’app impostata a inglese.
 
 Non caricare il bundle unsigned, non pubblicare la bozza privacy come informativa definitiva e non dichiarare completata la Data safety finché i punti precedenti non sono stati verificati.

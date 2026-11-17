@@ -44,12 +44,12 @@ The interface uses Italian or English according to your device language.
 
 - App creata nel profilo sviluppatore `maininimassimo@gmail.com`: ID Console `4974041146086048690`, package `it.digitalstargate.allskypocket`.
 - Scheda italiana e localizzazione inglese (en-US) inserite e salvate come bozza. I testi corrispondono alle descrizioni sopra.
-- Icona 512×512 caricata e selezionata nella scheda inglese; la scheda italiana ha due screenshot smartphone ma non mostra l’icona associata. La scheda inglese ha due screenshot. Play segnala che per la promozione servono quattro screenshot per lingua, ciascuno con almeno 1080 px su ogni lato. Il banner 1024×500 è nella raccolta Play ma non associato a uno slot.
-- L’app è gratuita, in italiano, categoria App; Play App Signing e dichiarazioni richieste sono state accettate dall’Owner nel flusso di creazione.
+- Icona 512×512 associata e condivisa dalle localizzazioni. Le schede italiana e inglese hanno ciascuna banner 1024×500 localizzato e quattro screenshot smartphone 1080×2160; la persistenza è stata verificata riaprendo la pagina Play Console.
+- L’app è gratuita e in italiano; categoria Fotografia e contatto email sono stati salvati in Play Console. Sono state salvate anche le dichiarazioni “nessun annuncio” e “nessuna parte soggetta a limitazioni”. Play App Signing e dichiarazioni richieste nel flusso di creazione sono stati accettati dall’Owner.
 
 ## Campi Console ancora da completare
 
 - Developer contact email: maininimassimo@gmail.com (provided by the Owner; use as public Play contact).
 - Privacy policy URL candidate: https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/ (verify after documentation deploy).
 - Complete the Data safety form using the confirmed six-month server access-log retention and map IP handling to the current Play form.
-- Complete content rating, target audience and remaining policy declarations in Console.
+- Complete target audience and content rating; the current target-audience questionnaire is still untouched because its age groups must match the audience actually intended.
