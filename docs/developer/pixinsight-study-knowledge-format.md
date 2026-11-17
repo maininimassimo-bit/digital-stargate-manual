@@ -2728,3 +2728,53 @@ L’Owner ha autorizzato separatamente la richiesta di review del piano completo
 La conoscenza provvisoria H123 ha 324 schede e 21 collegamenti di correzione invariati. Il rendiconto105 e il lettore75 riconciliano i 4.920 requisiti, 14.521 criteri, 19 criteri Owner e sette famiglie/25 assi. La coda requisiti conserva SHA256 e966c6f5106606680422ac21db452a12b29d9fffe1c04f5c4c328c3efd3f56bd; cinque azioni correnti sono aggiornate senza promozioni scientifiche. H123 precede temporalmente il successivo consenso/invio della nuova review: i byte restano immutabili e il successivo fatto è conservato in una ricevuta e in un emendamento separati. Capsula selezionata H123: 17 file, 11.813.802 byte ZIP, SHA256 1c64fefd7278614537ac6a16babc571a6466962ecec77077447514ffd3ecb8e6; due consultazioni del lettore recuperato identiche. Include la capsula candidata e il successivo invio, senza dichiarare ricostruzione completa dello studio.
 
 Pin H123: conoscenza 7209f43cf9e99d9cda7890b87d46b808fdade9e03a8ad010e94f9c26fc6e4df6; lettore75 72c318ee97cbbdf6e62e6571fac275fa9d55320f14687b9ba5b7085ad22d9cec; rendiconto105 8bf8abe725920349468bde571412ddadbc168f0a6439d8a5820bb29c9a7a01f6. Restano 456 casi nativi, qualificazione scientifica completa, conferma IA, conoscenza finale e trasferimento integrale GitHub con riscaricamento/hash. Zero chiusure scientifiche e nessun archivio o sorgente vendor caricato con questa modifica. Tutti i 7 job e i 199 passi restituiti H121 sono positivi; il nuovo head richiede verifica separata. PR in bozza, senza merge/deploy o attivazione del portale.
+
+
+## H124: recupero effettivo concluso e nuovo avvio di lettura congelato
+
+Stato del 17 novembre 2026. La review indipendente dell'implementazione completa di recupero header002 è stata approvata; è seguita una distinta autorizzazione diretta dell'Owner agli effetti e ai limiti dichiarati. È stato arrestato soltanto il controllore originale BKL-046. I due helper sono usciti naturalmente con codice 1 e la sessione originale è stata osservata realmente terminale con codice 1. Il record della prenotazione fallita è stato conservato tramite rinomina sotto l'unico blocco comune, mantenendo byte e identità del file. La chiusura del blocco posseduto è ritornata regolarmente. Le capsule prima/dopo sono state recuperate con byte identici.
+
+È una disposizione verificata della prenotazione fallita: non attesta retroattivamente lo stato originale dei documenti/risorse PixInsight e non costituisce un rilascio ordinario di successo. L'assenza della prenotazione attiva è un'osservazione puntuale, non una prenotazione per la prova successiva. Non sono stati arrestati altri processi o modificati materiali BKL051.
+
+| Evidenza del recupero | SHA-256 |
+| --- | --- |
+| Review indipendente completa, rapporto originale | `cf49eb65786ca131f8f051f96ddbda3f77db8833ea9e5363fb134071173ef33f` |
+| Eccezione Owner riferita al piano e alla review esatti | `2d583fe9faf60a44a2c79cc35bc6200bc647b78effd6d766339a7a724a571da1` |
+| Capsula dopo l'arresto | `e2898d10f6506afb8cd179602a93541d5568ee6ef64a4b4cf25c176b7fbe9a69` |
+| Capsula dopo la disposizione fallita | `3c395bbc55c6ad7d239bec53184f0bc79625cd5e536a9edf167f4645b3aba0b1` |
+
+### Compatibilità geometrica delle posizioni salvate
+
+Sono state ricomputate, senza nuovi fit o valutazioni di pixel, 240 configurazioni dipendenti su 80 campi già salvati. Un certificato algebrico esatto prova il minimo disco comune contenente le posizioni finite registrate; un verificatore separato controlla certificati, appartenenza ai sorgenti e conteggi senza importare il risolutore geometrico. La geometria non usa la verità sintetica. Il successivo confronto con la tolleranza e l'accuratezza usa invece FWHM iniziale e centro sintetici riservati alla verifica: non è un riferimento misurato su immagini reali.
+
+Nei 72 campi con punto vero definito, le configurazioni compatibili ma non tutte accurate sono 23 con i minimi vicini alla PSF nominale, 35 con le tre larghezze selezionate e 21 includendo anche i minimi vicini delle tre larghezze. Le otto scene senza punto vero non diventano accurate per compatibilità geometrica. Il risultato conserva il controesempio del bias comune: concordanza fra candidati non prova correttezza rispetto al riferimento. Un errore iniziale del verificatore includeva nel confronto di copertura anche righe di sola calibrazione; il sorgente iniziale è conservato e la correzione del perimetro è documentata, senza cambiare dati o risultato geometrico.
+
+Rapporto geometrico: `121b3d7a79a42a8273257b8f795e79ccf740dc65f2ad4df1b723db61aff8db8f`. Nessun nuovo caso astronomico o di conferma IA indipendente; nessuna chiusura scientifica.
+
+### Candidato completo per la prova nativa di lettura
+
+Un nuovo percorso distinto e non eseguito è congelato: 32 sorgenti Python transitivi, due corpi JS, otto file con impronte esatte per 139.469.422 byte complessivi, lettura a blocchi da 1 MiB, ricevute strette e campionamento della memoria sullo stesso handle originale già posseduto. I controlli di contesto, custodia, finestra, chiusura e conservazione precedenti sono mantenuti; il custode comune deve precedere la creazione del parent originale. Entrambi gli ingressi isolati reali rifiutano correttamente prima del Host/custode in assenza della review.
+
+Dieci gruppi di evidenze dell'autore comprendono simulazioni dichiarate, controlli su file reali e parser argv Windows. Le 29 simulazioni del flusso completo includono anche il campo aggiuntivo nella ricevuta UI che aveva bloccato header002. La prova Node dello script generato usa API adattate e macro iniettata: non qualifica il preprocessore o il runtime PJSR. Restano da verificare la vita dell'engine privato e la conservazione degli oggetti File dopo un errore. Le soglie di memoria campionate non dimostrano un limite continuo al private commit o una riduzione rispetto al vecchio algoritmo.
+
+Il dossier completo è stato inviato alla chat BKL051 dopo consenso specifico dell'Owner. L'esito della nuova review non è ancora ricevuto a questo aggiornamento. Nessuna approvazione o prova nativa è dedotta dall'invio. La capsula selezionata contiene 62 payload, è stata recuperata identicamente e misura 127.725 byte; gli input grandi immutabili restano ai percorsi nominati e non è una ricostruzione autonoma dell'intero studio.
+
+| Candidato | SHA-256 |
+| --- | --- |
+| Subject completo | `e3d901203b94a75ebe6f256befeaa6c41f5bc52abc9f412d0f2c723c49ea8dc6` |
+| Chiusura dei sorgenti | `c5fefd29c8d2ceb89d4858397e107f5bc51522eec6429765247cc90239514074` |
+| Capsula selezionata | `f65e6f5de6724a2c1c3ef8f08311e876ad6a58eefd454a81bbcdfe3500c9fcae` |
+
+### Conoscenza e requisiti conservati
+
+H124 è provvisoria: 327 schede, 21 collegamenti di correzione conservati, lettore76 verificato e rendiconto106. Sette azioni correnti sono riconciliate senza alterare le schede storiche, i 4.920 requisiti, i 14.521 criteri o i 19 criteri Owner. Il blocco delle righe di requisito mantiene SHA-256 `e966c6f5106606680422ac21db452a12b29d9fffe1c04f5c4c328c3efd3f56bd`. H124 precede il successivo consenso/invio della nuova review: il fatto successivo resta in una ricevuta separata, senza riscrivere lo snapshot.
+
+| Artefatto H124 | SHA-256 |
+| --- | --- |
+| Conoscenza provvisoria | `6e4e8ffc1bfe1f7c5af19f39ac8e03e86cca97cde46d7dd5d22f6bbbde823f91` |
+| Lettore76 | `66a04149a14e51d2383da546c86402736080b31b0cce073adbf73ee99718bd59` |
+| Rendiconto106 | `1d2272140ec1fa94d19d8f5f4cf5a226331ebe1848c121b8555b801b03961d42` |
+
+Restano 456 casi scientifici nativi, qualificazione del dominio completo, conferma IA, file di conoscenza finale e trasferimento integrale GitHub con riscaricamento, hash e ricostruzione verificati. Sette famiglie e 25 assi rimangono scientificamente aperti. La conoscenza registrata v1.171 e il registro v600 non sono sostituiti dal supplemento H124; il publisher non viene riavviato.
+
+Questo aggiornamento pubblica soltanto il resoconto tecnico. Non carica archivi o sorgenti vendor, non attiva il portale, non modifica master o script PixInsight installati e non riprende M27. PR627 resta in bozza, senza merge o deploy. I sette job/199 passi del precedente head H123 sono positivi; il nuovo head richiede la propria verifica.
