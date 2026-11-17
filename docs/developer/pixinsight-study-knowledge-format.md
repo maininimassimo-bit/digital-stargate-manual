@@ -1,3 +1,48 @@
+<!-- BKL046-H116-ACTUAL-HEADER001-ABORT-ISOLATED002-20261117 -->
+## H116: rilascio BKL-051, prova header001 respinta e nuovo piano isolato002
+
+La conoscenza **provvisoria H116** preserva tutte le 313 schede H115 e i byte della sezione requisiti: **315 schede e 20 collegamenti di correzione aciclici**. Il lettore68 supera nove verifiche; il rendiconto98 riconcilia **4.920 requisiti, 14.521 criteri e 19 criteri Owner**, senza chiusure scientifiche. Le sezioni precedenti sul gate occupato restano storico datato.
+
+| Artefatto locale H: | SHA256 |
+| --- | --- |
+| Conoscenza H116 | d5ba90d5e215748853eaa9cf1b23184bf6e03c575e08bc5feb8ef668b4565db1 |
+| Lettore68 | 1444ebd11f92706d6c2343c656608721d881caa53214791b56c049189b9065db |
+| Rendiconto98 | e3e300bfd6b12c14a4bfeae660010c2f2e4a580a26dc2fd512d4bdbcebaefaeb |
+| Capsula H116, 50 file / 12.904.030 byte | 921fdd2439115f7d75e0cfe1ae98c06d314e2c315d17e8dabfad21e06021fc8d |
+
+### Eventi operativi realmente verificati
+
+BKL-051 ha comunicato il rilascio effettivo della propria prenotazione fallita il **17 novembre 2026 alle 12:20:44 UTC**. La ricevuta autorevole, i byte originali conservati, il certificato e l’archivio citati sono stati verificati e copiati su H:. **F06 resta FAILED**: non è stata costruita una ricevuta di normale successo.
+
+Dopo tale cambiamento documentato è stata registrata una nuova ammissione ordinaria BKL-046, distinta dal precedente tentativo respinto prima del lease. Il coordinatore comune R4 e le approvazioni ARB/RQ avevano impronte corrispondenti; il nuovo operatore ha acquisito la propria reservation **0faf90a8-095e-4101-8180-8e32ce93c082** e avviato una sola istanza isolata della prova header001.
+
+Il processo PJSR ha scritto una ricevuta e mostrato HEADER_PROBE_SUCCESS_RECORDED, ma il consumatore ha respinto la ricevuta con **SUCCESS_FIELDS_WRONG**. Nel sorgente generato, il nome macro era usato come proprietà non quotata: il preprocessing lo ha trasformato nella chiave JSON **"15"**, mentre lo schema richiede **DataType_ByteArray**. La ricevuta originale, SHA256 **c6aaeca0e197e022d520a2ea40addc8653878638f0c9bdea84b26bc548b0b242**, e il latch di errore restano immutabili. Il messaggio in console non supera il rifiuto dello schema.
+
+L’esito formale è **HEADER_DIAGNOSTIC_ABORT_OWNED_NORMAL_EXIT_ARCHIVED_FAILURE_PRESERVED**. Il percorso revisionato ha verificato tramite CUA la finestra posseduta, l’uguaglianza empirica dell’identificatore con il MainWindowHandle del PID originale, la console terminale e l’assenza di immagini, documenti non salvati e dialoghi. La sola istanza posseduta è stata chiusa normalmente; l’uscita0 è stata osservata sul medesimo oggetto/handle originale. **111 file** sono stati archiviati e recuperati identici; il coordinatore ha poi rilasciato ordinariamente la sola prenotazione BKL-046. Le copie dei record acquisito/rilasciato sono conservate su H:.
+
+Capsula nativa prefinale: **485.558 byte**, SHA256 **26852e5bf8545a054964bc77b1d1ebdecd14b5deeef7591725c627efbe52f251**. La contabilità finale e la ricevuta di rilascio sono record causali esterni a quella capsula. Il successo del ciclo di chiusura/rilascio non trasforma ABORT in esito scientifico positivo.
+
+### Operazione002 corretta, ancora senza review approvata
+
+Il candidato usa **24 moduli h002_ distinti**, una nuova operazione e una root mai creata. Nessun sorgente precedente o file del tentativo001 è stato modificato. La chiave corretta viene costruita da frammenti quotati, evitando il token macro come nome di proprietà; anche il renderer di compatibilità usa una proprietà calcolata.
+
+Sono verificati **75 casi di controllo** con file e processi Python privati, **6 casi VM** sui sorgenti generati e **10 controlli** delle ricevute. Sono distinti dalle prove native e dai campioni scientifici indipendenti. I controlli comprendono conservazione del primo errore, custodia originale, interruzioni dei soli controller di collaudo, gestione di errori primari/cleanup, archiviazione e rifiuto di ricevute errate, parziali o contraddittorie. Le due entry nuove rifiutano correttamente l’esecuzione in assenza di review genuina.
+
+Pacchetto immutabile: fresh-native-header-complete-parent-review-005-h-v1; **445 evidenze** nominate e tutte le importazioni locali verificate.
+Subject SHA256 **b61e2571f8bac6b5097df275713944797f0f700a358e445beccfa7281d72af12**.
+SourceSet SHA256 **c88c0db99a705be82aea896d6014cd334455f65701870df94ca99f39571a9019**.
+Capsula: **502 file / 1.395.909 byte**, SHA256 **0eda8ae314d9f11f25cfe8670344c458810e387598f94537800d2b887a1aaa7f**, recupero identico verificato.
+
+Il seguito alla review offline autorizzata è stato effettivamente inviato. **Nessuna approvazione genuina header002 è ancora attestata e nessun suo avvio nativo è avvenuto.** Le fixture non attestano il preprocessing PJSR corretto, l’ammissione futura, il controllo di memoria/streaming o una validazione scientifica. La prossima prova richiede la review del piano completo e una nuova normale ammissione comune: la root001 consumata non viene riutilizzata.
+
+### Stato della milestone
+
+Una nuova esecuzione nativa diagnostica header001, **zero nuovi casi scientifici**; restano **456 casi**, sette famiglie e 25 assi aperti, oltre a collaudo IA, conoscenza finale e trasferimento integrale dei byte su GitHub. Le cinque consultazioni della capsula H116 sono state riprodotte identiche dopo recupero. Si tratta di un archivio selezionato con dipendenze dichiarate, non dell’intero storico.
+
+La CI H115 alla head44e0585b63a1abf824b0e0e5f1dd4b413a287957 è verificata: sette job e199 passaggi conclusi con successo; l’esito CI H116 va osservato separatamente. Nessun portale, merge/deploy, modifica a master/script installati, intervento su processi o materiali BKL-051, M27 o replay EXACT004/R005.
+
+---
+
 <!-- BKL046-H115-TRUTH-FREE-FLUX-COMPATIBILITY-20261116 -->
 ## H115: compatibilità necessaria del flusso senza verità sintetica
 
