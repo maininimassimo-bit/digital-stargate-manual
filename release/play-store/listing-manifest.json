@@ -21,14 +21,13 @@
         "technical access-request metadata"
       ],
       "purposes": [
-        "service operation",
-        "security"
+        "Fraud prevention, security, and compliance"
       ],
       "retention": "Six months",
       "sharing_with_analytics_or_advertising": false,
       "deletion_request_contact": "maininimassimo@gmail.com",
       "in_transit_encryption": "HTTPS/TLS",
-      "play_data_type_mapping": "Review candidate: Device or other IDs / Device or other IDs, collected automatically and required; purposes App functionality (technical request handling) and Fraud prevention, security, and compliance (security); HTTPS in transit; six-month retention; no third-party sharing claimed because the developer directly manages hosting. Google states IP mapping depends on actual use. Verify the current form definition and the controlled sky-map WebView requests before final submission."
+      "play_data_type_mapping": "Saved in the Play Console draft: Device or other IDs / Device or other IDs, collected automatically and required; not processed ephemerally; purpose Fraud prevention, security, and compliance; HTTPS in transit; six-month retention; no third-party sharing. The Play preview showed device or other IDs collected, no data shared, and transfer through a secure connection. Changes were saved to Publishing overview and have not been submitted for review. Google states IP mapping depends on actual use."
     },
     "network_access": "The app requests public AllSky Manciano images, weather projection, archive/meteor catalogue pages and the sky-map page over HTTPS. The developer directly manages the AllSky host and confirms access logs are retained for six months for technical operation and security. Requests necessarily expose the connection IP and technical request data to that host. No account, user-submitted content, analytics, advertising, or IP-based location inference is implemented. Map the IP/log handling to the current Play Data safety data types and purposes when completing the Data safety form; do not claim that no data is collected."
   },
@@ -38,8 +37,12 @@
   "play_console_contact_email_saved": true,
   "play_console_ads_declaration": "No ads; saved as draft",
   "play_console_access_declaration": "No restricted access; saved as draft",
-  "play_console_target_audience_state": "Not completed; select age groups based on intended audience before proceeding",
-  "play_console_content_rating_state": "Not completed",
+  "play_console_target_audience_state": "Saved; audience ages 13-17 only (ages under 13 excluded per Owner confirmation)",
+  "play_console_content_rating_state": "IARC questionnaire completed and saved; displayed ratings included PEGI 3 and generic 3 years",
+  "play_console_government_app_declaration": "No; saved",
+  "play_console_financial_features_declaration": "No financial features; saved",
+  "play_console_health_features_declaration": "No health features; saved",
+  "play_console_data_safety_state": "Saved in Publishing overview, not submitted for review; collected Device or other IDs, no sharing, HTTPS in transit",
   "play_console_free": true,
   "play_app_signing_terms_accepted": true,
   "release_state": "Draft only; no signed AAB uploaded; upload signing key not created",

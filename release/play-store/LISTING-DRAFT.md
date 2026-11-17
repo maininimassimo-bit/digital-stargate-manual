@@ -47,9 +47,10 @@ The interface uses Italian or English according to your device language.
 - Icona 512×512 associata e condivisa dalle localizzazioni. Le schede italiana e inglese hanno ciascuna banner 1024×500 localizzato e quattro screenshot smartphone 1080×2160; la persistenza è stata verificata riaprendo la pagina Play Console.
 - L’app è gratuita e in italiano; categoria Fotografia e contatto email sono stati salvati in Play Console. Sono state salvate anche le dichiarazioni “nessun annuncio” e “nessuna parte soggetta a limitazioni”. Play App Signing e dichiarazioni richieste nel flusso di creazione sono stati accettati dall’Owner.
 
-## Campi Console ancora da completare
+## Stato delle dichiarazioni Console
 
 - Developer contact email: maininimassimo@gmail.com (provided by the Owner; use as public Play contact).
 - Privacy policy: published at https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/, verified HTTP 200 on 2026-11-17, and saved in the Play Console field as a draft; persistence was checked after reloading.
-- Complete the Data safety form using the confirmed six-month server access-log retention and map IP handling to the current Play form.
-- Complete target audience and content rating; the current target-audience questionnaire is still untouched because its age groups must match the audience actually intended.
+- Data Safety dichiarata e salvata come bozza: log IP e dati tecnici di accesso classificati come “ID dispositivo o altri ID”, raccolta obbligatoria, nessuna condivisione, trasferimento cifrato e finalità sicurezza/prevenzione frodi. I log sono conservati sei mesi; il titolare gestisce direttamente il server. La modifica non è stata inviata per revisione.
+- Pubblico target impostato sui soli 13–17 anni, come confermato dall’Owner. Questionario IARC completato e salvato; i rating visualizzati includevano PEGI 3 e 3 anni generico.
+- Dichiarazioni app governativa, funzionalità finanziarie e salute salvate come “No”. Le modifiche restano in Panoramica della pubblicazione in attesa di un eventuale invio per revisione.
