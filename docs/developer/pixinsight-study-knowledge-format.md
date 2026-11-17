@@ -2673,3 +2673,26 @@ H118 mantiene tutte le 317 schede precedenti: **318 schede, 21 correzioni acicli
 | Rendiconto100 | `c251527835669bb28a4d248996162310c7150a17e2c1dbc416829709a8431818` |
 
 Le verifiche matematiche sono dell’autore, con formulazioni numeriche distinte: non si dichiara una nuova review esterna indipendente. Zero chiamate IA, zero avvii nativi e zero chiusure scientifiche. Il recupero della prenotazione header002 rimane separato e irrisolto. I sette job e i 199 passi restituiti della CI H117 sono positivi; la CI H118 va verificata sul suo commit. Restano i 456 casi scientifici, il dominio completo, la conoscenza finale e l’effettivo trasferimento integrale con recupero remoto. Solo documentazione tecnica in PR bozza, senza attivazione del portale.
+
+
+## H119: prevenzione della ricevuta fuori contratto e catene di controllo private
+
+H119 conserva il difetto reale di header002 e aggiunge un controllo preventivo, esclusivamente in lettura, dei dati destinati alla ricevuta di chiusura. Deriva le definizioni pure dai sorgenti originali fissati tramite hash; controlla campi esatti, contesto fornito, collegamento alla review, ordine temporale e riferimenti alle evidenze. I file citati devono essere regolari e limitati su H:, con percorsi ammessi, hash e metadati confrontati prima e dopo la lettura.
+
+Il controllo separato dei dati esclude esplicitamente le tre verifiche dell’uscita originale, che restano **inalterate nel parent reale**. Non autentica la verità delle osservazioni CUA o la custodia originale e non pubblica ricevute. Il contesto e la review forniti richiedono ancora i loro produttori qualificati; una verifica positiva dei dati non autorizza chiusura, recupero o rilascio. La lettura tramite percorso e il confronto dei metadati assumono un filesystem cooperativo e non sostituiscono un handle originale esclusivo.
+
+Le 14 verifiche dell’autore conservano l’accettazione circoscritta dei dati storici001 e il rifiuto della ricevuta reale002 con il campo aggiunto. Comprendono casi malformati, chiavi duplicate, contesto estraneo ed evidenze non valide. La rimozione del campo extra viene provata soltanto su una proiezione privata in memoria; il file operativo respinto resta immutato. Una capsula di 20 file è stata recuperata e riproduce entrambi i casi storici.
+
+Sono state inoltre composte le funzioni esatte e fissate del coordinatore e della custodia dell’operatore con una prenotazione, un kernel e uno scanner **esplicitamente simulati**, usando soltanto nuovi processi Python privati. L’uscita naturale0 del parent privato permette il rilascio della sola prenotazione di prova; l’uscita23 conserva quello stato e porta coordinatore e operatore privati a terminare naturalmente con1. Non è stata esercitata alcuna terminazione forzata, prenotazione comune o azione PixInsight.
+
+Il primo replay dell’archivio fallisce perché manca l’helper nella posizione attesa dal percorso privato; codice, archivio ed errore restano conservati. La nuova capsula include la copia esatta nella posizione di prova richiesta: 44 file, 306.397 byte, SHA `1d0d7be9ba9974d7a65f427a0e61fb628bd1c4cca52864ad5d5bf8c1062425c5`. Dopo il recupero, entrambe le catene sono state ripetute su nuovi processi privati, con gli esiti previsti. Queste fixture verificano il comportamento del controllo; non dimostrano l’uscita dei controllori reali o il rilascio della prenotazione reale.
+
+H119 preserva tutte le 318 schede H118: **320 schede, 21 correzioni acicliche**, sette verifiche del lettore71. Il rendiconto101 conserva 4.920 requisiti, 14.521 criteri, 19 criteri Owner, sette famiglie e 25 assi senza promozioni scientifiche. La capsula selezionata H119 contiene 30 file, 11.295.163 byte, SHA `261e91ff89d6768ba12beec0bed203c0b89612ce046249a31bc75318d537bd5e`; cinque consultazioni recuperate coincidono con le originali. Non è l’intero storico o una ricostruzione completa dello studio.
+
+| Artefatto locale | SHA-256 |
+| --- | --- |
+| Conoscenza provvisoria H119 | `a22b6419988ec8e24abf65806df8964e390d46cecdd2c84412e53928f0326548` |
+| Lettore71 | `3d4af5f4697c5df44d43edf5cea31f109c855dbf05c6d1ba1fc4a620f3f78b23` |
+| Rendiconto101 | `9eb5de38abaf9b5bd53b21d147ed48de7e2386b864df9b0ec4053b9348d2483b` |
+
+Nessun controllo originale, processo reale o stato comune è stato modificato. Il nuovo checker non è stato inserito in un parent operativo e non costituisce una nuova review indipendente del recupero. Header002 resta trattenuta; l’invio del dossier per la review separata attende il consenso richiesto all’Owner. Restano 456 casi scientifici, conoscenza finale e trasferimento completo dei byte con recupero remoto. I sette job e i 199 passi restituiti di H118 sono positivi; la CI H119 richiede la verifica del proprio commit. Zero nuovi avvii nativi, chiamate provider o chiusure scientifiche.
