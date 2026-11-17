@@ -2778,3 +2778,36 @@ H124 è provvisoria: 327 schede, 21 collegamenti di correzione conservati, letto
 Restano 456 casi scientifici nativi, qualificazione del dominio completo, conferma IA, file di conoscenza finale e trasferimento integrale GitHub con riscaricamento, hash e ricostruzione verificati. Sette famiglie e 25 assi rimangono scientificamente aperti. La conoscenza registrata v1.171 e il registro v600 non sono sostituiti dal supplemento H124; il publisher non viene riavviato.
 
 Questo aggiornamento pubblica soltanto il resoconto tecnico. Non carica archivi o sorgenti vendor, non attiva il portale, non modifica master o script PixInsight installati e non riprende M27. PR627 resta in bozza, senza merge o deploy. I sette job/199 passi del precedente head H123 sono positivi; il nuovo head richiede la propria verifica.
+
+
+## H125: review con modifiche richieste e correzione del preflight
+
+La review indipendente completa del primo candidato stream a 32 sorgenti ha restituito **CHANGES_REQUIRED**, blocker **STREAM-COMPLETE-01**: le riserve globali di memoria erano controllate soltanto dopo la creazione nativa. Tre simulazioni indipendenti riproducono una creazione seguita da RETAIN per riserve insufficienti; un controllo separato dell'ordine delle chiamate conferma il difetto. Rapporto originale SHA-256 `89baa46d302606516fd8a9f3c15649e201ac6f970e9706690c48b590506324f4`. Il candidato respinto rimane conservato e non è qualificato per l'esecuzione.
+
+Cinque verifiche indipendenti delle API Windows su un processo Python originale posseduto sono positive, con uscita naturale zero e canali chiusi. Un ulteriore controllo dell'autore conferma le chiamate sullo stesso handle con un bypass esplicito del costruttore nel solo harness; il costruttore di produzione invariato respinge correttamente il profilo Python. Queste prove non qualificano PixInsight, l'engine privato o la conservazione dei File dopo un errore. Un campione puntuale delle riserve è inferiore alle soglie del piano: non è una deroga ai budget e non autorizza interventi sui processi altrui.
+
+La correzione è congelata in un subject distinto a **34 sorgenti Python**. Il preflight globale controlla 8 GiB di memoria fisica disponibile e 12 GiB di commit disponibile prima della chiamata al custode, dopo l'ammissione prima del claim di sessione, dopo le verifiche di input/sorgenti e immediatamente prima dell'unica creazione nativa. Dopo l'ultimo campione non intervengono scritture persistenti prima della creazione; quel campione viene scritto soltanto dopo la creazione, restando nel Host in caso di errore. I controlli successivi sul solo handle originale, la soglia di 4 GiB di private commit e tutti i vincoli di custodia/UI/conservazione restano invariati. Si tratta di campioni puntuali, non di un limite continuo.
+
+Quattro nuovi gruppi dell'autore aggiungono 38 casi tecnici, con seam espliciti: soglie esatte e insufficienti, errore o indisponibilità dell'API, dati non validi, variazioni fra primo preflight e creazione, rifiuto prima del custode e prima del claim. Nei casi di rifiuto non avviene alcuna creazione nativa simulata. La prima fixture collegata non forniva due metadati del contesto di produzione; il fallimento è conservato e il qualificatore successivo completa la fixture senza cambiare il sorgente di produzione. Due ingressi isolati reali del subject corretto rifiutano senza review, prima del Host/custode.
+
+Il dossier corretto è stato inviato come seguito della stessa review autorizzata dall'Owner. **La review del nuovo subject non è ancora approvata a questo aggiornamento.** Il successo dei test dell'autore non chiude il blocker indipendente.
+
+| Candidato corretto | SHA-256 |
+| --- | --- |
+| Subject completo a 34 sorgenti | `8e4789e6e1647ef038e24271fd539a0c83ca7bd672a38365ae2a9c17a3439ea1` |
+| Chiusura dei sorgenti | `6f987743d8c0f1ff23f747ab12c58bc8ddf8dafaae601632b1dcb9ac6a31a660` |
+| Capsula selezionata, 79 payload / 154.081 byte | `6c30121b6b801eaff79f462205a12bc1a8d1903e9796c2473257f53f615c7b1e` |
+
+La capsula è stata recuperata identicamente. Gli input grandi e le dipendenze dello studio restano separatamente conservati; non è un archivio autonomo dell'intero studio.
+
+La conoscenza provvisoria **H125** contiene 329 schede e 22 collegamenti di correzione: la scheda storica del candidato ancora non revisionato è conservata e rimanda ora all'esito reale CHANGES_REQUIRED e al successore corretto non approvato. Lettore77 verificato; rendiconto107 e cinque azioni correnti riconciliati. Restano identici i 4.920 requisiti, i 14.521 criteri, i 19 criteri Owner e il blocco letterale delle righe di requisito.
+
+| Artefatto H125 | SHA-256 |
+| --- | --- |
+| Conoscenza provvisoria | `d2c618694e9f10e85c5a2c7b3b31f09b190d95faaff3235a49199948cd9c32b5` |
+| Lettore77 | `00bbb31dc420711016fe624fd0d74c5acd19f4cf497cd8ef484d2712588de3c6` |
+| Rendiconto107 | `535682c9261cc71131df4cf8631f219551bc2535565cfada97e259815ca3ad30` |
+
+Il commit H124 `951a03cf9856f5dd239688d6da2f71bc20a34078` ha concluso positivamente tutti i sette job e i 199 passi restituiti. È evidenza tecnica/documentale, non scientifica. Questo nuovo commit richiede i propri controlli.
+
+Nessun nuovo avvio PixInsight o caso scientifico, nessun archivio o sorgente vendor caricato. Restano 456 casi nativi, sette famiglie/25 assi scientificamente aperti, conferma IA, conoscenza finale e trasferimento integrale GitHub con recupero verificato. Il registro v600 / conoscenza registrata v1.171 resta distinto dai supplementi locali. PR627 rimane in bozza senza merge/deploy, portale o modifiche a master/script installati, M27 e materiali BKL051.
