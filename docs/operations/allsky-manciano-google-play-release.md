@@ -48,6 +48,7 @@ In `release/play-store/` sono pronti:
 - `it-IT/` e `en-US/`: quattro screenshot reali dell’app per ciascuna lingua (1080×2160, PNG, senza alpha): Live, meteo, archivio/keogramma e meteore; ciascuna cartella contiene anche il banner locale. Le schermate tablet non sono incluse: l’emulatore in landscape non ha prodotto un set uniforme e stabile.
 - `privacy-policy-draft.md`: riferimento alla pagina bilingue candidata; l’URL previsto non è ancora stato verificato dal deploy.
 - `listing-manifest.json`: riepilogo candidato e campi console mancanti.
+- Procedura locale per predisporre la chiave di caricamento: [chiave di caricamento Play](allsky-manciano-upload-key.md).
 
 La scheda è stata creata come **App** (non gioco) e la categoria **Fotografia** è ora salvata in Play Console. Il bundle in questa cartella è solo un candidato unsigned; il file ottenuto dal toolchain locale è stato aggiunto anche a `release/` con checksum per agevolare la successiva firma.
 
@@ -63,7 +64,7 @@ Prima di inviare un test o richiedere la pubblicazione, completare:
 2. Il contatto pubblico è `maininimassimo@gmail.com` e il titolare confermato è Massimo Mainini. Pubblicare la pagina privacy con il normale deploy documentale e verificare l’URL dall’esterno.
 3. Completare il modulo Data Safety in Play Console, dichiarando i log di accesso (sei mesi) secondo le definizioni e finalità del modulo corrente.
 4. Selezionare fascia d’età, completare classificazione contenuti e dichiarazioni Console.
-5. Generare la upload key e conservarla in modo sicuro; condividere con il progetto solo il riferimento locale alle credenziali, mai inserirle in Git. Il precedente tentativo locale è stato respinto dalla revisione automatica dell’ambiente; richiedere all’Owner di crearla sul proprio PC tramite il flusso standard Play Console/Android Studio, quindi firmare e verificare il bundle.
+5. Generare la upload key seguendo [la procedura locale](allsky-manciano-upload-key.md), conservarla in modo sicuro e configurare le proprietà nel `android/gradle.properties` locale. Condividere con il progetto solo percorso e alias, mai la chiave o le password; quindi firmare e verificare il bundle.
 6. Caricare il bundle firmato su una traccia di test e completare la verifica da parte di Play Console prima della produzione.
 
 Le dichiarazioni “nessun annuncio”, accesso non limitato, categoria Fotografia e contatto email sono salvate come modifiche in bozza. Il questionario “Pubblico di destinazione e contenuti” è ancora da completare: scegliere le fasce d’età in base al pubblico effettivamente previsto, poi completare la classificazione dei contenuti. Data Safety rimane da compilare dopo la mappatura esatta dei log IP e dei metadati di richiesta ai tipi e alle finalità del modulo corrente. Nessun invio alla revisione è stato effettuato.
