@@ -50,6 +50,6 @@ The interface uses Italian or English according to your device language.
 ## Campi Console ancora da completare
 
 - Developer contact email: maininimassimo@gmail.com (provided by the Owner; use as public Play contact).
-- Privacy policy URL candidate: https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/ (verify after documentation deploy).
+- Privacy policy: published at https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/, verified HTTP 200 on 2026-11-17, and saved in the Play Console field as a draft; persistence was checked after reloading.
 - Complete the Data safety form using the confirmed six-month server access-log retention and map IP handling to the current Play form.
 - Complete target audience and content rating; the current target-audience questionnaire is still untouched because its age groups must match the audience actually intended.
