@@ -40,10 +40,16 @@ This is a read-only app and requires an Internet connection. Data and images dep
 
 The interface uses Italian or English according to your device language.
 
-## Console fields still required
+## Stato in Play Console
+
+- App creata nel profilo sviluppatore `maininimassimo@gmail.com`: ID Console `4974041146086048690`, package `it.digitalstargate.allskypocket`.
+- Scheda italiana e localizzazione inglese (en-US) inserite e salvate come bozza. I testi corrispondono alle descrizioni sopra.
+- Icona 512×512 caricata e selezionata nella scheda inglese; la scheda italiana ha due screenshot smartphone ma non mostra l’icona associata. La scheda inglese ha due screenshot. Play segnala che per la promozione servono quattro screenshot per lingua, ciascuno con almeno 1080 px su ogni lato. Il banner 1024×500 è nella raccolta Play ma non associato a uno slot.
+- L’app è gratuita, in italiano, categoria App; Play App Signing e dichiarazioni richieste sono state accettate dall’Owner nel flusso di creazione.
+
+## Campi Console ancora da completare
 
 - Developer contact email: maininimassimo@gmail.com (provided by the Owner; use as public Play contact).
 - Privacy policy URL candidate: https://maininimassimo-bit.github.io/digital-stargate-manual/operations/allsky-manciano-privacy/ (verify after documentation deploy).
-- Developer account exists; identity and phone verification are pending, so Play Console currently disables app creation.
 - Complete the Data safety form using the confirmed six-month server access-log retention and map IP handling to the current Play form.
-- Select final app category and content rating in Console.
+- Complete content rating, target audience and remaining policy declarations in Console.

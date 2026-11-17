@@ -5,7 +5,7 @@ description: Bundle Android, scheda localizzata e requisiti ancora da completare
 
 # AllSky Manciano — preparazione Google Play
 
-**Aggiornato:** 17 novembre 2026. **Stato:** materiale di release candidato 0.2.6 predisposto; non caricato su Google Play. L’account personale esiste, ma Google sta verificando l’identità e richiede la verifica del telefono; “Crea app” è disabilitato. Contatto pubblico confermato: `maininimassimo@gmail.com`.
+**Aggiornato:** 17 novembre 2026. **Stato:** materiale di release candidato 0.2.6 predisposto; nessun bundle caricato. L’account personale `maininimassimo@gmail.com` è attivo e la scheda Play Console è stata creata: ID `4974041146086048690`, package `it.digitalstargate.allskypocket`. I testi italiano e inglese sono salvati come bozza. La scheda inglese ha icona e due screenshot smartphone associati; quella italiana ha due screenshot, ma l’icona e il banner non risultano associati. La Console richiede almeno quattro screenshot smartphone da 1080 px per lato per la promozione. Contatto pubblico confermato: `maininimassimo@gmail.com`.
 
 ## Configurazione del candidato
 
@@ -22,7 +22,7 @@ description: Bundle Android, scheda localizzata e requisiti ancora da completare
 
 Il bundle `release/allsky-manciano-v0.2.6-unsigned.aab` è stato creato con `bundleRelease` dopo l’aggiunta del collegamento privacy in-app. `jarsigner -verify` ha confermato che è unsigned; bundletool 1.18.3 lo valida. SHA-256: `d994c6de6c6e6c9fad0fbd2cd87ddf4391937d3c35504b6177820a13d845178d`. Il file `.sha256` è associato al bundle. Non caricare questo artefatto come release Play: va firmato con la upload key.
 
-La configurazione Gradle supporta una signing config `playUpload` alimentata da proprietà locali `playUploadStoreFile`, `playUploadStorePassword`, `playUploadKeyAlias` e `playUploadKeyPassword`; non contiene credenziali o chiavi. Senza tutte e quattro le proprietà, il bundle rimane unsigned. Non riusare la firma debug dell’APK installato sul G84. Per una nuova app, attivare Play App Signing e registrare il certificato della chiave di caricamento nel Play Console; Google conserva la chiave di firma dell’app. [Concetti e configurazione Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756?hl=en).
+La configurazione Gradle supporta una signing config `playUpload` alimentata da proprietà locali `playUploadStoreFile`, `playUploadStorePassword`, `playUploadKeyAlias` e `playUploadKeyPassword`; non contiene credenziali o chiavi. Senza tutte e quattro le proprietà, il bundle rimane unsigned. Non riusare la firma debug dell’APK installato sul G84. Nel flusso di creazione della scheda l’Owner ha accettato i termini di Play App Signing; prima del caricamento verificare l’associazione della chiave di caricamento e del certificato. Google conserva la chiave di firma dell’app. [Concetti e configurazione Play App Signing](https://support.google.com/googleplay/android-developer/answer/9842756?hl=en).
 
 ## Build e verifiche eseguite
 
@@ -49,9 +49,9 @@ In `release/play-store/` sono pronti:
 - `privacy-policy-draft.md`: riferimento alla pagina bilingue candidata; l’URL previsto non è ancora stato verificato dal deploy.
 - `listing-manifest.json`: riepilogo candidato e campi console mancanti.
 
-La categoria suggerita per la scheda è **Fotografia**. Il bundle in questa cartella è solo un candidato unsigned; il file ottenuto dal toolchain locale è stato aggiunto anche a `release/` con checksum per agevolare la successiva firma.
+La categoria suggerita è **Fotografia**, ma l’app è stata creata nella categoria generale **App**; la categoria finale va verificata nella Console. Il bundle in questa cartella è solo un candidato unsigned; il file ottenuto dal toolchain locale è stato aggiunto anche a `release/` con checksum per agevolare la successiva firma.
 
-Google richiede l’icona Play in PNG 32-bit con canale alpha, 512×512 e massimo 1 MB; la feature graphic è 1024×500. Per gli screenshot richiede almeno due immagini, dimensione tra 320 e 3840 px e rapporto massimo 2:1. Gli asset telefono preparati rispettano questi requisiti. [Requisiti immagini Google Play](https://support.google.com/googleplay/android-developer/answer/9866151?hl=en).
+Google richiede l’icona Play in PNG 32-bit con canale alpha, 512×512 e massimo 1 MB; la feature graphic è 1024×500. Per pubblicare la scheda base occorrono almeno due screenshot; per l’idoneità alle superfici di raccomandazione ne occorrono almeno quattro a 1080 px (verticali 1080×1920 o superiori, oppure orizzontali 1920×1080 o superiori). Play Console conferma due screenshot smartphone per ciascuna lingua; i quattro screenshot verticali sono già nel repository e nella raccolta asset, ma mancano da associare alle due schede per raggiungere l’idoneità promozionale. [Requisiti asset Google Play](https://support.google.com/googleplay/android-developer/answer/9866151?hl=en).
 
 ## Dati, privacy e moduli Play
 
@@ -59,20 +59,19 @@ L’app ha il solo permesso `INTERNET`, non include login, pubblicità o SDK di 
 
 Prima di inviare un test o richiedere la pubblicazione, completare:
 
-1. Completare la verifica dell’identità e, quando Google la abilita, del telefono nell’account personale Play Console. La Console mostra i documenti in revisione e “Crea app” disabilitato; l’Owner riceverà un’email quando l’identità sarà approvata. L’account personale è stato creato dall’Owner.
-2. Quando la verifica è conclusa, creare l’app in Console con Application ID `it.digitalstargate.allskypocket` e attivare Play App Signing. Google indica 25 USD una tantum per la registrazione dell’account. [Requisiti account e tariffa](https://support.google.com/googleplay/android-developer/answer/6112435?hl=en).
-3. Il contatto pubblico è `maininimassimo@gmail.com` e il titolare confermato è Massimo Mainini. Pubblicare la pagina privacy con il normale deploy documentale e verificare l’URL dall’esterno.
-4. Completare il modulo Data Safety in Play Console dopo che Google abilita la creazione dell’app, dichiarando i log di accesso (sei mesi) secondo le definizioni e finalità del modulo corrente.
-5. Selezionare categoria e fascia d’età, completare classificazione contenuti e dichiarazioni Console.
-6. Generare e conservare in modo sicuro la upload key; condividere con il progetto solo il riferimento locale alle credenziali, mai inserirle in Git. Firmare nuovamente il bundle e verificare la firma/certificato. Il tentativo di generazione locale è stato respinto dalla revisione automatica dell’ambiente senza un motivo specifico; non aggirarla con un altro percorso.
-7. Caricare il bundle firmato su una traccia di test e completare la verifica da parte di Play Console prima della produzione.
+1. Completare e rivedere la scheda `AllSky Manciano` (italiano, app gratuita, package `it.digitalstargate.allskypocket`): l’italiano ha i due screenshot minimi; per essere idonei alla promozione Google segnala che occorrono quattro screenshot smartphone da almeno 1080 px su ogni lato. Aggiungere l’icona obbligatoria nella lingua predefinita e verificare categoria e associazione Play App Signing. Il banner non è associato. L’Owner ha autorizzato e confermato le dichiarazioni richieste nel modulo di creazione.
+2. Il contatto pubblico è `maininimassimo@gmail.com` e il titolare confermato è Massimo Mainini. Pubblicare la pagina privacy con il normale deploy documentale e verificare l’URL dall’esterno.
+3. Completare il modulo Data Safety in Play Console, dichiarando i log di accesso (sei mesi) secondo le definizioni e finalità del modulo corrente.
+4. Selezionare fascia d’età, completare classificazione contenuti e dichiarazioni Console.
+5. Generare la upload key e conservarla in modo sicuro; condividere con il progetto solo il riferimento locale alle credenziali, mai inserirle in Git. Il precedente tentativo locale è stato respinto dalla revisione automatica dell’ambiente; richiedere all’Owner di crearla sul proprio PC tramite il flusso standard Play Console/Android Studio, quindi firmare e verificare il bundle.
+6. Caricare il bundle firmato su una traccia di test e completare la verifica da parte di Play Console prima della produzione.
 
-Google richiede inoltre la verifica del possesso del dispositivo Android da parte dei nuovi account personali e la registrazione dei nomi dei package secondo le regole entrate in vigore il 30 settembre 2026. Il Motorola G84 Android 15 soddisfa la soglia tecnica; completare la verifica nell’app Play Console quando Google la abilita dopo la verifica d’identità. [Verifica dispositivo](https://support.google.com/googleplay/android-developer/answer/14316361?hl=en), [registrazione dei package](https://support.google.com/googleplay/android-developer/answer/16984799?hl=en).
+Google richiede inoltre la verifica del possesso del dispositivo Android da parte dei nuovi account personali e la registrazione dei nomi dei package secondo le regole entrate in vigore il 30 settembre 2026. Il Motorola G84 Android 15 soddisfa la soglia tecnica; completare la verifica nell’app Play Console quando richiesto. [Verifica dispositivo](https://support.google.com/googleplay/android-developer/answer/14316361?hl=en), [registrazione dei package](https://support.google.com/googleplay/android-developer/answer/16984799?hl=en).
 
-Per i nuovi account personali Google può richiedere un test chiuso con almeno 12 tester iscritti per 14 giorni continuativi prima di consentire la richiesta di accesso alla produzione; il requisito va verificato sull’account e nelle istruzioni correnti. [Requisiti di test per account personali](https://support.google.com/googleplay/android-developer/answer/14151465?hl=en).
+Per gli account personali creati dopo il 13 novembre 2023 Google richiede un test chiuso con almeno 12 tester iscritti continuativamente per 14 giorni prima di consentire la richiesta di accesso alla produzione. Verificare il requisito nella dashboard dell’account e organizzare il gruppo di tester prima di avviare il periodo di prova. [Requisiti di test per account personali](https://support.google.com/googleplay/android-developer/answer/14151465?hl=en).
 
 ## Scheda e screenshot
 
-Testi localizzati e immagini pronti nella cartella `release/play-store`. Le immagini esprimono la UI dell’emulatore API 36, non mockup. Sono escluse la schermata Mappa dalle immagini promozionali, poiché la pagina Allsky incorporata è in italiano anche con la lingua dell’app impostata a inglese.
+Testi localizzati in italiano e inglese sono stati salvati come bozza nella scheda Play Console `4974041146086048690`. L’icona e due screenshot smartphone sono associati alla scheda inglese; due screenshot sono associati a quella italiana, dove l’icona obbligatoria non risulta ancora selezionata. La Console segnala che per la promozione occorrono quattro screenshot smartphone con almeno 1080 px su ogni lato. Il banner è nella raccolta Play ma non associato. Le immagini preparate esprimono la UI dell’emulatore API 36, non mockup. È esclusa la schermata Mappa dalle immagini promozionali, poiché la pagina Allsky incorporata è in italiano anche con la lingua dell’app impostata a inglese.
 
 Non caricare il bundle unsigned, non pubblicare la bozza privacy come informativa definitiva e non dichiarare completata la Data safety finché i punti precedenti non sono stati verificati.

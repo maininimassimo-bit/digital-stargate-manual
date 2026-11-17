@@ -30,8 +30,13 @@
       "in_transit_encryption": "HTTPS/TLS",
       "play_data_type_mapping": "Map the IP and request metadata to the exact current Play Console data types. Google's guidance makes IP handling dependent on actual use; do not declare no collection by default."
     },
-    "network_access": "The app requests public AllSky Manciano images, weather projection, archive/meteor catalogue pages and the sky-map page over HTTPS. The developer directly manages the AllSky host and confirms access logs are retained for six months for technical operation and security. Requests necessarily expose the connection IP and technical request data to that host. No account, user-submitted content, analytics, advertising, or IP-based location inference is implemented. Map the IP/log handling to the current Play Data safety data types and purposes when the account is cleared to create the app; do not claim that no data is collected."
+    "network_access": "The app requests public AllSky Manciano images, weather projection, archive/meteor catalogue pages and the sky-map page over HTTPS. The developer directly manages the AllSky host and confirms access logs are retained for six months for technical operation and security. Requests necessarily expose the connection IP and technical request data to that host. No account, user-submitted content, analytics, advertising, or IP-based location inference is implemented. Map the IP/log handling to the current Play Data safety data types and purposes when completing the Data safety form; do not claim that no data is collected."
   },
-  "release_state": "Draft only; developer account exists but Google identity/phone verification is pending; upload signing key not created",
+  "play_console_app_id": "4974041146086048690",
+  "play_console_listing_state": "App created; Italian and English (en-US) text saved as draft; English icon and two phone screenshots selected; Italian two phone screenshots selected but icon not associated; feature graphic uploaded to Play asset library but not associated; Play requires four 1080px phone screenshots per locale for promotion",
+  "play_console_category": "App",
+  "play_console_free": true,
+  "play_app_signing_terms_accepted": true,
+  "release_state": "Draft only; no signed AAB uploaded; upload signing key not created",
   "selected_category": "Photography"
 }
