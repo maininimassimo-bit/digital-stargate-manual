@@ -2639,3 +2639,37 @@ La conoscenza provvisoria H117 conserva le 315 schede precedenti, aggiunge due s
 I sette run GitHub dello snapshot documentale H116, commit `65e4b34741ab02e7cb061bc4c0ca5ca8911d27ca`, sono conclusi positivamente: sette job e tutti i 199 passi restituiti. Sono controlli tecnici della documentazione e del repository, non prove scientifiche PixInsight.
 
 Restano 456 casi scientifici, la validazione del dominio completo sui 25 assi, il collaudo confermativo IA, la conoscenza finale e il trasferimento integrale dei byte con recupero remoto verificato. Questa aggiunta pubblica soltanto testo tecnico in PR bozza; non trasferisce gli archivi locali, non attiva il portale e non modifica materiali BKL-051.
+
+
+## H118: candidato IA con controlli successivi e limite superiore conservativo
+
+H118 aggiunge un candidato matematico al collaudo IA, mantenendo **zero unità di conferma indipendenti**. Non sostituisce il controesempio storico sulle quote adattive: ripetere intervalli validi soltanto a numerosità fissa continua a richiedere un controllo della copertura complessiva.
+
+Il candidato fissa prima dei dati cinque alternative Bernoulli, `q={0,1/1000,1/400,1/200,3/400}`, ciascuna con peso `1/5`. Con `k` decisioni errate in `n` unità, il rapporto misto è `E_n(p)=sum_j (1/5)*(q_j/p)^k*((1-q_j)/(1-p))^(n-k)`. Per un unico estimando dichiarato, la soglia al limite Owner `p=0.01` è `20`.
+
+La garanzia condizionale deriva da un processo non negativo con aspettativa condizionale non crescente sotto l’ipotesi nulla, e dalla disuguaglianza massimale di Ville. Il fondamento è descritto nella [fonte primaria, sezione 2.3 e sezione 4.6](https://arxiv.org/html/1808.03204v5); la miscela finita e i conteggi qui conservati sono una derivazione dell’autore dello studio, non un risultato sperimentale OpenAI. Il [lavoro sul betting per osservazioni limitate](https://arxiv.org/abs/2010.09686v7) offre il contesto metodologico delle sequenze di confidenza.
+
+Per un errore Bernoulli i.i.d. con probabilità fissa e con le altre ipotesi dichiarate, la soglia controlla il rischio di falsa accettazione anche con osservazioni successive. Non consente di scegliere dopo gli esiti bersagli più facili, cambiare popolazione o trasformare campioni riutilizzati in unità indipendenti.
+
+È inoltre proposta l’inversione del processo in un limite superiore unilaterale. L’intervallo da zero a `max(q)=0.0075` resta sempre incluso; il ramo superiore viene delimitato con confronti razionali esatti. Il valore restituito è l’estremo superiore conservativo, con ampiezza del bracket non superiore a `1/16777216`. Il limite inferiore strutturale di `0.0075` impedisce di usare questa miscela per certificare soglie di errore arbitrariamente più piccole.
+
+Le verifiche distinguono:
+
+- algebra esatta dell’aspettativa sotto la nulla e 511 prefissi binari puramente matematici;
+- 12 frontiere condizionali di conteggio e otto controlli CLI, compreso il comportamento con ottimizzazioni Python;
+- 24 intervalli razionali verificati mediante una seconda formulazione intera, un caso al limite strutturale e tre alterazioni respinte;
+- replay da byte recuperati, senza richiamare operazioni PixInsight o provider.
+
+Le allocazioni esemplificative su uno, sette o 25 estimandi sono **alternative condizionali**, non quote operative e non un conteggio dei test rimanenti. Sette famiglie e 25 assi del progetto non definiscono automaticamente una collezione di estimandi statistici. Vanno ancora congelati popolazione e unità indipendenti, stratificazione e pesi, classificazione degli errori e dei casi non valutabili, configurazione IA/conoscenza, budget e regola di arresto. Le violazioni operative restano motivo immediato di rifiuto.
+
+Sono conservati due fallimenti tecnici: il primo produttore ha incontrato il limite Python di conversione decimale degli interi prima di pubblicare il risultato; la versione successiva usa impronte delle frazioni codificate in esadecimale. Il primo replay numerico dell’archivio H118 ha omesso la funzione pura `integer_score` e resta fallito. Una nuova capsula include la dipendenza e supera il replay. Nessuna ricevuta storica è corretta retroattivamente.
+
+H118 mantiene tutte le 317 schede precedenti: **318 schede, 21 correzioni acicliche**. Il lettore70 supera dieci verifiche CLI. Il rendiconto100 conserva 4.920 requisiti, 14.521 criteri, 19 criteri Owner, sette famiglie e 25 assi. L’archivio selezionato verificato contiene 45 file, ZIP 11.063.833 byte, SHA-256 `30ea520bbf30fbcdb49e9928edc236bf97b3b03792690128d02c5a7d08add816`; cinque consultazioni e i 24 bracket numerici vengono riprodotti dal recupero. È una consegna locale selezionata, non tutto lo storico o una ricostruzione completa dello studio.
+
+| Artefatto locale | SHA-256 |
+| --- | --- |
+| Conoscenza provvisoria H118 | `78ba3590573988e2d106c409e4e5453989748573ac6952e2be8ea7152e66abb8` |
+| Lettore70 | `90c8da008fabc47e732b9ab295f5345a2d240d7993e3f78d79bb34935f16ccc0` |
+| Rendiconto100 | `c251527835669bb28a4d248996162310c7150a17e2c1dbc416829709a8431818` |
+
+Le verifiche matematiche sono dell’autore, con formulazioni numeriche distinte: non si dichiara una nuova review esterna indipendente. Zero chiamate IA, zero avvii nativi e zero chiusure scientifiche. Il recupero della prenotazione header002 rimane separato e irrisolto. I sette job e i 199 passi restituiti della CI H117 sono positivi; la CI H118 va verificata sul suo commit. Restano i 456 casi scientifici, il dominio completo, la conoscenza finale e l’effettivo trasferimento integrale con recupero remoto. Solo documentazione tecnica in PR bozza, senza attivazione del portale.
