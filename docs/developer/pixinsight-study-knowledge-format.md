@@ -2616,3 +2616,26 @@ La verifica successiva ricostruisce i target mediante interi Python e arrotondam
 La legge IID uniforme di CNG resta un'ipotesi esplicita del modello di simulazione, non una proprietà dimostrata da file, firma o test finiti. La conversione usa il certificato di errore del quantile e non afferma arrotondamento corretto di ogni proposta vettoriale. Questo passo non costruisce ancora le immagini dei sette modelli di varianza, non prova le identità dei parametri serializzati o degli alias nativi e non autorizza automaticamente la campagna PixInsight. Occorrono ancora costruzione degli input, trasporto Float32, confronto numerico, misure native e inferenza condizionale secondo il protocollo congelato.
 
 Tutti i nuovi byte sono su H:. Questi dati e programmi non sono ancora trasferiti integralmente su GitHub; questo documento è soltanto documentazione tecnica, con verifiche remote del testo. Nessuna nuova chiamata PixInsight o API di IA, nessun merge, deploy o attivazione del portale. Conoscenza finale e trasferimento remoto integrale restano aperti insieme alle sette famiglie e ai 25 assi.
+
+
+## H117 — review genuina e diagnostica002 trattenuta
+
+Aggiornamento del 17 novembre 2026, successivo allo snapshot H116. La review indipendente dell'intera implementazione isolata a 24 moduli è `APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION`, senza blocker. Il rapporto SHA-256 `3eef759e9887a7651e7a1bc3a8ec3fdb89adcd060607e8ab2a56f8f894c07082` e tutte le 14 evidenze citate sono stati copiati e verificati su H:. La review comprende sei fixture VM sulle sorgenti esatte, 28 controlli ricevute/UI/argv/risorse e cinque flussi con processi Python privati. I 75 casi autore sono evidenze autenticate, non tutti rieseguiti indipendentemente.
+
+Una nuova ammissione ordinaria del gate comune ha avviato una sola diagnostica header002. La ricevuta nativa conserva correttamente `DataType_ByteArray: 15` e supera il consumer semantico; SHA-256 `7116a0cf84f650d7f9901ae939e25051ec0524196dcac72171dd3f97c2cad121`. Non sono stati ripetuti header001 o casi scientifici.
+
+Dopo verifica effettiva della finestra posseduta, vuota e con motore terminale, la chiusura normale è stata eseguita una volta; il successivo inventario UI non mostra PixInsight. L'operatore ha però aggiunto il campo descrittivo `afterFrameDisclosure` alla ricevuta, mentre il contratto ammette un insieme esatto di chiavi. Il consumer l'ha respinta con `UI_CLOSE_FIELDS_WRONG`. Il parent originale trattiene gli oggetti e la prenotazione BKL-046 resta irrisolta. **Non sono attestati il rendiconto finale dell'uscita originale, l'archiviazione terminale ordinaria o il rilascio.** L'assenza della finestra non sostituisce questi controlli.
+
+La ricevuta respinta resta immutata. Cinque verifiche offline riproducono la causa e conservano i rifiuti per prenotazione alterata o uscita non confermata. La proiezione privata senza il campo aggiunto serve soltanto alla diagnosi: non è una correzione operativa né un recupero. Una capsula limitata dell'incidente conserva 109 file, è stata ricostruita identicamente e riproduce il rifiuto sul consumer recuperato; ZIP SHA-256 `0fc20c498b4c1fd51d64cce81f8f03d7896faff5b9d3e65903ffeaddd551ef65`. Restano vietati retry, modifica retroattiva delle ricevute, adozione di processi, cancellazione di active.json per sbloccare e riuso delle eccezioni storiche EXACT004/R005. Il recupero richiede un piano separato qualificato; ogni eventuale arresto forzato richiede una nuova decisione Owner.
+
+La conoscenza provvisoria H117 conserva le 315 schede precedenti, aggiunge due schede distinte per approvazione e operazione trattenuta, e mantiene 21 correzioni acicliche. Il lettore69 supera nove verifiche CLI. Il rendiconto99 riconcilia tutti i 4.920 requisiti, 14.521 criteri, 19 criteri Owner, sette famiglie e 25 assi, senza cambiare i byte dei requisiti o promuovere disposizioni scientifiche.
+
+| Artefatto locale | SHA-256 |
+| --- | --- |
+| Conoscenza provvisoria H117 | `4be7df98914e6f1004438f29b766cecdd87203a5e75da101aca76c232cbf0ff8` |
+| Lettore69 | `9e599b7690d724ecfd7874fe8c0d0b71e0b2b70b84e8729422816eeed41c54f5` |
+| Rendiconto99 | `27355fd46338e72b4543442ec1539214a4412fbc7a1cd85b5bee3c599c324e3c` |
+
+I sette run GitHub dello snapshot documentale H116, commit `65e4b34741ab02e7cb061bc4c0ca5ca8911d27ca`, sono conclusi positivamente: sette job e tutti i 199 passi restituiti. Sono controlli tecnici della documentazione e del repository, non prove scientifiche PixInsight.
+
+Restano 456 casi scientifici, la validazione del dominio completo sui 25 assi, il collaudo confermativo IA, la conoscenza finale e il trasferimento integrale dei byte con recupero remoto verificato. Questa aggiunta pubblica soltanto testo tecnico in PR bozza; non trasferisce gli archivi locali, non attiva il portale e non modifica materiali BKL-051.
