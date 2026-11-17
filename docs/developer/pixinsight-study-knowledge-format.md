@@ -2811,3 +2811,26 @@ La conoscenza provvisoria **H125** contiene 329 schede e 22 collegamenti di corr
 Il commit H124 `951a03cf9856f5dd239688d6da2f71bc20a34078` ha concluso positivamente tutti i sette job e i 199 passi restituiti. È evidenza tecnica/documentale, non scientifica. Questo nuovo commit richiede i propri controlli.
 
 Nessun nuovo avvio PixInsight o caso scientifico, nessun archivio o sorgente vendor caricato. Restano 456 casi nativi, sette famiglie/25 assi scientificamente aperti, conferma IA, conoscenza finale e trasferimento integrale GitHub con recupero verificato. Il registro v600 / conoscenza registrata v1.171 resta distinto dai supplementi locali. PR627 rimane in bozza senza merge/deploy, portale o modifiche a master/script installati, M27 e materiali BKL051.
+
+
+## H126: seconda review approvata, requisiti di esecuzione ancora distinti
+
+La review indipendente completa del subject corretto a 34 sorgenti è conclusa con **APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION**, senza blocker. STREAM-COMPLETE-01 risulta risolto nel subject `8e4789e6e1647ef038e24271fd539a0c83ca7bd672a38365ae2a9c17a3439ea1`. Il rapporto originale ha SHA-256 `75322cd79bec19aedf5f18ff5b1f8c30c4baa8566fc2edaef28474d9903a5031`.
+
+Il revisore riporta 33 nuovi casi tecnici indipendenti positivi, con dipendenze modellate dichiarate e una query globale Windows reale. Ha verificato 34 moduli, 97 riscontri di byte e nove metadati prima/dopo, recuperando i 79 payload della capsula. I sorgenti sono invariati; rapporto respinto precedente e successiva correzione restano conservati.
+
+Sono stati installati i byte del rapporto genuino, la provenienza dal messaggio ricevuto e la review normalizzata `48312124303cee08dd0141c36b81f820ce05433bbf752ebdc294fbc54fea0aea`. La verifica isolata della sola Scope approvata è riuscita: 34 sorgenti, otto input, runtime/installazione/registro/publisher e manifest/ARB/RQ comuni. Non ha costruito Host o custode, acquisito il gate o avviato PixInsight.
+
+Il requisito della review è quindi soddisfatto. L'esecuzione resta subordinata alla prenotazione comune effettiva, alle riserve reali e a tutti i controlli originali. Nel campione separato successivo la memoria fisica disponibile supera appena 8 GiB, ma il commit disponibile è circa 6 GiB, sotto i 12 GiB richiesti: nessun avvio è stato effettuato. Questo è un dato puntuale, non una previsione della disponibilità futura.
+
+L'approvazione dell'implementazione non valida le API native File/CryptographicHash, la vita dell'engine privato, la conservazione dei File dopo un errore, un limite continuo di memoria o una riduzione del consumo. Il solo successo futuro del witness hash non chiuderebbe queste proprietà distinte.
+
+La conoscenza provvisoria **H126** registra 330 schede e 23 collegamenti di correzione. La scheda storica del successore non ancora approvato rimane integra e rimanda ora all'approvazione effettiva con i limiti di esecuzione. Lettore78 verificato e rendiconto108; cinque azioni correnti aggiornate, requisiti/criteri/Owner conservati letteralmente.
+
+| Artefatto H126 | SHA-256 |
+| --- | --- |
+| Conoscenza provvisoria | `2ee3a03d272e3142e617362e62c3dd411227231b18b816628be941e5236fd5bd` |
+| Lettore78 | `b591e61d5732ebc3a78eed740d45bf74536c9da9d2c3339744b9f0bcf73accf5` |
+| Rendiconto108 | `8692cacedba400f0b51f33caa171f0734b0048065f376c5e900a6405c9443a5a` |
+
+I sette job e i 199 passi restituiti del precedente head H125 `85a068342c5558047f6f2645e5f46f46b9740684` sono positivi; il nuovo head richiede verifica separata. Restano 456 casi scientifici nativi, sette famiglie/25 assi aperti, conferma IA, conoscenza finale e trasferimento integrale GitHub con recupero verificato. Zero nuove prove native e chiusure scientifiche. Solo resoconto tecnico pubblicato: nessun archivio o sorgente vendor, merge/deploy, portale, M27 o modifica ai master/script installati e ai materiali BKL051.
