@@ -111,3 +111,31 @@ Il campione è selezionato fra i candidati del temporale: non comprende tutte le
 Il controllo operativo al termine dell’analisi ha trovato entrambi i servizi attivi e `publication_enabled=false`. Configurazione, soglie, maschere e calibrazione restano invariate. Nessuna immagine candidata, ritaglio, miniatura o metadato individuale è aggiunto al repository o alla galleria: qui si pubblica soltanto il resoconto testuale autorizzato. Le prove visive e il confronto dettagliato rimangono nell’archivio privato dell’Owner.
 
 La decisione è **continuare l’affiancamento privato**, raccogliendo altre notti e contesto temporale prima di proporre modifiche o attivazione pubblica. Questa analisi non comporta un nuovo backup di configurazione, perché non modifica l’impianto; a quella data restavano validi gli snapshot del 12 novembre; quelli successivi sono indicati nella sezione backup. L’eventuale aggiornamento di versione o pubblicazione richiede una successiva autorizzazione. La verifica upstream del 13 novembre ha trovato il ramo ufficiale identico al commit v1.0.1 già installato, senza aggiornamenti da applicare.
+
+
+## Verifica delle notti 16–17 e 17–18 novembre 2026
+
+Riscontro conclusivo **18 novembre 2026, ore 09:07 Europe/Rome**, via SSH in sola lettura. Verificati stato dei servizi, journal dalla riattivazione del 16 novembre, registro SQLite aperto con `mode=ro`, file JPEG salvati e selezione notturna secondo la soglia solare configurata. La copertura indica i JPEG notturni idonei effettivamente salvati, non garantisce assenza di eventi durante l'intervallo fra due scatti.
+
+| Notte locale | JPEG idonei elaborati | Intervallo elaborato | JPEG idonei mancanti | Intervallo massimo fra scatti | Frame esclusi dal gate nuvolosità | Fotogrammi candidati privati / ordinari |
+|---|---:|---|---:|---:|---:|---:|
+| 16–17 novembre | 756 | 17:22:49–06:34:48 | 0 | 94 s | 27 | 10 / 18 |
+| 17–18 novembre | 706 | 17:21:39–06:35:56 | 0 | 171 s | 150 | 0 / 0 |
+
+Gli esclusi dal gate nuvolosità sono compresi nei JPEG elaborati: il motore li ha letti e ha scelto di saltarne il confronto; non sono errori o file mancanti. Nessuno scatto elaborato risulta estraneo alla selezione notturna ricostruita. Entrambi gli intervalli massimi restano sotto la soglia di reset temporale di 180 s.
+
+Al controllo entrambi i servizi risultano **attivi**, con gli stessi PID osservati dopo la riattivazione e `NRestarts=0`. Nel journal esaminato non emergono errori, traceback, arresti forzati o pause applicative. Il registro supera `PRAGMA quick_check` con esito `ok`. Il contatore complessivo privato è passato da 3.342 a 4.048 fotogrammi, coerentemente con i 706 dell'ultima notte. Lo stato è fresco e `waiting-for-night-frame` è normale in orario diurno; l'ultimo JPEG elaborato è quello delle 06:35:56 del 18 novembre. I reset dello stato temporale includono inizializzazione/cambio notte e non vanno confusi con riavvii del processo.
+
+### Confronto privato e limiti
+
+Per la notte 16–17 novembre, i 10 fotogrammi privati e i 18 ordinari condividono **6 fotogrammi**, ma soltanto **5 selezionano la stessa traccia**. Vi sono 4 fotogrammi aggiuntivi privati e 12 esclusivi dell'ordinario. L'esame di originali e immagini vicine dei candidati privati individua **6 fotogrammi con tracce visibili di origine non confermata** e **4 probabili falsi positivi da nuvole o bordi**. Dei quattro aggiuntivi privati, tre sono probabili falsi positivi e uno contiene una traccia reale non classificata.
+
+Nel confronto con i candidati esclusivi dell'ordinario si osservano strutture nuvolose, tracce in movimento fra scatti consecutivi e altre tracce di origine incerta. Questi riscontri non costituiscono una classificazione astronomica indipendente. Alcune tracce segmentate o persistenti possono avere origine artificiale; la cadenza di acquisizione non permette di escludere satelliti o aerei dalle sole immagini vicine. **Nessuna meteora è confermata** e la riduzione del numero di candidati non misura da sola precisione o sensibilità. Nell'ultima notte entrambi gli archivi contengono zero candidati: non vi sono nuovi oggetti da confrontare, e questo non dimostra l'assenza di meteore nel cielo.
+
+### Esito operativo e riservatezza
+
+Il rilevatore ordinario `allsky_meteorarchive.py` resta abilitato; nello stato privato è confermato `publication_enabled=false`, con i controlli di isolamento riusciti e nessun errore corrente. Non emergono anomalie operative che richiedano correzioni. Prosegue l'affiancamento privato; non viene attivato il temporale nella pipeline pubblica.
+
+Il primo tentativo SSH del 18 novembre era scaduto senza risposta; il successivo è riuscito e ha permesso il controllo conclusivo. Il timeout di collegamento non è stato attribuito a un guasto del rilevatore. L'automazione una tantum è stata rimossa dopo il resoconto; il nuovo controllo è stato richiesto dall'Owner.
+
+Questa attività e il relativo aggiornamento documentale **non modificano configurazione Allsky, software, soglie, maschere, calibrazione o servizi** e non richiedono un nuovo snapshot della configurazione. Immagini, ritagli, miniature, coordinate, orari dei singoli candidati e metadati individuali restano privati e non sono aggiunti al repository né alla galleria pubblica. Le sole informazioni pubblicate qui sono risultati aggregati e finestre operative della notte.
