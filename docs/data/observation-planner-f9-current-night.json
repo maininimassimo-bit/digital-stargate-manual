@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "projectionType": "BKL031_F9_REPEATABLE_CURRENT_NIGHT",
-  "generatedAtUtc": "2026-11-18T14:11:49Z",
+  "generatedAtUtc": "2026-11-18T22:04:35Z",
   "environment": "EVALUATION",
   "authority": "NONE",
   "consumerMode": "READ_ONLY",
@@ -14,50 +14,50 @@
     "providerId": "METEOHUB",
     "upstreamAuthorityId": "ITALIAMETEO_ARPAE",
     "modelId": "ICON_2I",
-    "runInitialisationUtc": "2026-11-18T00:00:00Z",
-    "retrievedAtUtc": "2026-11-18T14:11:49Z",
-    "runAgeHoursAtRetrieval": 14.197183,
+    "runInitialisationUtc": "2026-11-18T12:00:00Z",
+    "retrievedAtUtc": "2026-11-18T22:04:35Z",
+    "runAgeHoursAtRetrieval": 10.076489,
     "freshnessState": "FRESH",
     "sourceFiles": [
       {
         "variable": "CLCT",
-        "sha256": "f484e6fd279be70435e6969702b0865365b331c9f55cfbc29c00cf78aec6bd66",
+        "sha256": "6ba26762a7d03ed44d806cc5bea24270f72627fb16a4716148ffabfcbe7ab784",
         "byteLength": 84565244,
         "unit": "%"
       },
       {
         "variable": "T_2M",
-        "sha256": "c8151f0f549605ec3df9745befc72a67c4e839ce1bc2369bcfb1c8cf19aaa01d",
+        "sha256": "886e63137ff4a7a6e2b65b1e9f672638746b90bc1cf67cf227088ebd2ebed30b",
         "byteLength": 84565244,
         "unit": "K"
       },
       {
         "variable": "TD_2M",
-        "sha256": "9e58bfd6b7f4a8206975ab23d89847cbd21203b768491866a295666ace22ede4",
+        "sha256": "fbc1f78034d73ed299850aea2a6ab835b2ee5baaf3827398a0f1e75fcceea0a6",
         "byteLength": 84565244,
         "unit": "K"
       },
       {
         "variable": "TOT_PREC",
-        "sha256": "9d011fc427a2e951824a3dd6438cce32758fffb35d00d5de8ec1d83ba5714494",
+        "sha256": "5798fa74394ce68977effae17302dac3903f4748997b014d25a80591266097ee",
         "byteLength": 83408754,
         "unit": "kg m**-2"
       },
       {
         "variable": "U_10M",
-        "sha256": "e28ab5b4cfc55d7fb035d5d919720fb58bf7b67b375ddabac27627a5eb91bc07",
+        "sha256": "5f63c75fea28f385712b0199183ed3264fec2d27f7103f40f61e07a7724101de",
         "byteLength": 84565244,
         "unit": "m s**-1"
       },
       {
         "variable": "V_10M",
-        "sha256": "9271582d6fb3dd20d90bb4de9d9b07e7bc50dae4f2ad4ac1cee8ca22a549f6f2",
+        "sha256": "f8c7f13ede13322825af634ac8916f1fa764a2d7864efdae789fca7503616613",
         "byteLength": 84565244,
         "unit": "m s**-1"
       },
       {
         "variable": "VMAX_10M",
-        "sha256": "d37a6588b10c0265ee8d6d01a4da9b703547e5c1e2e16afdc04e521553903e1a",
+        "sha256": "dcf11f6c3e0805f97a4e1877e64cfa8bd2f54995214194a68846c42f4fdea262",
         "byteLength": 84566996,
         "unit": "m s**-1"
       }
@@ -1067,14 +1067,13 @@
       "moonAltitudeDeg": 25.2,
       "moonIlluminatedFraction": 0.611,
       "weather": {
-        "temperatureC": 18.89,
-        "dewPointC": 10.94,
-        "cloudCoverPct": 94.8,
-        "relativeHumidityPct": 59.9,
-        "precipitationMm": 0.0,
-        "windSpeedKmh": 13.1,
-        "windGustKmh": 30.8,
-        "precipitationNumericalTraceMm": 1.7763568394002505e-15
+        "temperatureC": 18.59,
+        "dewPointC": 10.62,
+        "cloudCoverPct": 42.5,
+        "relativeHumidityPct": 59.8,
+        "precipitationMm": 1.534883331544279e-12,
+        "windSpeedKmh": 21.3,
+        "windGustKmh": 39.7
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1082,7 +1081,7 @@
           "azimuthDeg": 4.37,
           "moonSeparationDeg": 96.49,
           "astronomyFactor": 0.6131,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1090,7 +1089,7 @@
           "azimuthDeg": 164.79,
           "moonSeparationDeg": 49.43,
           "astronomyFactor": 0.7707,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 0.8827
         },
         "dsg-target:m-31": {
@@ -1098,7 +1097,7 @@
           "azimuthDeg": 63.3,
           "moonSeparationDeg": 55.74,
           "astronomyFactor": 0.5472,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 0.901
         },
         "dsg-target:m-42": {
@@ -1106,7 +1105,7 @@
           "azimuthDeg": 44.63,
           "moonSeparationDeg": 102.71,
           "astronomyFactor": 0.25,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -1114,7 +1113,7 @@
           "azimuthDeg": 50.58,
           "moonSeparationDeg": 80.68,
           "astronomyFactor": 0.2433,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 0.9731
         },
         "dsg-target:ngc-7000": {
@@ -1122,7 +1121,7 @@
           "azimuthDeg": 75.18,
           "moonSeparationDeg": 56.42,
           "astronomyFactor": 0.7757,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 0.9029
         },
         "dsg-target:ngc-281": {
@@ -1130,7 +1129,7 @@
           "azimuthDeg": 44.76,
           "moonSeparationDeg": 69.11,
           "astronomyFactor": 0.6008,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 0.9396
         },
         "dsg-target:ic-1805": {
@@ -1138,7 +1137,7 @@
           "azimuthDeg": 32.59,
           "moonSeparationDeg": 81.66,
           "astronomyFactor": 0.524,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 0.9759
         },
         "dsg-target:ic-434": {
@@ -1146,7 +1145,7 @@
           "azimuthDeg": 40.91,
           "moonSeparationDeg": 104.54,
           "astronomyFactor": 0.25,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -1154,7 +1153,7 @@
           "azimuthDeg": 2.02,
           "moonSeparationDeg": 131.62,
           "astronomyFactor": 0.25,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -1162,7 +1161,7 @@
           "azimuthDeg": 138.49,
           "moonSeparationDeg": 14.1,
           "astronomyFactor": 0.3346,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 0.7806
         },
         "dsg-target:m-13": {
@@ -1170,7 +1169,7 @@
           "azimuthDeg": 274.76,
           "moonSeparationDeg": 94.04,
           "astronomyFactor": 0.7637,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -1178,7 +1177,7 @@
           "azimuthDeg": 309.27,
           "moonSeparationDeg": 126.1,
           "astronomyFactor": 0.513,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -1186,7 +1185,7 @@
           "azimuthDeg": 313.75,
           "moonSeparationDeg": 117.83,
           "astronomyFactor": 0.5866,
-          "weatherFactor": 0.356,
+          "weatherFactor": 0.4233,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -1197,13 +1196,14 @@
       "moonAltitudeDeg": 33.03,
       "moonIlluminatedFraction": 0.615,
       "weather": {
-        "temperatureC": 17.73,
-        "dewPointC": 13.91,
-        "cloudCoverPct": 86.9,
-        "relativeHumidityPct": 78.3,
-        "precipitationMm": 1.2118483994072449e-10,
-        "windSpeedKmh": 7.4,
-        "windGustKmh": 23.7
+        "temperatureC": 17.78,
+        "dewPointC": 11.03,
+        "cloudCoverPct": 0.0,
+        "relativeHumidityPct": 64.7,
+        "precipitationMm": 0.0,
+        "windSpeedKmh": 14.2,
+        "windGustKmh": 32.7,
+        "precipitationNumericalTraceMm": 5.88418203051333e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1211,7 +1211,7 @@
           "azimuthDeg": 5.23,
           "moonSeparationDeg": 96.22,
           "astronomyFactor": 0.6514,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1219,7 +1219,7 @@
           "azimuthDeg": 204.49,
           "moonSeparationDeg": 49.65,
           "astronomyFactor": 0.7921,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 0.8497
         },
         "dsg-target:m-31": {
@@ -1227,7 +1227,7 @@
           "azimuthDeg": 69.74,
           "moonSeparationDeg": 55.32,
           "astronomyFactor": 0.6625,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 0.8708
         },
         "dsg-target:m-42": {
@@ -1235,7 +1235,7 @@
           "azimuthDeg": 60.44,
           "moonSeparationDeg": 102.28,
           "astronomyFactor": 0.2797,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -1243,7 +1243,7 @@
           "azimuthDeg": 60.81,
           "moonSeparationDeg": 80.15,
           "astronomyFactor": 0.3093,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 0.9633
         },
         "dsg-target:ngc-7000": {
@@ -1251,7 +1251,7 @@
           "azimuthDeg": 60.95,
           "moonSeparationDeg": 56.37,
           "astronomyFactor": 0.7983,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 0.8747
         },
         "dsg-target:ngc-281": {
@@ -1259,7 +1259,7 @@
           "azimuthDeg": 47.53,
           "moonSeparationDeg": 68.73,
           "astronomyFactor": 0.6992,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 0.9208
         },
         "dsg-target:ic-1805": {
@@ -1267,7 +1267,7 @@
           "azimuthDeg": 36.68,
           "moonSeparationDeg": 81.26,
           "astronomyFactor": 0.6095,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 0.9674
         },
         "dsg-target:ic-434": {
@@ -1275,7 +1275,7 @@
           "azimuthDeg": 56.84,
           "moonSeparationDeg": 104.09,
           "astronomyFactor": 0.2797,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -1283,7 +1283,7 @@
           "azimuthDeg": 17.47,
           "moonSeparationDeg": 131.1,
           "astronomyFactor": 0.2797,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -1291,7 +1291,7 @@
           "azimuthDeg": 151.71,
           "moonSeparationDeg": 14.43,
           "astronomyFactor": 0.407,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 0.7185
         },
         "dsg-target:m-13": {
@@ -1299,7 +1299,7 @@
           "azimuthDeg": 282.88,
           "moonSeparationDeg": 94.27,
           "astronomyFactor": 0.693,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -1307,7 +1307,7 @@
           "azimuthDeg": 316.01,
           "moonSeparationDeg": 126.16,
           "astronomyFactor": 0.4678,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -1315,7 +1315,7 @@
           "azimuthDeg": 318.75,
           "moonSeparationDeg": 117.86,
           "astronomyFactor": 0.5459,
-          "weatherFactor": 0.1861,
+          "weatherFactor": 0.8675,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -1326,13 +1326,14 @@
       "moonAltitudeDeg": 38.63,
       "moonIlluminatedFraction": 0.619,
       "weather": {
-        "temperatureC": 17.25,
-        "dewPointC": 14.32,
-        "cloudCoverPct": 73.6,
-        "relativeHumidityPct": 82.9,
-        "precipitationMm": 4.53725945703809e-10,
-        "windSpeedKmh": 5.8,
-        "windGustKmh": 15.8
+        "temperatureC": 17.47,
+        "dewPointC": 11.15,
+        "cloudCoverPct": 67.1,
+        "relativeHumidityPct": 66.5,
+        "precipitationMm": 0.0,
+        "windSpeedKmh": 11.7,
+        "windGustKmh": 27.0,
+        "precipitationNumericalTraceMm": 9.492406860545088e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1340,7 +1341,7 @@
           "azimuthDeg": 5.77,
           "moonSeparationDeg": 95.95,
           "astronomyFactor": 0.7771,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1348,7 +1349,7 @@
           "azimuthDeg": 233.47,
           "moonSeparationDeg": 49.88,
           "astronomyFactor": 0.9026,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 0.8277
         },
         "dsg-target:m-31": {
@@ -1356,7 +1357,7 @@
           "azimuthDeg": 75.94,
           "moonSeparationDeg": 54.89,
           "astronomyFactor": 0.8703,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 0.8492
         },
         "dsg-target:m-42": {
@@ -1364,7 +1365,7 @@
           "azimuthDeg": 73.18,
           "moonSeparationDeg": 101.84,
           "astronomyFactor": 0.3957,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -1372,7 +1373,7 @@
           "azimuthDeg": 70.24,
           "moonSeparationDeg": 79.63,
           "astronomyFactor": 0.5158,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 0.9555
         },
         "dsg-target:ngc-7000": {
@@ -1380,7 +1381,7 @@
           "azimuthDeg": 289.64,
           "moonSeparationDeg": 56.33,
           "astronomyFactor": 0.9095,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 0.8554
         },
         "dsg-target:ngc-281": {
@@ -1388,7 +1389,7 @@
           "azimuthDeg": 48.14,
           "moonSeparationDeg": 68.36,
           "astronomyFactor": 0.8875,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 0.9071
         },
         "dsg-target:ic-1805": {
@@ -1396,7 +1397,7 @@
           "azimuthDeg": 39.44,
           "moonSeparationDeg": 80.85,
           "astronomyFactor": 0.7867,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 0.9607
         },
         "dsg-target:ic-434": {
@@ -1404,7 +1405,7 @@
           "azimuthDeg": 69.8,
           "moonSeparationDeg": 103.64,
           "astronomyFactor": 0.3957,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -1412,7 +1413,7 @@
           "azimuthDeg": 31.82,
           "moonSeparationDeg": 130.58,
           "astronomyFactor": 0.3957,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -1420,7 +1421,7 @@
           "azimuthDeg": 166.43,
           "moonSeparationDeg": 14.77,
           "astronomyFactor": 0.549,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 0.677
         },
         "dsg-target:m-13": {
@@ -1428,7 +1429,7 @@
           "azimuthDeg": 290.42,
           "moonSeparationDeg": 94.51,
           "astronomyFactor": 0.7116,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -1436,7 +1437,7 @@
           "azimuthDeg": 323.61,
           "moonSeparationDeg": 126.23,
           "astronomyFactor": 0.5181,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -1444,7 +1445,7 @@
           "azimuthDeg": 324.75,
           "moonSeparationDeg": 117.89,
           "astronomyFactor": 0.5988,
-          "weatherFactor": 0.2564,
+          "weatherFactor": 0.502,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -1455,13 +1456,14 @@
       "moonAltitudeDeg": 41.18,
       "moonIlluminatedFraction": 0.624,
       "weather": {
-        "temperatureC": 17.04,
-        "dewPointC": 13.84,
-        "cloudCoverPct": 65.0,
-        "relativeHumidityPct": 81.4,
+        "temperatureC": 17.74,
+        "dewPointC": 12.35,
+        "cloudCoverPct": 100.0,
+        "relativeHumidityPct": 70.7,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 7.3,
-        "windGustKmh": 18.7
+        "windSpeedKmh": 13.5,
+        "windGustKmh": 27.0,
+        "precipitationNumericalTraceMm": 5.162537064506978e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1469,7 +1471,7 @@
           "azimuthDeg": 5.92,
           "moonSeparationDeg": 95.68,
           "astronomyFactor": 0.8419,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1477,7 +1479,7 @@
           "azimuthDeg": 251.5,
           "moonSeparationDeg": 50.11,
           "astronomyFactor": 0.8795,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 0.8179
         },
         "dsg-target:m-31": {
@@ -1485,7 +1487,7 @@
           "azimuthDeg": 82.3,
           "moonSeparationDeg": 54.47,
           "astronomyFactor": 0.9595,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 0.8378
         },
         "dsg-target:m-42": {
@@ -1493,7 +1495,7 @@
           "azimuthDeg": 84.16,
           "moonSeparationDeg": 101.4,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -1501,7 +1503,7 @@
           "azimuthDeg": 79.39,
           "moonSeparationDeg": 79.1,
           "astronomyFactor": 0.6668,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 0.9502
         },
         "dsg-target:ngc-7000": {
@@ -1509,7 +1511,7 @@
           "azimuthDeg": 284.96,
           "moonSeparationDeg": 56.29,
           "astronomyFactor": 0.9615,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 0.8461
         },
         "dsg-target:ngc-281": {
@@ -1517,7 +1519,7 @@
           "azimuthDeg": 44.92,
           "moonSeparationDeg": 67.99,
           "astronomyFactor": 0.9749,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 0.8995
         },
         "dsg-target:ic-1805": {
@@ -1525,7 +1527,7 @@
           "azimuthDeg": 40.38,
           "moonSeparationDeg": 80.44,
           "astronomyFactor": 0.9054,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 0.9564
         },
         "dsg-target:ic-434": {
@@ -1533,7 +1535,7 @@
           "azimuthDeg": 80.94,
           "moonSeparationDeg": 103.19,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -1541,7 +1543,7 @@
           "azimuthDeg": 44.62,
           "moonSeparationDeg": 130.05,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -1549,7 +1551,7 @@
           "azimuthDeg": 182.03,
           "moonSeparationDeg": 15.12,
           "astronomyFactor": 0.6089,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 0.6582
         },
         "dsg-target:m-13": {
@@ -1557,7 +1559,7 @@
           "azimuthDeg": 298.03,
           "moonSeparationDeg": 94.75,
           "astronomyFactor": 0.6732,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -1565,7 +1567,7 @@
           "azimuthDeg": 332.07,
           "moonSeparationDeg": 126.29,
           "astronomyFactor": 0.5183,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -1573,7 +1575,7 @@
           "azimuthDeg": 331.65,
           "moonSeparationDeg": 117.92,
           "astronomyFactor": 0.5995,
-          "weatherFactor": 0.5021,
+          "weatherFactor": 0.3102,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -1584,13 +1586,14 @@
       "moonAltitudeDeg": 40.21,
       "moonIlluminatedFraction": 0.628,
       "weather": {
-        "temperatureC": 17.95,
-        "dewPointC": 11.25,
-        "cloudCoverPct": 72.2,
-        "relativeHumidityPct": 64.9,
+        "temperatureC": 17.48,
+        "dewPointC": 13.9,
+        "cloudCoverPct": 83.5,
+        "relativeHumidityPct": 79.5,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 9.2,
-        "windGustKmh": 21.2
+        "windSpeedKmh": 9.1,
+        "windGustKmh": 29.9,
+        "precipitationNumericalTraceMm": 8.326672684688674e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1598,7 +1601,7 @@
           "azimuthDeg": 5.67,
           "moonSeparationDeg": 95.4,
           "astronomyFactor": 0.8522,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1606,7 +1609,7 @@
           "azimuthDeg": 264.15,
           "moonSeparationDeg": 50.34,
           "astronomyFactor": 0.7811,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 0.8213
         },
         "dsg-target:m-31": {
@@ -1614,7 +1617,7 @@
           "azimuthDeg": 90.21,
           "moonSeparationDeg": 54.04,
           "astronomyFactor": 0.9595,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 0.838
         },
         "dsg-target:m-42": {
@@ -1622,7 +1625,7 @@
           "azimuthDeg": 94.37,
           "moonSeparationDeg": 100.97,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -1630,7 +1633,7 @@
           "azimuthDeg": 88.91,
           "moonSeparationDeg": 78.58,
           "astronomyFactor": 0.7675,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 0.9486
         },
         "dsg-target:ngc-7000": {
@@ -1638,7 +1641,7 @@
           "azimuthDeg": 287.83,
           "moonSeparationDeg": 56.25,
           "astronomyFactor": 0.962,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 0.848
         },
         "dsg-target:ngc-281": {
@@ -1646,7 +1649,7 @@
           "azimuthDeg": 33.87,
           "moonSeparationDeg": 67.61,
           "astronomyFactor": 0.9748,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 0.8991
         },
         "dsg-target:ic-1805": {
@@ -1654,7 +1657,7 @@
           "azimuthDeg": 38.56,
           "moonSeparationDeg": 80.03,
           "astronomyFactor": 0.9702,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 0.9551
         },
         "dsg-target:ic-434": {
@@ -1662,7 +1665,7 @@
           "azimuthDeg": 91.23,
           "moonSeparationDeg": 102.74,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -1670,7 +1673,7 @@
           "azimuthDeg": 55.93,
           "moonSeparationDeg": 129.53,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -1678,7 +1681,7 @@
           "azimuthDeg": 197.5,
           "moonSeparationDeg": 15.48,
           "astronomyFactor": 0.5931,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 0.6643
         },
         "dsg-target:m-13": {
@@ -1686,7 +1689,7 @@
           "azimuthDeg": 306.12,
           "moonSeparationDeg": 94.98,
           "astronomyFactor": 0.5871,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -1694,7 +1697,7 @@
           "azimuthDeg": 341.32,
           "moonSeparationDeg": 126.34,
           "astronomyFactor": 0.478,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -1702,7 +1705,7 @@
           "azimuthDeg": 339.31,
           "moonSeparationDeg": 117.95,
           "astronomyFactor": 0.5573,
-          "weatherFactor": 0.4826,
+          "weatherFactor": 0.3988,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -1713,13 +1716,14 @@
       "moonAltitudeDeg": 35.91,
       "moonIlluminatedFraction": 0.632,
       "weather": {
-        "temperatureC": 17.81,
-        "dewPointC": 8.88,
-        "cloudCoverPct": 99.6,
-        "relativeHumidityPct": 55.9,
+        "temperatureC": 17.15,
+        "dewPointC": 14.21,
+        "cloudCoverPct": 99.2,
+        "relativeHumidityPct": 82.8,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 12.9,
-        "windGustKmh": 25.5
+        "windSpeedKmh": 7.9,
+        "windGustKmh": 22.4,
+        "precipitationNumericalTraceMm": 1.071365218763276e-14
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1727,7 +1731,7 @@
           "azimuthDeg": 5.01,
           "moonSeparationDeg": 95.13,
           "astronomyFactor": 0.8618,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1735,7 +1739,7 @@
           "azimuthDeg": 274.44,
           "moonSeparationDeg": 50.58,
           "astronomyFactor": 0.6836,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 0.8376
         },
         "dsg-target:m-31": {
@@ -1743,7 +1747,7 @@
           "azimuthDeg": 142.13,
           "moonSeparationDeg": 53.62,
           "astronomyFactor": 0.9626,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 0.8502
         },
         "dsg-target:m-42": {
@@ -1751,7 +1755,7 @@
           "azimuthDeg": 104.63,
           "moonSeparationDeg": 100.53,
           "astronomyFactor": 0.5207,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -1759,7 +1763,7 @@
           "azimuthDeg": 99.86,
           "moonSeparationDeg": 78.05,
           "astronomyFactor": 0.8693,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 0.9508
         },
         "dsg-target:ngc-7000": {
@@ -1767,7 +1771,7 @@
           "azimuthDeg": 292.31,
           "moonSeparationDeg": 56.22,
           "astronomyFactor": 0.883,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 0.8609
         },
         "dsg-target:ngc-281": {
@@ -1775,7 +1779,7 @@
           "azimuthDeg": 8.34,
           "moonSeparationDeg": 67.24,
           "astronomyFactor": 0.9766,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 0.9063
         },
         "dsg-target:ic-1805": {
@@ -1783,7 +1787,7 @@
           "azimuthDeg": 32.2,
           "moonSeparationDeg": 79.62,
           "astronomyFactor": 0.9893,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 0.9572
         },
         "dsg-target:ic-434": {
@@ -1791,7 +1795,7 @@
           "azimuthDeg": 101.49,
           "moonSeparationDeg": 102.29,
           "astronomyFactor": 0.53,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -1799,7 +1803,7 @@
           "azimuthDeg": 66.1,
           "moonSeparationDeg": 129.0,
           "astronomyFactor": 0.4961,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -1807,7 +1811,7 @@
           "azimuthDeg": 211.86,
           "moonSeparationDeg": 15.85,
           "astronomyFactor": 0.5582,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 0.6946
         },
         "dsg-target:m-13": {
@@ -1815,7 +1819,7 @@
           "azimuthDeg": 314.94,
           "moonSeparationDeg": 95.22,
           "astronomyFactor": 0.5099,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -1823,7 +1827,7 @@
           "azimuthDeg": 351.19,
           "moonSeparationDeg": 126.4,
           "astronomyFactor": 0.4538,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -1831,7 +1835,7 @@
           "azimuthDeg": 347.6,
           "moonSeparationDeg": 117.97,
           "astronomyFactor": 0.5283,
-          "weatherFactor": 0.3361,
+          "weatherFactor": 0.3105,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -1842,13 +1846,14 @@
       "moonAltitudeDeg": 29.03,
       "moonIlluminatedFraction": 0.636,
       "weather": {
-        "temperatureC": 17.43,
-        "dewPointC": 11.11,
-        "cloudCoverPct": 72.2,
-        "relativeHumidityPct": 66.4,
+        "temperatureC": 16.67,
+        "dewPointC": 13.66,
+        "cloudCoverPct": 90.7,
+        "relativeHumidityPct": 82.4,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 9.5,
-        "windGustKmh": 29.0
+        "windSpeedKmh": 2.1,
+        "windGustKmh": 16.7,
+        "precipitationNumericalTraceMm": 1.1268763699945339e-14
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1856,7 +1861,7 @@
           "azimuthDeg": 3.97,
           "moonSeparationDeg": 94.85,
           "astronomyFactor": 0.8697,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1864,7 +1869,7 @@
           "azimuthDeg": 283.83,
           "moonSeparationDeg": 50.82,
           "astronomyFactor": 0.5903,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 0.8656
         },
         "dsg-target:m-31": {
@@ -1872,7 +1877,7 @@
           "azimuthDeg": 267.92,
           "moonSeparationDeg": 53.2,
           "astronomyFactor": 0.9685,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 0.8738
         },
         "dsg-target:m-42": {
@@ -1880,7 +1885,7 @@
           "azimuthDeg": 115.7,
           "moonSeparationDeg": 100.09,
           "astronomyFactor": 0.6161,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -1888,7 +1893,7 @@
           "azimuthDeg": 114.28,
           "moonSeparationDeg": 77.52,
           "astronomyFactor": 0.968,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 0.9572
         },
         "dsg-target:ngc-7000": {
@@ -1896,7 +1901,7 @@
           "azimuthDeg": 297.64,
           "moonSeparationDeg": 56.19,
           "astronomyFactor": 0.7966,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 0.8841
         },
         "dsg-target:ngc-281": {
@@ -1904,7 +1909,7 @@
           "azimuthDeg": 336.8,
           "moonSeparationDeg": 66.87,
           "astronomyFactor": 0.9802,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 0.9207
         },
         "dsg-target:ic-1805": {
@@ -1912,7 +1917,7 @@
           "azimuthDeg": 18.69,
           "moonSeparationDeg": 79.21,
           "astronomyFactor": 0.9908,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 0.963
         },
         "dsg-target:ic-434": {
@@ -1920,7 +1925,7 @@
           "azimuthDeg": 112.49,
           "moonSeparationDeg": 101.84,
           "astronomyFactor": 0.6272,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -1928,7 +1933,7 @@
           "azimuthDeg": 75.63,
           "moonSeparationDeg": 128.48,
           "astronomyFactor": 0.5921,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -1936,7 +1941,7 @@
           "azimuthDeg": 224.67,
           "moonSeparationDeg": 16.23,
           "astronomyFactor": 0.5082,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 0.747
         },
         "dsg-target:m-13": {
@@ -1944,7 +1949,7 @@
           "azimuthDeg": 324.69,
           "moonSeparationDeg": 95.46,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -1952,7 +1957,7 @@
           "azimuthDeg": 1.37,
           "moonSeparationDeg": 126.45,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -1960,7 +1965,7 @@
           "azimuthDeg": 356.29,
           "moonSeparationDeg": 117.99,
           "astronomyFactor": 0.514,
-          "weatherFactor": 0.4796,
+          "weatherFactor": 0.3723,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -1971,13 +1976,14 @@
       "moonAltitudeDeg": 20.39,
       "moonIlluminatedFraction": 0.64,
       "weather": {
-        "temperatureC": 16.54,
-        "dewPointC": 11.21,
-        "cloudCoverPct": 96.6,
-        "relativeHumidityPct": 70.8,
+        "temperatureC": 15.7,
+        "dewPointC": 11.91,
+        "cloudCoverPct": 100.0,
+        "relativeHumidityPct": 78.1,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 1.9,
-        "windGustKmh": 19.0
+        "windSpeedKmh": 5.1,
+        "windGustKmh": 8.2,
+        "precipitationNumericalTraceMm": 5.773159728050814e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -1985,7 +1991,7 @@
           "azimuthDeg": 2.6,
           "moonSeparationDeg": 94.57,
           "astronomyFactor": 0.8756,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -1993,7 +1999,7 @@
           "azimuthDeg": 293.16,
           "moonSeparationDeg": 51.07,
           "astronomyFactor": 0.5034,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 0.9035
         },
         "dsg-target:m-31": {
@@ -2001,7 +2007,7 @@
           "azimuthDeg": 276.58,
           "moonSeparationDeg": 52.78,
           "astronomyFactor": 0.9769,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 0.9078
         },
         "dsg-target:m-42": {
@@ -2009,7 +2015,7 @@
           "azimuthDeg": 128.37,
           "moonSeparationDeg": 99.65,
           "astronomyFactor": 0.7023,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2017,7 +2023,7 @@
           "azimuthDeg": 136.75,
           "moonSeparationDeg": 76.99,
           "astronomyFactor": 0.992,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 0.9678
         },
         "dsg-target:ngc-7000": {
@@ -2025,7 +2031,7 @@
           "azimuthDeg": 303.68,
           "moonSeparationDeg": 56.16,
           "astronomyFactor": 0.7172,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 0.9162
         },
         "dsg-target:ngc-281": {
@@ -2033,7 +2039,7 @@
           "azimuthDeg": 319.2,
           "moonSeparationDeg": 66.5,
           "astronomyFactor": 0.9854,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 0.9418
         },
         "dsg-target:ic-1805": {
@@ -2041,7 +2047,7 @@
           "azimuthDeg": 358.01,
           "moonSeparationDeg": 78.81,
           "astronomyFactor": 0.9931,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 0.9723
         },
         "dsg-target:ic-434": {
@@ -2049,7 +2055,7 @@
           "azimuthDeg": 125.09,
           "moonSeparationDeg": 101.38,
           "astronomyFactor": 0.7162,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2057,7 +2063,7 @@
           "azimuthDeg": 85.1,
           "moonSeparationDeg": 127.95,
           "astronomyFactor": 0.6923,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2065,7 +2071,7 @@
           "azimuthDeg": 235.98,
           "moonSeparationDeg": 16.62,
           "astronomyFactor": 0.4478,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 0.8182
         },
         "dsg-target:m-13": {
@@ -2073,7 +2079,7 @@
           "azimuthDeg": 335.45,
           "moonSeparationDeg": 95.69,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2081,7 +2087,7 @@
           "azimuthDeg": 11.49,
           "moonSeparationDeg": 126.49,
           "astronomyFactor": 0.4586,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2089,7 +2095,7 @@
           "azimuthDeg": 5.11,
           "moonSeparationDeg": 118.01,
           "astronomyFactor": 0.5153,
-          "weatherFactor": 0.3578,
+          "weatherFactor": 0.3201,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -2100,13 +2106,14 @@
       "moonAltitudeDeg": 10.67,
       "moonIlluminatedFraction": 0.644,
       "weather": {
-        "temperatureC": 16.27,
-        "dewPointC": 10.98,
-        "cloudCoverPct": 100.0,
-        "relativeHumidityPct": 70.9,
+        "temperatureC": 15.55,
+        "dewPointC": 11.79,
+        "cloudCoverPct": 50.4,
+        "relativeHumidityPct": 78.3,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 1.1,
-        "windGustKmh": 8.5
+        "windSpeedKmh": 3.3,
+        "windGustKmh": 10.3,
+        "precipitationNumericalTraceMm": 5.329070518200751e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -2114,7 +2121,7 @@
           "azimuthDeg": 1.02,
           "moonSeparationDeg": 94.3,
           "astronomyFactor": 0.8789,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -2122,7 +2129,7 @@
           "azimuthDeg": 303.02,
           "moonSeparationDeg": 51.31,
           "astronomyFactor": 0.4372,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 0.9487
         },
         "dsg-target:m-31": {
@@ -2130,7 +2137,7 @@
           "azimuthDeg": 283.03,
           "moonSeparationDeg": 52.36,
           "astronomyFactor": 0.9662,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 0.9501
         },
         "dsg-target:m-42": {
@@ -2138,7 +2145,7 @@
           "azimuthDeg": 143.43,
           "moonSeparationDeg": 99.21,
           "astronomyFactor": 0.7731,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2146,7 +2153,7 @@
           "azimuthDeg": 173.68,
           "moonSeparationDeg": 76.46,
           "astronomyFactor": 0.9955,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 0.9821
         },
         "dsg-target:ngc-7000": {
@@ -2154,7 +2161,7 @@
           "azimuthDeg": 310.46,
           "moonSeparationDeg": 56.14,
           "astronomyFactor": 0.6458,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 0.9551
         },
         "dsg-target:ngc-281": {
@@ -2162,7 +2169,7 @@
           "azimuthDeg": 312.82,
           "moonSeparationDeg": 66.13,
           "astronomyFactor": 0.9921,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 0.9684
         },
         "dsg-target:ic-1805": {
@@ -2170,7 +2177,7 @@
           "azimuthDeg": 338.25,
           "moonSeparationDeg": 78.4,
           "astronomyFactor": 0.9962,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 0.9846
         },
         "dsg-target:ic-434": {
@@ -2178,7 +2185,7 @@
           "azimuthDeg": 140.19,
           "moonSeparationDeg": 100.93,
           "astronomyFactor": 0.7911,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2186,7 +2193,7 @@
           "azimuthDeg": 95.32,
           "moonSeparationDeg": 127.42,
           "astronomyFactor": 0.7938,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2194,7 +2201,7 @@
           "azimuthDeg": 246.16,
           "moonSeparationDeg": 17.02,
           "astronomyFactor": 0.4258,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 0.9033
         },
         "dsg-target:m-13": {
@@ -2202,7 +2209,7 @@
           "azimuthDeg": 347.11,
           "moonSeparationDeg": 95.93,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2210,7 +2217,7 @@
           "azimuthDeg": 21.22,
           "moonSeparationDeg": 126.53,
           "astronomyFactor": 0.4873,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2218,7 +2225,7 @@
           "azimuthDeg": 13.75,
           "moonSeparationDeg": 118.02,
           "astronomyFactor": 0.532,
-          "weatherFactor": 0.3409,
+          "weatherFactor": 0.5971,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -2229,13 +2236,14 @@
       "moonAltitudeDeg": 0.34,
       "moonIlluminatedFraction": 0.648,
       "weather": {
-        "temperatureC": 15.17,
-        "dewPointC": 13.46,
-        "cloudCoverPct": 35.0,
-        "relativeHumidityPct": 89.5,
+        "temperatureC": 14.52,
+        "dewPointC": 11.99,
+        "cloudCoverPct": 95.0,
+        "relativeHumidityPct": 84.8,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 3.7,
-        "windGustKmh": 7.6
+        "windSpeedKmh": 3.9,
+        "windGustKmh": 7.6,
+        "precipitationNumericalTraceMm": 5.995204332975845e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -2243,7 +2251,7 @@
           "azimuthDeg": 359.36,
           "moonSeparationDeg": 94.02,
           "astronomyFactor": 0.8792,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -2251,7 +2259,7 @@
           "azimuthDeg": 313.89,
           "moonSeparationDeg": 51.57,
           "astronomyFactor": 0.4496,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 0.9984
         },
         "dsg-target:m-31": {
@@ -2259,7 +2267,7 @@
           "azimuthDeg": 289.22,
           "moonSeparationDeg": 51.94,
           "astronomyFactor": 0.8806,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 0.9984
         },
         "dsg-target:m-42": {
@@ -2267,7 +2275,7 @@
           "azimuthDeg": 161.27,
           "moonSeparationDeg": 98.77,
           "astronomyFactor": 0.8204,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2275,7 +2283,7 @@
           "azimuthDeg": 214.12,
           "moonSeparationDeg": 75.93,
           "astronomyFactor": 0.9999,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 0.9994
         },
         "dsg-target:ngc-7000": {
@@ -2283,7 +2291,7 @@
           "azimuthDeg": 318.04,
           "moonSeparationDeg": 56.12,
           "astronomyFactor": 0.5838,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 0.9986
         },
         "dsg-target:ngc-281": {
@@ -2291,7 +2299,7 @@
           "azimuthDeg": 311.83,
           "moonSeparationDeg": 65.76,
           "astronomyFactor": 0.9267,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 0.999
         },
         "dsg-target:ic-1805": {
@@ -2299,7 +2307,7 @@
           "azimuthDeg": 326.21,
           "moonSeparationDeg": 77.99,
           "astronomyFactor": 0.9999,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 0.9995
         },
         "dsg-target:ic-434": {
@@ -2307,7 +2315,7 @@
           "azimuthDeg": 158.42,
           "moonSeparationDeg": 100.47,
           "astronomyFactor": 0.8433,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2315,7 +2323,7 @@
           "azimuthDeg": 107.56,
           "moonSeparationDeg": 126.89,
           "astronomyFactor": 0.8934,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2323,7 +2331,7 @@
           "azimuthDeg": 255.69,
           "moonSeparationDeg": 17.42,
           "astronomyFactor": 0.4492,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 0.9969
         },
         "dsg-target:m-13": {
@@ -2331,7 +2339,7 @@
           "azimuthDeg": 359.33,
           "moonSeparationDeg": 96.17,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2339,7 +2347,7 @@
           "azimuthDeg": 30.27,
           "moonSeparationDeg": 126.57,
           "astronomyFactor": 0.5315,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2347,7 +2355,7 @@
           "azimuthDeg": 21.95,
           "moonSeparationDeg": 118.03,
           "astronomyFactor": 0.5631,
-          "weatherFactor": 0.664,
+          "weatherFactor": 0.3406,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -2358,13 +2366,14 @@
       "moonAltitudeDeg": -10.22,
       "moonIlluminatedFraction": 0.652,
       "weather": {
-        "temperatureC": 14.73,
-        "dewPointC": 14.1,
-        "cloudCoverPct": 91.4,
-        "relativeHumidityPct": 96.0,
+        "temperatureC": 14.26,
+        "dewPointC": 13.17,
+        "cloudCoverPct": 84.8,
+        "relativeHumidityPct": 93.2,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 3.1,
-        "windGustKmh": 7.5
+        "windSpeedKmh": 3.6,
+        "windGustKmh": 8.6,
+        "precipitationNumericalTraceMm": 6.772360450213455e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -2372,7 +2381,7 @@
           "azimuthDeg": 357.74,
           "moonSeparationDeg": 93.74,
           "astronomyFactor": 0.8766,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -2380,7 +2389,7 @@
           "azimuthDeg": 326.14,
           "moonSeparationDeg": 51.82,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-31": {
@@ -2388,7 +2397,7 @@
           "azimuthDeg": 295.61,
           "moonSeparationDeg": 51.52,
           "astronomyFactor": 0.7871,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-42": {
@@ -2396,7 +2405,7 @@
           "azimuthDeg": 181.1,
           "moonSeparationDeg": 98.32,
           "astronomyFactor": 0.8361,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2404,7 +2413,7 @@
           "azimuthDeg": 240.31,
           "moonSeparationDeg": 75.4,
           "astronomyFactor": 1.0,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7000": {
@@ -2412,7 +2421,7 @@
           "azimuthDeg": 326.48,
           "moonSeparationDeg": 56.1,
           "astronomyFactor": 0.5218,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-281": {
@@ -2420,7 +2429,7 @@
           "azimuthDeg": 313.65,
           "moonSeparationDeg": 65.39,
           "astronomyFactor": 0.852,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-1805": {
@@ -2428,7 +2437,7 @@
           "azimuthDeg": 320.84,
           "moonSeparationDeg": 77.58,
           "astronomyFactor": 0.9698,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-434": {
@@ -2436,7 +2445,7 @@
           "azimuthDeg": 179.14,
           "moonSeparationDeg": 100.01,
           "astronomyFactor": 0.8631,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2444,7 +2453,7 @@
           "azimuthDeg": 124.28,
           "moonSeparationDeg": 126.36,
           "astronomyFactor": 0.9849,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2452,7 +2461,7 @@
           "azimuthDeg": 265.17,
           "moonSeparationDeg": 17.83,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-13": {
@@ -2460,7 +2469,7 @@
           "azimuthDeg": 11.57,
           "moonSeparationDeg": 96.4,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2468,7 +2477,7 @@
           "azimuthDeg": 38.51,
           "moonSeparationDeg": 126.61,
           "astronomyFactor": 0.589,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2476,7 +2485,7 @@
           "azimuthDeg": 29.51,
           "moonSeparationDeg": 118.04,
           "astronomyFactor": 0.6074,
-          "weatherFactor": 0.3455,
+          "weatherFactor": 0.3848,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -2487,13 +2496,14 @@
       "moonAltitudeDeg": -20.67,
       "moonIlluminatedFraction": 0.656,
       "weather": {
-        "temperatureC": 14.63,
-        "dewPointC": 14.03,
-        "cloudCoverPct": 100.0,
-        "relativeHumidityPct": 96.2,
+        "temperatureC": 14.14,
+        "dewPointC": 13.26,
+        "cloudCoverPct": 99.2,
+        "relativeHumidityPct": 94.5,
         "precipitationMm": 0.0,
-        "windSpeedKmh": 3.6,
-        "windGustKmh": 8.7
+        "windSpeedKmh": 5.2,
+        "windGustKmh": 10.0,
+        "precipitationNumericalTraceMm": 6.827871601444713e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -2501,7 +2511,7 @@
           "azimuthDeg": 356.32,
           "moonSeparationDeg": 93.46,
           "astronomyFactor": 0.8713,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -2509,7 +2519,7 @@
           "azimuthDeg": 339.87,
           "moonSeparationDeg": 52.08,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-31": {
@@ -2517,7 +2527,7 @@
           "azimuthDeg": 302.44,
           "moonSeparationDeg": 51.1,
           "astronomyFactor": 0.6981,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-42": {
@@ -2525,7 +2535,7 @@
           "azimuthDeg": 200.81,
           "moonSeparationDeg": 97.88,
           "astronomyFactor": 0.8167,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2533,7 +2543,7 @@
           "azimuthDeg": 256.44,
           "moonSeparationDeg": 74.87,
           "astronomyFactor": 0.9105,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7000": {
@@ -2541,7 +2551,7 @@
           "azimuthDeg": 335.79,
           "moonSeparationDeg": 56.08,
           "astronomyFactor": 0.4726,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-281": {
@@ -2549,7 +2559,7 @@
           "azimuthDeg": 317.2,
           "moonSeparationDeg": 65.02,
           "astronomyFactor": 0.7806,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-1805": {
@@ -2557,7 +2567,7 @@
           "azimuthDeg": 319.62,
           "moonSeparationDeg": 77.17,
           "astronomyFactor": 0.9045,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-434": {
@@ -2565,7 +2575,7 @@
           "azimuthDeg": 199.98,
           "moonSeparationDeg": 99.56,
           "astronomyFactor": 0.8461,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2573,7 +2583,7 @@
           "azimuthDeg": 149.94,
           "moonSeparationDeg": 125.83,
           "astronomyFactor": 1.0,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2581,7 +2591,7 @@
           "azimuthDeg": 275.4,
           "moonSeparationDeg": 18.25,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-13": {
@@ -2589,7 +2599,7 @@
           "azimuthDeg": 23.32,
           "moonSeparationDeg": 96.64,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2597,7 +2607,7 @@
           "azimuthDeg": 45.88,
           "moonSeparationDeg": 126.64,
           "astronomyFactor": 0.6574,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2605,7 +2615,7 @@
           "azimuthDeg": 36.27,
           "moonSeparationDeg": 118.05,
           "astronomyFactor": 0.6627,
-          "weatherFactor": 0.2967,
+          "weatherFactor": 0.2997,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -2616,13 +2626,14 @@
       "moonAltitudeDeg": -30.61,
       "moonIlluminatedFraction": 0.66,
       "weather": {
-        "temperatureC": 14.45,
-        "dewPointC": 13.73,
+        "temperatureC": 14.32,
+        "dewPointC": 13.4,
         "cloudCoverPct": 100.0,
-        "relativeHumidityPct": 95.4,
-        "precipitationMm": 0.2890625,
-        "windSpeedKmh": 5.6,
-        "windGustKmh": 14.3
+        "relativeHumidityPct": 94.2,
+        "precipitationMm": 0.0,
+        "windSpeedKmh": 3.9,
+        "windGustKmh": 10.0,
+        "precipitationNumericalTraceMm": 4.9960036108132044e-15
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -2630,7 +2641,7 @@
           "azimuthDeg": 355.19,
           "moonSeparationDeg": 93.18,
           "astronomyFactor": 0.8638,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -2638,7 +2649,7 @@
           "azimuthDeg": 354.75,
           "moonSeparationDeg": 52.34,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-31": {
@@ -2646,7 +2657,7 @@
           "azimuthDeg": 309.9,
           "moonSeparationDeg": 50.69,
           "astronomyFactor": 0.6161,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-42": {
@@ -2654,7 +2665,7 @@
           "azimuthDeg": 218.35,
           "moonSeparationDeg": 97.44,
           "astronomyFactor": 0.7663,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2662,7 +2673,7 @@
           "azimuthDeg": 268.11,
           "moonSeparationDeg": 74.34,
           "astronomyFactor": 0.8099,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7000": {
@@ -2670,7 +2681,7 @@
           "azimuthDeg": 345.87,
           "moonSeparationDeg": 56.07,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-281": {
@@ -2678,7 +2689,7 @@
           "azimuthDeg": 322.01,
           "moonSeparationDeg": 64.65,
           "astronomyFactor": 0.7146,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-1805": {
@@ -2686,7 +2697,7 @@
           "azimuthDeg": 320.94,
           "moonSeparationDeg": 76.76,
           "astronomyFactor": 0.8393,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-434": {
@@ -2694,7 +2705,7 @@
           "azimuthDeg": 218.46,
           "moonSeparationDeg": 99.1,
           "astronomyFactor": 0.7963,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2702,7 +2713,7 @@
           "azimuthDeg": 186.16,
           "moonSeparationDeg": 125.3,
           "astronomyFactor": 1.0,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2710,7 +2721,7 @@
           "azimuthDeg": 287.65,
           "moonSeparationDeg": 18.67,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-13": {
@@ -2718,7 +2729,7 @@
           "azimuthDeg": 34.19,
           "moonSeparationDeg": 96.88,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2726,7 +2737,7 @@
           "azimuthDeg": 52.39,
           "moonSeparationDeg": 126.67,
           "astronomyFactor": 0.7343,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2734,7 +2745,7 @@
           "azimuthDeg": 42.12,
           "moonSeparationDeg": 118.05,
           "astronomyFactor": 0.727,
-          "weatherFactor": 0.0929,
+          "weatherFactor": 0.2989,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -2745,13 +2756,13 @@
       "moonAltitudeDeg": -39.49,
       "moonIlluminatedFraction": 0.664,
       "weather": {
-        "temperatureC": 14.89,
-        "dewPointC": 13.99,
+        "temperatureC": 14.51,
+        "dewPointC": 13.57,
         "cloudCoverPct": 100.0,
-        "relativeHumidityPct": 94.4,
-        "precipitationMm": 0.33203125,
-        "windSpeedKmh": 11.0,
-        "windGustKmh": 21.9
+        "relativeHumidityPct": 94.1,
+        "precipitationMm": 0.1933593750000045,
+        "windSpeedKmh": 4.6,
+        "windGustKmh": 11.4
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -2759,7 +2770,7 @@
           "azimuthDeg": 354.44,
           "moonSeparationDeg": 92.9,
           "astronomyFactor": 0.8545,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -2767,7 +2778,7 @@
           "azimuthDeg": 9.97,
           "moonSeparationDeg": 52.6,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-31": {
@@ -2775,7 +2786,7 @@
           "azimuthDeg": 318.14,
           "moonSeparationDeg": 50.27,
           "astronomyFactor": 0.543,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-42": {
@@ -2783,7 +2794,7 @@
           "azimuthDeg": 233.12,
           "moonSeparationDeg": 96.99,
           "astronomyFactor": 0.6935,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2791,7 +2802,7 @@
           "azimuthDeg": 277.91,
           "moonSeparationDeg": 73.81,
           "astronomyFactor": 0.7085,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7000": {
@@ -2799,7 +2810,7 @@
           "azimuthDeg": 356.44,
           "moonSeparationDeg": 56.07,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-281": {
@@ -2807,7 +2818,7 @@
           "azimuthDeg": 327.82,
           "moonSeparationDeg": 64.29,
           "astronomyFactor": 0.6561,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-1805": {
@@ -2815,7 +2826,7 @@
           "azimuthDeg": 323.97,
           "moonSeparationDeg": 76.35,
           "astronomyFactor": 0.7772,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-434": {
@@ -2823,7 +2834,7 @@
           "azimuthDeg": 233.8,
           "moonSeparationDeg": 98.64,
           "astronomyFactor": 0.7229,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2831,7 +2842,7 @@
           "azimuthDeg": 219.64,
           "moonSeparationDeg": 124.77,
           "astronomyFactor": 1.0,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2839,7 +2850,7 @@
           "azimuthDeg": 304.39,
           "moonSeparationDeg": 19.1,
           "astronomyFactor": 0.45,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-13": {
@@ -2847,7 +2858,7 @@
           "azimuthDeg": 44.05,
           "moonSeparationDeg": 97.11,
           "astronomyFactor": 0.5021,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2855,7 +2866,7 @@
           "azimuthDeg": 58.05,
           "moonSeparationDeg": 126.69,
           "astronomyFactor": 0.8179,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2863,7 +2874,7 @@
           "azimuthDeg": 46.94,
           "moonSeparationDeg": 118.06,
           "astronomyFactor": 0.7984,
-          "weatherFactor": 0.0809,
+          "weatherFactor": 0.0974,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -2874,13 +2885,13 @@
       "moonAltitudeDeg": -46.44,
       "moonIlluminatedFraction": 0.668,
       "weather": {
-        "temperatureC": 15.13,
-        "dewPointC": 13.76,
+        "temperatureC": 15.01,
+        "dewPointC": 14.32,
         "cloudCoverPct": 100.0,
-        "relativeHumidityPct": 91.5,
-        "precipitationMm": 0.0585937500288658,
-        "windSpeedKmh": 11.0,
-        "windGustKmh": 25.2
+        "relativeHumidityPct": 95.6,
+        "precipitationMm": 1.0429687500179783,
+        "windSpeedKmh": 11.2,
+        "windGustKmh": 25.4
       },
       "targets": {
         "dsg-target:ldn-1320": {
@@ -2888,7 +2899,7 @@
           "azimuthDeg": 354.1,
           "moonSeparationDeg": 92.62,
           "astronomyFactor": 0.7868,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-27": {
@@ -2896,7 +2907,7 @@
           "azimuthDeg": 24.56,
           "moonSeparationDeg": 52.87,
           "astronomyFactor": 0.3926,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-31": {
@@ -2904,7 +2915,7 @@
           "azimuthDeg": 327.28,
           "moonSeparationDeg": 49.86,
           "astronomyFactor": 0.4238,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-42": {
@@ -2912,7 +2923,7 @@
           "azimuthDeg": 245.57,
           "moonSeparationDeg": 96.55,
           "astronomyFactor": 0.5486,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-45": {
@@ -2920,7 +2931,7 @@
           "azimuthDeg": 287.09,
           "moonSeparationDeg": 73.27,
           "astronomyFactor": 0.5519,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7000": {
@@ -2928,7 +2939,7 @@
           "azimuthDeg": 7.16,
           "moonSeparationDeg": 56.06,
           "astronomyFactor": 0.3926,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-281": {
@@ -2936,7 +2947,7 @@
           "azimuthDeg": 334.51,
           "moonSeparationDeg": 63.92,
           "astronomyFactor": 0.5495,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-1805": {
@@ -2944,7 +2955,7 @@
           "azimuthDeg": 328.26,
           "moonSeparationDeg": 75.94,
           "astronomyFactor": 0.6629,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ic-434": {
@@ -2952,7 +2963,7 @@
           "azimuthDeg": 246.56,
           "moonSeparationDeg": 98.18,
           "astronomyFactor": 0.5773,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-2392": {
@@ -2960,7 +2971,7 @@
           "azimuthDeg": 241.84,
           "moonSeparationDeg": 124.24,
           "astronomyFactor": 0.8994,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:ngc-7293": {
@@ -2968,7 +2979,7 @@
           "azimuthDeg": 330.03,
           "moonSeparationDeg": 19.53,
           "astronomyFactor": 0.3926,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-13": {
@@ -2976,7 +2987,7 @@
           "azimuthDeg": 52.96,
           "moonSeparationDeg": 97.35,
           "astronomyFactor": 0.5208,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-51": {
@@ -2984,7 +2995,7 @@
           "azimuthDeg": 62.76,
           "moonSeparationDeg": 126.71,
           "astronomyFactor": 0.8489,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         },
         "dsg-target:m-101": {
@@ -2992,7 +3003,7 @@
           "azimuthDeg": 50.48,
           "moonSeparationDeg": 118.05,
           "astronomyFactor": 0.8175,
-          "weatherFactor": 0.0852,
+          "weatherFactor": 0.0786,
           "lunarSuitabilityFactor": 1.0
         }
       }
@@ -3003,13 +3014,13 @@
       "moonAltitudeDeg": -50.32,
       "moonIlluminatedFraction": 0.672,
       "weather": {
-        "temperatureC": 14.76,
-        "dewPointC": 13.83,
+        "temperatureC": 14.9,
+        "dewPointC": 13.81,
         "cloudCoverPct": 100.0,
-        "relativeHumidityPct": 94.2,
-        "precipitationMm": 5.460937500071626,
-        "windSpeedKmh": 14.2,
-        "windGustKmh": 23.9
+        "relativeHumidityPct": 93.2,
+        "precipitationMm": 12.462890625021636,
+        "windSpeedKmh": 14.8,
+        "windGustKmh": 25.2
       },
       "targets": {
         "dsg-target:ldn-1320": {
