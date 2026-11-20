@@ -61,3 +61,6 @@ Dallo ZIP R2 estratto in una cartella temporanea è stata eseguita anche la suit
 ### Perimetro della prossima revisione
 
 L’incarico R4 in `native-api-probe-operation-r4/INCARICO-REVISIONI-INDIPENDENTI.txt` richiede una revisione dell’intera operazione (62 input, 25 moduli). Il descrittore R4 ha SHA-256 `05d29ad31e64725c98c47263c994d94db51a24f93f6403cbdef673a83aeb8c04` e per quella composizione ARB ha richiesto modifiche. Lo ZIP R2 della VM contiene la correzione isolata e i suoi test. Prima della revisione formale occorre integrare la candidata in una composizione separata, verificarne le dipendenze e fissare il nuovo descrittore. La sequenza prevista è ARB sull’intera composizione, poi RQ dopo approvazione ARB.
+
+
+La VM ha ricostruito in una cartella di lavoro separata tutti i 62 input del descrittore R4, controllandone lunghezza e SHA-256. La composizione candidata di lavoro conserva 60 impronte e sostituisce owner e root operator con i due moduli verificati offline. Il manifesto locale ha SHA-256 `d6c27e7cfbfe197a1a2323cfeff48529fe87cc52318c15f51f278d61eddb92b8`. Il modulo `probe_root_package_r3.cjs` conserva riferimenti R2: resta da allineare il caricamento e verificare la composizione attraverso il suo ingresso prima del congelamento per ARB.
