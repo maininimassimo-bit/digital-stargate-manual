@@ -51,3 +51,8 @@ Il percorso `calibration-api-probe-integration-20261117-r1/full-runtime-retentio
 
 
 Il pacchetto locale `BKL051-ripresa-VM-20261120-r2.zip` include la candidata, il file di conoscenze aggiornato, gli esiti dei dodici casi e il comando ripetibile `node codice/run-root-model.cjs`. Dopo l’estrazione sulla VM sono state verificate tutte le impronte del manifesto e ripetuti i test con esito positivo. SHA-256 dello ZIP `0d8fa076a5171e7c4f9e54c8b4fe1f0e8fad3529d3a593e44fd08df02897558d`. Destinazione finale K ancora in attesa di scrittura autorizzata.
+
+
+### Verifica offline del rilascio BKL-051
+
+Dallo ZIP R2 estratto in una cartella temporanea è stata eseguita anche la suite `test_probe_common_owner_release_r3.cjs`. Per ripeterla si può duplicare `codice/run-root-model.cjs` nella stessa cartella e cambiare il solo modulo caricato dall’ultimo `require` in `./test_probe_common_owner_release_r3.cjs`. Il verificatore salva il risultato accanto al codice e richiede un’estrazione nuova. Tutti e dieci i casi riportano PASS. Coprono il rilascio ordinario simulato, il coordinatore occupato, il rifiuto di una ricevuta errata e il controllo delle dipendenze al momento del rilascio. Il modello dichiara zero avvii di processi e zero scritture sullo stato condiviso. La revisione indipendente resta aperta.
