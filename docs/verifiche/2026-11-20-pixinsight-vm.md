@@ -215,3 +215,8 @@ Su H il verbale BKL-046 attende ancora la prova di chiusura originale. Il coordi
 ### Nuovo turno senza concessioni e candidata sorgente BKL-051
 
 Nel nuovo turno, pur con `dsg-shared-smb-managed` salvato nel profilo utente, i quattro UNC rispondono con `0x80070041`. Le letture di H e K senza concessioni restano indisponibili. Creato sulla VM `BKL051-DSG-Shared-candidata-offline-r1.zip`, SHA-256 `50fd939e8b9e4268546958c7238c829670459e0e5f29e41c4656a951b18f7aa4`. Il pacchetto sorgente aggiorna sei moduli per i binari locali. Verificati i 62 input di base, la compilazione dei 25 moduli Python, la sintassi dei due moduli Node aggiornati e otto casi modellati. Restano da ricomporre manifesti e pin transitivi sul percorso operativo, completare le revisioni e qualificare il comportamento nativo tramite il coordinatore. Il nuovo obiettivo dà precedenza alla verifica della pubblicazione BKL-046 v571/v1.146. Nessun publisher avviato o interrotto dalla VM.
+
+
+### Verifica della pubblicazione v571 / conoscenza v1.146
+
+La ricerca GitHub dei commit con `v571`, `v1.146` o `H146` e delle PR con `v1.146` non ha restituito una corrispondenza. La PR #627 descrive H126 e resta una fonte storica. Da DSG-Shared non è visibile una sessione del publisher né un verbale terminale di v571. La verifica richiede il risultato del publisher originale e la rilettura degli artefatti di conoscenza su H con confronto delle impronte e della destinazione GitHub dichiarata. Stato della pubblicazione indeterminato. Nessun avvio, riavvio o arresto del publisher.
