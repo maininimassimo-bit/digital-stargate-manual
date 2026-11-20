@@ -90,3 +90,8 @@ BKL-046 riguarda l’assistente IA per il post-processing PixInsight. Il verbale
 ### Revisioni indipendenti della candidata VM R4
 
 Il descrittore `33ab393c5bc5e13955a670c69096aeca6e2a7754d5bea60c5def9c92ce6cebc8` allinea i riferimenti transitivi anche nel processo Python. ARB APPROVED, rapporto SHA-256 `59726e4308940a15be7a7395f043e5064a8aac69f77d69377b35aa503827945a`. RQ CHANGES_REQUIRED sullo stesso descrittore, rapporto SHA-256 `d12e8760ab3c37e1cefd6c2fc5c34b0586d3d683c31566f7a607e777376154cb`. Dopo la chiusura anomala del custode simulato, la root ha ancora inviato il comando prepare al parent. Entrambi i revisori hanno verificato 62 input e 25 moduli. Il difetto richiede una nuova candidata e revisioni sul suo descrittore. Nessuna ammissione nativa.
+
+
+### Candidata VM R5
+
+ARB ha confermato che la perdita del custode impedisce nuovi comandi e conserva la possibilità di osservare la richiesta pendente. Sul descrittore `ed877a93c7024cc5d8024cfc4bb95c1fb65e997212cf4a3d5758052bb3506aa5` ha emesso CHANGES_REQUIRED dopo 186 regressioni e tre casi mirati. Un errore del custode durante l’attesa finale può ancora coesistere con la restituzione di `LEASE_RELEASED`. La prima causa e l’eventuale ricevuta vanno conservate distinguendo l’effetto osservato dalla conferma di completamento. Rapporto `BKL051-ARB-indipendente-r5.json`, SHA-256 `609b9848b8b0bb0e7d2a4be45fe966504e1bf920dff9f2c22193aa0e96b4bd3e`. Nessuna RQ su R5.
