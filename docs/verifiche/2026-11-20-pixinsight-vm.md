@@ -105,3 +105,6 @@ ARB e RQ hanno entrambe approvato la composizione completa sul descrittore `63ac
 ### Consegna R6 e vincolo sul desktop
 
 Lo ZIP locale `BKL051-ripresa-VM-20261120-r6-approvata.zip` raccoglie la composizione esatta, i due rapporti indipendenti e le conoscenze aggiornate. SHA-256 `71283ba44c91b8c60f85b519f1856d64b325c62cdc4610fa6b31b02d60a08306`. I punti 3–6 del piano richiedono di identificare la finestra originale, acquisire schermate e testo della console, verificare lo stato della finestra e osservarne la chiusura normale. Una sessione grafica separata sul PC principale è una possibilità da qualificare per rispettare il vincolo di non disturbare il desktop di lavoro. Disponibilità e comportamento di tale sessione restano da verificare.
+
+
+La verifica dei binari R6 sul PC principale resta pendente. La shell collegata identifica DSG-SHARED. La procedura locale `Verifica-binari-PC-principale-R6.ps1` legge versione, lunghezza e SHA-256 di PixInsight e Python ai due percorsi del preflight. Il controllo di funzionamento sulla VM ha distinto PixInsight diverso e percorso Python assente. Nessuna sessione sul PC principale è stata verificata.
