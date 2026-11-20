@@ -135,3 +135,62 @@ Secondo il messaggio conclusivo del tentativo, riportato dall’Owner, il contro
 ### Verifica della via di recupero BKL-046
 
 Per `ea2a08ea-c95c-44d3-b961-52aa8bf1b9d2`, i file storici su H legano l’operazione `BKL046_NATIVE_STREAM_HASH_WITNESS_001` al custode PID 42296 (creationFiletime 134394750196503804), al parent PID 22484 (134394750206584212) e al processo nativo PID 32732 (134394750300302248). Il runtime-context dichiara esplicitamente di non aver letto lo stato condiviso. Il verbale di prechiusura attende ancora la registrazione della chiusura originale. Il piano di recupero dopo perdita di custodia reperito su K è specifico di BKL-051, prenotazione `298420bd-0d19-4dd3-927a-2ced168678dc`, fallita prima dell’avvio nativo. Per BKL-046 occorre riscontrare sul PC principale le identità complete e le ricevute correnti; se la custodia è perduta, il percorso eccezionale deve essere qualificato per questa prenotazione conservando come sconosciuta l’uscita originale finché priva di prova. Nessun rilascio o nuovo tentativo avviato dalla VM.
+
+
+### Controllo in sola lettura sul PC principale
+
+Lo script seguente confronta i tre registri prima e dopo il controllo dei tre processi. Due letture uguali documentano soltanto gli estremi dell’intervallo. L’assenza di un PID non dimostra la chiusura normale e nessun esito dello script autorizza automaticamente il rilascio. Sintassi e rifiuto di esecuzione sulla VM verificati; il riscontro operativo deve provenire dal PC principale.
+
+```powershell
+# Inventario puntuale. Eseguire nella sessione del PC principale.
+$ErrorActionPreference = 'Stop'
+if ([Environment]::MachineName -ine 'WIN-QOOF3903TQS') {
+    throw 'Verifica riservata al PC principale WIN-QOOF3903TQS.'
+}
+$stateDir = 'K:\DigitalStarGate\pixinsight-coordination-20261114-r1\state'
+$reservation = 'ea2a08ea-c95c-44d3-b961-52aa8bf1b9d2'
+function Read-Record([string]$name) {
+    $path = Join-Path $stateDir $name
+    try {
+        $raw = [IO.File]::ReadAllBytes($path)
+    } catch [IO.FileNotFoundException] {
+        return [ordered]@{ file = $name; state = 'file assente' }
+    }
+    $sha = [Security.Cryptography.SHA256]::Create()
+    try {
+        $digest = [BitConverter]::ToString($sha.ComputeHash($raw)).Replace('-', '')
+    } finally { $sha.Dispose() }
+    $record = [Text.Encoding]::UTF8.GetString($raw).TrimStart([char]0xFEFF) | ConvertFrom-Json
+    return [ordered]@{ file = $name; state = 'letto'; sha256 = $digest; reservation = $record.reservation; milestone = $record.milestone; operation = $record.operation }
+}
+function Read-Records {
+    foreach ($name in @('active.json', "$reservation-acquired.json", "$reservation-released.json")) {
+        Read-Record $name
+    }
+}
+$before = @(Read-Records)
+$identities = foreach ($item in @(
+    @{ role = 'custode'; number = 42296; birth = '134394750196503804' }
+    @{ role = 'parent'; number = 22484; birth = '134394750206584212' }
+    @{ role = 'PixInsight'; number = 32732; birth = '134394750300302248' }
+)) {
+    $actual = $null
+    try {
+        $process = [Diagnostics.Process]::GetProcessById($item.number)
+        try { $actual = $process.StartTime.ToUniversalTime().ToFileTimeUtc().ToString() }
+        finally { $process.Dispose() }
+        $status = if ($actual -eq $item.birth) { 'identita coincidente' } else { 'PID riutilizzato' }
+    } catch [ArgumentException] { $status = 'PID assente al controllo' }
+      catch { $status = 'identita non verificabile: ' + $_.Exception.Message }
+    [ordered]@{ role = $item.role; pid = $item.number; expectedBirth = $item.birth; observedBirth = $actual; state = $status }
+}
+$after = @(Read-Records)
+[ordered]@{
+    computer = [Environment]::MachineName
+    utc = [DateTime]::UtcNow.ToString('o')
+    before = $before
+    processes = @($identities)
+    after = $after
+    sameAtBothReads = (ConvertTo-Json $before -Compress) -ceq (ConvertTo-Json $after -Compress)
+} | ConvertTo-Json -Depth 6
+```
