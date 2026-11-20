@@ -342,3 +342,6 @@ Il verificatore locale `verify-coordinator-r4-snapshot.py`, SHA-256 `5ed2d450915
 
 
 Il protocollo ImageCalibration v2 `BKL046-ImageCalibration-protocollo-flat-dark-v2.md`, SHA-256 `7cfd4c7c9f13408b4cce14cf7556a5e2b193d4b0e0e75f07ca0ebad548f19060`, rende esplicita la verifica degli hint FITS `signed-is-physical` e `normalize` e della rappresentazione XISF Float32 in uscita con `no-compress-data` e `no-embedded-data`. Il controllo della trasformazione dei campioni precede la comparazione numerica. La v1 resta conservata. Nessuna prova nativa registrata.
+
+
+La rilettura indipendente ImageCalibration è implementata in `read-imagecalibration-xisf.py`, SHA-256 `e9963347bd71ca25b875596ca9f84513ea64cbf585f4936619954846449e1dda`. Su fixture sintetiche, tre rapporti attesi sono accettati, un caso con regioni scambiate è fuori soglia, e cinque file troncati o con formato o campioni inammissibili vengono respinti. Il lettore calcola impronte, mediane e scarti su XISF Gray Float32 non compresso a 64×64; il responso riguarda solo il rapporto tra regioni. Il controllo della scala in ingresso, dei parametri e dei livelli assoluti resta indipendente. Nessuna misura nativa registrata.
