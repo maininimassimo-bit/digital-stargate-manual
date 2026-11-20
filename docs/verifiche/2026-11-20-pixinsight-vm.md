@@ -56,3 +56,8 @@ Il pacchetto locale `BKL051-ripresa-VM-20261120-r2.zip` include la candidata, il
 ### Verifica offline del rilascio BKL-051
 
 Dallo ZIP R2 estratto in una cartella temporanea è stata eseguita anche la suite `test_probe_common_owner_release_r3.cjs`. Per ripeterla si può duplicare `codice/run-root-model.cjs` nella stessa cartella e cambiare il solo modulo caricato dall’ultimo `require` in `./test_probe_common_owner_release_r3.cjs`. Il verificatore salva il risultato accanto al codice e richiede un’estrazione nuova. Tutti e dieci i casi riportano PASS. Coprono il rilascio ordinario simulato, il coordinatore occupato, il rifiuto di una ricevuta errata e il controllo delle dipendenze al momento del rilascio. Il modello dichiara zero avvii di processi e zero scritture sullo stato condiviso. La revisione indipendente resta aperta.
+
+
+### Perimetro della prossima revisione
+
+L’incarico R4 in `native-api-probe-operation-r4/INCARICO-REVISIONI-INDIPENDENTI.txt` richiede una revisione dell’intera operazione (62 input, 25 moduli). Il descrittore R4 ha SHA-256 `05d29ad31e64725c98c47263c994d94db51a24f93f6403cbdef673a83aeb8c04` e per quella composizione ARB ha richiesto modifiche. Lo ZIP R2 della VM contiene la correzione isolata e i suoi test. Prima della revisione formale occorre integrare la candidata in una composizione separata, verificarne le dipendenze e fissare il nuovo descrittore. La sequenza prevista è ARB sull’intera composizione, poi RQ dopo approvazione ARB.
