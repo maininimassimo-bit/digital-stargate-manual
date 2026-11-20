@@ -297,3 +297,10 @@ La copia byte-identica di `coordinator.py` è stata caricata per eseguire esclus
 ### Regressioni isolate del coordinatore comune sulla VM
 
 Eseguito il codice `coordinator.py` con SHA-256 `a07b2614414c399181f4ffbf07750f870fdfdf159987539f7e1de3d9b3c0c613`, sempre con stato sintetico in cartelle temporanee e scanner modellato. Una prenotazione residua simulata respinge sia BKL-046 sia BKL-051 prima dell’inventario e conserva `active.json` byte per byte. In uno scenario separato, il lock esclusivo Windows impedisce la seconda ammissione mentre la prima è detenuta; un esito nonzero del parent mantiene `active.json` e non produce la ricevuta di rilascio. Sono prove del comportamento di rifiuto sulla VM. L’accesso al coordinatore canonico, l’inventario CIM nel suo contesto operativo e la riconciliazione della prenotazione storica restano prerequisiti per l’operatività. Nessuna scrittura sul coordinatore reale.
+
+
+### Consegna di lavoro BKL-046 e prerequisiti del trasferimento
+
+La consegna locale `BKL046-ripresa-v599-CometAlignment-v1.zip`, SHA-256 `71e9f97ea58da101b93a91e8b42ef96aea7e351aa43b13e3bce9faa29c961010`, riunisce il rendiconto, il riscontro delle pubblicazioni, la riconciliazione, le fixture e il protocollo geometrico. Tutti i membri corrispondono al manifesto SHA-256 verificato. Deposito su H in attesa di un contesto con scrittura; lettura H autorizzata dall’Owner, ma questa sessione non vede la condivisione.
+
+Il piano del sigillo finale prevede inventario completo dopo chiusura dello studio, verifica indipendente del file consolidato, trasferimento dei byte e recupero remoto. Le prove in tre parti su v1.166 sono ricostruzioni locali già archiviate. Il programma H-v6 ammette destinazioni nuove dentro la radice H e non esegue chiamate GitHub. La documentazione GitHub conferma il limite inferiore a 2 GiB per ciascun asset di Release. Il file v1.171 è di 3.030.957.683 byte. La sessione non ha potuto leggere l’elenco delle Release del repository, quindi la presenza di asset remoti non è verificata. [Documentazione GitHub sulle Release](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
