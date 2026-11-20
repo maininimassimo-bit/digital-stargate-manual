@@ -331,3 +331,8 @@ L’archivio `BKL046-ImageCalibration-fixture-flat-dark-FITS-v1.zip` (SHA-256 `9
 
 
 Per ImageCalibration è pronto il protocollo per revisione `BKL046-ImageCalibration-protocollo-flat-dark-v1.md`, SHA-256 `37e24317c71372e44e3cea647d11c727aafbf841b62217e4c514821a9be08040`. Le impronte delle fixture, del riferimento numerico e del manuale sono state rilette e confrontate. Il controllo del rapporto mediana sinistra/destra usa 1 per i due controlli e 82/81 per il caso bias sostitutivo, tolleranza assoluta proposta di 0,002 e incertezza massima di lettura 0,0005. Le bande restano disgiunte anche includendo quest’ultima. Il protocollo richiede verifica della scala d’importazione, zero piedistallo, output XISF Float32 e controllo dei livelli assoluti. La revisione, l’ammissione operativa e le misure native restano aperte.
+
+
+### Supplemento di lavoro alla conoscenza v1.171
+
+Il file locale `BKL046-conoscenza-v1.171-supplemento-VM-v1.json`, SHA-256 `3707a48408c7846a264036875233230c279426316d70a0010944db7c3b07d076`, lega dieci artefatti CometAlignment e ImageCalibration alla baseline v599 e alle due righe di requisito. Sono presenti dimensioni, impronte e ruoli degli artefatti. Sono stati riletti gli ZIP e verificata la corrispondenza di requisiti e criteri al rendiconto di 4.920 righe. I due requisiti conservano le disposizioni v599, con revisione ed esecuzione native pendenti. Il supplemento è separato dalla conoscenza pubblicata e ha zero chiusure scientifiche.
