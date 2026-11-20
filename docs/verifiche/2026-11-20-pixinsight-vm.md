@@ -38,3 +38,8 @@ La VM ha prodotto due ZIP con sorgenti, `conoscenze.json` e manifesto SHA-256. L
 ### Memoria disponibile nella VM
 
 Una lettura puntuale di Windows GetPerformanceInfo ha rilevato 5,999 GiB di RAM totale, 2,306 GiB di RAM disponibile e 3,184 GiB di margine di commit. Il gate BKL-046 richiede evidenze continue durante il lavoro nativo. Questa misura a riposo lascia la verifica aperta.
+
+
+### Dipendenze del coordinatore BKL-051
+
+Nessuno dei cinque percorsi del descrittore `coordinator-trust.json` risulta presente nella VM. Oltre a `coordinator.py` occorrono `original-parent-adapter.cjs`, `MANIFEST-R4.json`, `ARB-R4.md` e `RQ-R4.md`. Nel deposito Git di K: l’unico blob da 10650 byte ha SHA-256 `abc37971d9dfe049709abd934bf3c89468ea3d7df506d14bccf559d29b29ff93`. Il coordinatore richiesto ha SHA-256 `a07b2614414c399181f4ffbf07750f870fdfdf159987539f7e1de3d9b3c0c613`.
