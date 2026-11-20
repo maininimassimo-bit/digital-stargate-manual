@@ -373,3 +373,6 @@ Su DSG-Shared la query al namespace `root/cimv2` per il solo processo PixInsight
 
 
 Il test R4 tra interpreti Python Windows distinti ha verificato l’esclusione effettiva sulla stessa directory privata. Con il lock sintetico BKL-046 detenuto, il processo BKL-051 riceve `HOST_BUSY_OR_LOCK_UNAVAILABLE` prima dello scanner e `active.json` rimane identico. Dopo il rilascio simulato, un nuovo processo BKL-051 acquisisce e rilascia la prenotazione nella stessa directory; le due ricevute corrispondono alle rispettive milestone. Il codice del coordinatore coincide con l’impronta R4. Stato, scanner ed esiti dei parent sono sintetici, il lock Windows è reale nella sola directory temporanea. Nessuna ammissione operativa o esecuzione PixInsight.
+
+
+La regressione R4 su stato sintetico ha fatto terminare realmente il primo processo di prova con codice 17, subito dopo il claim e senza rilascio. Il secondo processo ha restituito `UNRESOLVED_PREVIOUS_RESERVATION_NO_AUTOMATIC_RECOVERY` prima dell’inventario. `active.json` e la ricevuta di acquisizione sono rimasti identici byte per byte; nessuna ricevuta di rilascio è comparsa. Il test conferma che la morte del custode non sblocca R4. Il codice coincide con l’impronta R4 e tutte le scritture sono rimaste nella directory di test temporanea. Non attesta la storia o il recupero della prenotazione BKL-046 reale.
