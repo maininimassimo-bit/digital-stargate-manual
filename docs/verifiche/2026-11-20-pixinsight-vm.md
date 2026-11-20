@@ -64,3 +64,6 @@ L’incarico R4 in `native-api-probe-operation-r4/INCARICO-REVISIONI-INDIPENDENT
 
 
 La VM ha ricostruito in una cartella di lavoro separata tutti i 62 input del descrittore R4, controllandone lunghezza e SHA-256. La composizione candidata di lavoro conserva 60 impronte e sostituisce owner e root operator con i due moduli verificati offline. Il manifesto locale ha SHA-256 `d6c27e7cfbfe197a1a2323cfeff48529fe87cc52318c15f51f278d61eddb92b8`. Il modulo `probe_root_package_r3.cjs` conserva riferimenti R2: resta da allineare il caricamento e verificare la composizione attraverso il suo ingresso prima del congelamento per ARB.
+
+
+Il nuovo descrittore candidato locale `ROOT-DESCRIPTOR-candidato.json` (SHA-256 `f4c7d448d436ed3743d9778418495176c55b97b93232ff6464454b0fcddf25e5`) associa root e owner ai moduli R3 e include il caricatore aggiornato `probe_root_package_r4.cjs`. Restano 59 input identici alla base R4 su 62. Nella prova offline il costruttore autentico ha verificato la composizione, comprese le dipendenze Python, e ha rifiutato il rapporto di prova PENDING con `API_PROBE_PACKAGE_EXACT_WHOLE_OPERATION_REVIEW`. Il caricamento operativo successivo richiede i due rapporti indipendenti sulla stessa impronta.
