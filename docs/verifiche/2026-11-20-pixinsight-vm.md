@@ -24,3 +24,12 @@ La suite preesistente del chiamante è stata eseguita sul candidato con i riferi
 ## Integrità delle osservazioni BKL-046
 
 La rilettura dalla VM della sequenza da 1 a 448 ha verificato la continuità degli indici. Per tutte le 417 catture dichiarate dai verbali, dimensione e SHA-256 ricalcolati coincidono con i valori registrati. Le altre 31 osservazioni non dichiarano una cattura. Le 417 catture hanno un unico hash (`5e791b5cdad9791bb98d72e0c14ac9c294304a14f179d452abe5c42cbad29bdd`); quella dell’osservazione 448 misura 4.124 byte. Sono letture archiviate ripetute dello stesso contenuto. Origine nativa, limite continuo di memoria, uscita del processo e rilascio del gate richiedono prove distinte.
+
+## Archivi intermedi della ripresa
+
+La VM ha prodotto due ZIP con sorgenti, `conoscenze.json` e manifesto SHA-256. La rilettura integrale ha verificato contenuti e CRC. Il deposito canonico resta in sospeso per entrambi.
+
+| Archivio | SHA-256 |
+| --- | --- |
+| `BKL046-ripresa-VM-20261120-r1.zip` | `6982bf15086b56002212375c696faf47fb7afac6246a57f9f6b0217958bd2d48` |
+| `BKL051-ripresa-VM-20261120-r1.zip` | `abe6fe1b7212746cb3568c3a8ba8956e8237c22dc35328ce7340c87d2ded3278` |
