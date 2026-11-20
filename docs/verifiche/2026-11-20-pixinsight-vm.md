@@ -43,3 +43,8 @@ Una lettura puntuale di Windows GetPerformanceInfo ha rilevato 5,999 GiB di RAM 
 ### Dipendenze del coordinatore BKL-051
 
 Nessuno dei cinque percorsi del descrittore `coordinator-trust.json` risulta presente nella VM. Oltre a `coordinator.py` occorrono `original-parent-adapter.cjs`, `MANIFEST-R4.json`, `ARB-R4.md` e `RQ-R4.md`. Nel deposito Git di K: l’unico blob da 10650 byte ha SHA-256 `abc37971d9dfe049709abd934bf3c89468ea3d7df506d14bccf559d29b29ff93`. Il coordinatore richiesto ha SHA-256 `a07b2614414c399181f4ffbf07750f870fdfdf159987539f7e1de3d9b3c0c613`.
+
+
+### Regressione offline BKL-051 completata
+
+Il percorso `calibration-api-probe-integration-20261117-r1/full-runtime-retention-private-r7-test/MODEL-common` nella condivisione di lavoro K contiene tutti e cinque i file del coordinatore. Lunghezze e SHA-256 coincidono con le cinque righe di `coordinator-trust.json`. Per la sola durata del test in Node, le letture dei cinque percorsi originali hanno restituito in memoria i rispettivi byte verificati. I dodici casi di `check-each-root-case.cjs` sulla candidata locale hanno restituito PASS (uscita 0), con processi e stato modellati. La candidata resta da sottoporre alla revisione prevista. L'esecuzione nativa resta vincolata al gate.
