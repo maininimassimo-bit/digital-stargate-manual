@@ -33,3 +33,8 @@ La VM ha prodotto due ZIP con sorgenti, `conoscenze.json` e manifesto SHA-256. L
 | --- | --- |
 | `BKL046-ripresa-VM-20261120-r1.zip` | `6982bf15086b56002212375c696faf47fb7afac6246a57f9f6b0217958bd2d48` |
 | `BKL051-ripresa-VM-20261120-r1.zip` | `abe6fe1b7212746cb3568c3a8ba8956e8237c22dc35328ce7340c87d2ded3278` |
+
+
+### Memoria disponibile nella VM
+
+Una lettura puntuale di Windows GetPerformanceInfo ha rilevato 5,999 GiB di RAM totale, 2,306 GiB di RAM disponibile e 3,184 GiB di margine di commit. Il gate BKL-046 richiede evidenze continue durante il lavoro nativo. Questa misura a riposo lascia la verifica aperta.
