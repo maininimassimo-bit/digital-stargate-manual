@@ -220,3 +220,10 @@ Nel nuovo turno, pur con `dsg-shared-smb-managed` salvato nel profilo utente, i 
 ### Verifica della pubblicazione v571 / conoscenza v1.146
 
 La ricerca GitHub dei commit con `v571`, `v1.146` o `H146` e delle PR con `v1.146` non ha restituito una corrispondenza. La PR #627 descrive H126 e resta una fonte storica. Da DSG-Shared non è visibile una sessione del publisher né un verbale terminale di v571. La verifica richiede il risultato del publisher originale e la rilettura degli artefatti di conoscenza su H con confronto delle impronte e della destinazione GitHub dichiarata. Stato della pubblicazione indeterminato. Nessun avvio, riavvio o arresto del publisher.
+
+
+### Rilettura delle pubblicazioni su H
+
+La successiva lettura autorizzata di H ha risolto l’incertezza sulla pubblicazione locale v571. `Ricevuta-terminale-publisher-v571-v1.json` registra uscita 0. Il rapporto indipendente è `PASS_INDEPENDENT_POST_COMMIT_V1146`; SHA-256 ricalcolato di `Conoscenza-PixInsight-v1.146.json`: `7b11789d0616b54cb002c506f0bd2c4e4cfb123a0569f8c409a09da67b2e567e`.
+
+Il deposito contiene anche la pubblicazione successiva v599. Il verbale `publication-v599-g-v1/terminal.json` registra `V599_V1171_PUBLISHED_AND_POSTVERIFIED_NOT_FINAL_MILESTONE`, con rapporto indipendente `PASS_INDEPENDENT_POST_PUBLICATION_V1171_V599`. SHA-256 ricalcolato di `Conoscenza-PixInsight-v1.171.json`: `65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d`. Entrambe le impronte coincidono con i rispettivi rapporti. Zero chiusure scientifiche e studio incompleto in entrambi gli esiti. La rilettura integrale dei byte da GitHub resta da verificare. Nessuna azione sul publisher. Il coordinamento futuro delle due milestone deve risiedere interamente sulla VM; la prenotazione storica resta soggetta alla procedura di recupero del coordinatore comune.
