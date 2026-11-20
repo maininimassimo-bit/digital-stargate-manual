@@ -201,3 +201,12 @@ $after = @(Read-Records)
 L’Owner ha designato DSG-Shared per lo sviluppo, la verifica e l’elaborazione PixInsight di entrambe le milestone. Il collaudo della collaborazione precedente è riuscito con il commento `7050080153`; l’incarico `7050086796` chiede al PC principale di disattivare la propria automazione. Il pianificatore sulla VM è stato aggiornato per seguire la migrazione locale.
 
 La VM dispone di PixInsight 1.9.6 Lockhart, 82.432.472 byte, SHA-256 `76d2339130b58be3d112b66cafc578d9f859d80c96842b2ba2dfbbdcdc8b2943`. Il runtime Python 3.12.14 locale ha SHA-256 `5699bdfd4b6924c69d0a1f6b1d75d7760698567ce81b92d4fcc8bb2af4eeba84`. Entrambi differiscono dalle impronte di BKL-051 R6. Per usare questi binari occorre una candidata separata, verificata sul nuovo ambiente e revisionata. La shell gestita ha ricevuto accesso di rete negato su `H:/Codex` e `K:/DigitalStarGate/BKL051/work`. Il registro comune non è leggibile al percorso atteso dalla VM. Il precedente riscontro BKL-046 resta storico e il cambio di host non costituisce rilascio. Nessuna prova di milestone avviata.
+
+
+### Ripristino delle letture e qualifica offline sulla VM
+
+L’accesso in sola lettura a `DSG-H-Codex$` e `DSG-K-Work$` è stato verificato con una concessione valida per il turno. Il `default_permissions` del profilo utente è stato allineato al profilo gestito `dsg-shared-smb-managed` già presente nei requisiti amministrativi, con rilettura del valore salvato. La prova senza concessione in un nuovo avvio è pendente.
+
+Python 3.12.14 AMD64 è stato eseguito in modalità isolata con una prova SHA-256. Tutti i 62 input R6 sono stati verificati per dimensione e hash; i 25 moduli Python sono stati compilati in memoria. Otto file contengono riferimenti al vecchio host, percorso o binario: quattro moduli Python, due moduli Node e i manifesti bootstrap e preflight. Il pacchetto R6 è conservato; serve un successore separato per qualificare l’elaborazione con PixInsight 1.9.6.
+
+Su H il verbale BKL-046 attende ancora la prova di chiusura originale. Il coordinatore comune non è disponibile alla VM sul percorso atteso. Il piano di recupero reperibile su K riguarda una prenotazione diversa e documenta una procedura legata a identità, ricevute, revisione e lock comune esistente. Nessuna scrittura sul gate o esecuzione nativa.
