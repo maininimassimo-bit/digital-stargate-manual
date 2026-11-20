@@ -108,3 +108,10 @@ Lo ZIP locale `BKL051-ripresa-VM-20261120-r6-approvata.zip` raccoglie la composi
 
 
 La verifica dei binari R6 sul PC principale resta pendente. La shell collegata identifica DSG-SHARED. La procedura locale `Verifica-binari-PC-principale-R6.ps1` legge versione, lunghezza e SHA-256 di PixInsight e Python ai due percorsi del preflight. Il controllo di funzionamento sulla VM ha distinto PixInsight diverso e percorso Python assente. Nessuna sessione sul PC principale è stata verificata.
+
+
+### Riscontro dal PC principale WIN-QOOF3903TQS
+
+Il resoconto della verifica locale, trasmesso dall’Owner, identifica PixInsight 1.9.5 (77.608.944 byte) e Python 3.12.14 (107.312 byte). La VM ha confrontato le due impronte riportate con il preflight della composizione approvata da ARB/RQ, descrittore `63acf2da99156f8607021d54bfbfbfa48d735c7d0c94f72de2da4c435ef562e2`. Entrambe coincidono. Per PixInsight la build 1706 deriva dall’identificazione per hash nel piano. Per Python anche il bootstrap della composizione approvata fissa `50f885251e42eb8cd1fbf5d4fbcc01efdbe8b9f4d4379e16664d4d0f3d4a9869`. Il resoconto segnala un valore diverso nel separato manifest storico `K:/DSG051-CAL-R6/bootstrap-manifest.json`.
+
+Al momento della verifica sul PC principale era presente una sola sessione grafica interattiva, console ID 1. PixInsight è rimasto chiuso. Restano da qualificare una sessione isolata e la capacità di osservare finestra, console e uscita originale senza interferire con il desktop di lavoro. Il riscontro non autorizza un avvio nativo o il rilascio del gate.
