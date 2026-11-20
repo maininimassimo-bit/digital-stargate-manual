@@ -125,3 +125,8 @@ Secondo il resoconto locale trasmesso dall’Owner, su WIN-QOOF3903TQS la consol
 ### Autorizzazione aggiornata per la console del PC principale
 
 L’Owner ha autorizzato l’esecuzione visibile di PixInsight su WIN-QOOF3903TQS e rinviato la verifica della modalità nascosta. La disponibilità di una sessione isolata cessa di essere un prerequisito per questa ripresa. Il pacchetto BKL-051 R6 conserva le approvazioni ARB/RQ sul descrittore `63acf2da99156f8607021d54bfbfbfa48d735c7d0c94f72de2da4c435ef562e2`. Il prossimo controllo operativo va effettuato sul PC principale: disponibilità dei file approvati ai percorsi attesi e stato attuale del coordinatore secondo il piano. Il verbale storico BKL-046 resta in attesa della prova di chiusura originale. Nessuna nuova esecuzione nativa osservata da DSG-Shared.
+
+
+### Esito del tentativo BKL-051 R6 sul PC principale
+
+Secondo il messaggio conclusivo del tentativo, riportato dall’Owner, il controllo preliminare si è fermato prima della richiesta di prenotazione. In quel momento `active.json` riportava ancora la prenotazione BKL-046 `ea2a08ea-c95c-44d3-b961-52aa8bf1b9d2`; mancava la ricevuta di rilascio e il PID del custode risultava assente. Per questo tentativo BKL-051 R6 non ha ottenuto alcun ID di prenotazione o codice di rifiuto. PixInsight è rimasto chiuso. La ricevuta di acquisizione citata dal PC principale identifica la prenotazione BKL-046. Tra le evidenze consultate non risulta un verbale distinto associato al descrittore R6. Lo stato descritto si riferisce al momento del controllo.
