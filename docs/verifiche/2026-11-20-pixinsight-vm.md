@@ -48,3 +48,6 @@ Nessuno dei cinque percorsi del descrittore `coordinator-trust.json` risulta pre
 ### Regressione offline BKL-051 completata
 
 Il percorso `calibration-api-probe-integration-20261117-r1/full-runtime-retention-private-r7-test/MODEL-common` nella condivisione di lavoro K contiene tutti e cinque i file del coordinatore. Lunghezze e SHA-256 coincidono con le cinque righe di `coordinator-trust.json`. Per la sola durata del test in Node, le letture dei cinque percorsi originali hanno restituito in memoria i rispettivi byte verificati. I dodici casi di `check-each-root-case.cjs` sulla candidata locale hanno restituito PASS (uscita 0), con processi e stato modellati. La candidata resta da sottoporre alla revisione prevista. L'esecuzione nativa resta vincolata al gate.
+
+
+Il pacchetto locale `BKL051-ripresa-VM-20261120-r2.zip` include la candidata, il file di conoscenze aggiornato, gli esiti dei dodici casi e il comando ripetibile `node codice/run-root-model.cjs`. Dopo l’estrazione sulla VM sono state verificate tutte le impronte del manifesto e ripetuti i test con esito positivo. SHA-256 dello ZIP `0d8fa076a5171e7c4f9e54c8b4fe1f0e8fad3529d3a593e44fd08df02897558d`. Destinazione finale K ancora in attesa di scrittura autorizzata.
