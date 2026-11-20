@@ -381,3 +381,6 @@ La regressione R4 su stato sintetico ha fatto terminare realmente il primo proce
 ### Ricerca dell’originale R4 nel deposito Git K
 
 L’Owner ha autorizzato la lettura di `DSG-K-GitStore$`. Dopo attivazione tecnica della sola lettura per il turno, interrogato il bare Git attraverso l’UNC. In `git cat-file --batch-all-objects` non risulta alcun blob della dimensione attesa per il `CURRENT.json` approvato (1.426 byte). In `git rev-list --all --objects` non risultano percorsi del coordinatore, `CURRENT.json` o della prenotazione storica. Il deposito Git non ha fornito la fonte operativa. Sul percorso canonico di DSG-Shared `CURRENT.json` e lo stato risultano ancora indisponibili; l’inventario CIM eseguito con Windows PowerShell restituisce `AccessDenied`. Nessuna modifica al repository locale, al gate o alla prenotazione. L’accesso al deposito è stato confermato solo per il turno.
+
+
+Ricerca per impronta circoscritta alle copie locali DSG-Shared: riletti 103 file e 128 membri in 29 ZIP (inclusi ZIP annidati entro 20 MiB). Candidati: JSON fino a 256 KiB e file da 1.426 byte. Nessuna corrispondenza per `CURRENT.json` R4 e per lo SHA-256 storico di active/acquired `c1cb401dada7cf6407767636e6b9e3d8c5a728c67af1e8a70bbb59e8d254c144`. I riferimenti per hash restano separati dai byte originali e dallo stato attuale. Nessuna scrittura sui dati esaminati.
