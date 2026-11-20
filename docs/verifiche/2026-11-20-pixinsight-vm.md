@@ -194,3 +194,10 @@ $after = @(Read-Records)
     sameAtBothReads = (ConvertTo-Json $before -Compress) -ceq (ConvertTo-Json $after -Compress)
 } | ConvertTo-Json -Depth 6
 ```
+
+
+### Passaggio a elaborazione sulla VM DSG-Shared
+
+L’Owner ha designato DSG-Shared per lo sviluppo, la verifica e l’elaborazione PixInsight di entrambe le milestone. Il collaudo della collaborazione precedente è riuscito con il commento `7050080153`; l’incarico `7050086796` chiede al PC principale di disattivare la propria automazione. Il pianificatore sulla VM è stato aggiornato per seguire la migrazione locale.
+
+La VM dispone di PixInsight 1.9.6 Lockhart, 82.432.472 byte, SHA-256 `76d2339130b58be3d112b66cafc578d9f859d80c96842b2ba2dfbbdcdc8b2943`. Il runtime Python 3.12.14 locale ha SHA-256 `5699bdfd4b6924c69d0a1f6b1d75d7760698567ce81b92d4fcc8bb2af4eeba84`. Entrambi differiscono dalle impronte di BKL-051 R6. Per usare questi binari occorre una candidata separata, verificata sul nuovo ambiente e revisionata. La shell gestita ha ricevuto accesso di rete negato su `H:/Codex` e `K:/DigitalStarGate/BKL051/work`. Il registro comune non è leggibile al percorso atteso dalla VM. Il precedente riscontro BKL-046 resta storico e il cambio di host non costituisce rilascio. Nessuna prova di milestone avviata.
