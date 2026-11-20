@@ -75,3 +75,8 @@ L’archivio locale `BKL051-composizione-ARB-20261120-r1.zip` raccoglie il descr
 ### Campioni di memoria dell’operazione originale BKL-046
 
 Letti su H tutti i 449 file `memory-*.json` dell’operazione `native-stream-hash-witness-001-h-v1`. Tutti riportano `continuousMemoryBoundAttested=false`, 448 dichiarano il riuso dell’handle originale e nessuno elenca motivi in `budgetReasons`. Il massimo valore registrato per `peakWorkingSetBytes` è 948084736 byte. Il verbale `preclose-state.json` indica ancora `AWAIT_FRESH_OWNED_EMPTY_UI_NORMAL_CLOSE_RECORD` e zero chiusure scientifiche. I dati descrivono l’esecuzione archiviata sull’host originario.
+
+
+### Esito indipendente ARB e host di elaborazione
+
+Il PC principale è l’host designato per l’elaborazione PixInsight. La verifica offline si è svolta su DSG-Shared. La compatibilità dei binari sul PC principale resta da verificare. Per il descrittore `f4c7d448d436ed3743d9778418495176c55b97b93232ff6464454b0fcddf25e5`, ARB ha emesso `CHANGES_REQUIRED`. Il caricamento canonico segue `PREFLIGHT-PINS.json`, seleziona il caricatore R3 e restituisce `API_PROBE_PACKAGE_EXACT_PINNED_MODULE` prima della lettura dei rapporti. Verificati 62 input e 25 moduli. La revisione RQ resta subordinata a una nuova approvazione ARB. Rapporto locale `BKL051-ARB-indipendente.json`, SHA-256 `ee9ce362dd19a7da531c7679dd2dfe0a0bd1e490e1386b2b4b4039d84efbb5f8`.
