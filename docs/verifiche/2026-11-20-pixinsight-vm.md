@@ -376,3 +376,8 @@ Il test R4 tra interpreti Python Windows distinti ha verificato l’esclusione e
 
 
 La regressione R4 su stato sintetico ha fatto terminare realmente il primo processo di prova con codice 17, subito dopo il claim e senza rilascio. Il secondo processo ha restituito `UNRESOLVED_PREVIOUS_RESERVATION_NO_AUTOMATIC_RECOVERY` prima dell’inventario. `active.json` e la ricevuta di acquisizione sono rimasti identici byte per byte; nessuna ricevuta di rilascio è comparsa. Il test conferma che la morte del custode non sblocca R4. Il codice coincide con l’impronta R4 e tutte le scritture sono rimaste nella directory di test temporanea. Non attesta la storia o il recupero della prenotazione BKL-046 reale.
+
+
+### Ricerca dell’originale R4 nel deposito Git K
+
+L’Owner ha autorizzato la lettura di `DSG-K-GitStore$`. Dopo attivazione tecnica della sola lettura per il turno, interrogato il bare Git attraverso l’UNC. In `git cat-file --batch-all-objects` non risulta alcun blob della dimensione attesa per il `CURRENT.json` approvato (1.426 byte). In `git rev-list --all --objects` non risultano percorsi del coordinatore, `CURRENT.json` o della prenotazione storica. Il deposito Git non ha fornito la fonte operativa. Sul percorso canonico di DSG-Shared `CURRENT.json` e lo stato risultano ancora indisponibili; l’inventario CIM eseguito con Windows PowerShell restituisce `AccessDenied`. Nessuna modifica al repository locale, al gate o alla prenotazione. L’accesso al deposito è stato confermato solo per il turno.
