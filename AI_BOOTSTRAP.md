@@ -1,5 +1,17 @@
 # Digital StarGate AI Bootstrap
 
+## Stato locale — riattivazione Import, 20 novembre 2026
+
+[Handover operativo](docs/project/HANDOVER_2026-11-20-ONEDRIVE-IMPORT-RESUME.md):
+riattivato soltanto OneDrive Import dopo la sospensione termica dello storage.
+Ciclo automatico 18:43:49–18:55:02 Europe/Rome concluso con risultato 0:
+905 file e 905 ACK esistenti verificati, zero nuove copie ed errori.
+Nessuna immagine nuova disponibile: nuova copia non esercitata.
+**Morning Transfer resta disabilitato e le elaborazioni scientifiche sospese.**
+H: e K: esclusi dalla verifica dei payload. Le note successive sono snapshot
+storici e non autorizzano la ripresa delle elaborazioni.
+
+
 ## Avvii locali — riscontro del 15 novembre 2026
 
 Leggere il [riscontro successivo di discovery/import e SpatialLag](docs/architecture/evidence/Local-Background-Script-Health-2026-11-15.md).
