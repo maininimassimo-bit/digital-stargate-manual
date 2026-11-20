@@ -310,3 +310,10 @@ Il riferimento numerico offline CometAlignment `BKL046-CometAlignment-riferiment
 
 
 Per la sottrazione CometAlignment è stato verificato il controllo analitico `BKL046-CometAlignment-riferimento-sottrazione-v1.json`, SHA-256 `3b04db601ce6179926b1ceabb9691714fab9f7f8cee11cb8c1fec0ca4a6683f6`. Con quattro frame indipendenti di varianza unitaria, sottrarre a ogni frame la media degli stessi frame dà varianza residua 3/4 e covarianza tra residui −1/4. Sottrarre una media comune da un insieme matematicamente indipendente dà 5/4 e +1/4. L’enumerazione esatta verifica 16 e 256 stati rispettivamente. Il secondo caso è un comparatore teorico, separato dai vincoli dell’operando nel manuale. I rami di fit, normalizzazione, reiezione e trasformazione restano da qualificare nativamente. Nessuna chiusura scientifica.
+
+
+### Chiusura dell’automazione sul PC principale e risorse della VM
+
+L’esecuzione pianificata sul PC principale ha confermato nel commento `7050374281` la rimozione della sua automazione, in risposta all’incarico `7050086796`. Il coordinamento futuro e PixInsight rimangono assegnati a DSG-Shared. La conferma di rimozione riguarda l’automazione e lascia aperto il trasferimento operativo del coordinatore e la riconciliazione della prenotazione BKL-046.
+
+Nuova misura DSG-Shared: 5,999 GiB di RAM totale, 2,496 GiB disponibili, 7,874 GiB di limite commit, 4,591 GiB usati e 3,283 GiB disponibili. Con un carico invariato, la soglia di 12 GiB disponibili richiederebbe almeno 16,591 GiB di limite totale. È un limite inferiore ricavato dalla misura, non il dimensionamento definitivo della VM. La disponibilità di commit e gli altri criteri del piano vanno riletti nel contesto di esecuzione. `CURRENT.json`, coordinatore e stato canonico restano inaccessibili al percorso previsto.
