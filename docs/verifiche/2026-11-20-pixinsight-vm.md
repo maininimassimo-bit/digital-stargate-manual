@@ -70,3 +70,8 @@ Il nuovo descrittore candidato locale `ROOT-DESCRIPTOR-candidato.json` (SHA-256 
 
 
 L’archivio locale `BKL051-composizione-ARB-20261120-r1.zip` raccoglie il descrittore candidato, i 62 file corrispondenti, il pacchetto test R2, le conoscenze e il manifesto. Controllati CRC e SHA-256 dopo la chiusura dello ZIP. Impronta dell’archivio `b95c579fe3ff72e868d3529fbe0f7323aaf6e20d7cac987e98f29ecd8b11a1a9`. Revisione ARB pendente.
+
+
+### Campioni di memoria dell’operazione originale BKL-046
+
+Letti su H tutti i 449 file `memory-*.json` dell’operazione `native-stream-hash-witness-001-h-v1`. Tutti riportano `continuousMemoryBoundAttested=false`, 448 dichiarano il riuso dell’handle originale e nessuno elenca motivi in `budgetReasons`. Il massimo valore registrato per `peakWorkingSetBytes` è 948084736 byte. Il verbale `preclose-state.json` indica ancora `AWAIT_FRESH_OWNED_EMPTY_UI_NORMAL_CLOSE_RECORD` e zero chiusure scientifiche. I dati descrivono l’esecuzione archiviata sull’host originario.
