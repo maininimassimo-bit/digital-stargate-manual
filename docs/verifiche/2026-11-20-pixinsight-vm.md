@@ -339,3 +339,6 @@ Il file locale `BKL046-conoscenza-v1.171-supplemento-VM-v1.json`, SHA-256 `3707a
 
 
 Il verificatore locale `verify-coordinator-r4-snapshot.py`, SHA-256 `5ed2d450915fa95103f5d976c43d91429956300afe0108d7bcb0a15a6a8e6871`, confronta un percorso in sola lettura con il pacchetto VM R3 verificato. Distingue impronta esatta, contenuto diverso, percorso assente e lettura negata. Legge active, acquired e released della prenotazione BKL-046 agli estremi del controllo, senza acquisire il lock. Provato sui due percorsi: sul percorso canonico della VM mancano i sei file e i tre registri, nella copia offline corrispondono i cinque file comuni mentre `CURRENT.json` manca. Il riscontro non attesta ammissione; resta necessario uno snapshot originale con provenienza e stato verificabili.
+
+
+Il protocollo ImageCalibration v2 `BKL046-ImageCalibration-protocollo-flat-dark-v2.md`, SHA-256 `7cfd4c7c9f13408b4cce14cf7556a5e2b193d4b0e0e75f07ca0ebad548f19060`, rende esplicita la verifica degli hint FITS `signed-is-physical` e `normalize` e della rappresentazione XISF Float32 in uscita con `no-compress-data` e `no-embedded-data`. Il controllo della trasformazione dei campioni precede la comparazione numerica. La v1 resta conservata. Nessuna prova nativa registrata.
