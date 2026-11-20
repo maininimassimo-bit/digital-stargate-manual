@@ -249,6 +249,25 @@ richiesti; non è il rollback generale del trasporto del §7.8.
 [Evidenze, limiti e dettagli del ripristino](../evidence/AP-013B-Hidden-Discovery-Import-2026-11-12.md).
 Questo addendum non modifica retroattivamente i gate storici o la promotion AP-013B.
 
+### 7.11 Riattivazione del solo Import — 20 novembre 2026
+
+Dopo la sospensione per temperatura dello storage/rimozione sicura e il ripristino
+della ventola, riabilitato su richiesta Owner soltanto OneDrive Import.
+Il confronto XML conferma la sola modifica di `Enabled`; launcher nascosto,
+trigger ogni 5 minuti, batch 30 e `IgnoreNew` conservati.
+
+Ciclo automatico 18:43:49–18:55:02 Europe/Rome, risultato 0: 905 file già
+importati e 905 ACK verificati su `F:\Astrofotografia`, nessun errore,
+delete o overwrite. Nessuna nuova immagine: nuova copia non esercitata.
+**Morning Transfer resta disabilitato e le elaborazioni scientifiche sospese.**
+La verifica non legge o scrive i payload H: e K:.
+
+Conservare ricevute e launcher; al primo ciclo con nuovi file verificare copia,
+SHA-256 e ACK. In caso di anomalia sospendere il solo Import senza riattivare
+automaticamente il legacy o le elaborazioni; il rollback generale resta §7.8.
+[Evidenze e limiti](../evidence/AP-013B-OneDrive-Import-Resume-2026-11-20.md) ·
+[Handover](../../project/HANDOVER_2026-11-20-ONEDRIVE-IMPORT-RESUME.md).
+
 ## 8. Evidence bundle
 
 Conservare manifest JSON, results CSV, transfer plan, timestamp, conteggi, sample hash, partial inventory e configurazione non-secret.
