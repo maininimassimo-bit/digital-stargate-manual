@@ -210,3 +210,8 @@ L’accesso in sola lettura a `DSG-H-Codex$` e `DSG-K-Work$` è stato verificato
 Python 3.12.14 AMD64 è stato eseguito in modalità isolata con una prova SHA-256. Tutti i 62 input R6 sono stati verificati per dimensione e hash; i 25 moduli Python sono stati compilati in memoria. Otto file contengono riferimenti al vecchio host, percorso o binario: quattro moduli Python, due moduli Node e i manifesti bootstrap e preflight. Il pacchetto R6 è conservato; serve un successore separato per qualificare l’elaborazione con PixInsight 1.9.6.
 
 Su H il verbale BKL-046 attende ancora la prova di chiusura originale. Il coordinatore comune non è disponibile alla VM sul percorso atteso. Il piano di recupero reperibile su K riguarda una prenotazione diversa e documenta una procedura legata a identità, ricevute, revisione e lock comune esistente. Nessuna scrittura sul gate o esecuzione nativa.
+
+
+### Nuovo turno senza concessioni e candidata sorgente BKL-051
+
+Nel nuovo turno, pur con `dsg-shared-smb-managed` salvato nel profilo utente, i quattro UNC rispondono con `0x80070041`. Le letture di H e K senza concessioni restano indisponibili. Creato sulla VM `BKL051-DSG-Shared-candidata-offline-r1.zip`, SHA-256 `50fd939e8b9e4268546958c7238c829670459e0e5f29e41c4656a951b18f7aa4`. Il pacchetto sorgente aggiorna sei moduli per i binari locali. Verificati i 62 input di base, la compilazione dei 25 moduli Python, la sintassi dei due moduli Node aggiornati e otto casi modellati. Restano da ricomporre manifesti e pin transitivi sul percorso operativo, completare le revisioni e qualificare il comportamento nativo tramite il coordinatore. Il nuovo obiettivo dà precedenza alla verifica della pubblicazione BKL-046 v571/v1.146. Nessun publisher avviato o interrotto dalla VM.
