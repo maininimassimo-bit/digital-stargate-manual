@@ -67,3 +67,6 @@ La VM ha ricostruito in una cartella di lavoro separata tutti i 62 input del des
 
 
 Il nuovo descrittore candidato locale `ROOT-DESCRIPTOR-candidato.json` (SHA-256 `f4c7d448d436ed3743d9778418495176c55b97b93232ff6464454b0fcddf25e5`) associa root e owner ai moduli R3 e include il caricatore aggiornato `probe_root_package_r4.cjs`. Restano 59 input identici alla base R4 su 62. Nella prova offline il costruttore autentico ha verificato la composizione, comprese le dipendenze Python, e ha rifiutato il rapporto di prova PENDING con `API_PROBE_PACKAGE_EXACT_WHOLE_OPERATION_REVIEW`. Il caricamento operativo successivo richiede i due rapporti indipendenti sulla stessa impronta.
+
+
+L’archivio locale `BKL051-composizione-ARB-20261120-r1.zip` raccoglie il descrittore candidato, i 62 file corrispondenti, il pacchetto test R2, le conoscenze e il manifesto. Controllati CRC e SHA-256 dopo la chiusura dello ZIP. Impronta dell’archivio `b95c579fe3ff72e868d3529fbe0f7323aaf6e20d7cac987e98f29ecd8b11a1a9`. Revisione ARB pendente.
