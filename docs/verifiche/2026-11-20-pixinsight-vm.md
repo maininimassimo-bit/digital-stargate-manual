@@ -285,3 +285,10 @@ Per isolare la precedenza temporale di CometAlignment, preparato `BKL046-CometAl
 
 
 Il protocollo geometrico candidato `BKL046-CometAlignment-protocollo-geometrico-v2.md` lega modulo e fixture alle impronte ricalcolate sulla VM. SHA-256 del protocollo `296de949302d84f6609db702fc75f99999aed02da0163d4dff31a4f093aa5b99`. La soglia di 0,25 pixel e la risoluzione di lettura di 0,1 pixel valgono per i centri e gli offset prima del ricampionamento, con orientamento verificato sulle ancore. Le due ipotesi di precedenza temporale distano circa 2,55 pixel. Il protocollo resta da revisionare e ammettere sul coordinatore comune della VM. Esito scientifico aperto.
+
+
+### Requisiti aggiuntivi del coordinatore comune R4 sulla VM
+
+`MANIFEST-R4.json` include anche `COORDINAMENTO.md`, `test_coordinator.py`, `TESTS-R4.txt` e `AGENTS-APPEND.txt`. Trovata la copia archivio di `COORDINAMENTO.md` su K e ricalcolato lo SHA-256 `7f05102ce6160d7cd8181853b09a491949f0ac46290177582fa099c4a574142e`, corrispondente al manifesto. Gli altri tre file e `CURRENT.json` non sono emersi nei tre alberi di lavoro interrogati.
+
+La copia byte-identica di `coordinator.py` è stata caricata per eseguire esclusivamente `scan_pixinsight()` su DSG-Shared. Il comando CIM esatto nella sessione Codex ha restituito codice 1 e «Accesso a una risorsa CIM non disponibile per il client». Questo è un ulteriore prerequisito operativo anche qualora i file canonici diventino disponibili. Il coordinatore deve poter completare l’inventario nel suo contesto di esecuzione sulla VM. Un errore di inventario mantiene il rifiuto di ammissione. Non è stato acquisito alcun lock, né è stato toccato lo stato.
