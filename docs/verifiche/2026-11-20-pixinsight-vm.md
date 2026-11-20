@@ -12,3 +12,7 @@ Questa verifica documenta l’ambiente di elaborazione. Le due milestone restano
 ## Verifica CI di H126
 
 Il 20 novembre 2026 GitHub riportava sette workflow completati con esito positivo sul commit `e47e224353748f6e8da84e05550ba4afd5dc1eca` della [PR #627](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/627). La PR era ancora in bozza. I risultati riguardano la CI del repository. La validazione scientifica e i 456 casi nativi indicati nel rendiconto H126 restano aperti.
+
+## Candidato offline BKL-051
+
+Nel workspace della VM è stato preparato un successore isolato di `probe_common_owner_r2.cjs`. Registra gli eventi `error` e `close` prima di leggere PID, handle e stream. Otto verifiche con EventEmitter coprono i ruoli guardian e parent nei casi ordinario, PID assente, getter che solleva un errore e registrazione parziale dei listener. Nessun processo nativo o lease è stato creato. La verifica è limitata al metodo di acquisizione del figlio. Restano da verificare integrazione con il canale, revisione indipendente e archiviazione su K:. SHA-256 del candidato: `91324731c2e84faf6547c9c83865d65f1e15cfe3a80f2484049247e731f53b75`.
