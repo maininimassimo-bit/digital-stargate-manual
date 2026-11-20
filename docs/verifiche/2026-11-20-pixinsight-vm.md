@@ -100,3 +100,8 @@ ARB ha confermato che la perdita del custode impedisce nuovi comandi e conserva 
 ### Approvazioni indipendenti R6
 
 ARB e RQ hanno entrambe approvato la composizione completa sul descrittore `63acf2da99156f8607021d54bfbfbfa48d735c7d0c94f72de2da4c435ef562e2` (62 input, 25 moduli). RQ ha rieseguito 186 regressioni, sei casi sul custode e quattro prove ulteriori. La causa originale e la ricevuta valida sono conservate e il rilascio resta singolo. SHA-256 dell’archivio `2a050af556f55309cc45e9a85be28b090beec5a5a4dfcdff70f6d1b01390b1fd`; rapporto ARB `c3dc1355e16b538676c81619e8a9a8717e0f6c45afe04b7a7560610c3750c9cf`; rapporto RQ `7f4f60c8ed1ecff32b43986aee8de2990d2ce4e3a8c6e475935492094cc582f8`. Approvazioni tecniche offline. Restano distinte la disponibilità sul PC principale, la compatibilità con l’elaborazione nascosta, l’ammissione operativa e la validazione scientifica.
+
+
+### Consegna R6 e vincolo sul desktop
+
+Lo ZIP locale `BKL051-ripresa-VM-20261120-r6-approvata.zip` raccoglie la composizione esatta, i due rapporti indipendenti e le conoscenze aggiornate. SHA-256 `71283ba44c91b8c60f85b519f1856d64b325c62cdc4610fa6b31b02d60a08306`. I punti 3–6 del piano richiedono di identificare la finestra originale, acquisire schermate e testo della console, verificare lo stato della finestra e osservarne la chiusura normale. Una sessione grafica separata sul PC principale è una possibilità da qualificare per rispettare il vincolo di non disturbare il desktop di lavoro. Disponibilità e comportamento di tale sessione restano da verificare.
