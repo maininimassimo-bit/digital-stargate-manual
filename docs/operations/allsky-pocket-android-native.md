@@ -5,19 +5,28 @@ description: App Android nativa Allsky Pocket con Live, Meteo, Archivio, galleri
 
 # AllSky Manciano: progetto Android nativo
 
-**Aggiornamento:** 17 novembre 2026. **Stato:** beta APK debug v0.2.5 installata via USB sul Motorola G84. Nome “AllSky Manciano”, icona adattiva dettagliata e schermata Info. Il codice candidato 0.2.6 aggiunge in Info un link alla policy privacy bilingue, verificato sull’emulatore API 36; la pagina non è ancora pubblicata sul sito. L’interfaccia segue la lingua configurata in Android: italiano per `it`, inglese come fallback per le altre lingue. Build e 9 test JUnit passati. L’Owner ha confermato che i test finali sul telefono hanno esito positivo. Rotazione generale, rete dati/lenta e messaggio offline sono già stati verificati dall’Owner; il reload della mappa è stato verificato nella 0.2.2. È stato predisposto il candidato Play 0.2.6: AAB locale unsigned, scheda store it-IT/en-US, icona, feature graphic, screenshot e policy privacy candidata. Account Play Console creato dall’Owner ma con verifica identità/telefono ancora pendente; la Console disabilita “Crea app”. Vedi [rapporto tecnico](allsky-pocket-android-v1.md), [preparazione Google Play](allsky-manciano-google-play-release.md) e [informativa privacy](allsky-manciano-privacy.md).
+## Beta 0.2.9 (build 11)
+
+- **Archivio:** le anteprime Startrail e Keogrammi hanno un'altezza di 200 dp e mantengono le proporzioni. Toccando l'anteprima si apre l'immagine completa, con il pulsante **Chiudi** per tornare all'Archivio.
+- **Timelapse:** il pulsante **Schermo intero** apre il lettore in orizzontale. Il video mantiene le proporzioni. I comandi si nascondono durante la riproduzione e ricompaiono con un tocco. **Esci da schermo intero** torna al lettore nell'Archivio mantenendo la posizione del video. **Archivio** chiude il lettore e torna al catalogo.
+- **Verifica su Motorola g84:** apertura e chiusura di entrambe le immagini, riproduzione a tutto schermo, comandi inferiori interamente visibili e ritorno al lettore con la posizione conservata.
+- **Distribuzione:** bundle firmato inviato al test chiuso Alpha. All'ultima verifica su Play Console, la 0.2.9 era in revisione e la 0.2.8 era disponibile ai tester.
+
+## Stato iniziale del progetto
+
+**Aggiornamento storico:** 17 novembre 2026. **Stato:** beta APK debug v0.2.5 installata via USB sul Motorola G84. Nome “AllSky Manciano”, icona adattiva dettagliata e schermata Info. Il codice candidato 0.2.6 aggiunge in Info un link alla policy privacy bilingue, verificato sull’emulatore API 36; la pagina non è ancora pubblicata sul sito. L’interfaccia segue la lingua configurata in Android: italiano per `it`, inglese come fallback per le altre lingue. Build e 9 test JUnit passati. L’Owner ha confermato che i test finali sul telefono hanno esito positivo. Rotazione generale, rete dati/lenta e messaggio offline sono già stati verificati dall’Owner; il reload della mappa è stato verificato nella 0.2.2. È stato predisposto il candidato Play 0.2.6: AAB locale unsigned, scheda store it-IT/en-US, icona, feature graphic, screenshot e policy privacy candidata. Account Play Console creato dall’Owner ma con verifica identità/telefono ancora pendente; la Console disabilita “Crea app”. Vedi [rapporto tecnico](allsky-pocket-android-v1.md), [preparazione Google Play](allsky-manciano-google-play-release.md) e [informativa privacy](allsky-manciano-privacy.md).
 
 Questo documento prepara una chat Work dedicata alla realizzazione della prima versione installabile sul telefono dell’Owner. La [PWA pubblica esistente](allsky-pocket-pwa.md) resta separata e disponibile: non è la nuova app nativa. Questo aggiornamento del manuale non modifica il Raspberry, l’acquisizione o l’hosting della PWA.
 
 ## Obiettivo della prima versione
 
-Client Android in **Kotlin e Jetpack Compose**, con cinque schede di sola consultazione: Live, Meteo, Archivio, Meteore e Mappa. La prima consegna è stata un **APK di prova locale**; il progetto è ora nella fase di preparazione alla distribuzione Google Play. Il candidato AAB e i materiali della scheda sono descritti nel [rapporto di preparazione Google Play](allsky-manciano-google-play-release.md); nessun account è stato acquistato o release caricata.
+Client Android in **Kotlin e Jetpack Compose**, con cinque schede di sola consultazione: Live, Meteo, Archivio, Meteore e Mappa. La prima consegna è stata un **APK di prova locale**; il progetto è poi passato al test chiuso su Google Play. Il candidato AAB e i materiali della scheda sono descritti nel [rapporto di preparazione Google Play](allsky-manciano-google-play-release.md).
 
 | Scheda | Perimetro della prova |
 |---|---|
 | Live | Ultimo JPEG, ora dello scatto, aggiornamento automatico mentre visibile e manuale, zoom/schermo intero, stato connessione e immagine scaduta |
 | Meteo | Temperatura ambiente, umidità, punto di rugiada e vento km/h CloudWatcher; ora della misura, scadenza e indisponibilità |
-| Archivio | Timelapse, startrails e keogrammi pubblici, elenco dal più recente, selezione data/notte, immagini complete e video con controlli |
+| Archivio | Timelapse, startrails e keogrammi pubblici, elenco dal più recente, selezione data/notte, anteprime compatte, immagini complete e timelapse con lettore a tutto schermo |
 | Meteore | Consultazione delle immagini e miniature candidate già pubbliche; sempre etichettate da verificare, mai come conferme |
 | Mappa | Pagina Allsky originale con overlay VirtualSky, calibrazione e clock sincronizzato sul fotogramma corrente |
 
