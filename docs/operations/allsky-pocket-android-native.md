@@ -5,6 +5,11 @@ description: App Android nativa Allsky Pocket con Live, Meteo, Archivio, galleri
 
 # AllSky Manciano: progetto Android nativo
 
+## Beta 0.2.11 (build 13)
+
+- **Sfondo:** paesaggio illustrativo ispirato alla Maremma, con la Via Lattea sul bordo destro e la cupola all'orizzonte. La risorsa locale `drawable-nodpi/manciano_night.png` è condivisa dalle schermate principali. Compose la adatta al contenitore e applica un velo scuro per mantenere il contrasto dei testi. Il fotogramma Live resta separato.
+- **Accessibilità:** include le modifiche della build 12. Le categorie e i comandi dell'Archivio vanno su più righe quando serve. Se le etichette della barra inferiore non hanno spazio sufficiente, le cinque destinazioni sono disponibili nel menu **Sezioni**. La dimensione dei caratteri segue Android. Il layout della build 12 è stato verificato sul Motorola g84 al 200%.
+
 ## Beta 0.2.9 (build 11)
 
 - **Archivio:** le anteprime Startrail e Keogrammi hanno un'altezza di 200 dp e mantengono le proporzioni. Toccando l'anteprima si apre l'immagine completa, con il pulsante **Chiudi** per tornare all'Archivio.
