@@ -185,3 +185,11 @@ Il componente del padre confronta le impronte dei piani e dei worker con il desc
 Dieci scenari sui due banchi hanno verificato il collegamento con processi testimone Windows e output scientifici simulati. Ricevute modificate, impronte non corrispondenti e perdita della prenotazione hanno impedito di produrre l'attestazione finale. L'analisi incompleta ha conservato il tentativo senza consentire una ripetizione.
 
 Il riscontro è conservato su H: e K:, SHA-256 `ed9fa55c4289df532ea6e1cff12ab1996958765f2675e47fe7313d7a4d6f9cbd`. Restano aperte l'integrazione dell'avvio, del comando e della chiusura nella stessa catena, le revisioni indipendenti e la prova nativa.
+
+### Chiusura ordinaria della finestra originale
+
+La candidata verifica la ricevuta del worker, il marcatore terminale e il riscontro della console legato alla prenotazione prima della richiesta di chiusura. Verifica anche che PID, ora di creazione, sessione e finestra corrispondano a quelli osservati all'invio del comando. Dopo la revisione della finestra, registra la richiesta una sola volta e ricontrolla le evidenze prima di inviare il messaggio Windows. L'analisi riceve le impronte delle ricevute solo dopo l'uscita con codice zero sullo stesso handle.
+
+Su DSG-Shared sono passati 16 scenari. Per ciascun banco una finestra testimone reale è stata chiusa con un solo messaggio e l'uscita è stata osservata. Negli altri 14 scenari il messaggio non è stato inviato per identità difforme, evidenza mancante o cambiata, revisione respinta, richiesta già registrata o condizione di trattenimento. Console scientifica e revisione sono state simulate. La perdita di stabilità del testo dopo la registrazione ha mantenuto il tentativo e bloccato un secondo invio.
+
+Il pacchetto è verificato su H: e K:, SHA-256 `46fb2be819981b2b0e319b2b5760bcac466db8d61e2ac4393189a535142d2c79`. Restano l'integrazione dell'avvio e dell'invio del comando, la revisione del launcher completo e la qualifica nativa del controllo della console e della finestra PixInsight.
