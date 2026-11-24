@@ -273,3 +273,9 @@ Il prefisso dei 64 casi e i 580 testimoni storici sono stati riconciliati con la
 In una finestra testimone WinForms identificata tramite processo originale, UI Automation ha visitato quattro elementi senza esporre pattern utilizzabili. Win32 ha individuato due controlli Edit, uno a sola lettura, e un pulsante. Due inventari sono coincisi, un PID diverso è stato respinto e il processo testimone si è chiuso con codice 0. L'inventario ha letto solo metadati dei controlli.
 
 Il pacchetto archiviato su H: e K: ha SHA-256 `57a63161229a745882ab7614a0e37527ccf5adb2203b1c6260a8428dcd09fd75`. La qualifica del provider PixInsight resta aperta. La procedura proposta prevede un incarico dedicato sotto R4 per identificare la console della build 1719 e verificare un solo marcatore innocuo nell'istanza originale. Nessun avvio PixInsight o richiesta di ammissione in questo collaudo.
+
+#### Contratto di qualifica dedicato
+
+La candidata `BKL046_PRIMARY2048_CONSOLE_QUALIFICATION_DSG_SHARED_1719_001` separa la qualifica del provider dalle prove dei due banchi. Il contratto verifica che revisione, prenotazione R4, processo, finestra, unico marcatore e ricevuta di rilascio appartengano alla stessa operazione. Verifica anche l'ordine degli eventi e richiede zero invii di lavoro scientifico e zero letture di dati scientifici.
+
+Un riscontro simulato coerente è stato accettato e dodici alterazioni sono state respinte, incluse operazione di banco, finestra diversa, doppio invio e rilascio anticipato. Il pacchetto su H: e K: ha SHA-256 `5eb5b11ab71cd0aa7248869f2dc7a3c392ad79afe6865ea1ab7dd43468826f73`. Il verificatore controlla la coerenza del fascicolo offline. Restano da collegare il launcher e le autorità reali e da ottenere l'ammissione per la prova dedicata. Nessun processo PixInsight è stato avviato.
