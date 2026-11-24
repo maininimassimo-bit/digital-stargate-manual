@@ -239,3 +239,11 @@ Il riscontro e il componente candidato sono archiviati su H: e K: con SHA-256 `c
 Un verificatore separato dal codice di replay ha riletto l'archivio dei 64 casi del banco 00 (build 1706). Ha riconciliato 560 flussi per endpoint e 36.700.160 stati per campo con le impronte di lotto e i conteggi del rapporto. Si contano 35.913.728 stime, 786.432 stati con selettore non supportato e zero discrepanze di supporto. Fra le stime, 580 superano il 5% di errore relativo. Tutte rientrano nella tolleranza assoluta di 10⁻⁶. Per ciascuno dei 580 superamenti, il verificatore ha ricostruito gli errori dichiarati a partire dalle frazioni esatte conservate.
 
 Il controllo aggiunge evidenza all'asse `NOISE_FLUX/3`, che resta aperto. Restano da dimostrare la validità sul disegno completo, il comportamento del rumore correlato dopo ricampionamento e l'incertezza sui casi indipendenti. Il risultato riguarda la rilettura di dati storici e registra zero avvii nativi e zero chiusure scientifiche. L'audit, il rapporto e l'addendum di tracciabilità sono archiviati su H: e K: con SHA-256 `8bceb1db05c167d3068b1848b873de834dc4eccde1b0859616bd443b1fd24f06`.
+
+#### Diagnosi dei superamenti relativi
+
+I 580 superamenti del 5% si concentrano nell'endpoint `PAIR_DIFFERENCE` (580 su 9.175.040 stime nel prefisso storico, distribuiti in 63 dei 64 casi). Nei testimoni il valore assoluto del riferimento originale arriva a 1,67 × 10⁻⁶ e l'errore assoluto massimo a 1,03 × 10⁻⁷. Il confronto usa le frazioni esatte archiviate.
+
+Con lo stesso denominatore originale, la sola componente di aritmetica nativa supera il 5% in 420 testimoni, la sola componente di lettura in 8, entrambe in 98. Nei restanti 54 ciascuna componente rispetta la soglia e l'errore totale la supera. Usando come riferimento il valore previsto dopo la lettura, l'aritmetica supera il 5% in 517 dei 580 testimoni. Quest'ultimo confronto riguarda solo i testimoni già selezionati dal criterio originale.
+
+Lo script, il rapporto e i 580 riscontri sono archiviati su H: e K: con SHA-256 `75c462396dc046164b0bd2e7caa2f2b511bd72408874c4273a0e759401415de0`. Per la successiva verifica sul disegno completo restano applicabili entrambe le soglie congelate. I conteggi descrivono il prefisso storico. L'asse `NOISE_FLUX/3` resta aperto.
