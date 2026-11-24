@@ -637,3 +637,11 @@ Il confronto usa gli stessi abbinamenti e gli stessi scarti del trasferimento di
 Nella posa da 7 s, il quartile con segnale più debole contiene 15 dei 17 scarti oltre 0,10 pixel sul chip 1 e 18 dei 21 sul chip 2. I P90 passano rispettivamente da 0,130 e 0,162 pixel nel quartile più debole a 0,045 e 0,046 nel più forte. Il confronto per quartili è diagnostico. Una corrispondenza per chip nella posa breve è rimasta senza stima valida del segnale.
 
 La concentrazione degli scarti accompagna il calo di segnale nel campione misurato. Il risultato non giustifica l’esclusione retroattiva del quartile debole. La soglia e la disposizione della coppia restano registrate. Rapporto riprodotto da H: e dal volume della VM ospitato su K: con SHA‑256 `2eb03017dd8a41ae7f850ee242078d3d48c25519edd9b289bf18220a18f8855d`.
+
+### Secondo campo indipendente NGC 5986 e replica del controllo di fase
+
+Sono state acquisite cinque pose ACS/WFC F606W da 350 s del programma GO‑10775, tutte del 16 aprile 2006. I ruoli sono fissati in ordine temporale dai soli header primari. Le prime due pose forniscono le stime di fase, la terza serve alla verifica e le ultime due sono riservate alla fotometria. La posa da 20 s è fuori dal protocollo a profondità uniforme. In una griglia strumentale di controllo, 105 punti su 153 per chip cadono in tutte e cinque le immagini ad almeno 32 pixel dai margini. [Programma ACS GO‑10775](https://archive.stsci.edu/prepds/acsggct/)
+
+Il confronto mantiene la separazione spaziale e il modello ePSF usati in NGC 6341. Nel campione accettato per entrambi gli stimatori, il P90 sulla posa di controllo passa da 0,116 a 0,051 pixel sul chip 1 (171 candidate) e da 0,117 a 0,032 sul chip 2 (151 candidate). Le classi di fase concordano per 153 e 136 rispettivamente con ePSF. La ripetibilità sotto 0,10 pixel è stata osservata anche nel secondo campo, entro il perimetro di questa prova. Restano da verificare trasferimento e fotometria nelle due pose riservate. Il protocollo ha mantenuto invariata la disposizione della coppia corta–lunga di NGC 6341.
+
+I rapporti riprodotti da H: hanno SHA‑256 `58f949e6ae3fe1f65f185629b6e37f7c2497bf6a30ab5d6e1b07bdc49f140acf` per gli input e `bd68f4a37b556396994ff3f31c24d54c931786011814f7f7c262eac32ef7be63` per la ripetibilità. L’asse scientifico resta aperto.
