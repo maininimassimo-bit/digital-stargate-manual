@@ -530,3 +530,11 @@ La registrazione parte dalle WCS strumentali del 2002 e del 2006. Il fit affine 
 Ciascuna posa del 2006 restituisce 197 candidati su 519 posizioni ammissibili dopo il fit e il margine. Le due pose condividono 192 identificativi del campione storico. Il P90 radiale delle associazioni accettate varia tra 0,269 e 0,313 pixel nei quattro raggruppamenti per chip e posa. La verifica dell’identità fisica delle stelle tra le due epoche e la correzione dei moti propri restano da fare. Le distanze misurano il residuo dell’intera catena di confronto, che comprende registrazione, centroidi e variazioni intercorse dal 2002.
 
 I dati su H: e sul volume della VM ospitato su K: hanno prodotto lo stesso rapporto, SHA‑256 `05bb4c2377a54151badf959d01f45de0b16861747031b62a550fb7d8832c322d`. L’asse `PSF_PIXEL/2` resta aperto.
+
+### Ripetibilità dei centroidi del 2006 sul piano ACS del 2002
+
+Il pilota è stato riprodotto senza modificare rilevazioni, fit o associazioni. Per le 192 candidate comuni, i centroidi da 7 s e 140 s sono stati invertiti attraverso le trasformazioni delle rispettive pose e riportati sullo stesso piano ACS del 2002. Il P90 delle distanze tra i due centroidi del 2006 è **0,059 pixel** e 186 coppie sono entro 0,10 pixel. Il P90 della distanza fra la loro media e il centro archiviato del 2002 è **0,288 pixel** e 43 coppie sono entro 0,10 pixel.
+
+La ripetibilità tra pose vicine nel 2006 è misurabile in questa sottocoorte. Lo scarto tra epoche include ancora effetti di registrazione, centraggio e moto proprio. Il campione contiene solo due centri storici al bordo del pixel e resta insufficiente per il confronto fotometrico bordo–centro.
+
+Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `fd0f4ca1cacd3a31299eb94d21145c9300bc7fc06eaa5c927b7ff8e5c32b6fe7`. L’asse scientifico resta aperto.
