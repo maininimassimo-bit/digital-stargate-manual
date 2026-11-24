@@ -201,3 +201,11 @@ Il controllo iniziale dello script poteva precedere la pubblicazione del PID da 
 Sedici scenari hanno verificato l'attesa sui due banchi con pubblicazione reale su Windows e runtime PJSR simulato. Altri otto scenari hanno verificato il collegamento al comando usando il renderer reale e il trasporto UI simulato. Il comando simulato è stato bloccato dopo modifiche del marcatore, cambi della finestra o perdita delle riserve di risorse. Restano la composizione finale del launcher e il collaudo nell'app sotto ammissione.
 
 Descrittore dispatcher SHA-256 `d47fa874f474c67cfea9097cb1f42d7d882959303815d1eea1863f808f877b43`. Pacchetto riletto su H: e K: con SHA-256 `677057a7c7101da0818b17bcc2320d6f19d5514ffef0c649bd83e6e0ba1c25c1`.
+
+### Sequenza del padre originale sulla VM
+
+La candidata riunisce nello stesso padre R4 la preparazione dell'avvio, l'avvio del processo vincolato, il monitor delle risorse, l'invio del comando, l'attesa delle evidenze terminali e la chiusura con passaggio all'analisi. Il riscontro terminale della console deve arrivare prima della lettura delle impronte delle ricevute. L'uscita dal tempo assegnato interrompe la sequenza senza avanzare alla chiusura.
+
+Diciotto scenari hanno collaudato la sequenza con processi Windows testimone e con autorità e fasi native simulate. Le due sequenze complete hanno passato al componente successivo il processo originale. Le altre si sono fermate per autorizzazione assente o revocata, byte di avvio mutati, rifiuto dell'avvio, perdita della prenotazione, finestra difforme o riscontro terminale errato o mancante.
+
+Il pacchetto con le dipendenze è riletto su H: e K: con SHA-256 `f93ce3a2467ce81bbfea78c7186d48340497dc111189108f94856cfe6bfad114`. Il padre candidato richiede ancora il collegamento alle autorità operative per avvio e revisioni UI, la verifica del launcher integrato da parte di ARB e RQ e la qualifica nativa ammessa da R4.
