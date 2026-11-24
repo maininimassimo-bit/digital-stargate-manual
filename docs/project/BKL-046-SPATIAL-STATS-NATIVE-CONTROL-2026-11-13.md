@@ -321,3 +321,9 @@ Il collaudo ha verificato in Python due autorizzazioni Node con chiavi di prova 
 Il punto d'ingresso candidato verifica le impronte R4 e l'identità del parent prima di attivare il provider. Il parent ricontrolla i record di acquisizione e identità durante le attese e prima delle azioni. Pubblica evidenze distinte per avvio, selezione e completamento. La chiusura richiede la risposta al marcatore e una decisione firmata che attesti finestra, applicazione inattiva, nessuna immagine o documento in sospeso e nessuna finestra di dialogo.
 
 Il collaudo offline ha verificato la sequenza completa e tre arresti, per avvio rifiutato, marcatore incerto o uscita nonzero. Il controllo della custodia ha inoltre respinto un record originale alterato. L'archivio verificato su H: e K: ha SHA-256 `e4a62fb42be790923a9deb17ec1b3e8f3474c343fd631990ab3a32e0f882ba3b`. Per la prova effettiva rimangono il collegamento operativo dell'operatore, le revisioni e l'ammissione del coordinatore.
+
+#### Soggetto candidato della prova console
+
+L'operatore candidato collega la sequenza firmata all'adattatore R4 e al parent. Verifica il soggetto, i componenti installati e i record di custodia. Prima del rilascio richiede l'esito originale e l'inventario Windows, poi rilegge la ricevuta R4. Quattro scenari isolati verificano il percorso riuscito, la presenza di PixInsight prima della prenotazione, la modifica del record attivo e una ricevuta di rilascio con operazione diversa.
+
+Il soggetto per la revisione contiene 24 componenti con SHA-256 `19cd2fc54ae32e0aeb822270b1836a45bfb0a4e808be25948284b552df006d0e`. Il pacchetto su H: e K: ha SHA-256 `f2583806c12adac1bd6f9bc6f0eef535bd5b939aaf6a62cb60be38d62a670c49`. Restano da acquisire le revisioni autentiche per questo soggetto e l'ancora di fiducia operativa. Non è stata richiesta l'ammissione canonica e PixInsight non è stato avviato.
