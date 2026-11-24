@@ -209,3 +209,11 @@ La candidata riunisce nello stesso padre R4 la preparazione dell'avvio, l'avvio 
 Diciotto scenari hanno collaudato la sequenza con processi Windows testimone e con autorità e fasi native simulate. Le due sequenze complete hanno passato al componente successivo il processo originale. Le altre si sono fermate per autorizzazione assente o revocata, byte di avvio mutati, rifiuto dell'avvio, perdita della prenotazione, finestra difforme o riscontro terminale errato o mancante.
 
 Il pacchetto con le dipendenze è riletto su H: e K: con SHA-256 `f93ce3a2467ce81bbfea78c7186d48340497dc111189108f94856cfe6bfad114`. Il padre candidato richiede ancora il collegamento alle autorità operative per avvio e revisioni UI, la verifica del launcher integrato da parte di ARB e RQ e la qualifica nativa ammessa da R4.
+
+### Soggetto Primary2048 e verifica delle autorizzazioni
+
+Il soggetto candidato fissa le impronte di 40 componenti su DSG-Shared. Il verificatore Ed25519 lega ARB e RQ allo stesso soggetto e il verbale RQ al verbale ARB approvato. Il padre rilegge le impronte dei file prima di accettare l'autorizzazione all'avvio. Le decisioni di avvio e interazione con la finestra sono legate alla prenotazione, all'impronta della richiesta e al suo termine di validità.
+
+Con chiavi effimere di collaudo sono state verificate le sei risposte richiamate dal padre, inclusa la rilettura del permesso di avvio e il rifiuto del riuso di un comando. Dieci casi avversi hanno coperto una chiave o un ruolo errato, verbali mancanti o disallineati, soggetto difforme, prenotazione diversa, risposta riutilizzata e scadenza. L'operatore esterno, l'ancora di fiducia operativa e le attestazioni effettive richiedono ancora qualificazione.
+
+Soggetto SHA-256 `a09d886342b325d921f32c71b4392fc00b2e4549bd2502ed703fe51e8ecdfd0f`. Pacchetto riletto su H: e K: con SHA-256 `97492bc0fa0871b4a78b9da93a7175848db282922bbab4909851013353e3d63a`.
