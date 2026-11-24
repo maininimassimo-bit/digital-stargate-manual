@@ -177,3 +177,11 @@ La candidata collega l'uscita del padre originale alla prenotazione e all'impron
 Il collaudo ha usato il coordinatore e l'adattatore con le impronte installate, con l'adattatore puntato a un registro isolato e dati scientifici simulati. Su 16 scenari, due rilasci sono stati confermati tramite rilettura, 12 prenotazioni sono rimaste trattenute per evidenze mancanti o difformi, uscita del padre non zero o piano errato, e in due casi la perdita simulata della conferma dopo la scrittura della ricevuta ha impedito di dichiarare il successo o ritentare. Le prove hanno verificato l'integrità dei record originali e l'identità dei processi testimone Windows.
 
 Il pacchetto è riletto su H: e K: con SHA-256 `8d316234879f04b83faf0f0c43a6b26911429ad4e90e684867f9ef952b841e08`. Restano l'integrazione nel launcher completo, ARB, RQ e l'ammissione per la prova su PixInsight.
+
+### Collegamento dell'analisi post-uscita al controllo R4
+
+Il componente del padre confronta le impronte dei piani e dei worker con il descrittore congelato, verifica la corrispondenza dei percorsi VM e rilegge il piano prima dell'analisi. La verifica su DSG-Shared ha coperto tutti i 456 casi residui, 196 del banco 00 e 260 del banco 01. Prima di avviare l'analisi il padre verifica l'identità nativa e la prenotazione e registra un tentativo esclusivo. Il rapporto dell'analisi viene passato al controllo di rilascio soltanto tramite l'attestazione del padre originale.
+
+Dieci scenari sui due banchi hanno verificato il collegamento con processi testimone Windows e output scientifici simulati. Ricevute modificate, impronte non corrispondenti e perdita della prenotazione hanno impedito di produrre l'attestazione finale. L'analisi incompleta ha conservato il tentativo senza consentire una ripetizione.
+
+Il riscontro è conservato su H: e K:, SHA-256 `ed9fa55c4289df532ea6e1cff12ab1996958765f2675e47fe7313d7a4d6f9cbd`. Restano aperte l'integrazione dell'avvio, del comando e della chiusura nella stessa catena, le revisioni indipendenti e la prova nativa.
