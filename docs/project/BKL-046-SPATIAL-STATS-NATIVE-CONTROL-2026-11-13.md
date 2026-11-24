@@ -653,3 +653,11 @@ Il trasferimento dalle due pose di riferimento alle due pose fotometriche da 350
 Il fit ePSF a centro fisso, con fondo costante e normalizzazione per il tempo di esposizione, conserva 115 stelle dopo due rifiuti per qualità dei pixel. Il confronto bordo–centro del P90 del log‑rapporto assoluto vale +0,01275 sul chip 1 e −0,00183 sul chip 2. Gli intervalli descrittivi per tessere comprendono zero, da −0,00046 a +0,05020 e da −0,02948 a +0,02868. Nella sottocoorte a classe stabile alcune repliche perdono una classe. I relativi intervalli sono omessi.
 
 Questo risultato misura la ripetibilità in conteggi per unità di tempo, nelle due pose profonde di NGC 5986. La coppia da 7 e 140 s di NGC 6341 mantiene la propria disposizione. La calibrazione assoluta e l’estensione ad altri regimi restano aperte. Il trasferimento e la fotometria sono stati riprodotti da H:. I rapporti hanno SHA‑256 `728079b5532eade5930ae9b944828a4bc2b406e6f6999557adcd84d2591a3317` e `8dc4d9df537a9a5f543d91b85ac0298bb289ee73aaa614796582b783c44c6296`.
+
+### Effetto della mappa dell’area dei pixel nel campo NGC 5986
+
+La fotometria a centro fisso è stata riprodotta e confrontata con le ampiezze corrette per l’area dei pixel. La correzione usa le mappe medie STScI per WFC1 e WFC2, interpolate nelle coordinate già congelate. Le 115 stelle e i rifiuti sono gli stessi nelle due misure. [Mappe dell’area dei pixel ACS](https://www.stsci.edu/hst/instrumentation/acs/data-analysis/pixel-area-maps)
+
+Il 90º percentile della variazione assoluta del log‑rapporto fra pose è 0,00521 sul chip 1 e 0,00410 sul chip 2. La differenza bordo–centro passa da +0,01275 a +0,00842 e da −0,00183 a −0,00139, rispettivamente. Dopo l’applicazione della mappa, entrambi gli intervalli descrittivi comprendono ancora zero. La correzione misura la sensibilità alle mappe medie nel dither disponibile. La calibrazione assoluta resta aperta.
+
+Il rapporto è stato riprodotto da H: con SHA‑256 `f25f34703e37419072ccdd07668facf6a87d7bcbcccbe02433181953ef64d511`.
