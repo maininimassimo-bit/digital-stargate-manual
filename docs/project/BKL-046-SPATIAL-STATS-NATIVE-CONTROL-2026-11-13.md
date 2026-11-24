@@ -538,3 +538,14 @@ Il pilota è stato riprodotto senza modificare rilevazioni, fit o associazioni. 
 La ripetibilità tra pose vicine nel 2006 è misurabile in questa sottocoorte. Lo scarto tra epoche include ancora effetti di registrazione, centraggio e moto proprio. Il campione contiene solo due centri storici al bordo del pixel e resta insufficiente per il confronto fotometrico bordo–centro.
 
 Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `fd0f4ca1cacd3a31299eb94d21145c9300bc7fc06eaa5c927b7ff8e5c32b6fe7`. L’asse scientifico resta aperto.
+
+### Effetto dei moti propri Gaia sullo scarto fra 2002 e 2006
+
+L’incrocio delle associazioni Gaia coerenti nelle due pose del 2002 con le candidate comuni delle pose del 2006 conserva 26 stelle, 12 sul chip 1 e 14 sul chip 2. I due pilot sono stati riletti senza modificare registrazione o associazioni. Il controllo proietta il moto proprio catalogato su 3,622 anni e rimuove le componenti affini sia dal vettore previsto sia da quello misurato. La rimozione serve al confronto differenziale e lascia intatto il fit delle immagini.
+
+| Chip | P90 dello scarto misurato | P90 dopo la sottrazione Gaia | Variazione della somma degli scarti quadratici |
+| --- | ---: | ---: | ---: |
+| 1 | 0,213 px | 0,207 px | +20,8% |
+| 2 | 0,190 px | 0,180 px | −7,9% |
+
+Lo scarto dopo la sottrazione rimane sopra 0,10 pixel su entrambi i chip. I moti propri catalogati danno un risultato diverso sui due chip, nel sottoinsieme selezionato dalle associazioni concordanti. La verifica non separa gli errori di centraggio e registrazione dall’incertezza dei moti propri. Rapporto riprodotto da H: e dal volume della VM ospitato su K: con SHA‑256 `cc9c96cbace48557a3b8addc9c192393577f98b9390d7ea88aab66ebef0cc1b8`. L’asse resta aperto.
