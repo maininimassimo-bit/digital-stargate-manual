@@ -147,3 +147,9 @@ Il confronto integrale successivo ha riletto e verificato di nuovo le impronte d
 - Quattro intestazioni di record v1.171 contengono locatori assoluti legati a un profilo Windows. Il rapporto registra gli ordinali senza riprodurre i locatori. Il riscontro sulle fonti è archiviato su H: e K: con SHA-256 `cb2df74643109d62bb1897b4ec55016f97f89ce0870eb1b703effce2157c626b`.
 
 La consegna del file integrale al repository pubblico resta aperta. Queste verifiche documentano le fonti e i termini nei rispettivi perimetri.
+
+La scansione del file intero individua profili Windows in 124 record incorporati e in altre sezioni. Un collaudo locale ha sostituito 280.706 componenti di percorso con un alias comune e ha ricostruito lo SHA-256 esatto del file registrato usando il registro di inversione conservato localmente. Il risultato attesta la reversibilità della trasformazione. Restano da verificare gli altri dati riservati e i diritti sui contenuti. L'indice di scansione è archiviato su H: e K: con SHA-256 `c3072f0b3f9e72d96f171aa5da31a49b7c34115d3f34823a5856e6fad9d9b343`.
+
+### Rilettura del prefisso Primary2048
+
+Sono stati riletti tutti i 12 record associati ai 64 casi storici del banco 00. Gli insiemi dei 64 casi completati e dei 196 mai avviati coincidono nei rendiconti originali. Due file omonimi della ricevuta comune sono stati respinti perché difformi dallo SHA-256 registrato. Per chiudere la verifica serve ancora la ricevuta originale della prenotazione `b9941dc6-8c9e-4c83-ad02-941bf4b28d39`. Il rapporto e i test di rifiuto sono archiviati su H: e K:, SHA-256 `fecd6dcbf1cc5385b654eb6197ada03f0198e257b4e2ec4848975dec2a723837`.
