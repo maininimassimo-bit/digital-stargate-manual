@@ -261,3 +261,9 @@ Il riscontro derivato dai piani congelati e dal modello elenca, per ciascun caso
 I conteggi dei casi residui sono attese di copertura. In sede di verifica si applicano le soglie congelate di 10⁻⁶ assoluto e del 5% relativo con riferimento zero indefinito. Le mancate stime per selettore assente, le discrepanze di supporto e le misure sospese per esito dell'audit grezzo richiedono conteggi distinti. Il prefisso 1706 resta identificabile nel confronto: una stima aggregata fra build richiede una verifica di equivalenza. Il modello dichiara che endpoint e configurazioni logiche condividono i campi di ingresso, quindi il numero di posizioni non è la numerosità di un campione indipendente.
 
 Il pacchetto con generatore, mappa caso-endpoint e sei verifiche di rifiuto è archiviato su H: e K: con SHA-256 `8d80756e647565f4863a2bb9817a6ac46bfc10390959fc66ec5caae194a6e56a`. La riconciliazione futura richiederà i risultati nativi effettivi e le relative ricevute.
+
+#### Verifica dei risultati salvati
+
+Il verificatore offline usa la mappa congelata per rileggere il rapporto, i file dei singoli casi, gli stati per campo e i testimoni frazionari. Verifica le impronte, l'ordine dei casi e degli endpoint e la conservazione dei conteggi. Se mancano casi, l'esito completo viene rifiutato. Un esito esplicitamente parziale deve riportare tutti gli identificativi attesi che mancano. Un audit grezzo fallito ammette solo stati sospesi o privi di selettore, secondo il piano.
+
+Il prefisso dei 64 casi e i 580 testimoni storici sono stati riconciliati con la stessa procedura. Dieci scenari isolati coprono anche superamenti contemporanei delle due soglie, discrepanze di supporto e un testimone alterato. Il pacchetto su H: e K: ha SHA-256 `e9a458bfb5f63d4a0c2768de39f9a2918355277358b74c7e57c4bae954a38b48`. La provenienza del processo nativo e le ricevute R4 richiedono la verifica del coordinatore. Le prove residue attendono l'ammissione.
