@@ -169,3 +169,11 @@ Il replay offline su DSG-Shared ha riprodotto byte per byte tutti i 64 rapporti 
 L'archivio integrale contiene 1.811 file di output verificati con SHA-256, più indice e rapporto. È conservato su H: e sullo storage K: tramite O:. SHA-256 dell'archivio `ea87865d283b50e42f02deebc1d0d0e751638390efd39d1cc115f0aa91f74fe6`. Il riscontro compatto è disponibile anche direttamente su K:, SHA-256 `a3060d03fa221b5f0849972652bafff073aaad9fdd6cc37a2b05517891b7efa6`.
 
 La riproduzione riguarda i dati storici. Restano aperti la verifica della ricevuta comune originale, la prova nativa sulla build 1719 e la validazione scientifica.
+
+### Verifica delle evidenze prima del rilascio R4
+
+La candidata collega l'uscita del padre originale alla prenotazione e all'impronta attesa del piano congelato. Prima dell'unica richiesta di rilascio rilegge l'attestazione post-uscita, il rapporto numerico, il marcatore di completamento e le ricevute native. Dopo la conferma R4 verifica la ricevuta di rilascio e la sua impronta.
+
+Il collaudo ha usato il coordinatore e l'adattatore con le impronte installate, con l'adattatore puntato a un registro isolato e dati scientifici simulati. Su 16 scenari, due rilasci sono stati confermati tramite rilettura, 12 prenotazioni sono rimaste trattenute per evidenze mancanti o difformi, uscita del padre non zero o piano errato, e in due casi la perdita simulata della conferma dopo la scrittura della ricevuta ha impedito di dichiarare il successo o ritentare. Le prove hanno verificato l'integrità dei record originali e l'identità dei processi testimone Windows.
+
+Il pacchetto è riletto su H: e K: con SHA-256 `8d316234879f04b83faf0f0c43a6b26911429ad4e90e684867f9ef952b841e08`. Restano l'integrazione nel launcher completo, ARB, RQ e l'ammissione per la prova su PixInsight.
