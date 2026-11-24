@@ -495,3 +495,16 @@ L’alternativa FITS `A` ricostruisce la stessa mappatura del blocco WCS incorpo
 La rilettura delle 736 posizioni archiviate mostra che tutte ricadono nelle tessere dispari da 256 pixel nelle pose da 5 e 90 s. Una partizione da 512 pixel colloca 360 di queste stesse stelle nelle tessere pari. Per mantenere separato il campione storico, la prossima registrazione deve riservare le tessere dispari da 256 pixel e determinare le corrispondenze di addestramento separatamente. Il ricampionamento descrittivo del confronto storico conserva le tessere da 128 pixel.
 
 Il rapporto WCS riprodotto dai FITS su H: e sul volume della VM ospitato su K: ha SHA‑256 `bd2500f06adc346d83518f90e001003404dbe3e28529f76d053f449b71fdc538`. Il rapporto di partizione ha SHA‑256 `2b388795582bbcc56b429f4d686b0efe2c604084b15cfbc62909863276809721`. La registrazione e la valutazione metrologica sui centroidi restano aperte.
+
+### Registrazione pilota Gaia sulla WCS strumentale di NGC 6341
+
+La traslazione iniziale e il fit affine sono stati stimati separatamente per posa e chip, usando soltanto picchi estratti dalle tessere pari da 256 pixel e sorgenti Gaia con incertezza formale propagata fino a 5 mas. La valutazione usa le 736 stelle storiche delle tessere dispari. Sono ammesse soltanto corrispondenze reciproche e univoche entro 1 pixel. Le sorgenti prive di corrispondenza restano nel denominatore.
+
+| Posa | Chip fisico | Stelle con corrispondenza | P90 radiale delle corrispondenze | Entro 0,10 pixel |
+| --- | ---: | ---: | ---: | ---: |
+| 5 s | 1 | 44 / 341 | 0,536 px | 3 |
+| 5 s | 2 | 71 / 395 | 0,470 px | 11 |
+| 90 s | 1 | 44 / 341 | 0,536 px | 4 |
+| 90 s | 2 | 71 / 395 | 0,477 px | 11 |
+
+Il confronto pilota non qualifica il riferimento per distinguere le fasi subpixel secondo il limite di 0,10 pixel. I due totali per posa non attestano la continuità di identità Gaia tra le due pose. Il P90 è condizionato alle sole associazioni accettate. La prova non misura la fotometria né isola i contributi di propagazione, affollamento, centroidi e registrazione. Rapporto identico dai dati su H: e sul volume della VM ospitato su K:, SHA‑256 `b4402ddb36b9c9ecd8bb04f8491bba961c63032809abff7581f8c108dd1ed64c`. L’asse resta aperto.
