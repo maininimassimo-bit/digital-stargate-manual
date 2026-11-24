@@ -471,3 +471,11 @@ La riconciliazione confronta riga per riga l’indice GitHub riletto con il regi
 | Versioni e backend | 3 | Confronti a input identico, variazioni isolate e protocollo stocastico |
 
 Il layout 1706 e il collaudo del launcher sono collegati con le rispettive impronte. Il confronto 1719, la conoscenza finale e il trasferimento integrale GitHub restano aperti. SHA-256 del rapporto `e6bcc0ef775a2c019fdaf8c06139eb3345245e368aa2b6caba6ddf1f8f3b8676`. Archivio riletto su H: e K:, SHA-256 `ca4edd6875ca488a09e2691ab9e5f4994f78d0e9b5866a164bddc036ece87e86`. Zero chiusure scientifiche.
+
+### Copertura della fase subpixel nel campo NGC 6341
+
+Il confronto congelato dell’asse `PSF_PIXEL/2` contiene 415 stelle al centro del pixel, 314 nella fascia intermedia e sette al bordo. Le sette stelle di bordo occupano sette tessere distinte. Il chip 1 ne contiene quattro su 185 tessere e il chip 2 tre su 178.
+
+Con il ricampionamento separato per chip già fissato, la probabilità che una replica perda la classe di bordo è circa **0,0851%**. Su 1.000 repliche la probabilità di perderla almeno una volta è **57,3%**. Il calcolo usa, per ogni chip, la probabilità di estrarre sempre tessere prive di bordo e moltiplica le probabilità dei due chip. La replica incompleta osservata resta nel registro e l’intervallo bordo–centro resta assente.
+
+Per qualificare il confronto successivo servono posizioni indipendenti dal fit fotometrico e una copertura al bordo distribuita tra tessere, chip e campi indipendenti. L’occupazione delle tessere verifica se il confronto è calcolabile. La precisione del 90º percentile richiede una verifica distinta. Le copie archiviate su H: e K: hanno riprodotto lo stesso rapporto, SHA‑256 `49c93db0bd2dfc4970928945ad50ccf0455d4bcb1bed0efd21d4618f2ed0a269`. L’asse scientifico resta aperto.
