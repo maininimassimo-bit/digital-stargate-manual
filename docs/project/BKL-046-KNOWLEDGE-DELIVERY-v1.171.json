@@ -130,14 +130,14 @@
     "fullPlanSha256": "cb30745073d1a69003e41b78da1948ef3093508b9a7ed5f97d3cf01b2827e90a",
     "scope": "v600 artifacts, earlier knowledge versions and historical manifests",
     "totalLogicalAliases": 11839,
-    "verifiedLogicalAliases": 11808,
-    "verifiedContentObjects": 10149,
+    "verifiedLogicalAliases": 11822,
+    "verifiedContentObjects": 10163,
     "plannedJobs": 71,
-    "verifiedJobs": 40,
-    "verifiedCarrierFiles": 43,
-    "verifiedCarrierBytes": 17872987183,
+    "verifiedJobs": 54,
+    "verifiedCarrierFiles": 57,
+    "verifiedCarrierBytes": 18804332243,
     "readbackOnHAndKBackedVmVolume": true,
-    "checkpointSha256": "960e25ad7c68913abf0c85d2084712660f5b84f5fdc62a9ced8a1fb9b126fd16",
+    "checkpointSha256": "e28a9b651f1ff58dfa2324784370bba1da4692c5b44315fa3f13262f83ce7087",
     "remoteBytesUploaded": 0,
     "checkpointType": "BKL046_DUAL_CARRIER_INDEX_V1",
     "localCarrierAssemblyComplete": false
@@ -168,6 +168,15 @@
       "verifiedMedia": 2,
       "unknownAliasRejected": true,
       "mismatchedIndexRejected": true
+    },
+    "splitRestore": {
+      "reportSha256": "6aac514e2ba99b3bc182a6e0135a7363a6b7e76eaa9a4548d9fc58a4ac46f034",
+      "indexedCheckpointSha256": "960e25ad7c68913abf0c85d2084712660f5b84f5fdc62a9ced8a1fb9b126fd16",
+      "reconstructedBytes": 4255774043,
+      "contentSha256": "43daf766840495f14f9a0e6dab8a106c10e48e9557a8d305c3eab8487b875438",
+      "parts": 4,
+      "verifiedMedia": 2,
+      "independentReadback": true
     }
   }
 }
