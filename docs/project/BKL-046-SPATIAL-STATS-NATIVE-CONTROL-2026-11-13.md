@@ -291,3 +291,9 @@ Il pacchetto su H: e K: ha SHA-256 `28ca63486f5ced6e562a436c6d5a89d564e0acb43452
 Il componente candidato verifica firme distinte per ARB, RQ, operatore e interfaccia e richiede quattro autorizzazioni legate al singolo tentativo. L'avvio segue l'ammissione, l'invio segue l'identificazione del controllo e la chiusura segue la rilettura del marcatore. Le autorizzazioni consumate sono registrate in esclusiva. Un esito ambiguo interrompe la sequenza e respinge una seconda esecuzione nella stessa cartella di tentativo.
 
 Undici scenari con chiavi temporanee hanno verificato la sequenza e i punti di arresto. Le risposte R4 e della console erano simulate in questo collaudo. Il pacchetto su H: e K: ha SHA-256 `f2151d2fcb7c0e9df5556b84f8acffbfa64c89887a6040ede8e42de923c5dd82`. Restano aperti il collegamento della sequenza al parent R4 e al provider nativo e la verifica delle autorità operative autentiche.
+
+#### Integrazione della sequenza firmata con R4
+
+In un registro isolato, la sequenza firmata ha ottenuto una prenotazione dal vero coordinatore R4, legato il parent originale e riletto la ricevuta di rilascio nel caso riuscito. Nei tre casi avversi (autorizzazione di avvio assente, risposta ambigua al marcatore, impronta del record originale alterata) il registro ha conservato la prenotazione senza scrivere una ricevuta di rilascio. Il tentativo duplicato è stato respinto in tutti e quattro i casi. Il confronto del registro canonico prima e dopo è risultato identico.
+
+Il pacchetto su H: e K: ha SHA-256 `9c930b174fddffb28e9410239b48ae718b0895aa67fd2e912c9086105f00fb9c`. Il custode e il parent testimone erano processi reali. Il provider della console era simulato e le firme erano di collaudo. Restano aperti il collegamento al provider effettivo su build 1719, le revisioni autentiche e l'ammissione della prova dedicata.
