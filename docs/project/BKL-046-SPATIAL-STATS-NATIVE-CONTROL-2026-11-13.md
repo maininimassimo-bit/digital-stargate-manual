@@ -508,3 +508,9 @@ La traslazione iniziale e il fit affine sono stati stimati separatamente per pos
 | 90 s | 2 | 71 / 395 | 0,477 px | 11 |
 
 Il confronto pilota non qualifica il riferimento per distinguere le fasi subpixel secondo il limite di 0,10 pixel. I due totali per posa non attestano la continuità di identità Gaia tra le due pose. Il P90 è condizionato alle sole associazioni accettate. La prova non misura la fotometria né isola i contributi di propagazione, affollamento, centroidi e registrazione. Rapporto identico dai dati su H: e sul volume della VM ospitato su K:, SHA‑256 `b4402ddb36b9c9ecd8bb04f8491bba961c63032809abff7581f8c108dd1ed64c`. L’asse resta aperto.
+
+### Continuità delle associazioni Gaia tra le pose da 5 e 90 secondi
+
+La rilettura del pilota ha prodotto lo stesso rapporto senza modificare l’allineamento o la selezione. Le 44 associazioni del chip 1 e le 71 del chip 2 appartengono alle stesse stelle e alle stesse sorgenti Gaia nelle due pose. Nel campione comune, il P90 della media vettoriale degli scarti vale 0,533 pixel sul chip 1 e 0,479 sul chip 2. Il P90 della differenza tra gli scarti vale rispettivamente 0,226 e 0,038 pixel. Il risultato mostra che una parte rilevante dello scarto si ripete fra le due pose. La sua origine resta da isolare.
+
+Tra le 115 associazioni comuni, i centroidi archiviati contengono una sola stella di bordo nella posa da 5 s e nessuna nella posa da 90 s. La classe nominale da Gaia e quella del centro misurato concordano per 33 e 31 stelle rispettivamente. Questa coorte non sostiene il confronto fotometrico bordo–centro. Il rapporto è riproducibile dai dati su H: e sul volume della VM ospitato su K:, SHA‑256 `967776bea29bc659008d39b1821e668a1057043131023ec8b2bc908f7db31c78`. L’asse scientifico resta aperto.
