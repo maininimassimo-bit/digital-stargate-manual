@@ -267,3 +267,9 @@ Il pacchetto con generatore, mappa caso-endpoint e sei verifiche di rifiuto è a
 Il verificatore offline usa la mappa congelata per rileggere il rapporto, i file dei singoli casi, gli stati per campo e i testimoni frazionari. Verifica le impronte, l'ordine dei casi e degli endpoint e la conservazione dei conteggi. Se mancano casi, l'esito completo viene rifiutato. Un esito esplicitamente parziale deve riportare tutti gli identificativi attesi che mancano. Un audit grezzo fallito ammette solo stati sospesi o privi di selettore, secondo il piano.
 
 Il prefisso dei 64 casi e i 580 testimoni storici sono stati riconciliati con la stessa procedura. Dieci scenari isolati coprono anche superamenti contemporanei delle due soglie, discrepanze di supporto e un testimone alterato. Il pacchetto su H: e K: ha SHA-256 `e9a458bfb5f63d4a0c2768de39f9a2918355277358b74c7e57c4bae954a38b48`. La provenienza del processo nativo e le ricevute R4 richiedono la verifica del coordinatore. Le prove residue attendono l'ammissione.
+
+### Inventario del canale console su DSG-Shared
+
+In una finestra testimone WinForms identificata tramite processo originale, UI Automation ha visitato quattro elementi senza esporre pattern utilizzabili. Win32 ha individuato due controlli Edit, uno a sola lettura, e un pulsante. Due inventari sono coincisi, un PID diverso è stato respinto e il processo testimone si è chiuso con codice 0. L'inventario ha letto solo metadati dei controlli.
+
+Il pacchetto archiviato su H: e K: ha SHA-256 `57a63161229a745882ab7614a0e37527ccf5adb2203b1c6260a8428dcd09fd75`. La qualifica del provider PixInsight resta aperta. La procedura proposta prevede un incarico dedicato sotto R4 per identificare la console della build 1719 e verificare un solo marcatore innocuo nell'istanza originale. Nessun avvio PixInsight o richiesta di ammissione in questo collaudo.
