@@ -592,3 +592,14 @@ Il confronto è stato ripetuto partendo da nuove rilevazioni nella prima posa di
 Dalle 4.096 rilevazioni iniziali nelle tessere dispari si ottengono 548 candidate con corrispondenza univoca nelle altre due pose. Sulla posa di controllo, il P90 radiale è 0,133 pixel sul chip 1 e 0,131 sul chip 2. La classe di fase coincide per 181 su 277 candidate e 195 su 271, rispettivamente. Anche il controllo descrittivo limitato alle previsioni lontane più di 0,10 pixel dalle soglie conserva dieci cambi di classe su 106 candidate.
 
 Il campione più ampio rende misurabile la ripetibilità senza dipendere dalle associazioni tra epoche. Il limite radiale di 0,10 pixel rimane superato su entrambi i chip. La qualifica e il trasferimento di fase alle pose fotometriche restano aperti. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `a5e2d33f9068019614af6d006f6736b433f34d454ef5dbc14a352da60ad2a82d`.
+
+### Controllo ePSF sulle stesse associazioni del 2006
+
+Il confronto mantiene le associazioni e i coefficienti di registrazione del pilota a momenti. Dei 548 candidati, 372 hanno dati accettabili per entrambi gli stimatori nelle tre pose di riferimento. I rifiuti dei fit sono conteggiati separatamente. I pixel delle pose fotometriche restano fuori dal controllo.
+
+| Chip | Candidati comuni | P90 a momenti | P90 ePSF | Classi concordanti con ePSF |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 182 | 0,127 px | 0,045 px | 176 |
+| 2 | 190 | 0,128 px | 0,038 px | 172 |
+
+L’ePSF porta il P90 sotto 0,10 pixel su entrambi i chip della posa di controllo, nella sottocoorte accettata e con la registrazione congelata. La precisione e la copertura nelle due pose fotometriche restano da verificare. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `0b519a9d051fc30a5a64672afcc5f63fce048fdf26af17f00bd2550a15568eb8`. L’asse scientifico resta aperto.
