@@ -225,3 +225,11 @@ L'operatore candidato verifica i verbali prima di aprire la prenotazione e li ri
 Venti scenari sui due banchi hanno usato R4 e il suo adattatore su un registro isolato, con chiavi effimere ed evidenze scientifiche simulate. In quattro casi il rifiuto del preflight o l'assenza di ARB ha impedito di prenotare. In 12 casi la prenotazione è rimasta trattenuta dopo l'interruzione. Due rilasci sono stati confermati e due hanno scritto la ricevuta prima di una perdita simulata della risposta, senza ripetizione della richiesta.
 
 Il soggetto candidato include ora 41 componenti con SHA-256 del descrittore `5fb282723a58e689051ab1942d6f90bde550b8bab48d555a045a0ff64c76733e`. Pacchetto verificato su H: e K:, SHA-256 `d595a71342cb78ef5bf30400b7a05b5dfb4d22b020ee91efeea4b30389566d21`. Il collegamento al preflight e alla configurazione operativa, l'ancora di fiducia autenticata, le revisioni sul nuovo soggetto e l'ammissione nativa restano aperti.
+
+### Preflight del candidato operatore su DSG-Shared
+
+Il collegamento candidato ha riletto il soggetto, il dispatcher, i due piani e i 456 casi rilocati. Ha verificato il coordinatore R4 installato e osservato memoria, storage, inventario processi e publisher. La rilettura dell'archivio storico ha riconosciuto l'arresto eccezionale del tentativo da 196 casi con zero nuovi casi. La ricevuta di rilascio ordinario dei 64 casi storici resta assente dalle radici controllate.
+
+Il preflight reale ha bloccato entrambi i banchi prima della prenotazione. Mancano i verbali ARB/RQ del soggetto, la qualifica nativa del canale console e la ricevuta storica dei 64 casi. Le prove simulate hanno inoltre verificato il rifiuto di inventario incompleto, prenotazione attiva, PixInsight già presente, publisher incerto, riserve insufficienti, storia incompleta o piano difforme.
+
+Il riscontro e il componente candidato sono archiviati su H: e K: con SHA-256 `ce766992457469b0d5ee842905e4349b0bb988ae40eecbae79087c7769b423b2`. Restano aperti il riscontro delle autorità operative e la prova nativa.
