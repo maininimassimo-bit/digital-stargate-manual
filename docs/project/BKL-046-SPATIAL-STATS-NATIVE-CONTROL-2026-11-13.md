@@ -285,3 +285,9 @@ Un riscontro simulato coerente è stato accettato e dodici alterazioni sono stat
 Su DSG-Shared il coordinatore R4 è stato collaudato con processi reali e un registro isolato per l'operazione di qualifica. L'adattatore ha atteso la prenotazione prima di creare il parent. Il parent ha riletto i record di acquisizione e identità e il rilascio è stato confermato dopo l'uscita zero. In due scenari separati, un identificativo di operazione scientifica e un'impronta alterata hanno lasciato la prenotazione di prova trattenuta. Il registro canonico è risultato identico prima e dopo il collaudo.
 
 Il pacchetto su H: e K: ha SHA-256 `28ca63486f5ced6e562a436c6d5a89d564e0acb43452e01b90b8addd7ee06840`. Il parent collaudato è un testimone. Il collegamento alla vera istanza PixInsight e le approvazioni della prova nativa restano aperti.
+
+#### Autorizzazioni e sequenza di qualifica
+
+Il componente candidato verifica firme distinte per ARB, RQ, operatore e interfaccia e richiede quattro autorizzazioni legate al singolo tentativo. L'avvio segue l'ammissione, l'invio segue l'identificazione del controllo e la chiusura segue la rilettura del marcatore. Le autorizzazioni consumate sono registrate in esclusiva. Un esito ambiguo interrompe la sequenza e respinge una seconda esecuzione nella stessa cartella di tentativo.
+
+Undici scenari con chiavi temporanee hanno verificato la sequenza e i punti di arresto. Le risposte R4 e della console erano simulate in questo collaudo. Il pacchetto su H: e K: ha SHA-256 `f2151d2fcb7c0e9df5556b84f8acffbfa64c89887a6040ede8e42de923c5dd82`. Restano aperti il collegamento della sequenza al parent R4 e al provider nativo e la verifica delle autorità operative autentiche.
