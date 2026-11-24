@@ -279,3 +279,9 @@ Il pacchetto archiviato su H: e K: ha SHA-256 `57a63161229a745882ab7614a0e37527c
 La candidata `BKL046_PRIMARY2048_CONSOLE_QUALIFICATION_DSG_SHARED_1719_001` separa la qualifica del provider dalle prove dei due banchi. Il contratto verifica che revisione, prenotazione R4, processo, finestra, unico marcatore e ricevuta di rilascio appartengano alla stessa operazione. Verifica anche l'ordine degli eventi e richiede zero invii di lavoro scientifico e zero letture di dati scientifici.
 
 Un riscontro simulato coerente è stato accettato e dodici alterazioni sono state respinte, incluse operazione di banco, finestra diversa, doppio invio e rilascio anticipato. Il pacchetto su H: e K: ha SHA-256 `5eb5b11ab71cd0aa7248869f2dc7a3c392ad79afe6865ea1ab7dd43468826f73`. Il verificatore controlla la coerenza del fascicolo offline. Restano da collegare il launcher e le autorità reali e da ottenere l'ammissione per la prova dedicata. Nessun processo PixInsight è stato avviato.
+
+#### Custodia R4 del parent di qualifica
+
+Su DSG-Shared il coordinatore R4 è stato collaudato con processi reali e un registro isolato per l'operazione di qualifica. L'adattatore ha atteso la prenotazione prima di creare il parent. Il parent ha riletto i record di acquisizione e identità e il rilascio è stato confermato dopo l'uscita zero. In due scenari separati, un identificativo di operazione scientifica e un'impronta alterata hanno lasciato la prenotazione di prova trattenuta. Il registro canonico è risultato identico prima e dopo il collaudo.
+
+Il pacchetto su H: e K: ha SHA-256 `28ca63486f5ced6e562a436c6d5a89d564e0acb43452e01b90b8addd7ee06840`. Il parent collaudato è un testimone. Il collegamento alla vera istanza PixInsight e le approvazioni della prova nativa restano aperti.
