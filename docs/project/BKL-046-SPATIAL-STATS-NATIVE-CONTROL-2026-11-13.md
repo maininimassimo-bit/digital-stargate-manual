@@ -357,3 +357,9 @@ La rilettura dei 32 blocchi di ingresso riconcilia **33.554.432 parole primarie*
 Il limite di costruzione della sorgente si riconcilia per tutti i 2.632 endpoint supportati. Per i 548 endpoint storici osservati, il calcolo condizionale somma il limite di sorgente al termine RMS dell'errore misurato sullo stesso campo. Usa radici razionali con arrotondamento verso l'esterno e la disuguaglianza triangolare per delimitare il secondo momento ideale. I 548 intervalli diagnostici rimangono dentro la finestra congelata `[779/800,819/800]`. Il maggiore termine RMS normalizzato è 4,33 × 10⁻⁵.
 
 Il prefisso conserva un solo banco per endpoint e non soddisfa il certificato simultaneo dell'intera famiglia. Il risultato condizionale richiede ancora la qualifica del modello delle parole, della conversione effettiva e della catena 1719. Non costituisce validazione di popolazione. Codice e riscontro riprodotti dalla copia H: e verificati su K:, SHA-256 `19d46e08da5be5122d8c14cdbf34c66cb6c9b571b16a5ef8f9f4755959e35e9d`.
+
+#### Riconciliazione prevista dei due banchi
+
+La mappa congelata e il prefisso storico verificato identificano 548 endpoint supportati per cui il piano unirebbe il primo banco in build 1706 e il secondo in 1719. Anche con i campi completi, il verificatore sospende l'aggregazione di queste misure in assenza di equivalenza tra build. I restanti 2.084 endpoint supportati hanno entrambi i banchi previsti in 1719 e richiedono comunque le qualifiche scientifiche. I 280 endpoint privi di selettore restano indisponibili.
+
+Il collaudo offline copre sette scenari e distingue banco mancante, supporto incompleto, build o caso difforme e assenza di selettore. L'archivio su H: e K: ha SHA-256 `4b7dfdb8227dd07a57f5cc5a949cc9135ec567d699605bffbc01b08cfa433233`. La verifica non avvia prove native e non cambia le soglie.
