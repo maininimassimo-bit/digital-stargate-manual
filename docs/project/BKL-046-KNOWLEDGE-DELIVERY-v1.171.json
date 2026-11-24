@@ -1,0 +1,44 @@
+{
+  "schema": "BKL046_KNOWLEDGE_DELIVERY_PUBLIC_LOCATOR_V1",
+  "milestone": "BKL-046",
+  "reopeningPullRequest": 586,
+  "version": "1.171",
+  "releaseState": "INTERIM_REGISTERED_BASELINE",
+  "knowledge": {
+    "filename": "Conoscenza-PixInsight-v1.171.json",
+    "bytes": 3030957683,
+    "sha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d"
+  },
+  "losslessCarrier": {
+    "filename": "BKL046-Conoscenza-PixInsight-v1.171.zip",
+    "bytes": 103445718,
+    "sha256": "25be4e999a09fecf4f883c7896714161e6c87ad177d30642abe160f58f9332f3",
+    "localRecoveryVerified": true,
+    "repositoryAssetId": null,
+    "remoteBytesVerified": false
+  },
+  "basis": {
+    "registerManifestSha256": "0b72cb301dfcad9f55197d61b60137861c57a394b612b12ec73ef4bdc9a29cbb",
+    "registrationReceiptSha256": "e63e0bf660c8729ec2b968d17d1a88bfcc8ca23bd0ad86aff7c1a16ff24500b4",
+    "independentPrepublicationSha256": "5692074a03c4007659e6cef14dbfb4df8e109cb35d078a9e2d645c79e1ad580e"
+  },
+  "coverage": {
+    "requirementRows": 4920,
+    "embeddedReports": 2712,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "delivery": {
+    "publicLocatorContainsMetadataOnly": true,
+    "integralTransferVerified": false,
+    "finalKnowledgeAccepted": false,
+    "requiredEvidence": [
+      "distribution-scope-approval",
+      "actual-github-object-identity",
+      "independent-download-size-and-sha256",
+      "lossless-knowledge-reconstruction",
+      "recovery-of-required-dependencies"
+    ]
+  }
+}
