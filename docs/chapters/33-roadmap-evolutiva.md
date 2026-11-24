@@ -108,3 +108,5 @@ La componente **Live Observatory è attualmente in standby**. Rimane confermata 
 ## 33.9 Riapertura BKL-046 — 13/10/2026
 
 BKL-046 è riaperta su richiesta dell’Owner per completare lo studio verificabile della versione installata di PixInsight, consolidare conoscenza e lacune e definire la validazione scientifica. La precedente chiusura F1–F5 riguarda la sola baseline advisory deterministica read-only e resta storica. La riapertura non attiva conoscenze nel portale e non riavvia M27. Per perimetro, vincoli e criteri di nuova chiusura vedere il [record di riapertura](../project/BKL-046-REOPENING-2026-10-13.md).
+
+**Aggiornamento del 24/11/2026.** BKL-046 resta in corso. Su DSG-Shared sono stati verificati il preflight e i componenti Primary2048 con prove offline e processi testimone. Restano da eseguire 196 casi del banco 00 e 260 del banco 01 dopo le revisioni e l'ammissione R4. Le sette famiglie scientifiche restano aperte. Il file di conoscenza integrale è ancora da consegnare su GitHub. [Riscontri tecnici nella PR #627](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/627).
