@@ -5,7 +5,7 @@ description: Snapshot privato della configurazione Allsky e copia pubblica sanif
 
 # Allsky: backup della configurazione
 
-Snapshot corrente acquisito il **24/11/2026 alle 19:21 Europe/Rome**, dopo le correzioni SEO e l’integrazione della revisione manuale dei nuovi candidati temporali, senza fermare acquisizione o rilevatori. Conserva personalizzazioni, calibrazione, collegamenti Pocket e correzione di avvio del worker privato. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
+Snapshot corrente acquisito il **24/11/2026 alle 19:36 Europe/Rome**, dopo le correzioni SEO e l’integrazione della revisione manuale dei nuovi candidati temporali, senza fermare acquisizione o rilevatori. Conserva personalizzazioni, calibrazione, collegamenti Pocket e correzione di avvio del worker privato. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
 
 ## Due copie con finalità diverse
 
@@ -18,10 +18,10 @@ La copia privata **non è pubblicata su GitHub**. Include autenticazione, databa
 
 ## Download pubblico e integrità
 
-- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261124-192136.tar.gz).
-- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261124-192136.tar.gz.sha256).
+- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261124-193619.tar.gz).
+- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261124-193619.tar.gz.sha256).
 
-SHA-256 pubblico: `be80e2d889e9a45440881437e8af6ca2f4c54cee10b228f61da6724369be03c4` (5.503.266 byte).
+SHA-256 pubblico: `3bb38df504e70b6b3354d997cf1080f9d9292c176753d2ad3ed75f39dd77d587` (5.503.153 byte).
 
 L'archivio pubblico corrente contiene **163 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **378 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
 
@@ -149,7 +149,7 @@ Le copie pre/post hanno checksum e manifest verificati, database SQLite `quick_c
 
 Snapshot preventivo **19:01:58**, `configuration-backup-20261124-190158`, 367 file privati e 148 pubblici oltre ai manifest, verificato su Raspberry e PC. Ulteriori originali mirati sono in `seo-rollback` e `meteor-review-rollback` sotto quella directory privata. Il suo export pubblico intermedio non è aggiunto al repository.
 
-Snapshot successivo **19:21:36**, `configuration-backup-20261124-192136`: **378 file privati e 163 pubblici**, oltre ai manifest. Acquisito senza fermare i servizi; SQLite tramite API di backup coerente, hardlink settings preservato. SHA-256 degli archivi e tutti i file dei due manifest verificati sulle copie locali. Il privato è conservato sul Raspberry e in una directory del PC Owner fuori da Git, con accesso limitato all’utente corrente. Pubblico sanificato con allowlist esplicita nel repository, non una copia indiscriminata del privato.
+Snapshot successivo **19:36:19**, `configuration-backup-20261124-193619`: **378 file privati e 163 pubblici**, oltre ai manifest. Acquisito senza fermare i servizi; SQLite tramite API di backup coerente, hardlink settings preservato. SHA-256 degli archivi e tutti i file dei due manifest verificati sulle copie locali. Il privato è conservato sul Raspberry e in una directory del PC Owner fuori da Git, con accesso limitato all’utente corrente. Pubblico sanificato con allowlist esplicita nel repository, non una copia indiscriminata del privato.
 
 Comprende ora i due WebP decorativi versionati, robots, sitemap, template e ingressi delle quattro gallerie, codice/configurazione/unit della revisione manuale e pagina amministrativa con collegamento Meteors. Nel privato sono presenti anche le regole lighttpd aggiornate; non sono aggiunte all’export pubblico con credenziali o materiale TLS. I sorgenti della revisione pubblicati nel repository non contengono credenziali.
 

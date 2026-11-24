@@ -183,11 +183,10 @@ def serve(config_path):
         path.unlink()
     with socketserver.UnixStreamServer(str(path), Handler) as server:
         os.chmod(path, 0o660)
-        server.allowed_uids = {0, os.getuid(), pwd.getpwnam('www-data').pw_uid}
+        server.allowed_uids = {0, pwd.getpwnam('www-data').pw_uid}
         server.review = review
         server.serve_forever()
 
 if __name__ == '__main__':
     import sys
     serve(sys.argv[1])
-
