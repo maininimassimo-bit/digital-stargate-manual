@@ -130,16 +130,17 @@
     "fullPlanSha256": "cb30745073d1a69003e41b78da1948ef3093508b9a7ed5f97d3cf01b2827e90a",
     "scope": "v600 artifacts, earlier knowledge versions and historical manifests",
     "totalLogicalAliases": 11839,
-    "verifiedLogicalAliases": 1047,
-    "verifiedContentObjects": 638,
+    "verifiedLogicalAliases": 7926,
+    "verifiedContentObjects": 6749,
     "plannedJobs": 71,
-    "verifiedJobs": 6,
-    "verifiedCarrierFiles": 9,
-    "verifiedCarrierBytes": 5648444899,
+    "verifiedJobs": 27,
+    "verifiedCarrierFiles": 30,
+    "verifiedCarrierBytes": 13973120168,
     "readbackOnHAndKBackedVmVolume": true,
-    "checkpointSha256": "5c03ec44bcdecfa9836509b0d30b06fe5d1f1504478f659e7c1d4025b00ba5d9",
-    "checkpointArchiveSha256": "5696a822df3840089f93fb9d80c59d00aa7b13f2420e51dda03104c509f194b5",
-    "remoteBytesUploaded": 0
+    "checkpointSha256": "aa629fd7e6f48c40ea651cad7b0e2cd7ebf027f51de27618b01874f2cf196a05",
+    "remoteBytesUploaded": 0,
+    "checkpointType": "BKL046_DUAL_CARRIER_INDEX_V1",
+    "localCarrierAssemblyComplete": false
   },
   "offlineVerification": {
     "stream34": {
@@ -149,7 +150,9 @@
       "sourceInputsWithPreservedFingerprints": 8,
       "independentApprovalVerified": false,
       "nativeAdmissionRequested": false,
-      "scientificClosures": 0
+      "scientificClosures": 0,
+      "reviewHandoffSha256": "127ec442dad584f58af505128054e3ad9e9df696564161c92bf8fe803aa5c264",
+      "reviewStatus": "PENDING_INDEPENDENT_REVIEW"
     },
     "restoreSample": {
       "reportSha256": "792f88a1cf6702b028e86e1bf4964437f09362fd5bace85161da416eb2e5a0b8",
