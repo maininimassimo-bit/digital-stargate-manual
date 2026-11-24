@@ -1,7 +1,7 @@
 # Capitolo 27 – Sistema AllSky
 
 **Codice documento:** DSG-TM-001-27  
-**Revisione:** 2.2 — piano Android nativo e passaggio alla chat di sviluppo, 16/11/2026
+**Revisione:** 2.3 — SEO verificata e revisione manuale meteore, 24/11/2026
 **Stato:** acquisizione, sito locale e HTTPS pubblico operativi; limiti della mappa e collaudi residui espliciti
 
 ## 27.1 Scopo
@@ -746,3 +746,12 @@ Snapshot **15:49:34**, 367 file privati e 148 pubblici oltre ai manifest, verifi
 Definito il perimetro della prima versione nativa Allsky Pocket in Kotlin/Jetpack Compose: Live, Meteo e Archivio pubblico, APK locale da provare sul telefono. Stima iniziale 30–50 ore per la versione essenziale, da affinare dopo la verifica dei contratti e degli strumenti. La PWA esistente è un prodotto separato e resta disponibile.
 
 App, APK e collaudo nativo sono **ancora da realizzare**. Nessuna configurazione Allsky modificata e nessun candidato privato incluso; non occorre un nuovo backup dell’impianto per questa sola documentazione. Pubblicazione Play, acquisti e servizi aggiuntivi sono fasi da autorizzare separatamente. [Piano, confini, stime, criteri di prova e prompt della chat Work](../operations/allsky-pocket-android-native.md).
+
+
+## 27.44 SEO e revisione manuale delle nuove meteore — 24 novembre 2026
+
+Dopo backup preventivo, corretti robots per i soli dati pubblici necessari al rendering, rivalidazione cache HTML/SEO, redirect al canonico e canonical delle quattro gallerie. Copie decorative WebP più leggere, originali conservati; fallback iniziale con metadati pubblici correnti. Il nuovo rendering smartphone Google mostra il live senza l’avviso rosso; test delle 19:14 positivo e richiesta di indicizzazione accettata nella coda prioritaria. L’indicizzazione effettiva resta da verificare. [Diagnosi, esiti e rollback SEO](../operations/allsky-search-indexing.md#correzioni-seo-e-rendering-google-24-novembre-2026).
+
+Il rilevatore temporale resta privato e quello ordinario attivo. Un servizio separato permette la revisione autenticata dei soli candidati successivi al **24/11 alle 19:19:36 Europe/Rome**. Pubblicazione solo con decisione manuale, conferma CSRF e hash dell’anteprima coerente; storico privato precedente escluso. Dieci test sintetici e controllo browser positivi, nessun candidato reale pubblicato. Acquisizione, parametri fotografici, maschere e calibrazione invariati. [Procedura e limiti](../operations/allsky-meteor-shadow.md#revisione-manuale-dei-nuovi-candidati-24-novembre-2026).
+
+[Nuovo snapshot e copia pubblica sanificata](../operations/allsky-configuration-backup.md#seo-e-revisione-manuale-meteore-24-novembre-2026). Il privato rimane su Raspberry e PC fuori da Git; candidati e registri privati esclusi dagli archivi pubblici e dal backup di sola configurazione.

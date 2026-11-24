@@ -5,7 +5,7 @@ description: Snapshot privato della configurazione Allsky e copia pubblica sanif
 
 # Allsky: backup della configurazione
 
-Snapshot corrente acquisito il **16/11/2026 alle 15:49 Europe/Rome**, dopo l’aggiunta della presentazione HTML e dei collegamenti testuali per la ricerca Google, senza fermare l’acquisizione. La unit privata conserva la correzione di avvio delle 15:24. Conserva i collegamenti ad Allsky Pocket e alla guida Android. La procedura di backup include ora anche `css/dsg-pocket-links.css` nelle due copie. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
+Snapshot corrente acquisito il **24/11/2026 alle 19:21 Europe/Rome**, dopo le correzioni SEO e l’integrazione della revisione manuale dei nuovi candidati temporali, senza fermare acquisizione o rilevatori. Conserva personalizzazioni, calibrazione, collegamenti Pocket e correzione di avvio del worker privato. Baseline **Allsky v2026.10.01_01**, Git `f1406ea78ba969313abd1ddd14a4272967081a06`, con le personalizzazioni descritte nel [Capitolo 27](../chapters/27-sistema-allsky.md) e nella [guida ai pannelli](allsky-live-panels.md).
 
 ## Due copie con finalità diverse
 
@@ -18,14 +18,16 @@ La copia privata **non è pubblicata su GitHub**. Include autenticazione, databa
 
 ## Download pubblico e integrità
 
-- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261116-154934.tar.gz).
-- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261116-154934.tar.gz.sha256).
+- [Snapshot pubblico sanificato, TAR.GZ](../assets/backups/allsky-public-20261124-192136.tar.gz).
+- [Checksum SHA-256 dell'archivio](../assets/backups/allsky-public-20261124-192136.tar.gz.sha256).
 
-SHA-256 pubblico: `a64716ecb83a8dd09478d28c5297ae1d0b1d0406384c57f9750ff3a147ce5dd5` (4.976.412 byte).
+SHA-256 pubblico: `be80e2d889e9a45440881437e8af6ca2f4c54cee10b228f61da6724369be03c4` (5.503.266 byte).
 
-L'archivio pubblico contiene **148 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **367 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
+L'archivio pubblico corrente contiene **163 file verificati**, oltre al proprio `SHA256SUMS`. Quello privato contiene **378 file verificati**, oltre al proprio manifest. I checksum verificano identità e integrità dei byte; non attestano un ripristino riuscito e non costituiscono una firma del produttore.
 
 ## Snapshot precedenti conservati
+
+La copia delle **15:49:34 del 16 novembre**, dopo la presentazione SEO iniziale, resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261116-154934.tar.gz), [checksum](../assets/backups/allsky-public-20261116-154934.tar.gz.sha256).
 
 La copia delle **15:25 del 16 novembre** con avvio privato corretto resta immutata: [archivio pubblico](../assets/backups/allsky-public-20261116-152502.tar.gz), [checksum](../assets/backups/allsky-public-20261116-152502.tar.gz.sha256). Prima della presentazione SEO è stato acquisito lo snapshot delle **15:47:45**, `configuration-backup-20261116-154745`, conservato su Raspberry/PC; il suo export intermedio non è aggiunto al repository.
 
@@ -141,3 +143,18 @@ Rollback mirato, se necessario: fermare soltanto `dsg-meteor-shadow`, ripristina
 Lo snapshot corrente `configuration-backup-20261116-154934` include la presentazione visibile sotto la ripresa e il CSS dedicato, insieme ai collegamenti Pocket e alla unit privata corretta. [Diagnosi Search Console e richiesta accettata](allsky-search-indexing.md#verifica-e-migliorie-del-16-novembre-2026). Nessuna modifica all’acquisizione o pubblicazione di candidati privati.
 
 Le copie pre/post hanno checksum e manifest verificati, database SQLite `quick_check` positivo, hardlink settings conservato e export pubblico sanificato. Copia privata su Raspberry e PC (`outputs/allsky-seo-post-20261116/private`, fuori da Git con accesso limitato); solo TAR pubblico e checksum pubblicati. Il backup preventivo è `configuration-backup-20261116-154745`; per annullare la presentazione ripristinare soltanto pagina e CSS da quel privato. Non è stato collaudato un ripristino integrale e la conferma di richiesta Google non equivale a indicizzazione.
+
+
+## SEO e revisione manuale meteore — 24 novembre 2026
+
+Snapshot preventivo **19:01:58**, `configuration-backup-20261124-190158`, 367 file privati e 148 pubblici oltre ai manifest, verificato su Raspberry e PC. Ulteriori originali mirati sono in `seo-rollback` e `meteor-review-rollback` sotto quella directory privata. Il suo export pubblico intermedio non è aggiunto al repository.
+
+Snapshot successivo **19:21:36**, `configuration-backup-20261124-192136`: **378 file privati e 163 pubblici**, oltre ai manifest. Acquisito senza fermare i servizi; SQLite tramite API di backup coerente, hardlink settings preservato. SHA-256 degli archivi e tutti i file dei due manifest verificati sulle copie locali. Il privato è conservato sul Raspberry e in una directory del PC Owner fuori da Git, con accesso limitato all’utente corrente. Pubblico sanificato con allowlist esplicita nel repository, non una copia indiscriminata del privato.
+
+Comprende ora i due WebP decorativi versionati, robots, sitemap, template e ingressi delle quattro gallerie, codice/configurazione/unit della revisione manuale e pagina amministrativa con collegamento Meteors. Nel privato sono presenti anche le regole lighttpd aggiornate; non sono aggiunte all’export pubblico con credenziali o materiale TLS. I sorgenti della revisione pubblicati nel repository non contengono credenziali.
+
+**Esclusioni:** JPEG candidati temporali e ordinari, dati in `/var/lib/dsg-meteor-shadow`, registro decisioni e limite persistente in `/var/lib/dsg-meteor-review`, stato temporaneo, media storici e hosting PWA. Questo è uno snapshot di configurazione, non un backup dello storico o un’immagine SD. Per conservare decisioni e candidati in un ripristino completo serve un backup privato aggiuntivo e coerente di quegli stati; non ricrearli da una copia pubblica e non retrodatare `new_after`.
+
+Per annullare la sola revisione: disabilitare `dsg-meteor-review.service` e ripristinare `html/includes/meteors.php` dall’originale mirato. Conservare lo stato privato per audit; il worker temporale e il rilevatore ordinario restano attivi. Per la sola SEO: ripristinare i file in `seo-rollback`, validare lighttpd e ricaricarlo, senza toccare settings, maschere o calibrazione. Le richieste Google già inviate non sono annullate dal rollback. Nessun ripristino integrale o riavvio fisico è stato eseguito.
+
+[Verifica Google e correzioni](allsky-search-indexing.md#correzioni-seo-e-rendering-google-24-novembre-2026) · [Revisione manuale e collaudo](allsky-meteor-shadow.md#revisione-manuale-dei-nuovi-candidati-24-novembre-2026).
