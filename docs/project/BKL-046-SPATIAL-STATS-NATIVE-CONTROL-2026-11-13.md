@@ -217,3 +217,11 @@ Il soggetto candidato fissa le impronte di 40 componenti su DSG-Shared. Il verif
 Con chiavi effimere di collaudo sono state verificate le sei risposte richiamate dal padre, inclusa la rilettura del permesso di avvio e il rifiuto del riuso di un comando. Dieci casi avversi hanno coperto una chiave o un ruolo errato, verbali mancanti o disallineati, soggetto difforme, prenotazione diversa, risposta riutilizzata e scadenza. L'operatore esterno, l'ancora di fiducia operativa e le attestazioni effettive richiedono ancora qualificazione.
 
 Soggetto SHA-256 `a09d886342b325d921f32c71b4392fc00b2e4549bd2502ed703fe51e8ecdfd0f`. Pacchetto riletto su H: e K: con SHA-256 `97492bc0fa0871b4a78b9da93a7175848db282922bbab4909851013353e3d63a`.
+
+### Operatore R4 e padre originale
+
+L'operatore candidato verifica i verbali prima di aprire la prenotazione e li rilegge prima di autorizzare la prosecuzione del padre. Mantiene il processo originale e accetta una sola attestazione finale con uscita a zero. Passa la richiesta di rilascio al controllo delle evidenze post-uscita, al massimo una volta.
+
+Venti scenari sui due banchi hanno usato R4 e il suo adattatore su un registro isolato, con chiavi effimere ed evidenze scientifiche simulate. In quattro casi il rifiuto del preflight o l'assenza di ARB ha impedito di prenotare. In 12 casi la prenotazione è rimasta trattenuta dopo l'interruzione. Due rilasci sono stati confermati e due hanno scritto la ricevuta prima di una perdita simulata della risposta, senza ripetizione della richiesta.
+
+Il soggetto candidato include ora 41 componenti con SHA-256 del descrittore `5fb282723a58e689051ab1942d6f90bde550b8bab48d555a045a0ff64c76733e`. Pacchetto verificato su H: e K:, SHA-256 `d595a71342cb78ef5bf30400b7a05b5dfb4d22b020ee91efeea4b30389566d21`. Il collegamento al preflight e alla configurazione operativa, l'ancora di fiducia autenticata, le revisioni sul nuovo soggetto e l'ammissione nativa restano aperti.
