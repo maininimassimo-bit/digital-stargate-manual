@@ -153,3 +153,11 @@ La scansione del file intero individua profili Windows in 124 record incorporati
 ### Rilettura del prefisso Primary2048
 
 Sono stati riletti tutti i 12 record associati ai 64 casi storici del banco 00. Gli insiemi dei 64 casi completati e dei 196 mai avviati coincidono nei rendiconti originali. Due file omonimi della ricevuta comune sono stati respinti perché difformi dallo SHA-256 registrato. Per chiudere la verifica serve ancora la ricevuta originale della prenotazione `b9941dc6-8c9e-4c83-ad02-941bf4b28d39`. Il rapporto e i test di rifiuto sono archiviati su H: e K:, SHA-256 `fecd6dcbf1cc5385b654eb6197ada03f0198e257b4e2ec4848975dec2a723837`.
+
+### Canali del processo originale e verifica post-uscita
+
+Su DSG-Shared un testimone Python ha riprodotto il blocco del componente precedente saturando entrambi i canali standard. Con la candidata v2 il processo ha scritto 4 MiB per canale ed è uscito con il codice atteso. Sulla stessa identità sono state verificate lunghezze e impronte, senza conservare il contenuto dei canali.
+
+La candidata di analisi post-uscita verifica le due impronte prima e dopo l'analisi e le lega alla stessa identità di processo e prenotazione. I 18 scenari sui due banchi includono due catene con processi testimone Windows e il rifiuto di canali incompleti, di un altro processo o alterati. Sono state ripetute anche le prove della finestra originale e del monitor di risorse. Le soglie del monitor sono rimaste quelle del protocollo. La prova con PixInsight richiede ancora l'integrazione nel launcher, ARB, RQ e l'ammissione R4.
+
+Il pacchetto tecnico è riletto su H: e K: con SHA-256 `f515584cca6220f41e50fc4e05ea41dfb1e31b4c85cf977347d9a9c9a0893c51`. Il risultato riguarda l'affidabilità del launcher e lascia aperta la validazione scientifica delle sette famiglie.
