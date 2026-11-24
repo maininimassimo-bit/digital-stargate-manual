@@ -315,3 +315,9 @@ Quattro contesti JavaScript isolati e nove casi di rifiuto sono stati collaudati
 La sequenza Node e il provider Python candidato usano gli stessi campi firmati per invio e chiusura: operazione, tentativo, prenotazione, PID e ora di creazione, HWND, sessione, impronta del controllo, del transcript e dello script. Prima dell'azione il parent può rileggere la ricevuta consumata e verificare nuovamente la firma rispetto al soggetto e all'ancora fissati. La chiusura è legata anche all'impronta della risposta.
 
 Il collaudo ha verificato in Python due autorizzazioni Node con chiavi di prova e respinto modifiche di finestra, sessione e script, un riuso e una diversa impronta del verificatore. La sequenza ha superato gli undici scenari Node e il provider candidato sette verifiche isolate. L'archivio su H: e K: ha SHA-256 `9bde5824c7e98fddaccecffe5c5ac773a6a7e117464705567881281ae34177f`. Le prove hanno lasciato aperte l'integrazione operativa del parent, le revisioni autentiche e l'ammissione R4.
+
+#### Parent candidato per la prova nativa
+
+Il punto d'ingresso candidato verifica le impronte R4 e l'identità del parent prima di attivare il provider. Il parent ricontrolla i record di acquisizione e identità durante le attese e prima delle azioni. Pubblica evidenze distinte per avvio, selezione e completamento. La chiusura richiede la risposta al marcatore e una decisione firmata che attesti finestra, applicazione inattiva, nessuna immagine o documento in sospeso e nessuna finestra di dialogo.
+
+Il collaudo offline ha verificato la sequenza completa e tre arresti, per avvio rifiutato, marcatore incerto o uscita nonzero. Il controllo della custodia ha inoltre respinto un record originale alterato. L'archivio verificato su H: e K: ha SHA-256 `e4a62fb42be790923a9deb17ec1b3e8f3474c343fd631990ab3a32e0f882ba3b`. Per la prova effettiva rimangono il collegamento operativo dell'operatore, le revisioni e l'ammissione del coordinatore.
