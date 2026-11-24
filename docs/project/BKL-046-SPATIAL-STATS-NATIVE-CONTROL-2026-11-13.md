@@ -309,3 +309,9 @@ Il pacchetto archiviato su H: e K: ha SHA-256 `04a1b874877a0b58c6c9ba2717745026c
 Il sorgente candidato contiene solo il controllo di build 1719, assenza di immagini e richiesta di interruzione, la stampa di un marcatore e il flush della console. Il marcatore deriva dall'operazione, dalla prenotazione, dal soggetto revisionato, dal PID e dall'ora di creazione del processo. Il verificatore richiede la stessa finestra, il transcript precedente integro e l'eco del comando e del percorso prima del marcatore unico. L'eco è modellata sul transcript nativo storico della build 1706 e attende verifica su 1719.
 
 Quattro contesti JavaScript isolati e nove casi di rifiuto sono stati collaudati offline. Il pacchetto su H: e K: ha SHA-256 `009d405267acebeac516c6009e07630160284e0d7f7979aa3371305ed6098bda`. L'esecuzione PJSR effettiva e la selezione del controllo Qt restano da verificare con la distinta qualifica ammessa da R4.
+
+#### Legame firmato tra operatore e parent
+
+La sequenza Node e il provider Python candidato usano gli stessi campi firmati per invio e chiusura: operazione, tentativo, prenotazione, PID e ora di creazione, HWND, sessione, impronta del controllo, del transcript e dello script. Prima dell'azione il parent può rileggere la ricevuta consumata e verificare nuovamente la firma rispetto al soggetto e all'ancora fissati. La chiusura è legata anche all'impronta della risposta.
+
+Il collaudo ha verificato in Python due autorizzazioni Node con chiavi di prova e respinto modifiche di finestra, sessione e script, un riuso e una diversa impronta del verificatore. La sequenza ha superato gli undici scenari Node e il provider candidato sette verifiche isolate. L'archivio su H: e K: ha SHA-256 `9bde5824c7e98fddaccecffe5c5ac773a6a7e117464705567881281ae34177f`. Le prove hanno lasciato aperte l'integrazione operativa del parent, le revisioni autentiche e l'ammissione R4.
