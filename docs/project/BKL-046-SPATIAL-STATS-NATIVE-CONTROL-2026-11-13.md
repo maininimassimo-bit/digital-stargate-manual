@@ -549,3 +549,14 @@ L’incrocio delle associazioni Gaia coerenti nelle due pose del 2002 con le can
 | 2 | 0,190 px | 0,180 px | −7,9% |
 
 Lo scarto dopo la sottrazione rimane sopra 0,10 pixel su entrambi i chip. I moti propri catalogati danno un risultato diverso sui due chip, nel sottoinsieme selezionato dalle associazioni concordanti. La verifica non separa gli errori di centraggio e registrazione dall’incertezza dei moti propri. Rapporto riprodotto da H: e dal volume della VM ospitato su K: con SHA‑256 `cc9c96cbace48557a3b8addc9c192393577f98b9390d7ea88aab66ebef0cc1b8`. L’asse resta aperto.
+
+### Sensibilità della copertura di fase al modello di centraggio
+
+Sulle 736 sorgenti storiche sono stati ricalcolati i centroidi nei FITS del 2002 con il modello ePSF ACS/WFC F606W pre‑SM4. Il fit parte dai centri archiviati, usa lo stesso nucleo di raggio 3 pixel per ogni sorgente e conserva i rifiuti per qualità dei pixel o spostamento fuori tolleranza. Le classi di fase mantengono le soglie di 0,25 e 0,375 pixel.
+
+| Posa | Centroidi confrontabili | Bordo con i vecchi centroidi | Bordo con ePSF |
+| --- | ---: | ---: | ---: |
+| 5 s | 685 | 7 | 278 |
+| 90 s | 647 | 3 | 259 |
+
+Sono disponibili 643 sorgenti in entrambe le pose. Il P90 dello spostamento tra i due stimatori varia tra 0,188 e 0,192 pixel nei quattro gruppi chip–posa. La scarsa occupazione storica del bordo dipende dalla definizione del centro utilizzata per il confronto. Entrambi gli stimatori usano i pixel delle stesse immagini. L’accuratezza assoluta e la nuova fotometria per classe di fase restano da verificare. Il rapporto riprodotto da H: ha SHA‑256 `f38337d25d96f1100b2a539567f55931651f3bf0d29a41544ab7593778008da6`. L’asse resta aperto.
