@@ -124,3 +124,13 @@ Il preflight sulla VM ha rilevato 11,69 GiB di RAM disponibile, 13,12 GiB di com
 Il file storico prodotto dall'incremento v571 è stato riletto sullo storage fisico. Misura 1.153.824.341 byte e ha SHA-256 `7b11789d0616b54cb002c506f0bd2c4e4cfb123a0569f8c409a09da67b2e567e`. Sono stati verificati i registri prima e dopo l'incremento. La ricevuta originale v571 resta da recuperare. Il documento trovato con quel nome contiene la transazione successiva v572.
 
 Questa verifica conserva la sequenza storica e non cambia la conoscenza registrata v1.171 descritta sopra. Il file integrale e la verifica del recupero dei byte da GitHub restano da consegnare.
+
+## Rilettura della conoscenza registrata v1.171
+
+Il file registrato con v600 è stato riletto integralmente su DSG-Shared. Sono stati verificati 3.030.957.683 byte, con SHA-256 `65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d`.
+
+- Tutti gli 802 file del catalogo v1.171 coincidono per lunghezza e SHA-256 con le copie conservate nel mirror. La verifica copre 1.525.423.639 byte. L’impronta del catalogo è `a2a5c042a1158a8254411bb0ef93b4d6a4c67f1c2d5cb7dfa0477f31b8797a3b`.
+- I 229 nuovi record incorporati coincidono per nome, impronta del sorgente e contenuto JSON con i file del catalogo contrassegnati per l’inclusione. I 2.483 record ereditati includono 713 record riconducibili ai 708 sorgenti già verificati per v1.146.
+- Il rapporto, l’indice e gli script di verifica sono conservati su H: e K:. Le copie dello ZIP hanno SHA-256 `7825c8ff54793b7d9ed111b8d6dfc5f6939ae015e19b857fb2a395fbd240f8e3`.
+
+La rilettura attesta l’integrità e la corrispondenza dei dati nel perimetro descritto. Restano aperte la verifica di pubblicabilità dei materiali incorporati, la consegna integrale con riscaricamento da GitHub e la validazione scientifica delle sette famiglie.
