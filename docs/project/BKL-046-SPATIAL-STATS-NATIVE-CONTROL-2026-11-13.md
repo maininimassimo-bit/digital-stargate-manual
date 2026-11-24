@@ -560,3 +560,11 @@ Sulle 736 sorgenti storiche sono stati ricalcolati i centroidi nei FITS del 2002
 | 90 s | 647 | 3 | 259 |
 
 Sono disponibili 643 sorgenti in entrambe le pose. Il P90 dello spostamento tra i due stimatori varia tra 0,188 e 0,192 pixel nei quattro gruppi chip–posa. La scarsa occupazione storica del bordo dipende dalla definizione del centro utilizzata per il confronto. Entrambi gli stimatori usano i pixel delle stesse immagini. L’accuratezza assoluta e la nuova fotometria per classe di fase restano da verificare. Il rapporto riprodotto da H: ha SHA‑256 `f38337d25d96f1100b2a539567f55931651f3bf0d29a41544ab7593778008da6`. L’asse resta aperto.
+
+### Ripetibilità del flusso per fase con i centroidi ePSF
+
+Le 643 stelle comuni alle pose da 5 e 90 s sono state rimisurate con lo stesso modello ePSF e gli stessi pixel per entrambe le scelte di centro. Per ciascuna scelta si stimano ampiezza e fondo costante. Il rapporto fra le ampiezze è normalizzato solo per il tempo di esposizione.
+
+Con le classi definite sulla posa da 5 s, la differenza bordo meno centro del P90 del log‑rapporto assoluto è +0,0047 sul chip 1 e −0,0039 sul chip 2. Gli intervalli descrittivi al 95% del ricampionamento per tessere comprendono zero su entrambi i chip, rispettivamente da −0,0139 a +0,0160 e da −0,0173 a +0,0090. Anche gli intervalli del cambiamento dovuto alla scelta del centro comprendono zero. Il confronto conserva le riclassificazioni tra pose e le misure della sottocoorte con classe stabile.
+
+Fase e flusso derivano dagli stessi pixel e i campioni appartengono allo stesso campo. Per una validazione indipendente servono un riferimento di fase separato e la replica su un secondo campo. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `17cb145f156f601430d433c4fba55ee7fab946ed44b6c0be9f4b9699bab3317a`.
