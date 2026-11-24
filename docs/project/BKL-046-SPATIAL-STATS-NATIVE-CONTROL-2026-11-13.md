@@ -603,3 +603,16 @@ Il confronto mantiene le associazioni e i coefficienti di registrazione del pilo
 | 2 | 190 | 0,128 px | 0,038 px | 172 |
 
 L’ePSF porta il P90 sotto 0,10 pixel su entrambi i chip della posa di controllo, nella sottocoorte accettata e con la registrazione congelata. La precisione e la copertura nelle due pose fotometriche restano da verificare. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `0b519a9d051fc30a5a64672afcc5f63fce048fdf26af17f00bd2550a15568eb8`. L’asse scientifico resta aperto.
+
+### Trasferimento della fase alle pose fotometriche del 2006
+
+Un protocollo distinto, fissato prima della prova, usa le tessere pari per calibrare la geometria di ciascuna posa fotometrica e le tessere dispari per valutarla. Le previsioni individuali della fase derivano dalle due pose di riferimento. I centroidi bersaglio delle tessere dispari servono a verificare le previsioni e a controllare l’univocità delle corrispondenze. La prova non misura il flusso.
+
+| Posa bersaglio | Chip | Associazioni valutate / candidate | P90 ePSF |
+| --- | ---: | ---: | ---: |
+| 7 s | 1 | 186 / 274 | 0,09788 px |
+| 7 s | 2 | 176 / 248 | 0,10317 px |
+| 140 s | 1 | 194 / 289 | 0,04140 px |
+| 140 s | 2 | 183 / 264 | 0,04198 px |
+
+La posa da 140 s rispetta il limite di 0,10 pixel nei due chip sulla sottocoorte accettata. Il chip 2 della posa da 7 s supera il limite. La qualifica congiunta per il confronto di flusso resta aperta. Il protocollo ha SHA‑256 `60301c08b6fbaa1c4efb978f6199c19f6d7405688fff61617e3c0ef9f1aa9f9d`. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `45e0534b23d387ecb20a2973a30d4311d0d00ff411cc276785df30c655bd8ece`.
