@@ -576,3 +576,11 @@ Il protocollo fissa i ruoli prima della lettura delle nuove immagini. Le pose F6
 Con la WCS strumentale, a più di 32 pixel dai margini, 468 posizioni della coorte storica cadono in entrambe le pose di fase e in entrambe le pose di fotometria. Di queste, 435 ricadono anche nella posa riservata alla ripetibilità. La copertura è geometrica. Restano da misurare i centroidi indipendenti e l’errore con cui si può predire la fase nelle pose di fotometria.
 
 Il protocollo ha SHA‑256 `67cdd5b15372c5d2710979a87b7a204fda455acc8e0a8b55182ef65ecb852f10`. I FITS aggiuntivi sono archiviati su H: e sul volume della VM ospitato su K:. La prova riprodotta da H: ha SHA‑256 `327cbaa23fe8920bc186384ff82acc9bb80b86ba4e365e3d546ea3d795b5775f`.
+
+### Ripetibilità predittiva sulle sole pose di riferimento nel 2006
+
+La media dei centroidi delle due pose di fase è stata riportata nel piano della terza posa di riferimento. Il fit geometrico di ciascuna posa usa rilevazioni nelle tessere pari del 2002. La verifica riguarda una coorte separata, dalle tessere dispari. I due FITS destinati alla fotometria sono rimasti fuori dalle letture e dal fit.
+
+Le tre pose condividono 36 candidate. Sul chip 1 il P90 dello scarto radiale è 0,147 pixel e la classe coincide per 14 candidate su 21. Sul chip 2 il P90 è 0,082 pixel e la classe coincide per 15 su 15. Le misure non qualificano l’intero riferimento. Il chip 1 supera il limite di 0,10 pixel e la coorte comune è molto più piccola della copertura geometrica. Rimane da stabilire una previsione di fase trasferibile alle pose destinate al flusso.
+
+Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `b3d9888b7bb685891e014df8ff947b969037337dadb96fa296ba8d2ce5f86ffb`. L’asse scientifico resta aperto.
