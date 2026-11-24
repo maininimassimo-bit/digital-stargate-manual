@@ -455,3 +455,19 @@ Ricevuta di layout per il comparatore SHA-256 `85d5174ba24ba8c5822f8c28c94f5821c
 Il verificatore candidato consuma le evidenze della prova rilasciata da R4 e ricostruisce i 64 casi, le 26 letture tipizzate e i 240 piani. Prima di produrre la ricevuta di formato confronta le letture con la conversione XISF indipendente e verifica gli estremi nativi decodificando entrambi gli ordini dei byte. Rilegge la stessa evidenza di rilascio prima della pubblicazione.
 
 Il collaudo sul protocollo congelato ha ricostruito le dimensioni dei 240 piani e ha respinto una ricevuta alterata. Il lettore adattato ha riprodotto i riscontri di due casi storici, otto piani complessivi. La copia v2 della generazione della coda corregge un fine riga letterale che rendeva il JSON scritto dalla CLI illeggibile a Node. Archivio verificato su H: e K:, SHA-256 `840b735b70c686cd1d831dad8f02e3fba4d5b83b01a86c5a9602e46ad37f5383`. Nessun esito nativo 1719 disponibile per questo confronto e nessuna chiusura scientifica.
+
+### Matrice residua e percorso di chiusura BKL‑046
+
+La riconciliazione confronta riga per riga l’indice GitHub riletto con il registro locale. Corrispondono 4.920 identificativi e 14.521 criteri letterali. Le disposizioni restano 4.887 con completamento da dimostrare, 26 con evidenza parziale, sei con revisione dei metadati e attestazione di matrice pendente, una con esclusione API interna motivata e attestazione pendente. La mappa conserva il criterio e la prossima prova per tutti i 25 assi e i 19 criteri di consegna.
+
+| Famiglia | Assi aperti | Evidenza ancora necessaria |
+| --- | ---: | --- |
+| CFA, dither, drizzle | 4 | Identità fisica Bayer, registrazione, supporto e scale native confrontabili |
+| Fondo diffuso | 3 | Contrasto, fondo assoluto e contaminazione su domini indipendenti |
+| Filtri e colore | 4 | Risposta misurata, PSF e indipendenza dei riferimenti |
+| Rumore e flusso | 3 | Calibrazione fisica e verifica della covarianza su realizzazioni indipendenti |
+| PSF e campionamento | 4 | Riferimenti e incertezza per campionamento, variazioni e confusione |
+| Saturazione e sovrapposizione | 4 | Risposta del sensore, clipping per canale e prove di ricomposizione |
+| Versioni e backend | 3 | Confronti a input identico, variazioni isolate e protocollo stocastico |
+
+Il layout 1706 e il collaudo del launcher sono collegati con le rispettive impronte. Il confronto 1719, la conoscenza finale e il trasferimento integrale GitHub restano aperti. SHA-256 del rapporto `e6bcc0ef775a2c019fdaf8c06139eb3345245e368aa2b6caba6ddf1f8f3b8676`. Archivio riletto su H: e K:, SHA-256 `ca4edd6875ca488a09e2691ab9e5f4994f78d0e9b5866a164bddc036ece87e86`. Zero chiusure scientifiche.
