@@ -297,3 +297,9 @@ Undici scenari con chiavi temporanee hanno verificato la sequenza e i punti di a
 In un registro isolato, la sequenza firmata ha ottenuto una prenotazione dal vero coordinatore R4, legato il parent originale e riletto la ricevuta di rilascio nel caso riuscito. Nei tre casi avversi (autorizzazione di avvio assente, risposta ambigua al marcatore, impronta del record originale alterata) il registro ha conservato la prenotazione senza scrivere una ricevuta di rilascio. Il tentativo duplicato è stato respinto in tutti e quattro i casi. Il confronto del registro canonico prima e dopo è risultato identico.
 
 Il pacchetto su H: e K: ha SHA-256 `9c930b174fddffb28e9410239b48ae718b0895aa67fd2e912c9086105f00fb9c`. Il custode e il parent testimone erano processi reali. Il provider della console era simulato e le firme erano di collaudo. Restano aperti il collegamento al provider effettivo su build 1719, le revisioni autentiche e l'ammissione della prova dedicata.
+
+#### Collaudo integrato con finestra testimone
+
+Il parent testimone, creato dopo la prenotazione R4, ha avviato una finestra WinForms reale nella VM. Dopo le autorizzazioni firmate con chiavi di collaudo, il trasporto ha inviato una sola riga inerte al controllo Edit del processo originale. Nel caso riuscito ha riletto la riga, chiuso la stessa finestra, osservato uscita zero e ottenuto la ricevuta R4. Nel caso con conferma omessa, la sequenza si è arrestata dopo l'invio e ha conservato la prenotazione. Il nuovo tentativo è stato respinto in entrambi i casi. Il registro canonico è risultato identico prima e dopo.
+
+Il pacchetto archiviato su H: e K: ha SHA-256 `04a1b874877a0b58c6c9ba2717745026c2e22ef615de8e86964bb23152537332`. La finestra testimone ha registrato il testo senza eseguirlo. Restano da identificare e verificare i controlli effettivi di PixInsight 1719 e da ottenere le approvazioni indipendenti e l'ammissione della prova dedicata.
