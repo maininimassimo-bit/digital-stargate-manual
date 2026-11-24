@@ -616,3 +616,16 @@ Un protocollo distinto, fissato prima della prova, usa le tessere pari per calib
 | 140 s | 2 | 183 / 264 | 0,04198 px |
 
 La posa da 140 s rispetta il limite di 0,10 pixel nei due chip sulla sottocoorte accettata. Il chip 2 della posa da 7 s supera il limite. La qualifica congiunta per il confronto di flusso resta aperta. Il protocollo ha SHA‑256 `60301c08b6fbaa1c4efb978f6199c19f6d7405688fff61617e3c0ef9f1aa9f9d`. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `45e0534b23d387ecb20a2973a30d4311d0d00ff411cc276785df30c655bd8ece`.
+
+### Incertezza spaziale del P90 nel trasferimento di fase
+
+Il rapporto di trasferimento è stato riprodotto senza cambiare le associazioni o le stime puntuali. Per ciascuna posa e chip sono state ricampionate 5.000 volte tessere sorgente da 128 pixel. Il controllo ha ricalcolato anche il P90 escludendo a turno una sola tessera.
+
+| Posa | Chip | P90 | Intervallo descrittivo 95% |
+| --- | ---: | ---: | ---: |
+| 7 s | 1 | 0,0979 px | 0,0744–0,1076 px |
+| 7 s | 2 | 0,1032 px | 0,0823–0,1219 px |
+| 140 s | 1 | 0,0414 px | 0,0382–0,0469 px |
+| 140 s | 2 | 0,0420 px | 0,0347–0,0475 px |
+
+Nella posa da 7 s entrambi gli intervalli attraversano 0,10 pixel. Sul chip 2 il P90 rimane sopra la soglia escludendo a turno ciascuna delle 118 tessere. Per la posa da 140 s gli intervalli rimangono sotto la soglia su entrambi i chip. La diagnosi riguarda il campione accettato di un solo campo. Non modifica il criterio stabilito né qualifica la coppia fotometrica. Rapporto riprodotto da H: e dal volume della VM ospitato su K: con SHA‑256 `13457e6c91efd8ad8f49064bc9b43943a3147dd58eb0c4989bf5cb2e436656d7`.
