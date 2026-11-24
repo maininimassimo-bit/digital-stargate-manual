@@ -333,3 +333,11 @@ Il soggetto per la revisione contiene 24 componenti con SHA-256 `19cd2fc54ae32e0
 Il riscontro offline ricostruisce i coefficienti dei due pixel dagli endpoint `PAIR_MEAN` e `PAIR_DIFFERENCE` e verifica che il primo selettore coincida con `PIXEL`. Con le varianze di ingresso congelate, ha riconciliato tutte le 2.632 varianze marginali supportate, lasciato indisponibili 280 endpoint e calcolato 728 covarianze di coppia. La covarianza è positiva in 616 coppie e zero in 112. L'ipotesi di indipendenza può sovrastimare la varianza della differenza di un fattore 37,01 e ridurre la varianza stimata della media al 50,68% di quella calcolata nel modello.
 
 I 580 testimoni di superamento relativo del prefisso storico interessano 133 endpoint. Nel modello congelato, 526 testimoni sono associati a coppie con covarianza positiva e 54 a coppie con covarianza zero. Il confronto seleziona soltanto i superamenti storici. Non stima frequenze di popolazione o causalità. L'archivio verificato su H: e K: ha SHA-256 `5825bcc266eddf67c8897ef91f32a0608c3ce9197e933f4fa1802aee8c38c8fd`. Resta aperta la verifica nativa e indipendente dell'asse `NOISE_FLUX/3`.
+
+#### Confronto con le uscite PixInsight storiche
+
+Nei 64 casi salvati della build 1706, media e differenza di ciascuna delle 140 coppie disponibili risultano stimate sugli stessi 65.536 campi. Dai momenti centrati si ricava la covarianza finita come varianza della media meno un quarto della varianza della differenza. Il confronto usa lo stesso campo per sorgente originale, lettura float32 prevista e uscita PixInsight.
+
+Normalizzando per la media delle due varianze condizionali dei pixel, lo scostamento assoluto massimo tra la covarianza dell'uscita e quella della sorgente è 2,29 × 10⁻⁷. Tra la sorgente finita e il valore teorico del modello, il massimo alla stessa scala è 0,00739. Sono scostamenti descrittivi del prefisso storico. Il conteggio di 9.175.040 campi per coppia aggregati include osservazioni condivise tra endpoint e non è una numerosità indipendente. La baseline non estende il risultato alla build 1719 e non chiude l'asse `NOISE_FLUX/3`.
+
+Riproduzione verificata dalla copia H: e copia K: con SHA-256 `a2c16ee68e4f6d64ad863bf145ab863272ee359f506598523fd129b0b2413b77`.
