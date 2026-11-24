@@ -413,3 +413,9 @@ Su DSG-Shared, dieci scenari hanno usato il codice R4 installato con un registro
 Il punto d’ingresso del padre passa al runner appaiato solo i callback per decisioni firmate. L’ambito lega operazione, protocollo e worker. La configurazione deve concordare con il soggetto revisionato anche su titolo esatto della finestra e scadenze. L’inventario registra 28 componenti del launcher e le impronte del coordinatore installato.
 
 Il collaudo con chiavi effimere ha esercitato tutte le sei decisioni operative e dieci rifiuti nel verificatore, oltre al rifiuto di un’operazione estranea e di un inventario incompleto. I test hanno usato una console simulata. Archivio riletto su H: e K:, SHA-256 `c5b4ecfb2c976060e1f47048488c5e453eafda879498a1bf5513991a2a665055`. Manifest SHA-256 `56c131e816456ce3d2c45636aadaf846d99cd6a8166cc2194f11784a848cee2b`. L’inventario conserva aperta la qualifica del titolo reale 1719 e la disponibilità dei ruoli e delle revisioni operative. Nessuna ammissione richiesta.
+
+### Verifica prima della richiesta di ammissione appaiata
+
+La candidata controlla i riscontri di avvio, selezione, comando e chiusura della qualifica della console 1719. Collega titolo, sessione, finestra, PID e FILETIME del processo originale alle ricevute R4. Il controllo Node lega l’esito al soggetto revisionato e ai percorsi della prova prima di chiamare il confine di ammissione. Il collaudo ha respinto otto alterazioni nei riscontri sintetici e tre variazioni al confine Node.
+
+La scansione in sola lettura su DSG-Shared ha osservato zero processi PixInsight, nessuna prenotazione attiva e nessun publisher in esecuzione nel perimetro osservato. La qualifica nativa e le revisioni indipendenti restano aperte. Archivio riletto su H: e K:, SHA-256 `ad43f5576601bf64124b18138211898c35752703e898cc6fdd9cbeea24953d59`. Manifest SHA-256 `8e3578bc7cd3090d3ed05c6ec102265d0d6aa0bb235381c76427267100a262a1`. Nessuna ammissione richiesta.
