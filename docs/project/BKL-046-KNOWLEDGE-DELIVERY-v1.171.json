@@ -130,17 +130,20 @@
     "fullPlanSha256": "cb30745073d1a69003e41b78da1948ef3093508b9a7ed5f97d3cf01b2827e90a",
     "scope": "v600 artifacts, earlier knowledge versions and historical manifests",
     "totalLogicalAliases": 11839,
-    "verifiedLogicalAliases": 11822,
-    "verifiedContentObjects": 10163,
+    "verifiedLogicalAliases": 11839,
+    "verifiedContentObjects": 10180,
     "plannedJobs": 71,
-    "verifiedJobs": 54,
-    "verifiedCarrierFiles": 57,
-    "verifiedCarrierBytes": 18804332243,
+    "verifiedJobs": 71,
+    "verifiedCarrierFiles": 80,
+    "verifiedCarrierBytes": 27478864996,
     "readbackOnHAndKBackedVmVolume": true,
-    "checkpointSha256": "e28a9b651f1ff58dfa2324784370bba1da4692c5b44315fa3f13262f83ce7087",
+    "checkpointSha256": "337de0761a1e104da130c1bdef0300b5855789e32e3e745a240fe9cb0091d090",
     "remoteBytesUploaded": 0,
     "checkpointType": "BKL046_DUAL_CARRIER_INDEX_V1",
-    "localCarrierAssemblyComplete": false
+    "localCarrierAssemblyComplete": true,
+    "checkpointArchiveSha256": "6b9447b78449c355d5968069c3f202398189f6e5971288f03f308b02523bad69",
+    "terminalReceiptSha256": "8411e1be2294bd1c220d92ad81a6f378ca65d26d59d64758d6c26551a176b664",
+    "releaseAssetInventorySha256": "48262824c9472647d47218c77e0fccc579ce04a9436e8219be42623bbf8b31e6"
   },
   "offlineVerification": {
     "stream34": {
@@ -177,6 +180,13 @@
       "parts": 4,
       "verifiedMedia": 2,
       "independentReadback": true
+    },
+    "releaseAssetReadback": {
+      "fixtureReportSha256": "509c66de4dfc5852fdf279802f8846fbac2fa9e6a681b59a1b842be99c0e4549",
+      "fixtureArchiveSha256": "18e49bbd06bbdabd6412d6157143031b2f60556126efd7ff4188e5c6b31652ff",
+      "finalInventoryFiles": 80,
+      "githubMetadataSimulated": true,
+      "githubTransferVerified": false
     }
   }
 }
