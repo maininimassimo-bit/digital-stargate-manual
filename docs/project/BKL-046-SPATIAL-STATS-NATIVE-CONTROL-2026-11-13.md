@@ -629,3 +629,11 @@ Il rapporto di trasferimento è stato riprodotto senza cambiare le associazioni 
 | 140 s | 2 | 0,0420 px | 0,0347–0,0475 px |
 
 Nella posa da 7 s entrambi gli intervalli attraversano 0,10 pixel. Sul chip 2 il P90 rimane sopra la soglia escludendo a turno ciascuna delle 118 tessere. Per la posa da 140 s gli intervalli rimangono sotto la soglia su entrambi i chip. La diagnosi riguarda il campione accettato di un solo campo. Non modifica il criterio stabilito né qualifica la coppia fotometrica. Rapporto riprodotto da H: e dal volume della VM ospitato su K: con SHA‑256 `13457e6c91efd8ad8f49064bc9b43943a3147dd58eb0c4989bf5cb2e436656d7`.
+
+### Scarti di fase in funzione del segnale nella posa breve
+
+Il confronto usa gli stessi abbinamenti e gli stessi scarti del trasferimento di fase. Per ciascun chip sono stati ordinati in quartili secondo un’approssimazione del rapporto segnale/rumore. Il numeratore usa gli elettroni nel nucleo dopo la sottrazione del fondo locale. Il denominatore combina in quadratura i valori `ERR` del nucleo. La stima non propaga l’incertezza del fondo né le correlazioni fra pixel.
+
+Nella posa da 7 s, il quartile con segnale più debole contiene 15 dei 17 scarti oltre 0,10 pixel sul chip 1 e 18 dei 21 sul chip 2. I P90 passano rispettivamente da 0,130 e 0,162 pixel nel quartile più debole a 0,045 e 0,046 nel più forte. Il confronto per quartili è diagnostico. Una corrispondenza per chip nella posa breve è rimasta senza stima valida del segnale.
+
+La concentrazione degli scarti accompagna il calo di segnale nel campione misurato. Il risultato non giustifica l’esclusione retroattiva del quartile debole. La soglia e la disposizione della coppia restano registrate. Rapporto riprodotto da H: e dal volume della VM ospitato su K: con SHA‑256 `2eb03017dd8a41ae7f850ee242078d3d48c25519edd9b289bf18220a18f8855d`.
