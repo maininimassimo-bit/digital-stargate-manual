@@ -437,3 +437,9 @@ La qualifica console e il confronto appaiato conservano operazioni, revisioni e 
 La diagnostica misura differenze a livello di bit e di valore, errore massimo, medio e quadratico, e superamento delle soglie 1/1.000.000 e 1/20. Conta i confronti con riferimento zero e quelli con valori non finiti. Legge a blocchi e verifica entrambe le impronte prima di restituire misure. La decodifica Float32 little-endian va sostenuta dal riscontro nativo della rispettiva build.
 
 Sono passati sette scenari sintetici, inclusi un cambio a cavallo del limite di blocco e il rifiuto di un’impronta errata. La rilettura di due piani storici della build 1706 ha confrontato 8.388.608 pixel con i propri byte, con zero differenze. Archivio riletto su H: e K:, SHA-256 `713ad391c1c003acc824a4774bff3513bd2fba400607d37b7e4c4e6925199b75`. Il collegamento del misuratore ai 240 piani dopo il rilascio R4 resta da qualificare. Nessuna prova 1719 e nessuna chiusura scientifica.
+
+### Misure finite dopo il rilascio R4
+
+La candidata collega l’esito del controllo dei byte alla misura dei piani. Per costruire la coda richiede le ricevute R4 della prova appaiata e due riscontri nativi di layout con impronte verificate. Il riscontro 1719 deve riferirsi alla prenotazione della prova. Le misure rileggono le impronte dei piani e riportano separatamente i riepiloghi per integrazione e peso, conservando la copertura incompleta.
+
+Il collaudo con 240 piani sintetici ha misurato 239 piani, recuperato la differenza nota e contato un file mancante. Ha respinto una coda alterata, una voce duplicata e un riscontro di layout riferito a un’altra prenotazione. Archivio verificato su H: e K:, SHA-256 `b0f6f78cc3e763d263335cb5a1bd4a74a1546adb44cd2770e01299095ee8b02f`. I riscontri nativi del formato e i risultati appaiati della build 1719 restano da acquisire. Nessuna chiusura scientifica.
