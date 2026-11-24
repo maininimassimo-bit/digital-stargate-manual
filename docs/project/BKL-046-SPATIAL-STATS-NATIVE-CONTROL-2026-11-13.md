@@ -303,3 +303,9 @@ Il pacchetto su H: e K: ha SHA-256 `9c930b174fddffb28e9410239b48ae718b0895aa67fd
 Il parent testimone, creato dopo la prenotazione R4, ha avviato una finestra WinForms reale nella VM. Dopo le autorizzazioni firmate con chiavi di collaudo, il trasporto ha inviato una sola riga inerte al controllo Edit del processo originale. Nel caso riuscito ha riletto la riga, chiuso la stessa finestra, osservato uscita zero e ottenuto la ricevuta R4. Nel caso con conferma omessa, la sequenza si è arrestata dopo l'invio e ha conservato la prenotazione. Il nuovo tentativo è stato respinto in entrambi i casi. Il registro canonico è risultato identico prima e dopo.
 
 Il pacchetto archiviato su H: e K: ha SHA-256 `04a1b874877a0b58c6c9ba2717745026c2e22ef615de8e86964bb23152537332`. La finestra testimone ha registrato il testo senza eseguirlo. Restano da identificare e verificare i controlli effettivi di PixInsight 1719 e da ottenere le approvazioni indipendenti e l'ammissione della prova dedicata.
+
+#### Marcatore PJSR e risposta attesa
+
+Il sorgente candidato contiene solo il controllo di build 1719, assenza di immagini e richiesta di interruzione, la stampa di un marcatore e il flush della console. Il marcatore deriva dall'operazione, dalla prenotazione, dal soggetto revisionato, dal PID e dall'ora di creazione del processo. Il verificatore richiede la stessa finestra, il transcript precedente integro e l'eco del comando e del percorso prima del marcatore unico. L'eco è modellata sul transcript nativo storico della build 1706 e attende verifica su 1719.
+
+Quattro contesti JavaScript isolati e nove casi di rifiuto sono stati collaudati offline. Il pacchetto su H: e K: ha SHA-256 `009d405267acebeac516c6009e07630160284e0d7f7979aa3371305ed6098bda`. L'esecuzione PJSR effettiva e la selezione del controllo Qt restano da verificare con la distinta qualifica ammessa da R4.
