@@ -522,3 +522,11 @@ La tabella osservativa HACKS include le immagini ACS/WFC F606W GO‑9453 dell’
 Da MAST sono state acquisite e verificate due pose originali ACS/WFC F606W GO‑10775 dell’11 aprile 2006. I FITS identificano `j9l958p2q` da 7 s e `j9l958p4q` da 140 s. Con le WCS strumentali, **502 delle 736 posizioni storiche** cadono in entrambe le nuove immagini ad almeno 32 pixel dai margini. Le WCS primarie ne contano 504. Sono proiezioni geometriche. Rimangono da verificare le identità, i centroidi e l’effetto dei moti propri tra il 2002 e il 2006. Le misure di registrazione e la validazione della fase restano aperte. [Programma ACS GO‑10775](https://archive.stsci.edu/prepds/acsggct/)
 
 Il rapporto e le due acquisizioni esatte sono conservati su H: e sul volume della VM ospitato su K:. La rilettura da H: ha riprodotto il rapporto con SHA‑256 `c65075becf0a5f3760ab8873c667754f528091a4e6d04071533a8358944cc9da`.
+
+### Centroidi nelle pose ACS indipendenti del 2006
+
+La registrazione parte dalle WCS strumentali del 2002 e del 2006. Il fit affine per posa e chip usa soltanto rilevazioni dalle tessere pari del 2002. Il controllo sulle 736 posizioni storiche esclude qualsiasi rilevazione del 2006 impiegata come ancora. Le corrispondenze reciproche e univoche sono accettate entro 1,5 pixel.
+
+Ciascuna posa del 2006 restituisce 197 candidati su 519 posizioni ammissibili dopo il fit e il margine. Le due pose condividono 192 identificativi del campione storico. Il P90 radiale delle associazioni accettate varia tra 0,269 e 0,313 pixel nei quattro raggruppamenti per chip e posa. La verifica dell’identità fisica delle stelle tra le due epoche e la correzione dei moti propri restano da fare. Le distanze misurano il residuo dell’intera catena di confronto, che comprende registrazione, centroidi e variazioni intercorse dal 2002.
+
+I dati su H: e sul volume della VM ospitato su K: hanno prodotto lo stesso rapporto, SHA‑256 `05bb4c2377a54151badf959d01f45de0b16861747031b62a550fb7d8832c322d`. L’asse `PSF_PIXEL/2` resta aperto.
