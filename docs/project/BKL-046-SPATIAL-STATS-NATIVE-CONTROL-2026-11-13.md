@@ -431,3 +431,9 @@ L’inventario per la revisione registra 36 componenti. Manifest SHA-256 `5bd791
 Le copie su H: e K: del fascicolo contengono 60 file verificati, inclusi 36 componenti del launcher e il fascicolo dedicato alla prova console. Il verificatore incluso controlla l’archivio, le impronte dei membri e i legami tra manifest, dispatcher e protocollo. La prova ha respinto un singolo membro modificato anche con un nuovo hash ZIP valido. SHA-256 dell’archivio `5e06f422d8e9617ce18a3e1dc3674743a1cb06477b59f5340041f6cd789a556a`. SHA-256 dell’indice `9c18fe960d439fdb6cda92be57ede5b497c8552b0ed49444505d3207039e2180`.
 
 La qualifica console e il confronto appaiato conservano operazioni, revisioni e ammissioni distinte. La prima deve verificare la console 1719 sul processo originale. Il secondo deve verificare la catena scientifica e i 240 piani. La PR è in bozza e risulta priva di revisori assegnati e di revisioni registrate. Nessuna ammissione richiesta.
+
+### Diagnostica degli scostamenti per piano binario
+
+La diagnostica misura differenze a livello di bit e di valore, errore massimo, medio e quadratico, e superamento delle soglie 1/1.000.000 e 1/20. Conta i confronti con riferimento zero e quelli con valori non finiti. Legge a blocchi e verifica entrambe le impronte prima di restituire misure. La decodifica Float32 little-endian va sostenuta dal riscontro nativo della rispettiva build.
+
+Sono passati sette scenari sintetici, inclusi un cambio a cavallo del limite di blocco e il rifiuto di un’impronta errata. La rilettura di due piani storici della build 1706 ha confrontato 8.388.608 pixel con i propri byte, con zero differenze. Archivio riletto su H: e K:, SHA-256 `713ad391c1c003acc824a4774bff3513bd2fba400607d37b7e4c4e6925199b75`. Il collegamento del misuratore ai 240 piani dopo il rilascio R4 resta da qualificare. Nessuna prova 1719 e nessuna chiusura scientifica.
