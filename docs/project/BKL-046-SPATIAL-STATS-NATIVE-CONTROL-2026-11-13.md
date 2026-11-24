@@ -100,3 +100,27 @@ Il tentativo originale fallisce per condivisione della ricevuta dopo 120 campi e
 Sono conservati 1.310 profili finiti confrontabili e **418 fit nativi non validi**. Negli isolati, 472 slot sono confrontabili e 104 non validi, su 576 previsti; fra i confrontabili quattro posizioni e 173 flussi totali analitici superano la soglia del 5%. `b0` differisce dall’angolo del rettangolo richiesto in tutti i 1.310 fit validi: non certifica quindi la regione interna usata. Il [riferimento tecnico H58](../developer/pixinsight-study-knowledge-format.md#h58-ponte-nativo-psf-esiti-non-validi-e-recupero) conserva denominatori, impronte e limiti.
 
 Queste misure appaiate su pixel riutilizzati non portano nativamente l’ottimizzatore Python, non sono nuove acquisizioni indipendenti e non chiudono famiglie scientifiche o gate Owner. Conoscenza registrata v1.171 e trasferimento integrale degli archivi restano distinti da questo aggiornamento curato.
+
+## Aggiornamento del 24 novembre 2026 — Primary2048 su VM e verifica dello storico v571
+
+**BKL-046 resta in corso.** Sette famiglie scientifiche, 25 assi e 19 criteri Owner restano aperti. I collaudi descritti di seguito non producono nuove chiusure scientifiche.
+
+### Primary2048 e coordinamento R4
+
+Il banco 00 conserva 64 casi storici. Restano 196 casi nel banco 00 e 260 nel banco 01. La riconciliazione del tentativo storico sui 196 casi è stata riletta confrontando il certificato con l'inventario del registro e verificando i 180 file della capsula precedente alla chiusura. Il tentativo si è fermato prima di eseguire un caso. La ricevuta del rilascio ordinario dei 64 casi appartiene a una prenotazione distinta. L'inventario del PC principale ne identifica percorso e impronta, ma la copia esatta resta da recuperare.
+
+Sulla VM il fascicolo di revisione collega i due piani congelati ai worker candidati per PixInsight build 1719. I collaudi offline coprono custodia del padre originale in un registro R4 isolato, associazione alla finestra, controllo di avvio, osservazione delle risorse e riconciliazione dopo l'uscita. I test della finestra e del trasporto hanno usato testimoni Windows. Restano da qualificare il controllo della console PixInsight, l'integrazione operativa dell'analisi post-uscita e le revisioni indipendenti ARB e RQ del launcher completo.
+
+Il preflight sulla VM ha rilevato 11,69 GiB di RAM disponibile, 13,12 GiB di commit disponibile e 318,77 GiB liberi sul volume di lavoro. Sono misure puntuali da ripetere prima di una prova. Nessuna nuova ammissione Primary2048 è stata richiesta.
+
+| Evidenza archiviata su storage di progetto | SHA-256 |
+| --- | --- |
+| Fascicolo di revisione Primary2048 | `de0b7823806dbf0fc360710f6cecc97875c490957482b2e6f7237d0ee708e664` |
+| Riconciliazione storica del tentativo interrotto | `0664548d0798e2fdf14e912fe20a32f3f7d125d5f69ab36165ecca760d45413c` |
+| Verifica offline del passaggio all'analisi post-uscita | `3d730977c5db6629a532531d349594987105bfeb316f1ab1538ff404af1437ae` |
+
+### Verifica retrospettiva della conoscenza v1.146
+
+Il file storico prodotto dall'incremento v571 è stato riletto sullo storage fisico. Misura 1.153.824.341 byte e ha SHA-256 `7b11789d0616b54cb002c506f0bd2c4e4cfb123a0569f8c409a09da67b2e567e`. Sono stati verificati i registri prima e dopo l'incremento. La ricevuta originale v571 resta da recuperare. Il documento trovato con quel nome contiene la transazione successiva v572.
+
+Questa verifica conserva la sequenza storica e non cambia la conoscenza registrata v1.171 descritta sopra. Il file integrale e la verifica del recupero dei byte da GitHub restano da consegnare.
