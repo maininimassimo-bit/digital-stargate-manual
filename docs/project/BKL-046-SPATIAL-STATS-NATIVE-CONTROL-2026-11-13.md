@@ -568,3 +568,11 @@ Le 643 stelle comuni alle pose da 5 e 90 s sono state rimisurate con lo stesso m
 Con le classi definite sulla posa da 5 s, la differenza bordo meno centro del P90 del log‑rapporto assoluto è +0,0047 sul chip 1 e −0,0039 sul chip 2. Gli intervalli descrittivi al 95% del ricampionamento per tessere comprendono zero su entrambi i chip, rispettivamente da −0,0139 a +0,0160 e da −0,0173 a +0,0090. Anche gli intervalli del cambiamento dovuto alla scelta del centro comprendono zero. Il confronto conserva le riclassificazioni tra pose e le misure della sottocoorte con classe stabile.
 
 Fase e flusso derivano dagli stessi pixel e i campioni appartengono allo stesso campo. Per una validazione indipendente servono un riferimento di fase separato e la replica su un secondo campo. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `17cb145f156f601430d433c4fba55ee7fab946ed44b6c0be9f4b9699bab3317a`.
+
+### Pose distinte per il riferimento di fase e la fotometria nel 2006
+
+Il protocollo fissa i ruoli prima della lettura delle nuove immagini. Le pose F606W `j9l958p6q` e `j9l958p8q`, entrambe da 140 s, sono riservate alla stima di fase. La posa `j9l958paq`, anch’essa da 140 s, è riservata a un controllo di ripetibilità separato. Le pose `j9l958p2q` da 7 s e `j9l958p4q` da 140 s restano destinate alla fotometria. Le cinque acquisizioni ACS/WFC GO‑10775 dell’11 aprile 2006 hanno impronte distinte e coprono circa 94,3 minuti tra i primi e gli ultimi istanti centrali.
+
+Con la WCS strumentale, a più di 32 pixel dai margini, 468 posizioni della coorte storica cadono in entrambe le pose di fase e in entrambe le pose di fotometria. Di queste, 435 ricadono anche nella posa riservata alla ripetibilità. La copertura è geometrica. Restano da misurare i centroidi indipendenti e l’errore con cui si può predire la fase nelle pose di fotometria.
+
+Il protocollo ha SHA‑256 `67cdd5b15372c5d2710979a87b7a204fda455acc8e0a8b55182ef65ecb852f10`. I FITS aggiuntivi sono archiviati su H: e sul volume della VM ospitato su K:. La prova riprodotta da H: ha SHA‑256 `327cbaa23fe8920bc186384ff82acc9bb80b86ba4e365e3d546ea3d795b5775f`.
