@@ -193,3 +193,11 @@ La candidata verifica la ricevuta del worker, il marcatore terminale e il riscon
 Su DSG-Shared sono passati 16 scenari. Per ciascun banco una finestra testimone reale è stata chiusa con un solo messaggio e l'uscita è stata osservata. Negli altri 14 scenari il messaggio non è stato inviato per identità difforme, evidenza mancante o cambiata, revisione respinta, richiesta già registrata o condizione di trattenimento. Console scientifica e revisione sono state simulate. La perdita di stabilità del testo dopo la registrazione ha mantenuto il tentativo e bloccato un secondo invio.
 
 Il pacchetto è verificato su H: e K:, SHA-256 `46fb2be819981b2b0e319b2b5760bcac466db8d61e2ac4393189a535142d2c79`. Restano l'integrazione dell'avvio e dell'invio del comando, la revisione del launcher completo e la qualifica nativa del controllo della console e della finestra PixInsight.
+
+### Sincronizzazione dell'avvio e invio del comando
+
+Il controllo iniziale dello script poteva precedere la pubblicazione del PID da parte del padre. La candidata attende ora un marcatore pubblicato con rinomina atomica su Windows dopo la rilettura di `native-process.json`. Il marcatore associa banco, operazione e prenotazione alle impronte del binding e del processo. L'attesa candidata ha un limite di 10 secondi e interrompe l'avvio in caso di stop, prova incompleta o difforme. La revisione del dispatcher conserva i due piani, i due worker e i percorsi operativi.
+
+Sedici scenari hanno verificato l'attesa sui due banchi con pubblicazione reale su Windows e runtime PJSR simulato. Altri otto scenari hanno verificato il collegamento al comando usando il renderer reale e il trasporto UI simulato. Il comando simulato è stato bloccato dopo modifiche del marcatore, cambi della finestra o perdita delle riserve di risorse. Restano la composizione finale del launcher e il collaudo nell'app sotto ammissione.
+
+Descrittore dispatcher SHA-256 `d47fa874f474c67cfea9097cb1f42d7d882959303815d1eea1863f808f877b43`. Pacchetto riletto su H: e K: con SHA-256 `677057a7c7101da0818b17bcc2320d6f19d5514ffef0c649bd83e6e0ba1c25c1`.
