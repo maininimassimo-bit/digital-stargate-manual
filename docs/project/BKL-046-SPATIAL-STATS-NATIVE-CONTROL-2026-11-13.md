@@ -233,3 +233,9 @@ Il collegamento candidato ha riletto il soggetto, il dispatcher, i due piani e i
 Il preflight reale ha bloccato entrambi i banchi prima della prenotazione. Mancano i verbali ARB/RQ del soggetto, la qualifica nativa del canale console e la ricevuta storica dei 64 casi. Le prove simulate hanno inoltre verificato il rifiuto di inventario incompleto, prenotazione attiva, PixInsight già presente, publisher incerto, riserve insufficienti, storia incompleta o piano difforme.
 
 Il riscontro e il componente candidato sono archiviati su H: e K: con SHA-256 `ce766992457469b0d5ee842905e4349b0bb988ae40eecbae79087c7769b423b2`. Restano aperti il riscontro delle autorità operative e la prova nativa.
+
+### Audit dei 64 casi storici Primary2048
+
+Un verificatore separato dal codice di replay ha riletto l'archivio dei 64 casi del banco 00 (build 1706). Ha riconciliato 560 flussi per endpoint e 36.700.160 stati per campo con le impronte di lotto e i conteggi del rapporto. Si contano 35.913.728 stime, 786.432 stati con selettore non supportato e zero discrepanze di supporto. Fra le stime, 580 superano il 5% di errore relativo. Tutte rientrano nella tolleranza assoluta di 10⁻⁶. Per ciascuno dei 580 superamenti, il verificatore ha ricostruito gli errori dichiarati a partire dalle frazioni esatte conservate.
+
+Il controllo aggiunge evidenza all'asse `NOISE_FLUX/3`, che resta aperto. Restano da dimostrare la validità sul disegno completo, il comportamento del rumore correlato dopo ricampionamento e l'incertezza sui casi indipendenti. Il risultato riguarda la rilettura di dati storici e registra zero avvii nativi e zero chiusure scientifiche. L'audit, il rapporto e l'addendum di tracciabilità sono archiviati su H: e K: con SHA-256 `8bceb1db05c167d3068b1848b873de834dc4eccde1b0859616bd443b1fd24f06`.
