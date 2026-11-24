@@ -383,3 +383,9 @@ La candidata collega il worker da 64 casi agli stadi di avvio e dispatch con il 
 Il collaudo offline su DSG-Shared ha raggiunto una volta il callback simulato, respinto 13 casi negativi e verificato cinque condizioni terminali. Le due fasi native generate passano la verifica di sintassi JavaScript. Soggetto SHA-256 `4b24fabf1efcd676655271e3a4eb74469be7648fe62fa48607f28dfeed69892f`. Archivio riletto su H: e K:, SHA-256 `8c051528db62f9c79f5eede82c9f609a49ab6d0cf915ab132ed22e624905b4d8`.
 
 La candidata copre avvio e dispatch interni a PixInsight. Restano il collegamento end-to-end al launcher padre, la qualifica nativa della console sulla build 1719 e la revisione indipendente. Nessuna richiesta di ammissione, chiamata nativa o chiusura scientifica.
+
+### Collegamento del processo padre al confronto appaiato
+
+Il padre dedicato risolve lo stesso soggetto congelato per entrambe le fasi, genera gli script con il Node verificato e confronta acquisizione e identità originale con la prenotazione ricevuta. Il collaudo su DSG-Shared ha osservato un processo testimone reale e la pubblicazione atomica della sua identità su NTFS. Il rendezvous ha respinto sette condizioni anomale. Il controllo del padre ha inoltre respinto l'operazione storica del suffisso, il cambio di un tick del FILETIME e l'acquisizione alterata nel registro di prova.
+
+Manifest SHA-256 `86a01b8433b2de624e6498917e7d60dc9574f086ed128fd0cc9bf75d90673d2b`. Archivio riletto su H: e K:, SHA-256 `7c24e50aa678b8d85b03e905f6dba4440f024e268747b28983055801f8d525cd`. Restano da integrare e qualificare la consegna del comando attraverso la console 1719 e la finalizzazione appaiata dopo l'uscita. Nessuna richiesta di ammissione e nessuna chiusura scientifica.
