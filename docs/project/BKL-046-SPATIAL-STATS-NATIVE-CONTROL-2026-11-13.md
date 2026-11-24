@@ -247,3 +247,17 @@ I 580 superamenti del 5% si concentrano nell'endpoint `PAIR_DIFFERENCE` (580 su 
 Con lo stesso denominatore originale, la sola componente di aritmetica nativa supera il 5% in 420 testimoni, la sola componente di lettura in 8, entrambe in 98. Nei restanti 54 ciascuna componente rispetta la soglia e l'errore totale la supera. Usando come riferimento il valore previsto dopo la lettura, l'aritmetica supera il 5% in 517 dei 580 testimoni. Quest'ultimo confronto riguarda solo i testimoni già selezionati dal criterio originale.
 
 Lo script, il rapporto e i 580 riscontri sono archiviati su H: e K: con SHA-256 `75c462396dc046164b0bd2e7caa2f2b511bd72408874c4273a0e759401415de0`. Per la successiva verifica sul disegno completo restano applicabili entrambe le soglie congelate. I conteggi descrivono il prefisso storico. L'asse `NOISE_FLUX/3` resta aperto.
+
+### Perimetro di riconciliazione per le prove residue Primary2048
+
+Il riscontro derivato dai piani congelati e dal modello elenca, per ciascun caso, tutti gli endpoint logici, l'intervallo dei campi e la disponibilità del selettore. Ha confrontato il prefisso storico con i rapporti dei 64 casi e ha verificato che il piano dei 196 casi coincida con la parte residua esatta del banco 00.
+
+| Entrata | Build prevista o osservata | Casi | Posizioni campo-endpoint con selettore | Senza selettore |
+| --- | ---: | ---: | ---: | ---: |
+| Prefisso storico del banco 00 | 1706 | 64 | 35.913.728 | 786.432 |
+| Casi residui del banco 00 | 1719 | 196 | 136.577.024 | 17.563.648 |
+| Banco 01 | 1719 | 260 | 172.490.752 | 18.350.080 |
+
+I conteggi dei casi residui sono attese di copertura. In sede di verifica si applicano le soglie congelate di 10⁻⁶ assoluto e del 5% relativo con riferimento zero indefinito. Le mancate stime per selettore assente, le discrepanze di supporto e le misure sospese per esito dell'audit grezzo richiedono conteggi distinti. Il prefisso 1706 resta identificabile nel confronto: una stima aggregata fra build richiede una verifica di equivalenza. Il modello dichiara che endpoint e configurazioni logiche condividono i campi di ingresso, quindi il numero di posizioni non è la numerosità di un campione indipendente.
+
+Il pacchetto con generatore, mappa caso-endpoint e sei verifiche di rifiuto è archiviato su H: e K: con SHA-256 `8d80756e647565f4863a2bb9817a6ac46bfc10390959fc66ec5caae194a6e56a`. La riconciliazione futura richiederà i risultati nativi effettivi e le relative ricevute.
