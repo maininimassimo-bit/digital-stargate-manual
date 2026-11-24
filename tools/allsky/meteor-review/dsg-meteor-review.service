@@ -1,0 +1,39 @@
+[Unit]
+Description=Digital Stargate explicit manual meteor publication gate
+After=local-fs.target
+ConditionPathExists=/home/pi/allsky/config/myFiles/meteor-review/config.json
+
+[Service]
+Type=simple
+User=pi
+Group=www-data
+ExecStart=/home/pi/allsky/venv/bin/python /home/pi/allsky/config/myFiles/meteor-review/review.py /home/pi/allsky/config/myFiles/meteor-review/config.json
+WorkingDirectory=/home/pi/allsky/config/myFiles/meteor-review
+Environment=PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+StateDirectory=dsg-meteor-review
+StateDirectoryMode=0700
+RuntimeDirectory=dsg-meteor-review
+RuntimeDirectoryMode=0750
+UMask=0077
+Nice=15
+CPUQuota=25%
+MemoryMax=192M
+TasksMax=16
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/dsg-meteor-review /run/dsg-meteor-review /home/pi/allsky/html/allsky/meteors
+ReadOnlyPaths=/var/lib/dsg-meteor-shadow
+PrivateTmp=yes
+PrivateNetwork=yes
+PrivateDevices=yes
+RestrictAddressFamilies=AF_UNIX
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target

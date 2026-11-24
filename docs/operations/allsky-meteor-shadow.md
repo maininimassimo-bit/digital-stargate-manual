@@ -5,7 +5,7 @@ description: Affiancamento asincrono del rilevatore temporale di meteore, con ar
 
 # Affiancamento privato del rilevatore meteore
 
-Dal **12 novembre 2026 alle 22:03 Europe/Rome** il servizio `dsg-meteor-shadow.service` analizza le nuove immagini notturne già salvate da Allsky. L’Owner ha autorizzato l’affiancamento dopo la valutazione su tre notti complete. Il rilevatore ordinario rimane nel flusso esistente; **i nuovi candidati temporali non vengono pubblicati** né nella galleria pubblica né nella pagina amministrativa Meteors.
+Dal **12 novembre 2026 alle 22:03 Europe/Rome** il servizio `dsg-meteor-shadow.service` analizza le nuove immagini notturne già salvate da Allsky. L’Owner ha autorizzato l’affiancamento dopo la valutazione su tre notti complete. Il rilevatore ordinario rimane nel flusso esistente; **il worker non pubblica i candidati temporali**. Dal 24 novembre i soli nuovi risultati possono passare dalla revisione manuale riservata descritta sotto; lo storico precedente resta escluso.
 
 Dopo il riavvio del 16 novembre il servizio non era partito per un ciclo di ordinamento systemd. Corretto e riattivato con autorizzazione Owner alle **15:24:49**; il controllo diurno lo trova attivo in attesa di fotogrammi notturni. [Diagnosi e snapshot aggiornato](allsky-configuration-backup.md#avvio-del-rilevatore-temporale-privato-16-novembre-2026-1524).
 
@@ -56,7 +56,7 @@ La conferma è differita al fotogramma successivo, quindi l’archiviazione può
 
 Il worker importa il motore con un sostituto privato di `allsky_shared`: variabili assenti non ricaricano la configurazione d’ambiente live e non vengono scritti collector o database dell’applicazione. Il servizio ha `PrivateNetwork=yes`, socket limitati ad `AF_UNIX`, filesystem in sola lettura e scritture consentite soltanto alle proprie directory persistenti e temporanee. All’avvio verifica che tre file di produzione non siano apribili in scrittura e che non sia possibile creare un socket IPv4.
 
-Le due directory private sono di proprietà dell’utente del servizio con permessi **0700**; l’utente del server web non può leggere neppure `status.json`. Non esiste un collegamento dal sito a questo archivio. Il rilevatore ordinario continua a gestire i propri candidati e contatori con la procedura precedente.
+Le due directory private sono di proprietà dell’utente del servizio con permessi **0700**; l’utente del server web non può leggere neppure `status.json`. Il sito pubblico non accede a questo archivio. Dal 24 novembre un servizio separato offre alla sola amministrazione autenticata i candidati successivi alla propria attivazione, senza esporre lo storico precedente. Il rilevatore ordinario continua a gestire i propri candidati e contatori con la procedura precedente.
 
 La soglia di conservazione è **2 GiB**, verificata ogni 60 s: se lo spazio privato la supera, l’analisi si mette in pausa senza cancellare candidati. È un controllo applicativo e non una quota rigida del filesystem. Se cambia il checksum della maschera di produzione, il servizio si mette in pausa per evitare di usare silenziosamente una maschera superata. Per riprendere occorre rivedere profilo e copia privata, oppure liberare spazio dopo aver archiviato i risultati. Non viene modificata la configurazione Allsky per risolvere una pausa privata.
 
@@ -139,3 +139,27 @@ Il rilevatore ordinario `allsky_meteorarchive.py` resta abilitato; nello stato p
 Il primo tentativo SSH del 18 novembre era scaduto senza risposta; il successivo è riuscito e ha permesso il controllo conclusivo. Il timeout di collegamento non è stato attribuito a un guasto del rilevatore. L'automazione una tantum è stata rimossa dopo il resoconto; il nuovo controllo è stato richiesto dall'Owner.
 
 Questa attività e il relativo aggiornamento documentale **non modificano configurazione Allsky, software, soglie, maschere, calibrazione o servizi** e non richiedono un nuovo snapshot della configurazione. Immagini, ritagli, miniature, coordinate, orari dei singoli candidati e metadati individuali restano privati e non sono aggiunti al repository né alla galleria pubblica. Le sole informazioni pubblicate qui sono risultati aggregati e finestre operative della notte.
+
+
+## Revisione manuale dei nuovi candidati — 24 novembre 2026
+
+L’Owner ha autorizzato l’integrazione con **nuovi candidati soltanto dopo revisione manuale** e storico privato escluso. Il nuovo servizio `dsg-meteor-review.service` è separato da entrambi i rilevatori: non cambia modulo/versione/soglie, flusso Allsky o `publish=false` dell’adattatore privato.
+
+Il limite iniziale persistente è **24/11/2026 alle 19:19:36 Europe/Rome** (`2026-11-24T18:19:36.165126+00:00`). Un fotogramma deve avere timestamp e file successivi al limite. I **29 fotogrammi storici privati** presenti al collaudo restano esclusi anche se si tenta di richiamarli direttamente. Il limite non viene spostato ai riavvii e un valore diverso dalla copia nello stato privato impedisce l’avvio. Sono ammessi solo percorsi validati sotto l’archivio temporale, senza link simbolici.
+
+### Uso dall’amministrazione
+
+1. Accedere alla normale WebUI locale o tramite VPN.
+2. Nella pagina **Meteors**, aprire **Revisione nuovi candidati temporali**; è disponibile anche `/meteor-review.php` nell’amministrazione.
+3. Aprire un nuovo fotogramma e controllare l’anteprima. I cerchi sugli estremi delle tracce sono solo privati, non alterano il JPEG pubblicato.
+4. Dopo l’esame, selezionare la conferma e **Pubblica candidato esaminato**, oppure **Escludi dalla pubblicazione**. Il rifiuto conserva l’originale privato.
+
+La pubblicazione richiede sessione autenticata, protezione CSRF e coincidenza dell’hash immagine/metadati con l’anteprima esaminata. Se il file cambia, occorre rivederlo. Decisioni ripetute sono idempotenti; una immagine già pubblicata dal rilevatore ordinario non viene sovrascritta. Una diversa decisione dopo approvazione/rifiuto richiede manutenzione esplicita. L’esame autorizza la visibilità, **non conferma scientificamente una meteora**. Il rilevatore ordinario conserva il proprio comportamento e i contatori pubblici attuali; i risultati temporali in attesa non vengono conteggiati nel sito.
+
+Il servizio ascolta soltanto su socket Unix, accessibile soltanto a root e all’utente del server web; richieste dell’utente del worker privato respinte, con rete IP disabilitata e scritture limitate al proprio registro e alla galleria pubblica. La WebUI non riceve accesso filesystem generale allo storico. Richieste senza login e accesso dalla porta pubblica restituiscono **403**; nessuna credenziale viene inclusa nel nuovo componente. [Codice e test](https://github.com/maininimassimo-bit/digital-stargate-manual/tree/main/tools/allsky/meteor-review).
+
+**Collaudo:** dieci test sintetici riusciti: storico e file precedenti esclusi, nessuna pubblicazione da lista/anteprima, approvazione esplicita e ripetibile senza duplicati, rifiuto con conservazione, hash cambiato respinto, immagini ordinarie preservate, percorsi/link simbolici respinti, azione non valida respinta e limite iniziale non retrodatabile al riavvio. Test eseguiti in directory temporanee, mai su candidati reali. Verificati sintassi PHP, socket dall’utente web e diniego per l’utente del worker, accesso autenticato e collegamento dalla pagina Meteors nel browser. Coda vuota al collaudo; **nessun candidato reale approvato o pubblicato durante l’intervento**.
+
+Acquisizione e worker temporale rimangono sugli stessi PID, senza riavvio o modifica di otto hash protetti; il nuovo servizio di revisione è attivo. Il test dopo un riavvio fisico e il percorso umano completo su un nuovo candidato reale restano da osservare: non sono sostituiti dai test sintetici.
+
+Configurazione in `config/myFiles/meteor-review/`, decisioni e limite persistente in `/var/lib/dsg-meteor-review/` (privati), unit systemd dedicata. Il nuovo snapshot comprende configurazione/codice/unit e pagina amministrativa, **non** candidati o registri runtime privati. [Backup e rollback](allsky-configuration-backup.md#seo-e-revisione-manuale-meteore-24-novembre-2026). Per sospendere solo la revisione usare `sudo systemctl disable --now dsg-meteor-review.service`: rilevatore ordinario e worker privato restano attivi. Non abilitare `publish` nel worker e non retrodatare il limite per recuperare lo storico.

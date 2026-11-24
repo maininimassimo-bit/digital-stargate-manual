@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-24",
+  "owner_authorization": "SEO package and explicit manual review of new temporal candidates only; historical private candidates excluded",
+  "seo": {
+    "canonical": "https://digitalstargate.freeddns.it:23232/allsky/",
+    "google_live_test_local": "2026-11-24 19:14 Europe/Rome",
+    "http": 200,
+    "google_available": true,
+    "red_data_error_absent": true,
+    "remaining_resource_block": "configuration.json intentionally blocked by robots; page settings server-rendered",
+    "indexing_request": "accepted into priority crawl queue",
+    "indexed_status": "not yet indexed at inspection; last indexed crawl 2026-11-16 15:50:40"
+  },
+  "manual_review": {
+    "new_after_utc": "2026-11-24T18:19:36.165126+00:00",
+    "historical_private_frames_excluded": 29,
+    "queue_at_test": 0,
+    "real_candidates_published_during_test": 0,
+    "synthetic_tests_passed": 10,
+    "browser_authenticated_page_and_link_verified": true,
+    "unauthenticated_http": 403,
+    "external_public_http": 403,
+    "existing_detector_unchanged": true,
+    "temporal_worker_publish": false,
+    "private_worker_socket_access_denied": true
+  },
+  "protected_file_hashes_unchanged": 8,
+  "acquisition_and_shadow_restarted": false,
+  "backup": {
+    "before": "20261124-190158",
+    "after": "20261124-193619",
+    "private_files": 378,
+    "public_files": 163,
+    "public_sha256": "3bb38df504e70b6b3354d997cf1080f9d9292c176753d2ad3ed75f39dd77d587",
+    "manifest_and_archives_verified": true,
+    "sqlite_integrity": "ok",
+    "settings_hardlink_preserved": true,
+    "private_images_and_runtime_ledgers_in_public": false
+  },
+  "not_tested": [
+    "physical Raspberry restart",
+    "full configuration restoration",
+    "human approval of a new real candidate",
+    "future Google indexing decision"
+  ]
+}

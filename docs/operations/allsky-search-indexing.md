@@ -126,3 +126,26 @@ La precisazione risponde a una sovrapposizione osservata nelle fonti di Google A
 
 
 Con autorizzazione specifica Owner è stato inviato il feedback Google AI sui contenuti tecnici non corretti: valore Allsky 8 mm superato e uso di specifiche di una descrizione del 2019. Il testo indica i riferimenti pubblici correnti (pagina Allsky, introduzione e inventario) e non nomina altre persone. Il modulo avvisava dell’inclusione della conversazione di ricerca e del possibile uso di dati dell’account/sistema; questo invio è stato approvato esplicitamente. Google ha confermato «Grazie per averci informati». La ricezione del feedback non attesta la sostituzione dei collegamenti o la correzione delle successive risposte AI. Le richieste di scansione delle pagine aggiornate e gli esiti saranno registrati nell’evidence della PR dopo la pubblicazione.
+
+
+## Correzioni SEO e rendering Google — 24 novembre 2026
+
+Intervento autorizzato dall’Owner dopo la diagnosi; backup preventivo **19:01:58**, `configuration-backup-20261124-190158`, privato su Raspberry e PC fuori da Git. Il sito canonico è **https://digitalstargate.freeddns.it:23232/allsky/**.
+
+Prima dell’intervento Search Console indicava «Pagina scansionata, ma attualmente non indicizzata», ultima scansione **16 novembre alle 15:50:40**, recupero riuscito e canonical selezionato coerente. Sitemap riuscita, ultima lettura **21 novembre**, cinque pagine; sicurezza e azioni manuali senza problemi. Il test pubblico delle **18:46** era positivo per disponibilità, ma la schermata Google smartphone mostrava l’errore `data.json` mancante: la risorsa pubblica era bloccata da robots. Altri caricamenti fallivano con «Altro errore». Questo è un difetto di rendering osservato, non la dimostrazione della causa algoritmica dell’esclusione dall’indice.
+
+Correzioni applicate:
+
+- `robots.txt` permette il solo `data.json` pubblico con quattro campi (alba, tramonto e acquisizione giorno/notte). Restano esclusi configurazione e directory private; robots non sostituisce i controlli di accesso.
+- Home `/allsky/index.php` senza query → **301** alla directory canonica; i riferimenti con query mantengono il comportamento precedente. Le quattro gallerie dichiarano il rispettivo canonical e il ritorno alla Home usa la directory.
+- HTML, gallerie, robots e sitemap richiedono rivalidazione della cache. La lunga cache immutabile resta sulle risorse statiche con nome versionato.
+- Logo e sfondo decorativi hanno copie WebP, **509.862 byte complessivi** contro circa 3,4 MB; PNG originali conservati. Nessuna compressione delle immagini scientifiche o modifica della ripresa.
+- La Home incorpora per tutti i visitatori gli stessi quattro valori pubblici correnti. Se il primo recupero XHR fallisce, vengono usati questi dati per al massimo cinque minuti dal caricamento della pagina; l’inclusione server richiede un file completo aggiornato entro 36 ore. Nessun valore astronomico viene inventato. Controller, calibrazione e dimensionamento restano byte-identici.
+
+Il test intermedio delle **19:10** ha confermato la rimozione del blocco robots su `data.json`, ma ancora errori transitori e avviso rosso: non è stato considerato un successo completo. Dopo il fallback, test Google delle **19:14**: **«L’URL è disponibile per Google / La pagina può essere indicizzata»**, HTTP 200, logo e ripresa live visibili, avviso rosso assente. **Una risorsa su 28 resta bloccata intenzionalmente: `configuration.json`**; le impostazioni necessarie sono già incluse nel rendering server. Non è stata aperta quella risorsa ai crawler.
+
+Invio della richiesta della sola Home canonica completato: Google ha confermato **«Indicizzazione richiesta»**, URL aggiunto alla coda prioritaria. Non equivale a indicizzazione effettiva, non garantisce tempi o posizione e non è stato seguito da reinvii ripetuti. L’ultimo stato dell’indice resta quello precedente fino a una nuova scansione/decisione Google.
+
+Verifiche HTTP positive su Home, redirect, robots, sitemap, quattro canonical e due WebP. Amministrazione e nuova revisione meteore: **403 dall’ingresso pubblico**. Otto file protetti (settings, flusso notturno, maschere, configurazione/controller mappa, profilo e worker temporale) invariati; Allsky PID **721**, worker privato PID **22685**, nessun riavvio. Ricaricato soltanto lighttpd dopo verifica sintattica; sintassi PHP valida.
+
+[Snapshot successivo e perimetro](allsky-configuration-backup.md). Rollback SEO mirato: ripristinare i file conservati in `seo-rollback` nello snapshot preventivo, validare lighttpd e ricaricarlo. Conservare le immagini originali; non ripristinare settings, maschere o mappa per annullare la SEO. La richiesta già inviata a Google non è annullata dal rollback.

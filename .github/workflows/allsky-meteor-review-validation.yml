@@ -1,0 +1,32 @@
+name: Validate Allsky manual meteor review
+on:
+  pull_request:
+    paths:
+      - 'tools/allsky/meteor-review/**'
+      - 'tools/allsky/backup/**'
+      - '.github/workflows/allsky-meteor-review-validation.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/allsky/meteor-review/**'
+      - 'tools/allsky/backup/**'
+      - '.github/workflows/allsky-meteor-review-validation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review-gate:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      - name: Install isolated test dependencies
+        run: python -m pip install numpy==1.24.4 opencv-python-headless==4.6.0.66
+      - name: Test review boundary with synthetic images only
+        run: python -m unittest discover -s tools/allsky/meteor-review -p test_review.py -v
+      - name: Validate PHP page and backup producer syntax
+        run: |
+          php -l tools/allsky/meteor-review/meteor-review.php
+          python -m py_compile tools/allsky/backup/capture-configuration.py
