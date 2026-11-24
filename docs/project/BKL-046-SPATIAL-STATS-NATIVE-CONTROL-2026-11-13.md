@@ -161,3 +161,11 @@ Su DSG-Shared un testimone Python ha riprodotto il blocco del componente precede
 La candidata di analisi post-uscita verifica le due impronte prima e dopo l'analisi e le lega alla stessa identità di processo e prenotazione. I 18 scenari sui due banchi includono due catene con processi testimone Windows e il rifiuto di canali incompleti, di un altro processo o alterati. Sono state ripetute anche le prove della finestra originale e del monitor di risorse. Le soglie del monitor sono rimaste quelle del protocollo. La prova con PixInsight richiede ancora l'integrazione nel launcher, ARB, RQ e l'ammissione R4.
 
 Il pacchetto tecnico è riletto su H: e K: con SHA-256 `f515584cca6220f41e50fc4e05ea41dfb1e31b4c85cf977347d9a9c9a0893c51`. Il risultato riguarda l'affidabilità del launcher e lascia aperta la validazione scientifica delle sette famiglie.
+
+### Replay numerico dei 64 casi storici
+
+Il replay offline su DSG-Shared ha riprodotto byte per byte tutti i 64 rapporti di caso del banco 00. Nel riepilogo sono stati confrontati otto campi, inclusi piano, impronte native e riconciliazione. Sono stati verificati 2.912 endpoint, con 35.913.728 valori stimati, 786.432 senza supporto e zero divergenze del supporto. Restano esclusi dal replay i 196 casi del banco 00 mai avviati.
+
+L'archivio integrale contiene 1.811 file di output verificati con SHA-256, più indice e rapporto. È conservato su H: e sullo storage K: tramite O:. SHA-256 dell'archivio `ea87865d283b50e42f02deebc1d0d0e751638390efd39d1cc115f0aa91f74fe6`. Il riscontro compatto è disponibile anche direttamente su K:, SHA-256 `a3060d03fa221b5f0849972652bafff073aaad9fdd6cc37a2b05517891b7efa6`.
+
+La riproduzione riguarda i dati storici. Restano aperti la verifica della ricevuta comune originale, la prova nativa sulla build 1719 e la validazione scientifica.
