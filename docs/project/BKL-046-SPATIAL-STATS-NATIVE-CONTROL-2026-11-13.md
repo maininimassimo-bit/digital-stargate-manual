@@ -584,3 +584,11 @@ La media dei centroidi delle due pose di fase è stata riportata nel piano della
 Le tre pose condividono 36 candidate. Sul chip 1 il P90 dello scarto radiale è 0,147 pixel e la classe coincide per 14 candidate su 21. Sul chip 2 il P90 è 0,082 pixel e la classe coincide per 15 su 15. Le misure non qualificano l’intero riferimento. Il chip 1 supera il limite di 0,10 pixel e la coorte comune è molto più piccola della copertura geometrica. Rimane da stabilire una previsione di fase trasferibile alle pose destinate al flusso.
 
 Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `b3d9888b7bb685891e014df8ff947b969037337dadb96fa296ba8d2ce5f86ffb`. L’asse scientifico resta aperto.
+
+### Campione rilevato direttamente nelle pose di riferimento del 2006
+
+Il confronto è stato ripetuto partendo da nuove rilevazioni nella prima posa di riferimento del 2006. Le rilevazioni nelle tessere pari da 256 pixel servono alla registrazione e quelle nelle tessere dispari alla verifica. I pixel del 2002 e quelli delle due pose fotometriche non sono stati letti.
+
+Dalle 4.096 rilevazioni iniziali nelle tessere dispari si ottengono 548 candidate con corrispondenza univoca nelle altre due pose. Sulla posa di controllo, il P90 radiale è 0,133 pixel sul chip 1 e 0,131 sul chip 2. La classe di fase coincide per 181 su 277 candidate e 195 su 271, rispettivamente. Anche il controllo descrittivo limitato alle previsioni lontane più di 0,10 pixel dalle soglie conserva dieci cambi di classe su 106 candidate.
+
+Il campione più ampio rende misurabile la ripetibilità senza dipendere dalle associazioni tra epoche. Il limite radiale di 0,10 pixel rimane superato su entrambi i chip. La qualifica e il trasferimento di fase alle pose fotometriche restano aperti. Il rapporto riprodotto da H: e dal volume della VM ospitato su K: ha SHA‑256 `a5e2d33f9068019614af6d006f6736b433f34d454ef5dbc14a352da60ad2a82d`.
