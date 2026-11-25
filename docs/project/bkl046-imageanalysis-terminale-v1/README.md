@@ -1,0 +1,5 @@
+# BKL-046 — Verifica delle evidenze di chiusura ImageAnalysis
+
+Il verificatore collega la chiusura ordinaria alla prenotazione, all'operazione, al piano e all'entry PJSR già conosciuti dal padre. Confronta il marcatore di ritorno con la ricevuta ImageAnalysis, verifica le impronte dell'acquisizione e dell'evidenza di console e richiede che l'uscita del processo originale sia avvenuta con codice zero dopo l'azione di chiusura. La validazione riusa i controlli temporali e di identità del trasporto F06.
+
+Un caso valido e dodici casi di rifiuto hanno prodotto lo stesso rapporto in due esecuzioni. I casi coprono scadenza, processo o prenotazione estranei, alterazione delle evidenze e chiusura in stato incerto. Il collaudo usa record sintetici e non prova l'origine grafica dei record. Il componente deve ancora essere integrato nel padre con le osservazioni del supervisore legate al processo originale e con la custodia dei file fino alla decisione R4.
