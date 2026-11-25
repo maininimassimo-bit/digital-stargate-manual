@@ -1,0 +1,35 @@
+{
+  "schema": "BKL046_M8_M20_REFERENCE_TRANSFER_PROTOCOL_V1",
+  "captureZip": "daa8ba4ee748f7616f3db0371b60d95752ff98d00ceaef280fe8f6e8ab937c76",
+  "captureReceipt": "28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59",
+  "stellarReceipt": "aaadaabe9c31bd79f56b539c1c4d5301b017f87a75b9c193e753404742592e77",
+  "priorIC1805Protocol": "c927342ac9b9a1755034adb45cd060a4345861bd3683ed6d1ab14f2fd9bfe61a",
+  "excludePreviouslyMeasured": [
+    0,
+    7,
+    14
+  ],
+  "maximumRegistrationP90NativePx": 1,
+  "origin": [
+    1040,
+    654
+  ],
+  "shape": [
+    1024,
+    768
+  ],
+  "cell": 64,
+  "rawRejectAtOrAbove": 62000,
+  "minimumValidPerCell": 0.9,
+  "photoScale": 1,
+  "models": [
+    1,
+    3
+  ],
+  "maeImprovementMinimumPercent": 10,
+  "folds": [
+    0,
+    1
+  ],
+  "references": "Transfer the frozen IC1805 relative-background comparison rule to a separate camera and sequence. Use the archived stellar Huber displacements, in native pixels with basis center (3104,2076) and scale 2048. Map binned grid coordinates to the original convention with detector coordinates twice the grid coordinates, then divide displacements by two. Fit parity 0 and 1 separately, score the other. The plane passes a pair only when both predictions improve median absolute residual by at least 10 percent against an offset with no increase in P90. Choose first, upper median and last from eligible exposures. Keep identical common support across all pairs."
+}
