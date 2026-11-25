@@ -1,0 +1,67 @@
+{
+  "schema": "BKL046_CFA_ORIGIN_LAUNCHER_REVIEW_CANDIDATE_V1",
+  "subjectSha": "dc444bc84029bb6a2aff32099349218b4012b915d2d4b1456bcb1fd30dc5e072",
+  "cases": [
+    {
+      "name": "signed-fixture-only",
+      "accepted": true
+    },
+    {
+      "name": "expired",
+      "accepted": false
+    },
+    {
+      "name": "wrong-subject",
+      "accepted": false
+    },
+    {
+      "name": "missing-rq",
+      "accepted": false
+    },
+    {
+      "name": "wrong-role-key",
+      "accepted": false
+    },
+    {
+      "name": "rq-blocker",
+      "accepted": false
+    },
+    {
+      "name": "wrong-arb-binding",
+      "accepted": false
+    },
+    {
+      "name": "same-role-key",
+      "accepted": false
+    },
+    {
+      "name": "caller-digest-not-enrolled",
+      "accepted": false
+    },
+    {
+      "name": "valid-signature-unenrolled-key",
+      "accepted": false
+    },
+    {
+      "name": "valid-signature-unenrolled-identity",
+      "accepted": false
+    },
+    {
+      "name": "cli-rejects-caller-approval",
+      "accepted": false
+    },
+    {
+      "name": "cli-rejects-without-enrollment",
+      "accepted": false
+    }
+  ],
+  "imports": {
+    "parentLoaded": true,
+    "members": 21,
+    "launched": false
+  },
+  "testSigningKeysAreFixtures": true,
+  "admissionRequested": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

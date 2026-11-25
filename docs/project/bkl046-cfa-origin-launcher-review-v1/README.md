@@ -1,0 +1,9 @@
+# BKL-046 · Pacchetto di revisione del launcher per l'origine XDRZ
+
+Il soggetto specifico dell'esperimento unisce ingresso Node, dispatcher, parent Python, preflight e verificatore. L'ingresso verifica due firme indipendenti con le chiavi registrate, la dipendenza della ricevuta RQ dalla ricevuta ARB e le impronte dei moduli e dei dati. Il parent viene caricato dai byte verificati. Il comparatore rilegge l'inventario del proprio runtime prima del confronto.
+
+Il collaudo con due chiavi di prova accetta una coppia conforme e respinge dodici casi, inclusi scadenza, soggetto errato, chiave o identità estranea, ruolo condiviso, obiezione RQ e legame ARB errato. L'invocazione con argomenti esterni e quella senza configurazione attiva sono respinte. Il test importa il parent isolato dai byte fissati senza richiederne l'esecuzione. Un primo controllo ha individuato una dipendenza legacy non inclusa del modulo usato per verificare l'immagine del processo. La dipendenza è ora inclusa e fissata dal soggetto.
+
+Il pacchetto di revisione contiene 28 moduli e 25 oggetti del verificatore, oltre ai pin degli interpreti e del coordinatore. La configurazione d'attivazione è nulla. Restano da verificare le directory operative sullo storage fisico, completare eventuali correzioni emerse in revisione, registrare le due identità indipendenti, ricevere ARB e RQ sul soggetto esatto e proteggere l'installazione prima del preflight e dell'ammissione. Le ricevute sintetiche non autorizzano aperture. Nessuna esecuzione PixInsight o consultazione dello stato canonico. [Dispatcher](../bkl046-cfa-origin-dispatcher-candidate-v1/README.md) · [Parent candidato](../bkl046-cfa-origin-native-parent-candidate-v1/README.md)
+
+Per ripetere il collaudo usare il Node fissato, collaudo.cjs, il Python fissato e un percorso nuovo per il rapporto. Il kit H/K contiene il soggetto esatto e le fonti necessarie al controllo offline di autorizzazione e caricamento.
