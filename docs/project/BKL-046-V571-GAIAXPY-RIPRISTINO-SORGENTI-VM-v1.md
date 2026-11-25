@@ -1,0 +1,8 @@
+# BKL-046 · Ripristino remoto delle fonti GaiaXPy di v571
+
+La bozza GitHub contiene la ricetta e il programma di ricostruzione per i 13 file pubblici GaiaXPy fissati alla revisione `349e9a435d81de50b4c09bc4afb14548acc2c9ac`. Il programma scarica ogni oggetto dal repository a monte e verifica dimensione, identificatore blob Git e SHA-256. Il ripristino conserva il file LICENSE della revisione. [Licenza GaiaXPy](https://github.com/gaia-dpci/GaiaXPy/blob/349e9a435d81de50b4c09bc4afb14548acc2c9ac/LICENSE)
+
+Da DSG-Shared sono stati riscaricati il programma e la ricetta del commit `6ab54dfc6e8e4dd28a38ae77d55e5754f1c86387`. Eseguendo la copia riscaricata si è ricostruito lo ZIP con SHA-256 `80ba52aa3b751ab499bfe23f4f4f795e5bc137b4ba66429d3398192700b0e088`, identico all'archivio sorgenti già conservato. [Ricetta fissata al commit](https://github.com/maininimassimo-bit/digital-stargate-manual/blob/6ab54dfc6e8e4dd28a38ae77d55e5754f1c86387/docs/project/BKL-046-V571-GAIAXPY-SOURCE-RECONSTRUCTION-v1.json) · [Programma](https://github.com/maininimassimo-bit/digital-stargate-manual/blob/6ab54dfc6e8e4dd28a38ae77d55e5754f1c86387/docs/project/BKL-046-V571-GAIAXPY-SOURCE-RECONSTRUCTION-v1.py)
+
+La ricetta ha SHA-256 `4df82a9ce10c22def08d718e2e4679aed66a9785b9049bef36b491a6766a5021`. Per riprodurre passare al programma l'URL raw della ricetta al commit, la sua impronta e un percorso ZIP nuovo. La verifica riguarda la componente pubblica GaiaXPy. I prodotti ESA e la capsula mista v571/v1.146 richiedono ancora una destinazione autorizzata e una verifica di riscaricamento propria.
+SHA-256 archivio H: eabb0619e5f9713f3585b54253ea6f4ca15e491d9de2ad04b67af458fd97deab.
