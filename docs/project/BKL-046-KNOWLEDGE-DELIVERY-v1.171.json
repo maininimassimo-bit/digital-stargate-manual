@@ -1979,6 +1979,30 @@
       "status": "SAME_CHIP_DESCRIPTIVE_PHOTOMETRY_ONLY",
       "controlsQualified": 0,
       "scientificClosures": 0
+    },
+    "processSemanticSheetsMltCfa": {
+      "priorIndexSha256": "115a9f4a0d95c2e202a4fcf237681749a11cb2381f670b4a2bbaa047dae3cefc",
+      "path": "docs/project/BKL-046-SCHEDE-MLT-CFA-WBPP-v1.md",
+      "documentCommitSha": "64800673c217fa2cc6caf2f3a3b30c6bb4e96a1e",
+      "documentSha256": "a2bb690e5a580dc53d8743558283d30ce49f3fe98f288b8044be51c8b4742c40",
+      "processInventory": 125,
+      "installedDirectGuides": 40,
+      "localGuideIndexSha256": "8363ab428d5fa254341799034d1f4a84c21c0f1eb669de420218efbc3cc500be",
+      "xdrzXnmlReceiptSha256": "6933fc53f72a18f1fdc6ee01a2a2773417f988f459fb8720fa3f5e8f924d94ad",
+      "wbppSourceReceiptSha256": "8b938723e4805ebab8a0642839f219cd7f55425027dd1efb56df92642ad46c75",
+      "mltSyntheticReceiptSha256": "86daa91f2c8ad85602cceda7cee339e12b53cd2b71e65de4fb0e31812ea7ad07",
+      "requirements": [
+        "process:MultiscaleLinearTransform",
+        "process:ImageCalibration",
+        "process:Debayer",
+        "process:StarAlignment",
+        "process:LocalNormalization",
+        "process:ImageIntegration",
+        "process:DrizzleIntegration"
+      ],
+      "status": "SOURCE_TRACE_AND_OFFLINE_EVIDENCE_NATIVE_VERIFICATION_REQUIRED",
+      "criteriaPromoted": 0,
+      "scientificClosures": 0
     }
   }
 }
