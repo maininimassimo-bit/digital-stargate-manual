@@ -1,0 +1,17 @@
+{
+  "protocol": "BKL046_ACS11677_LONG_PAIR_GEOMETRY_PLAN_V1",
+  "parentResultSha256": "1a4710d52733b4500c5a01c638732557f9d72054a6225e49e1d62807001d4ff9",
+  "centroidSourceSha256": "1539c0aa0322b8d3fcf04dec1fafb11d9ab42fdd678dc8d34b5c8ec7b68e8de1",
+  "seedSourceSha256": "28f69e280b3df1e9ce0d7ffd9019739477add1a2561d9d4f7863cd41ebd63edc",
+  "tilePixels": 512,
+  "maxPeaksPerTile": 128,
+  "minFitAndHoldoutStars": 24,
+  "minFitAndHoldoutTiles": 8,
+  "heldoutP90LimitPx": 0.1,
+  "geometryModels": [
+    "primaryWcs",
+    "translation",
+    "affine"
+  ],
+  "referenceSeedSelection": "Positive isolated core per frozen centroid. Select from exposure 1457 s only, excluding center pixels with any DQ before ranking peaks. Use even tiles to fit, odd tiles to test."
+}

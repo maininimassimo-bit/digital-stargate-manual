@@ -1,0 +1,34 @@
+{
+  "astrophysicalTruthReconstructed": false,
+  "chips": [
+    {
+      "applied": true,
+      "chip": 2,
+      "components": 127,
+      "stats": {
+        "cosmicFlagsOnNearestCommonFullWell": {
+          "baselineOnly": 1069,
+          "commonFlagged": 3046,
+          "neitherFlagged": 23703,
+          "referenceFlagged": 4115,
+          "repeatFlagged": 4337,
+          "repeatOnly": 1291
+        },
+        "fullWellNearest": 29109,
+        "fullWellWithinOnePixel": 33248,
+        "inView": 35692,
+        "sourceSupport": 36983,
+        "targetDetectorDisplacementMedianPx": 102.33433443976233
+      }
+    },
+    {
+      "applied": false,
+      "chip": 1,
+      "reason": "HELDOUT_P90_OUTSIDE_LIMIT"
+    }
+  ],
+  "geometrySha256": "8c827727f28bb152316b3d5dd20ff3f74b3c8932cb60c985fd4bee6d1fbc864d",
+  "nativeExecutions": 0,
+  "protocol": "BKL046_ACS11677_DQ_AFFINE_SENSITIVITY_V1",
+  "scientificClosures": 0
+}
