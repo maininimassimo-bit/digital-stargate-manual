@@ -1,0 +1,7 @@
+# BKL-046 · Script candidato per i controlli CFA in PixInsight
+
+Lo script PJSR corrisponde ai cinque casi fissati nel piano XDRZ a tre ingressi. Verifica la presenza dei parametri e degli enumeratori, rilegge ogni valore assegnato e richiede la rappresentazione JavaScript effettiva del processo. Controlla inoltre che siano stati creati due risultati distinti e nuovi, un'immagine RGB e la mappa RGB dei pesi, entrambi da 32 × 28 pixel. Richiede scrittura FITS in virgola mobile a 64 bit. Il messaggio finale di esportazione viene emesso solo se entrambe le scritture si completano.
+
+Due collaudi Node con un ambiente PJSR simulato hanno prodotto ricevute identiche. Sono coperti i cinque casi previsti e 11 errori. Fra questi rientrano un parametro mancante o ignorato, l'enumeratore assente, una finestra già aperta, pesi mancanti o con forma diversa e scrittura FITS incompleta. Il caricamento dello script nel simulatore non avvia integrazioni. Le evidenze sul modulo installato provengono dal codice WBPP distribuito e dalle impronte locali. La disponibilità effettiva degli enumeratori, la lettura dei parametri e la conservazione dei valori dei pesi nel FITS restano da verificare nel runtime nativo.
+
+Il supervisore già sottoposto al coordinamento dovrà invocare lo script candidato, verificare gli hash e gestire la singola sessione autorizzata. L'operazione, lo script e il piano esatti restano da sottoporre a revisione prima dell'ammissione. Ricevuta SHA-256 `73be7de7ad7852b71b71fe13672ef1f1bd9189f6990cbb3152ae94d318c0fcd6`. Zero esecuzioni native.
