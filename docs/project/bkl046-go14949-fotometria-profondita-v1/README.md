@@ -1,0 +1,9 @@
+# BKL-046 — Fotometria di controllo a profondità diverse su GO14949
+
+Ho riletto per SHA-256 cinque prodotti ACS/WFC F606W e le due mappe di area pixel. Ho mantenuto i 105 riferimenti stellari delle tessere di verifica già comuni alle quattro pose da 40 e 150 secondi. Il centro della posa da 400 secondi è quello previsto dal precedente fit affine, che era rimasto fuori dalla soglia prefissata di 0,1 pixel. La misura è diagnostica. Aperture di 3 e 5 pixel, fondo mediano fra 8 e 12 pixel, scelta congelata prima della misura. Scarto qualsiasi apertura con pixel DQ non nullo. I tassi riportati sono in elettroni al secondo dopo fondo e correzione PAM.
+
+Con raggio 3 pixel, la prima posa da 150 s ha 22 confronti validi sul chip 1 e 33 sul chip 2 rispetto a B da 40 s. Il 90° percentile dello scarto assoluto è rispettivamente 2,92% e 2,61%. Per la seconda posa da 150 s, con gli stessi conteggi, i valori sono 3,70% e 3,84%. La posa da 400 s ha 27 confronti sul chip 2, mediana firmata +1,61% e P90 assoluto 4,54%. Sul chip 1 manca un centro lungo utilizzabile secondo il protocollo preesistente.
+
+Il raggio 5 lascia al massimo due coppie per confronto, quindi non supporta una conclusione sulla stabilità al variare dell'apertura. Le tre sorgenti prima classificate come pure full well sono state respinte a entrambi i raggi della posa da 400 s per il controllo DQ o di finitezza. I conteggi di ogni esclusione restano nel rapporto. Nessun recupero del nucleo saturo è stato tentato. La differenza di durata si accompagna a differenze di geometria osservativa. Il rapporto e il replay coincidono byte per byte.
+
+[Riferimento STScI per la saturazione ACS](https://spacetelescope.github.io/hst_notebooks/notebooks/ACS/acs_saturation_trails/acs_saturation_trails.html)
