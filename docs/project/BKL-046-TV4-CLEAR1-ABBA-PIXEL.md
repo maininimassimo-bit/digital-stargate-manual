@@ -20,3 +20,5 @@ Quattro gruppi condividono la stessa sessione di laboratorio. Manca una misura i
 | Riscontro sui 40 FITS e rilettura identica | 5cc3749b5b4337f62303ca8aba3889d08ecedcffcd1f84cd4f1843043653aea2 |
 | Confronto predittivo e rilettura identica | 36e54c8ad3b0c3b03396aa642b70044ea9db259f6c6f50d02063de5dfb8fe00c |
 | Archivio riletto su H: | d6d5e0b68f7b5c4f896d8d30a9569ad9afc24020e4f34aeb44cf4a8d92ea9a7a |
+
+La [verifica del registro PDS](BKL-046-TV4-CLEAR1-RIALLINEAMENTO.md) associa i 40 FITS a quattro gruppi posti a cavallo del riallineamento della sfera. La deriva lineare di questa pagina è un confronto descrittivo. Il modello a salto sul confine documentato riduce ulteriormente l’errore predittivo e chiarisce il limite fisico del test originale.
