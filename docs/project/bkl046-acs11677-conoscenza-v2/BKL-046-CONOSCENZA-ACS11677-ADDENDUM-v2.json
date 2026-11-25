@@ -1,0 +1,138 @@
+{
+  "schema": "BKL046_KNOWLEDGE_ACS11677_GAIA_DQ_ADDENDUM_V2",
+  "priorAddendum": {
+    "path": "docs/project/bkl046-acs11677-conoscenza-v1/BKL-046-CONOSCENZA-ACS11677-ADDENDUM-v1.json",
+    "commit": "d2b5e7be4c495061a50f0c4ea501d92370635245",
+    "sha256": "bce9053a4c95e38cd2c2f55c3c3ba48196dcd4532ed7893ecbcbbf03afefaf08"
+  },
+  "baseKnowledgeVersion": "1.171",
+  "status": "INTERIM",
+  "family": "SATURATION_BLEND",
+  "evidence": [
+    {
+      "id": "gaiaShortlist",
+      "commit": "001ce12221d34a73fa82a0a9eaf40acd9a6d8b79",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-gaia-screen-v1/esito-selezione.json",
+          "sha256": "5b81ca356e5bb25c3ef16c7114c29baa6a75b6c2fae6e52134c8e07d02d629ee"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-gaia-screen-v1/go14949-sintesi.json",
+          "sha256": "8c746a9f43fdbdc29e8c002fd91d499d3f0dd21ce7323c0e0678763be03b0f91"
+        }
+      ],
+      "archiveSha256": "3a38014e7837749b79c357bfffbc62f4a8ac20b18626a7c79b17479b8b990fbc"
+    },
+    {
+      "id": "restoredGo14949Replay",
+      "commit": "121e8a2333a73ba396732ee45b526dbb92f502f2",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-go14949-replay-v1/replay-completo-go14949.json",
+          "sha256": "1aceebcf1399f74022c06f3d7d87f5a74cdc038b949c9d4c78d9c5cf05f63105"
+        }
+      ],
+      "archiveSha256": "373bd951e7890fc5d4dbcde6519805ac6f1fe3651fed9493eb5af10e03ed65fe"
+    },
+    {
+      "id": "gaia30",
+      "commit": "cfb5e56c2b0f90a5578da9d37983d157c6752079",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-gaia-11887-v1/esito-jbbf01i3q.json",
+          "sha256": "c6c34b953bfffc667ef2e326ca568395a1420ef0ae4f58abc915b9903d0860c4"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-gaia-11887-v1/diagnosi-jbbf01i3q.json",
+          "sha256": "cddebd10fb0866db48ef6bfef96b5b3094f78052ebe6c08a3504c20b8a41a6dc"
+        }
+      ],
+      "archiveSha256": "659ba2072f2454d539a35427ae02e9652e9b07a4807bc7fe44ccfe2f85d50980"
+    },
+    {
+      "id": "gaia40",
+      "commit": "65bf3a50bf6928124b3d6759ed7ad81ed6378538",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-gaia-11880-v1/esito-jbb502ijq.json",
+          "sha256": "5054c3853a831e21442278c78dc153af56d431717d86a3971ed128493858f996"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-gaia-11880-v1/diagnosi-jbb502ijq.json",
+          "sha256": "52eedfad0fa8292dad4e20f65753d119d9ba0b11a6f5a14a9b8748260c2eda59"
+        }
+      ],
+      "archiveSha256": "612bb5411a5b703a3b15cb95fe0c559902e8c06ce952eb4f210c67ec1ca08667"
+    },
+    {
+      "id": "sameVisitDqSensitivity",
+      "commit": "65bf3a50bf6928124b3d6759ed7ad81ed6378538",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-gaia-11880-v1/diagnosi-sensibilita-dq-go11887.json",
+          "sha256": "a8df736d24c903e8c86d63b74eb1a52a6e6a45277f31982dc143c8b517bc8de6"
+        }
+      ],
+      "archiveSha256": "b0f594b10f24591c852f0324ea8be80b09192664bc0d20d660fe7841d38d88cd"
+    }
+  ],
+  "observations": {
+    "independentGaiaTests": {
+      "jbbf01i3q": {
+        "coveredCenters": 316,
+        "seconds": 30,
+        "p90Px": {
+          "1->2": 0.1329150803917105,
+          "2->1": 0.11024741183876596
+        },
+        "referenceCandidates": 0,
+        "fluxMeasured": false
+      },
+      "jbb502ijq": {
+        "coveredCenters": 296,
+        "seconds": 40,
+        "p90Px": {
+          "1->2": 0.1398917215337067,
+          "2->1": 0.129518290209143
+        },
+        "referenceCandidates": 0,
+        "fluxMeasured": false
+      }
+    },
+    "pairedDqSensitivity": {
+      "commonProjectedCenters": 316,
+      "commonPassingDiagnosticOnly": {
+        "0": 0,
+        "16": 0,
+        "80": 45
+      }
+    },
+    "go14949RestoredReplay": {
+      "inputArtifacts": 14,
+      "equalOutputs": 3,
+      "runtimeStillInstalled": {
+        "astropy": "7.2.0",
+        "numpy": "2.3.5",
+        "python": "3.12.14"
+      }
+    }
+  },
+  "decisionRules": [
+    {
+      "use": "Qualify the astrometry on held-out tiles even when both WCS products declare Gaia eDR3.",
+      "limit": "A shared reference catalogue and sufficient matched stars do not establish the required residual."
+    },
+    {
+      "use": "Attribute DQ sensitivity only within the frozen source cohort and keep its geometry status.",
+      "limit": "Counts after ignoring diagnostic DQ bits do not authorize an aperture or a science closure."
+    },
+    {
+      "use": "Recover inputs, protocols and helpers by digest before replay.",
+      "limit": "A replay on the same runtime establishes reproducibility of this test and keeps its biases in scope."
+    }
+  ],
+  "nativeExecutionsAdded": 0,
+  "scientificClosuresAdded": 0,
+  "finalKnowledge": false
+}
