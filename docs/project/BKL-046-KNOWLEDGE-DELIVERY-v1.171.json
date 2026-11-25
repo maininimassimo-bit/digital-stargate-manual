@@ -330,6 +330,22 @@
   },
   "studySupplements": [
     {
+      "axis": "NOISE_FLUX/2",
+      "status": "OPEN",
+      "redFlatApertureVariance": {
+        "path": "docs/project/BKL-046-TV4-VARIANZA-APERTURE-RED.md",
+        "documentCommitSha": "6479f452b999498e8b8dc431bc0d9ddaf66b579d",
+        "documentSha256": "c2522d407f0f4a1109ce4d41e9d5e4ab3004aaed29c7439f5fca6ff1f7d8cfff",
+        "receiptSha256": "ff778ec8c42d8d1da726288ab3aa0ff138b0b7aa8a2f67a7ebaed46c15b1bd63",
+        "regionalAperturePredictions": 30,
+        "relatedAxes": [
+          "NOISE_FLUX/3"
+        ],
+        "scientificClosures": 0,
+        "status": "HELDOUT_APERTURE_VARIANCE_REQUIRES_SPATIAL_AND_ORIENTATION_CONTROL"
+      }
+    },
+    {
       "axis": "NOISE_FLUX/1",
       "status": "OPEN",
       "redFlatTemporalVariance": {
