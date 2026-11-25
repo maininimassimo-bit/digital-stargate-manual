@@ -1,0 +1,9 @@
+# BKL-046 · Batch candidato per l'origine XDRZ
+
+Il generatore verifica le impronte del batch CFA v4, del piano fattoriale, dei 12 XDRZ e dei sei FITS da cui dipendono. Deriva un batch separato per le quattro combinazioni matrice/origine. Il batch produce otto FITS nella directory outputs, più log e marcatore nella directory della prenotazione. Le impostazioni di DrizzleIntegration riusano quelle dello shear v4, con rigetto disattivato. [Piano di classificazione](../bkl046-cfa-origin-output-classifier-v1/piano.json)
+
+Con le API PixInsight simulate, il batch ha prodotto gli otto file e otto eventi per ciascuna delle tre sequenze. Il classificatore effettivo, invocato da terminale, ha riconosciuto tutte e tre. Nel controllo con errore al terzo caso il batch si è fermato senza scrivere il marcatore. Le finestre di prova estranee sono rimaste aperte nei tre casi completi. I FITS simulati provengono dalle mappe attese, quindi il risultato verifica il passaggio tra script, file ed esito del classificatore.
+
+La candidata è offline. Per una prova nativa servono un parent e una custodia R4 che verifichino gli ingressi esatti, la provenienza degli output e l'uscita del processo, seguiti da revisione del pacchetto, attivazione e ammissione. Il piano e il launcher v4 rimangono congelati. [Casi fattoriali](../bkl046-cfa-origin-factorial-v1/README.md)
+
+Il generatore riceve il batch v4, la directory del classificatore, la directory dei prodotti fattoriali, la directory degli ingressi originari e la destinazione. Il collaudo riceve la directory del batch generato, le directory del piano e degli oracoli, il verificatore numerico v4, le dipendenze, Python, una nuova directory di prova e il percorso del rapporto.
