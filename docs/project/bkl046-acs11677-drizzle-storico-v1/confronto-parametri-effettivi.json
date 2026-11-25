@@ -1,0 +1,423 @@
+{
+  "allSharedParameters": {
+    "archiveOnly": [],
+    "compared": 93,
+    "differences": [
+      {
+        "intentional": true,
+        "mast": "True",
+        "parameter": "clean",
+        "replica": "False",
+        "stage": "Final Drizzle"
+      },
+      {
+        "intentional": true,
+        "mast": "jb6v01010_pydriz.log",
+        "parameter": "logfile",
+        "replica": "replica.log",
+        "stage": "Final Drizzle"
+      },
+      {
+        "intentional": true,
+        "mast": "jb6v01010_pipeline_flc_asn.fits",
+        "parameter": "input",
+        "replica": "['jb6v01dfq_flc.fits', 'jb6v01diq_flc.fits', 'jb6v01dkq_flc.fits', 'jb6v01e0q_flc.fits', 'jb6v01e5q_flc.fits', 'jb6v01ekq_flc.fits']",
+        "stage": "Initialization"
+      },
+      {
+        "intentional": true,
+        "mast": "",
+        "parameter": "output",
+        "replica": "jb6v01010",
+        "stage": "Initialization"
+      },
+      {
+        "intentional": true,
+        "mast": "jb6v01010_pydriz",
+        "parameter": "runfile",
+        "replica": "replica",
+        "stage": "Initialization"
+      },
+      {
+        "intentional": true,
+        "mast": "True",
+        "parameter": "clean",
+        "replica": "False",
+        "stage": "Separate Drizzle"
+      }
+    ],
+    "matching": 87,
+    "replicaOnly": [],
+    "unexpected": []
+  },
+  "checks": [
+    {
+      "mast": "1",
+      "parameter": "num_cores",
+      "replica": "1",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "4096",
+      "parameter": "resetbits",
+      "replica": "4096",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "False",
+      "parameter": "updatewcs",
+      "replica": "False",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "",
+      "parameter": "wcskey",
+      "replica": "",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "4096",
+      "parameter": "crbit",
+      "replica": "4096",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "True",
+      "parameter": "mdriztab",
+      "replica": "True",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "10",
+      "parameter": "stepsize",
+      "replica": "10",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "False",
+      "parameter": "in_memory",
+      "replica": "False",
+      "stage": "Initialization"
+    },
+    {
+      "mast": "True",
+      "parameter": "static",
+      "replica": "True",
+      "stage": "Static Mask"
+    },
+    {
+      "mast": "4.0",
+      "parameter": "static_sig",
+      "replica": "4.0",
+      "stage": "Static Mask"
+    },
+    {
+      "mast": "0",
+      "parameter": "sky_bits",
+      "replica": "0",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "5",
+      "parameter": "skyclip",
+      "replica": "5",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "-100.0",
+      "parameter": "skylower",
+      "replica": "-100.0",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "4.0",
+      "parameter": "skylsigma",
+      "replica": "4.0",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "localmin",
+      "parameter": "skymethod",
+      "replica": "localmin",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "median",
+      "parameter": "skystat",
+      "replica": "median",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "True",
+      "parameter": "skysub",
+      "replica": "True",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "None",
+      "parameter": "skyupper",
+      "replica": "None",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "4.0",
+      "parameter": "skyusigma",
+      "replica": "4.0",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "0.10000000149011612",
+      "parameter": "skywidth",
+      "replica": "0.10000000149011612",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "True",
+      "parameter": "use_static",
+      "replica": "True",
+      "stage": "Subtract Sky"
+    },
+    {
+      "mast": "336",
+      "parameter": "bits",
+      "replica": "336",
+      "stage": "Separate Drizzle"
+    },
+    {
+      "mast": "False",
+      "parameter": "build",
+      "replica": "False",
+      "stage": "Separate Drizzle"
+    },
+    {
+      "mast": "turbo",
+      "parameter": "kernel",
+      "replica": "turbo",
+      "stage": "Separate Drizzle"
+    },
+    {
+      "mast": "1.0",
+      "parameter": "pixfrac",
+      "replica": "1.0",
+      "stage": "Separate Drizzle"
+    },
+    {
+      "mast": "cps",
+      "parameter": "units",
+      "replica": "cps",
+      "stage": "Separate Drizzle"
+    },
+    {
+      "mast": "True",
+      "parameter": "coeffs",
+      "replica": "True",
+      "stage": "Separate Drizzle"
+    },
+    {
+      "mast": "10",
+      "parameter": "stepsize",
+      "replica": "10",
+      "stage": "Separate Drizzle"
+    },
+    {
+      "mast": "1",
+      "parameter": "combine_grow",
+      "replica": "1",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "0.3",
+      "parameter": "combine_maskpt",
+      "replica": "0.3",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "1",
+      "parameter": "combine_nhigh",
+      "replica": "1",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "0",
+      "parameter": "combine_nlow",
+      "replica": "0",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "4 3",
+      "parameter": "combine_nsigma",
+      "replica": "4 3",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "median",
+      "parameter": "combine_type",
+      "replica": "median",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "True",
+      "parameter": "median",
+      "replica": "True",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "True",
+      "parameter": "median_newmasks",
+      "replica": "True",
+      "stage": "Create Median"
+    },
+    {
+      "mast": "True",
+      "parameter": "blot_addsky",
+      "replica": "True",
+      "stage": "Blot"
+    },
+    {
+      "mast": "poly5",
+      "parameter": "blot_interp",
+      "replica": "poly5",
+      "stage": "Blot"
+    },
+    {
+      "mast": "1.0",
+      "parameter": "blot_sinscl",
+      "replica": "1.0",
+      "stage": "Blot"
+    },
+    {
+      "mast": "0.0",
+      "parameter": "blot_skyval",
+      "replica": "0.0",
+      "stage": "Blot"
+    },
+    {
+      "mast": "True",
+      "parameter": "coeffs",
+      "replica": "True",
+      "stage": "Blot"
+    },
+    {
+      "mast": "4096",
+      "parameter": "crbit",
+      "replica": "4096",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "True",
+      "parameter": "driz_cr",
+      "replica": "True",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "False",
+      "parameter": "driz_cr_corr",
+      "replica": "False",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "0",
+      "parameter": "driz_cr_ctegrow",
+      "replica": "0",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "1",
+      "parameter": "driz_cr_grow",
+      "replica": "1",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "1.2 0.7",
+      "parameter": "driz_cr_scale",
+      "replica": "1.2 0.7",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "3.5 3.0",
+      "parameter": "driz_cr_snr",
+      "replica": "3.5 3.0",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "False",
+      "parameter": "inmemory",
+      "replica": "False",
+      "stage": "Driz_CR"
+    },
+    {
+      "mast": "336",
+      "parameter": "bits",
+      "replica": "336",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "True",
+      "parameter": "build",
+      "replica": "True",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "True",
+      "parameter": "coeffs",
+      "replica": "True",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "4096",
+      "parameter": "crbit",
+      "replica": "4096",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "square",
+      "parameter": "kernel",
+      "replica": "square",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "0.800000011920929",
+      "parameter": "pixfrac",
+      "replica": "0.800000011920929",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "10",
+      "parameter": "stepsize",
+      "replica": "10",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "cps",
+      "parameter": "units",
+      "replica": "cps",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "",
+      "parameter": "wcskey",
+      "replica": "",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "EXP",
+      "parameter": "wht_type",
+      "replica": "EXP",
+      "stage": "Final Drizzle"
+    },
+    {
+      "mast": "exptime",
+      "parameter": "wt_scl",
+      "replica": "exptime",
+      "stage": "Final Drizzle"
+    }
+  ],
+  "differences": [],
+  "historicalMdriztabRow": 4,
+  "mastTrailerSha256": "b39d93ff19af1b6de4e9cc37e2759400d44fee37dcde66f85413faeceef97c6d",
+  "matching": 60,
+  "missing": [],
+  "replicaLogSha256": "979dfe05ad4eeadc4f275d41391064ecf0e70c4d6f880536cd722ff414f399d8",
+  "replicaMdriztabRow": 4,
+  "scientificClosure": false
+}

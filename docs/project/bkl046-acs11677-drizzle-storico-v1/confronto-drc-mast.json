@@ -1,0 +1,117 @@
+{
+  "comparablePixelGrid": true,
+  "context": {
+    "first": [
+      "jb6v01dfq_flc.fits[sci,1]",
+      "jb6v01dfq_flc.fits[sci,2]",
+      "jb6v01diq_flc.fits[sci,1]",
+      "jb6v01diq_flc.fits[sci,2]",
+      "jb6v01dkq_flc.fits[sci,1]",
+      "jb6v01dkq_flc.fits[sci,2]",
+      "jb6v01e0q_flc.fits[sci,1]",
+      "jb6v01e0q_flc.fits[sci,2]",
+      "jb6v01e5q_flc.fits[sci,1]",
+      "jb6v01e5q_flc.fits[sci,2]",
+      "jb6v01ekq_flc.fits[sci,1]",
+      "jb6v01ekq_flc.fits[sci,2]"
+    ],
+    "inputOrderMatches": true,
+    "second": [
+      "jb6v01dfq_flc.fits[sci,1]",
+      "jb6v01dfq_flc.fits[sci,2]",
+      "jb6v01diq_flc.fits[sci,1]",
+      "jb6v01diq_flc.fits[sci,2]",
+      "jb6v01dkq_flc.fits[sci,1]",
+      "jb6v01dkq_flc.fits[sci,2]",
+      "jb6v01e0q_flc.fits[sci,1]",
+      "jb6v01e0q_flc.fits[sci,2]",
+      "jb6v01e5q_flc.fits[sci,1]",
+      "jb6v01e5q_flc.fits[sci,2]",
+      "jb6v01ekq_flc.fits[sci,1]",
+      "jb6v01ekq_flc.fits[sci,2]"
+    ]
+  },
+  "gridMismatches": [],
+  "maximumWcsHeaderAbsDifference": 1e-12,
+  "officialGrid": {
+    "BUNIT": "ELECTRONS/S",
+    "CD1_1": 9.99779613606401e-06,
+    "CD1_2": 9.64081464346269e-06,
+    "CD2_1": 9.64081464346269e-06,
+    "CD2_2": -9.997796136064e-06,
+    "CRPIX1": 2264.0,
+    "CRPIX2": 2261.5,
+    "CRVAL1": 5.658735610258816,
+    "CRVAL2": -72.06745328305038,
+    "CTYPE1": "RA---TAN",
+    "CTYPE2": "DEC--TAN",
+    "CUNIT1": "deg",
+    "CUNIT2": "deg",
+    "NAXIS1": 4528,
+    "NAXIS2": 4523
+  },
+  "officialSha256": "2c331c978de0008c2bee8a845b238ffcdc0bbd72cbbba4148d2721d022cb57bf",
+  "payloads": {
+    "CTX": {
+      "bothFinite": 20480144,
+      "bothNonfinite": 0,
+      "elements": 20480144,
+      "equalFinite": 20480144,
+      "finiteMismatch": 0,
+      "maxAbsDifference": 0.0,
+      "rmsDifference": 0.0,
+      "shape": [
+        4523,
+        4528
+      ],
+      "unequalFinite": 0
+    },
+    "SCI": {
+      "bothFinite": 18881501,
+      "bothNonfinite": 1598643,
+      "elements": 20480144,
+      "equalFinite": 18881238,
+      "finiteMismatch": 0,
+      "maxAbsDifference": 3.814697265625e-06,
+      "rmsDifference": 8.976607937097841e-10,
+      "shape": [
+        4523,
+        4528
+      ],
+      "unequalFinite": 263
+    },
+    "WHT": {
+      "bothFinite": 20480144,
+      "bothNonfinite": 0,
+      "elements": 20480144,
+      "equalFinite": 20479994,
+      "finiteMismatch": 0,
+      "maxAbsDifference": 0.0009765625,
+      "rmsDifference": 1.444583323743761e-06,
+      "shape": [
+        4523,
+        4528
+      ],
+      "unequalFinite": 150
+    }
+  },
+  "replicaGrid": {
+    "BUNIT": "ELECTRONS/S",
+    "CD1_1": 9.99779613606401e-06,
+    "CD1_2": 9.64081464346269e-06,
+    "CD2_1": 9.64081464346269e-06,
+    "CD2_2": -9.997796136064e-06,
+    "CRPIX1": 2264.0,
+    "CRPIX2": 2261.5,
+    "CRVAL1": 5.658735610258816,
+    "CRVAL2": -72.06745328305038,
+    "CTYPE1": "RA---TAN",
+    "CTYPE2": "DEC--TAN",
+    "CUNIT1": "deg",
+    "CUNIT2": "deg",
+    "NAXIS1": 4528,
+    "NAXIS2": 4523
+  },
+  "replicaSha256": "9b89c7760d213eff848b1fac2d275c39d27b2729f24ca3b54c686bc7abc7297e",
+  "scientificClosure": false
+}
