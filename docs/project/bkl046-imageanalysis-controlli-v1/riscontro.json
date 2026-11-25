@@ -1,0 +1,76 @@
+{
+  "schema": "BKL046_IMAGEANALYSIS_CONTROL_INPUTS_V1",
+  "files": [
+    {
+      "name": "compact-shuffled.fits",
+      "sha256": "87e320cd438d6ea235c656200fad8457c6162836d7cf371552e8ab6da9d8b49a",
+      "bytes": 77760,
+      "expectedStars": 36,
+      "gaussianFwhmPixels": 3.296748063043329,
+      "fields": {
+        "backgroundCount": 23160,
+        "median": 1200.0,
+        "sigmaPopulation": 23.634720222587784,
+        "medianAbsoluteDeviation": 14.0,
+        "meanAbsoluteDeviation": 18.2,
+        "madGaussianScaled": 20.756431059078427,
+        "horizontalPairSigma": 23.63507142504271,
+        "histogramSha256": "8ad6cdc67236a6cfe526917e73ba6ecc13c78e8d766c29cb2f9c24eaa994e2a3"
+      }
+    },
+    {
+      "name": "compact-zones.fits",
+      "sha256": "555ab7153b6389597e610cf71d8f8d63e0670632e5fb54f82b49a6daaafce230",
+      "bytes": 77760,
+      "expectedStars": 36,
+      "gaussianFwhmPixels": 3.296748063043329,
+      "fields": {
+        "backgroundCount": 23160,
+        "median": 1200.0,
+        "sigmaPopulation": 23.634720222587784,
+        "medianAbsoluteDeviation": 14.0,
+        "meanAbsoluteDeviation": 18.2,
+        "madGaussianScaled": 20.756431059078427,
+        "horizontalPairSigma": 1.7440596996939488,
+        "histogramSha256": "8ad6cdc67236a6cfe526917e73ba6ecc13c78e8d766c29cb2f9c24eaa994e2a3"
+      }
+    },
+    {
+      "name": "tailed-shuffled.fits",
+      "sha256": "30c4c2f75f6c5b91f945c835e7e0dcb48b5470f5f5c044146e6d604a6dc94d04",
+      "bytes": 77760,
+      "expectedStars": 36,
+      "gaussianFwhmPixels": 3.296748063043329,
+      "fields": {
+        "backgroundCount": 23160,
+        "median": 1200.0,
+        "sigmaPopulation": 53.630215364102355,
+        "medianAbsoluteDeviation": 8.0,
+        "meanAbsoluteDeviation": 33.0,
+        "madGaussianScaled": 11.860817748044816,
+        "horizontalPairSigma": 53.661212198113745,
+        "histogramSha256": "a808e696b7d4b39ec9038b4fe201445068d0cd8271cb85106183122a3f6ced7d"
+      }
+    },
+    {
+      "name": "compact-wide-psf.fits",
+      "sha256": "b33838da9aba6598f7b7de240272ac2bdc445f5cdcaa6106c21115d246943b9c",
+      "bytes": 77760,
+      "expectedStars": 36,
+      "gaussianFwhmPixels": 4.827381092313446,
+      "fields": {
+        "backgroundCount": 23160,
+        "median": 1200.0,
+        "sigmaPopulation": 23.634720222587784,
+        "medianAbsoluteDeviation": 14.0,
+        "meanAbsoluteDeviation": 18.2,
+        "madGaussianScaled": 20.756431059078427,
+        "horizontalPairSigma": 23.63507142504271,
+        "histogramSha256": "8ad6cdc67236a6cfe526917e73ba6ecc13c78e8d766c29cb2f9c24eaa994e2a3"
+      }
+    }
+  ],
+  "pixelType": "UInt16 through FITS BZERO=32768",
+  "newNativeRun": false,
+  "scientificClosures": 0
+}
