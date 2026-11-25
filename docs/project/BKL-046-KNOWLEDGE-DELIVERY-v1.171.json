@@ -330,6 +330,22 @@
   },
   "studySupplements": [
     {
+      "axis": "NOISE_FLUX/1",
+      "status": "OPEN",
+      "redFlatTemporalVariance": {
+        "path": "docs/project/BKL-046-TV4-VARIANZA-FLAT-RED.md",
+        "documentCommitSha": "80e94f2e67d5c1519f910601e493dffb140d07e5",
+        "documentSha256": "be7011dac85633ec91fe17c2ef9ac5f30cb7f5128869ce32e6783c8f6493fe73",
+        "receiptSha256": "738a6e5149c950130f1003e9834fe049cdaad75d2875db918ae0803f95ffa472",
+        "regionalPredictions": 10,
+        "relatedAxes": [
+          "NOISE_FLUX/2"
+        ],
+        "scientificClosures": 0,
+        "status": "EMPIRICAL_AFFINE_VARIANCE_TRANSFER_AT_TWO_HELDOUT_LEVELS"
+      }
+    },
+    {
       "axis": "DIFFUSE_BACKGROUND/2",
       "status": "OPEN",
       "redFlatSpatialResponse": {
