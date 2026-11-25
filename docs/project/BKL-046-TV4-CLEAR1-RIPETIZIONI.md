@@ -12,3 +12,5 @@ Il disegno conserva gli input mancanti e il controllo di ritorno. Questa selezio
 | Inventario dopo il recupero | `ab2d5e8da01e71b8f7b4833c9932834718586e5b4220242fced9eabd2410f552` |
 | Rilettura delle dieci coppie | `5517d9b6b1988529b7b8ddb34893b58c5b558e714ce0159603ba1ca0bb8060c4` |
 | Riscontro a 53,5 ms | `2fd8e8414778bca177a2aec7e2c40043928fde40b809a638964a8cf2b35838ce` |
+
+Il pacchetto BKL046-TV4-CLEAR1-ripetizioni-53ms-replay.zip contiene le dieci coppie verificate, il disegno, i programmi e i riscontri. Lo SHA-256 `f513adeaf4b4680103345fa253c821bd8480938c86874b888db017d4c20e1d3d` coincide tra la copia su O: e la rilettura su H: eseguita attraverso lo stesso handle dopo flush. La riesecuzione dalla copia su O: ha riprodotto le due ricevute byte per byte.
