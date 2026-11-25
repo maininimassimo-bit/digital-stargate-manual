@@ -1,6 +1,6 @@
 # BKL-046 — Deriva nel test TV4 a esposizione invertita
 
-Il [disegno ABBA](BKL-046-TV4-CLEAR1-ABBA.md) fissa quattro gruppi indipendenti come unità dell'analisi, con integrazioni da 7.503,5 e 15.003,5 ms. Dopo il primo tentativo di acquisizione, abbiamo recuperato tutti gli otto FITS previsti e poi i 32 fotogrammi intermedi degli stessi gruppi. Identità, ora, integrazione, modalità, posizione del filtro e dimensioni sono state riscontrate tra indice PDS, etichetta e testata FITS. Abbiamo misurato 1.280 blocchi in cinque regioni interne fisse per fotogramma, oltre a due controlli di overscan. [Dataset TV4 della NASA](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-CAL-HRII%2FHRIV%2FMRI-2-GROUND-TV4-V1.0)
+Il [disegno ABBA](BKL-046-TV4-CLEAR1-ABBA.md) fissa quattro gruppi di acquisizione come unità dell'analisi, con integrazioni da 7.503,5 e 15.003,5 ms. Dopo il primo tentativo di acquisizione, abbiamo recuperato tutti gli otto FITS previsti e poi i 32 fotogrammi intermedi degli stessi gruppi. Identità, ora, integrazione, modalità, posizione del filtro e dimensioni sono state riscontrate tra indice PDS, etichetta e testata FITS. Abbiamo misurato 1.280 blocchi in cinque regioni interne fisse per fotogramma, oltre a due controlli di overscan. [Dataset TV4 della NASA](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-CAL-HRII%2FHRIV%2FMRI-2-GROUND-TV4-V1.0)
 
 | Serie sulle 40 immagini | Contrasto con deriva lineare | Contrasto con deriva quadratica |
 | --- | ---: | ---: |
