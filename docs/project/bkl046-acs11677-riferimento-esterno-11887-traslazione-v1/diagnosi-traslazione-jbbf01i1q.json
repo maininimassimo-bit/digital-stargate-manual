@@ -1,0 +1,55 @@
+{
+  "protocolSha256": "0d287520e74b28b3b0269ba4fa26cd65d53db7cf999955d9b506f0c30bd361e7",
+  "heldoutMeasured": false,
+  "scientificClosure": false,
+  "chipPairs": {
+    "1->1": {
+      "sourceTrainingAnchors": 0,
+      "targetPeakChecks": 0,
+      "possiblePairs": 0,
+      "status": "NO_TRANSLATION_SUPPORT"
+    },
+    "1->2": {
+      "sourceTrainingAnchors": 68,
+      "targetPeakChecks": 406,
+      "possiblePairs": 232,
+      "status": "COHERENT_TRANSLATION_ON_TRAINING",
+      "coarseShiftPx": [
+        3,
+        7
+      ],
+      "peakVotes": 24,
+      "runnerUpVotes": 3,
+      "uniqueSupport": 24,
+      "sourceTiles": 11,
+      "medianShiftPx": [
+        3.216673075734093,
+        6.923955524887049
+      ]
+    },
+    "2->1": {
+      "sourceTrainingAnchors": 69,
+      "targetPeakChecks": 455,
+      "possiblePairs": 213,
+      "status": "COHERENT_TRANSLATION_ON_TRAINING",
+      "coarseShiftPx": [
+        4,
+        8
+      ],
+      "peakVotes": 23,
+      "runnerUpVotes": 2,
+      "uniqueSupport": 22,
+      "sourceTiles": 12,
+      "medianShiftPx": [
+        4.181945734849819,
+        7.793691007283712
+      ]
+    },
+    "2->2": {
+      "sourceTrainingAnchors": 0,
+      "targetPeakChecks": 0,
+      "possiblePairs": 0,
+      "status": "NO_TRANSLATION_SUPPORT"
+    }
+  }
+}
