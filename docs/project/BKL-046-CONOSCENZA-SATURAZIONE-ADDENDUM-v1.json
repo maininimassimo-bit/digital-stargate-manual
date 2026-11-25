@@ -1,0 +1,142 @@
+{
+  "protocol": "BKL046_KNOWLEDGE_SATURATION_ADDENDUM_V1",
+  "previousAddendum": {
+    "path": "docs/project/BKL-046-CONOSCENZA-TV4-ADDENDUM-v1.json",
+    "commit": "71e15a32e9233fff792fb393fe2f2c7085751865",
+    "sha256": "daf292ef4513b8d04e293515f34556185cfc4d6b121e6c4c9a075b8cf35b02fc"
+  },
+  "baselineVersion": "1.171",
+  "status": "INTERIM",
+  "criteria": [
+    "SATURATION_BLEND/1",
+    "SATURATION_BLEND/4"
+  ],
+  "evidence": [
+    {
+      "id": "tv4Ceiling",
+      "githubCommit": "be8db31c22505a96d543c806dccd835cd1725b87",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-tv4-saturazione-v1/protocollo.json",
+          "sha256": "0c62e3ad5cfd91e89a296bcbbdcdff915ac6462845bb668044b0f327aa2165f8"
+        },
+        {
+          "path": "docs/project/bkl046-tv4-saturazione-v1/riscontro.json",
+          "sha256": "bf2672b93ac6a29dc918d5bb6bdf6be48bc1ec80861604b9ede68e57c8c32e10"
+        },
+        {
+          "path": "docs/project/bkl046-tv4-saturazione-v1/README.md",
+          "sha256": "11d09726033917dbf9bf632ce4ae02f28d5dea01b6d92e9ef5382c52f6615e77"
+        }
+      ],
+      "archiveSha256": "0ee96d3e0c81559226a93bc87a5bd9674a7c9ab4a9d86dc096aaf842bdae9711",
+      "archiveMembers": 55
+    },
+    {
+      "id": "tv4Heldout",
+      "githubCommit": "895add405b3d83a105220bc1b4c731b1cb8f5869",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-tv4-saturazione-predizione-v1/protocollo.json",
+          "sha256": "b3aa59c378f7ee391181b45153b3f63f1e85956b1993a55685e7c6a13c3140ce"
+        },
+        {
+          "path": "docs/project/bkl046-tv4-saturazione-predizione-v1/riscontro.json",
+          "sha256": "8b08fa4c9fa2ce80f94692d23c56d07ef939fa75ed8592ebe2f18b8d87fbceed"
+        },
+        {
+          "path": "docs/project/bkl046-tv4-saturazione-predizione-v1/README.md",
+          "sha256": "a0d60156d23286af841977802a753c9647838bd8939510f821974df67684ed13"
+        }
+      ],
+      "archiveSha256": "ade813b9de9b3a98fd5e4ab02f4cb87d1b1c16b723012cc42d81f1f9eaeeb90a",
+      "archiveMembers": 45
+    },
+    {
+      "id": "tv4Censor",
+      "githubCommit": "68ecbf6e53f201cc6c9e62b648cf640dbf311806",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-tv4-recupero-controllato-v1/protocollo.json",
+          "sha256": "f3a5c33ac00804f8413cbf87bec8733b7c10586fff4978b1efbfe1ba2883e36c"
+        },
+        {
+          "path": "docs/project/bkl046-tv4-recupero-controllato-v1/riscontro.json",
+          "sha256": "3db184ca392780299351ad9fa2db2f51443437145c2c5e02c921a9eb94d9722a"
+        },
+        {
+          "path": "docs/project/bkl046-tv4-recupero-controllato-v1/README.md",
+          "sha256": "0abcb4267f6e581954fb5afbf539f6deda73bac6f4d1477768b523ffefb1cddd"
+        }
+      ],
+      "archiveSha256": "c97644efa6ab20678bf2cf5db96913f54a9b7773ba727f7b15daf940d37cb175",
+      "archiveMembers": 21
+    },
+    {
+      "id": "acsControls",
+      "githubCommit": "f3761816f8798a1fcf448974859fc5ee90e6c16e",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-go14949-fotometria-profondita-v1/protocollo.json",
+          "sha256": "0c75168ffc2bc67f73491237248f16a661f6d516dc96958366ec4d15daab4c52"
+        },
+        {
+          "path": "docs/project/bkl046-go14949-fotometria-profondita-v1/riscontro.json",
+          "sha256": "d884b39a5a341e20a41ff6ca989285e63b188e21b426458e3ca2abba66b09a80"
+        },
+        {
+          "path": "docs/project/bkl046-go14949-fotometria-profondita-v1/README.md",
+          "sha256": "bf23f65509339cd46921b16c14b315ea459a1d53eec16a3da3171bf673eb150e"
+        }
+      ],
+      "archiveSha256": "ed23c0f446a9d30530074b546e7e56bf3fa01487fba664b64323151819eb28d6",
+      "archiveMembers": 9
+    }
+  ],
+  "decisionRules": [
+    {
+      "rule": "ASSESS_RAW_LOCAL_SATURATION",
+      "evidence": [
+        "tv4Ceiling"
+      ],
+      "input": "Native raw codes or instrument-defined DQ",
+      "action": "Separate isolated boundary maxima from contiguous or substantial clipping in the measurement support",
+      "limit": "The digital limit is not a full-well estimate."
+    },
+    {
+      "rule": "HOLD_OUT_THE_TARGET_DOSE",
+      "evidence": [
+        "tv4Heldout"
+      ],
+      "input": "Shorter exposures and raw codes at the held-out exposure",
+      "action": "Count false positives as well as detected clipped pixels and measure residuals on still observable pixels",
+      "limit": "Model predictions are not reference values beyond the digital ceiling."
+    },
+    {
+      "rule": "SEPARATE_CENSORING_FROM_DETECTOR_RECOVERY",
+      "evidence": [
+        "tv4Censor"
+      ],
+      "input": "Same-session real flats with known original values and declared artificial cut",
+      "action": "Compare with the clipped lower bound and repeat across acquisition configurations",
+      "limit": "A known artificial mask and retained truth do not model physical charge spill or astronomical source morphology."
+    },
+    {
+      "rule": "VALIDATE_GEOMETRY_AND_DQ_BEFORE_RECOMPOSITION",
+      "evidence": [
+        "acsControls"
+      ],
+      "input": "Matched stellar controls and instrument DQ",
+      "action": "Keep quality exclusions, compare common-aperture rates with PAM and report loss of support on each chip",
+      "limit": "The three flagged full-well cores have no qualifying flux estimate in this study."
+    }
+  ],
+  "remaining": [
+    "Physically saturated stellar recovery with an independent photometric reference",
+    "Detector and acquisition domain transfer with uncertainty",
+    "Native process qualification under ARB, RQ and canonical R4"
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0,
+  "finalKnowledgeAccepted": false
+}
