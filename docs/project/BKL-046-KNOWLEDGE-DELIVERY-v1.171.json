@@ -33,8 +33,27 @@
     "publicLocatorContainsMetadataOnly": true,
     "integralTransferVerified": false,
     "finalKnowledgeAccepted": false,
-    "readbackPreparation": {"note":"docs/project/BKL-046-VERIFICA-CONSEGNA-v1.171.md","noteCommit":"96cead15c2715f5b9b7257b33ed17e8070def36f","fixtureCasesPassed":15,"localExactCapsuleVerified":true,"liveAssetReadbackVerified":false,"archiveName":"BKL046-verifica-consegna-v1171-v2-verificabile.zip","archiveSha256":"72aecbb0bd3c4eb2a1087c7588b30929ff46369b3313fb713e9af1d4317ad922","archiveReplayPassed":true},
-    "distributionDecisionCoverage": {"note":"docs/project/BKL-046-CONOSCENZA-COPERTURA-DISTRIBUZIONE-v1.171.md","noteCommit":"bf6da33b5e743f8ee01da09822349236860f2913","unitManifestSha256":"bf8c953f16e73edeba21e72b3c8ce076cf126a92d18f40b5e5854a86751a73c1","archiveSha256":"f807be9a4651d9ebf54d56ff6f724f36c7921d5f6305ba7ac588fb3d0715ac11","embeddedUnits":2712,"outerUnits":241,"fixtureCases":16,"actualApproved":0,"actualDecisionVerified":false},
+    "readbackPreparation": {
+      "note": "docs/project/BKL-046-VERIFICA-CONSEGNA-v1.171.md",
+      "noteCommit": "96cead15c2715f5b9b7257b33ed17e8070def36f",
+      "fixtureCasesPassed": 15,
+      "localExactCapsuleVerified": true,
+      "liveAssetReadbackVerified": false,
+      "archiveName": "BKL046-verifica-consegna-v1171-v2-verificabile.zip",
+      "archiveSha256": "72aecbb0bd3c4eb2a1087c7588b30929ff46369b3313fb713e9af1d4317ad922",
+      "archiveReplayPassed": true
+    },
+    "distributionDecisionCoverage": {
+      "note": "docs/project/BKL-046-CONOSCENZA-COPERTURA-DISTRIBUZIONE-v1.171.md",
+      "noteCommit": "bf6da33b5e743f8ee01da09822349236860f2913",
+      "unitManifestSha256": "bf8c953f16e73edeba21e72b3c8ce076cf126a92d18f40b5e5854a86751a73c1",
+      "archiveSha256": "f807be9a4651d9ebf54d56ff6f724f36c7921d5f6305ba7ac588fb3d0715ac11",
+      "embeddedUnits": 2712,
+      "outerUnits": 241,
+      "fixtureCases": 16,
+      "actualApproved": 0,
+      "actualDecisionVerified": false
+    },
     "requiredEvidence": [
       "distribution-scope-approval",
       "actual-github-object-identity",
@@ -109,7 +128,16 @@
     "verifiedParentLinks": 180,
     "localReadbackComplete": true,
     "fullLocalReconciliationSha256": "50dd96ea2c5543aa5b29079d8167d77d8c4ac712093f7027457b2132a85ce11b",
-    "carrierReadbackCorroboration": {"note":"docs/project/BKL-046-STORICO-RILETTURA-CONTENITORI.md","noteCommit":"4e7ee7a502743e478a7ea7132ff1912850e9eeac","versionsReread":45,"bytesReread":63599156359,"historicalInventoryConcordant":181,"historicalInventorySha256":"e2b5b0abfbe9ab57537a8ffeba91d7614917f7e7a49f3a6679f41a926d0d7e10","archiveSha256":"1fea5288391b21245f6bdac7cd88a830467fdbc97ba8aa7af0016eced4b5fe41","remoteReadbackVerified":false},
+    "carrierReadbackCorroboration": {
+      "note": "docs/project/BKL-046-STORICO-RILETTURA-CONTENITORI.md",
+      "noteCommit": "4e7ee7a502743e478a7ea7132ff1912850e9eeac",
+      "versionsReread": 45,
+      "bytesReread": 63599156359,
+      "historicalInventoryConcordant": 181,
+      "historicalInventorySha256": "e2b5b0abfbe9ab57537a8ffeba91d7614917f7e7a49f3a6679f41a926d0d7e10",
+      "archiveSha256": "1fea5288391b21245f6bdac7cd88a830467fdbc97ba8aa7af0016eced4b5fe41",
+      "remoteReadbackVerified": false
+    },
     "fullLocalArchiveSha256": "a67755496a863e49d2578b4270f3b216c71f724eac2caf84644960f09754d804"
   },
   "registeredStudyDependencies": {
@@ -332,8 +360,365 @@
     }
   },
   "studySupplements": [
-    {"axis":"FILTER_COLOR/3","status":"OPEN_SCIENTIFIC_SCOPE","empiricalBayerApertureColor":{"path":"docs/project/BKL-046-BAYER-COLORE-APERTURA.md","documentCommitSha":"03e0c3ab27bdaa79976fae4d4c5fc55aa98f8e88","documentSha256":"8a86feba0aa6296e5849d0cfeb67c79915f816dec91cbcbba6fa03890e450d40","receiptSha256":"34881bf55161e630b2b1e1cc9aa230fdf615decdf14f7cd9d044bf417256edbc","testStars":61,"scientificClosures":0,"status":"EMPIRICAL_APERTURE_COLOR_CORRECTION_DOES_NOT_TRANSFER_RELIABLY"},"empiricalBayerAperturePlateau":{"path":"docs/project/BKL-046-BAYER-STABILITA-APERTURA.md","documentCommitSha":"45a7bb335a18db77987fffae85380295148ff910","documentSha256":"9d62978964e4122ce9bc073816472bbe427f26a96b25c8f44d0d1dd616acd9ff","receiptSha256":"90108af854ee1673e9e65130bbeb1df5755f8be680a97a445b95fc46dfae679d","stars":126,"fullJointPasses":10,"scientificClosures":0,"status":"FINITE_APERTURE_REFERENCE_NOT_STABLE_ACROSS_FIELDS_AND_BACKGROUND_MODELS"},"gaiaDr3IC1805":{"path":"docs/project/BKL-046-IC1805-GAIA-ASSOCIAZIONI.md","documentCommitSha":"5df8757f5a522725dc5be85cbe417c3ba59fba20","documentSha256":"6205659559712502da5fc5179aa678136e3c42388dff7a60b00f4b48c77cb7ea","associationReceiptSha256":"e205be51911ba9d4ea5a8132c0ec2dc2133f5049049e02da0f0531be75912071","colorReceiptSha256":"57498643d2aa8da59c854e11e613646373a76b53af8eb93a1cc45109a3fd8062","archiveSha256":"bce57d8c83d698e783b7845f903eb877716206aa22d0858d57981d3861630bea","holdoutPairs":66,"colorHeldOutStars":21,"scientificClosures":0,"status":"IC1805_GAIA_MATCH_PASSED_APERTURE_COLOR_COVARIATE_FIELD_LIMITED"},"gaiaDr3CrossField":{"path":"docs/project/BKL-046-GAIA-TRASFERIMENTO-COLORE-BAYER.md","documentCommitSha":"8240ee16c967c31f0a31a3115c6a855818dce1fb","documentSha256":"55fbabb3caa846ea2fe9524452123dd183822fac8135a49fd52793b96296bfce","m8PlateSha256":"b4d9d1ee43b8c707383b0884dbb2b577abb145696c1c05c447c98d337819c254","m8IsolatedPairsSha256":"a2d46c85c9695bf71f7402eafea55434040785e66e3bfe42b7297e931f6db0bb","transferReceiptSha256":"a1675aa38ee773464e549bff59970cc45c016d35d19669f5e442b9ba2511370a","archiveSha256":"fe612e6a41ee3659c7765fd67deb3e4978f799e14bd82d6051215f82485f5011","originalAstrometricControlPassed":false,"isolatedPairs":42,"scientificClosures":0,"status":"CROSS_FIELD_GAIA_COLOR_CORRECTION_NOT_QUALIFIED"},"gaiaSpatialSensitivity":{"path":"docs/project/BKL-046-GAIA-BAYER-SENSIBILITA-SPAZIALE.md","documentCommitSha":"777cd9906660090e5dcdf6e60773bfaea57e77a4","documentSha256":"c133e3f5065481935dccb7816b19413b557590046a628ed396951d83c1d864cc","sensitivitySha256":"030d1288d38d63c3dc90cb1b65ef97ed665dc413b06e49c735bf1a201db2eb6b","xpInventorySha256":"3a0672169b9981b3104c67ab8f64f7211c9b68d727e7374e059c534a23cc05cd","archiveSha256":"b3eb78521343ddc3fe8a6fdf7d4c83ab97fc09e4d85749f12985209b050d3df2","sharedColorSupport":37,"xpContinuousCandidates":81,"scientificClosures":0,"status":"APERTURE_COLOR_TAIL_IMPROVEMENT_WITH_PERSISTENT_MEDIAN_BIAS"},"gavoXpBayerLinear":{"path":"docs/project/BKL-046-GAVO-XP-COLORE-BAYER-LINEARE.md","documentCommitSha":"1c27ee23c01b86714771d4313e82885213a2495c","documentSha256":"108d2a82308982ec3fe65fd8d9ef90132cfb6d14210af4111bce81c689939da5","receiptSha256":"a7f6cf854bd974f6eda3f37efbb3908897f1fdae394b52cab12273452aaeca08","archiveSha256":"46592722196059b2decc2620a119980772d52e91f98caea7fe1a6492479f8e4f","verifiedSpectra":81,"heldOutIC1805":9,"heldOutM8M20":19,"scientificClosures":0,"status":"XP_SPECTRA_VERIFIED_BAYER_COLOR_SENSITIVE_TO_SYNTHETIC_BAND_CHOICE"},"documentedOpticalResponse":{"path":"docs/project/BKL-046-BAYER-RISPOSTE-OTTICHE.md","documentCommitSha":"873225667a9b0b5f04c068a688c42f499576f762","documentSha256":"0111887b5e9d7f0975a5fcdb81bffff804407a3ec586ef05849bbc57c600dcc3","receiptSha256":"829812223d0e6076ec419f77c425574ae54436fd4cb76440162845ac15699ab9","archiveSha256":"651f2c41e7225550c99084ddb75a6db675464e0c9eade6d84c282e08e7640519","m8Filter":"Optolong L-Pro","heldOutIC1805":9,"heldOutM8M20":19,"scientificClosures":0,"status":"OPTICAL_COMPONENTS_IDENTIFIED_SYSTEM_RESPONSE_NOT_QUALIFIED"},"atmosphericExtinctionSensitivity":{"path":"docs/project/BKL-046-BAYER-ESTINZIONE-ATMOSFERICA.md","documentCommitSha":"d2f7f10422af2d9c4dc19cd60d730efcda02647d","documentSha256":"5221e4a53b2e3969a33406d37f912b85ed4ea3e9dcfa0bc8568eb6ea14b94be7","receiptSha256":"b00a2152ec5481ab1b381121331c2e664b1c14be0b79c275b7a7cb23a6c8e718","archiveSha256":"5107045af2b9ebd214084bdbe27eea43173c95ffefe605b25e069456b2b87f82","m8NativeHeadersAudited":15,"m8MaxErrorP90ChangeMagnitude":0.012,"scientificClosures":0,"status":"ATMOSPHERIC_REFERENCE_SENSITIVITY_MEASURED_ACTUAL_CONDITIONS_UNVERIFIED"},"gaiaApertureBackgroundHeldout":{"path":"docs/project/BKL-046-BAYER-RAGGIO-FONDO-LOCALE.md","documentCommitSha":"c919b07b767f506204344cbefc646c4757837ab0","documentSha256":"f8e0c041d6537ecb714dce830f7b03cf141485d8aee1a4883eb0a939482d7c31","receiptSha256":"e76f51c22e86c71078deafed0a51ee46b90d75c3a3ebbc387d7d695d42ef98fe","archiveSha256":"af54707b42f7b0ef6cba0b7a2adf09ed840e1dcfe73b7f6ff8875651581f4fae","heldOutIC1805":9,"heldOutM8M20":19,"improvedBothCalibrationsCases":0,"scientificClosures":0,"status":"LOCAL_BACKGROUND_SENSITIVITY_LARGE_NO_HELDOUT_IMPROVEMENT_QUALIFIED"},"m8GaiaSkyMaskControls":{"path":"docs/project/BKL-046-M8-FONDO-MASCHERA-GAIA.md","documentCommitSha":"b59eaa2e7f5df8e67c52b92b30d059a11d512313","documentSha256":"a0755d31db3ff986af071742537e6bf82aa2c8a78fd87902b3481c35777d4af6","primaryReceiptSha256":"6c7a0bf10054191ca2a2dc316571ea2612f3b531cb41c78daba5f3751d99ed75","exploratoryReceiptSha256":"79b9f5799f237451019aba33ca4bd2f59af31c6fd9235447e13b4114f83b0faf","archiveSha256":"61e14406c0e4c1e4f8851f086c65309243ba4504da30f3264a589beb9ed72f89","gaiaNeighborsCatalogSize":9225,"heldOutPrimary":9,"heldOutExploratory":19,"scientificClosures":0,"status":"EXPLORATORY_PLANAR_BACKGROUND_IMPROVEMENT_PRIMARY_APERTURE_NOT_QUALIFIED"},"m8PsfBlendInjection":{"path":"docs/project/BKL-046-M8-SEPARAZIONE-PSF-INIEZIONI.md","documentCommitSha":"834c09dffd3015067f9f7d26ce832365465bf072","documentSha256":"7fb5718621844b731ac14a6e6d224028da983f6a0fc314e44f51defdb43bc47d","receiptSha256":"1cf6f1b055a9ad2b45ed80d7cfc0b294f957f3621a2592d39d2bb6608058f2d8","archiveSha256":"cf3efefd8c04e357d46bf9704cd7b973f09f65e294b0d7964df5c69c01aa84d6","heldOutStars":19,"evaluatedInjections":170,"scientificClosures":0,"status":"PSF_BLEND_CONTROL_RECOVERS_INJECTED_SIGNAL_REAL_COLOR_WORSENS"},"m8EmpiricalPsfAndBackground":{"path":"docs/project/BKL-046-M8-PSF-EMPIRICA-FONDO.md","documentCommitSha":"5156c54d6ff387a5a2973aabd2af02503f099cc1","documentSha256":"24f25666ce3f62cebc67cdca5a1c228e4430d8b915441be561390911e7ae3a1a","receiptSha256":"3ecf8e80873f0ddef41693aad987aac7f339db2b6e7abfaa7543a4060b7d86db","archiveSha256":"aa0c431a49733edae40c702eefa3547c39cd34bcd4c429d9f24c47e820db0e57","heldOutStars":19,"empiricalTemplateTrainingStars":15,"scientificClosures":0,"status":"EMPIRICAL_PSF_IMPROVES_PARAMETRIC_CONTROL_APERTURE_STILL_LOWER_COLOR_ERROR"}},
-    {"axis":"CFA_DITHER_DRIZZLE/2","status":"OPEN_SCIENTIFIC_SCOPE","empiricalTwoPosePhase":{"path":"docs/project/BKL-046-NGC5986-FASE-DUE-POSE.md","documentCommitSha":"9bea101b2c0cdf498574c2a6e5c0765c41491ff1","documentSha256":"a5d27395a3c478b772d4efa192fb2dc9f25678265f8e0f7d795c2a9271ee256a","receiptSha256":"a1921e693456ae6e24895cf51e26d0c0bfddb8983fad9d2b6f7acd7da1d14771","candidatePairs":117,"scientificClosures":0,"status":"REGISTRATION_ERROR_REDUCES_CONDITIONAL_DETECTOR_PHASE_SEPARATION"},"sameScaleReconstruction":{"path":"docs/project/BKL-046-NGC5986-RICOSTRUZIONE-SCALA-COMUNE.md","documentCommitSha":"8a99f537b789fc44dca1b5d66772dd660b19b08a","documentSha256":"e77c8bef154ba2f3dcb408777691712616aade6f9147e7093d8889cb13e5175b","receiptSha256":"a5d277ad3ae0ea9ef75a00186b5d08671b66fad05ae79135782dfd4a115084e8","eligiblePairs":109,"scientificClosures":0,"status":"SHARED_MASK_SAME_SCALE_P90_EFFECT_DIFFERS_BY_CHIP"},"phaseBasedDropSelection":{"path":"docs/project/BKL-046-NGC5986-FASE-SCELTA-IMPRONTA.md","documentCommitSha":"94c9286c637a507907efa686801e46d07fea8a73","documentSha256":"85d2069f3f77de6660ad15b9e288e2d7bea7964aa439f2a3b110dc0dabf8bd30","receiptSha256":"10c7f2add8e3bda980502b3f4f712bf5c7c295b0cba3edb3bf1bd50b9e6e8a5d","eligiblePairs":109,"informativeWithinTilePairs":27,"scientificClosures":0,"status":"PHASE_RULE_ADDS_NO_HELDOUT_SELECTION_GAIN"},"empiricalBayerPhase":{"path":"docs/project/BKL-046-M8-M20-FASE-BAYER.md","documentCommitSha":"54439fe1ff343dc2ff781c70c09ddf3e922cca06","documentSha256":"aa6507de07eb1474a0c8d6570ce33687b52a1c612ec00acd2c2f34e9aea10ff4","receiptSha256":"28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59","rawExposures":15,"allTilesParityCells":3,"scientificClosures":0,"status":"REAL_BAYER_POSES_THREE_PARITY_CELLS_WITH_TILE_AGREEMENT"},"empiricalBayerRegionalGeometry":{"path":"docs/project/BKL-046-M8-M20-REGISTRAZIONE-REGIONALE.md","documentCommitSha":"9cfc8cae909f427252ce721bbbd738d4b9c8bb17","documentSha256":"8909582052e4cba615226149090e97a1a0ad5f475a31688ca1ee22e0ab5819d1","receiptSha256":"ff52f15b3fb8d1475971c8686438d1c0636ee5849da9fc0728bbdce45c9500ec","testedExposures":14,"affinePasses":10,"scientificClosures":0,"status":"AFFINE_REDUCES_HELDOUT_RESIDUALS_FOUR_EXPOSURES_ABOVE_TARGET"},"empiricalBayerStellarGeometry":{"path":"docs/project/BKL-046-M8-M20-REGISTRAZIONE-STELLARE.md","documentCommitSha":"ec51f58dd46406878b8cb5fad567cb0516f239e7","documentSha256":"ad43b1980ec8f4085e216397e2d62f000c7ae54b34267516d26c8f81e38e995d","receiptSha256":"29aec711f14fc71aae8936575243eec70cdca8271d53e95f7e6a35f3eef151d7","testedExposures":14,"completeStars":54,"affinePasses":1,"scientificClosures":0,"status":"HELDOUT_STELLAR_AFFINE_FAILS_TARGET_IN_13_OF_14_EXPOSURES"},"empiricalBayerStellarRefit":{"path":"docs/project/BKL-046-M8-M20-FIT-STELLARE-ROBUSTO.md","documentCommitSha":"09bf0e276456c0310e2a05bbaa72d23e2a1699e6","documentSha256":"d62019653b92bb5f10b273e5d91cc747bee6ef196a4ccad809ebbaf8b04232ef","receiptSha256":"aaadaabe9c31bd79f56b539c1c4d5301b017f87a75b9c193e753404742592e77","trainingStars":49,"testStars":54,"huberPasses":3,"scientificClosures":0,"status":"HUBER_STELLAR_AFFINE_REDUCES_RESIDUALS_TARGET_UNMET_IN_11_OF_14"},"empiricalBayerCalibrationSplit":{"path":"docs/project/BKL-046-M8-M20-CALIBRATORI-BAYER.md","documentCommitSha":"88bf0535d632ec83b872ebfebbf1f5a14d18f239","documentSha256":"fe5cb8fb3c6351f7abaa997b54cfe1ac3bbdf6e10c7c24e3cd5b152e44a94af9","receiptSha256":"65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc","verifiedFits":60,"sampledTiles":9,"scientificClosures":0,"status":"MATCHED_CAPTURE_METADATA_FLAT_SPLIT_P90_ABOVE_ONE_PERCENT"},"empiricalBayerCalibrationPropagation":{"path":"docs/project/BKL-046-M8-M20-FLUSSO-CALIBRAZIONE.md","documentCommitSha":"6bbcf0552ac0fc06a1f247081a9560bb1e21173b","documentSha256":"6f7a8d4613384b937d89a9f1f086764ee3eb8fe3ec83e80c571d0b685aa0d184","receiptSha256":"82198e82179b377b50d5a6af55bdeb76423583e9d3f8cbf5abd2423b3ade9420","parityApertures":3023,"scientificClosures":0,"status":"BAYER_APERTURE_FLUX_SPLIT_P90_EXCEEDS_ONE_PERCENT_FOR_ALL_PARITIES"},"empiricalBayerReconstruction":{"path":"docs/project/BKL-046-M8-M20-RICOSTRUZIONE-BAYER.md","documentCommitSha":"1a7aeb0e5804e4b2174e0c2cfcf00971a218fb77","documentSha256":"99e39d81939b41f4579542ad2dcd5fe1fc1fa193e62c8386c2ce9c30ebe8dfa4","receiptSha256":"bd9719bbe544a4edeaaa64e881bf6f5871034f839887c614a1b1845521e8e458","stars":54,"rawExposures":14,"scientificClosures":0,"status":"CALIBRATION_FLUX_P90_ABOVE_ONE_PERCENT_AFTER_MATCHED_SCALE_DROPS"},"empiricalBayerInterpolation":{"path":"docs/project/BKL-046-M8-M20-INTERPOLAZIONE-BAYER.md","documentCommitSha":"6662d7401351b385fbda7bbb4acc2d8efb2b6620","documentSha256":"1f5add74674e595be7c2274aa4bf8a24be137358635fd06ca2fdebbc64a7e795","receiptSha256":"ba65d831ffd5906e9945455689632dbf0994a06a0fcbba26e2d9ec7aa735a979","stars":54,"rawExposures":14,"scientificClosures":0,"status":"BILINEAR_REDUCES_SPLIT_PIXEL_DISPERSION_AND_BROADENS_PROFILES"},"empiricalBayerApertureCovariance":{"path":"docs/project/BKL-046-M8-M20-COVARIANZA-APERTURA.md","documentCommitSha":"27bca5d4c65486e0ec72eb6983b7709948f6a94a","documentSha256":"75a3bbd8c3c807332b9974572739f9d3e1327a8ca02564cc1eb7065ec37c911a","receiptSha256":"218ffd7a24a87da24798e76ee6165f212b96029394a11cbcb89ff6425690b15b","parityWindows":1715,"scientificClosures":0,"status":"BILINEAR_APERTURE_DISPERSION_REDUCED_DIAGONAL_MODEL_UNDERESTIMATES"},"empiricalBayerMatchedRadius":{"path":"docs/project/BKL-046-M8-M20-RAGGIO-COMUNE.md","documentCommitSha":"7cfb1ea53226b9b99f64a034b126afbb3495a7f6","documentSha256":"024f8ea6c7440d1998860d08ff130f4388e9c2db7c28edbff75a5aca9bc2a356","receiptSha256":"6b0af19c12ba9719eb0fb9fc5320b66fac1bbad790593559e7e49b40d96a87f3","maxTestRadiusP90Percent":0.767779793,"scientificClosures":0,"status":"AT_MATCHED_STELLAR_RADIUS_BILINEAR_ADVANTAGE_DEPENDS_ON_PARITY_AND_APERTURE"},"independentBayerField":{"path":"docs/project/BKL-046-IC1805-CAMPO-BAYER.md","documentCommitSha":"f5dbd46bca4a8a98c3b9b2ef94385f5e9ee64287","documentSha256":"0800aeaae3e673564492327bdc317de059bdc806f0566bdc888d9aac1f377b1f","receiptSha256":"582a3adcdeb5509b4c4e9434b252726cf0473c86fdd6da272a69aa4358bc705f","verifiedCR2":84,"rawLights":39,"nonReferencePassing":0,"scientificClosures":0,"status":"SECOND_REAL_BAYER_FIELD_CAPTURE_VERIFIED_REGION_ALIGNMENT_FAILED"},"independentBayerStellarRegistration":{"path":"docs/project/BKL-046-IC1805-REGISTRAZIONE-STELLARE.md","documentCommitSha":"a409f2972b1e2c41e75319c98cbae332609b9f1e","documentSha256":"56c0df816fb3d91aa451d4caa77e0b630e8b1b63d0aff8ad7b6c15c2b1c8b1a6","receiptSha256":"eb36f255976fbef04ea8dd3acc20201153f20bec4dff1b3fe80c723e8d7768ae","evaluatedRawLights":38,"passes":0,"pooledP90NativePx":0.814194357,"scientificClosures":0,"status":"INDEPENDENT_BAYER_STELLAR_MATCHES_RECOVERED_TARGET_UNMET_FOR_ALL_POSES"},"independentBayerRawCentroids":{"path":"docs/project/BKL-046-IC1805-CENTROIDI-RAW.md","documentCommitSha":"3a156e52af86ca5c976816dd48ca077bfa254b88","documentSha256":"2db7f46fe16812ef7979dedbbb41eb2ab708cbde7d4075cb53c247503034863a","receiptSha256":"a7d0c4d58cb59d6898aa597e3faf94cbbc40b94871dcb41f8f54028586d812a9","evaluatedRawLights":38,"passes":0,"pooledP90NativePx":0.462645014,"scientificClosures":0,"status":"RAW_GREEN_CENTROIDS_REDUCE_RESIDUALS_TARGET_UNMET_ON_SECOND_FIELD"},"independentBayerQuadraticGeometry":{"path":"docs/project/BKL-046-IC1805-GEOMETRIA-QUADRATICA.md","documentCommitSha":"c37d736fd882a51e3759bcfac286084f9649468c","documentSha256":"b44d6bbb5f14ed033980dfdfc9511fc67d42e3dd7736dae776cc37d35cb39b5c","receiptSha256":"0b46f893cf58fd7476a57e03911569f9172285aa7d4c1aef1dd26a85304ddf3a","evaluatedRawLights":38,"passes":0,"pooledP90NativePx":0.465737306,"scientificClosures":0,"status":"QUADRATIC_FIT_DOES_NOT_REDUCE_POOLED_HELDOUT_RESIDUAL"},"independentBayerMaskedOffset":{"path":"docs/project/BKL-046-IC1805-OFFSET-MASCHERATO.md","documentCommitSha":"9f5fc314af02f8f882b04d49408543a273d50ad6","documentSha256":"46198363b41aa740d63ba1a7f7e22f1769af48838946393967497a08dedb1f30","receiptSha256":"ca08cc5d050431c856d229a71f954ac0e805663a323ce69b8e0c750e5b6dd4f3","flatFrames":17,"matchedDarkFlatMissing":true,"scientificClosures":0,"status":"FLAT_RESPONSE_INSENSITIVE_TO_SCALAR_OFFSET_MATCHED_DARK_FLAT_STILL_MISSING"},"independentBayerPhaseUnderRegistrationError":{"path":"docs/project/BKL-046-IC1805-COPERTURA-FASE.md","documentCommitSha":"7bb7e5141742fdf8fadbaad08787effa4f820651","documentSha256":"9e8d04ddbf2f227c61d0479da074297db1ad833253a9eeac20de7fb53b3c96a0","receiptSha256":"e3d06b80ec65272d117e251c43d212c8eae01740c121d98472edd3cbba208c5b","eligibleStars":72,"passesFullWidthAtObservedRadius":32,"passesSmallWidthAtObservedRadius":2,"scientificClosures":0,"status":"NARROW_DROPS_LOSE_PHASE_SUPPORT_UNDER_MEASURED_SCALE_STRESS"},"independentBayerExploratoryReconstruction":{"path":"docs/project/BKL-046-IC1805-RICOSTRUZIONE-CFA.md","documentCommitSha":"ff5d1e8932b14bd53d8e7ab52f54d6970d286e68","documentSha256":"113320212ad1f2b23c8d10df58e5a42ddfe807e91ed6f48b1072f7f21fb30307","receiptSha256":"4e5ecceb27ae9ac713b9ce8cf1c09316bd6f15634b08faeadcac22eb7a367844","stars":72,"rawExposures":38,"patches":2021,"scientificClosures":0,"status":"EXPLORATORY_SECOND_FIELD_RECONSTRUCTION_WITH_UNQUALIFIED_GEOMETRY_AND_FLATS"},"independentBayerMatchedRadius":{"path":"docs/project/BKL-046-IC1805-RAGGIO-COMUNE.md","documentCommitSha":"92c15b8940e6ff50b5efb52b8aba5b0c1b943deb","documentSha256":"291941dadd9ab07e0f64337ccf74e24631e32229f0bb249f03d5fc9cde729b49","receiptSha256":"b0a7b9c3ffdd72d8127c6d741243791275083ccc0d811885a1711c90b96c76e4","trainingStars":40,"testStars":32,"scientificClosures":0,"status":"SECOND_FIELD_NO_SYSTEMATIC_BILINEAR_GAIN_AT_MATCHED_STELLAR_RADIUS"}},
+    {
+      "axis": "FILTER_COLOR/3",
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "empiricalBayerApertureColor": {
+        "path": "docs/project/BKL-046-BAYER-COLORE-APERTURA.md",
+        "documentCommitSha": "03e0c3ab27bdaa79976fae4d4c5fc55aa98f8e88",
+        "documentSha256": "8a86feba0aa6296e5849d0cfeb67c79915f816dec91cbcbba6fa03890e450d40",
+        "receiptSha256": "34881bf55161e630b2b1e1cc9aa230fdf615decdf14f7cd9d044bf417256edbc",
+        "testStars": 61,
+        "scientificClosures": 0,
+        "status": "EMPIRICAL_APERTURE_COLOR_CORRECTION_DOES_NOT_TRANSFER_RELIABLY"
+      },
+      "empiricalBayerAperturePlateau": {
+        "path": "docs/project/BKL-046-BAYER-STABILITA-APERTURA.md",
+        "documentCommitSha": "45a7bb335a18db77987fffae85380295148ff910",
+        "documentSha256": "9d62978964e4122ce9bc073816472bbe427f26a96b25c8f44d0d1dd616acd9ff",
+        "receiptSha256": "90108af854ee1673e9e65130bbeb1df5755f8be680a97a445b95fc46dfae679d",
+        "stars": 126,
+        "fullJointPasses": 10,
+        "scientificClosures": 0,
+        "status": "FINITE_APERTURE_REFERENCE_NOT_STABLE_ACROSS_FIELDS_AND_BACKGROUND_MODELS"
+      },
+      "gaiaDr3IC1805": {
+        "path": "docs/project/BKL-046-IC1805-GAIA-ASSOCIAZIONI.md",
+        "documentCommitSha": "5df8757f5a522725dc5be85cbe417c3ba59fba20",
+        "documentSha256": "6205659559712502da5fc5179aa678136e3c42388dff7a60b00f4b48c77cb7ea",
+        "associationReceiptSha256": "e205be51911ba9d4ea5a8132c0ec2dc2133f5049049e02da0f0531be75912071",
+        "colorReceiptSha256": "57498643d2aa8da59c854e11e613646373a76b53af8eb93a1cc45109a3fd8062",
+        "archiveSha256": "bce57d8c83d698e783b7845f903eb877716206aa22d0858d57981d3861630bea",
+        "holdoutPairs": 66,
+        "colorHeldOutStars": 21,
+        "scientificClosures": 0,
+        "status": "IC1805_GAIA_MATCH_PASSED_APERTURE_COLOR_COVARIATE_FIELD_LIMITED"
+      },
+      "gaiaDr3CrossField": {
+        "path": "docs/project/BKL-046-GAIA-TRASFERIMENTO-COLORE-BAYER.md",
+        "documentCommitSha": "8240ee16c967c31f0a31a3115c6a855818dce1fb",
+        "documentSha256": "55fbabb3caa846ea2fe9524452123dd183822fac8135a49fd52793b96296bfce",
+        "m8PlateSha256": "b4d9d1ee43b8c707383b0884dbb2b577abb145696c1c05c447c98d337819c254",
+        "m8IsolatedPairsSha256": "a2d46c85c9695bf71f7402eafea55434040785e66e3bfe42b7297e931f6db0bb",
+        "transferReceiptSha256": "a1675aa38ee773464e549bff59970cc45c016d35d19669f5e442b9ba2511370a",
+        "archiveSha256": "fe612e6a41ee3659c7765fd67deb3e4978f799e14bd82d6051215f82485f5011",
+        "originalAstrometricControlPassed": false,
+        "isolatedPairs": 42,
+        "scientificClosures": 0,
+        "status": "CROSS_FIELD_GAIA_COLOR_CORRECTION_NOT_QUALIFIED"
+      },
+      "gaiaSpatialSensitivity": {
+        "path": "docs/project/BKL-046-GAIA-BAYER-SENSIBILITA-SPAZIALE.md",
+        "documentCommitSha": "777cd9906660090e5dcdf6e60773bfaea57e77a4",
+        "documentSha256": "c133e3f5065481935dccb7816b19413b557590046a628ed396951d83c1d864cc",
+        "sensitivitySha256": "030d1288d38d63c3dc90cb1b65ef97ed665dc413b06e49c735bf1a201db2eb6b",
+        "xpInventorySha256": "3a0672169b9981b3104c67ab8f64f7211c9b68d727e7374e059c534a23cc05cd",
+        "archiveSha256": "b3eb78521343ddc3fe8a6fdf7d4c83ab97fc09e4d85749f12985209b050d3df2",
+        "sharedColorSupport": 37,
+        "xpContinuousCandidates": 81,
+        "scientificClosures": 0,
+        "status": "APERTURE_COLOR_TAIL_IMPROVEMENT_WITH_PERSISTENT_MEDIAN_BIAS"
+      },
+      "gavoXpBayerLinear": {
+        "path": "docs/project/BKL-046-GAVO-XP-COLORE-BAYER-LINEARE.md",
+        "documentCommitSha": "1c27ee23c01b86714771d4313e82885213a2495c",
+        "documentSha256": "108d2a82308982ec3fe65fd8d9ef90132cfb6d14210af4111bce81c689939da5",
+        "receiptSha256": "a7f6cf854bd974f6eda3f37efbb3908897f1fdae394b52cab12273452aaeca08",
+        "archiveSha256": "46592722196059b2decc2620a119980772d52e91f98caea7fe1a6492479f8e4f",
+        "verifiedSpectra": 81,
+        "heldOutIC1805": 9,
+        "heldOutM8M20": 19,
+        "scientificClosures": 0,
+        "status": "XP_SPECTRA_VERIFIED_BAYER_COLOR_SENSITIVE_TO_SYNTHETIC_BAND_CHOICE"
+      },
+      "documentedOpticalResponse": {
+        "path": "docs/project/BKL-046-BAYER-RISPOSTE-OTTICHE.md",
+        "documentCommitSha": "873225667a9b0b5f04c068a688c42f499576f762",
+        "documentSha256": "0111887b5e9d7f0975a5fcdb81bffff804407a3ec586ef05849bbc57c600dcc3",
+        "receiptSha256": "829812223d0e6076ec419f77c425574ae54436fd4cb76440162845ac15699ab9",
+        "archiveSha256": "651f2c41e7225550c99084ddb75a6db675464e0c9eade6d84c282e08e7640519",
+        "m8Filter": "Optolong L-Pro",
+        "heldOutIC1805": 9,
+        "heldOutM8M20": 19,
+        "scientificClosures": 0,
+        "status": "OPTICAL_COMPONENTS_IDENTIFIED_SYSTEM_RESPONSE_NOT_QUALIFIED"
+      },
+      "atmosphericExtinctionSensitivity": {
+        "path": "docs/project/BKL-046-BAYER-ESTINZIONE-ATMOSFERICA.md",
+        "documentCommitSha": "d2f7f10422af2d9c4dc19cd60d730efcda02647d",
+        "documentSha256": "5221e4a53b2e3969a33406d37f912b85ed4ea3e9dcfa0bc8568eb6ea14b94be7",
+        "receiptSha256": "b00a2152ec5481ab1b381121331c2e664b1c14be0b79c275b7a7cb23a6c8e718",
+        "archiveSha256": "5107045af2b9ebd214084bdbe27eea43173c95ffefe605b25e069456b2b87f82",
+        "m8NativeHeadersAudited": 15,
+        "m8MaxErrorP90ChangeMagnitude": 0.012,
+        "scientificClosures": 0,
+        "status": "ATMOSPHERIC_REFERENCE_SENSITIVITY_MEASURED_ACTUAL_CONDITIONS_UNVERIFIED"
+      },
+      "gaiaApertureBackgroundHeldout": {
+        "path": "docs/project/BKL-046-BAYER-RAGGIO-FONDO-LOCALE.md",
+        "documentCommitSha": "c919b07b767f506204344cbefc646c4757837ab0",
+        "documentSha256": "f8e0c041d6537ecb714dce830f7b03cf141485d8aee1a4883eb0a939482d7c31",
+        "receiptSha256": "e76f51c22e86c71078deafed0a51ee46b90d75c3a3ebbc387d7d695d42ef98fe",
+        "archiveSha256": "af54707b42f7b0ef6cba0b7a2adf09ed840e1dcfe73b7f6ff8875651581f4fae",
+        "heldOutIC1805": 9,
+        "heldOutM8M20": 19,
+        "improvedBothCalibrationsCases": 0,
+        "scientificClosures": 0,
+        "status": "LOCAL_BACKGROUND_SENSITIVITY_LARGE_NO_HELDOUT_IMPROVEMENT_QUALIFIED"
+      },
+      "m8GaiaSkyMaskControls": {
+        "path": "docs/project/BKL-046-M8-FONDO-MASCHERA-GAIA.md",
+        "documentCommitSha": "b59eaa2e7f5df8e67c52b92b30d059a11d512313",
+        "documentSha256": "a0755d31db3ff986af071742537e6bf82aa2c8a78fd87902b3481c35777d4af6",
+        "primaryReceiptSha256": "6c7a0bf10054191ca2a2dc316571ea2612f3b531cb41c78daba5f3751d99ed75",
+        "exploratoryReceiptSha256": "79b9f5799f237451019aba33ca4bd2f59af31c6fd9235447e13b4114f83b0faf",
+        "archiveSha256": "61e14406c0e4c1e4f8851f086c65309243ba4504da30f3264a589beb9ed72f89",
+        "gaiaNeighborsCatalogSize": 9225,
+        "heldOutPrimary": 9,
+        "heldOutExploratory": 19,
+        "scientificClosures": 0,
+        "status": "EXPLORATORY_PLANAR_BACKGROUND_IMPROVEMENT_PRIMARY_APERTURE_NOT_QUALIFIED"
+      },
+      "m8PsfBlendInjection": {
+        "path": "docs/project/BKL-046-M8-SEPARAZIONE-PSF-INIEZIONI.md",
+        "documentCommitSha": "834c09dffd3015067f9f7d26ce832365465bf072",
+        "documentSha256": "7fb5718621844b731ac14a6e6d224028da983f6a0fc314e44f51defdb43bc47d",
+        "receiptSha256": "1cf6f1b055a9ad2b45ed80d7cfc0b294f957f3621a2592d39d2bb6608058f2d8",
+        "archiveSha256": "cf3efefd8c04e357d46bf9704cd7b973f09f65e294b0d7964df5c69c01aa84d6",
+        "heldOutStars": 19,
+        "evaluatedInjections": 170,
+        "scientificClosures": 0,
+        "status": "PSF_BLEND_CONTROL_RECOVERS_INJECTED_SIGNAL_REAL_COLOR_WORSENS"
+      },
+      "m8EmpiricalPsfAndBackground": {
+        "path": "docs/project/BKL-046-M8-PSF-EMPIRICA-FONDO.md",
+        "documentCommitSha": "5156c54d6ff387a5a2973aabd2af02503f099cc1",
+        "documentSha256": "24f25666ce3f62cebc67cdca5a1c228e4430d8b915441be561390911e7ae3a1a",
+        "receiptSha256": "3ecf8e80873f0ddef41693aad987aac7f339db2b6e7abfaa7543a4060b7d86db",
+        "archiveSha256": "aa0c431a49733edae40c702eefa3547c39cd34bcd4c429d9f24c47e820db0e57",
+        "heldOutStars": 19,
+        "empiricalTemplateTrainingStars": 15,
+        "scientificClosures": 0,
+        "status": "EMPIRICAL_PSF_IMPROVES_PARAMETRIC_CONTROL_APERTURE_STILL_LOWER_COLOR_ERROR"
+      }
+    },
+    {
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "empiricalTwoPosePhase": {
+        "path": "docs/project/BKL-046-NGC5986-FASE-DUE-POSE.md",
+        "documentCommitSha": "9bea101b2c0cdf498574c2a6e5c0765c41491ff1",
+        "documentSha256": "a5d27395a3c478b772d4efa192fb2dc9f25678265f8e0f7d795c2a9271ee256a",
+        "receiptSha256": "a1921e693456ae6e24895cf51e26d0c0bfddb8983fad9d2b6f7acd7da1d14771",
+        "candidatePairs": 117,
+        "scientificClosures": 0,
+        "status": "REGISTRATION_ERROR_REDUCES_CONDITIONAL_DETECTOR_PHASE_SEPARATION"
+      },
+      "sameScaleReconstruction": {
+        "path": "docs/project/BKL-046-NGC5986-RICOSTRUZIONE-SCALA-COMUNE.md",
+        "documentCommitSha": "8a99f537b789fc44dca1b5d66772dd660b19b08a",
+        "documentSha256": "e77c8bef154ba2f3dcb408777691712616aade6f9147e7093d8889cb13e5175b",
+        "receiptSha256": "a5d277ad3ae0ea9ef75a00186b5d08671b66fad05ae79135782dfd4a115084e8",
+        "eligiblePairs": 109,
+        "scientificClosures": 0,
+        "status": "SHARED_MASK_SAME_SCALE_P90_EFFECT_DIFFERS_BY_CHIP"
+      },
+      "phaseBasedDropSelection": {
+        "path": "docs/project/BKL-046-NGC5986-FASE-SCELTA-IMPRONTA.md",
+        "documentCommitSha": "94c9286c637a507907efa686801e46d07fea8a73",
+        "documentSha256": "85d2069f3f77de6660ad15b9e288e2d7bea7964aa439f2a3b110dc0dabf8bd30",
+        "receiptSha256": "10c7f2add8e3bda980502b3f4f712bf5c7c295b0cba3edb3bf1bd50b9e6e8a5d",
+        "eligiblePairs": 109,
+        "informativeWithinTilePairs": 27,
+        "scientificClosures": 0,
+        "status": "PHASE_RULE_ADDS_NO_HELDOUT_SELECTION_GAIN"
+      },
+      "empiricalBayerPhase": {
+        "path": "docs/project/BKL-046-M8-M20-FASE-BAYER.md",
+        "documentCommitSha": "54439fe1ff343dc2ff781c70c09ddf3e922cca06",
+        "documentSha256": "aa6507de07eb1474a0c8d6570ce33687b52a1c612ec00acd2c2f34e9aea10ff4",
+        "receiptSha256": "28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59",
+        "rawExposures": 15,
+        "allTilesParityCells": 3,
+        "scientificClosures": 0,
+        "status": "REAL_BAYER_POSES_THREE_PARITY_CELLS_WITH_TILE_AGREEMENT"
+      },
+      "empiricalBayerRegionalGeometry": {
+        "path": "docs/project/BKL-046-M8-M20-REGISTRAZIONE-REGIONALE.md",
+        "documentCommitSha": "9cfc8cae909f427252ce721bbbd738d4b9c8bb17",
+        "documentSha256": "8909582052e4cba615226149090e97a1a0ad5f475a31688ca1ee22e0ab5819d1",
+        "receiptSha256": "ff52f15b3fb8d1475971c8686438d1c0636ee5849da9fc0728bbdce45c9500ec",
+        "testedExposures": 14,
+        "affinePasses": 10,
+        "scientificClosures": 0,
+        "status": "AFFINE_REDUCES_HELDOUT_RESIDUALS_FOUR_EXPOSURES_ABOVE_TARGET"
+      },
+      "empiricalBayerStellarGeometry": {
+        "path": "docs/project/BKL-046-M8-M20-REGISTRAZIONE-STELLARE.md",
+        "documentCommitSha": "ec51f58dd46406878b8cb5fad567cb0516f239e7",
+        "documentSha256": "ad43b1980ec8f4085e216397e2d62f000c7ae54b34267516d26c8f81e38e995d",
+        "receiptSha256": "29aec711f14fc71aae8936575243eec70cdca8271d53e95f7e6a35f3eef151d7",
+        "testedExposures": 14,
+        "completeStars": 54,
+        "affinePasses": 1,
+        "scientificClosures": 0,
+        "status": "HELDOUT_STELLAR_AFFINE_FAILS_TARGET_IN_13_OF_14_EXPOSURES"
+      },
+      "empiricalBayerStellarRefit": {
+        "path": "docs/project/BKL-046-M8-M20-FIT-STELLARE-ROBUSTO.md",
+        "documentCommitSha": "09bf0e276456c0310e2a05bbaa72d23e2a1699e6",
+        "documentSha256": "d62019653b92bb5f10b273e5d91cc747bee6ef196a4ccad809ebbaf8b04232ef",
+        "receiptSha256": "aaadaabe9c31bd79f56b539c1c4d5301b017f87a75b9c193e753404742592e77",
+        "trainingStars": 49,
+        "testStars": 54,
+        "huberPasses": 3,
+        "scientificClosures": 0,
+        "status": "HUBER_STELLAR_AFFINE_REDUCES_RESIDUALS_TARGET_UNMET_IN_11_OF_14"
+      },
+      "empiricalBayerCalibrationSplit": {
+        "path": "docs/project/BKL-046-M8-M20-CALIBRATORI-BAYER.md",
+        "documentCommitSha": "88bf0535d632ec83b872ebfebbf1f5a14d18f239",
+        "documentSha256": "fe5cb8fb3c6351f7abaa997b54cfe1ac3bbdf6e10c7c24e3cd5b152e44a94af9",
+        "receiptSha256": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+        "verifiedFits": 60,
+        "sampledTiles": 9,
+        "scientificClosures": 0,
+        "status": "MATCHED_CAPTURE_METADATA_FLAT_SPLIT_P90_ABOVE_ONE_PERCENT"
+      },
+      "empiricalBayerCalibrationPropagation": {
+        "path": "docs/project/BKL-046-M8-M20-FLUSSO-CALIBRAZIONE.md",
+        "documentCommitSha": "6bbcf0552ac0fc06a1f247081a9560bb1e21173b",
+        "documentSha256": "6f7a8d4613384b937d89a9f1f086764ee3eb8fe3ec83e80c571d0b685aa0d184",
+        "receiptSha256": "82198e82179b377b50d5a6af55bdeb76423583e9d3f8cbf5abd2423b3ade9420",
+        "parityApertures": 3023,
+        "scientificClosures": 0,
+        "status": "BAYER_APERTURE_FLUX_SPLIT_P90_EXCEEDS_ONE_PERCENT_FOR_ALL_PARITIES"
+      },
+      "empiricalBayerReconstruction": {
+        "path": "docs/project/BKL-046-M8-M20-RICOSTRUZIONE-BAYER.md",
+        "documentCommitSha": "1a7aeb0e5804e4b2174e0c2cfcf00971a218fb77",
+        "documentSha256": "99e39d81939b41f4579542ad2dcd5fe1fc1fa193e62c8386c2ce9c30ebe8dfa4",
+        "receiptSha256": "bd9719bbe544a4edeaaa64e881bf6f5871034f839887c614a1b1845521e8e458",
+        "stars": 54,
+        "rawExposures": 14,
+        "scientificClosures": 0,
+        "status": "CALIBRATION_FLUX_P90_ABOVE_ONE_PERCENT_AFTER_MATCHED_SCALE_DROPS"
+      },
+      "empiricalBayerInterpolation": {
+        "path": "docs/project/BKL-046-M8-M20-INTERPOLAZIONE-BAYER.md",
+        "documentCommitSha": "6662d7401351b385fbda7bbb4acc2d8efb2b6620",
+        "documentSha256": "1f5add74674e595be7c2274aa4bf8a24be137358635fd06ca2fdebbc64a7e795",
+        "receiptSha256": "ba65d831ffd5906e9945455689632dbf0994a06a0fcbba26e2d9ec7aa735a979",
+        "stars": 54,
+        "rawExposures": 14,
+        "scientificClosures": 0,
+        "status": "BILINEAR_REDUCES_SPLIT_PIXEL_DISPERSION_AND_BROADENS_PROFILES"
+      },
+      "empiricalBayerApertureCovariance": {
+        "path": "docs/project/BKL-046-M8-M20-COVARIANZA-APERTURA.md",
+        "documentCommitSha": "27bca5d4c65486e0ec72eb6983b7709948f6a94a",
+        "documentSha256": "75a3bbd8c3c807332b9974572739f9d3e1327a8ca02564cc1eb7065ec37c911a",
+        "receiptSha256": "218ffd7a24a87da24798e76ee6165f212b96029394a11cbcb89ff6425690b15b",
+        "parityWindows": 1715,
+        "scientificClosures": 0,
+        "status": "BILINEAR_APERTURE_DISPERSION_REDUCED_DIAGONAL_MODEL_UNDERESTIMATES"
+      },
+      "empiricalBayerMatchedRadius": {
+        "path": "docs/project/BKL-046-M8-M20-RAGGIO-COMUNE.md",
+        "documentCommitSha": "7cfb1ea53226b9b99f64a034b126afbb3495a7f6",
+        "documentSha256": "024f8ea6c7440d1998860d08ff130f4388e9c2db7c28edbff75a5aca9bc2a356",
+        "receiptSha256": "6b0af19c12ba9719eb0fb9fc5320b66fac1bbad790593559e7e49b40d96a87f3",
+        "maxTestRadiusP90Percent": 0.767779793,
+        "scientificClosures": 0,
+        "status": "AT_MATCHED_STELLAR_RADIUS_BILINEAR_ADVANTAGE_DEPENDS_ON_PARITY_AND_APERTURE"
+      },
+      "independentBayerField": {
+        "path": "docs/project/BKL-046-IC1805-CAMPO-BAYER.md",
+        "documentCommitSha": "f5dbd46bca4a8a98c3b9b2ef94385f5e9ee64287",
+        "documentSha256": "0800aeaae3e673564492327bdc317de059bdc806f0566bdc888d9aac1f377b1f",
+        "receiptSha256": "582a3adcdeb5509b4c4e9434b252726cf0473c86fdd6da272a69aa4358bc705f",
+        "verifiedCR2": 84,
+        "rawLights": 39,
+        "nonReferencePassing": 0,
+        "scientificClosures": 0,
+        "status": "SECOND_REAL_BAYER_FIELD_CAPTURE_VERIFIED_REGION_ALIGNMENT_FAILED"
+      },
+      "independentBayerStellarRegistration": {
+        "path": "docs/project/BKL-046-IC1805-REGISTRAZIONE-STELLARE.md",
+        "documentCommitSha": "a409f2972b1e2c41e75319c98cbae332609b9f1e",
+        "documentSha256": "56c0df816fb3d91aa451d4caa77e0b630e8b1b63d0aff8ad7b6c15c2b1c8b1a6",
+        "receiptSha256": "eb36f255976fbef04ea8dd3acc20201153f20bec4dff1b3fe80c723e8d7768ae",
+        "evaluatedRawLights": 38,
+        "passes": 0,
+        "pooledP90NativePx": 0.814194357,
+        "scientificClosures": 0,
+        "status": "INDEPENDENT_BAYER_STELLAR_MATCHES_RECOVERED_TARGET_UNMET_FOR_ALL_POSES"
+      },
+      "independentBayerRawCentroids": {
+        "path": "docs/project/BKL-046-IC1805-CENTROIDI-RAW.md",
+        "documentCommitSha": "3a156e52af86ca5c976816dd48ca077bfa254b88",
+        "documentSha256": "2db7f46fe16812ef7979dedbbb41eb2ab708cbde7d4075cb53c247503034863a",
+        "receiptSha256": "a7d0c4d58cb59d6898aa597e3faf94cbbc40b94871dcb41f8f54028586d812a9",
+        "evaluatedRawLights": 38,
+        "passes": 0,
+        "pooledP90NativePx": 0.462645014,
+        "scientificClosures": 0,
+        "status": "RAW_GREEN_CENTROIDS_REDUCE_RESIDUALS_TARGET_UNMET_ON_SECOND_FIELD"
+      },
+      "independentBayerQuadraticGeometry": {
+        "path": "docs/project/BKL-046-IC1805-GEOMETRIA-QUADRATICA.md",
+        "documentCommitSha": "c37d736fd882a51e3759bcfac286084f9649468c",
+        "documentSha256": "b44d6bbb5f14ed033980dfdfc9511fc67d42e3dd7736dae776cc37d35cb39b5c",
+        "receiptSha256": "0b46f893cf58fd7476a57e03911569f9172285aa7d4c1aef1dd26a85304ddf3a",
+        "evaluatedRawLights": 38,
+        "passes": 0,
+        "pooledP90NativePx": 0.465737306,
+        "scientificClosures": 0,
+        "status": "QUADRATIC_FIT_DOES_NOT_REDUCE_POOLED_HELDOUT_RESIDUAL"
+      },
+      "independentBayerMaskedOffset": {
+        "path": "docs/project/BKL-046-IC1805-OFFSET-MASCHERATO.md",
+        "documentCommitSha": "9f5fc314af02f8f882b04d49408543a273d50ad6",
+        "documentSha256": "46198363b41aa740d63ba1a7f7e22f1769af48838946393967497a08dedb1f30",
+        "receiptSha256": "ca08cc5d050431c856d229a71f954ac0e805663a323ce69b8e0c750e5b6dd4f3",
+        "flatFrames": 17,
+        "matchedDarkFlatMissing": true,
+        "scientificClosures": 0,
+        "status": "FLAT_RESPONSE_INSENSITIVE_TO_SCALAR_OFFSET_MATCHED_DARK_FLAT_STILL_MISSING"
+      },
+      "independentBayerPhaseUnderRegistrationError": {
+        "path": "docs/project/BKL-046-IC1805-COPERTURA-FASE.md",
+        "documentCommitSha": "7bb7e5141742fdf8fadbaad08787effa4f820651",
+        "documentSha256": "9e8d04ddbf2f227c61d0479da074297db1ad833253a9eeac20de7fb53b3c96a0",
+        "receiptSha256": "e3d06b80ec65272d117e251c43d212c8eae01740c121d98472edd3cbba208c5b",
+        "eligibleStars": 72,
+        "passesFullWidthAtObservedRadius": 32,
+        "passesSmallWidthAtObservedRadius": 2,
+        "scientificClosures": 0,
+        "status": "NARROW_DROPS_LOSE_PHASE_SUPPORT_UNDER_MEASURED_SCALE_STRESS"
+      },
+      "independentBayerExploratoryReconstruction": {
+        "path": "docs/project/BKL-046-IC1805-RICOSTRUZIONE-CFA.md",
+        "documentCommitSha": "ff5d1e8932b14bd53d8e7ab52f54d6970d286e68",
+        "documentSha256": "113320212ad1f2b23c8d10df58e5a42ddfe807e91ed6f48b1072f7f21fb30307",
+        "receiptSha256": "4e5ecceb27ae9ac713b9ce8cf1c09316bd6f15634b08faeadcac22eb7a367844",
+        "stars": 72,
+        "rawExposures": 38,
+        "patches": 2021,
+        "scientificClosures": 0,
+        "status": "EXPLORATORY_SECOND_FIELD_RECONSTRUCTION_WITH_UNQUALIFIED_GEOMETRY_AND_FLATS"
+      },
+      "independentBayerMatchedRadius": {
+        "path": "docs/project/BKL-046-IC1805-RAGGIO-COMUNE.md",
+        "documentCommitSha": "92c15b8940e6ff50b5efb52b8aba5b0c1b943deb",
+        "documentSha256": "291941dadd9ab07e0f64337ccf74e24631e32229f0bb249f03d5fc9cde729b49",
+        "receiptSha256": "b0a7b9c3ffdd72d8127c6d741243791275083ccc0d811885a1711c90b96c76e4",
+        "trainingStars": 40,
+        "testStars": 32,
+        "scientificClosures": 0,
+        "status": "SECOND_FIELD_NO_SYSTEMATIC_BILINEAR_GAIN_AT_MATCHED_STELLAR_RADIUS"
+      }
+    },
     {
       "axis": "NOISE_FLUX/2",
       "status": "OPEN",
@@ -348,30 +733,30 @@
         ],
         "scientificClosures": 0,
         "status": "HELDOUT_APERTURE_VARIANCE_REQUIRES_SPATIAL_AND_ORIENTATION_CONTROL",
-      "resamplingCovarianceTransfer": {
-        "path": "docs/project/BKL-046-TV4-COVARIANZA-RICAMPIONAMENTO-RED.md",
-        "documentCommitSha": "e26315b13fb593a0eb09427dd32dec8a7c7fc491",
-        "documentSha256": "b441ef6adde75c8e145aa2fe1b1e061d5dbaebea6c1fb3743aa49dca4e1c4db9",
-        "receiptSha256": "14091d3c521efa0479a939b4b6c30298d4e38027655c79a45cb4b109910f428e",
-        "predictions": 90,
-        "relatedAxes": [
-          "NOISE_FLUX/3"
-        ],
-        "scientificClosures": 0,
-        "status": "COVARIANCE_PROPAGATION_IMPROVES_HELDOUT_RESAMPLING_WITH_HORIZONTAL_RESIDUALS",
-        "signalDependentCovariance": {
-          "path": "docs/project/BKL-046-TV4-COVARIANZA-DIPENDENTE-SEGNALE.md",
-          "documentCommitSha": "305ac92e0c143ee2a9f443cd942145fdc14da932",
-          "documentSha256": "52847251df6d789d6cc708e480e5e7cb8d28e71a541781fed0f00f486b79b569",
-          "receiptSha256": "920891932cbea7b7e8f1a5acf5ee7a47b4bdc53629cd635e69f8358d1cdba116",
-          "pairedPredictions": 90,
+        "resamplingCovarianceTransfer": {
+          "path": "docs/project/BKL-046-TV4-COVARIANZA-RICAMPIONAMENTO-RED.md",
+          "documentCommitSha": "e26315b13fb593a0eb09427dd32dec8a7c7fc491",
+          "documentSha256": "b441ef6adde75c8e145aa2fe1b1e061d5dbaebea6c1fb3743aa49dca4e1c4db9",
+          "receiptSha256": "14091d3c521efa0479a939b4b6c30298d4e38027655c79a45cb4b109910f428e",
+          "predictions": 90,
           "relatedAxes": [
             "NOISE_FLUX/3"
           ],
           "scientificClosures": 0,
-          "status": "LAG_AFFINE_COVARIANCE_IMPROVES_HIGH_SIGNAL_HORIZONTAL_BUT_NOT_LOW_SIGNAL"
+          "status": "COVARIANCE_PROPAGATION_IMPROVES_HELDOUT_RESAMPLING_WITH_HORIZONTAL_RESIDUALS",
+          "signalDependentCovariance": {
+            "path": "docs/project/BKL-046-TV4-COVARIANZA-DIPENDENTE-SEGNALE.md",
+            "documentCommitSha": "305ac92e0c143ee2a9f443cd942145fdc14da932",
+            "documentSha256": "52847251df6d789d6cc708e480e5e7cb8d28e71a541781fed0f00f486b79b569",
+            "receiptSha256": "920891932cbea7b7e8f1a5acf5ee7a47b4bdc53629cd635e69f8358d1cdba116",
+            "pairedPredictions": 90,
+            "relatedAxes": [
+              "NOISE_FLUX/3"
+            ],
+            "scientificClosures": 0,
+            "status": "LAG_AFFINE_COVARIANCE_IMPROVES_HIGH_SIGNAL_HORIZONTAL_BUT_NOT_LOW_SIGNAL"
+          }
         }
-      }
       }
     },
     {
@@ -392,7 +777,16 @@
     },
     {
       "axis": "DIFFUSE_BACKGROUND/2",
-      "darkReferenceSpatialTransfer": {"path":"docs/project/BKL-046-IC1805-FONDO-DARK.md","documentCommitSha":"80f8bbdf0ac63f438b19f37d2f8c7c6022eba011","documentSha256":"8bdb8515aff80a80e05dadffdff8fcec923c2b412ae8831f877c0d1ca51e0f0f","receiptSha256":"e967c80397d3ec42e2211114386646323021a7c8292f2fa84d44d2d539841b43","darkFrames":17,"heldOutWindows":36,"scientificClosures":0,"status":"DARK_SURFACE_FIT_DOES_NOT_CONSISTENTLY_IMPROVE_HELDOUT_RESIDUALS"},
+      "darkReferenceSpatialTransfer": {
+        "path": "docs/project/BKL-046-IC1805-FONDO-DARK.md",
+        "documentCommitSha": "80f8bbdf0ac63f438b19f37d2f8c7c6022eba011",
+        "documentSha256": "8bdb8515aff80a80e05dadffdff8fcec923c2b412ae8831f877c0d1ca51e0f0f",
+        "receiptSha256": "e967c80397d3ec42e2211114386646323021a7c8292f2fa84d44d2d539841b43",
+        "darkFrames": 17,
+        "heldOutWindows": 36,
+        "scientificClosures": 0,
+        "status": "DARK_SURFACE_FIT_DOES_NOT_CONSISTENTLY_IMPROVE_HELDOUT_RESIDUALS"
+      },
       "status": "OPEN",
       "redFlatSpatialResponse": {
         "path": "docs/project/BKL-046-TV4-FLAT-RISPOSTA-SPAZIALE.md",
@@ -404,37 +798,37 @@
         "blocksPerFrame": 1280,
         "scientificClosures": 0,
         "status": "JOINT_SPATIAL_OFFSET_AND_EFFECTIVE_RESPONSE_IMPROVE_HELDOUT_TV4_FLATS",
-      "matchedBiasComparison": {
-        "path": "docs/project/BKL-046-TV4-BIAS-RED-CONFRONTO.md",
-        "documentCommitSha": "65e401ea1f47c64daa82daff9cfb57c60e6a4774",
-        "documentSha256": "14093aa9f1871677e7f77548b8fe835155dd9da4c15dce86f2ff00b0f346b300",
-        "receiptSha256": "2b573af900a37c3c951b07801f38e9d5b591048e47d54e9704a19be30f2474d5",
-        "biasFrames": 4,
-        "matchedOldResults": 28,
-        "totalResults": 42,
-        "scientificClosures": 0,
-        "status": "SIMILAR_SPATIAL_BIAS_PATTERN_REQUIRES_COMMON_OFFSET_ON_TV4_FLATS",
-        "zeroCommandCheck": {
-          "path": "docs/project/BKL-046-TV4-FLAT-COMANDO-ZERO.md",
-          "documentCommitSha": "f7912a8c3341bfa9ac601745efa55ca7ea7cf7eb",
-          "documentSha256": "1f0d4536267f09fbd5fc069d8f378c7a828a6888abf30244dbf93c7b339120f8",
-          "receiptSha256": "3d11929dc4a54c08e69499ba228f96938d7e5e5268702a385be684f9be55ba2a",
-          "zeroCommandFrames": 8,
-          "matchedOldResults": 42,
+        "matchedBiasComparison": {
+          "path": "docs/project/BKL-046-TV4-BIAS-RED-CONFRONTO.md",
+          "documentCommitSha": "65e401ea1f47c64daa82daff9cfb57c60e6a4774",
+          "documentSha256": "14093aa9f1871677e7f77548b8fe835155dd9da4c15dce86f2ff00b0f346b300",
+          "receiptSha256": "2b573af900a37c3c951b07801f38e9d5b591048e47d54e9704a19be30f2474d5",
+          "biasFrames": 4,
+          "matchedOldResults": 28,
+          "totalResults": 42,
           "scientificClosures": 0,
-          "status": "MEASURED_ILLUMINATED_ZERO_COMMAND_DIFFERS_FROM_BIAS_AND_POSITIVE_FLAT_EXTRAPOLATION"
-        },
-        "overscanCheck": {
-          "path": "docs/project/BKL-046-TV4-OVERSCAN-RED.md",
-          "documentCommitSha": "a7f1e42c9c42bd1460dbaa8224af6da5296de45d",
-          "documentSha256": "7e87380af0e94862adfe5f7aa166f72b6add5057f76c890f803cc4f8cb165836",
-          "receiptSha256": "2689ccc779e4c01ef843027534981f32a1659b4f89e8f54d73d84a1908498d4b",
-          "overscanModelResults": 14,
-          "matchedOldResults": 42,
-          "scientificClosures": 0,
-          "status": "SERIAL_AND_PARALLEL_CORRECTIONS_FAIL_TO_REPRODUCE_THE_COMMON_OFFSET"
+          "status": "SIMILAR_SPATIAL_BIAS_PATTERN_REQUIRES_COMMON_OFFSET_ON_TV4_FLATS",
+          "zeroCommandCheck": {
+            "path": "docs/project/BKL-046-TV4-FLAT-COMANDO-ZERO.md",
+            "documentCommitSha": "f7912a8c3341bfa9ac601745efa55ca7ea7cf7eb",
+            "documentSha256": "1f0d4536267f09fbd5fc069d8f378c7a828a6888abf30244dbf93c7b339120f8",
+            "receiptSha256": "3d11929dc4a54c08e69499ba228f96938d7e5e5268702a385be684f9be55ba2a",
+            "zeroCommandFrames": 8,
+            "matchedOldResults": 42,
+            "scientificClosures": 0,
+            "status": "MEASURED_ILLUMINATED_ZERO_COMMAND_DIFFERS_FROM_BIAS_AND_POSITIVE_FLAT_EXTRAPOLATION"
+          },
+          "overscanCheck": {
+            "path": "docs/project/BKL-046-TV4-OVERSCAN-RED.md",
+            "documentCommitSha": "a7f1e42c9c42bd1460dbaa8224af6da5296de45d",
+            "documentSha256": "7e87380af0e94862adfe5f7aa166f72b6add5057f76c890f803cc4f8cb165836",
+            "receiptSha256": "2689ccc779e4c01ef843027534981f32a1659b4f89e8f54d73d84a1908498d4b",
+            "overscanModelResults": 14,
+            "matchedOldResults": 42,
+            "scientificClosures": 0,
+            "status": "SERIAL_AND_PARALLEL_CORRECTIONS_FAIL_TO_REPRODUCE_THE_COMMON_OFFSET"
+          }
         }
-      }
       }
     },
     {
@@ -448,36 +842,36 @@
         "records": 1280,
         "scientificClosures": 0,
         "status": "DIGITAL_REFERENCE_CONTAMINATION_INDUCES_LOCAL_ERRORS_AT_EDGE_AND_CENTER",
-      "agreementVeto": {
-        "path": "docs/project/BKL-046-TV4-ASTENSIONE-RIFERIMENTI.md",
-        "documentCommitSha": "27fcd5d2909b6f4e393c0023dad6ae597e001d32",
-        "documentSha256": "849a0a0d0946a55cb9ad5b2ce0f0370c308720d158e1e9f4b1d8686db9902fb8",
-        "receiptSha256": "2483067d28b832b69405ec62bcb96c538f987516f484b030b67f5f04fe3fdd6c",
-        "records": 640,
-        "scientificClosures": 0,
-        "status": "REFERENCE_AGREEMENT_ALONE_MISSES_COMMON_CONTAMINATION",
-        "calibratedCommonGuard": {
-          "path": "docs/project/BKL-046-TV4-RIFERIMENTO-CALIBRAZIONE.md",
-          "documentCommitSha": "94609ab289fb4d20765781815e39e23ea19205fa",
-          "documentSha256": "1d0ca973c2ea39f3ae10f488debfea9fbd7c61c93156fadf76b65469b7879f85",
-          "receiptSha256": "d50ac586a6ea38ae745c75417ca51a99544614a2bb7436ee658a729818fcd9a2",
+        "agreementVeto": {
+          "path": "docs/project/BKL-046-TV4-ASTENSIONE-RIFERIMENTI.md",
+          "documentCommitSha": "27fcd5d2909b6f4e393c0023dad6ae597e001d32",
+          "documentSha256": "849a0a0d0946a55cb9ad5b2ce0f0370c308720d158e1e9f4b1d8686db9902fb8",
+          "receiptSha256": "2483067d28b832b69405ec62bcb96c538f987516f484b030b67f5f04fe3fdd6c",
           "records": 640,
           "scientificClosures": 0,
-          "status": "CALIBRATION_REFERENCE_REDUCES_COMMON_CONTAMINATION_MISSES_WITH_RESIDUALS",
-          "otherAcquisitionTransfer": {
-            "path": "docs/project/BKL-046-TV4-TRASFERIMENTO-ACQUISIZIONI.md",
-            "documentCommitSha": "c9f4e843b3ad6fba9ec591d0e7c311dd91a27965",
-            "documentSha256": "cf4d633d9f9fb16f4491460b63012f606b7ef45f9aff4ab0fd9b9d7f2504ea4e",
-            "receiptSha256": "b8434df013e50957c814e5117a0f42397168f7da86eb25e787850e63c4d259c4",
-            "records": 960,
-            "digitallyInjected": true,
-            "distinctExposures": 6,
-            "differentSessionGroups": 2,
+          "status": "REFERENCE_AGREEMENT_ALONE_MISSES_COMMON_CONTAMINATION",
+          "calibratedCommonGuard": {
+            "path": "docs/project/BKL-046-TV4-RIFERIMENTO-CALIBRAZIONE.md",
+            "documentCommitSha": "94609ab289fb4d20765781815e39e23ea19205fa",
+            "documentSha256": "1d0ca973c2ea39f3ae10f488debfea9fbd7c61c93156fadf76b65469b7879f85",
+            "receiptSha256": "d50ac586a6ea38ae745c75417ca51a99544614a2bb7436ee658a729818fcd9a2",
+            "records": 640,
             "scientificClosures": 0,
-            "status": "PARTIAL_TRANSFER_WITH_RESIDUALS_ON_OTHER_TV4_ACQUISITIONS"
+            "status": "CALIBRATION_REFERENCE_REDUCES_COMMON_CONTAMINATION_MISSES_WITH_RESIDUALS",
+            "otherAcquisitionTransfer": {
+              "path": "docs/project/BKL-046-TV4-TRASFERIMENTO-ACQUISIZIONI.md",
+              "documentCommitSha": "c9f4e843b3ad6fba9ec591d0e7c311dd91a27965",
+              "documentSha256": "cf4d633d9f9fb16f4491460b63012f606b7ef45f9aff4ab0fd9b9d7f2504ea4e",
+              "receiptSha256": "b8434df013e50957c814e5117a0f42397168f7da86eb25e787850e63c4d259c4",
+              "records": 960,
+              "digitallyInjected": true,
+              "distinctExposures": 6,
+              "differentSessionGroups": 2,
+              "scientificClosures": 0,
+              "status": "PARTIAL_TRANSFER_WITH_RESIDUALS_ON_OTHER_TV4_ACQUISITIONS"
+            }
           }
         }
-      }
       }
     },
     {
@@ -587,10 +981,46 @@
     },
     {
       "axis": "DIFFUSE_BACKGROUND/1",
-      "diffuseExternalBackgroundAnchors": {"path":"docs/project/BKL-046-FONDO-RIFERIMENTI-INDIPENDENTI.md","documentCommitSha":"086fb6378a179c2dd90ff07ad9fcdb7bb35ad9ff","documentSha256":"d9d474c5459264c9b3a321129df581b652ea5af7b706db893a6d66e66148388f","receiptSha256":"dc8082b08d3b09d53f87e5dbd363e2350d5e44af6db73a75b2e35ff71a94c115","fields":2,"simulatedReferences":true,"scientificClosures":0,"status":"SPREAD_EXTERNAL_REFERENCES_IMPROVE_MODE_CONDITIONING_IN_SIMULATION"},
-      "diffuseSkyDetectorIdentifiability": {"path":"docs/project/BKL-046-FONDO-IDENTIFICABILITA.md","documentCommitSha":"346e11956f2d7e655be4dbfe1e3cfe5032d0fb98","documentSha256":"2f8a7a076a31dbc9025b1020d8295186ca99645dace3bbaa2d36057de5fd2519","receiptSha256":"3e802109cb197c89470ee7f7ed2577a17a9a543abe559eec3c0906ca6d085804","fields":2,"scientificClosures":0,"status":"DITHER_DOES_NOT_IDENTIFY_FREE_PER_FRAME_QUADRATIC_SKY_MODES"},
-      "diffuseDataDrivenMask": {"path":"docs/project/BKL-046-M8-M20-MASCHERA-DIFFUSO.md","documentCommitSha":"2a3cf9967c91e39a7096a41dbd8518b427f9e3b2","documentSha256":"a30abadad9d1b1f9eac9130900292b4eca01d2733cfc71616fe145aef1930999","receiptSha256":"219dc1040623a518ede46112be63436942dcda90b6eca3f243bd218a5245a775","injections":729,"blindPasses":20,"blindAbstentions":16,"scientificClosures":0,"status":"BLIND_MASK_MISSES_BROAD_DIFFUSE_WITHOUT_ABSTENTION"},
-      "spatialBackgroundModelSelection": {"path":"docs/project/BKL-046-M8-M20-FONDO-DIFFUSO-CV.md","documentCommitSha":"00f4afcde1f80dc2bd5a3b9006e16027d526188e","documentSha256":"d1ea6b598165bacbe3084ee5949e71db9199f26774760e0a531505db36601870","receiptSha256":"dd866044eedbd523d5a4dda18fb0eb2527fb65936277b94f56ce7525fa263552","injections":729,"combinedPasses":0,"scientificClosures":0,"status":"HELDOUT_BACKGROUND_MODEL_SELECTION_DOES_NOT_PRESERVE_DIFFUSE_INJECTIONS"},
+      "diffuseExternalBackgroundAnchors": {
+        "path": "docs/project/BKL-046-FONDO-RIFERIMENTI-INDIPENDENTI.md",
+        "documentCommitSha": "086fb6378a179c2dd90ff07ad9fcdb7bb35ad9ff",
+        "documentSha256": "d9d474c5459264c9b3a321129df581b652ea5af7b706db893a6d66e66148388f",
+        "receiptSha256": "dc8082b08d3b09d53f87e5dbd363e2350d5e44af6db73a75b2e35ff71a94c115",
+        "fields": 2,
+        "simulatedReferences": true,
+        "scientificClosures": 0,
+        "status": "SPREAD_EXTERNAL_REFERENCES_IMPROVE_MODE_CONDITIONING_IN_SIMULATION"
+      },
+      "diffuseSkyDetectorIdentifiability": {
+        "path": "docs/project/BKL-046-FONDO-IDENTIFICABILITA.md",
+        "documentCommitSha": "346e11956f2d7e655be4dbfe1e3cfe5032d0fb98",
+        "documentSha256": "2f8a7a076a31dbc9025b1020d8295186ca99645dace3bbaa2d36057de5fd2519",
+        "receiptSha256": "3e802109cb197c89470ee7f7ed2577a17a9a543abe559eec3c0906ca6d085804",
+        "fields": 2,
+        "scientificClosures": 0,
+        "status": "DITHER_DOES_NOT_IDENTIFY_FREE_PER_FRAME_QUADRATIC_SKY_MODES"
+      },
+      "diffuseDataDrivenMask": {
+        "path": "docs/project/BKL-046-M8-M20-MASCHERA-DIFFUSO.md",
+        "documentCommitSha": "2a3cf9967c91e39a7096a41dbd8518b427f9e3b2",
+        "documentSha256": "a30abadad9d1b1f9eac9130900292b4eca01d2733cfc71616fe145aef1930999",
+        "receiptSha256": "219dc1040623a518ede46112be63436942dcda90b6eca3f243bd218a5245a775",
+        "injections": 729,
+        "blindPasses": 20,
+        "blindAbstentions": 16,
+        "scientificClosures": 0,
+        "status": "BLIND_MASK_MISSES_BROAD_DIFFUSE_WITHOUT_ABSTENTION"
+      },
+      "spatialBackgroundModelSelection": {
+        "path": "docs/project/BKL-046-M8-M20-FONDO-DIFFUSO-CV.md",
+        "documentCommitSha": "00f4afcde1f80dc2bd5a3b9006e16027d526188e",
+        "documentSha256": "d1ea6b598165bacbe3084ee5949e71db9199f26774760e0a531505db36601870",
+        "receiptSha256": "dd866044eedbd523d5a4dda18fb0eb2527fb65936277b94f56ce7525fa263552",
+        "injections": 729,
+        "combinedPasses": 0,
+        "scientificClosures": 0,
+        "status": "HELDOUT_BACKGROUND_MODEL_SELECTION_DOES_NOT_PRESERVE_DIFFUSE_INJECTIONS"
+      },
       "detectorStripSignalLoss": {
         "path": "docs/project/BKL-046-TV4-SEGNALE-DIFFUSO.md",
         "documentCommitSha": "c28cb66d871090b213fa496e0015e203ecdbd111",
@@ -805,16 +1235,16 @@
               "FILTER_COLOR/3"
             ],
             "status": "MIXED_HELD_OUT_CORE_PIXEL_RESULTS_ON_REAL_DQ_ZERO_SAMPLES",
-          "ditherGapPrediction": {
-            "path": "docs/project/BKL-046-WFC3-P330E-LACUNE-FRA-POSE.md",
-            "documentCommitSha": "261edd0134b94a3be0d1b126fe02abd4e133b979",
-            "documentSha256": "62f0638e5cbbfee09fb4b4b91800a36f8753adabf5002d6832d03bf4654022e6",
-            "receiptSha256": "fc1fe8c5a3348887dc8b9c67e983abf039c7fb1fc468b9ad47e76b59560993cb",
-            "relatedAxes": [
-              "FILTER_COLOR/3"
-            ],
-            "status": "DITHER_GAP_PROXY_REMAINS_ABOVE_TWO_PERCENT_MEDIAN_PEAK_NORMALIZED_RMSE"
-          }
+            "ditherGapPrediction": {
+              "path": "docs/project/BKL-046-WFC3-P330E-LACUNE-FRA-POSE.md",
+              "documentCommitSha": "261edd0134b94a3be0d1b126fe02abd4e133b979",
+              "documentSha256": "62f0638e5cbbfee09fb4b4b91800a36f8753adabf5002d6832d03bf4654022e6",
+              "receiptSha256": "fc1fe8c5a3348887dc8b9c67e983abf039c7fb1fc468b9ad47e76b59560993cb",
+              "relatedAxes": [
+                "FILTER_COLOR/3"
+              ],
+              "status": "DITHER_GAP_PROXY_REMAINS_ABOVE_TWO_PERCENT_MEDIAN_PEAK_NORMALIZED_RMSE"
+            }
           },
           "focusFit": {
             "path": "docs/project/BKL-046-WFC3-P330E-FUOCO-FIT.md",
@@ -825,65 +1255,65 @@
               "FILTER_COLOR/3"
             ],
             "status": "ESTIMATED_FOCUS_REDUCES_SYNTHETIC_MASKED_ERROR_P90_STILL_ABOVE_ONE_PERCENT",
-          "centerAblation": {
-            "path": "docs/project/BKL-046-WFC3-P330E-CENTRATURA.md",
-            "documentCommitSha": "c8de26a889fcf6fe3da9cbfa2fed64125ed3e342",
-            "documentSha256": "cdb76cb2170ae4b0c7914396728e6ba609316f4d49f92e0d933eccaac498e2c9",
-            "receiptSha256": "9e4fc698955b2557cd39289bd0a8df435f8a59ee0efcd4ad546ebcffe7293efe",
-            "relatedAxes": [
-              "FILTER_COLOR/3"
-            ],
-            "status": "CENTER_ABLATION_RESIDUAL_P90_ABOVE_ONE_PERCENT",
-          "focusInterpolation": {
-            "path": "docs/project/BKL-046-WFC3-P330E-INTERPOLAZIONE.md",
-            "documentCommitSha": "6931b92f4f85e663e62abc20bc25a709d3f3beec",
-            "documentSha256": "ffd1c3c8c4ec323f243c80a9b404e7a30d3bc117719c492629336155d4e45d18",
-            "receiptSha256": "04ef0d18a47a0e35b21ca10cfdd4be66d898412e660b773eb6407d0415a2587f",
-            "relatedAxes": [
-              "FILTER_COLOR/3"
-            ],
-            "status": "INTERPOLATED_FOCUS_REDUCES_PAIRED_ERROR_P90_ABOVE_ONE_PERCENT",
-          "focusCenterControls": {
-            "path": "docs/project/BKL-046-WFC3-P330E-DIAGNOSTICA-PSF.md",
-            "documentCommitSha": "56d4d11eccce8f0dc92e2b62581cfcdb446f94de",
-            "documentSha256": "9202ad5c036e95107362d19b8d876467365dcfe01f6cdfa999a752a505ac4ab9",
-            "receiptSha256": "aa0b9bf2a69ac6079a456182d733b6fba99fd3bec4f87260dbfd705787b69385",
-            "relatedAxes": [
-              "FILTER_COLOR/3"
-            ],
-            "status": "EXACT_CENTER_CONTROL_IDENTIFIES_RESIDUAL_F606W",
-          "fineCenterGrid": {
-            "path": "docs/project/BKL-046-WFC3-P330E-CENTRO-FINE.md",
-            "documentCommitSha": "a7b79b883be5410015b61ef46d1bba0b84af7c75",
-            "documentSha256": "1a5debc919d4eb5d31e2ba4ceee41cc91e4432d83561620b4040c63ff9811d99",
-            "receiptSha256": "1efe02abb6d00230235713608c0fbc0999217821489e34a956c953bb215ae23a",
-            "relatedAxes": [
-              "FILTER_COLOR/3"
-            ],
-            "status": "F438W_HIGH_SIGNAL_ONLY_BELOW_ONE_PERCENT_ON_FOUR_SIMULATED_PHASES",
-          "withheldPhases": {
-            "path": "docs/project/BKL-046-WFC3-P330E-FASI-NUOVE.md",
-            "documentCommitSha": "50015edbf5425f683803ab2b636caf3535fa2b2f",
-            "documentSha256": "765087e531c125380aa61be06c1bc1be7c8b7e718c27fe9501ab851ee6e6091a",
-            "receiptSha256": "247afa329fb2a545278cb4786c2639ba8aaf3e7f19cd3137ad9f7c8d170dc698",
-            "relatedAxes": [
-              "FILTER_COLOR/3"
-            ],
-            "status": "NO_BAND_BELOW_ONE_PERCENT_ON_HELD_OUT_MIDPOINT_PHASES"
-          }
-          }
-          }
-          }
-          }
+            "centerAblation": {
+              "path": "docs/project/BKL-046-WFC3-P330E-CENTRATURA.md",
+              "documentCommitSha": "c8de26a889fcf6fe3da9cbfa2fed64125ed3e342",
+              "documentSha256": "cdb76cb2170ae4b0c7914396728e6ba609316f4d49f92e0d933eccaac498e2c9",
+              "receiptSha256": "9e4fc698955b2557cd39289bd0a8df435f8a59ee0efcd4ad546ebcffe7293efe",
+              "relatedAxes": [
+                "FILTER_COLOR/3"
+              ],
+              "status": "CENTER_ABLATION_RESIDUAL_P90_ABOVE_ONE_PERCENT",
+              "focusInterpolation": {
+                "path": "docs/project/BKL-046-WFC3-P330E-INTERPOLAZIONE.md",
+                "documentCommitSha": "6931b92f4f85e663e62abc20bc25a709d3f3beec",
+                "documentSha256": "ffd1c3c8c4ec323f243c80a9b404e7a30d3bc117719c492629336155d4e45d18",
+                "receiptSha256": "04ef0d18a47a0e35b21ca10cfdd4be66d898412e660b773eb6407d0415a2587f",
+                "relatedAxes": [
+                  "FILTER_COLOR/3"
+                ],
+                "status": "INTERPOLATED_FOCUS_REDUCES_PAIRED_ERROR_P90_ABOVE_ONE_PERCENT",
+                "focusCenterControls": {
+                  "path": "docs/project/BKL-046-WFC3-P330E-DIAGNOSTICA-PSF.md",
+                  "documentCommitSha": "56d4d11eccce8f0dc92e2b62581cfcdb446f94de",
+                  "documentSha256": "9202ad5c036e95107362d19b8d876467365dcfe01f6cdfa999a752a505ac4ab9",
+                  "receiptSha256": "aa0b9bf2a69ac6079a456182d733b6fba99fd3bec4f87260dbfd705787b69385",
+                  "relatedAxes": [
+                    "FILTER_COLOR/3"
+                  ],
+                  "status": "EXACT_CENTER_CONTROL_IDENTIFIES_RESIDUAL_F606W",
+                  "fineCenterGrid": {
+                    "path": "docs/project/BKL-046-WFC3-P330E-CENTRO-FINE.md",
+                    "documentCommitSha": "a7b79b883be5410015b61ef46d1bba0b84af7c75",
+                    "documentSha256": "1a5debc919d4eb5d31e2ba4ceee41cc91e4432d83561620b4040c63ff9811d99",
+                    "receiptSha256": "1efe02abb6d00230235713608c0fbc0999217821489e34a956c953bb215ae23a",
+                    "relatedAxes": [
+                      "FILTER_COLOR/3"
+                    ],
+                    "status": "F438W_HIGH_SIGNAL_ONLY_BELOW_ONE_PERCENT_ON_FOUR_SIMULATED_PHASES",
+                    "withheldPhases": {
+                      "path": "docs/project/BKL-046-WFC3-P330E-FASI-NUOVE.md",
+                      "documentCommitSha": "50015edbf5425f683803ab2b636caf3535fa2b2f",
+                      "documentSha256": "765087e531c125380aa61be06c1bc1be7c8b7e718c27fe9501ab851ee6e6091a",
+                      "receiptSha256": "247afa329fb2a545278cb4786c2639ba8aaf3e7f19cd3137ad9f7c8d170dc698",
+                      "relatedAxes": [
+                        "FILTER_COLOR/3"
+                      ],
+                      "status": "NO_BAND_BELOW_ONE_PERCENT_ON_HELD_OUT_MIDPOINT_PHASES"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
   ],
   "residualAccounting": {
-    "localLedger": "rendiconto-VM-v65.json",
-    "ledgerSha256": "063a20017cdbce730509423d1d06ee71a978ae54a29863dc0fcd5312591bbdea",
-    "archiveZipSha256": "73f71e86d1b07890765ad7d2a17d536f19c805ab9b58a36298f151838ea78364",
+    "localLedger": "rendiconto-VM-v66.json",
+    "ledgerSha256": "b75279ad902d84d51e0b3fa6723f78a00a06c76d22a3bea5dc9ca6d4200bd9b3",
+    "archiveZipSha256": "7cd51ace1701dad817066a1f486994021ffa33186179207e8a65b848b8f0da7f",
     "requirements": 4920,
     "criteria": 14521,
     "ownerCriteriaOpen": 19,
@@ -891,23 +1321,23 @@
     "scientificAxesOpen": 25,
     "scientificClosures": 0,
     "publicGitHubObject": "metadata-only",
-    "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V65",
-    "precedingLedgerSha256": "2a6817384f7caf22ba85b6563c86a58eb832ba6195766a40ddeabfdae610cb86",
-    "precedingIndexCommit": "674d3a9f0e0d954f0b33e9fa73b3a68766e3032a",
-    "addedScientificReceipts": 8,
-    "addedReceiptsAcrossAxes": 1,
-    "addedAuxiliaryReceipts": 3,
-    "documentReadbacksVerified": 7,
-    "sourceGitHubHead": "674d3a9f0e0d954f0b33e9fa73b3a68766e3032a",
+    "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V66",
+    "precedingLedgerSha256": "063a20017cdbce730509423d1d06ee71a978ae54a29863dc0fcd5312591bbdea",
+    "precedingIndexCommit": "2be82f46b5333812aac9bb4cf7ef0ba89e7ea717",
+    "documentReadbacksVerified": 26,
+    "sourceGitHubHead": "2be82f46b5333812aac9bb4cf7ef0ba89e7ea717",
     "summary": {
-      "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v65.md",
-      "documentCommitSha": "98225247bdd891d651658303c5614ad38831ecb8",
-      "documentSha256": "525ec4fa38d489c00a8fa8ff816d419209d743b612417a7dbefc7d3810627190"
+      "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v66.md",
+      "documentCommitSha": "733214dec7c6ac1070f3a6c628ac64304e3ead12",
+      "documentSha256": "858b85c4eea44b284c99e28f02d1b52ee351babf894b281ba5f7673a5c14a67a"
     },
     "operationalReadiness": {
       "stream34": "V11_PINNED_INPUT_REFERENCE_VERIFIED_AUTHENTIC_REVIEWS_PENDING",
       "restrictedDelivery": "DESTINATION_AND_DISTRIBUTION_SCOPE_PENDING",
       "processInstance": "V601_ISOLATED_VALIDATION_COMPLETE_REAL_DUAL_HOST_AND_CANONICAL_PUBLICATION_PENDING"
-    }
+    },
+    "archiveReadbacksVerified": 27,
+    "jsonArchiveMembersVerified": 40,
+    "archiveBytesRead": 3560123912
   }
 }
