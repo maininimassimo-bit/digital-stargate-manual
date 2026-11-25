@@ -353,7 +353,19 @@
           "NOISE_FLUX/3"
         ],
         "scientificClosures": 0,
-        "status": "COVARIANCE_PROPAGATION_IMPROVES_HELDOUT_RESAMPLING_WITH_HORIZONTAL_RESIDUALS"
+        "status": "COVARIANCE_PROPAGATION_IMPROVES_HELDOUT_RESAMPLING_WITH_HORIZONTAL_RESIDUALS",
+        "signalDependentCovariance": {
+          "path": "docs/project/BKL-046-TV4-COVARIANZA-DIPENDENTE-SEGNALE.md",
+          "documentCommitSha": "305ac92e0c143ee2a9f443cd942145fdc14da932",
+          "documentSha256": "52847251df6d789d6cc708e480e5e7cb8d28e71a541781fed0f00f486b79b569",
+          "receiptSha256": "920891932cbea7b7e8f1a5acf5ee7a47b4bdc53629cd635e69f8358d1cdba116",
+          "pairedPredictions": 90,
+          "relatedAxes": [
+            "NOISE_FLUX/3"
+          ],
+          "scientificClosures": 0,
+          "status": "LAG_AFFINE_COVARIANCE_IMPROVES_HIGH_SIGNAL_HORIZONTAL_BUT_NOT_LOW_SIGNAL"
+        }
       }
       }
     },
