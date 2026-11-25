@@ -19,3 +19,5 @@ I tempi di integrazione crescono nello stesso ordine di acquisizione. Questo con
 | Protocollo | `7de6fa00184daab137effe6e2d52d72cb5b49edde898a4d79824defd24787b5b` |
 | Programma | `cdca2343b016053c5c1c6920405090256cb667bcab12529b8109f038d642e144` |
 | Riscontro | `e7d1b648e3ec0db4b1efe8f63f5c4cdb89126ef79df4274bb80e000ed5e18a75` |
+
+Il pacchetto BKL046-TV4-esposizioni-escluse-v1.zip è stato riletto da H: e rieseguito sugli input TV4 già conservati. La ricevuta riprodotta ha lo stesso SHA-256. Impronta dello ZIP `0d4dde9ee9d112ea62c6f1d22b26e191eaf427522305c170b8414f2b3889fe99`.
