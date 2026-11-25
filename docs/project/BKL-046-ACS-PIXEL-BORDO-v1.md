@@ -1,6 +1,6 @@
 # BKL-046 – Sensibilità ACS al contributo dei pixel sul bordo
 
-Il confronto usa le visite indipendenti j8jq03 e j8jq06 dello standard GRW+70D5824, con due esposizioni per visita e per filtro a 3 e 5 pixel. Le misure usano gli stessi centri WCS derivati da CALSPEC, la stessa mappa delle aree dei pixel e la stessa stima del fondo. L'apertura frazionaria pesa la porzione di pixel che interseca il cerchio e verifica la qualità su tutti i pixel intersecati.
+Il confronto usa le visite indipendenti j8jq03 e j8jq06 dello standard GRW+70D5824, con due esposizioni per visita e per filtro a 3 e 5 pixel. Le misure usano gli stessi centroidi misurati sul nucleo della sorgente, individuata a partire dalla posizione WCS di CALSPEC, la stessa mappa delle aree dei pixel e la stessa stima del fondo. L'apertura frazionaria pesa la porzione di pixel che interseca il cerchio e verifica la qualità su tutti i pixel intersecati.
 
 Gli scarti indicano la variazione percentuale di ciascun rapporto tra la seconda e la prima visita.
 

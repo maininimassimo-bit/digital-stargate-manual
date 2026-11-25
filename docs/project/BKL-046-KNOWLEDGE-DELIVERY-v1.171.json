@@ -2024,7 +2024,7 @@
     "acsFractionalApertureEvidence": {
       "priorIndexSha256": "6c2c6fb026a2154bc56f50ee45d419b2b2f0834c4c58962c56bd1a8548e97a9d",
       "path": "docs/project/BKL-046-ACS-PIXEL-BORDO-v1.md",
-      "documentSha256": "dbe3a35a44cd2fe2486967363b6036de9e98661f7410b946aded77dd2081f6f5",
+      "documentSha256": "2156a24f4bc0769a81eab0a3c111fcc9657c1174b78e5f7d6c3ee4953f4ecd58",
       "receiptPath": "docs/project/BKL-046-ACS-PIXEL-BORDO-v1.json",
       "receiptSha256": "29901c3f7f22778d3ffdc085eca9911afe4a528ff5cab4bbf7ad302d015806ee",
       "status": "BETWEEN_VISIT_RATIO_SENSITIVE_TO_PIXEL_EDGE_WEIGHTING",
@@ -2044,6 +2044,17 @@
         "sensibilita-scelta-posa-visite-v1.ps1": "184b600e6f8698f3d42781fc20453a88f5b86ef4d5e266583e11292b977dd122"
       },
       "status": "DESCRIPTIVE_REPEATABILITY_AND_EXPOSURE_SELECTION_ONLY",
+      "qualifiedControls": 0,
+      "scientificClosures": 0
+    },
+    "acsApertureCenterSensitivity": {
+      "priorIndexSha256": "2bd77462461aa4459c076c5d2bb8dfdb4d5fb0399d9f4dd0aa485e8445f2a261",
+      "priorApertureDocumentSha256": "dbe3a35a44cd2fe2486967363b6036de9e98661f7410b946aded77dd2081f6f5",
+      "correctedApertureDocumentSha256": "2156a24f4bc0769a81eab0a3c111fcc9657c1174b78e5f7d6c3ee4953f4ecd58",
+      "receiptPath": "docs/project/bkl046-acs-ripetibilita-v1/sensibilita-centro-apertura-v1.json",
+      "receiptSha256": "ab751578c92714d1351a20777765f6ec1553344aecdde9fa3af535265fd93246",
+      "sourceScriptSha256": "bc8a554681e48d5e69cab009b44d31a8bb9284415724757120a3c35d69a985b5",
+      "status": "THREE_PIXEL_TRANSFER_SIGN_NOT_ROBUST_TO_INDEPENDENT_CENTER_OFFSETS",
       "qualifiedControls": 0,
       "scientificClosures": 0
     }
