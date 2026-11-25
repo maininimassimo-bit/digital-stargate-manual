@@ -815,9 +815,9 @@
     }
   ],
   "residualAccounting": {
-    "localLedger": "rendiconto-VM-v61.json",
-    "ledgerSha256": "362d965c92cb319687c7fbf9e248d888440a062de80064ed6e23b026e4712340",
-    "archiveManifestSha256": "ab2de00f9ff2ece7fb165b62fcfae985ea7b0b0b67e524931a76c19f75a4d69f",
+    "localLedger": "rendiconto-VM-v62.json",
+    "ledgerSha256": "bb1ce8b299d8b7923103c8449c7d1a877804ca17b57ba0ae5de85e4aa11b2376",
+    "archiveManifestSha256": "27e9309e81631fb8d0526dfccfc61b560cf3e3cf46100662979283deda0d9ef3",
     "requirements": 4920,
     "criteria": 14521,
     "ownerCriteriaOpen": 19,
@@ -825,16 +825,17 @@
     "scientificAxesOpen": 25,
     "scientificClosures": 0,
     "publicGitHubObject": "metadata-only",
-    "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V61",
-    "precedingLedgerSha256": "605f17755997007a911a08816fe94262c7674d6c8d53e7d4c0fdf2781b98b5d3",
+    "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V62",
+    "precedingLedgerSha256": "362d965c92cb319687c7fbf9e248d888440a062de80064ed6e23b026e4712340",
     "addedScientificReceipts": 8,
-    "addedReceiptsAcrossAxes": 8,
-    "addedAuxiliaryReceipts": 3,
-    "documentReadbacksVerified": 11,
-    "sourceGitHubHead": "6ab4d3cbd9dd51be73ab7aff7c863cd51af401ec",
+    "addedReceiptsAcrossAxes": 0,
+    "addedAuxiliaryReceipts": 9,
+    "documentReadbacksVerified": 17,
+    "sourceGitHubHead": "418dee9d4bd31a81b020b9b99e918c614c9d6bbb",
     "operationalReadiness": {
       "stream34": "V11_AUTHORITY_TEST_REPLAYED_REAL_APPROVALS_NOT_VERIFIED",
-      "restrictedDelivery": "DESTINATION_AND_DISTRIBUTION_SCOPE_PENDING"
+      "restrictedDelivery": "DESTINATION_AND_DISTRIBUTION_SCOPE_PENDING",
+      "processInstance": "V601_ISOLATED_VALIDATION_COMPLETE_REAL_DUAL_HOST_AND_CANONICAL_PUBLICATION_PENDING"
     }
   }
 }
