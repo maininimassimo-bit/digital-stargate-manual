@@ -1,0 +1,115 @@
+{
+  "protocol": "BKL046_ACS11677_ARCHIVE_DQ_ONLY_PREFLIGHT_V1",
+  "sourcePositionSha256": "dc3011919ce361c5c741d2f4ac2251a0fd94ac61f8e764ca8b8e9152dadb52d6",
+  "targetDiagnostics": [
+    {
+      "root": "jbbf01hxq",
+      "objectVersion": "tO4x7Iltx9isWWH8APRdWAuFNcsqoHWX",
+      "etag": "\"04e93328b8c6e0d67b1ed1f83e439ad8\"",
+      "detectorXY": [
+        312.55940427149886,
+        1208.4117905498163
+      ],
+      "headers": [
+        {
+          "name": "PRIMARY",
+          "headerOffset": 0,
+          "headerSha256": "8c186fe4ec6df7215f6f3f862a477d4c6aeb3d91913a391e18c4d01cd76e41d7"
+        },
+        {
+          "name": "SCI",
+          "headerOffset": 23040,
+          "headerSha256": "16f9757537088a644b96cff3363af0e9b10ae7f663964e0303536ad13613ac1f"
+        },
+        {
+          "name": "ERR",
+          "headerOffset": 33595200,
+          "headerSha256": "df2d08e69a9d2dfa65c01294e397da9a4d222bcc34bfed2762717dacf9e410de"
+        },
+        {
+          "name": "DQ",
+          "headerOffset": 67155840,
+          "headerSha256": "1980db66ef3d0188d12856cf068dd38cb9f75b29693eb52399033cf4b3aaf1f5"
+        }
+      ],
+      "dqByteRange": [
+        76918272,
+        77204991
+      ],
+      "dqRangeSha256": "bf775b37b939f68b0a3b229a94befb9c764aa423ee9b9e279d2bbcf45c30f11b",
+      "nominalNeighborhood": {
+        "10": {
+          "pixels": 314,
+          "dqNonzero": 10,
+          "fullWell": 0
+        },
+        "13": {
+          "pixels": 534,
+          "dqNonzero": 14,
+          "fullWell": 0
+        },
+        "16": {
+          "pixels": 810,
+          "dqNonzero": 17,
+          "fullWell": 0
+        }
+      }
+    },
+    {
+      "root": "je5v02rhq",
+      "objectVersion": "PI67fcwvLcuuPrgyE3pCwiaQY8Punc6U",
+      "etag": "\"d3c2d42a9e68958126fb52de9fa0b0c9\"",
+      "detectorXY": [
+        455.2616150746179,
+        1281.3726606308176
+      ],
+      "headers": [
+        {
+          "name": "PRIMARY",
+          "headerOffset": 0,
+          "headerSha256": "869d52ef2e5a982bd1435a6e3858e3bb821105bb2510a7068bcf57871757dbdf"
+        },
+        {
+          "name": "SCI",
+          "headerOffset": 28800,
+          "headerSha256": "a9c6a09d294bb2a90bd2d88ae189349f5f6d52d124ca974b95b9b812242d951c"
+        },
+        {
+          "name": "ERR",
+          "headerOffset": 33606720,
+          "headerSha256": "57eb768be42cb9b40c58ba8b5a7eb64c73dba5881d184a74f23fe8df8f31fea2"
+        },
+        {
+          "name": "DQ",
+          "headerOffset": 67167360,
+          "headerSha256": "135df780c7c0cf6d4af3d9acdfe5edac87f09893fee472ad85fafc9181534fb5"
+        }
+      ],
+      "dqByteRange": [
+        77527808,
+        77814527
+      ],
+      "dqRangeSha256": "d947cd438fa72131681f23da8cedef0f14a8d24b946d6974fd2494448b2f0fdb",
+      "nominalNeighborhood": {
+        "10": {
+          "pixels": 316,
+          "dqNonzero": 18,
+          "fullWell": 0
+        },
+        "13": {
+          "pixels": 531,
+          "dqNonzero": 32,
+          "fullWell": 0
+        },
+        "16": {
+          "pixels": 806,
+          "dqNonzero": 48,
+          "fullWell": 0
+        }
+      }
+    }
+  ],
+  "sciencePixelValuesRead": false,
+  "fluxMeasured": false,
+  "scientificClosure": false
+}
