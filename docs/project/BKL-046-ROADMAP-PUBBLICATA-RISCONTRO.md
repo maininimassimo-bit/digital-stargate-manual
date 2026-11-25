@@ -16,3 +16,5 @@ Alla punta esaminata della bozza PR #627, `5d8a1c2e22e81c03205d6ed5af19a6a3cc155
 > BKL-046 è in corso. Il rendiconto copre 4.920 requisiti e 14.521 criteri. Sette famiglie e 25 assi restano aperti, con zero chiusure scientifiche. Stream34 v11 dispone di riscontri offline su DSG-Shared. La prova nativa richiede le approvazioni indipendenti e l'ammissione del coordinatore. La conoscenza v1.171 è una baseline intermedia con recupero locale verificato. Consegna integrale, validazione scientifica e qualificazione per la produzione restano aperte.
 
 Il controllo ha riguardato dati pubblicati e riscontri della bozza. La verifica di BKL-051 in questo passaggio riguarda la scheda pubblica e il suo allineamento al sorgente della Roadmap.
+
+La copia su H: di BKL046-roadmap-pubblicata-v1.zip, SHA-256 `56243501768d14297e69006ebae7e070f3fa469780e4425d27d67a7be397c904`, è stata riletta dopo il flush sullo stesso handle. Le catture archiviate hanno riprodotto il riscontro con SHA-256 `6f542821b6b9c6722fd37d50a974b7d33e2e36fd8b06b4bb8c8cf38e606cbd42` senza ulteriori richieste al sito.
