@@ -1,0 +1,61 @@
+{
+  "coordinatorRegistryMutations": 0,
+  "nativeExecutions": 0,
+  "positive": [
+    {
+      "markerSha256": "ec28adb2d239d4f6b487287bc81bd62b994d6f14d7bbaa1e33f76449224642c3",
+      "nativeExecutionAttestedByAudit": false,
+      "releaseSha256": "e3e40beac498c629c512e84b1e5c890c93325a28d69a456dffbae8be0eeec561",
+      "reservation": "51245d72-6bf3-4380-92ec-09e916d845d9",
+      "status": "ARCHIVE_AND_RELEASE_RECEIPT_MATCH",
+      "verifiedMembers": 17
+    },
+    {
+      "markerSha256": "6e912fed1b67f1781bb005ba0b720901b2eb5645bcb948e46627a71d8d8e1f97",
+      "nativeExecutionAttestedByAudit": false,
+      "releaseSha256": "60c5a9b87df8961eb9a2c58ca1464d081fa2c8cb1d371e50ea8aff8842a81af1",
+      "reservation": "ebc06f2a-e633-4c46-862a-17d9c3c225c2",
+      "status": "ARCHIVE_AND_RELEASE_RECEIPT_MATCH",
+      "verifiedMembers": 17
+    }
+  ],
+  "provenance": "TWO_EXISTING_ISOLATED_R4_WITNESS_RUNS",
+  "rejected": [
+    {
+      "case": "wrong-reservation-real-receipt",
+      "reason": "RELEASE_CONTEXT_DIFFERS",
+      "rejected": true
+    },
+    {
+      "case": "missing-marker",
+      "reason": "FILE_MISSING",
+      "rejected": true
+    },
+    {
+      "case": "changed-marker",
+      "reason": "ARCHIVE_MARKER_PIN_DIFFERS",
+      "rejected": true
+    },
+    {
+      "case": "changed-fits",
+      "reason": "MEMBER_DIFFERS:integer-unmasked-rgb.fits",
+      "rejected": true
+    },
+    {
+      "case": "changed-original",
+      "reason": "MEMBER_DIFFERS:r4-original.json",
+      "rejected": true
+    },
+    {
+      "case": "unexpected-file",
+      "reason": "ARCHIVE_NAMESPACE_DIFFERS",
+      "rejected": true
+    },
+    {
+      "case": "changed-release",
+      "reason": "RELEASE_PIN_DIFFERS",
+      "rejected": true
+    }
+  ],
+  "schema": "BKL046_CFA_ARCHIVE_OFFLINE_RECONCILIATION_V1"
+}
