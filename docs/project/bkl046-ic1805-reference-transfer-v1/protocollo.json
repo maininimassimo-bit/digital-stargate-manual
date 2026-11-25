@@ -1,0 +1,37 @@
+{
+  "schema": "BKL046_IC1805_REFERENCE_TRANSFER_PROTOCOL_V1",
+  "captureZip": "4a0c4142d8d0e7b056ec9b46046eec78fe6fc149aabf3c028923f81d6851f0a0",
+  "captureReceipt": "582a3adcdeb5509b4c4e9434b252726cf0473c86fdd6da272a69aa4358bc705f",
+  "stellarReceipt": "eb36f255976fbef04ea8dd3acc20201153f20bec4dff1b3fe80c723e8d7768ae",
+  "excludePreviouslyMeasured": [
+    0,
+    1,
+    9,
+    19,
+    29,
+    38
+  ],
+  "maximumRegistrationP90NativePx": 1,
+  "origin": [
+    256,
+    240
+  ],
+  "shape": [
+    1024,
+    768
+  ],
+  "cell": 64,
+  "rawRejectAtOrAbove": 15700,
+  "minimumValidPerCell": 0.9,
+  "photoScale": 1,
+  "models": [
+    1,
+    3
+  ],
+  "maeImprovementMinimumPercent": 10,
+  "folds": [
+    0,
+    1
+  ],
+  "references": "Choose earliest, median, latest by existing catalogue index after excluding the six previously processed exposures and exposures whose registration P90 exceeds 1 native pixel. All other eligible exposures are paired with each reference. Use the intersection of valid aligned samples across all eligible frames. Fit each spatial checkerboard parity separately and score the other parity. Each pair passes only if both folds improve median absolute error at least 10 percent and do not increase P90. No scene calibration or multipliers. All frames are from this one sequence."
+}
