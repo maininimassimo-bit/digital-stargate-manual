@@ -1,0 +1,236 @@
+{
+  "schema": "BKL046_KNOWLEDGE_ACS11677_STDPSF_CANDIDATE_ADDENDUM_V3",
+  "priorAddendum": {
+    "path": "docs/project/bkl046-acs11677-conoscenza-v2/BKL-046-CONOSCENZA-ACS11677-ADDENDUM-v2.json",
+    "commit": "352b3875c2d5844756e12d2f115799bdc6c04434",
+    "sha256": "4873de8b9eb52ac9730a5e2724ab8679f17c00f176fcf434c13f6de0fcdc1297"
+  },
+  "milestone": "BKL-046",
+  "family": "SATURATION_BLEND",
+  "status": "INTERIM",
+  "baselineAcceptance": {
+    "matrix": {
+      "path": "docs/project/BKL-046-MATRICE-CRITERI-v2.json",
+      "commit": "aadb832711d74052f727d822178e018c5be8c04e",
+      "sha256": "75fa5f3040e54be1009837f7ab86dbc5a4be16757cd7b643a602be8cd1b1940a"
+    },
+    "residualReport": {
+      "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v72.md",
+      "commit": "aadb832711d74052f727d822178e018c5be8c04e",
+      "sha256": "64d30269b0a86a4654b46e285b17d0af91aefaa5f4d3657dcb859b22488fad3c"
+    },
+    "previouslyOpenOwnerCriteria": 19,
+    "previouslyIncompleteFamilies": 7,
+    "previouslyOpenScientificAxes": 25,
+    "closedByThisIncrement": 0
+  },
+  "evidence": [
+    {
+      "id": "fresh40",
+      "commit": "58e06f5f519dce7edcddb230a47e8190e6c67b11",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-stdpsf-fresh-v1/riscontro-epsf.json",
+          "sha256": "6e12ff6d0740b57dac02286eea7180c4eb230abf45c7523ebbb76363ada400c8"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-stdpsf-fresh-v1/riscontro-epsf-dq.json",
+          "sha256": "d6f2fcecdedf99dc6b2d64f19de15b1fc5a190ccceed3b7691b514fdc3264cdb"
+        }
+      ],
+      "archiveSha256": "10cd721b0857cdf75844f1db0669a5383271028b4444701c928ef8fd5442267f",
+      "archiveEntriesVerified": 18
+    },
+    {
+      "id": "repeat40and10",
+      "commit": "94ce28d0cedbfe0becbf2cca40ee52e6186fba6c",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-stdpsf-extension-v1/ten/riscontro-epsf.json",
+          "sha256": "28baa1c569e7b6de23c77896b364e4b27a2b92911f1288ad31ca2931a3ae5be0"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-stdpsf-extension-v1/repeat/riscontro-epsf.json",
+          "sha256": "a6ba502cd249ce5bbb6b508bcf10942c5ad93410459fb6ac9e30462e581fee76"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-stdpsf-extension-v1/repeat/riscontro-ripetibilita-dq.json",
+          "sha256": "50654c58ce79f1ef7e88d1aa1b36644434d04ef3075b277a1d311e7945c401be"
+        }
+      ],
+      "archiveSha256": "e0d377b6a76c9b8eae868be1f026060ac53267ab63e7aa72ac54ad9ff1028c6a",
+      "archiveEntriesVerified": 24
+    },
+    {
+      "id": "crossVisit30",
+      "commit": "12d0bf07a01e00025ab201a514db43cca68e273e",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-stdpsf-candidate-208-v1/riscontro-epsf.json",
+          "sha256": "9dbc517a3f6b5095e46adabc3e21c370b4e77faf3bbb0407bd2365c2b3e8216a"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-stdpsf-candidate-208-v1/riscontro-epsf-dq.json",
+          "sha256": "def905398e3fd279b8421a7a7cf38e4d57e4b67d91366ad5c07c5f78a5be3384"
+        }
+      ],
+      "archiveSha256": "2705be4b3b34a059177e17d35c4a6022e9d3ca5820bdb80d0460bbe237684568",
+      "archiveEntriesVerified": 11
+    },
+    {
+      "id": "dominantPeak",
+      "commit": "2f4ba3dfa2999cc02b2718cdd4ed1dfa463ed413",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-candidate-208-morphology-v1/riscontro-picco-dominante-208.json",
+          "sha256": "905aa625acac59a03fdb9f22eb21e92b8310762015ed7bb81fdba7d8c49683ca"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-candidate-208-morphology-v1/riscontro-proiezione-picco-dominante-208.json",
+          "sha256": "dc3011919ce361c5c741d2f4ac2251a0fd94ac61f8e764ca8b8e9152dadb52d6"
+        }
+      ],
+      "archiveSha256": "c574eee722379ceaf93416fe475d83f34f6015a1395af24b7fe26fdd5f74cca3",
+      "archiveEntriesVerified": 15
+    },
+    {
+      "id": "focusAndIndependentPositions",
+      "commit": "fb54da5c340aa991d62cd646332669fb4c16b3b8",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-candidate-208-focus-v1/riscontro-fuoco-controlli-v2.json",
+          "sha256": "b7423233a85141d45a99ed2de076ac4befd9adc015e50f34589bd558c443306d"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-candidate-208-focus-v1/riscontro-208-altre-pose.json",
+          "sha256": "abb55bae32bb290e4f864e83e8565afe0081a55c8166b4596ac59f1c82e1ec32"
+        }
+      ],
+      "archiveSha256": "3c62436ac30bb2c64cfb50a89fb6d810d5ac32cfe1be504e7dee075f5750688f",
+      "archiveEntriesVerified": 17
+    },
+    {
+      "id": "otherDetectorRegions",
+      "commit": "2b7acc861683e1ad7a144063f9b3797d2f59f663",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-candidate-208-detector-regions-v1/riscontro-208-j8hw23ggq.json",
+          "sha256": "770c79af43c7740551dde6080e841f1a68f1cd1af780233edc7d9bf59a6424ad"
+        },
+        {
+          "path": "docs/project/bkl046-acs11677-candidate-208-detector-regions-v1/riscontro-208-jd1y02pgq.json",
+          "sha256": "5da68a35ac6810faf056143f90c899351c1206db501f23fffb42ac9af71cf2e3"
+        }
+      ],
+      "archiveSha256": "e3f3e7b8dc470a361580f63e5b4a66ebaba4cfae4441114a74835be5fc04e8e3",
+      "archiveEntriesVerified": 24
+    },
+    {
+      "id": "boundedDqRead",
+      "commit": "aadb832711d74052f727d822178e018c5be8c04e",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs11677-candidate-208-dq-preflight-v1/riscontro-dq-range-extra-v3.json",
+          "sha256": "5d6e0a1ce69dd358232a2f6bb30f3eee21d8e6fc3465b08a689a0558c1f8f6cf"
+        }
+      ],
+      "archiveSha256": "e2c5c6fbcf0c7a904e26783bb0fdaa0a3c5ca351f340a904292e0121b83222ba",
+      "archiveEntriesVerified": 4
+    }
+  ],
+  "verifiedObservations": {
+    "geometry": {
+      "jbb502igq": {
+        "2->1": {
+          "p90Px": 0.060272880845619665,
+          "passes": true
+        },
+        "1->2": {
+          "p90Px": 0.06175598188589347,
+          "passes": true
+        }
+      },
+      "jbb502ijq": {
+        "2->1": {
+          "p90Px": 0.05942257132768312,
+          "passes": true
+        },
+        "1->2": {
+          "p90Px": 0.07762954696703904,
+          "passes": true
+        }
+      },
+      "j9dw06xoq": {
+        "2->1": {
+          "p90Px": 0.13679562912122104,
+          "passes": false
+        }
+      },
+      "jbbf01i3q": {
+        "2->1": {
+          "p90Px": 0.06509113240052376,
+          "passes": true
+        },
+        "1->2": {
+          "p90Px": 0.06571965634596859,
+          "passes": true
+        }
+      }
+    },
+    "dominantPeak": {
+      "spatiallyConsistent": true,
+      "sourceOffsetPx": [
+        -0.49669423068371543,
+        -5.700003100077083
+      ],
+      "reCenteredStandardModelChiSquarePerDof": 4.254105432478528,
+      "candidateAdmitted": false
+    },
+    "focus": {
+      "fitStars": 71,
+      "heldoutStars": 55,
+      "standardHeldoutMedian": 1.921602004034847,
+      "selectedHeldoutMedian": 1.9512316462328074,
+      "candidateUsedToChooseFocus": false,
+      "approved": false
+    },
+    "repeatPositions": [
+      {
+        "exposure": "jbb502igq",
+        "offsetPx": 0.20121620076397223,
+        "flaggedPixels": 5
+      },
+      {
+        "exposure": "jbb502ijq",
+        "offsetPx": 0.3019407442311379,
+        "flaggedPixels": 5
+      }
+    ]
+  },
+  "decisionRules": [
+    {
+      "id": "VALIDATE_GEOMETRY_SEPARATELY_FROM_FLUX",
+      "action": "Choose standards by observing era and compare both centroid estimators on the same common stars. Fit even tiles and verify odd tiles before projecting the saturated cohort.",
+      "limit": "Geometry approval applies to a chip pair, exposure and validated stellar sample. Keep DQ and fit adequacy checks separate."
+    },
+    {
+      "id": "SEPARATE_NEARBY_PEAK_FROM_COMPONENT_CENTER",
+      "action": "If local centering fails, preserve the original detection and inspect the surrounding window. Then reproject the plausible alternate peak into the original saturated component and check distinct exposures.",
+      "limit": "Spatial consistency does not establish source separation, a good photometric model or a qualified flux."
+    },
+    {
+      "id": "CHOOSE_FOCUS_OUTSIDE_THE_CANDIDATE",
+      "action": "Exclude candidate pixels from model choice. Use independent control tiles to verify improvement against the standard PSF.",
+      "limit": "Training fit improvement alone does not authorize changing the model for the candidate."
+    },
+    {
+      "id": "USE_DQ_RANGE_READ_FOR_PRELIMINARY_SELECTION",
+      "action": "Bind FITS DQ byte ranges to extension layout and provider object version. Screen the nominal region for DQ exclusions before fetching full images.",
+      "limit": "Nominal DQ counts are planning evidence. Final eligibility still uses actual geometry and the approved aperture mask."
+    }
+  ],
+  "scientificClosure": false,
+  "finalKnowledge": false,
+  "paidProvidersUsed": false,
+  "nativeExecutionsAdded": 0
+}
