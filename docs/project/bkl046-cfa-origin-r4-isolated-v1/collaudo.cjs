@@ -1,0 +1,154 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs/promises');
+const path=require('node:path');
+const {spawn,execFile}=require('node:child_process');
+const {once}=require('node:events');
+const {promisify}=require('node:util');
+const {createHash}=require('node:crypto');
+const {runInNewContext}=require('node:vm');
+
+const [python, authorities, barrier, deps, scratch, report]=process.argv.slice(2);
+const exec=promisify(execFile);
+const sha=raw=>createHash('sha256').update(raw).digest('hex');
+const canonical='K:/DigitalStarGate/pixinsight-coordination-20261114-r1';
+const operation='BKL046_CFA_XDRZ_ORIGIN_FACTORIAL_001';
+const fixtureId='348eaf20-c65c-438c-b808-eb1c163f9a31';
+const verifier=path.join(authorities,'verifica-batch.py');
+async function pinned(file, pin){
+  const data=await fs.readFile(file);
+  assert.equal(sha(data),pin,file);
+  return data;
+}
+function done(child){
+  const received=once(child,'close');
+  received.catch(()=>{});
+  child.stdin.on('error',()=>{});
+  return received;
+}
+async function test(mode, adapter){
+  const state=await fs.mkdtemp(path.join(scratch,'reg-'));
+  const run=path.join(state,'measure');
+  let supervisor, parent, supervisorExit, parentExit, parentOutput='';
+  const fakeRequire=specifier=>{
+    if(specifier!=='node:child_process'){
+      assert.equal(specifier,'node:path');
+      return path;
+    }
+    return {spawn:(python,cmd,options)=>{
+      assert(!supervisor);
+      assert.equal(path.normalize(cmd[3]),path.join(__dirname,'custode.py'));
+      const args=[...cmd.slice(0,4),scratch,...cmd.slice(4)];
+      supervisor=spawn(python,args,{...options,env:{...process.env,DSG_ORIGIN_TEST_STATE:state}});
+      supervisorExit=done(supervisor);
+      return supervisor;
+    }};
+  };
+  const module={exports:{}};
+  runInNewContext(adapter,{module,require:fakeRequire,Buffer,process,setTimeout,clearTimeout});
+  try{
+    const owned=await module.exports.startOriginal({identityProtocol:'DSG_PARENT_IDENTITY_FD3_V2',
+      python,milestone:'BKL-046',operation,start(){
+        parent=spawn(python,['-I','-B','-S',path.join(__dirname,'testimone.py'),state,barrier,mode],
+          {windowsHide:true,stdio:['pipe','pipe','pipe','pipe']});
+        parentExit=done(parent);
+        parent.stdout.on('data',c=>{parentOutput+=c.toString();});
+        return parent;
+      }});
+    const activePath=path.join(state,'active.json');
+    const active=await fs.readFile(activePath);
+    const acquired=JSON.parse(active);
+    const prefix=path.join(state,acquired.reservation);
+    const original=await fs.readFile(prefix+'-original.json');
+    assert.deepEqual(await fs.readFile(prefix+'-acquired.json'),active);
+    assert.equal(acquired.operation,operation);
+    assert.equal(owned.child,parent);
+    assert.equal(owned.identity.pid,parent.pid);
+    parent.stdin.end(JSON.stringify({reservation:acquired.reservation,acquired:sha(active),original:sha(original)})+'\n');
+    const [parentCode,signal]=await parentExit;
+    assert.equal(signal,null);
+    assert.equal(parentCode,mode==='parent-failed'?7:0);
+    assert.deepEqual(JSON.parse(parentOutput),{reservation:acquired.reservation,boundParent:true});
+
+    await fs.cp(path.join(authorities,'fixture','use-declared'),run,{recursive:true,errorOnExist:true,force:false});
+    for(const name of ['events.txt','batch.done.json']){
+      const f=path.join(run,name);
+      const bytes=await fs.readFile(f,'utf8');
+      assert(bytes.includes(fixtureId));
+      await fs.writeFile(f,bytes.replaceAll(fixtureId,acquired.reservation));
+    }
+    if(mode==='bad-transcript'){
+      const f=path.join(run,'events.txt');
+      const bytes=await fs.readFile(f,'utf8');
+      assert(bytes.includes('"dropShrink":0.7'));
+      await fs.writeFile(f,bytes.replace('"dropShrink":0.7','"dropShrink":0.65'));
+    }
+    const auth=path.join(authorities,'autorita');
+    if(mode==='unmodeled'){
+      for(const name of (await fs.readdir(path.join(run,'outputs')))){
+        const kind=name.endsWith('-rgb.fits')?'rgb':'weight';
+        await fs.copyFile(path.join(auth,'oracoli-prova','oracoli','baseline-'+kind+'.fits'),path.join(run,'outputs',name));
+      }
+    }
+    const receipt=path.join(run,'receipt.json');
+    const verify=()=>exec(python,['-I','-B','-S',verifier,acquired.reservation,auth,
+      path.join(auth,'oracoli-prova'),path.join(auth,'verifica-v4.py'),deps,run,receipt],{windowsHide:true,timeout:15000});
+    let evidenceStatus=null;
+    if(mode==='bad-transcript'){
+      await assert.rejects(verify,e=>e.stderr?.includes('SETTINGS_DIFFERS'));
+      evidenceStatus='REJECTED_TRANSCRIPT';
+    }else{
+      await verify();
+      const result=JSON.parse(await fs.readFile(receipt));
+      assert.equal(result.reservation,acquired.reservation);
+      evidenceStatus=result.classification.status;
+      assert.equal(evidenceStatus,mode==='unmodeled'?'UNMODELED_SEQUENCE':'MATCHED_TESTED_HYPOTHESIS');
+    }
+    let releases=0;
+    if(parentCode===0 && evidenceStatus==='MATCHED_TESTED_HYPOTHESIS'){
+      assert.equal(mode,'valid');
+      releases++;
+      assert.equal((await owned.release()).status,'LEASE_RELEASED');
+    }else{
+      supervisor.stdin.end();
+    }
+    const [code,endSignal]=await supervisorExit;
+    assert.equal(endSignal,null);
+    assert.equal(code,mode==='valid'?0:1);
+    assert.deepEqual(await fs.readFile(prefix+'-acquired.json'),active);
+    assert.deepEqual(await fs.readFile(prefix+'-original.json'),original);
+    if(mode==='valid'){
+      const release=JSON.parse(await fs.readFile(prefix+'-released.json'));
+      assert.equal(release.parentExitCode,0);
+      assert.equal(release.reservation,acquired.reservation);
+      await assert.rejects(fs.access(activePath),{code:'ENOENT'});
+    }else{
+      assert.deepEqual(await fs.readFile(activePath),active);
+      await assert.rejects(fs.access(prefix+'-released.json'),{code:'ENOENT'});
+    }
+    return {mode,parentCode,evidenceStatus,releaseCalls:releases,reservationRetained:mode!=='valid'};
+  }finally{
+    parent?.stdin.end();
+    supervisor?.stdin.end();
+    await Promise.allSettled([parentExit,supervisorExit]);
+  }
+}
+async function main(){
+  await fs.mkdir(scratch);
+  const adapter=await pinned(path.join(canonical,'original-parent-adapter.cjs'),
+    '2fe08ef35c126f97b9fce3e382070acf21070ebe8c76fcf5519dc393024464a2');
+  const marker="const ENTRY='K:/DigitalStarGate/pixinsight-coordination-20261114-r1/coordinator.py';";
+  const code=adapter.toString('utf8');
+  assert.equal(code.split(marker).length,2);
+  const scratchAdapter=code.replace(marker,'const ENTRY='+JSON.stringify(path.join(__dirname,'custode.py'))+';');
+  await pinned(verifier,'1a2036157bb31e4bf7a09408e7bef25051d19ff0e8fe891ab513690f7483aa06');
+  const cases=[];
+  for(const mode of ['valid','bad-transcript','unmodeled','parent-failed']){
+    cases.push(await test(mode,scratchAdapter));
+  }
+  const r={schema:'BKL046_CFA_ORIGIN_R4_SCRATCH_V1',cases,adapterSha256:sha(adapter),
+    isolatedRegistry:true,nativeOutputsSimulated:true,processInventorySimulated:true,nativeExecutions:0,scientificClosures:0};
+  await fs.writeFile(report,JSON.stringify(r,null,2)+'\n',{flag:'wx'});
+  console.log(JSON.stringify(r));
+}
+main().catch(e=>{console.error(e);process.exitCode=1;});
