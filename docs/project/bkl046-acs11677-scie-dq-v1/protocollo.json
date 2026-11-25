@@ -1,0 +1,44 @@
+{
+  "protocol": "BKL046_ACS11677_TRAIL_DQ_ATTRITION_PLAN_V1",
+  "catalogueSha256": "f767afda06343a0594c5c02189e712298bee355c4bc8829db0587b6edb5cf236",
+  "association": "jb6v01010",
+  "filters": "F606W",
+  "roles": [
+    "A1",
+    "L1457"
+  ],
+  "fits": {
+    "A1": {
+      "file": "jb6v01dfq_flc.fits",
+      "seconds": 1.0,
+      "sha256": "a330f28eca9e64cba6c8f47e6607d67fbaeb82f2c6165d254b74b82f6be7d938",
+      "sourceFolder": "BKL046-ACS-11677-fotometria-v1",
+      "headerSha256": "2ed3f34d11c7488607177ac742895393eb6a9999c1ff31c08f364f2828064378"
+    },
+    "L1457": {
+      "file": "jb6v01e0q_flc.fits",
+      "seconds": 1457.0,
+      "sha256": "e6011691a50b2608a3cb91e5f9ceb0957aa4a17e46aa04f8e00bee30df5fdd4d",
+      "sourceFolder": "BKL046-ACS-11677-fotometria-v2",
+      "headerSha256": "78ef6c7c27462838807d4a78056fb642641b3c90279ba4388f39dce24cdab0cf"
+    }
+  },
+  "longBit": 256,
+  "baseRadiusPx": 10,
+  "minVerticalSpanPx": 21,
+  "shortLocalSearchPx": 4,
+  "shortMaxPeakShiftPx": 3.5,
+  "shortMinPeakAboveBackgroundElectrons": 200,
+  "shortRequireDqZeroInsideRadius": true,
+  "scope": "Same-association extremal durations selected from the archived catalogue before image screening. No photometry.",
+  "parentReportSha256": "e0386291b596798aee56198a6f4ede0dac28b7390384f87b88250fe3e8e4b248",
+  "dqDiagnostics": {
+    "masks": [
+      0,
+      16,
+      80
+    ],
+    "longRetainsFullWellBit": 256,
+    "scope": "Sensitivity counts only. No change to the original screen or photometric admission."
+  }
+}
