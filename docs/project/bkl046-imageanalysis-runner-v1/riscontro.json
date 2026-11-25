@@ -1,0 +1,40 @@
+{
+  "protocol": "BKL046_IMAGEANALYSIS_RUNNER_OFFLINE_V1",
+  "fitsBytesRead": [
+    {
+      "id": "compact-shuffled",
+      "sha256": "87e320cd438d6ea235c656200fad8457c6162836d7cf371552e8ab6da9d8b49a",
+      "bytes": 77760
+    },
+    {
+      "id": "compact-zones",
+      "sha256": "555ab7153b6389597e610cf71d8f8d63e0670632e5fb54f82b49a6daaafce230",
+      "bytes": 77760
+    },
+    {
+      "id": "tailed-shuffled",
+      "sha256": "30c4c2f75f6c5b91f945c835e7e0dcb48b5470f5f5c044146e6d604a6dc94d04",
+      "bytes": 77760
+    },
+    {
+      "id": "compact-wide-psf",
+      "sha256": "b33838da9aba6598f7b7de240272ac2bdc445f5cdcaa6106c21115d246943b9c",
+      "bytes": 77760
+    }
+  ],
+  "exactWbppFourColumnHelper": true,
+  "orderIndependentControl": true,
+  "injectedOrderSensitivityPx": 0.5,
+  "rejected": [
+    "missing",
+    "duplicate",
+    "foreign",
+    "badNoise",
+    "invalidStars",
+    "executionFailure",
+    "missingColumn",
+    "postExecutionChanged"
+  ],
+  "nativeObjectsMocked": true,
+  "scientificClosures": 0
+}
