@@ -1,0 +1,43 @@
+{
+  "protocol": "BKL046_WBPP_IMAGEANALYSIS_WRAPPER_V1",
+  "target": "PixInsight 1.9.6 build 1719 / WBPP 3.2.2",
+  "sources": [
+    {
+      "file": "BPP-SubframeAnalyzer.js",
+      "sha256": "2e238f66ec3e0aa31cb791b1be9190ce55e8321f6d8023694b289f10c33d4620"
+    },
+    {
+      "file": "BPP-ExecutionCache.js",
+      "sha256": "324e6df1c7430f16c2849fccba483b2e003046e9cfe770a595e559250ce2edc9"
+    },
+    {
+      "file": "ImageAnalysis-pxm.dll",
+      "sha256": "fd421a2d4abe392a72ca9fd02c365716c202aaf3df8a61eabc7a8214893d16bc"
+    }
+  ],
+  "methodSimulation": "Exact installed methods with mock native ImageAnalysis, frame paths, and timestamps",
+  "mapping": {
+    "madSource": "measurements_measurementSigma",
+    "sampleMad": 0.04,
+    "noiseSource": "measurements_measurementNoise",
+    "nonfiniteNoiseAccepted": true
+  },
+  "cache": {
+    "sameTimestampReused": 1,
+    "changedTimestampRemeasured": 1,
+    "changedSettingsRemeasured": 1
+  },
+  "bookkeeping": {
+    "absentRow": {
+      "nCached": 0,
+      "nMeasured": 0,
+      "nFailed": 0
+    },
+    "absentFrameMarkedFailed": true,
+    "mockDuplicateRowsMeasured": 2,
+    "mockUnknownRowFailed": 1,
+    "globalFailureCount": 1
+  },
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
