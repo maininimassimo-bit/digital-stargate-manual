@@ -342,7 +342,19 @@
           "NOISE_FLUX/3"
         ],
         "scientificClosures": 0,
-        "status": "HELDOUT_APERTURE_VARIANCE_REQUIRES_SPATIAL_AND_ORIENTATION_CONTROL"
+        "status": "HELDOUT_APERTURE_VARIANCE_REQUIRES_SPATIAL_AND_ORIENTATION_CONTROL",
+      "resamplingCovarianceTransfer": {
+        "path": "docs/project/BKL-046-TV4-COVARIANZA-RICAMPIONAMENTO-RED.md",
+        "documentCommitSha": "e26315b13fb593a0eb09427dd32dec8a7c7fc491",
+        "documentSha256": "b441ef6adde75c8e145aa2fe1b1e061d5dbaebea6c1fb3743aa49dca4e1c4db9",
+        "receiptSha256": "14091d3c521efa0479a939b4b6c30298d4e38027655c79a45cb4b109910f428e",
+        "predictions": 90,
+        "relatedAxes": [
+          "NOISE_FLUX/3"
+        ],
+        "scientificClosures": 0,
+        "status": "COVARIANCE_PROPAGATION_IMPROVES_HELDOUT_RESAMPLING_WITH_HORIZONTAL_RESIDUALS"
+      }
       }
     },
     {
