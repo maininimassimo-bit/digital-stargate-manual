@@ -1,0 +1,7 @@
+# BKL-046 — TV4 CLEAR1 e trasferibilità della varianza delle aperture
+
+Sul gruppo del 2 marzo sono state rilette le 40 pose e riprodotti 160 rapporti preesistenti nella regione centrale. Con 128 permutazioni per coppia, il rapporto mediano a 16 × 16 pixel fra varianza osservata e riferimento per pixel indipendenti è 1,181 per le 20 coppie adiacenti e 1,187 per le 20 coppie separate. In entrambi gli schemi 11 coppie superano l'inviluppo centrale del 95% ottenuto per permutazione. I due schemi riusano gli stessi fotogrammi.
+
+Le coorti del 27 febbraio sono state fissate dal registro prima di leggere i pixel. Con la soglia di 15.000 DN, la coorte a 23,5 ms esclude 15 fotogrammi su 16 e nessuna coppia è misurabile. A 4,5 ms, le sei pose AU sono escluse e le sei pose CZ restano utilizzabili. In CZ, il rapporto a 16 × 16 dipende fortemente dalla sottrazione dell'overscan per quadrante. In una diagnosi separata, togliere la media di ciascun quadrante alla differenza lascia rapporti fra 3,28 e 11,74. La diagnosi non cambia il protocollo.
+
+Le verifiche delimitano il risultato del 2 marzo. DIFFUSE_BACKGROUND/2 resta aperto per trasferibilità e guadagno assoluto. Gli inviluppi di permutazione sono descrittivi e le condizioni termiche differiscono. [Riscontro e impronte degli archivi](riscontro.json) · [Dataset NASA PDS](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-CAL-HRII%2FHRIV%2FMRI-2-GROUND-TV4-V1.0)
