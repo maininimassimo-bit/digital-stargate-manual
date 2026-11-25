@@ -1,0 +1,53 @@
+{
+  "admissionRequested": false,
+  "cases": [
+    {
+      "case": "fixed-half",
+      "hypotheses": [
+        "fixed-half"
+      ],
+      "status": "MATCHED_TESTED_HYPOTHESIS"
+    },
+    {
+      "case": "fixed-zero",
+      "hypotheses": [
+        "fixed-zero"
+      ],
+      "status": "MATCHED_TESTED_HYPOTHESIS"
+    },
+    {
+      "case": "use-declared",
+      "hypotheses": [
+        "use-declared"
+      ],
+      "status": "MATCHED_TESTED_HYPOTHESIS"
+    },
+    {
+      "case": "all-baseline",
+      "hypotheses": [],
+      "status": "UNMODELED_SEQUENCE"
+    },
+    {
+      "case": "mismatched",
+      "hypotheses": [],
+      "status": "UNRESOLVED_CASE"
+    },
+    {
+      "case": "missing",
+      "reason": "OUTPUT_NAMESPACE_DIFFERS",
+      "status": "REJECTED_INPUT"
+    },
+    {
+      "case": "extra",
+      "reason": "OUTPUT_NAMESPACE_DIFFERS",
+      "status": "REJECTED_INPUT"
+    },
+    {
+      "case": "nonfinite",
+      "reason": "NONFINITE_OR_NONFLOAT:zero-origin0-rgb.fits",
+      "status": "REJECTED_INPUT"
+    }
+  ],
+  "nativeExecutions": 0,
+  "schema": "BKL046_CFA_ORIGIN_CLASSIFIER_FIXTURE_V1"
+}
