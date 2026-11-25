@@ -22,3 +22,5 @@ Il conteggio dei blocchi è il riferimento calcolato dal lettore Python. La rice
 | Piano congelato | `66dc8a2c794e004b63f60f51b21b837d41a13cacd0e025523c1a854600073c95` |
 | Verificatore indipendente | `bdc615a121e1b8eb08646172925d2f86b1c9d9643cb6259b855f90ade219b959` |
 | Riscontro offline | `73c5682ec23ed90629c4d022a799c38f26cae8d5557e6da07b7408e92ddc64b9` |
+
+Lo ZIP BKL046-Stream34-riferimento-byte-v11-verificabile.zip è stato riletto da H:. Il verificatore estratto ha riprodotto la ricevuta byte per byte. SHA-256 dello ZIP: f901ed69f433d3ddd0bd9621b87aa25db878e0ce0a92d9a8a9853fd02dc8b902.
