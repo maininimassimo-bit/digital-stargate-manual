@@ -1,0 +1,739 @@
+{
+  "schema": "BKL046_ACS_INDEPENDENT_APERTURE_PHOTOMETRY_V1",
+  "maps": {
+    "1": {
+      "url": "https://www.stsci.edu/files/live/sites/www/files/home/hst/instrumentation/acs/data-analysis/pixel-area-maps/_documents/wfc1_newpam.fits",
+      "sha256": "025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c"
+    },
+    "2": {
+      "url": "https://www.stsci.edu/files/live/sites/www/files/home/hst/instrumentation/acs/data-analysis/pixel-area-maps/_documents/wfc2_newpam.fits",
+      "sha256": "e372a9f1e4409531422b3679b58073967584244de46fcfc27b1a190bf6b005a3"
+    }
+  },
+  "visits": {
+    "j8c103": {
+      "3": {
+        "counts": {
+          "F606W": 0,
+          "F658N": 0,
+          "F660N": 0
+        },
+        "bandRatios": {}
+      },
+      "5": {
+        "counts": {
+          "F606W": 0,
+          "F658N": 0,
+          "F660N": 0
+        },
+        "bandRatios": {}
+      },
+      "10": {
+        "counts": {
+          "F606W": 0,
+          "F658N": 0,
+          "F660N": 0
+        },
+        "bandRatios": {}
+      }
+    },
+    "j8c104": {
+      "3": {
+        "counts": {
+          "F606W": 0,
+          "F658N": 0,
+          "F660N": 0
+        },
+        "bandRatios": {}
+      },
+      "5": {
+        "counts": {
+          "F606W": 0,
+          "F658N": 0,
+          "F660N": 0
+        },
+        "bandRatios": {}
+      },
+      "10": {
+        "counts": {
+          "F606W": 0,
+          "F658N": 0,
+          "F660N": 0
+        },
+        "bandRatios": {}
+      }
+    },
+    "j8jq03": {
+      "3": {
+        "counts": {
+          "F606W": 2,
+          "F658N": 2,
+          "F660N": 2
+        },
+        "bandRatios": {
+          "F658N/F606W": 0.02120882002033831,
+          "F658N/F660N": 2.5438360799237505,
+          "F660N/F606W": 0.008337337530401735
+        }
+      },
+      "5": {
+        "counts": {
+          "F606W": 2,
+          "F658N": 2,
+          "F660N": 2
+        },
+        "bandRatios": {
+          "F658N/F606W": 0.021166190785948332,
+          "F658N/F660N": 2.5617035922080236,
+          "F660N/F606W": 0.008262544835526596
+        }
+      },
+      "10": {
+        "counts": {
+          "F606W": 2,
+          "F658N": 2,
+          "F660N": 2
+        },
+        "bandRatios": {
+          "F658N/F606W": 0.021420578494738135,
+          "F658N/F660N": 2.547117697123085,
+          "F660N/F606W": 0.008409732506249013
+        }
+      }
+    },
+    "j8jq06": {
+      "3": {
+        "counts": {
+          "F606W": 2,
+          "F658N": 2,
+          "F660N": 2
+        },
+        "bandRatios": {
+          "F658N/F606W": 0.021502814814378785,
+          "F658N/F660N": 2.579397922536259,
+          "F660N/F606W": 0.008336369749897135
+        }
+      },
+      "5": {
+        "counts": {
+          "F606W": 2,
+          "F658N": 2,
+          "F660N": 2
+        },
+        "bandRatios": {
+          "F658N/F606W": 0.021303300124386863,
+          "F658N/F660N": 2.577448027187796,
+          "F660N/F606W": 0.00826526855233255
+        }
+      },
+      "10": {
+        "counts": {
+          "F606W": 0,
+          "F658N": 0,
+          "F660N": 0
+        },
+        "bandRatios": {}
+      }
+    }
+  },
+  "rows": [
+    {
+      "obs": "j8c103uyq",
+      "visit": "j8c103",
+      "band": "F606W",
+      "chip": 1,
+      "apertures": {},
+      "referenceSeed": [
+        183.9904939352921,
+        299.81616984888745
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c103uzq",
+      "visit": "j8c103",
+      "band": "F606W",
+      "chip": 1,
+      "apertures": {},
+      "referenceSeed": [
+        183.99038727529876,
+        299.8162351034543
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c103v2q",
+      "visit": "j8c103",
+      "band": "F658N",
+      "chip": 1,
+      "apertures": {},
+      "referenceSeed": [
+        183.94984669058985,
+        299.8536662673007
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c103v3q",
+      "visit": "j8c103",
+      "band": "F658N",
+      "chip": 1,
+      "apertures": {},
+      "referenceSeed": [
+        183.94968562470748,
+        299.85376497234864
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c103xcq",
+      "visit": "j8c103",
+      "band": "F660N",
+      "chip": 1,
+      "apertures": {},
+      "referenceSeed": [
+        183.98987762092514,
+        299.81652839809436
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c103xdq",
+      "visit": "j8c103",
+      "band": "F660N",
+      "chip": 1,
+      "apertures": {},
+      "referenceSeed": [
+        183.98955242864076,
+        299.81672770365566
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c104ivq",
+      "visit": "j8c104",
+      "band": "F606W",
+      "chip": 2,
+      "apertures": {},
+      "referenceSeed": [
+        183.9414376300205,
+        298.35530324130167
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c104iwq",
+      "visit": "j8c104",
+      "band": "F606W",
+      "chip": 2,
+      "apertures": {},
+      "referenceSeed": [
+        183.94131197490253,
+        298.35537738601323
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c104izq",
+      "visit": "j8c104",
+      "band": "F658N",
+      "chip": 2,
+      "apertures": {},
+      "referenceSeed": [
+        183.9295509845326,
+        298.36650219578866
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c104j0q",
+      "visit": "j8c104",
+      "band": "F658N",
+      "chip": 2,
+      "apertures": {},
+      "referenceSeed": [
+        183.92931120129074,
+        298.3666437298963
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c104j7q",
+      "visit": "j8c104",
+      "band": "F660N",
+      "chip": 2,
+      "apertures": {},
+      "referenceSeed": [
+        183.93933807029728,
+        298.35654082894627
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8c104j8q",
+      "visit": "j8c104",
+      "band": "F660N",
+      "chip": 2,
+      "apertures": {},
+      "referenceSeed": [
+        183.93915394110599,
+        298.35664850312133
+      ],
+      "state": "EXCLUDED_UNCONFIRMED_IDENTITY"
+    },
+    {
+      "obs": "j8jq03cbq",
+      "visit": "j8jq03",
+      "band": "F606W",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 230919.57820513114,
+          "rateWithoutDq64": 230919.57820513114,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 246939.07849987154,
+          "rateWithoutDq64": 246939.07849987154,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "MEASURED",
+          "rate": 259879.57309452235,
+          "rateWithoutDq64": 259856.5174562579,
+          "noDq64Flagged": false
+        }
+      },
+      "referenceSeed": [
+        271.1771787087863,
+        256.7950822289804
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 45371.47265625,
+      "center": [
+        271.25068492398555,
+        256.169682581754
+      ],
+      "skyGood": 0.9807378387202089,
+      "cte": "OMIT",
+      "skyElectron": -2.5815574313653875
+    },
+    {
+      "obs": "j8jq03ccq",
+      "visit": "j8jq03",
+      "band": "F606W",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 229561.47732288903,
+          "rateWithoutDq64": 229561.47732288903,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 246227.7590909067,
+          "rateWithoutDq64": 246227.7590909067,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "MEASURED",
+          "rate": 259028.78260421613,
+          "rateWithoutDq64": 258999.432780816,
+          "noDq64Flagged": false
+        }
+      },
+      "referenceSeed": [
+        271.17718487437855,
+        256.79507315248117
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 43203.3828125,
+      "center": [
+        271.22775727279213,
+        256.25752883061455
+      ],
+      "skyGood": 0.9807566862361383,
+      "cte": "OMIT",
+      "skyElectron": -2.851312258396585
+    },
+    {
+      "obs": "j8jq03cfq",
+      "visit": "j8jq03",
+      "band": "F658N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 4864.98945142328,
+          "rateWithoutDq64": 4864.98945142328,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 5207.2736298091995,
+          "rateWithoutDq64": 5207.2736298091995,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "MEASURED",
+          "rate": 5545.438386485,
+          "rateWithoutDq64": 5543.672418980963,
+          "noDq64Flagged": false
+        }
+      },
+      "referenceSeed": [
+        271.14424523324254,
+        256.8297235799253
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 38799.90234375,
+      "center": [
+        271.6416146859056,
+        256.9802591107344
+      ],
+      "skyGood": 0.9807441253263708,
+      "cte": "OMIT",
+      "skyElectron": -3.1752124331984835
+    },
+    {
+      "obs": "j8jq03cgq",
+      "visit": "j8jq03",
+      "band": "F658N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 4901.270378045911,
+          "rateWithoutDq64": 4901.270378045911,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 5231.189743940009,
+          "rateWithoutDq64": 5231.189743940009,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "MEASURED",
+          "rate": 5569.878778335324,
+          "rateWithoutDq64": 5567.638577546776,
+          "noDq64Flagged": false
+        }
+      },
+      "referenceSeed": [
+        271.14425853115847,
+        256.82971918692954
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 39509.10546875,
+      "center": [
+        271.65515673271744,
+        256.97322272330956
+      ],
+      "skyGood": 0.9768201110022854,
+      "cte": "OMIT",
+      "skyElectron": -3.212874925361416
+    },
+    {
+      "obs": "j8jq03chq",
+      "visit": "j8jq03",
+      "band": "F660N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 1918.2547892528432,
+          "rateWithoutDq64": 1918.2547892528432,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 2037.3238403145763,
+          "rateWithoutDq64": 2037.3238403145763,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "MEASURED",
+          "rate": 2182.568160308753,
+          "rateWithoutDq64": 2182.153823104101,
+          "noDq64Flagged": false
+        }
+      },
+      "referenceSeed": [
+        271.17725941483025,
+        256.79509729636607
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 40733.24609375,
+      "center": [
+        271.6540397490856,
+        256.2706923900845
+      ],
+      "skyGood": 0.9800718719372754,
+      "cte": "OMIT",
+      "skyElectron": -2.8377001044645325
+    },
+    {
+      "obs": "j8jq03ciq",
+      "visit": "j8jq03",
+      "band": "F660N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 1920.931197039924,
+          "rateWithoutDq64": 1920.931197039924,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 2037.4892666740918,
+          "rateWithoutDq64": 2037.4892666740918,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "MEASURED",
+          "rate": 2181.312306375153,
+          "rateWithoutDq64": 2181.088279082223,
+          "noDq64Flagged": false
+        }
+      },
+      "referenceSeed": [
+        271.17728196509694,
+        256.79509071787794
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 40695.84375,
+      "center": [
+        271.66098736485526,
+        256.26965730738107
+      ],
+      "skyGood": 0.9630839594903626,
+      "cte": "OMIT",
+      "skyElectron": -2.690617325240594
+    },
+    {
+      "obs": "j8jq06wwq",
+      "visit": "j8jq06",
+      "band": "F606W",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 228927.07344039434,
+          "rateWithoutDq64": 228927.07344039434,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 245387.3698757187,
+          "rateWithoutDq64": 245387.3698757187,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "EXCLUDED_DQ_OR_SUPPORT"
+        }
+      },
+      "referenceSeed": [
+        229.33065923937284,
+        247.3977883149772
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 37505.97265625,
+      "center": [
+        221.94000424672384,
+        258.5588202338956
+      ],
+      "skyGood": 0.9947797716150082,
+      "cte": "OMIT",
+      "skyElectron": 1.0976171223365765
+    },
+    {
+      "obs": "j8jq06wxq",
+      "visit": "j8jq06",
+      "band": "F606W",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 228377.52638673672,
+          "rateWithoutDq64": 228377.52638673672,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 244753.95494926968,
+          "rateWithoutDq64": 244753.95494926968,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "EXCLUDED_DQ_OR_SUPPORT"
+        }
+      },
+      "referenceSeed": [
+        229.33064397114788,
+        247.397790038249
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 39167.0546875,
+      "center": [
+        221.91056385488463,
+        258.63680300908004
+      ],
+      "skyGood": 0.9947780678851175,
+      "cte": "OMIT",
+      "skyElectron": 2.5381199327826747
+    },
+    {
+      "obs": "j8jq06x0q",
+      "visit": "j8jq06",
+      "band": "F658N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 4915.416623209467,
+          "rateWithoutDq64": 4915.416623209467,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 5217.529552898264,
+          "rateWithoutDq64": 5217.529552898264,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "EXCLUDED_DQ_OR_SUPPORT"
+        }
+      },
+      "referenceSeed": [
+        229.2942907906299,
+        247.4315136287673
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 40228.65625,
+      "center": [
+        222.25997551783965,
+        259.3003631464957
+      ],
+      "skyGood": 0.9941234084231146,
+      "cte": "OMIT",
+      "skyElectron": 1.3283656609194192
+    },
+    {
+      "obs": "j8jq06x1q",
+      "visit": "j8jq06",
+      "band": "F658N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 4917.919500636927,
+          "rateWithoutDq64": 4917.919500636927,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 5224.098193213052,
+          "rateWithoutDq64": 5224.098193213052,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "EXCLUDED_DQ_OR_SUPPORT"
+        }
+      },
+      "referenceSeed": [
+        229.2942765127964,
+        247.43151583745365
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 38723.09375,
+      "center": [
+        222.30649775163107,
+        259.36320720477795
+      ],
+      "skyGood": 0.9938009787928221,
+      "cte": "OMIT",
+      "skyElectron": 1.4190894800579943
+    },
+    {
+      "obs": "j8jq06x2q",
+      "visit": "j8jq06",
+      "band": "F660N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 1906.6225962047536,
+          "rateWithoutDq64": 1906.6225962047536,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 2025.6041439777014,
+          "rateWithoutDq64": 2025.6041439777014,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "EXCLUDED_DQ_OR_SUPPORT"
+        }
+      },
+      "referenceSeed": [
+        229.33053367941292,
+        247.39775969341935
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 41261.359375,
+      "center": [
+        222.33408058996713,
+        258.6788914630875
+      ],
+      "skyGood": 0.9944535073409462,
+      "cte": "OMIT",
+      "skyElectron": 1.9861465621718732
+    },
+    {
+      "obs": "j8jq06x3q",
+      "visit": "j8jq06",
+      "band": "F660N",
+      "chip": 1,
+      "apertures": {
+        "3": {
+          "state": "MEASURED",
+          "rate": 1905.6376362829565,
+          "rateWithoutDq64": 1905.6376362829565,
+          "noDq64Flagged": true
+        },
+        "5": {
+          "state": "MEASURED",
+          "rate": 2025.5455342968887,
+          "rateWithoutDq64": 2025.5455342968887,
+          "noDq64Flagged": true
+        },
+        "10": {
+          "state": "EXCLUDED_DQ_OR_SUPPORT"
+        }
+      },
+      "referenceSeed": [
+        229.33052890737267,
+        247.39776570184824
+      ],
+      "state": "EVALUATED",
+      "peakElectron": 40583.46875,
+      "center": [
+        222.34099040472762,
+        258.66729316797546
+      ],
+      "skyGood": 0.991514360313316,
+      "cte": "OMIT",
+      "skyElectron": 2.226943691823635
+    }
+  ],
+  "radiusUnits": "detector pixels",
+  "astrometry": "Pinned CALSPEC J2000 and proper motion",
+  "scientificClosures": 0,
+  "qualifiedControls": 0
+}
