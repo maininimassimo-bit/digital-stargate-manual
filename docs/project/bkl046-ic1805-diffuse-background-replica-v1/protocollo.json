@@ -1,0 +1,46 @@
+{
+  "schema": "BKL046_IC1805_DIFFUSE_SPATIAL_MODEL_FROZEN_REPLICATION_V1",
+  "captureZip": "4a0c4142d8d0e7b056ec9b46046eec78fe6fc149aabf3c028923f81d6851f0a0",
+  "captureReceipt": "582a3adcdeb5509b4c4e9434b252726cf0473c86fdd6da272a69aa4358bc705f",
+  "frameIndices": [
+    0,
+    19,
+    38
+  ],
+  "tileStartsX": [
+    290,
+    1622,
+    2992
+  ],
+  "tileStartsY": [
+    250,
+    1066,
+    2024
+  ],
+  "sideBinned": 128,
+  "cellBinned": 16,
+  "amplitudeNoise": [
+    0.5,
+    1,
+    2
+  ],
+  "angles": [
+    0,
+    45,
+    90,
+    135
+  ],
+  "relativeTolerance": 0.05,
+  "design": "Real RGGB data as a two-green preview. Independently refit plane or full quadratic to alternating spatial cell medians. Choose degree exclusively by lower median validation error. For each low-contrast filament or diffuse injection measure median-centered corrected increment through the independently reselected pipeline, and through each fixed degree. Evaluate flux in the known local aperture and L2 relative error. Source mask and truth never supplied to fitting.",
+  "archivedBaseProtocolSha256": "a2baf9703d08045c06116299bfceadded32a7707208197138fba400f9820868a",
+  "archivedEstimatorSha256": "b1d56ffe2669f435a3d22a72c9efdc9a7bd5638a6b9317dbc18d0c6a30ef0fc8",
+  "rawpyWheelSha256": "fb91f8fb21b56037ecc3c062ce2de4d97fdc7d4ecb1d2738280461d74c593562",
+  "rawVisibleDimensions": [
+    2602,
+    3908
+  ],
+  "resampling": "No image resampling. Map relative tile origins to the nearest even raw detector coordinate.",
+  "captureScope": "Three chronologically spaced independent lights in IC1805, raw visible RGGB green average.",
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
