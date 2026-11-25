@@ -1,0 +1,10 @@
+{
+  "schema": "BKL046_M8_M20_EMPIRICAL_SCALE_BACKGROUND_PROTOCOL_V1",
+  "baseReport": "a84d66047802b999c61cce84b80e2cf79dc85032532fc9b30cf6c015684a9564",
+  "scaleReport": "3788dfdc1c97bc96528e3d66d9f32ccb81b365f7fb254822737834a3d786d934",
+  "expectedPairs": 27,
+  "variants": 8,
+  "withheldTiles": 8,
+  "minimumMedianImprovement": 0.1,
+  "design": "Recompute archived relative backgrounds using the same 27 pairs and common support. Use unit scale, 8 whole-star-cohort scale estimates and 64 leave-one-tile-out scale estimates per pair. Multiply target contrast about its common-support median. Fit offset and plane on each checkerboard fold and validate on the opposite fold. Compare pass status across all 72 empirical estimates and classify all pass, all fail or mixed, separately from the unit baseline. These individual empirical estimates are a finite sensitivity sample, not continuous bounds or an astrophysical ground truth."
+}
