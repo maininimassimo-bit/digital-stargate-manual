@@ -1,0 +1,7 @@
+# BKL-046 / BKL-051 — Rilettura del rilievo ARB-APIOP-R4-001
+
+Il rilievo riguardava la custodia del figlio originale se fallivano la lettura del PID, la verifica degli stream o la registrazione dei listener. Il verbale ARB della candidata build 1719 indica il rilievo come risolto. Il replay odierno carica il modulo comune esatto del descrittore del probe eseguito e verifica l'impronta prima di usarlo. Per custode e padre, il modulo conserva l'oggetto originale e la prima causa anche nei quattro casi di cattura incompleta. La custodia operativa resta bloccata in caso di errore. Otto casi negativi e due validi con figli simulati hanno prodotto replay identici. Il test non crea processi figli né canali verso il coordinatore.
+
+La rilettura separata della prova storica su DSG-Shared ha verificato le approvazioni ARB e RQ legate al descrittore effettivo, i 312 membri dell'archivio, l'uscita del padre e dell'originale con codice zero e il rilascio canonico. L'esito effettivo rimane `PASS_SYNTHETIC_API_CONTRACT_ONLY`, con zero controlli scientifici qualificati. La correzione è confermata per il modulo comune verificato. I collaudi e le approvazioni di nuove candidate restano distinti.
+
+Nessuna nuova richiesta di ammissione e nessun avvio PixInsight.
