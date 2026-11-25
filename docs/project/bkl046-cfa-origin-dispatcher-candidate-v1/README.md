@@ -1,0 +1,9 @@
+# BKL-046 · Dispatcher candidato per il controllo dell'origine XDRZ
+
+Il dispatcher usa la continuazione R4 dei quattro casi e attende il contesto di prontezza dal parent. Collega acquisizione della finestra, confronto dei FITS, autorizzazione di una sola chiusura, uscita e pubblicazione. Il classificatore effettivo rilegge i file e il dispatcher verifica le impronte prima della chiusura e prima del rilascio. La ricevuta, lo script, il BMP e il verbale di chiusura sono compresi nei 17 oggetti trattenuti su H: durante il rilascio.
+
+Nel registro isolato, un parent Python controlla una finestra testimone reale e invia al dispatcher i messaggi del supervisore CFA. Con fixture valide il custode installato emette una sola ricevuta di rilascio. Con log difforme o collisione d'archivio il record attivo rimane intatto e non compare una ricevuta. La collisione conserva il contenuto preesistente. Nel caso valido la scrittura del BMP è negata durante il rilascio.
+
+Il contesto di prontezza è stato allineato al dispatcher includendo l'impronta del batch. Gli output del collaudo sono sintetici e l'inventario PixInsight è simulato. La prova usa il parent testimone e il registro isolato, senza leggere lo stato canonico o avviare PixInsight. Il parent nativo candidato e l'ingresso con firme di revisione devono ancora essere legati allo stesso pacchetto operativo. [Parent candidato](../bkl046-cfa-origin-native-parent-candidate-v1/README.md)
+
+Il kit riusa l'adattatore R4 installato e il kit di verifica del batch. Il collaudo Node accetta Python, la directory del kit di verifica, le dipendenze, una nuova directory di prova, una radice di prova su H: e un nuovo rapporto.
