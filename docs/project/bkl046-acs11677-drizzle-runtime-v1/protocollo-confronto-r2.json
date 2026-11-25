@@ -1,0 +1,48 @@
+{
+  "arms": {
+    "control": {
+      "driz_cr": false,
+      "driz_cr_corr": false,
+      "mdriztab": true,
+      "resetbits": "4096"
+    },
+    "historical": {
+      "driz_cr_corr": false,
+      "mdriztab": true,
+      "resetbits": "4096"
+    }
+  },
+  "checks": [
+    "same read-only inputs, order, WCS, output grid and settings",
+    "historical run retains all twelve CR masks",
+    "control logs Driz_CR off and retains no CR mask",
+    "compare SCI, WHT and CTX with the same declared units"
+  ],
+  "layers": [
+    "defaults",
+    "MDRIZTAB row 4",
+    "explicit user kwargs"
+  ],
+  "mergeOrder": [
+    [
+      132,
+      [
+        "configObj",
+        "mdriztab_dict"
+      ]
+    ],
+    [
+      154,
+      [
+        "configObj",
+        "overwrite_dict"
+      ]
+    ]
+  ],
+  "oldPlanSha256": "f53ddf31c0913df95f3e7f1eed4930abf734bfad5d46e73e72ab8a624b276eef",
+  "scientificClosure": false,
+  "scope": "Corrects parameter precedence before either scientific outcome is inspected.",
+  "source": "drizzlepac/processInput.py",
+  "sourceSha256": "38741d80ba455a81938142f1a44671c8af69742061ad7da4394cabb80e51b59c",
+  "wheelSha256": "2223ae6ee2169bf0f480aa34ea8e2daca495faa4c86be19bdf6d3741b3bb3336"
+}
