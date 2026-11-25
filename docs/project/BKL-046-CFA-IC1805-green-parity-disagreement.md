@@ -14,3 +14,7 @@ Su 2.070 associazioni precedenti, 2.003 consentono entrambe le misure. Sono dist
 L'accordo tra parità è un indicatore diagnostico di qualità su questo campo. Il gruppo a basso disaccordo comprende il 52% delle associazioni originarie e il suo P90 sfiora la soglia. Selezione e valutazione condividono i pixel delle stesse stelle. Restano possibili errori comuni ai due centroidi e dipendenze dovute alla posa di riferimento. Il risultato motiva un controllo su pose o fonti astrometriche indipendenti, con copertura dichiarata. L'asse CFA resta aperto e PixInsight non è stato avviato.
 
 I due rapporti ottenuti rileggendo le 39 pose hanno SHA-256 `5aa721557e500f9fcb3ee03cfcb4f8a12c84a90797e9cdd425169cd8481f2588`. Il protocollo fissa le impronte dei dati e le versioni del decodificatore.
+
+## Controllo descrittivo per posa e per stella
+
+Per ogni posa o stella con almeno tre misure in entrambi i gruppi, ho sottratto la mediana del residuo congiunto nel gruppo a basso disaccordo da quella del gruppo ad alto disaccordo. La differenza è positiva in tutte le 38 pose, con mediana delle differenze di 0,09751 pixel. Ripetendo il confronto entro ciascuna stella, è positiva in 23 stelle su 46 e la mediana scende a 0,00058 pixel. Questo controllo aggiunto dopo il primo esito indica che il confronto aggregato discrimina soprattutto tra stelle della stessa posa. Su questo campione l'accordo tra parità ha scarso sostegno come indicatore di variazione del residuo per la stessa stella nel tempo.
