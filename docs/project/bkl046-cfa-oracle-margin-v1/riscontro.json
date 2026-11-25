@@ -1,0 +1,120 @@
+{
+  "arithmeticModel": "Archived polygon primitives applied to pinned serialized inputs",
+  "binary32Conversion": {
+    "detector": {
+      "acceptedByExactComparator": true,
+      "differentSupportSamples": 0,
+      "maxAbsIntensityOnCommonSupport": 1.3877787807814457e-17,
+      "maxAbsWeight": 1.6431300764452317e-14
+    },
+    "reference": {
+      "acceptedByExactComparator": true,
+      "differentSupportSamples": 0,
+      "maxAbsIntensityOnCommonSupport": 1.3877787807814457e-17,
+      "maxAbsWeight": 1.6431300764452317e-14
+    },
+    "shear": {
+      "acceptedByExactComparator": true,
+      "differentSupportSamples": 0,
+      "maxAbsIntensityOnCommonSupport": 2.978001700792987e-08,
+      "maxAbsWeight": 1.1492176321681313e-07
+    },
+    "unmasked": {
+      "acceptedByExactComparator": true,
+      "differentSupportSamples": 0,
+      "maxAbsIntensityOnCommonSupport": 1.3877787807814457e-17,
+      "maxAbsWeight": 1.6431300764452317e-14
+    },
+    "wrong-channel": {
+      "acceptedByExactComparator": true,
+      "differentSupportSamples": 0,
+      "maxAbsIntensityOnCommonSupport": 1.3877787807814457e-17,
+      "maxAbsWeight": 1.6431300764452317e-14
+    }
+  },
+  "integerPairComparisons": [
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 0,
+      "left": "unmasked",
+      "maxAbsIntensityOnCommonSupport": 0.25,
+      "maxAbsWeight": 0.9999999999999981,
+      "right": "detector"
+    },
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 0,
+      "left": "unmasked",
+      "maxAbsIntensityOnCommonSupport": 0.3100000023841858,
+      "maxAbsWeight": 0.9999999999999981,
+      "right": "reference"
+    },
+    {
+      "acceptedByExactComparator": true,
+      "differentSupportSamples": 0,
+      "left": "unmasked",
+      "maxAbsIntensityOnCommonSupport": 0.0,
+      "maxAbsWeight": 0.0,
+      "right": "wrong-channel"
+    },
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 0,
+      "left": "detector",
+      "maxAbsIntensityOnCommonSupport": 0.3100000023841858,
+      "maxAbsWeight": 0.9999999999999981,
+      "right": "reference"
+    },
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 0,
+      "left": "detector",
+      "maxAbsIntensityOnCommonSupport": 0.25,
+      "maxAbsWeight": 0.9999999999999981,
+      "right": "wrong-channel"
+    },
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 0,
+      "left": "reference",
+      "maxAbsIntensityOnCommonSupport": 0.3100000023841858,
+      "maxAbsWeight": 0.9999999999999981,
+      "right": "wrong-channel"
+    }
+  ],
+  "nativeExecutions": 0,
+  "programSha256": "88fa97f68aa13882074c585992f329ab34e720654346a54da017a65c942e9894",
+  "protocolSha256": "99f551c87642c6d4248ecfc1dded553f5a21cfbb4687511a9fa182894e3c9eeb",
+  "schema": "BKL046_CFA_FROZEN_ORACLE_MARGIN_V1",
+  "scientificClosures": 0,
+  "shearAgainstFrozenOracle": {
+    "center0": {
+      "normalizeSerializedOrigin": {
+        "acceptedByExactComparator": true,
+        "differentSupportSamples": 0,
+        "maxAbsIntensityOnCommonSupport": 0.0,
+        "maxAbsWeight": 0.0
+      },
+      "rawAsCenterZero": {
+        "acceptedByExactComparator": true,
+        "differentSupportSamples": 0,
+        "maxAbsIntensityOnCommonSupport": 0.0,
+        "maxAbsWeight": 0.0
+      }
+    },
+    "edge05": {
+      "normalizeSerializedOrigin": {
+        "acceptedByExactComparator": true,
+        "differentSupportSamples": 0,
+        "maxAbsIntensityOnCommonSupport": 2.220446049250313e-16,
+        "maxAbsWeight": 2.6645352591003757e-15
+      },
+      "rawAsCenterZero": {
+        "acceptedByExactComparator": false,
+        "differentSupportSamples": 52,
+        "maxAbsIntensityOnCommonSupport": 0.206982595922168,
+        "maxAbsWeight": 0.5588810524209675
+      }
+    }
+  }
+}
