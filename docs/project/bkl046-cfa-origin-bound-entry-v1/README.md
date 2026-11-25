@@ -1,0 +1,9 @@
+# BKL-046 · Entrypoint XDRZ legato al parent R4 isolato
+
+Il parent identificato tramite FD3 legge i record di acquisizione e identità e usa l'ID creato dal custode per preparare l'entrypoint. In una directory isolata crea la sottocartella della prenotazione, scrive lo script con creazione esclusiva, lo sincronizza e ne rilegge i byte. Rifiuta una versione alterata e una seconda posa per lo stesso ID. Il comando PixInsight resta in memoria. Nel collaudo il parent avvia soltanto le finestre testimone.
+
+Nel caso valido, il verbale di chiusura include l'impronta dello script appena preparato. Il supervisore la confronta con i byte riletti, pubblica lo script con gli altri 15 membri e aggiunge il marcatore di archivio. Windows blocca l'apertura in scrittura durante il rilascio. Nei due casi con finestra estranea o ricevuta alterata la posa riesce, ma il parent rifiuta la chiusura e R4 conserva la prenotazione di prova.
+
+I processi testimone, la scrittura su H: e gli handle sono effettivi. FITS, inventario PixInsight e ammissione riguardano il registro isolato e le fixture. Non è stato eseguito il comando PixInsight. Restano l'integrazione dell'avvio effettivo vincolato all'handle, la revisione del launcher e l'attivazione protetta prima dell'ammissione. [Comando candidato](../bkl046-cfa-origin-launch-intent-v1/README.md) · [Catena testimone](../bkl046-cfa-origin-window-r4-chain-v1/README.md)
+
+Il kit riusa l'adattatore R4 installato, i kit di custodia degli ingressi e di verifica del batch e le dipendenze fissate dalla catena testimone. Il collaudo crea stato e archivio solo nelle directory di prova.
