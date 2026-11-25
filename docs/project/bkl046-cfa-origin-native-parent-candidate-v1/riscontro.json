@@ -1,0 +1,63 @@
+{
+  "cases": [
+    {
+      "calls": [
+        "hold-inputs",
+        "stage",
+        "check-r4",
+        "intercept-spawn",
+        "verify-image",
+        "ready",
+        "serve",
+        "observe-original"
+      ],
+      "case": "valid",
+      "failure": null
+    },
+    {
+      "calls": [
+        "hold-inputs",
+        "stage"
+      ],
+      "case": "changed-entry",
+      "failure": "STAGED_ENTRY_BYTES_DIFFERS"
+    },
+    {
+      "calls": [
+        "hold-inputs",
+        "stage",
+        "check-r4"
+      ],
+      "case": "records-changed",
+      "failure": "R4_RECORDS_CHANGED_BEFORE_LAUNCH"
+    },
+    {
+      "calls": [
+        "hold-inputs",
+        "stage",
+        "check-r4",
+        "intercept-spawn"
+      ],
+      "case": "spawn-exception",
+      "failure": "TEST_SPAWN_FAILED"
+    },
+    {
+      "calls": [
+        "hold-inputs",
+        "stage",
+        "check-r4",
+        "intercept-spawn",
+        "verify-image",
+        "observe-original"
+      ],
+      "case": "image-differs",
+      "failure": "TEST_IMAGE_DIFFERS"
+    }
+  ],
+  "coordinatorStateAccessed": false,
+  "nativeExecutions": 0,
+  "originalAppSpawnIntercepted": true,
+  "recordsRevalidationSimulated": true,
+  "schema": "BKL046_CFA_ORIGIN_NATIVE_PARENT_DRY_TEST_V1",
+  "scratchInputAndEntryHandlesReal": true
+}
