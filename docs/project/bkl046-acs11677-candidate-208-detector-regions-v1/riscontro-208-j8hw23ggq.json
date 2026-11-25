@@ -1,0 +1,63 @@
+{
+  "protocol": "BKL046_ACS11677_208_SHIFTED_DETECTOR_DIAGNOSTIC_V1",
+  "trial": "j8hw23ggq",
+  "reportSha256": "c25ab627f99ba425455e912f318b94612b849950e19687c2f1a1f729be6098e7",
+  "sourcePositionSha256": "dc3011919ce361c5c741d2f4ac2251a0fd94ac61f8e764ca8b8e9152dadb52d6",
+  "predictedLocationsUseAffineInDiagnostic": true,
+  "geometryPassed": false,
+  "heldOutAffineP90Px": 0.11897037265458636,
+  "targetSha256": "ef3a44a8a87d87c8c7b6a5cc711e41abac9684a6b862988490423a1df601c77b",
+  "screen": {
+    "frozenCenter": {
+      "state": "PEAK_SUPPORT_OR_RELOCATION",
+      "peakAboveBackground": 4776.393557071686,
+      "peakShiftPx": 3.6526135154351493,
+      "apertureNonzeroDQ": 2,
+      "apertureFullWell": 0,
+      "projectedXY": [
+        2914.5260098710824,
+        212.0466690594713
+      ],
+      "peakXY": [
+        2911,
+        213
+      ],
+      "apertureDqCounts": {
+        "0": 315,
+        "64": 2
+      },
+      "maskSensitivity": {
+        "0": false,
+        "16": false,
+        "80": false
+      }
+    },
+    "exploratoryBrightPeak": {
+      "state": "SHORT_OTHER_DQ",
+      "peakAboveBackground": 23918.32905435562,
+      "peakShiftPx": 1.0733410070046008,
+      "apertureNonzeroDQ": 2,
+      "apertureFullWell": 0,
+      "projectedXY": [
+        2909.0723871796704,
+        213.5399957156106
+      ],
+      "peakXY": [
+        2910,
+        213
+      ],
+      "apertureDqCounts": {
+        "0": 315,
+        "64": 2
+      },
+      "maskSensitivity": {
+        "0": false,
+        "16": false,
+        "80": true
+      }
+    }
+  },
+  "candidateQualified": false,
+  "stellarFluxMeasured": false,
+  "scientificClosure": false
+}
