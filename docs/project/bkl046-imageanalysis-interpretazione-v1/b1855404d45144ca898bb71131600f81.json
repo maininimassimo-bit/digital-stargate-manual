@@ -1,0 +1,65 @@
+{
+  "protocol": "BKL046_IMAGEANALYSIS_CONTROL_INTERPRETATION_V1",
+  "operationRef": "b1855404d45144ca898bb71131600f81",
+  "inputSha256": "7c9071fb365bb2493485f26c2ffc79093b013a7efcc47e7e796369f0e4adec80",
+  "numericTolerance": {
+    "relative": 1e-09,
+    "absoluteNativeUnits": 1e-12,
+    "starsExact": true
+  },
+  "orderDifferencesByFrame": {
+    "compact-shuffled": [],
+    "compact-zones": [],
+    "tailed-shuffled": [],
+    "compact-wide-psf": []
+  },
+  "contrasts": {
+    "spatialSigma": {
+      "field": "measurementSigma",
+      "target": "compact-zones",
+      "directions": {
+        "forward": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE",
+        "reverse": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+      },
+      "interpretation": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+    },
+    "spatialNoise": {
+      "field": "noise",
+      "target": "compact-zones",
+      "directions": {
+        "forward": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE",
+        "reverse": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+      },
+      "interpretation": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+    },
+    "heavyTailSigma": {
+      "field": "measurementSigma",
+      "target": "tailed-shuffled",
+      "directions": {
+        "forward": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE",
+        "reverse": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+      },
+      "interpretation": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+    },
+    "heavyTailNoise": {
+      "field": "noise",
+      "target": "tailed-shuffled",
+      "directions": {
+        "forward": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE",
+        "reverse": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+      },
+      "interpretation": "INDISTINGUISHABLE_AT_FROZEN_TOLERANCE"
+    },
+    "widePsfFwhm": {
+      "field": "fwhmPx",
+      "target": "compact-wide-psf",
+      "directions": {
+        "forward": "INCREASED",
+        "reverse": "INCREASED"
+      },
+      "interpretation": "INCREASED"
+    }
+  },
+  "nativeOriginVerifiedByEvaluator": false,
+  "scientificAcceptance": false
+}
