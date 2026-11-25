@@ -1,0 +1,231 @@
+{
+  "schema": "BKL046_ACS_GRW_CALSPEC_PHOTFLAM_SENSITIVITY_V1",
+  "sourceSha256": {
+    "grw_70d5824_stiswfcnic_003.fits": "6faea1017d3beb7c77f4c48a5d5b8f75abf2c0386a2f99a72111eaa688211c40",
+    "F606W.vot": "03711db8880801b8bbf5b5a7ff91fa6aedab503558d49cde9cffac8bd702fe66",
+    "F658N.vot": "3861370f71db2e6e16ba1dd26454fdadde362dea1c41081d1729fb05085db110",
+    "F660N.vot": "aa6145d43e46a4fe3f404569170af7b8a0a61628ba79d5d88808ecd149915980"
+  },
+  "bandFlux": {
+    "F606W": {
+      "meanFlam": 2.1989970258615444e-14,
+      "wavelengthRange": [
+        4569.0,
+        7283.0
+      ],
+      "samples": 2715,
+      "integrationRefinementDeltaPct": -1.54444476652138e-05
+    },
+    "F658N": {
+      "meanFlam": 1.19573601687267e-14,
+      "wavelengthRange": [
+        6435.0,
+        6734.0
+      ],
+      "samples": 300,
+      "integrationRefinementDeltaPct": -0.001396153464083838
+    },
+    "F660N": {
+      "meanFlam": 1.2631439396247663e-14,
+      "wavelengthRange": [
+        6511.0,
+        6693.0
+      ],
+      "samples": 183,
+      "integrationRefinementDeltaPct": 0.0012235318516129468
+    }
+  },
+  "frames": [
+    {
+      "obs": "j8jq03cbq",
+      "visit": "j8jq03",
+      "band": "F606W",
+      "photmode": "ACS WFC1 F606W MJD#52655.1545",
+      "photflam": 7.7447234e-20,
+      "predictedRateElectronPerSec": 283934.86923775024
+    },
+    {
+      "obs": "j8jq03ccq",
+      "visit": "j8jq03",
+      "band": "F606W",
+      "photmode": "ACS WFC1 F606W MJD#52655.1553",
+      "photflam": 7.7447234e-20,
+      "predictedRateElectronPerSec": 283934.86923775024
+    },
+    {
+      "obs": "j8jq03cfq",
+      "visit": "j8jq03",
+      "band": "F658N",
+      "photmode": "ACS WFC1 F658N MJD#52655.1585",
+      "photflam": 1.9689175e-18,
+      "predictedRateElectronPerSec": 6073.06307589155
+    },
+    {
+      "obs": "j8jq03cgq",
+      "visit": "j8jq03",
+      "band": "F658N",
+      "photmode": "ACS WFC1 F658N MJD#52655.1597",
+      "photflam": 1.9689175e-18,
+      "predictedRateElectronPerSec": 6073.06307589155
+    },
+    {
+      "obs": "j8jq03chq",
+      "visit": "j8jq03",
+      "band": "F660N",
+      "photmode": "ACS WFC1 F660N MJD#52655.1614",
+      "photflam": 5.1471409e-18,
+      "predictedRateElectronPerSec": 2454.069092269781
+    },
+    {
+      "obs": "j8jq03ciq",
+      "visit": "j8jq03",
+      "band": "F660N",
+      "photmode": "ACS WFC1 F660N MJD#52655.1633",
+      "photflam": 5.1471413e-18,
+      "predictedRateElectronPerSec": 2454.0689015566104
+    },
+    {
+      "obs": "j8jq06wwq",
+      "visit": "j8jq06",
+      "band": "F606W",
+      "photmode": "ACS WFC1 F606W MJD#52805.1616",
+      "photflam": 7.7508361e-20,
+      "predictedRateElectronPerSec": 283710.94388920756
+    },
+    {
+      "obs": "j8jq06wxq",
+      "visit": "j8jq06",
+      "band": "F606W",
+      "photmode": "ACS WFC1 F606W MJD#52805.1624",
+      "photflam": 7.7508361e-20,
+      "predictedRateElectronPerSec": 283710.94388920756
+    },
+    {
+      "obs": "j8jq06x0q",
+      "visit": "j8jq06",
+      "band": "F658N",
+      "photmode": "ACS WFC1 F658N MJD#52805.1656",
+      "photflam": 1.9705279e-18,
+      "predictedRateElectronPerSec": 6068.099908012823
+    },
+    {
+      "obs": "j8jq06x1q",
+      "visit": "j8jq06",
+      "band": "F658N",
+      "photmode": "ACS WFC1 F658N MJD#52805.1668",
+      "photflam": 1.9705279e-18,
+      "predictedRateElectronPerSec": 6068.099908012823
+    },
+    {
+      "obs": "j8jq06x2q",
+      "visit": "j8jq06",
+      "band": "F660N",
+      "photmode": "ACS WFC1 F660N MJD#52805.1685",
+      "photflam": 5.1513529e-18,
+      "predictedRateElectronPerSec": 2452.0625244385146
+    },
+    {
+      "obs": "j8jq06x3q",
+      "visit": "j8jq06",
+      "band": "F660N",
+      "photmode": "ACS WFC1 F660N MJD#52805.1704",
+      "photflam": 5.1513529e-18,
+      "predictedRateElectronPerSec": 2452.0625244385146
+    }
+  ],
+  "comparisons": [
+    {
+      "ratio": "F658N/F606W",
+      "radiusPixels": 3,
+      "predictedRatios": {
+        "j8jq03": 0.02138893011694991,
+        "j8jq06": 0.021388318070601067
+      },
+      "observedRatios": {
+        "j8jq03": 0.021373852138974147,
+        "j8jq06": 0.021353465280174923
+      },
+      "predictedVisitDeltaPct": -0.002861509881491031,
+      "measuredVisitDeltaPct": -0.09538223932058498,
+      "remainingDeltaPoints": -0.09252072943909395
+    },
+    {
+      "ratio": "F658N/F606W",
+      "radiusPixels": 5,
+      "predictedRatios": {
+        "j8jq03": 0.02138893011694991,
+        "j8jq06": 0.021388318070601067
+      },
+      "observedRatios": {
+        "j8jq03": 0.02123127239475918,
+        "j8jq06": 0.021285267716501147
+      },
+      "predictedVisitDeltaPct": -0.002861509881491031,
+      "measuredVisitDeltaPct": 0.2543197634979899,
+      "remainingDeltaPoints": 0.25718127337948093
+    },
+    {
+      "ratio": "F658N/F660N",
+      "radiusPixels": 3,
+      "predictedRatios": {
+        "j8jq03": 2.4746912509511505,
+        "j8jq06": 2.474692161205117
+      },
+      "observedRatios": {
+        "j8jq03": 2.570443137884404,
+        "j8jq06": 2.583629445729127
+      },
+      "predictedVisitDeltaPct": 3.678252655792136e-05,
+      "measuredVisitDeltaPct": 0.5129974536443704,
+      "remainingDeltaPoints": 0.5129606711178125
+    },
+    {
+      "ratio": "F658N/F660N",
+      "radiusPixels": 5,
+      "predictedRatios": {
+        "j8jq03": 2.4746912509511505,
+        "j8jq06": 2.474692161205117
+      },
+      "observedRatios": {
+        "j8jq03": 2.5667560869322426,
+        "j8jq06": 2.580401717286717
+      },
+      "predictedVisitDeltaPct": 3.678252655792136e-05,
+      "measuredVisitDeltaPct": 0.5316294144171341,
+      "remainingDeltaPoints": 0.5315926318905762
+    },
+    {
+      "ratio": "F660N/F606W",
+      "radiusPixels": 3,
+      "predictedRatios": {
+        "j8jq03": 0.00864307016429991,
+        "j8jq06": 0.008642819662945656
+      },
+      "observedRatios": {
+        "j8jq03": 0.00831524021051321,
+        "j8jq06": 0.008264910169480109
+      },
+      "predictedVisitDeltaPct": -0.0028982913419794976,
+      "measuredVisitDeltaPct": -0.6052746494258576,
+      "remainingDeltaPoints": -0.6023763580838781
+    },
+    {
+      "ratio": "F660N/F606W",
+      "radiusPixels": 5,
+      "predictedRatios": {
+        "j8jq03": 0.00864307016429991,
+        "j8jq06": 0.008642819662945656
+      },
+      "observedRatios": {
+        "j8jq03": 0.008271636133581572,
+        "j8jq06": 0.008248819388820796
+      },
+      "predictedVisitDeltaPct": -0.0028982913419794976,
+      "measuredVisitDeltaPct": -0.2758431873972733,
+      "remainingDeltaPoints": -0.2729448960552938
+    }
+  ],
+  "qualifiedControls": 0,
+  "scientificClosures": 0,
+  "scope": "Static SVO passband shape and exposure-specific PHOTFLAM, no finite-aperture or CTE correction"
+}
