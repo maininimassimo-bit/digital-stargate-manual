@@ -1,0 +1,16 @@
+# BKL-046 – Misura stellare con FWHMEccentricity
+
+Scheda intermedia per `script_file:src/scripts/mschuster/FWHMEccentritity/FWHMEccentricity.js` e per la chiamata a DynamicPSF da questo script. L'impronta della riga del requisito script è `90c64bf5e0c98e922b2863163bc5c14df5f17ea7bb74fecd6aacb4ef0d6ea738`. La disposizione resta U. Questa scheda documenta il comportamento del wrapper 1.5.3 nella copia installata con PixInsight 1.9.6.
+
+## Dati, scelta del modello e verifiche
+
+1. Selezionare una vista principale in scala di grigi. Registrare canale, stato lineare o non lineare, scala angolare se usata a valle, regione e popolazione stellare. Il wrapper rifiuta anteprime e viste a colori. Per confrontare frame o regioni, fissare la preparazione degli ingressi e conservare separatamente le inquadrature che non hanno supporto comparabile.
+2. Impostare `StarDetector.sensitivity` e `upperLimit` e registrare i valori effettivi. I valori iniziali del sorgente sono 0,5 e 1,0. Il wrapper rileva le stelle sull'immagine della vista principale e costruisce una regione per posizione con raggio almeno tre pixel. Quando raggiunge il limite di 100.000 stelle selezionate, riduce il campione con una scelta casuale. Per un confronto ripetibile controllare che il limite non sia raggiunto e definire prima i criteri di esclusione per stelle sature, bordi e stelle confuse.
+3. Fissare il modello e registrarlo con ogni risultato. Il wrapper disattiva la scelta automatica e la simmetria circolare di DynamicPSF. Attiva un solo modello fra quelli elencati dall'interfaccia, con Moffat 4 come valore iniziale. Accetta fit con stato `PSF_FittedOk` e `psf_mad < 0.1`, conserva il primo fit idoneo per indice di stella e accorpa i centri con coordinate arrotondate coincidenti. Un risultato aggregato descrive le stelle rimaste dopo questi filtri.
+4. Confrontare anche il numero di stelle e la distribuzione nella regione. FWHM è la mediana di `sqrt(sx*sy)` moltiplicata per il fattore del modello. L'eccentricità usa `sqrt(1-(sy/sx)^2)`. Il residuo in DN usa un fattore fisso 65.535. I campi indicati come MAD nel CSV usano la **media delle deviazioni assolute dalla mediana**. Una soglia definita per la mediana delle deviazioni assolute richiede una metrica distinta. Un solo fit può produrre una mediana e un valore zero per la dispersione. Preregistrare un supporto minimo e una verifica spaziale per qualsiasi decisione di selezione.
+
+## Riscontro offline
+
+Il collaudo Node ha eseguito soltanto le funzioni di aggregazione estratte dal sorgente fissato, con righe di fit inventate. Per il campione 1, 1, 1, 9 la metrica etichettata MAD dallo script vale 2, mentre la mediana delle deviazioni è 0. Il test ha verificato anche l'accorpamento dei centri e le conversioni Gaussian e Moffat 4 a parità di larghezze sintetiche. Le differenze fra i due numeri illustrano la dipendenza dalla formula del modello. La bontà dei fit nativi sui pixel e la soglia per la selezione dei frame restano da verificare.
+
+Sorgente installato `FWHMEccentricity.js`, SHA-256 `1743bfde348ebf65bdb8e55a9537d32f5f645b2b5f2063fb333edae2cf7f0f1f`. Le sezioni rilevanti sono le righe 42–89, 148–229, 232–273, 408–472, 619–675 e l'intestazione del CSV alla riga 721. [Riscontro](riscontro.json)

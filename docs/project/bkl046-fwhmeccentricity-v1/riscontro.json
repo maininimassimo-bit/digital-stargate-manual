@@ -1,0 +1,34 @@
+{
+  "schema": "BKL046_FWHMECCENTRICITY_SOURCE_AGGREGATION_V1",
+  "sourceSha256": "1743bfde348ebf65bdb8e55a9537d32f5f645b2b5f2063fb333edae2cf7f0f1f",
+  "sourceScriptVersion": "1.5.3",
+  "cases": {
+    "reportedMadForOneOneOneNine": 2,
+    "medianAbsoluteDeviationForSameSample": 0,
+    "uniqueRoundedPositions": 2,
+    "sameSyntheticWidths": {
+      "gaussian": {
+        "fwhm": 4.078667960675236,
+        "eccentricity": 0.6614378277661477,
+        "residual": 32.7675,
+        "spreadFwhm": 0,
+        "support": 3
+      },
+      "moffat4": {
+        "fwhm": 1.5068129877435528,
+        "eccentricity": 0.6614378277661477,
+        "residual": 32.7675,
+        "spreadFwhm": 0,
+        "support": 3
+      }
+    },
+    "widerOutlier": {
+      "medianUnchanged": true,
+      "spreadFwhm": 0.3767032469358882,
+      "support": 4
+    }
+  },
+  "syntheticFitRows": true,
+  "pixInsightExecuted": false,
+  "scientificClosures": 0
+}
