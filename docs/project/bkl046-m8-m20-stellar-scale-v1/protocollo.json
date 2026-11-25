@@ -1,0 +1,24 @@
+{
+  "schema": "BKL046_M8_M20_STELLAR_SCALE_PROTOCOL_V1",
+  "photometrySHA256": "64027afb19cf84e32f1626f059a1579edc517e329ad8f7a387ca7973bc7d1b3d",
+  "pairsSHA256": "a84d66047802b999c61cce84b80e2cf79dc85032532fc9b30cf6c015684a9564",
+  "greenParities": [
+    "G1",
+    "G2"
+  ],
+  "calibrations": [
+    0,
+    1
+  ],
+  "centers": [
+    0,
+    1
+  ],
+  "minimumStars": 32,
+  "minimumTiles": 8,
+  "decisionBandsPercent": [
+    0.5,
+    1
+  ],
+  "design": "Use exactly the M8/M20 differential pairs. Match the same positive-flux stars in G1 and G2 across both exposures. Fit each calibration, aperture-centre convention and green parity separately with median log(reference flux / target flux). Withhold each tile of stars in turn and predict the ratios in that tile. Record unadjusted and adjusted held-out residuals. The envelope spans every fit variant and withheld tile; it is a sensitivity envelope, not a confidence interval. Unit gain remains the baseline for the previous diffuse test."
+}
