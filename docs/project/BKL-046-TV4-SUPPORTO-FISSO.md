@@ -20,3 +20,5 @@ DIFFUSE_BACKGROUND/2 resta aperto. L'audit conserva soglia e regioni originali. 
 | Protocollo | `bd8c1764127e8dcd10ae669b6fc5629d1b742d9b2845e21219fb21de24b76907` |
 | Programma | `28abea8e1481fe6f27b7b64cbdf5960386ec28c479e671a4bd7b0c24b7812e40` |
 | Riscontro | `6acf42878ca9751bee410f2707bc325a9dc0863341713d3e6c2a571850e38229` |
+
+Il pacchetto BKL046-TV4-verifica-supporto-v1.zip, SHA-256 `ac9bac53aab33a3782cf523d6547cff0c57572cdd961fa9410daad87739aa6c4`, è stato riletto da H: sullo stesso handle dopo flush. Il programma estratto da quella copia ha rigenerato il riscontro con gli stessi byte a partire dalle immagini già conservate.
