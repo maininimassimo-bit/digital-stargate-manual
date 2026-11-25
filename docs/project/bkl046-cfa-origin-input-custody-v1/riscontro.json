@@ -1,0 +1,27 @@
+{
+  "admissionRequested": false,
+  "fixtureOnVMNTFS": true,
+  "inputsTested": 18,
+  "nativeExecutions": 0,
+  "negative": [
+    {
+      "case": "changed-xdrz",
+      "previousHandlesReleased": true,
+      "ready": false
+    },
+    {
+      "case": "missing-fits",
+      "previousHandlesReleased": true,
+      "ready": false
+    },
+    {
+      "case": "writer-already-open",
+      "previousHandlesReleased": true,
+      "ready": false
+    }
+  ],
+  "readableWhileHeld": 18,
+  "schema": "BKL046_CFA_ORIGIN_INPUT_CUSTODY_WINDOWS_V1",
+  "writableAfterClose": 18,
+  "writeDenied": 18
+}
