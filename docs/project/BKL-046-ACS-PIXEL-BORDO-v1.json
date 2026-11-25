@@ -1,0 +1,75 @@
+{
+  "schema": "bkl046-acs-confronto-pixel-bordo-v1",
+  "pinSha256": {
+    "fotometria-CALSPEC-v2.json": "8a6394cdc9d700f66ba3e44b86390b451b2b343b36f162e65db78e1ec9781d6c",
+    "sensibilita-apertura-frazionaria-v1.json": "9d2910cdfc91af3fc912e34410df7b874e36895ed7794a76321c314f073880d8",
+    "sensibilita-apertura-frazionaria-v1.py": "7ff92d8063d84c3456f74fa2f8674065d7c2449c4b70adc42bb5f4bcb6946f1b"
+  },
+  "visite": [
+    "j8jq03",
+    "j8jq06"
+  ],
+  "confronto": [
+    {
+      "raggioPixel": 3,
+      "rapporto": "F658N/F606W",
+      "deltaInteraPct": 1.3861911872444788,
+      "deltaFrazionariaPct": -0.09538223932058498,
+      "differenzaPuntiPercentuali": -1.4815734265650637
+    },
+    {
+      "raggioPixel": 3,
+      "rapporto": "F658N/F660N",
+      "deltaInteraPct": 1.397961248099544,
+      "deltaFrazionariaPct": 0.5129974536443704,
+      "differenzaPuntiPercentuali": -0.8849637944551736
+    },
+    {
+      "raggioPixel": 3,
+      "rapporto": "F660N/F606W",
+      "deltaInteraPct": -0.011607788470491265,
+      "deltaFrazionariaPct": -0.6052746494258576,
+      "differenzaPuntiPercentuali": -0.5936668609553664
+    },
+    {
+      "raggioPixel": 5,
+      "rapporto": "F658N/F606W",
+      "deltaInteraPct": 0.6477752176813789,
+      "deltaFrazionariaPct": 0.2543197634979899,
+      "differenzaPuntiPercentuali": -0.393455454183389
+    },
+    {
+      "raggioPixel": 5,
+      "rapporto": "F658N/F660N",
+      "deltaInteraPct": 0.6146079908566415,
+      "deltaFrazionariaPct": 0.5316294144171341,
+      "differenzaPuntiPercentuali": -0.08297857643950746
+    },
+    {
+      "raggioPixel": 5,
+      "rapporto": "F660N/F606W",
+      "deltaInteraPct": 0.032964623613818134,
+      "deltaFrazionariaPct": -0.2758431873972733,
+      "differenzaPuntiPercentuali": -0.30880781101109145
+    }
+  ],
+  "convergenza16vs32": [
+    {
+      "raggioPixel": 3,
+      "esposizioniMisurate": 12,
+      "maxCambioSuddivisioniPct": 0.01806935114873065
+    },
+    {
+      "raggioPixel": 5,
+      "esposizioniMisurate": 12,
+      "maxCambioSuddivisioniPct": 0.004476883888893113
+    },
+    {
+      "raggioPixel": 10,
+      "esposizioniMisurate": 6,
+      "maxCambioSuddivisioniPct": 0.0006687940327987363
+    }
+  ],
+  "controlliQualificati": 0,
+  "chiusureScientifiche": 0
+}
