@@ -1,0 +1,9 @@
+# BKL-046 · Corrispondenze stellari nelle pose Bayer IC 1805
+
+Si rilevano le sorgenti nella previsualizzazione ottenuta dai due verdi del mosaico Bayer originale. Dalla posa di riferimento si ricavano 101 stelle candidate per la stima e 104 per la verifica in regioni disgiunte a scacchiera. Le stelle di stima votano la traslazione iniziale e determinano il campo affine con pesi di Huber. Le stelle di verifica sono associate per vicinanza reciproca dopo la previsione, con esclusione delle rilevazioni già usate nel fit. Il programma conserva le corrispondenze, i residui e i conteggi per posa. Due controlli sintetici recuperano uno spostamento noto in presenza di falsi candidati e un campo affine noto. [Serie originale di Santiago Rodriguez](https://amor.cms.hu-berlin.de/~rodrigus/datasets.html)
+
+Tutte le 38 pose oltre il riferimento diventano misurabili, con 43–79 delle 104 stelle di verifica associate per posa. Il P90 complessivo dei residui radiali è **0,814 pixel nativi**. I P90 per posa vanno da **0,531 a 1,264 pixel**. Nessuna posa rispetta il traguardo diagnostico di 0,30 pixel. Le associazioni fuori raggio rimangono fuori dal calcolo dei residui e figurano implicitamente nella copertura rispetto alle 104 candidate. Il P90 è condizionato alle associazioni accettate e può sottostimare l'errore sulle sorgenti perse.
+
+Il risultato recupera una geometria stellare misurabile sul secondo campo, dopo il fallimento delle misure a quattro regioni. La replica scientifica a scala comune resta aperta, poiché la registrazione supera la soglia e i flat non hanno dark-flat abbinati. La prova usa centroidi a metà scala, regioni parziali del rivelatore e nessun riferimento astrometrico esterno. Zero chiusure scientifiche e zero avvii PixInsight.
+
+SHA-256 della ricevuta `eb36f255976fbef04ea8dd3acc20201153f20bec4dff1b3fe80c723e8d7768ae`.
