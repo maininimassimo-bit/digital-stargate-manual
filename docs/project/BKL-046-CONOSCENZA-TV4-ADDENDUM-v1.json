@@ -1,0 +1,96 @@
+{
+  "schema": "BKL046_KNOWLEDGE_EVIDENCE_ADDENDUM_V1",
+  "milestone": "BKL-046",
+  "baseline": {
+    "version": "1.171",
+    "locator": "docs/project/BKL-046-KNOWLEDGE-DELIVERY-v1.171.json",
+    "locatorSha256": "67296f7837b98ab7f482c5dac0032f05a6cddaa081c7c821ff68a78d14f8a669",
+    "verifiedAtCommit": "b8fe5afb604ea8ee954e68bd6a0e6fbd38e24ae4"
+  },
+  "criterion": "DIFFUSE_BACKGROUND/2",
+  "status": "OPEN",
+  "findings": [
+    {
+      "source": "xcal65",
+      "use": "Support exclusion for an independent optical configuration",
+      "fits": 6,
+      "validPairs": 0,
+      "rule": "Exclude any selected central ROI with a pixel value below 0 or at least 15000 DN",
+      "transfer": "No variance estimate from this cohort"
+    },
+    {
+      "source": "flat24",
+      "use": "Offset sensitivity at a comparable signal level in an independent lab session",
+      "fits": 12,
+      "validPairs": 12,
+      "independentPairingSchemes": false,
+      "transfer": "No universal aperture variance correction established"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "xcal65",
+      "commit": "8c6ed1f20c9e3bee6001bcd2e516f754aaf25a21",
+      "archiveSha256": "6aaa49b53d71151315e6ad8acf808a6c7de7f81bcaf4ed6d1a722b1a3b8140ad",
+      "archiveMembers": 20,
+      "verifiedPublicFiles": [
+        {
+          "path": "docs/project/bkl046-tv4-xcal65-v1/README.md",
+          "sha256": "338ea928b89e808814cdaaf5da79ea43b96568448115a5a73862e2d7649f0ca6",
+          "replayVerified": false
+        },
+        {
+          "path": "docs/project/bkl046-tv4-xcal65-v1/protocollo.json",
+          "sha256": "54a0476169d466f7172eef69836c532ad38b7eca25512a008becfa77e6a664ba",
+          "replayVerified": false
+        },
+        {
+          "path": "docs/project/bkl046-tv4-xcal65-v1/acquisizione.json",
+          "sha256": "ff13faab7510d98fa620c7048e8f7ebe6e8c519ff9643b2b07f613c34f372882",
+          "replayVerified": false
+        },
+        {
+          "path": "docs/project/bkl046-tv4-xcal65-v1/riscontro.json",
+          "sha256": "ffef48f8b6f281d772a5a721386274d60d77eea8e74bc7841b45dcf0296d1024",
+          "replayVerified": true
+        }
+      ]
+    },
+    {
+      "id": "flat24",
+      "commit": "b8fe5afb604ea8ee954e68bd6a0e6fbd38e24ae4",
+      "archiveSha256": "9c4024cb47afb4f7a6ae1a5902f186dcd7edc0e4aee5a2df539953bbcf4541a1",
+      "archiveMembers": 35,
+      "verifiedPublicFiles": [
+        {
+          "path": "docs/project/bkl046-tv4-flat24-livello-v1/README.md",
+          "sha256": "da4c6da3b3a286be752ea4bd6c080186c2c003a6ae3053c92c2c9b78dae2b4bc",
+          "replayVerified": false
+        },
+        {
+          "path": "docs/project/bkl046-tv4-flat24-livello-v1/protocollo.json",
+          "sha256": "9a6dd4d70cc02b1969e47e8dcb3d0a0249bf48ed7cfc3d4da4a660f126177743",
+          "replayVerified": false
+        },
+        {
+          "path": "docs/project/bkl046-tv4-flat24-livello-v1/acquisizione.json",
+          "sha256": "8600fcdc4d6af79200356f8c87c2832e3d5a508f7f814851e4b97f35c580b3c2",
+          "replayVerified": false
+        },
+        {
+          "path": "docs/project/bkl046-tv4-flat24-livello-v1/riscontro.json",
+          "sha256": "b9c082597201195f696eeea6ee158e6caa24b93b190cb67db60369212ceda10f",
+          "replayVerified": true
+        },
+        {
+          "path": "docs/project/bkl046-tv4-flat24-livello-v1/diagnosi.json",
+          "sha256": "dad926c82ca1d4ab968a8f1219321607972adf5cc817926ae6c2cdb92f521daf",
+          "replayVerified": true
+        }
+      ]
+    }
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0,
+  "finalKnowledgeAccepted": false
+}
