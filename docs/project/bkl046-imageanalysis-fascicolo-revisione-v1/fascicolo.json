@@ -1,0 +1,95 @@
+{
+  "protocol": "BKL046_IMAGEANALYSIS_REVIEW_PACKET_V1",
+  "status": "TECHNICAL_PREPARATION_AVAILABLE",
+  "artifactScope": "Evidence dossier. It does not assemble or qualify an operational launcher.",
+  "scientificScope": "Four synthetic ImageAnalysis controls, both input orders, on PixInsight 1.9.6 build 1719 after admission.",
+  "sources": [
+    {
+      "id": "input",
+      "path": "archives/input.zip",
+      "archiveSha256": "41ef28ba5dac95640af02b60b6fd2c030cb67c27bbc3c972ba86ef42a748e585",
+      "entries": 16
+    },
+    {
+      "id": "isolatedR4",
+      "path": "archives/isolatedR4.zip",
+      "archiveSha256": "f350e781401e064f655d126feb3da574fa367d1f6ffb30fe8e8f19770a441f09",
+      "entries": 218,
+      "report": {
+        "commit": "19017832d6748804d4cf92f919c254fc1d764c07",
+        "path": "docs/project/bkl046-imageanalysis-catena-r4-v6/riscontro.json",
+        "archiveCopy": "reports/isolatedR4.json",
+        "sha256": "67dde907f5b71a570d80ab78ae44288b38e291168bc0e2387fcff7793ca3f526"
+      }
+    },
+    {
+      "id": "ownedWindow",
+      "path": "archives/ownedWindow.zip",
+      "archiveSha256": "d52b42899fd6a4ea347d63b693e6ebe2727a2b8fb9ff1536b3f0f1314e69bfcc",
+      "entries": 12,
+      "report": {
+        "commit": "6c3ba5c077eeb570ce91f4af3c45672419ddc101",
+        "path": "docs/project/bkl046-imageanalysis-terminale-gui-v1/riscontro.json",
+        "archiveCopy": "reports/ownedWindow.json",
+        "sha256": "6c370d4e70576ea4cd8fbe461024ea045fc057e30af8917c380e2fddbc98462a"
+      }
+    },
+    {
+      "id": "partialState",
+      "path": "archives/partialState.zip",
+      "archiveSha256": "e242a1dc824b17b5cd0d1b639d5d33accd098cec181c11331a7c128ece1fc769",
+      "entries": 10,
+      "report": {
+        "commit": "84804ff25abd6df3e2cc6dc7fd8cab7e18c756a1",
+        "path": "docs/project/bkl046-imageanalysis-stato-parziale-v1/riscontro.json",
+        "archiveCopy": "reports/partialState.json",
+        "sha256": "1f42c054a0e7bdd0dffef34b91e65c328562c0e8dd93f394a2bb372f204fc170"
+      }
+    },
+    {
+      "id": "startup",
+      "path": "archives/startup.zip",
+      "archiveSha256": "08dc1bbc31c41911d345115adae2ff896f1000d114f5b1d9d8ab870c41594537",
+      "entries": 6,
+      "report": {
+        "commit": "fe3d8a481d5060bf5e55159e6788d1cde8c0aeb4",
+        "path": "docs/project/bkl046-imageanalysis-avvio-argomenti-v1/impronte.json",
+        "archiveCopy": "reports/startup.json",
+        "sha256": "ce1082cb45a98f23e3fd2da2cbb636366100cf023d1d2b5d5b763d3912235e8c"
+      }
+    },
+    {
+      "id": "modal",
+      "path": "archives/modal.zip",
+      "archiveSha256": "809f6d5e8e57e5793fbb5cdc2ab4c1c92885592b550165895a9f01b6e5fa9445",
+      "entries": 9,
+      "report": {
+        "commit": "fea99a89d7f5d33062be235fa10869984e9d05d4",
+        "path": "docs/project/bkl046-imageanalysis-modale-gui-v1/riscontro.json",
+        "archiveCopy": "reports/modal.json",
+        "sha256": "04090a06faaf10829f1f5b6d6c0636c6ef0396a4367afa2e1b2bf2d565833018"
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "IA-GLOBAL-STATE",
+      "status": "OPEN",
+      "required": "Prove coverage of processing activity, unsaved non-image documents and contained dialogs for original PID. Partial PJSR and native window enumeration cannot jointly establish this."
+    },
+    {
+      "id": "IA-EXECUTABLE-PARENT",
+      "status": "OPEN",
+      "required": "Integrate the same original child proof, terminal path and custody in a single exact review subject, with canonical R4 admission and release."
+    },
+    {
+      "id": "IA-NATIVE-INTERPRETATION",
+      "status": "OPEN",
+      "required": "Verify actual installed ImageAnalysis behavior and interpret both orders, then reassess scientific scope separately."
+    }
+  ],
+  "arbOperationalApproval": false,
+  "rqOperationalApproval": false,
+  "nativeAdmission": false,
+  "scientificClosures": 0
+}
