@@ -1,0 +1,40 @@
+{
+  "archiveMembers": 119,
+  "archiveSha256": "4db02f1e8ab0bb33b298b21b85ed736ef22546544f46542a63a346b289234748",
+  "cases": {
+    "altered-interpretation": {
+      "activeUnchanged": true,
+      "postExitRejection": "READ_LOCK_HASH",
+      "release": false,
+      "reportSha256": "5285d62515817d15482c84d6b960d6f081d7616ed13393f40a468cc88c7e3740"
+    },
+    "altered-measurements": {
+      "activeUnchanged": true,
+      "postExitRejection": "READ_LOCK_HASH",
+      "release": false,
+      "reportSha256": "dfcf6314fbe627a58ef48478271678d04f68641dc8eaca0e2888e31aff312ba9"
+    },
+    "altered-return": {
+      "activeUnchanged": true,
+      "postExitRejection": "READ_LOCK_HASH",
+      "release": false,
+      "reportSha256": "f7daf8eb5e9e5e1bd66c0280d8b13b36e8abd42741fb87a8f6ea3c2b39a79f24"
+    },
+    "positive": {
+      "activeUnchanged": false,
+      "postExitRejection": null,
+      "release": true,
+      "reportSha256": "45693e08760166040930e05316937b3c7a0642c2a59972abed761f39e4c09fce"
+    },
+    "tampered-return": {
+      "activeUnchanged": true,
+      "postExitRejection": null,
+      "release": false,
+      "reportSha256": "fa0c7e081dc902c54288218307c6a4b42db2925464e2a9310c558675de47b2b5"
+    }
+  },
+  "nativeExecutions": 0,
+  "productionRegistryModified": false,
+  "protocol": "BKL046_IMAGEANALYSIS_R4_CUSTODY_V5",
+  "scientificClosures": 0
+}
