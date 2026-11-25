@@ -1,0 +1,89 @@
+{
+  "schema": "BKL046_CFA_ORIGIN_R4_PARENT_BARRIER_SCRATCH_V1",
+  "cases": [
+    {
+      "mode": "valid",
+      "parentStarted": true,
+      "parentCode": 0,
+      "stagedEntrypointVerified": true,
+      "repeatedStageRejected": true,
+      "window": {
+        "case": "valid",
+        "originalCaptureVerified": true,
+        "originalOrdinaryClose": true,
+        "foreignUnaffected": true,
+        "comparisonPinned": true,
+        "reason": null
+      },
+      "releaseCalls": 1,
+      "archiveEntries": 17,
+      "denyWriteObserved": true,
+      "reservationRetained": false
+    },
+    {
+      "mode": "other-window",
+      "parentStarted": true,
+      "parentCode": 8,
+      "stagedEntrypointVerified": true,
+      "repeatedStageRejected": true,
+      "window": {
+        "case": "other-window",
+        "originalCaptureVerified": false,
+        "originalOrdinaryClose": false,
+        "foreignUnaffected": true,
+        "comparisonPinned": true,
+        "reason": "CFA window scope changed"
+      },
+      "releaseCalls": 0,
+      "archiveEntries": 0,
+      "denyWriteObserved": false,
+      "reservationRetained": true
+    },
+    {
+      "mode": "receipt-changed",
+      "parentStarted": true,
+      "parentCode": 8,
+      "stagedEntrypointVerified": true,
+      "repeatedStageRejected": true,
+      "window": {
+        "case": "receipt-changed",
+        "originalCaptureVerified": true,
+        "originalOrdinaryClose": false,
+        "foreignUnaffected": true,
+        "comparisonPinned": true,
+        "reason": "ORIGIN_RECEIPT_CHANGED"
+      },
+      "releaseCalls": 0,
+      "archiveEntries": 0,
+      "denyWriteObserved": false,
+      "reservationRetained": true
+    },
+    {
+      "mode": "wrong-plan",
+      "checkpointRejected": true,
+      "stagedEntrypointVerified": false,
+      "releaseCalls": 0,
+      "reservationRetained": true
+    },
+    {
+      "mode": "wrong-parent-time",
+      "checkpointRejected": true,
+      "stagedEntrypointVerified": false,
+      "releaseCalls": 0,
+      "reservationRetained": true
+    },
+    {
+      "mode": "wrong-record-pin",
+      "checkpointRejected": true,
+      "stagedEntrypointVerified": false,
+      "releaseCalls": 0,
+      "reservationRetained": true
+    }
+  ],
+  "adapterSha256": "2fe08ef35c126f97b9fce3e382070acf21070ebe8c76fcf5519dc393024464a2",
+  "isolatedRegistry": true,
+  "nativeOutputsSimulated": true,
+  "processInventorySimulated": true,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
