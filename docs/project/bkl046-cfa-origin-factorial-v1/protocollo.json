@@ -1,0 +1,19 @@
+{
+  "schema": "BKL046_CFA_ORIGIN_FACTORIAL_PROTOCOL_V1",
+  "priorProgram": "88fa97f68aa13882074c585992f329ab34e720654346a54da017a65c942e9894",
+  "priorReport": "b3318e34703d72f32fffb6798688290a7cc260a5e56def19e320a73a976e2cd9",
+  "matrixVariants": [
+    "center0",
+    "edge05"
+  ],
+  "declaredOrigins": [
+    0,
+    0.5
+  ],
+  "hypotheses": [
+    "use-declared",
+    "fixed-zero",
+    "fixed-half"
+  ],
+  "design": "Keep all three CFA inputs, matrices, geometry, support threshold, drop shrink and tolerance unchanged. Cross the two existing serialized matrix variants with the two values of AlignmentOrigin. Derive three reference map classes from the archived polygon model. For each crossed input assess mapping under the three assumed policies. Each policy must yield a distinct four-case signature, and each predicted observation must match exactly one map class. Inputs are offline proposals for a separately reviewed native plan."
+}
