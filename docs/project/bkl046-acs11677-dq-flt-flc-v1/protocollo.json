@@ -1,0 +1,43 @@
+{
+  "protocol": "BKL046_ACS11677_DQ_PRODUCT_LINEAGE_PLAN_V1",
+  "times": {
+    "short": 1,
+    "long": 1457
+  },
+  "bits": [
+    16,
+    64,
+    256,
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "scope": "Exact same-exposure FLT/FLC pairs. Detector coordinate agreement. No external truth for cosmic ray rejection.",
+  "images": {
+    "short": {
+      "FLT": {
+        "folder": "BKL046-ACS-11677-fotometria-v1",
+        "file": "jb6v01dfq_flt.fits",
+        "sha256": "b2b69d80dca09da08a2704155e11e4d20f02ac48b606de1e34259d478813dff9"
+      },
+      "FLC": {
+        "folder": "BKL046-ACS-11677-fotometria-v1",
+        "file": "jb6v01dfq_flc.fits",
+        "sha256": "a330f28eca9e64cba6c8f47e6607d67fbaeb82f2c6165d254b74b82f6be7d938"
+      }
+    },
+    "long": {
+      "FLT": {
+        "folder": "BKL046-ACS-11677-fotometria-v2",
+        "file": "jb6v01e0q_flt.fits",
+        "sha256": "43aac5750ae6128153fad0e3e9f3cfcbed1e7588422c8bb7627a3fdaa468244b"
+      },
+      "FLC": {
+        "folder": "BKL046-ACS-11677-fotometria-v2",
+        "file": "jb6v01e0q_flc.fits",
+        "sha256": "e6011691a50b2608a3cb91e5f9ceb0957aa4a17e46aa04f8e00bee30df5fdd4d"
+      }
+    }
+  }
+}
