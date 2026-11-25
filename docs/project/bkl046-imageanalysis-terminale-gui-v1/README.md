@@ -1,0 +1,5 @@
+# BKL-046 — Chiusura del testimone dalla finestra Windows originale
+
+Due esecuzioni autonome su DSG-Shared hanno usato una finestra reale di un testimone WinForms. Il backend comune ha associato la finestra al PID, all'immagine eseguibile e all'handle del figlio nella stessa sessione Windows. Ha acquisito PNG e testo UI Automation dal controllo del testimone, letto il marcatore ImageAnalysis esatto e inviato una sola chiusura ordinaria. Ha poi osservato la scomparsa della finestra e verificato uscita a zero e timestamp dall'handle originale.
+
+L'eseguibile testimone BKL-051 usato nel primo tentativo accettava solo il proprio titolo e marcatori. È stato compilato un testimone dedicato per il formato BKL-046. Nelle due esecuzioni riuscite lo stato applicativo, la prenotazione e i dati scientifici erano simulati. L'acquisizione della finestra, il testo UI Automation, la chiusura Windows e l'osservazione del processo erano reali. Resta da integrare con il padre e qualificare l'osservazione dello stato globale di PixInsight in un'operazione ammessa.
