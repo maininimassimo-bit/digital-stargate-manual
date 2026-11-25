@@ -1,0 +1,37 @@
+{
+  "schema": "BKL046_WBPP_MEASUREMENT_SCOPE_GAP_V1",
+  "requirementIndex": {
+    "path": "docs/project/BKL-046-REQUIREMENTS-FINGERPRINTS.tsv",
+    "commit": "c30db964d755d69e42f7a6af19bdd7b7922af30f",
+    "sha256": "fd0f6ab787d776b7bfa9863ae613e6dae9a274c3f1da2ccd70a1fadb6d39fc12"
+  },
+  "existingScriptRequirement": "script_file:src/scripts/BatchPreprocessing/BPP-SubframeAnalyzer.js",
+  "scriptRequirementFingerprint": "5252b23ae75ecc3d74ec89a16a2584692732005ccd663e88e427940d61db8cda",
+  "existingNativeRequirement": "process:SubframeSelector",
+  "nativeRequirementFingerprint": "1e2ce330fb4c065c9db980cdd1acb4db557db8b62bf7981eb945e226f7f2961e",
+  "candidateAdditionalProcess": "ImageAnalysis",
+  "candidateProcessPresentInPinnedRequirementIndex": false,
+  "installedModuleFiles": {
+    "ImageAnalysis-pxm.dll": {
+      "bytes": 9761752,
+      "sha256": "fd421a2d4abe392a72ca9fd02c365716c202aaf3df8a61eabc7a8214893d16bc",
+      "fileVersion": null
+    },
+    "SubframeSelector-pxm.dll": {
+      "bytes": 9553368,
+      "sha256": "72f057a82505745ab9e55481797338f9b2695feb3568462725398e84ab5e5bcd",
+      "fileVersion": null
+    }
+  },
+  "testedWrapperVersion": "3.2.2",
+  "currentMeasurementCall": "ImageAnalysis.Task_Measure",
+  "proposedNativeChecks": [
+    "Per-input descriptor provenance and units",
+    "Missing or failed measurement handling",
+    "Cache invalidation after input or configuration change",
+    "Cohort-stable ranking and explicit tie resolution"
+  ],
+  "canonicalRequirementsChanged": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

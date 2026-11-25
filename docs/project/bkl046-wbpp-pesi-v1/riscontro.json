@@ -1,0 +1,33 @@
+{
+  "schema": "BKL046_WBPP_MEASUREMENT_WEIGHT_DECISIONS_V1",
+  "sourceSha256": "2e238f66ec3e0aa31cb791b1be9190ce55e8321f6d8023694b289f10c33d4620",
+  "scriptVersion": "3.2.2",
+  "weightScenario": {
+    "metrics": [
+      "FWHM",
+      "SNR"
+    ],
+    "before": [
+      2,
+      2.5
+    ],
+    "after": [
+      2,
+      1.6
+    ],
+    "rankingReversed": true
+  },
+  "descriptorGuard": {
+    "undefinedFwhm": false,
+    "nanFwhm": false,
+    "zeroStars": false,
+    "nullFwhm": true
+  },
+  "registrationReference": {
+    "normalFrameAvailable": "normalLow",
+    "allLowestBinningFlagged": "highWeightLow"
+  },
+  "syntheticInput": true,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
