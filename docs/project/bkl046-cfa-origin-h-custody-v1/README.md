@@ -1,0 +1,9 @@
+# BKL-046 · Custodia su H: del controllo di origine XDRZ prima del rilascio
+
+Il collaudo collega il verificatore dei quattro controlli al custode R4 installato con stato isolato. Nel caso valido pubblica 13 file, compresi gli otto FITS, il log, il marcatore del batch, il rapporto e due record R4. Dopo la rilettura aggiunge ARCHIVED.json e rilegge l'insieme completo. Il custode degli oggetti usa la primitiva Windows del candidato v4, adattata al numero esatto di 14 file. Mantiene la condivisione limitata alla lettura durante la chiamata al custode R4.
+
+Nel caso valido, il tentativo di aprire in scrittura il log archiviato riceve EBUSY durante il rilascio e riesce dopo la chiusura degli handle. R4 emette una sola ricevuta di prova. Una collisione preserva la directory preesistente. Una modifica del log dopo la pubblicazione viene rilevata prima di qualsiasi tentativo di rilascio. Anche log difforme, sequenza non riconosciuta e uscita non zero del testimone conservano le rispettive prenotazioni isolate.
+
+I FITS e il log derivano dalle fixture. Il processo testimone, la custodia del suo handle, l'archivio su H: e il rifiuto di scrittura sono reali. La protezione vale durante il rilascio e l'archivio torna scrivibile alla chiusura degli handle. Restano aperte integrazione del processo PixInsight, riconciliazione dei risultati nativi e protezione di lungo periodo. Il collaudo non usa il registro canonico e PixInsight resta chiuso. [R4 isolato](../bkl046-cfa-origin-r4-isolated-v1/README.md)
+
+Argomenti del collaudo Node: Python v4, kit di verifica del batch, parent_barrier.py v4, directory dipendenze, nuova directory per il registro isolato, directory H: esistente in cui creare lo spazio di prova e percorso nuovo per la ricevuta. L'adattatore R4 e il modulo di attesa della custodia vengono riletti con impronte verificate.
