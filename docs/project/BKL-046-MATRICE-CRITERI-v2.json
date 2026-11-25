@@ -1,0 +1,292 @@
+{
+  "schema": "BKL046_OWNER_CRITERIA_PARTIAL_EVIDENCE_V2",
+  "sourceLedgerSha256": "2a6817384f7caf22ba85b6563c86a58eb832ba6195766a40ddeabfdae610cb86",
+  "criteria": [
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_01",
+      "criterion": "Intero dominio Digital StarGate / PixInsight + IA documentato dal repository e dai requisiti autorevoli, senza riduzione al solo lavoro già eseguito.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "reopening",
+        "requirements",
+        "index"
+      ],
+      "remaining": "Completare le aree prive di risultati semantici e verificare la copertura del dominio riaperto."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_02",
+      "criterion": "Conoscenza semantica dei processi e delle relative applicazioni, parametri, prerequisiti, ordine dei workflow, diramazioni, maschere, checkpoint e regole decisionali per l'IA.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "trace",
+        "requirements",
+        "index"
+      ],
+      "remaining": "Verificare per processo ingressi, parametri, ordine, diramazioni, maschere e decisioni con riferimenti comportamentali."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_03",
+      "criterion": "Copertura esplicita dei4920requisiti, sette famiglie scientifiche e25assi: risultati, criteri, stato effettivo e limiti con evidenze corrispondenti alla portata delle affermazioni.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "requirements",
+        "residual",
+        "index"
+      ],
+      "remaining": "Agganciare a tutti i criteri sia l'evidenza pertinente sia i limiti. Sette famiglie e 25 assi restano aperti."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_04",
+      "criterion": "Versioni di software/moduli/modelli e dominio applicabile delle verifiche; separazione tra dati reali, simulazioni, controlli, compatibilità tecnica e validazione scientifica.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "reopening",
+        "residual",
+        "index",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Verificare i vincoli di versione e il dominio di applicazione per tutte le famiglie, comprese le prove native richieste.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_05",
+      "criterion": "Risultati verificati, fallimenti, correzioni, prove respinte e limiti scientifici; nessuna trasformazione automatica di lettura, inventario o processo riuscito in validazione.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "trace",
+        "residual",
+        "index",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Consolidare esiti positivi, negativi e correzioni per criterio. Le verifiche parziali restano tali.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_06",
+      "criterion": "Provenienza, impronte e riferimenti alle evidenze immutabili, distinguendo contenuto della conoscenza da dati binari e archivi di supporto.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "trace",
+        "index",
+        "readback",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Verificare la risoluzione delle dipendenze e delle impronte anche dalla destinazione di consegna.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_07",
+      "criterion": "Gli incrementi intermedi non sostituiscono il file finale.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "reopening",
+        "index"
+      ],
+      "remaining": "Costruire la baseline finale soltanto quando supera i criteri. L'indice rimane intermedio."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_08",
+      "criterion": "Un inventario di file o una raccolta di rimandi agli archivi non costituisce da sola la conoscenza completa richiesta.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "trace",
+        "index"
+      ],
+      "remaining": "Verificare che la conoscenza consolidata contenga la logica utilizzabile oltre ai riferimenti."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_09",
+      "criterion": "Non attestare completamento finale in presenza di requisiti mancanti, non verificati o ancora incompleti.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "reopening",
+        "residual",
+        "index"
+      ],
+      "remaining": "Accettare la baseline finale solo a valle del riscontro dei criteri ancora aperti."
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_10",
+      "criterion": "Conservare le versioni precedenti e tutti i vincoli su portale, master, installazione, migrazione e M27.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "reopening",
+        "index"
+      ],
+      "remaining": "Verificare i vincoli e la conservazione su tutta la baseline finale e sullo storico consegnato."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_01",
+      "criterion": "File di conoscenza finale e tutte le versioni storiche.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "index",
+        "readback"
+      ],
+      "remaining": "Trasferire la baseline finale e verificare il recupero delle versioni storiche dalla destinazione autorizzata."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_02",
+      "criterion": "Documentazione, requisiti, protocolli, script e logica di funzionamento della conoscenza e delle decisioni PixInsight/IA.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "trace",
+        "index",
+        "requirements"
+      ],
+      "remaining": "Rileggere da GitHub i contenuti effettivi della documentazione, dei protocolli e degli script con la loro logica."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_03",
+      "criterion": "Test, evidenze, risultati, ricevute, verifiche, fallimenti, prove respinte e correzioni, senza cancellazioni dello storico.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "residual",
+        "index",
+        "readback",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Dimostrare disponibilità remota degli esiti originali, compresi rifiuti, fallimenti e correzioni.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_04",
+      "criterion": "Archivi, consegne e tutti gli artefatti del lavoro Codex, con inventario completo e riferimenti alle rispettive dipendenze.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "index",
+        "distribution"
+      ],
+      "remaining": "Completare il riscontro degli artefatti e delle dipendenze per la consegna effettiva."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_05",
+      "criterion": "Inventario completo con percorso storico, identificatore remoto, dimensione, SHA256, ruolo, versione e dipendenze di ogni artefatto.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "index",
+        "distribution",
+        "readback",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Verificare oggetto remoto, dimensione, SHA-256, versione, ruolo e dipendenze per gli artefatti consegnati.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_06",
+      "criterion": "Contenuti effettivamente disponibili su GitHub: un manifest che rimanda soltanto ai file locali non soddisfa il passaggio completo.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "index",
+        "distribution",
+        "readback"
+      ],
+      "remaining": "Ottenere una decisione sulla destinazione e sul perimetro dei contenuti misti. Verificare i byte remoti."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_07",
+      "criterion": "Verifica delle copie remote mediante riscaricamento o altra verifica equivalente documentata delle impronte e delle dimensioni; per archivi eventualmente suddivisi verificare anche la ricostruzione esatta.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "readback",
+        "index",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Riscaricare da remoto e verificare dimensioni e impronte, inclusa la ricostruzione degli archivi divisi.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_08",
+      "criterion": "Verifica di recupero dello storico e di almeno i percorsi di riproduzione richiesti dai protocolli, mantenendo esplicite le dipendenze esterne.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "index",
+        "readback",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Riprodurre da una copia nuova i protocolli richiesti e recuperare storico e dipendenze.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_09",
+      "criterion": "Documentazione tecnica della struttura della conoscenza, dei criteri decisionali, delle regole di aggiornamento e della tracciabilità requisito→protocollo→test→risultato→decisione.",
+      "status": "NOT_YET_SATISFIED",
+      "partialEvidence": [
+        "trace",
+        "reopening",
+        "index",
+        "acsIndependentReplay",
+        "currentIndex"
+      ],
+      "remaining": "Verificare il collegamento requisito, protocollo, prova, esito e decisione nell'intera baseline.",
+      "readbackScope": "Un solo percorso scientifico ACS, riprodotto dai FITS. Restano da verificare gli altri domini e lo storico completo."
+    }
+  ],
+  "evidence": {
+    "reopening": {
+      "path": "docs/project/BKL-046-REOPENING-2026-10-13.md",
+      "commit": "7e87a62e29b6abb2919d39f89ccf0c21a2bcf323",
+      "bytes": 3956,
+      "sha256": "0a2e49f21f4f5c602f6e286395d6b000f882458a1b3bf101f27463f0bf8b64f4"
+    },
+    "requirements": {
+      "path": "docs/project/BKL-046-REQUIREMENTS-FINGERPRINTS.tsv",
+      "commit": "c30db964d755d69e42f7a6af19bdd7b7922af30f",
+      "bytes": 883069,
+      "sha256": "fd0f6ab787d776b7bfa9863ae613e6dae9a274c3f1da2ccd70a1fadb6d39fc12"
+    },
+    "trace": {
+      "path": "docs/project/BKL-046-TRACCIABILITA-CONOSCENZA.md",
+      "commit": "3dd615bde2d2feed2c6457f455300643e1be85b2",
+      "bytes": 3941,
+      "sha256": "2049a4c030e1fd25b372c55ea431a18181fd83d651b2067dd520aeaf302e751a"
+    },
+    "residual": {
+      "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v72.md",
+      "commit": "fe821474d608a0ab34730e14e3dc26bd177c383d",
+      "bytes": 1520,
+      "sha256": "64d30269b0a86a4654b46e285b17d0af91aefaa5f4d3657dcb859b22488fad3c"
+    },
+    "index": {
+      "path": "docs/project/BKL-046-KNOWLEDGE-DELIVERY-v1.171.json",
+      "commit": "3dd615bde2d2feed2c6457f455300643e1be85b2",
+      "bytes": 109441,
+      "sha256": "40f0dbbc7159c20ef432fec603f163c03410752abf0e0252277922dcaad93cc7"
+    },
+    "readback": {
+      "path": "docs/project/BKL-046-VERIFICA-CONSEGNA-v1.171.md",
+      "commit": "96cead15c2715f5b9b7257b33ed17e8070def36f",
+      "bytes": 1324,
+      "sha256": "8664bba027b4ed3dca30aff2f92c57a86419e53cc9fdc23fe83e129f4fef43cb"
+    },
+    "distribution": {
+      "path": "docs/project/BKL-046-CONOSCENZA-COPERTURA-DISTRIBUZIONE-v1.171.md",
+      "commit": "bf6da33b5e743f8ee01da09822349236860f2913",
+      "bytes": 1877,
+      "sha256": "b2af3f444d5b65313f6463adfe03bf28e859f8dcae41497e493d83d9c5e2b730"
+    },
+    "acsIndependentReplay": {
+      "path": "docs/project/bkl046-acs-ripetibilita-v1/ripristino/riscontro-riproduzione-GitHub-MAST.json",
+      "commit": "d656157d914e0ade38d56a63b8959275676ec626",
+      "bytes": 1312,
+      "sha256": "6b0bfb49f3e779305b315a79f857b0de48bfb906528092a7bb91f840b1b8f344"
+    },
+    "currentIndex": {
+      "path": "docs/project/BKL-046-KNOWLEDGE-DELIVERY-v1.171.json",
+      "commit": "d656157d914e0ade38d56a63b8959275676ec626",
+      "bytes": 118566,
+      "sha256": "13eaf4187531df870c440f1de548adfff463535b29f9e2fd1197c2b6da81eaba"
+    }
+  },
+  "openCriteria": 19,
+  "criteriaPromoted": 0,
+  "scientificClosures": 0,
+  "precedingMatrixSha256": "11370007ea48e48d0e85105c36e681a4cba237d0c1f7a15ef8a2227cf2f5a4e7"
+}
