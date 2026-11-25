@@ -1,0 +1,67 @@
+{
+  "schema": "BKL046_CFA_XDRZ_COMPARATOR_FILE_TEST_V1",
+  "subjectSHA": "3ad86ab652dbe80b08fc6b939dd2b10fb3038563784598f08c10ada3a545b072",
+  "planSHA": "377aea9a4decbf470a95c92f7f85852bc59f5e056b76a8c7ae110e842fcfd6e7",
+  "manifestSHA": "6fd2da645650a19f4654276607612c0af5ba193734a0087fc221058aab4fe16b",
+  "verifierSHA": "c04623fb80badca0db83917c237a9d7fef5041d0fd9b6a6a371f86cf8397c54f",
+  "comparatorSHA": "f84d6e73218707f18e3480dde8442baefbe8bc8502c52fc7e1dc067b6fb31790",
+  "cases": [
+    {
+      "name": "detector",
+      "accepted": true
+    },
+    {
+      "name": "reference",
+      "accepted": true
+    },
+    {
+      "name": "missing-fits",
+      "accepted": false,
+      "phase": "initialComparison"
+    },
+    {
+      "name": "extra-fits",
+      "accepted": false,
+      "phase": "initialComparison"
+    },
+    {
+      "name": "duplicate-event",
+      "accepted": false,
+      "phase": "initialComparison"
+    },
+    {
+      "name": "missing-event",
+      "accepted": false,
+      "phase": "initialComparison"
+    },
+    {
+      "name": "incorrect-fits-values",
+      "accepted": false,
+      "phase": "initialComparison"
+    },
+    {
+      "name": "fits-changed",
+      "accepted": false,
+      "phase": "readback"
+    },
+    {
+      "name": "log-changed",
+      "accepted": false,
+      "phase": "readback"
+    },
+    {
+      "name": "marker-changed",
+      "accepted": false,
+      "phase": "readback"
+    },
+    {
+      "name": "receipt-changed",
+      "accepted": false,
+      "phase": "readback"
+    }
+  ],
+  "fixtureProvenance": "SYNTHETIC_STANDINS",
+  "scientificClosures": 0,
+  "nativeExecutions": 0,
+  "admissionRequested": false
+}
