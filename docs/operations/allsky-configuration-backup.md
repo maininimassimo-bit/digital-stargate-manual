@@ -158,3 +158,28 @@ Comprende ora i due WebP decorativi versionati, robots, sitemap, template e ingr
 Per annullare la sola revisione: disabilitare `dsg-meteor-review.service` e ripristinare `html/includes/meteors.php` dall’originale mirato. Conservare lo stato privato per audit; il worker temporale e il rilevatore ordinario restano attivi. Per la sola SEO: ripristinare i file in `seo-rollback`, validare lighttpd e ricaricarlo, senza toccare settings, maschere o calibrazione. Le richieste Google già inviate non sono annullate dal rollback. Nessun ripristino integrale o riavvio fisico è stato eseguito.
 
 [Verifica Google e correzioni](allsky-search-indexing.md#correzioni-seo-e-rendering-google-24-novembre-2026) · [Revisione manuale e collaudo](allsky-meteor-shadow.md#revisione-manuale-dei-nuovi-candidati-24-novembre-2026).
+
+
+## Ripristino della bonifica della galleria
+
+Il backup media del 26 novembre 2026 è separato dal backup di configurazione: la configurazione non è stata modificata dalla bonifica. L’archivio privato preventivo contiene l’intera galleria prima dell’intervento, misura 259.184.043 byte ed è stato verificato insieme agli hash delle 422 immagini originali. Archivio, miniature, manifesti e report rimangono fuori dal repository, sul Raspberry e nell’archivio privato su J:.
+
+La procedura predisposta ripristina l’intero lotto di 103 immagini e relative 103 miniature descritto nel piano privato. **Il ripristino non è stato eseguito in produzione**: sono state verificate integrità dei backup, segregazione della quarantena ed esito della bonifica.
+
+1. Rivedere privatamente il piano e autorizzare la nuova esposizione delle immagini. Il ripristino non conferma la natura astronomica delle tracce.
+2. Sul Raspberry, verificare directory, spazio disponibile e piano originale. Evitare scritture concorrenti sugli stessi nomi durante l’operazione; non è previsto un arresto automatico dell’acquisizione.
+3. Nella directory privata dell’intervento, verificare il checksum ed eseguire lo script soltanto dopo le verifiche precedenti:
+
+```bash
+cd '<directory_privata_della_bonifica>'
+sha256sum -c public-gallery-before.tar.gz.sha256
+python3 restore.py
+```
+
+Lo script usa i percorsi del Raspberry contenuti in `move-plan.json`: non va eseguito su Windows. Prima della copia verifica tutti gli asset. Salta le destinazioni già presenti e identiche; si interrompe se trova una destinazione diversa o un file di quarantena mancante o con hash inatteso. Copia i file assenti dalla quarantena, verificandone l’hash e conservando le copie private. In caso di conflitto non forzare la sovrascrittura.
+
+Per un ripristino parziale predisporre e rivedere separatamente un piano derivato, mantenendo intatto quello originale. Non estrarre indiscriminatamente l’intero archivio sulla galleria corrente: potrebbero esserci immagini pubblicate dopo la bonifica. Non occorre ripristinare impostazioni, maschere o calibrazione per annullare un trasferimento di soli media.
+
+Al termine verificare coppie immagine/miniatura, hash, risposta HTTP della galleria e di immagini rappresentative, stato dei servizi Allsky e dei due servizi meteore. Confrontare i conteggi tenendo conto delle nuove acquisizioni. Il revert della documentazione su GitHub non ripristina i media: il ripristino operativo è distinto.
+
+La copia pubblica sanificata della configurazione resta separata: il backup media e i suoi dettagli individuali non devono essere aggiunti a Git, allegati alle PR o pubblicati sul portale.
