@@ -1,0 +1,24 @@
+{
+  "schema": "BKL046_CFA_WEIGHT_WINDOW_LINK_TEST_V1",
+  "cases": {
+    "valid": {
+      "resolved": true,
+      "scaleStatus": "UNIQUE_PROFILE",
+      "weightProfile": "RAW"
+    },
+    "wrong_pin": "REJECTED",
+    "foreign_marker": "REJECTED",
+    "missing_export": "REJECTED",
+    "swapped_events": "REJECTED",
+    "extra_file": "REJECTED",
+    "wrong_path": "REJECTED",
+    "mask_knob_changed": "REJECTED",
+    "inconsistent_map_retained": {
+      "resolved": false,
+      "scaleStatus": "NO_COMMON_PROFILE",
+      "weightProfile": null
+    }
+  },
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
