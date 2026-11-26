@@ -183,3 +183,22 @@ Per un ripristino parziale predisporre e rivedere separatamente un piano derivat
 Al termine verificare coppie immagine/miniatura, hash, risposta HTTP della galleria e di immagini rappresentative, stato dei servizi Allsky e dei due servizi meteore. Confrontare i conteggi tenendo conto delle nuove acquisizioni. Il revert della documentazione su GitHub non ripristina i media: il ripristino operativo è distinto.
 
 La copia pubblica sanificata della configurazione resta separata: il backup media e i suoi dettagli individuali non devono essere aggiunti a Git, allegati alle PR o pubblicati sul portale.
+
+
+## Ripristino della selezione manuale del 27 novembre 2026
+
+Il secondo intervento ha un proprio backup e un proprio piano privato, separati dal lotto del 26 novembre. Il backup preventivo `selected-public-before.tar.gz` contiene le 300 immagini selezionate a piena risoluzione e 300 miniature, misura **187.835.335 byte** e ha superato la verifica degli hash di tutti i 600 asset prima del trasferimento. Non contiene configurazioni da ripristinare.
+
+Le 23 copie amministrative ancora esistenti sono rimaste invariate; per le altre 277 immagini la conservazione è assicurata dalle copie a piena risoluzione in quarantena e nel backup. Quarantena, backup e manifesti sono esterni alla radice web e restano privati. Il precedente backup completo della galleria rimane separato e disponibile.
+
+Per annullare il solo secondo intervento usare la directory privata del **lotto del 27 novembre**, verificare il checksum e rivedere il relativo piano prima di eseguire sul Raspberry:
+
+```bash
+cd '<directory_privata_del_lotto_del_27_novembre>'
+sha256sum -c selected-public-before.tar.gz.sha256
+python3 restore.py
+```
+
+Lo script ripristina l’intero piano di quel lotto: 300 immagini e 300 miniature. Non ripristina automaticamente il primo lotto di 103 immagini. Restano validi i controlli del paragrafo precedente: nessuna sovrascrittura di file diversi, coordinamento contro scritture concorrenti sugli stessi nomi, conservazione della quarantena e verifica finale di hash, coppie immagine/miniatura, HTTP e servizi. Un ripristino parziale richiede un piano derivato separatamente verificato.
+
+**Nessun ripristino è stato eseguito.** L’operazione rende nuovamente pubbliche le copie interessate e richiede autorizzazione; la selezione non certifica la natura delle tracce. Il backup di configurazione e la copia pubblica sanificata restano separati dai backup media e non vengono sostituiti da questi archivi.
