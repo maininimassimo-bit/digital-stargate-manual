@@ -1,0 +1,27 @@
+{
+  "schema": "BKL046_ACS17979_GAIA_ANCHORED_ASTROMETRY_V1",
+  "catalogSha256": "175ffa239bddca4a5e53a9146b4099674c3126339714b8a0970f6c7639672ff9",
+  "parentCodeSha256": "ba60b2b73e6bf657c282940bda85d62b509e15c08fdd6ad34a8ec590e3b2539c",
+  "parentProtocolSha256": "5503a9d04938e26d3ccc76c85bb4926dc3798db81fd559b9655c4e83ec39cf7c",
+  "gaiaMagRange": [
+    13,
+    19
+  ],
+  "maxRUWE": 1.4,
+  "maxMotionErrorMasPerYear": 1,
+  "maxGaiaNeighborArcsec": 0.45,
+  "searchHalfWidthPx": 3,
+  "maximumCentroidDisplacementPx": 3,
+  "backgroundOuterPx": 9,
+  "minimumPeakAboveSkyE": 120,
+  "maximumFullWellSafePeakE": 50000,
+  "centroidHalfWidthPx": 2,
+  "minimumCompanionSeparationPx": 2,
+  "companionPeakRatio": 0.7,
+  "skyTileArcsec": 16,
+  "skyOrigin": [
+    5.635,
+    -72.038
+  ],
+  "scope": "Use previously archived Gaia DR3 cone as partial field reference, move positions linearly to each observing epoch, fit independent Gaia offset per chip, hold out the same sky tiles in every exposure. Gaia labels for alignment, not a saturated flux reference. The catalogue coverage and rejected candidates limit inference."
+}

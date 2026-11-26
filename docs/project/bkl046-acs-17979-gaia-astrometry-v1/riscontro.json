@@ -1,0 +1,407 @@
+{
+  "eligibleGaiaSources": 3184,
+  "fits": {
+    "jfln02qtq": {
+      "1": {
+        "candidates": 0,
+        "epochJyearTCB": 2026.3281432448277,
+        "fitBeforeClipping": 0,
+        "holdout": 0,
+        "holdoutTiles": 0,
+        "models": {},
+        "originalHoldout": null,
+        "statusCounts": {
+          "CENTROID_DISPLACEMENT": 5,
+          "CORE_DQ": 11,
+          "OUTSIDE": 2674,
+          "PEAK_BELOW_MINIMUM": 494
+        }
+      },
+      "2": {
+        "candidates": 1,
+        "epochJyearTCB": 2026.3281432448277,
+        "fitBeforeClipping": 0,
+        "holdout": 1,
+        "holdoutTiles": 1,
+        "models": {},
+        "originalHoldout": {
+          "maxPx": 2.407077555219473,
+          "medianPx": 2.407077555219473,
+          "p90Px": 2.407077555219473,
+          "pairs": 1
+        },
+        "statusCounts": {
+          "AMBIGUOUS_PEAK": 1,
+          "CENTROID_DISPLACEMENT": 4,
+          "CORE_DQ": 5,
+          "MATCH": 1,
+          "OUTSIDE": 2606,
+          "PEAK_BELOW_MINIMUM": 567
+        }
+      }
+    },
+    "jfln02qzq": {
+      "1": {
+        "candidates": 266,
+        "epochJyearTCB": 2026.3282864116197,
+        "fitBeforeClipping": 200,
+        "holdout": 66,
+        "holdoutTiles": 21,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.1977148985221896,
+                -0.11978160329711196
+              ],
+              [
+                0.05240219231372008,
+                0.1686490386474941
+              ],
+              [
+                0.130440022679225,
+                0.02691988626759323
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.3569751711416669,
+              "medianPx": 0.08451623474739633,
+              "p90Px": 0.18527650095860965,
+              "pairs": 66
+            },
+            "trainRetained": 194,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                0.137107476046819,
+                -0.11574729737518452
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.33913028825129793,
+              "medianPx": 0.11129088833033945,
+              "p90Px": 0.2486988754848813,
+              "pairs": 66
+            },
+            "trainRetained": 198,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.46380078967347976,
+          "medianPx": 0.19782146895820044,
+          "p90Px": 0.31386065646275313,
+          "pairs": 66
+        },
+        "statusCounts": {
+          "CORE_DQ": 216,
+          "MATCH": 266,
+          "OUTSIDE": 2673,
+          "PEAK_ABOVE_LIMIT": 29
+        }
+      },
+      "2": {
+        "candidates": 266,
+        "epochJyearTCB": 2026.3282864116197,
+        "fitBeforeClipping": 202,
+        "holdout": 64,
+        "holdoutTiles": 23,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.03423711843581011,
+                0.19053035466476337
+              ],
+              [
+                0.04919641784225002,
+                0.14360008855399614
+              ],
+              [
+                0.10753256143346145,
+                0.15186782261522686
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.2517889636935899,
+              "medianPx": 0.08071924661448066,
+              "p90Px": 0.1607807609316295,
+              "pairs": 64
+            },
+            "trainRetained": 189,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                -0.015097745676715646,
+                0.12620758379062916
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.4546358111282917,
+              "medianPx": 0.11944814815939195,
+              "p90Px": 0.25215854019389417,
+              "pairs": 64
+            },
+            "trainRetained": 197,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.4290212777578066,
+          "medianPx": 0.17387799745372698,
+          "p90Px": 0.29986965761463535,
+          "pairs": 64
+        },
+        "statusCounts": {
+          "CORE_DQ": 271,
+          "MATCH": 266,
+          "OUTSIDE": 2602,
+          "PEAK_ABOVE_LIMIT": 45
+        }
+      }
+    },
+    "jfln05ykq": {
+      "1": {
+        "candidates": 1,
+        "epochJyearTCB": 2026.5578394328581,
+        "fitBeforeClipping": 1,
+        "holdout": 0,
+        "holdoutTiles": 0,
+        "models": {},
+        "originalHoldout": null,
+        "statusCounts": {
+          "CORE_DQ": 1,
+          "MATCH": 1,
+          "OUTSIDE": 2738,
+          "PEAK_ABOVE_LIMIT": 444
+        }
+      },
+      "2": {
+        "candidates": 2,
+        "epochJyearTCB": 2026.5578394328581,
+        "fitBeforeClipping": 1,
+        "holdout": 1,
+        "holdoutTiles": 1,
+        "models": {},
+        "originalHoldout": {
+          "maxPx": 0.8209109215741304,
+          "medianPx": 0.8209109215741304,
+          "p90Px": 0.8209109215741304,
+          "pairs": 1
+        },
+        "statusCounts": {
+          "CORE_DQ": 1,
+          "MATCH": 2,
+          "OUTSIDE": 2507,
+          "PEAK_ABOVE_LIMIT": 674
+        }
+      }
+    },
+    "jfln05ymq": {
+      "1": {
+        "candidates": 1,
+        "epochJyearTCB": 2026.5578564810446,
+        "fitBeforeClipping": 1,
+        "holdout": 0,
+        "holdoutTiles": 0,
+        "models": {},
+        "originalHoldout": null,
+        "statusCounts": {
+          "CORE_DQ": 1,
+          "MATCH": 1,
+          "OUTSIDE": 2738,
+          "PEAK_ABOVE_LIMIT": 444
+        }
+      },
+      "2": {
+        "candidates": 5,
+        "epochJyearTCB": 2026.5578564810446,
+        "fitBeforeClipping": 1,
+        "holdout": 4,
+        "holdoutTiles": 4,
+        "models": {},
+        "originalHoldout": {
+          "maxPx": 0.9967532382535099,
+          "medianPx": 0.6504532394348849,
+          "p90Px": 0.9530056265543251,
+          "pairs": 4
+        },
+        "statusCounts": {
+          "MATCH": 5,
+          "OUTSIDE": 2507,
+          "PEAK_ABOVE_LIMIT": 672
+        }
+      }
+    }
+  },
+  "photometryPerformed": false,
+  "protocolSha256": "3c2e20152bdf1017dcdfee5eb8920a8aad86e8fff5d89dd8d2325d20c1b3129e",
+  "schema": "BKL046_ACS17979_GAIA_ANCHORED_ASTROMETRY_V1",
+  "scientificClosures": 0,
+  "sharedIds": [
+    {
+      "chips": [
+        1,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        1,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        2,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        2,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        1,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qzq"
+    },
+    {
+      "chips": [
+        1,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 1,
+      "short": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ykq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qzq"
+    },
+    {
+      "chips": [
+        1,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        1,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        2,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        2,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qtq"
+    },
+    {
+      "chips": [
+        1,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qzq"
+    },
+    {
+      "chips": [
+        1,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 1,
+      "short": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "long": "jfln05ymq",
+      "matchedGaiaIdsInBoth": 0,
+      "short": "jfln02qzq"
+    }
+  ]
+}

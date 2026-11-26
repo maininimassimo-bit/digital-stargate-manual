@@ -1,0 +1,5 @@
+SELECT TOP 20000 source_id, ra, dec, ref_epoch, ra_error, dec_error, pmra, pmdec,
+pmra_error, pmdec_error, ruwe, astrometric_params_solved, phot_g_mean_mag, parallax
+FROM gaiadr3.gaia_source
+WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',5.635,-72.038,0.06))
+ORDER BY source_id
