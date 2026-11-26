@@ -1,0 +1,79 @@
+{
+  "schema": "BKL046_CFA_XDRZ_WEIGHT_EXPORT_COMPONENT_V1",
+  "fixtureReceiptSha256": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "operation": "BKL046_CFA_XDRZ_WEIGHT_WINDOW_DSG_SHARED_001",
+  "cases": [
+    {
+      "id": "unmasked",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-unmasked.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": false
+    },
+    {
+      "id": "mask-green",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-mask-green.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": true
+    },
+    {
+      "id": "mask-wrong-channel",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-mask-wrong-channel.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": true
+    },
+    {
+      "id": "zero-detector",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-zero-detector.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-zero-detector-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": false
+    },
+    {
+      "id": "zero-reference",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-zero-reference.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-zero-reference-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": false
+    }
+  ],
+  "weightOutput": "NATIVE_WEIGHT_WINDOW_UNCLASSIFIED",
+  "scientificClosures": 0
+}
