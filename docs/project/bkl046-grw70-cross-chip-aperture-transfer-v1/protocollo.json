@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_GRW70_CROSS_CHIP_APERTURE_TRANSFER_V1",
+  "input": [
+    "fd33baa1618fa4875427a83f96e2eca5d6539293d70d077edf5afeb24b3b1c7f",
+    "riscontro-centro.json",
+    "0b16f9a4700b03733e172bd6ccbc8b3e4de301404a772a223cd8a4ace06e72fe"
+  ],
+  "trainCountMinimum": 2,
+  "training2": "first",
+  "evaluation": "reserve",
+  "cohortSupport": "Only 7 accepted observations from the two previously frozen batches. Exclude exploratory visits and use all eligible reserved visits. Estimate with the first-batch UVIS2 median and test on the reserves of each chip. As a secondary sensitivity test, fit the two reserved UVIS1 visits and evaluate on the three reserved UVIS2 visits.",
+  "scope": "Compare zero correction and the trained correction within each evaluation set. Report errors in differences of colors from radii 5 and 10 and the training min-max envelope as a descriptive diagnostic. The chip is associated with visits, times and detector positions, so these are transfer errors, not estimates of the causal chip effect."
+}
