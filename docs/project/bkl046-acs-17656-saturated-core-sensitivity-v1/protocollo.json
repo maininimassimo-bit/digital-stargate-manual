@@ -1,0 +1,37 @@
+{
+  "schema": "BKL046_ACS17656_SINGLE_CORE_SENSITIVITY_V1",
+  "parentCode": "520059e17050f59d17e9d5bc064d7ede05c810b0ca281561cc2470192643fb42",
+  "primaryProtocol": "82ff2d6cc78f0d7b4e096212e7c6fab3a6b4ffa6d1d59bfe90b0975c6135e91c",
+  "primaryReport": "02691d3e3f40c29295bb7d69ae9fa2c3621e7c47e438f05cb3ce2e5d0664c8af",
+  "siblingProtocol": "104cf3d3c07c6e23b96b3040ef09870da43d6a51ee5c1d5afe72a55d21701fe8",
+  "radii": [
+    5,
+    8,
+    10,
+    12,
+    15
+  ],
+  "skyAnnuli": [
+    [
+      30,
+      40
+    ],
+    [
+      35,
+      48
+    ],
+    [
+      40,
+      52
+    ]
+  ],
+  "centerPerturbationsPx": [
+    -1,
+    0,
+    1
+  ],
+  "minimumApertureCoverage": 0.97,
+  "minimumSkyPixels": 400,
+  "maximumSiblingPeakDistancePx": 3,
+  "scope": "Single-case sensitivity only. Perturb the long exposure's integer center, keeping each short center fixed. Exclude other bad pixels and use identical retained support. No independent scientific closure."
+}
