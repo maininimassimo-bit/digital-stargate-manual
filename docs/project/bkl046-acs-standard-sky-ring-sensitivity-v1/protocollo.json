@@ -1,0 +1,13 @@
+{
+  "schema":"BKL046_ACS_SKY_RING_SENSITIVITY_PROTOCOL_V1",
+  "parentProtocolSha256":"3830ff3101c8a039d40d4f39f564ad1d38959abf0611969d7d71c00c00aa737c",
+  "parentRunnerSha256":"9091ba05c19faabbf3e54875ec3d9891664ac66839a321f1355a46f8e3e0be1a",
+  "parentResultSha256":"af55caeda739e60978597f4eb046755c494423168d422a7a2bfcb6b7abb8dbaa",
+  "bands":["F658N","F660N"],
+  "annuli":[[25,32],[32,40],[28,40]],
+  "quadrantJackknife":[0,1,2,3],
+  "minimumSkySupport":0.7,
+  "radii":[10,15,20],
+  "extremeEnvelope":"Independent baseline-or-alternative median per exposure, to maximize the diagnostic ratio interval.",
+  "scope":"Background sensitivity conditional on fixed centers, FITS, PAM, DQ masks and the prior same-radius peer envelope. Neither statistical interval nor infinite-aperture calibration."
+}
