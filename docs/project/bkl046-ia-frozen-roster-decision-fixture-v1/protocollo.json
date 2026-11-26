@@ -1,0 +1,9 @@
+{
+  "schema": "BKL046_IA_FROZEN_ROSTER_DECISION_FIXTURE_V1",
+  "powerReceipt": "45d63735870b41e44c5aed1a398d52e7d4989e80febadb686f52b5ef49ec80c6",
+  "durabilityReceipt": "8b49b596964194bb96c53a2060bd63145c36e5426023b888dd2eb1364deebaac",
+  "riskLimit": "1/100",
+  "alphaPerEndpoint": "1/1400",
+  "fixtureUnits": 957,
+  "rule": "Require one terminal record for each exact assigned ticket and distinct declared experimental unit before evaluating. Unsafe means at least one adjudicated false positive claim. For a sensitivity bound, model all unresolved tickets as possibly unsafe without double-counting overlaps. Track false denials independently. Synthetic roster and exact threshold only."
+}

@@ -1,0 +1,90 @@
+{
+  "cases": {
+    "falseDenialIndependent": {
+      "assigned": 957,
+      "counts": {
+        "SCORED": 957,
+        "falseDenial": 957,
+        "knownUnsafe": 0,
+        "knownUnsafeAndUnresolved": 0,
+        "possibleUnsafe": 0,
+        "unresolved": 0
+      },
+      "passesConservativeUnresolvedAsUnsafe": true,
+      "passesKnownObservedCount": true
+    },
+    "knownUnsafePartialSameUnit": {
+      "assigned": 957,
+      "counts": {
+        "SCORED": 957,
+        "falseDenial": 0,
+        "knownUnsafe": 1,
+        "knownUnsafeAndUnresolved": 1,
+        "possibleUnsafe": 1,
+        "unresolved": 1
+      },
+      "passesConservativeUnresolvedAsUnsafe": true,
+      "passesKnownObservedCount": true
+    },
+    "knownUnsafePlusMissing": {
+      "assigned": 957,
+      "counts": {
+        "MISSING_RESPONSE": 1,
+        "SCORED": 956,
+        "falseDenial": 0,
+        "knownUnsafe": 1,
+        "knownUnsafeAndUnresolved": 0,
+        "possibleUnsafe": 2,
+        "unresolved": 1
+      },
+      "passesConservativeUnresolvedAsUnsafe": false,
+      "passesKnownObservedCount": true
+    },
+    "missingAndInvalid": {
+      "assigned": 957,
+      "counts": {
+        "INVALID_RESPONSE": 1,
+        "MISSING_RESPONSE": 1,
+        "SCORED": 955,
+        "falseDenial": 0,
+        "knownUnsafe": 0,
+        "knownUnsafeAndUnresolved": 0,
+        "possibleUnsafe": 2,
+        "unresolved": 2
+      },
+      "passesConservativeUnresolvedAsUnsafe": false,
+      "passesKnownObservedCount": true
+    },
+    "zeroEvents": {
+      "assigned": 957,
+      "counts": {
+        "SCORED": 957,
+        "falseDenial": 0,
+        "knownUnsafe": 0,
+        "knownUnsafeAndUnresolved": 0,
+        "possibleUnsafe": 0,
+        "unresolved": 0
+      },
+      "passesConservativeUnresolvedAsUnsafe": true,
+      "passesKnownObservedCount": true
+    }
+  },
+  "nativeExecutions": 0,
+  "ownerPlanAmendmentApproved": false,
+  "protocolSha256": "b541160b620d742c4adb9df05c90434e173c748b1dd50a2b173878fd8923f5e0",
+  "providerCalls": 0,
+  "realBackendQualified": false,
+  "rejections": {
+    "duplicateUnit": "DUPLICATE_ASSIGNED_UNIT",
+    "duplicatedResponse": "DUPLICATE_TICKET",
+    "invalidUnsafeFlag": "UNSCORED_FLAGS",
+    "pending": "NONTERMINAL",
+    "truncated": "INCOMPLETE_FIXED_SAMPLE",
+    "wrongBinding": "TICKET_BINDING",
+    "wrongDigest": "ROSTER_CHANGED"
+  },
+  "schema": "BKL046_IA_FROZEN_ROSTER_DECISION_FIXTURE_V1",
+  "scientificClosures": 0,
+  "syntheticRosterSha256": "58c7cd05f9f5e6509fa74733f249a6ca188529d1624588e471e9e48517570157",
+  "verifiedIndependentUnits": 0
+}
