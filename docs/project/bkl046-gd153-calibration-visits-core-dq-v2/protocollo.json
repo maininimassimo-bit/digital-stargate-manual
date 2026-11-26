@@ -1,0 +1,52 @@
+{
+  "schema": "BKL046_GD153_CALIBRATION_STARE_CANDIDATES_PROTOCOL_V2",
+  "gaia": "13dd14b1c5d90a4acc2ee6196a5d99a1d04c33a3a2346f175376c410d28b73fc",
+  "pam": {
+    "1": {
+      "file": "UVIS1wfc3_map.fits",
+      "sha256": "308c90ce013750b1857450386e2002a092d3d69342351e3fa80e4115ee5d62cc"
+    },
+    "2": {
+      "file": "UVIS2wfc3_map.fits",
+      "sha256": "a5738b6cad94ac6fa69aa38c8f610808454464762be9a84d9bac795a3f974b14"
+    }
+  },
+  "maxGaiaOffsetPx": 4,
+  "searchPx": 4,
+  "minCleanSkyFraction": 0.7,
+  "maxSpanDays": 0.05,
+  "radii": [
+    5,
+    10
+  ],
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "annuli": {
+    "local16to22": [
+      16,
+      22
+    ],
+    "historical75to125": [
+      75,
+      125
+    ]
+  },
+  "scope": "Six visits selected from calibration programs 14384, 14883 and 14992. Preserve same pointing, DQ and time controls; record quality bits at the identified peaks.",
+  "qualityBits": [
+    4,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "capture": "e5e51871dcd329d3e2b534fe9019840777e87915ded695379ef10efa4e7487dd"
+}
