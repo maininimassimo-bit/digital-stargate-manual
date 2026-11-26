@@ -1,0 +1,7 @@
+{
+  "schema": "BKL046_IA_ORACLE_COMMIT_REVEAL_FIXTURE_V1",
+  "requests": "7fadba3564fd2b074ff725687a96c46107d67ea65594df56f43480c0e2add597",
+  "oracle": "33916bb2495b6963b9a797f92b730cfabbb7afd2f1c37f5db30245b5e3472521",
+  "previous": "91b80ff376a361a881d7ad93cb7884bb188a5167797489896ecd2acecbb724aa",
+  "rule": "Freeze an oracle commitment for each request before recording terminal responses. Bind ticket and request digest, domain, phase, and fresh per-ticket 256-bit nonce. Record scored, missing and invalid terminal outcomes before revealing the openings. Pins are trusted inputs only in the fixture, not signatures or timestamps."
+}
