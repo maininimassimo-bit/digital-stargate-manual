@@ -1,0 +1,189 @@
+{
+  "comparisons": [
+    {
+      "extendedCovered": 161916,
+      "fourCovered": 163060,
+      "guards": [
+        {
+          "allFour": 0,
+          "allSixteen": 0,
+          "factor": 1,
+          "nearest": 0,
+          "upperCodeExclusive": 43600.0
+        },
+        {
+          "allFour": 0,
+          "allSixteen": 0,
+          "factor": 0.9,
+          "nearest": 0,
+          "upperCodeExclusive": 39240.0
+        },
+        {
+          "allFour": 0,
+          "allSixteen": 0,
+          "factor": 0.8,
+          "nearest": 0,
+          "upperCodeExclusive": 34880.0
+        }
+      ],
+      "longSeconds": 100,
+      "nearestCodeZero": 0,
+      "nearestCovered": 163944,
+      "shortSeconds": 45,
+      "sourceScienceSamplesAtOrAboveAmplifierLevel": 163944
+    },
+    {
+      "extendedCovered": 161418,
+      "fourCovered": 162555,
+      "guards": [
+        {
+          "allFour": 158183,
+          "allSixteen": 155539,
+          "factor": 1,
+          "nearest": 159519,
+          "upperCodeExclusive": 43649.0
+        },
+        {
+          "allFour": 158171,
+          "allSixteen": 155524,
+          "factor": 0.9,
+          "nearest": 159507,
+          "upperCodeExclusive": 39284.1
+        },
+        {
+          "allFour": 158164,
+          "allSixteen": 155514,
+          "factor": 0.8,
+          "nearest": 159499,
+          "upperCodeExclusive": 34919.200000000004
+        }
+      ],
+      "longSeconds": 100,
+      "nearestCodeZero": 0,
+      "nearestCovered": 163138,
+      "shortSeconds": 30,
+      "sourceScienceSamplesAtOrAboveAmplifierLevel": 163944
+    },
+    {
+      "extendedCovered": 162000,
+      "fourCovered": 163140,
+      "guards": [
+        {
+          "allFour": 158748,
+          "allSixteen": 156052,
+          "factor": 1,
+          "nearest": 160325,
+          "upperCodeExclusive": 43649.0
+        },
+        {
+          "allFour": 158735,
+          "allSixteen": 156037,
+          "factor": 0.9,
+          "nearest": 160313,
+          "upperCodeExclusive": 39284.1
+        },
+        {
+          "allFour": 158726,
+          "allSixteen": 156026,
+          "factor": 0.8,
+          "nearest": 160305,
+          "upperCodeExclusive": 34919.200000000004
+        }
+      ],
+      "longSeconds": 45,
+      "nearestCodeZero": 0,
+      "nearestCovered": 163944,
+      "shortSeconds": 30,
+      "sourceScienceSamplesAtOrAboveAmplifierLevel": 164565
+    }
+  ],
+  "fluxReferenceQualified": false,
+  "frames": [
+    {
+      "amplifiers": {
+        "A": {
+          "atOrAboveLevel": 3624,
+          "headerLevelADU": 44487.0,
+          "scienceSamples": 386262
+        },
+        "B": {
+          "atOrAboveLevel": 0,
+          "headerLevelADU": 43649.0,
+          "scienceSamples": 0
+        }
+      },
+      "archiveFullCcdCutout": "wide-M8-dec050437.fits",
+      "centerInDataSection": true,
+      "nonScienceSamples": 0,
+      "rawSubarrayOriginXY": [
+        448,
+        1808
+      ],
+      "samplesAtOrAboveAmplifierLevel": 3624,
+      "scienceSamples": 386262,
+      "seconds": 30.0,
+      "source": "dec050437.fits.fz",
+      "zerosInScience": 0,
+      "zerosOutsideScience": 0
+    },
+    {
+      "amplifiers": {
+        "A": {
+          "atOrAboveLevel": 0,
+          "headerLevelADU": 47271.0,
+          "scienceSamples": 0
+        },
+        "B": {
+          "atOrAboveLevel": 164565,
+          "headerLevelADU": 43600.0,
+          "scienceSamples": 165186
+        }
+      },
+      "archiveFullCcdCutout": "wide-M8-tentativo2-45s.fits",
+      "centerInDataSection": false,
+      "nonScienceSamples": 34776,
+      "rawSubarrayOriginXY": [
+        0,
+        1731
+      ],
+      "samplesAtOrAboveAmplifierLevel": 164565,
+      "scienceSamples": 165186,
+      "seconds": 45.0,
+      "source": "dec088331.fits.fz",
+      "zerosInScience": 0,
+      "zerosOutsideScience": 0
+    },
+    {
+      "amplifiers": {
+        "A": {
+          "atOrAboveLevel": 0,
+          "headerLevelADU": 47271.0,
+          "scienceSamples": 0
+        },
+        "B": {
+          "atOrAboveLevel": 163944,
+          "headerLevelADU": 43600.0,
+          "scienceSamples": 164565
+        }
+      },
+      "archiveFullCcdCutout": "wide-M8-dec088332.fits",
+      "centerInDataSection": false,
+      "nonScienceSamples": 34776,
+      "rawSubarrayOriginXY": [
+        0,
+        1729
+      ],
+      "samplesAtOrAboveAmplifierLevel": 163944,
+      "scienceSamples": 164565,
+      "seconds": 100.0,
+      "source": "dec088332.fits.fz",
+      "zerosInScience": 621,
+      "zerosOutsideScience": 34776
+    }
+  ],
+  "nativeExecutions": 0,
+  "programSha256": "88e69e8a91d3286b85220ce4d9246463dc1fca72a6a85aa13a19131c206549fa",
+  "protocolSha256": "b2f13bb36032e1876b4b0f2b9e3c4b5dd41f6b51106c7615966bc689bb82dc3d",
+  "schema": "BKL046_DECAM_HDR_M8_DATASEC_RESULT_V1",
+  "scientificClosures": 0
+}
