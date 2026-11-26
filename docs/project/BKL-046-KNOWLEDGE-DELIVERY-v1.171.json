@@ -172,7 +172,35 @@
       "sampledWavelengthsMatched": 343,
       "freshSourceSpecificEsaDataLinkByteMatchVerified": false,
       "fullRemoteCarrierReadbackVerified": false,
-      "scientificClosures": 0
+      "scientificClosures": 0,
+      "sourceSpecificEsaByteRecovery": {
+        "sourceId": "4458990005388621952",
+        "products": [
+          "XP_CONTINUOUS",
+          "XP_SAMPLED"
+        ],
+        "archivedReadbackXmlByteMatchVerified": true,
+        "archivedReadbackRawZipByteMatchVerified": false,
+        "historicalZipReconstructionByteMatchVerified": true,
+        "archiveName": "BKL046-v571-riconciliazione-DataLink-v2.zip",
+        "archiveSha256": "979051790a802bcc04d4385f6400566540b557a062e33caa50d047e17c184375",
+        "archiveBytes": 2321644,
+        "archiveVerifiedOnVMAndPhysicalH": true,
+        "evidence": {
+          "README.md": {
+            "path": "docs/project/bkl046-v571-datalink-provenance/README.md",
+            "sha256": "485d3b35cc371f321600494e2c5098324c39b92fa96f4536e459753b82db5f74"
+          },
+          "riscontro-archiviato.json": {
+            "path": "docs/project/bkl046-v571-datalink-provenance/riscontro-archiviato.json",
+            "sha256": "95ab2695bb3b59a20fa11dbebc4f4f69a70b0f061a1661694aeacaff9677ce1a"
+          },
+          "riscontro-http.json": {
+            "path": "docs/project/bkl046-v571-datalink-provenance/riscontro-http.json",
+            "sha256": "617101318468ea9db3cba08a38f8864bea34f5187b80e43d25595e200c8043e4"
+          }
+        }
+      }
     }
   },
   "registeredStudyDependencies": {
