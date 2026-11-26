@@ -87,6 +87,9 @@ jobs:
             python -m pip install mkdocs-material
           fi
 
+      - name: Generate AllSky nightly weather summaries
+        run: python .github/scripts/generate-allsky-night-weather.py
+
       - name: Build documentation
         run: mkdocs build --strict --config-file mkdocs.pages.yml
 
