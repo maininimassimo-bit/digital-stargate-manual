@@ -1,0 +1,124 @@
+{
+  "schema": "BKL046_CFA_R4_DELIVERY_SUPPLEMENT_V1",
+  "stagedBaseSha256": "ca6ac2dba26e90704bd583d1073744079b9e889a4fc95cc38895d702cab815d1",
+  "stagedBaseAssets": 81,
+  "stagedBaseBytes": 27582310714,
+  "transferIncludesSupplement": false,
+  "archiveCopiesVerifiedPerEntry": 2,
+  "supplementAssets": 10,
+  "supplementBytes": 938318,
+  "entries": [
+    {
+      "id": "zero-three",
+      "scope": "OFFLINE_CONTROLS",
+      "archiveSha256": "d9be03b4fa464b93780b0a5f674ea6172a845045701c026636b361860ae1dddf",
+      "archiveBytes": 68227,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-zero-three-input-v1/riscontro.json",
+        "commit": "4f4ae782ba7e6516820e0ede8aa9c89e2df5c559",
+        "sha256": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f"
+      }
+    },
+    {
+      "id": "weight-scale",
+      "scope": "OFFLINE_COMPARATOR",
+      "archiveSha256": "a7656231af19a49d5c4adb6125e45d081d54a31a5183cf4d9f9503d5713cef09",
+      "archiveBytes": 22685,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-weight-scale-v1/riscontro.json",
+        "commit": "7b86ff9173818c9d518f242efa076cda76291d7d",
+        "sha256": "3423391474304847997a4f02a4c9d6461467114235f3c4a3e971d7c64396d4ab"
+      }
+    },
+    {
+      "id": "relative-response",
+      "scope": "OFFLINE_RELATIVE_WEIGHT_CONTROLS",
+      "archiveSha256": "b5ff5f2adf9b9da790d7d4b6cf83900cc1783f60f7ad2abbfb6c51362dd6e6cd",
+      "archiveBytes": 32108,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-positive-response-v1/riscontro.json",
+        "commit": "52843a4c2afac5848e245890054f226bf6c2e736",
+        "sha256": "af8798dab62ff2e34a0c3c47e59ca4c0aab7f40fdec00cbe0fc54c87939e4daf"
+      }
+    },
+    {
+      "id": "r4-release-crosswalk",
+      "scope": "HISTORICAL_SYNTHETIC_API_ONLY",
+      "archiveSha256": "ebc4f5cfa70b5de57b69ed3c5fbdb3f54ae198039040533578c84684101e7c9f",
+      "archiveBytes": 6156,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-bkl051-r4-executed-scope-v1/riepilogo.json",
+        "commit": "bbbe46f5a03d189ba393fa30f18ceb8fe0833308",
+        "sha256": "31d519f4cc4d2347eddf4475d7eb8212fbb8ace70a84534ba940288a845fee9a"
+      }
+    },
+    {
+      "id": "weight-export",
+      "scope": "COMPONENT_MOCK",
+      "archiveSha256": "9ab108914096ab3e74ba728b0752d1ee3dad10418f30d6e81c1d19c820855925",
+      "archiveBytes": 24239,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-weight-window-export-v1/riscontro.json",
+        "commit": "7a186f6bd623a13a98650759a5f988f0c9f62dc8",
+        "sha256": "36bfc1f29cc00c47a4f965ec979d8a71552d804cb5e7153a8b73d1e080144272"
+      }
+    },
+    {
+      "id": "weight-evidence-intake",
+      "scope": "COMPONENT_MOCK",
+      "archiveSha256": "99eb46ea960bf629e8ebed560db8444a7c8aeeb0ae54eb8944abb79955b05d73",
+      "archiveBytes": 27385,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-weight-evidence-intake-v1/riscontro.json",
+        "commit": "990088354a0d3f8499b1bf3f3c8ee9987a944fd4",
+        "sha256": "36db0b254f0a4ccc31df178a7e96c2319afdf57178ab5d97a02e1baae85b90a8"
+      }
+    },
+    {
+      "id": "product-handoff",
+      "scope": "ISOLATED_CUSTODY_TEST",
+      "archiveSha256": "caef35a7b4ad0e546faa67ae8414734d17ac0293d5b3cd5b5bb860e339e5f0a2",
+      "archiveBytes": 39003,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-product-handoff-v1/riscontro.json",
+        "commit": "e6464c868be024761b8eea0fe6e883f75e0d80c2",
+        "sha256": "984fb3a0689cf58f01a21aa3b9a5ad590e8c98c4febfd0ad6a46da959b3a200f"
+      }
+    },
+    {
+      "id": "cfa-v5-review",
+      "scope": "HISTORICAL_CANDIDATE_V5",
+      "archiveSha256": "060b659a4fe28c1504a7f4e39c583e30866039b40f23b0fe1e55da8ece56c0df",
+      "archiveBytes": 235977,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-v5-review-handoff/richiesta-revisione.json",
+        "commit": "4ea24807e869d0422c7c8d7d87a6af2c52279aae",
+        "sha256": "512f4314df9ab9ca4d62d6dcf9a06285f5a5905eb64c9e3c6d9f786ea7863ee9"
+      }
+    },
+    {
+      "id": "cfa-v5-witness",
+      "scope": "ISOLATED_WITNESS_TEST_V5",
+      "archiveSha256": "6958ccadd351a2afb9e9ba5954f5279bebc640a0b2f404baf1932a7f9c205662",
+      "archiveBytes": 237638,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-v5-witness-chain/custodia.json",
+        "commit": "21378218909ad9a5feda74812a7c561ffa86802a",
+        "sha256": "b2faf49632016ff5e659113d80cf666a1698e6bbf1e8d3ce2827f30f16833f59"
+      }
+    },
+    {
+      "id": "cfa-v6-review",
+      "scope": "PENDING_INDEPENDENT_REVIEW_V6",
+      "archiveSha256": "29099b78c12cb8735f75d33daee066280a5aae9cb328c6322b3c71d3516b4780",
+      "archiveBytes": 244900,
+      "publicReceipt": {
+        "path": "docs/project/bkl046-cfa-xdrz-v6-console-handoff/richiesta-revisione.json",
+        "commit": "f00e17ec4ffa6f4dfad2a4827839d9769964d085",
+        "sha256": "9f3f29bb3f52f23292369f9edf30161e52d7efa009a4bfb41b3c4e3d9d379dc4"
+      }
+    }
+  ],
+  "privatePayloadUploaded": false,
+  "scientificClosures": 0
+}
