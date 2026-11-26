@@ -1,0 +1,7 @@
+# BKL-046 · Proiezione delle richieste IA per il corpus Native64
+
+Il generatore prepara 64 richieste di sviluppo dai pacchetti fissati. Conserva le domande, i conteggi per tipo di endpoint e la portata delle misure. Usa identificativi opachi nel formato della richiesta. Gli identificativi delle sorgenti, le impronte dei pacchetti originali e il legame con le chiavi di valutazione sono in un file separato. I campi testuali delle fonti non vengono trasferiti nella richiesta.
+
+Il controllo verifica la somma dei conteggi e rifiuta campi inattesi, tipi alterati e totali incoerenti. Solo dopo aver congelato la proiezione, il valutatore offline rilegge le chiavi separate. Le 256 conclusioni di riferimento restano ricostruibili dai dati proiettati. Questi esiti attestano il contenuto della richiesta e la coerenza della chiave, senza attribuire prestazioni a un modello.
+
+Il generatore riceve protocollo, directory del corpus e directory nuova di uscita. Il kit H/K conserva le richieste e i rispettivi legami. GitHub contiene il programma, il protocollo e il riepilogo. Restano da qualificare l'isolamento operativo del valutatore e del backend, i dati indipendenti e la prova confermativa. Zero chiamate a provider, unità indipendenti e avvii PixInsight. [Controllo dell'adjudicazione offline](../bkl046-native64-offline-adjudication-v1/README.md)
