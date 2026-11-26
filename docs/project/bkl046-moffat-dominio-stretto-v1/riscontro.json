@@ -1,0 +1,4821 @@
+{
+  "protocol": "BKL046_MOFFAT_NARROW_DOMAIN_NUMERICAL_DEVELOPMENT_V1",
+  "protocolSha256": "997a4e3f2b1d5f5dcd7c7b7879b931631045fc7bd5aaacc1a33eb21ff73e0542",
+  "priorEdgeSourceSha256": "d52c7a2f87b8a636cd35b4b5ca48ec27d909452e9435639225f805fde7d7d409",
+  "cases": [
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.000888343900442e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 6.002665031701326e-11,
+          "edgeToAreaElectrons": 4.729372449219227e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-13,
+          "edgeToAreaElectrons": 2.5579538487363607e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-13,
+          "edgeToAreaElectrons": 2.5579538487363607e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.1316282072803006e-14,
+          "edgeToAreaElectrons": 8.526512829121202e-14
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 5.963562976774028e-13,
+        "finiteFieldElectrons": 0.0
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 4.547473508864641e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 2.7853275241795927e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.6370904631912708e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.820766091346741e-11,
+          "edgeToAreaElectrons": 4.729372449219227e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 6.252776074688882e-13,
+          "edgeToAreaElectrons": 7.389644451905042e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 6.252776074688882e-13,
+          "edgeToAreaElectrons": 7.389644451905042e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-13,
+          "edgeToAreaElectrons": 6.252776074688882e-13
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 8.526512829121202e-13,
+        "finiteFieldElectrons": 1.8189894035458565e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.017650371811214427,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 6.2220797190093435e-06,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.7621459846850485e-12,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.001332515850663e-11,
+          "edgeToAreaElectrons": 2.4556356947869062e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.9103830456733704e-11,
+          "edgeToAreaElectrons": 2.546585164964199e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 7.105427357601002e-14,
+          "edgeToAreaElectrons": 1.4210854715202004e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 7.105427357601002e-14,
+          "edgeToAreaElectrons": 2.5579538487363607e-13
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 1.8189894035458565e-12,
+        "finiteFieldElectrons": 5.4569682106375694e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 7.3641786002554e-09,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.5006662579253316e-11,
+          "edgeToAreaElectrons": 1.2732925824820995e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.5006662579253316e-11,
+          "edgeToAreaElectrons": 1.2732925824820995e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.5006662579253316e-11,
+          "edgeToAreaElectrons": 1.2732925824820995e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.5006662579253316e-11,
+          "edgeToAreaElectrons": 1.2278178473934531e-11
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 9.094947017729282e-13,
+        "finiteFieldElectrons": 3.637978807091713e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.338596459594555e-06,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 3.637978807091713e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.3283064365386963e-10,
+          "edgeToAreaElectrons": 1.418811734765768e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.4210854715202004e-13,
+          "edgeToAreaElectrons": 8.242295734817162e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.1316282072803006e-14,
+          "edgeToAreaElectrons": 3.552713678800501e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.0658141036401503e-14,
+          "edgeToAreaElectrons": 1.0302869668521453e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.002240603294922039,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.5115801943466067e-08,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.546585164964199e-11,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.3101165425032377e-10,
+          "edgeToAreaElectrons": 1.3642420526593924e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.2505552149377763e-12,
+          "edgeToAreaElectrons": 1.5916157281026244e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-13,
+          "edgeToAreaElectrons": 1.2647660696529783e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 7.105427357601002e-14,
+          "edgeToAreaElectrons": 2.2026824808563106e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.80225789603719,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 0.21507958713573316,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 0.0007603089898111648,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.1823431123048067e-10,
+          "edgeToAreaElectrons": 1.1962583812419325e-08
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.1550582712516189e-10,
+          "edgeToAreaElectrons": 1.2101736501790583e-08
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.4210854715202004e-14,
+          "edgeToAreaElectrons": 3.907985046680551e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.7763568394002505e-14,
+          "edgeToAreaElectrons": 4.369837824924616e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": false,
+      "acceptedEdgeOrders": []
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 8.212760440073907e-05,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 1.3505996321327984e-10,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.775291356258094e-11,
+          "edgeToAreaElectrons": 3.54702933691442e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.6843418860808015e-11,
+          "edgeToAreaElectrons": 3.410605131648481e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.95719029661268e-11,
+          "edgeToAreaElectrons": 3.54702933691442e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 5.820766091346741e-11,
+          "edgeToAreaElectrons": 3.3651303965598345e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 9.237055564881302e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 3.225864020350855e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 9.890754881780595e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.0732037480920553e-10,
+          "edgeToAreaElectrons": 7.821654435247183e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 8.526512829121202e-14,
+          "edgeToAreaElectrons": 1.0658141036401503e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 6.394884621840902e-14,
+          "edgeToAreaElectrons": 4.547473508864641e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.842170943040401e-14,
+          "edgeToAreaElectrons": 9.947598300641403e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.6245394363068044e-08,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 8.327560863108374e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.737010618147906e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.0913936421275139e-10,
+          "edgeToAreaElectrons": 7.821654435247183e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 4.831690603168681e-13,
+          "edgeToAreaElectrons": 3.268496584496461e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.979039320256561e-13,
+          "edgeToAreaElectrons": 1.8332002582610585e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.4210854715202004e-13,
+          "edgeToAreaElectrons": 2.2737367544323206e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.486260760897494,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 0.07660239424512838,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 8.301456819026498e-05,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.4569682106375694e-11,
+          "edgeToAreaElectrons": 7.457856554538012e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.4569682106375694e-11,
+          "edgeToAreaElectrons": 1.546140993013978e-10
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.2434497875801753e-14,
+          "edgeToAreaElectrons": 3.197442310920451e-14
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 7.105427357601002e-14,
+          "edgeToAreaElectrons": 1.7053025658242404e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": false,
+      "acceptedEdgeOrders": []
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.6269482102870825e-05,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 8.86757334228605e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 7.275957614183426e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.183231456205249e-12,
+          "edgeToAreaElectrons": 1.318767317570746e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.002220859751105e-11,
+          "edgeToAreaElectrons": 2.8194335754960775e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 4.934008757118136e-11,
+          "edgeToAreaElectrons": 2.637534635141492e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 5.9117155615240335e-12,
+          "edgeToAreaElectrons": 1.2278178473934531e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.1827872842550278e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.8198777474462986e-10,
+          "edgeToAreaElectrons": 2.455635694786906e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.9815559743351372e-18,
+          "edgeToAreaElectrons": 1.996568600552695e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.927345865710862e-18,
+          "edgeToAreaElectrons": 1.9965680584516088e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.8963515573697816e-20,
+          "edgeToAreaElectrons": 3.0951827167632114e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.000888343900442e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.80168785341084e-10,
+          "edgeToAreaElectrons": 2.455635694786906e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 9.020562075079397e-16,
+          "edgeToAreaElectrons": 8.817321872633954e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 9.020562075079397e-16,
+          "edgeToAreaElectrons": 8.817252483694915e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.496198998029996e-17,
+          "edgeToAreaElectrons": 8.357418489896018e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.7229254274043342,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 0.00281944700236636,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.672095433808863e-09,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.90084392670542e-10,
+          "edgeToAreaElectrons": 1.227817847393453e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.8826540326699615e-10,
+          "edgeToAreaElectrons": 1.2005330063402653e-10
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.5720931501039814e-18,
+          "edgeToAreaElectrons": 2.227650030585393e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.5178830414797062e-18,
+          "edgeToAreaElectrons": 4.583467394687901e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.8350062823155895e-06,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 4.092726157978177e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 8.185452315956354e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 9.549694368615746e-11,
+          "edgeToAreaElectrons": 6.45741238258779e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 9.5042196335271e-11,
+          "edgeToAreaElectrons": 6.139089236967266e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 9.458744898438454e-11,
+          "edgeToAreaElectrons": 6.093614501878619e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 9.413270163349807e-11,
+          "edgeToAreaElectrons": 5.820766091346741e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 4.083287421963178e-06,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 7.275957614183426e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 4.001776687800884e-11,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.3587850844487548e-09,
+          "edgeToAreaElectrons": 5.984475137665868e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 4.119968255444917e-18,
+          "edgeToAreaElectrons": 2.4504812241865626e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.3499587596865412e-21,
+          "edgeToAreaElectrons": 5.838988384059971e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.044024654195142e-22,
+          "edgeToAreaElectrons": 1.7630056732839166e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.007296825504390751,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 6.517439032904804e-08,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.9103830456733704e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.356966095045209e-09,
+          "edgeToAreaElectrons": 5.966285243630409e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.3600232051658168e-15,
+          "edgeToAreaElectrons": 2.0097812303276896e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.963111948670274e-19,
+          "edgeToAreaElectrons": 7.931605201729093e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.2027867851011065e-19,
+          "edgeToAreaElectrons": 1.437208421798666e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 60.782001432606194,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 10.516245510843873,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 0.15050588466510817,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 7.012204150669277e-10,
+          "edgeToAreaElectrons": 1.2651850738620851e-05
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 6.566551746800542e-10,
+          "edgeToAreaElectrons": 1.2652449186134618e-05
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 8.999725064576941e-22,
+          "edgeToAreaElectrons": 2.5114250615706346e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 9.26442286059391e-22,
+          "edgeToAreaElectrons": 2.6270544058794196e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": false,
+      "acceptedEdgeOrders": []
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.0048411751977255335,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.1834133551456034e-08,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.3646862246096134e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.5920599000528455e-10,
+          "edgeToAreaElectrons": 1.6370904631912708e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.460183168295771e-10,
+          "edgeToAreaElectrons": 1.482476363889873e-10
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.269633452873677e-10,
+          "edgeToAreaElectrons": 1.468833943363279e-10
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.0740920919924974e-10,
+          "edgeToAreaElectrons": 1.3278622645884752e-10
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.418682146454164e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.1485336350058363e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 6.693881005048752e-10,
+          "edgeToAreaElectrons": 3.6925484891980886e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 7.047314121155779e-19,
+          "edgeToAreaElectrons": 1.341540431260696e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.1350241493207625e-19,
+          "edgeToAreaElectrons": 7.023633095888963e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 5.759824041329242e-20,
+          "edgeToAreaElectrons": 1.0406267725781779e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 8.581275679972467e-08,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 9.701796224032e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 3.233563937443673e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 6.693881005048752e-10,
+          "edgeToAreaElectrons": 3.6561687011271715e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.1510571102112408e-16,
+          "edgeToAreaElectrons": 3.8277627595340036e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 4.0115480381963664e-17,
+          "edgeToAreaElectrons": 2.250457199065581e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.2551405187698492e-17,
+          "edgeToAreaElectrons": 2.5255184228634153e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 52.81517934396288,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 5.358699298999454,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 0.025444946710194927,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.4378899727016687e-10,
+          "edgeToAreaElectrons": 1.9860272004734725e-07
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 3.228706191293895e-10,
+          "edgeToAreaElectrons": 1.9897197489626706e-07
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.164670302474663e-21,
+          "edgeToAreaElectrons": 1.0555940449735743e-14
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.7279472123987727e-19,
+          "edgeToAreaElectrons": 2.0157255381449309e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": false,
+      "acceptedEdgeOrders": []
+    },
+    {
+      "case": {
+        "alpha": 0.06,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.0028489504611570737,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 5.007677827961743e-09,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.5011104298755527e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.0186340659856796e-10,
+          "edgeToAreaElectrons": 8.913048077374697e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.276010491186753e-10,
+          "edgeToAreaElectrons": 1.0686562745831907e-10
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.2100721253082156e-10,
+          "edgeToAreaElectrons": 9.981704351957887e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.1596057447604835e-10,
+          "edgeToAreaElectrons": 7.185008144006133e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 4.547473508864641e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.4551915228366852e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.0913936421275139e-11,
+          "edgeToAreaElectrons": 1.000444171950221e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-13,
+          "edgeToAreaElectrons": 2.8421709430404007e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-13,
+          "edgeToAreaElectrons": 2.8421709430404007e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.842170943040401e-14,
+          "edgeToAreaElectrons": 0.0
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 7.951417302365371e-13,
+        "finiteFieldElectrons": 3.637978807091713e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 1.000444171950221e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.000444171950221e-11,
+          "edgeToAreaElectrons": 9.094947017729282e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 9.094947017729282e-13,
+          "edgeToAreaElectrons": 1.4779288903810084e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-12,
+          "edgeToAreaElectrons": 1.1368683772161603e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-13,
+          "edgeToAreaElectrons": 1.9895196601282805e-13
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 7.105427357601002e-13,
+        "finiteFieldElectrons": 1.8189894035458565e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.0985484045231715e-06,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 5.258016244624741e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.4068746168049984e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.4569682106375694e-12,
+          "edgeToAreaElectrons": 5.4569682106375694e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 6.366462912410498e-12,
+          "edgeToAreaElectrons": 6.366462912410498e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.4210854715202004e-13,
+          "edgeToAreaElectrons": 1.9895196601282805e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-13,
+          "edgeToAreaElectrons": 0.0
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 9.094947017729282e-13,
+        "finiteFieldElectrons": 0.0
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 4.547473508864641e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 4.547473508864641e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.637978807091713e-12,
+          "edgeToAreaElectrons": 3.183231456205249e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.7284841053187847e-12,
+          "edgeToAreaElectrons": 3.183231456205249e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.183231456205249e-12,
+          "edgeToAreaElectrons": 3.183231456205249e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.183231456205249e-12,
+          "edgeToAreaElectrons": 3.183231456205249e-12
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 6.186162693211372e-13,
+        "finiteFieldElectrons": 1.8189894035458565e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.0700678103603423e-06,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 3.092281986027956e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 6.366462912410498e-11,
+          "edgeToAreaElectrons": 4.9112713895738125e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-13,
+          "edgeToAreaElectrons": 5.115907697472721e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 4.263256414560601e-14,
+          "edgeToAreaElectrons": 4.547473508864641e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.7763568394002505e-14,
+          "edgeToAreaElectrons": 1.4210854715202004e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.00024332574719210243,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.1614247341640294e-09,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.000888343900442e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 6.366462912410498e-11,
+          "edgeToAreaElectrons": 4.547473508864641e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.8189894035458565e-12,
+          "edgeToAreaElectrons": 1.3642420526593924e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.410605131648481e-13,
+          "edgeToAreaElectrons": 1.1084466677857563e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.2789769243681803e-13,
+          "edgeToAreaElectrons": 1.1368683772161603e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.10346662414576713,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 0.000368215251910442,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 5.90443960390985e-09,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.2741809263825417e-11,
+          "edgeToAreaElectrons": 2.546585164964199e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 3.2741809263825417e-11,
+          "edgeToAreaElectrons": 2.4556356947869062e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.842170943040401e-14,
+          "edgeToAreaElectrons": 1.2079226507921703e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.842170943040401e-14,
+          "edgeToAreaElectrons": 2.2737367544323206e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 4.862840796704404e-08,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.0658141036401503e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 4.092726157978177e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.546140993013978e-11,
+          "edgeToAreaElectrons": 1.1823431123048067e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.5916157281026244e-11,
+          "edgeToAreaElectrons": 1.2278178473934531e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.7280399333685637e-11,
+          "edgeToAreaElectrons": 1.318767317570746e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.7280399333685637e-11,
+          "edgeToAreaElectrons": 1.2732925824820995e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 2.7853275241795927e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 9.208633855450898e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.3646862246096134e-11,
+          "edgeToAreaElectrons": 2.000888343900442e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.4210854715202004e-13,
+          "edgeToAreaElectrons": 1.5916157281026244e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.2789769243681803e-13,
+          "edgeToAreaElectrons": 4.547473508864641e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.842170943040401e-14,
+          "edgeToAreaElectrons": 9.663381206337363e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.4367531043244526e-09,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 6.139089236967266e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.1714186004828662e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.546585164964199e-11,
+          "edgeToAreaElectrons": 2.091837814077735e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 7.958078640513122e-13,
+          "edgeToAreaElectrons": 2.5011104298755527e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 7.673861546209082e-13,
+          "edgeToAreaElectrons": 1.9326762412674725e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-13,
+          "edgeToAreaElectrons": 1.1368683772161603e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.03703920501720859,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "64": {
+          "maxPixelElectrons": 4.178030303592095e-05,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 7.185008144006133e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.3642420526593924e-11,
+          "edgeToAreaElectrons": 1.2732925824820995e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.4551915228366852e-11,
+          "edgeToAreaElectrons": 1.2732925824820995e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.1316282072803006e-14,
+          "edgeToAreaElectrons": 8.171241461241152e-14
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-13,
+          "edgeToAreaElectrons": 2.842170943040401e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.6944795788731426e-08,
+          "finiteFieldElectrons": 7.275957614183426e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "128": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.637978807091713e-12,
+          "edgeToAreaElectrons": 1.8189894035458565e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-11,
+          "edgeToAreaElectrons": 1.1596057447604835e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-11,
+          "edgeToAreaElectrons": 1.0913936421275139e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.7284841053187847e-12,
+          "edgeToAreaElectrons": 1.8189894035458565e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.546585164964199e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.1641532182693481e-10,
+          "edgeToAreaElectrons": 9.458744898438454e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 3.122502256758253e-16,
+          "edgeToAreaElectrons": 1.3260226250366713e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.122502256758253e-16,
+          "edgeToAreaElectrons": 1.3260226250366713e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 4.336808689942018e-18,
+          "edgeToAreaElectrons": 1.2275120156446384e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.887556943027448e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.000888343900442e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.1823431123048067e-10,
+          "edgeToAreaElectrons": 9.640643838793039e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.861977570020827e-14,
+          "edgeToAreaElectrons": 8.668621376273222e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.773159728050814e-14,
+          "edgeToAreaElectrons": 1.5898393712632242e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.304512053934559e-15,
+          "edgeToAreaElectrons": 1.1740886041167187e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.001363931386549666,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.4233592082746327e-09,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 1.7669748043208644e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.729816621169448e-11,
+          "edgeToAreaElectrons": 4.729372449219227e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.729816621169448e-11,
+          "edgeToAreaElectrons": 4.729372449219227e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.5959455978986625e-16,
+          "edgeToAreaElectrons": 1.2992384945675894e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.5959455978986625e-16,
+          "edgeToAreaElectrons": 7.795500356344576e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.6921043172478676e-10,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.2737367544323206e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.9103830456733704e-11,
+          "edgeToAreaElectrons": 2.4556356947869062e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.955857780762017e-11,
+          "edgeToAreaElectrons": 2.4556356947869062e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.955857780762017e-11,
+          "edgeToAreaElectrons": 2.3646862246096134e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.001332515850663e-11,
+          "edgeToAreaElectrons": 2.4101609596982598e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 4.030644049635157e-06,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 7.275957614183426e-12,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "128": {
+          "maxPixelElectrons": 4.18367562815547e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 4.220055416226387e-10,
+          "edgeToAreaElectrons": 2.473825588822365e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 4.163336342344337e-16,
+          "edgeToAreaElectrons": 1.901159785155926e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.6601845766184287e-19,
+          "edgeToAreaElectrons": 6.403541129155251e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.7269449679189215e-20,
+          "edgeToAreaElectrons": 2.108737446812614e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.005676705639290347,
+          "finiteFieldElectrons": 7.275957614183426e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.6732672015205026e-08,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "128": {
+          "maxPixelElectrons": 3.092281986027956e-11,
+          "finiteFieldElectrons": 9.094947017729282e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 4.220055416226387e-10,
+          "edgeToAreaElectrons": 2.455635694786906e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 8.970602038971265e-14,
+          "edgeToAreaElectrons": 4.574118861455645e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 6.938893903907228e-17,
+          "edgeToAreaElectrons": 1.0415166992738811e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.431146867680866e-17,
+          "edgeToAreaElectrons": 1.623135219980254e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 5.110646630734664,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 0.07314918179054075,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 6.1905657275929116e-06,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.128217602148652e-10,
+          "edgeToAreaElectrons": 1.2369127944111824e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.0827428670600057e-10,
+          "edgeToAreaElectrons": 1.2187229003757238e-10
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.1519648082658485e-19,
+          "edgeToAreaElectrons": 4.418480995850311e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.1180834903756764e-19,
+          "edgeToAreaElectrons": 1.610545599878624e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": false,
+      "acceptedEdgeOrders": []
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.4588075322972145e-05,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 9.094947017729282e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.0413714335300028e-10,
+          "edgeToAreaElectrons": 6.230038707144558e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.0186340659856796e-10,
+          "edgeToAreaElectrons": 6.048139766789973e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.0913936421275139e-10,
+          "edgeToAreaElectrons": 6.184563972055912e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.0595613275654614e-10,
+          "edgeToAreaElectrons": 5.911715561524034e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 9.4974896003297e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.1991904785033665e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.148533655334627e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.9281287677586079e-10,
+          "edgeToAreaElectrons": 1.4370016288012266e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 7.979727989493313e-17,
+          "edgeToAreaElectrons": 1.0726541183059268e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.3877787807814457e-17,
+          "edgeToAreaElectrons": 6.321976362549941e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 6.938893903907228e-18,
+          "edgeToAreaElectrons": 9.402617573428529e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 5.460606189444661e-08,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "64": {
+          "maxPixelElectrons": 9.406392331712254e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 3.3042429903318293e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.9463186617940664e-10,
+          "edgeToAreaElectrons": 1.4370016288012266e-10
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.6431300764452317e-14,
+          "edgeToAreaElectrons": 3.1592506388733455e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.774758283725532e-15,
+          "edgeToAreaElectrons": 2.172068080952272e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.9984014443252818e-15,
+          "edgeToAreaElectrons": 2.1951329642888595e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.613340183062064,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 0.012819444596971152,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.152939148596488e-07,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.000444171950221e-10,
+          "edgeToAreaElectrons": 7.639755494892597e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 9.822542779147625e-11,
+          "edgeToAreaElectrons": 7.185008144006133e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.4568966692773966e-19,
+          "edgeToAreaElectrons": 9.499654074441796e-15
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.0383000842727483e-17,
+          "edgeToAreaElectrons": 1.4818962029705673e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.12,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.2579324649996124e-06,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 4.092726157978177e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.000444171950221e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 8.185452315956354e-12,
+          "edgeToAreaElectrons": 2.9103830456733704e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 8.822098607197404e-11,
+          "edgeToAreaElectrons": 4.774847184307873e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 8.731149137020111e-11,
+          "edgeToAreaElectrons": 4.524736141320318e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.2278178473934531e-11,
+          "edgeToAreaElectrons": 2.546585164964199e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 2.7284841053187847e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.0913936421275139e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 9.094947017729282e-13,
+          "edgeToAreaElectrons": 2.7284841053187847e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.8421709430404007e-13,
+          "edgeToAreaElectrons": 1.7053025658242404e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.8421709430404007e-13,
+          "edgeToAreaElectrons": 1.7053025658242404e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 8.526512829121202e-14,
+          "edgeToAreaElectrons": 2.842170943040401e-14
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 9.094947017729282e-13,
+        "finiteFieldElectrons": 1.8189894035458565e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 7.275957614183426e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 0.0,
+          "edgeToAreaElectrons": 9.094947017729282e-13
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-12,
+          "edgeToAreaElectrons": 1.1368683772161603e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-12,
+          "edgeToAreaElectrons": 9.094947017729282e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-13,
+          "edgeToAreaElectrons": 5.684341886080802e-14
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 9.094947017729282e-13,
+        "finiteFieldElectrons": 5.4569682106375694e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 5.542233338928781e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 1.4068746168049984e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 0.0,
+          "edgeToAreaElectrons": 1.3642420526593924e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 9.094947017729282e-13,
+          "edgeToAreaElectrons": 1.8189894035458565e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-13,
+          "edgeToAreaElectrons": 1.7053025658242404e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.7053025658242404e-13,
+          "edgeToAreaElectrons": 2.2737367544323206e-13
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 7.069900220812997e-13,
+        "finiteFieldElectrons": 0.0
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 6.821210263296962e-13,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.694822225952521e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 4.547473508864641e-13,
+          "edgeToAreaElectrons": 6.821210263296962e-13
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 4.547473508864641e-13,
+          "edgeToAreaElectrons": 9.094947017729282e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-12,
+          "edgeToAreaElectrons": 1.3642420526593924e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-13,
+          "edgeToAreaElectrons": 6.821210263296962e-13
+        }
+      ],
+      "circularSolidAngleCheck": {
+        "maxPixelElectrons": 6.821210263296962e-13,
+        "finiteFieldElectrons": 1.8189894035458565e-12
+      },
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.1537304089870304e-07,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "64": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.4556356947869062e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.4551915228366852e-11,
+          "edgeToAreaElectrons": 1.3642420526593924e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 3.410605131648481e-13,
+          "edgeToAreaElectrons": 7.958078640513122e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.684341886080802e-14,
+          "edgeToAreaElectrons": 5.258016244624741e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.552713678800501e-14,
+          "edgeToAreaElectrons": 2.1316282072803006e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.2251585758349393e-05,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 2.7284841053187847e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.2732925824820995e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.1823431123048067e-11,
+          "edgeToAreaElectrons": 1.1823431123048067e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.5916157281026244e-12,
+          "edgeToAreaElectrons": 1.3642420526593924e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.684341886080801e-13,
+          "edgeToAreaElectrons": 9.094947017729282e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.5579538487363607e-13,
+          "edgeToAreaElectrons": 8.526512829121202e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.00017600684623175766,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 2.9331204132176936e-09,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 8.185452315956354e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 7.275957614183426e-12,
+          "edgeToAreaElectrons": 7.275957614183426e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 7.73070496506989e-12,
+          "edgeToAreaElectrons": 7.73070496506989e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.684341886080802e-14,
+          "edgeToAreaElectrons": 2.5579538487363607e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 5.684341886080802e-14,
+          "edgeToAreaElectrons": 1.8474111129762605e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.6370904631912708e-11,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 1.0231815394945443e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.8137492336099967e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.637978807091713e-12,
+          "edgeToAreaElectrons": 3.183231456205249e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 3.637978807091713e-12,
+          "edgeToAreaElectrons": 3.637978807091713e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 4.547473508864641e-12,
+          "edgeToAreaElectrons": 4.092726157978177e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 4.092726157978177e-12,
+          "edgeToAreaElectrons": 3.637978807091713e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.7284841053187847e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.9895196601282805e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 7.44648787076585e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 3.637978807091713e-12,
+          "edgeToAreaElectrons": 3.637978807091713e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-13,
+          "edgeToAreaElectrons": 1.0231815394945443e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 2.5579538487363607e-13,
+          "edgeToAreaElectrons": 4.547473508864641e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 5.684341886080802e-14,
+          "edgeToAreaElectrons": 5.684341886080801e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.502939994679764e-10,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.069544618483633e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.5006662579253316e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.8189894035458565e-12,
+          "edgeToAreaElectrons": 3.637978807091713e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.0231815394945443e-12,
+          "edgeToAreaElectrons": 1.5916157281026244e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.0231815394945443e-12,
+          "edgeToAreaElectrons": 1.5347723092418164e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.1368683772161603e-13,
+          "edgeToAreaElectrons": 1.1368683772161603e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.043659924311214e-05,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.6834535421803594e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 4.661160346586257e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.8189894035458565e-12,
+          "edgeToAreaElectrons": 3.637978807091713e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-12,
+          "edgeToAreaElectrons": 2.7284841053187847e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 4.973799150320701e-14,
+          "edgeToAreaElectrons": 9.947598300641403e-14
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-13,
+          "edgeToAreaElectrons": 4.547473508864641e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 1.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.2737367544323206e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.0516032489249483e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 5.002220859751105e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-12,
+          "edgeToAreaElectrons": 9.094947017729282e-13
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.115907697472721e-12,
+          "edgeToAreaElectrons": 3.979039320256561e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.002220859751105e-12,
+          "edgeToAreaElectrons": 3.296918293926865e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 3.183231456205249e-12,
+          "edgeToAreaElectrons": 9.094947017729282e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 2.1827872842550278e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.546585164964199e-11,
+          "edgeToAreaElectrons": 2.000888343900442e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.042810365310288e-14,
+          "edgeToAreaElectrons": 2.824407374646398e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.9539925233402755e-14,
+          "edgeToAreaElectrons": 7.194245199571014e-14
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 4.163336342344337e-16,
+          "edgeToAreaElectrons": 2.478572902475662e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.865352482534945e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.000888343900442e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.1827872842550278e-11,
+          "edgeToAreaElectrons": 2.000888343900442e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 9.379164112033322e-13,
+          "edgeToAreaElectrons": 1.8189894035458565e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 9.379164112033322e-13,
+          "edgeToAreaElectrons": 1.1084466677857563e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 5.3290705182007514e-14,
+          "edgeToAreaElectrons": 7.72715225139109e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.07775122160092e-09,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 1.9436674492112616e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.0913936421275139e-11,
+          "edgeToAreaElectrons": 1.0913936421275139e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.0913936421275139e-11,
+          "edgeToAreaElectrons": 9.094947017729282e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.0658141036401503e-14,
+          "edgeToAreaElectrons": 3.4416913763379853e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.021405182655144e-14,
+          "edgeToAreaElectrons": 1.341149413747189e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 5.300922461398683e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.002220859751105e-12,
+          "edgeToAreaElectrons": 4.547473508864641e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.002220859751105e-12,
+          "edgeToAreaElectrons": 5.4569682106375694e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 5.4569682106375694e-12,
+          "edgeToAreaElectrons": 5.4569682106375694e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 5.4569682106375694e-12,
+          "edgeToAreaElectrons": 5.002220859751105e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 2.6143861759919673e-06,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 7.275957614183426e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 4.18367562815547e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.1641532182693481e-10,
+          "edgeToAreaElectrons": 9.094947017729282e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.7533531010703882e-14,
+          "edgeToAreaElectrons": 1.2514433933574765e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.9081958235744878e-17,
+          "edgeToAreaElectrons": 1.6765018193143355e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 4.553649124439119e-18,
+          "edgeToAreaElectrons": 4.3186591455746104e-14
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.00015159297981881537,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 2.1645973902195692e-10,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 2.9103830456733704e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 1.1459633242338896e-10,
+          "edgeToAreaElectrons": 8.549250196665525e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 1.7337242752546445e-12,
+          "edgeToAreaElectrons": 9.663381206337363e-13
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 6.161737786669619e-15,
+          "edgeToAreaElectrons": 1.1114442699522442e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.3739009929736312e-15,
+          "edgeToAreaElectrons": 3.2669700278376013e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.034812341066754016,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.0312239687191322e-06,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 1.0913936421275139e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.729816621169448e-11,
+          "edgeToAreaElectrons": 4.638422979041934e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.638867150992155e-11,
+          "edgeToAreaElectrons": 4.3655745685100555e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.3444106938820255e-17,
+          "edgeToAreaElectrons": 3.406996906818449e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.3010426069826053e-17,
+          "edgeToAreaElectrons": 2.0201678871401008e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 0,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 4.567937139654532e-09,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "64": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 4.547473508864641e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.864908310584724e-11,
+          "edgeToAreaElectrons": 2.2737367544323206e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.8194335754960775e-11,
+          "edgeToAreaElectrons": 2.2282620193436742e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.0468072509393096e-11,
+          "edgeToAreaElectrons": 2.2737367544323206e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.955857780762017e-11,
+          "edgeToAreaElectrons": 2.1827872842550278e-11
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 3.368277878834647e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 1.1662032450843185e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.275069270282984e-11,
+          "edgeToAreaElectrons": 4.3655745685100555e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 5.773159728050814e-15,
+          "edgeToAreaElectrons": 1.1621814621776139e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.304512053934559e-15,
+          "edgeToAreaElectrons": 4.595768210435835e-13
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 6.106226635438361e-16,
+          "edgeToAreaElectrons": 9.745260154403468e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.25,
+          0.25
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 1.734016308319042e-08,
+          "finiteFieldElectrons": 0.0
+        },
+        "64": {
+          "maxPixelElectrons": 9.469758310842735e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "128": {
+          "maxPixelElectrons": 3.2512659231542784e-11,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 5.093170329928398e-11,
+          "edgeToAreaElectrons": 4.18367562815547e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 4.405364961712621e-13,
+          "edgeToAreaElectrons": 4.021671884402167e-12
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.6697754290362354e-13,
+          "edgeToAreaElectrons": 2.220446049250313e-12
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 7.993605777301127e-14,
+          "edgeToAreaElectrons": 2.3856472353145364e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 0.006175880872433481,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 6.044592737453058e-08,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "128": {
+          "maxPixelElectrons": 7.774669796845046e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 2.546585164964199e-11,
+          "edgeToAreaElectrons": 2.1827872842550278e-11
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 2.7284841053187847e-11,
+          "edgeToAreaElectrons": 2.2737367544323206e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 1.6046192152785466e-17,
+          "edgeToAreaElectrons": 9.094287822808411e-15
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 1.8318679906315083e-15,
+          "edgeToAreaElectrons": 2.8804736373899686e-13
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        64,
+        128
+      ]
+    },
+    {
+      "case": {
+        "alpha": 0.24,
+        "beta": 4.5,
+        "axisRatio": 0.35,
+        "angleDegrees": 37,
+        "phase": [
+          0.499,
+          0.499
+        ]
+      },
+      "edgeAgainstHighestOrder": {
+        "32": {
+          "maxPixelElectrons": 7.79891706770286e-10,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "64": {
+          "maxPixelElectrons": 2.2737367544323206e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "128": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      },
+      "selectedAreaChecks": [
+        {
+          "pixel": [
+            12,
+            12
+          ],
+          "areaRefinementElectrons": 4.547473508864641e-12,
+          "edgeToAreaElectrons": 2.7284841053187847e-12
+        },
+        {
+          "pixel": [
+            12,
+            13
+          ],
+          "areaRefinementElectrons": 3.069544618483633e-11,
+          "edgeToAreaElectrons": 2.0463630789890885e-11
+        },
+        {
+          "pixel": [
+            13,
+            12
+          ],
+          "areaRefinementElectrons": 3.0468072509393096e-11,
+          "edgeToAreaElectrons": 1.9326762412674725e-11
+        },
+        {
+          "pixel": [
+            13,
+            13
+          ],
+          "areaRefinementElectrons": 2.2737367544323206e-12,
+          "edgeToAreaElectrons": 2.7284841053187847e-12
+        }
+      ],
+      "circularSolidAngleCheck": null,
+      "referenceAgrees": true,
+      "acceptedEdgeOrders": [
+        32,
+        64,
+        128
+      ]
+    }
+  ],
+  "referenceDisagreements": 5,
+  "failedEdgeOrders": {
+    "32": 34,
+    "64": 11,
+    "128": 5
+  },
+  "detectorOrInstrumentModelQualified": false,
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}

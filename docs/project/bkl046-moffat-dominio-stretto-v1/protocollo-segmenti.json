@@ -1,0 +1,23 @@
+{
+  "schema": "BKL046_MOFFAT_EDGE_SUBDIVISION_FOLLOWUP_PLAN_V1",
+  "initialProtocolSha256": "997a4e3f2b1d5f5dcd7c7b7879b931631045fc7bd5aaacc1a33eb21ff73e0542",
+  "initialReportSha256": "377f3efa919cfe23f8b70fd2bea9c300da6c55048068f8beb2e3759eb3f06dc2",
+  "initialVerifierSha256": "ba56149194630448239a77dcd6319218a86ab08c498381a6ab766799580d395c",
+  "partition": "DEVELOPMENT_ONLY",
+  "rules": [
+    {
+      "divisions": 4,
+      "order": 32
+    },
+    {
+      "divisions": 8,
+      "order": 32
+    },
+    {
+      "divisions": 8,
+      "order": 64
+    }
+  ],
+  "includeAllOriginalCases": true,
+  "compareInitialFiveDisagreements": true
+}
