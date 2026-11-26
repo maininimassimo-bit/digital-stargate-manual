@@ -1,0 +1,7 @@
+# BKL-046 · Prerequisiti Stream34 v11 su DSG-Shared
+
+Il controllo in sola lettura parte dal fascicolo e verifica per impronta tutti i 70 membri. Sul soggetto v11 rilegge gli otto ingressi (139.469.422 byte), il runtime fissato, il registro dello studio e i sei file installati R4. Al momento della lettura il percorso di sessione monouso era assente. Sono state superate le soglie di 8 GiB di RAM disponibile e 12 GiB di commit disponibile. Il censimento del coordinatore ha osservato zero PixInsight e l'osservatore locale non ha rilevato il publisher durante il controllo. Queste misure valgono per l'intervallo di acquisizione.
+
+Soggetto esatto: 0b029846da0412875e26595e2ead8361bc35fcef2c882ec2be95303b9582bdd1. La cartella del fascicolo non conteneva trust.json né verbali e attestazioni ARB/RQ. Le revisioni dei soggetti precedenti hanno un perimetro diverso. Per v11 servono i due verbali autentici in ordine ARB→RQ, le attestazioni di provenienza e il pin di trust dalla fonte autenticata prevista dal fascicolo. L'installazione e l'iscrizione firmata del peer restano soggette al contratto del launcher. Ogni richiesta di esecuzione passa poi dal coordinatore canonico e da una nuova misura delle risorse.
+
+Il kit H/K conserva l'archivio candidato e il fascicolo con lo script di verifica. Il controllo non acquisisce host.lock, non crea sessioni, non chiede ammissione e non avvia PixInsight. La prova di streaming riguarda un requisito tecnico del runtime e non chiude un criterio scientifico.
