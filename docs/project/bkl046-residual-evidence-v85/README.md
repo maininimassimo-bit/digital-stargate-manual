@@ -1,0 +1,9 @@
+# BKL-046 · Rendiconto v85 e supplemento alla conoscenza v1.171
+
+Il rendiconto aggiunge undici studi e quattordici rapporti agli assi FILTER_COLOR/3 e FILTER_COLOR/4. Ogni rapporto coincide per SHA-256 con i byte del commit d'origine e con i membri delle copie archiviate su H: e K:.
+
+- **Incertezza GD153.** In F438W la differenza di 43,82 millimagnitudini fra posa danneggiata e riferimento supera la deviazione formale di 7,16 millimagnitudini del modello ERR diagonale. Sul cielo la quota oltre 1,96 deviazioni formali scende dal 26,39% al 7,17% sottraendo la mediana per posa. Restano da stimare l'incertezza nel nucleo e gli scarti sistematici.
+- **Selezione e centro.** Le 30 scansioni P330E e le 48 pose di tre altri calibratori del primo controllo non forniscono terne ammesse. Nelle visite GRW+70°5824, la previsione del centro dalle altre due bande porta a misure ripetute senza allentare i veto DQ. Il controllo sulle quattro terne integre GD153 riproduce i colori dopo la ricentratura. La verifica astrometrica assoluta resta distinta.
+- **Trasferimento.** Su UVIS2, la correzione stimata dalle prime due visite GRW+70°5824 riduce tutti e nove gli errori di colore nel lotto riservato. Su UVIS1, la stessa correzione peggiora tutti e sei gli errori. Il test fra GD153 e GRW+70°5824 sullo stesso chip riduce otto errori su dodici. Restano aperte la dipendenza da epoca e posizione sul chip e la validità su altre stelle.
+
+Il rendiconto conserva 4.920 requisiti e 14.521 criteri, con sette famiglie, 25 assi e 19 criteri Owner aperti. Nessuna nuova chiusura scientifica o esecuzione nativa. La baseline v1.171 resta intermedia e il trasferimento integrale del corpus GitHub resta da verificare.
