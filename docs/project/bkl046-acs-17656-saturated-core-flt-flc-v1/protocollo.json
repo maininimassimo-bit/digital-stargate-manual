@@ -1,0 +1,45 @@
+{
+  "schema": "BKL046_ACS17656_PAIRED_FLT_FLC_SATURATION_DIAGNOSTIC_V1",
+  "commonReport": "4fd1e1d64ca1a6811e1d0f11ba362b974f28e37594346dac44feea94035e5a9c",
+  "commonCode": "84e69873024e25cae2117a935075c8604e1681639a40d1793e744cd5118c456c",
+  "sensitivityProtocol": "0b9c87a5552cf6f40e42449a56a169c2365e0a2e6f2ceb5f6c8f255e78b3fa82",
+  "sensitivityReport": "8a1f68cf1e74ea6522b8407314ad3f4be67a6c480e2688eacde907f48d0321f1",
+  "flc": [
+    {
+      "bytes": 168206400,
+      "file": "jfdp02vfq_flc.fits",
+      "sha256": "d794469f916caaa93bf7d2932ff6d0bf304e2a010a9be085751fff01ef3f73f5"
+    },
+    {
+      "bytes": 168206400,
+      "file": "jfdp02vdq_flc.fits",
+      "sha256": "6c3f5dd67e58a93f21cc5895b9bb8a3c2a93bf05b3f7d804612d79a5326f2df1"
+    },
+    {
+      "bytes": 168324480,
+      "file": "jfdp02vwq_flc.fits",
+      "sha256": "c695c491c20a853118f0297dc1ea1f9ef43dad1274d9133218448c4ac7874540"
+    },
+    {
+      "bytes": 168324480,
+      "file": "jfdp02w3q_flc.fits",
+      "sha256": "664adff65eb9b24877452735d213b3a257d70fbfb0fb0023510a5a70796f867b"
+    }
+  ],
+  "radiusPx": 10,
+  "skyAnnuli": [
+    [
+      30,
+      40
+    ],
+    [
+      35,
+      48
+    ],
+    [
+      40,
+      52
+    ]
+  ],
+  "scope": "Same integer centers and common DQ support for all eight products. Compare paired archived FLT and FLC rates within the existing single-source diagnostic. The product difference does not establish the true physical CTE or the cause of any residual."
+}
