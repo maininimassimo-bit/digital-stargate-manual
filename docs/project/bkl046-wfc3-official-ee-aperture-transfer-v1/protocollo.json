@@ -1,0 +1,33 @@
+{
+  "schema": "BKL046_WFC3_OFFICIAL_EE_APERTURE_TERMS_V1",
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "columns": [
+    "APER#0.20",
+    "APER#0.40"
+  ],
+  "tableSource": "https://www.stsci.edu/hst/instrumentation/wfc3/data-analysis/photometric-calibration/uvis-encircled-energy",
+  "csv": {
+    "1": "222dc1fc05a55d58221cf76b4d9edbe36fc41ff09f82d79fcbe59d9078cf6948",
+    "2": "57dfa01d79a27d4dd16bb69ee03ecc7bd104c7b2df1ab8ca0b7f8ef450f311e2"
+  },
+  "gd153": [
+    "824efc802063acfe85cd9e9b9c2f6a75b21260389c612b0798e5390a09a1fab5",
+    "84c97ba7275bc103b09abd64042c0d7a9efaa3a6ef74287150a7592ceb6cd456"
+  ],
+  "gdPoseProtocol": "7636924bce5cb8ab6f2832052565d335bdcc083f90e2597bb40e28316e9ecfaa",
+  "first": [
+    "b87a0af5d4333201d3c02e69b8b0f3482159cddc26cb0b1d938cf14e3dbd4d1a",
+    "9557d5bb438df263f624a95a2bdabac8822dc195080992005cf8812e7e0879d9",
+    "cd532c4f14609939a53c36ed4763ca28d684d745d408e5d627ef5f2a55bba090"
+  ],
+  "reserve": [
+    "fd33baa1618fa4875427a83f96e2eca5d6539293d70d077edf5afeb24b3b1c7f",
+    "0b16f9a4700b03733e172bd6ccbc8b3e4de301404a772a223cd8a4ace06e72fe",
+    "229491f064feec06e5cef1cc01605fa89bbb3755839af082def9bc794d10eb5b"
+  ],
+  "scope": "Use frozen STScI 007 curves named by filter, with published columns 0.20 and 0.40 arcseconds for nominal 5 and 10 pixels. Score zero, same physical chip table, all UVIS2, and the published corner recommendation as a per-radius rule: UVIS1 table for r5 in the specified upper-left Amp A apertures; UVIS2 otherwise, including r10. Also measure the sensitivity of using the same table at the two radii in the Amp A corner. Verify each DETECTOR, FILTER, APERTURE and CCDCHIP by FITS hashes. Report per-visit and star/chip summaries without inferring independent calibration or WCS-sampling corrections."
+}
