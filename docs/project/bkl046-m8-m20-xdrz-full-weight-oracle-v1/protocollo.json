@@ -1,0 +1,31 @@
+{
+  "schema": "BKL046_WEIGHTED_XDRZ_FULL_WEIGHT_ORACLE_V1",
+  "math": "5b10c3b383d78de2bfdec87d674ec9dd3f98cf0a61c21c5eb21176b6375a8e09",
+  "oracolo": "7e1b375f032e78f6a66d236fd03fe74974a03313015fdcbf0e034e0dd50b58a5",
+  "baseline": "69ac3654712805361eb0728da0dfb67a6ba358db18c691968e102df2438ecccb",
+  "calibrated": "7285425ff3667612296a78307ab813b6d1d419aa35f73e46dd1b096a6b54b910",
+  "calibratedManifest": "e794f06fdd0cbdf735e36acf52a45526711daa7de96c960da3965a058e8e37a1",
+  "star": "14-1-0",
+  "size": 48,
+  "widths": [
+    1,
+    0.7
+  ],
+  "arms": [
+    "unit",
+    "signal"
+  ],
+  "variants": [
+    "masked",
+    "unmasked",
+    "zeroAduWithWeight"
+  ],
+  "weightAtol": 1e-10,
+  "intensityAtol": 1e-10,
+  "relativeScaleHypotheses": [
+    "identity",
+    "global_expected_peak",
+    "expected_peak_by_channel"
+  ],
+  "comparison": "Recompute the entire reference ROI and match the previous 29x29 cropped oracle. Hypothetical normalization factors come only from expected whole-map maxima."
+}
