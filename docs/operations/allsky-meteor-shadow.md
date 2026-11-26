@@ -200,3 +200,28 @@ Il backup preventivo dell’intera galleria e i manifesti restano privati sul Ra
 Il report privato successivo comprende soltanto le 319 immagini conservate, con caselle per proporre ulteriori spostamenti. Salvare una selezione non modifica la galleria: un successivo intervento richiede richiesta esplicita e nuova verifica di inventario e hash. Report, selezioni, immagini, anteprime e dettagli individuali non vengono pubblicati nel repository.
 
 La bonifica è una tantum e non introduce filtri nella produzione: il rilevatore ordinario mantiene la pubblicazione automatica esistente. Il controllo delle 08:00 resta in sola lettura e non autorizza quarantene automatiche. Per annullare il trasferimento consultare la [procedura di ripristino della galleria](allsky-configuration-backup.md#ripristino-della-bonifica-della-galleria).
+
+
+## Selezione manuale e quarantena del 27 novembre 2026
+
+L’Owner ha selezionato 300 delle 319 immagini conservate nel report privato e ha autorizzato il trasferimento delle sole copie pubbliche, senza cancellazione. L’elenco esportato è stato confrontato con l’impronta dell’inventario e con gli identificativi e hash del report prima dell’intervento.
+
+| Verifica | Esito |
+| --- | ---: |
+| Immagini selezionate manualmente | 300 |
+| File trasferiti con le miniature | 600 |
+| Immagini pubbliche prima del secondo intervento | 319 |
+| Immagini pubbliche dopo il secondo intervento | 19 |
+| Immagini complessivamente in quarantena nei due interventi | 403 |
+| Copie amministrative esistenti verificate e conservate nel secondo intervento | 23 |
+| File protetti di codice e configurazione invariati | 11 |
+
+Per 277 immagini selezionate non era presente una copia amministrativa nel percorso atteso: tutte le 300 immagini a piena risoluzione e le miniature sono state salvate in un nuovo backup privato verificato prima dello spostamento e restano nella quarantena privata. Nessuna immagine è stata cancellata. I file pubblici non selezionati sono stati confrontati con gli hash precedenti e risultano invariati.
+
+I tre servizi Allsky, rilevatore temporale e revisione sono rimasti attivi, con PID e contatori di riavvio invariati. Non sono stati modificati acquisizione, maschere, calibrazione o parametri fotografici; lo storico temporale privato escluso non è stato consultato. Il controllo HTTP di un’immagine e della miniatura ritirate restituisce 404; una conservata restituisce 200. I conteggi restano riferiti all’istante dell’intervento.
+
+Il report privato è stato aggiornato alle sole 19 immagini rimaste e il registro delle quarantene comprende la selezione Owner. La selezione manuale autorizza la segregazione, non costituisce conferma scientifica di artefatti né etichetta automatica di addestramento.
+
+Il controllo quotidiano delle **08:00 Europe/Rome** produce sempre un report privato con caselle, contatore, filtri, ingrandimento e salvataggio dell’elenco su J:, in una sottocartella giornaliera senza sovrascrivere le selezioni precedenti. Un report vuoto distingue l’assenza di nuovi risultati dall’impossibilità di effettuare il controllo. Le immagini già quarantinate e lo storico temporale escluso non sono inclusi; i risultati ordinari e temporali restano distinti. Le caselle esportano proposte e non eseguono spostamenti o pubblicazioni. Ogni successiva operazione richiede richiesta esplicita e nuove verifiche.
+
+Immagini, anteprime, selezioni, nomi e hash individuali rimangono privati. Nel repository sono pubblicati soltanto questi dati aggregati e la [procedura di ripristino](allsky-configuration-backup.md#ripristino-della-selezione-manuale-del-27-novembre-2026).
