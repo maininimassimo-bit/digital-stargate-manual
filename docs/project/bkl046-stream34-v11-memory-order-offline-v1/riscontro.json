@@ -1,0 +1,213 @@
+{
+  "admissionRequested": false,
+  "boundaryGrid": [
+    {
+      "reasons": [
+        "PHYSICAL_RESERVE_BELOW_8_GIB",
+        "COMMIT_RESERVE_BELOW_12_GIB"
+      ],
+      "supportsCommit": false,
+      "supportsPhysical": false
+    },
+    {
+      "reasons": [
+        "PHYSICAL_RESERVE_BELOW_8_GIB"
+      ],
+      "supportsCommit": true,
+      "supportsPhysical": false
+    },
+    {
+      "reasons": [
+        "PHYSICAL_RESERVE_BELOW_8_GIB"
+      ],
+      "supportsCommit": true,
+      "supportsPhysical": false
+    },
+    {
+      "reasons": [
+        "COMMIT_RESERVE_BELOW_12_GIB"
+      ],
+      "supportsCommit": false,
+      "supportsPhysical": true
+    },
+    {
+      "reasons": [],
+      "supportsCommit": true,
+      "supportsPhysical": true
+    },
+    {
+      "reasons": [],
+      "supportsCommit": true,
+      "supportsPhysical": true
+    },
+    {
+      "reasons": [
+        "COMMIT_RESERVE_BELOW_12_GIB"
+      ],
+      "supportsCommit": false,
+      "supportsPhysical": true
+    },
+    {
+      "reasons": [],
+      "supportsCommit": true,
+      "supportsPhysical": true
+    },
+    {
+      "reasons": [],
+      "supportsCommit": true,
+      "supportsPhysical": true
+    }
+  ],
+  "canonicalGateAccessed": false,
+  "continuousMemoryBoundAttested": false,
+  "launchHostScenarios": {
+    "atBothThresholds": {
+      "commitThresholdBytes": 12884901888,
+      "events": [
+        "retention",
+        "observePublisher",
+        "publisher-prelaunch.json",
+        "retention",
+        "assertInputs",
+        "PARENT_BEFORE_NATIVE_INTENT",
+        "GlobalMemoryStatusEx",
+        "launch-intent.json",
+        "allocateCustody",
+        "native-stdout.log",
+        "native-stderr.log",
+        "PARENT_IMMEDIATELY_BEFORE_NATIVE_CREATE",
+        "GlobalMemoryStatusEx",
+        "nativeCreateStub",
+        "memory-000000.json"
+      ],
+      "outcome": "PASSED",
+      "ownerRetainedAfterStub": true,
+      "physicalThresholdBytes": 8589934592,
+      "reasons": [],
+      "stubCreations": 1
+    },
+    "initialPhysicalBelow": {
+      "commitThresholdBytes": 12884901888,
+      "events": [
+        "retention",
+        "observePublisher",
+        "publisher-prelaunch.json",
+        "retention",
+        "assertInputs",
+        "PARENT_BEFORE_NATIVE_INTENT",
+        "GlobalMemoryStatusEx"
+      ],
+      "outcome": "RESERVE_REFUSED",
+      "ownerRetainedAfterStub": false,
+      "physicalThresholdBytes": 8589934592,
+      "reasons": [
+        "PHYSICAL_RESERVE_BELOW_8_GIB"
+      ],
+      "stubCreations": 0
+    },
+    "lastCommitBelow": {
+      "commitThresholdBytes": 12884901888,
+      "events": [
+        "retention",
+        "observePublisher",
+        "publisher-prelaunch.json",
+        "retention",
+        "assertInputs",
+        "PARENT_BEFORE_NATIVE_INTENT",
+        "GlobalMemoryStatusEx",
+        "launch-intent.json",
+        "allocateCustody",
+        "native-stdout.log",
+        "native-stderr.log",
+        "PARENT_IMMEDIATELY_BEFORE_NATIVE_CREATE",
+        "GlobalMemoryStatusEx"
+      ],
+      "outcome": "RESERVE_REFUSED",
+      "ownerRetainedAfterStub": false,
+      "physicalThresholdBytes": 8589934592,
+      "reasons": [
+        "COMMIT_RESERVE_BELOW_12_GIB"
+      ],
+      "stubCreations": 0
+    },
+    "lastPhysicalBelow": {
+      "commitThresholdBytes": 12884901888,
+      "events": [
+        "retention",
+        "observePublisher",
+        "publisher-prelaunch.json",
+        "retention",
+        "assertInputs",
+        "PARENT_BEFORE_NATIVE_INTENT",
+        "GlobalMemoryStatusEx",
+        "launch-intent.json",
+        "allocateCustody",
+        "native-stdout.log",
+        "native-stderr.log",
+        "PARENT_IMMEDIATELY_BEFORE_NATIVE_CREATE",
+        "GlobalMemoryStatusEx"
+      ],
+      "outcome": "RESERVE_REFUSED",
+      "ownerRetainedAfterStub": false,
+      "physicalThresholdBytes": 8589934592,
+      "reasons": [
+        "PHYSICAL_RESERVE_BELOW_8_GIB"
+      ],
+      "stubCreations": 0
+    },
+    "lastQueryFailed": {
+      "commitThresholdBytes": 12884901888,
+      "events": [
+        "retention",
+        "observePublisher",
+        "publisher-prelaunch.json",
+        "retention",
+        "assertInputs",
+        "PARENT_BEFORE_NATIVE_INTENT",
+        "GlobalMemoryStatusEx",
+        "launch-intent.json",
+        "allocateCustody",
+        "native-stdout.log",
+        "native-stderr.log",
+        "PARENT_IMMEDIATELY_BEFORE_NATIVE_CREATE",
+        "GlobalMemoryStatusEx"
+      ],
+      "outcome": "OS_QUERY_FAILED",
+      "ownerRetainedAfterStub": false,
+      "physicalThresholdBytes": 8589934592,
+      "reasons": [],
+      "stubCreations": 0
+    },
+    "receiptFailureAfterStub": {
+      "commitThresholdBytes": 12884901888,
+      "events": [
+        "retention",
+        "observePublisher",
+        "publisher-prelaunch.json",
+        "retention",
+        "assertInputs",
+        "PARENT_BEFORE_NATIVE_INTENT",
+        "GlobalMemoryStatusEx",
+        "launch-intent.json",
+        "allocateCustody",
+        "native-stdout.log",
+        "native-stderr.log",
+        "PARENT_IMMEDIATELY_BEFORE_NATIVE_CREATE",
+        "GlobalMemoryStatusEx",
+        "nativeCreateStub",
+        "memory-000000.json"
+      ],
+      "outcome": "MEMORY_RECEIPT_WRITE_FAILED",
+      "ownerRetainedAfterStub": true,
+      "physicalThresholdBytes": 8589934592,
+      "reasons": [],
+      "stubCreations": 1
+    }
+  },
+  "nativeExecutions": 0,
+  "programSha256": "c53fd6a6f6b5fea4e16eee70db0a84d1aca688449225e940534e31ee05c0ac04",
+  "protocolSha256": "68635588bf590003272fbae5a2a25339a8341c89a772dba8c50533053b22d021",
+  "schema": "BKL046_STREAM34_MEMORY_ORDER_OFFLINE_RESULT_V1",
+  "scientificClosures": 0,
+  "subjectSha256": "0b029846da0412875e26595e2ead8361bc35fcef2c882ec2be95303b9582bdd1"
+}
