@@ -1,0 +1,50 @@
+{
+  "schema": "BKL046_GD153_HELDOUT_MASK_GEOMETRIC_COLOR_COVERAGE_V1",
+  "inputs": {
+    "clean": [
+      "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+      "riscontro-verificato.json",
+      "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab"
+    ],
+    "masked": [
+      "7104c91982d85ee3ddf3b3fd2580d87153938e7a3bff2bc1f722bac6dc1ecb77",
+      "riscontro.json",
+      "670003936733be601376adda7384523375c05413cbd18d1667ebe34512121927"
+    ],
+    "color": [
+      "3b6b5b62875a75482dd2a16191cb1569db8e3f055ac11d234b26355b0a840acd",
+      "riscontro.json",
+      "ce6b98d4ae296679d63e70dd42e510b8e510595a83d3dc45a085abbeddbb5b6c"
+    ]
+  },
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "methods": [
+    "zero",
+    "area",
+    "annularMedian"
+  ],
+  "policies": [
+    "nearest",
+    "four"
+  ],
+  "aperture": "local16to22:median:r10",
+  "maxSpanDays": 0.05,
+  "limitsMillimag": [
+    5,
+    10,
+    20
+  ],
+  "gateCapOnMissingPerBand": [
+    null,
+    10,
+    5,
+    3,
+    1,
+    0
+  ],
+  "scope": "Fixed gates. The always gate is an unrestricted comparator. Other gates require zero missing core samples in every band, optionally with a maximum missing count per band in the full aperture. Score simultaneous absolute error in all three colors. Report overall and by each reference and mask visit. No acceptance thresholds learned from results. Repeated masks and visits, one star, no actual damaged target truth."
+}
