@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_GD153_RELATIVE_CENTER_CONTROL_V1",
+  "poseProtocol": "7636924bce5cb8ab6f2832052565d335bdcc083f90e2597bb40e28316e9ecfaa",
+  "ditherArchive": "07b2b84ebf0fb3a5239bd1f9c91b1fcf9dfdab20fd933b77b2ccbe99bdaa5ee7",
+  "ditherReport": "b1d08b03e33f3579ad9f08aa49e4ff0c8e273faf379cf4f7488ecbc5b619728e",
+  "cleanArchive": "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+  "cleanReport": "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab",
+  "donorProgram": "bfd4f7ecdf431ec5844f258ad1e8dd54e4c95980f9a5155159a7e719ba3dee48",
+  "donorProtocol": "b0d372172da6d4552f5c9c607c1db50601d23574da57e61f5cf0885232069953",
+  "measurementProgram": "e31c40aa70771d90df45c16884061c8629bc23d1ad87af2d61296d6326bc0b3a",
+  "measurementProtocol": "cd890601b037508ce9eeca7d9bb78cbec39f7230235f1fcada1f28cf85122e54",
+  "scope": "In GD153's 16 fixed same-visit dither groups, predict a seed from two other bands with the GRW70 rules. Seed each donor search only from the same-band peaks at the other three dithers with an affine fit. Compare direct detector-pixel midpoint and WCS-projected midpoint against the benchmark local centroid in the evaluated exposure. Use frozen donor prominence, agreement, local re-centering and DQ checks. Score flux/color only for the four originally dual-radius clean triplets. Reuse fixed measured reference pixels and count all refusals; this is internal observational validation on GD153, not a new absolute astrometric tie."
+}
