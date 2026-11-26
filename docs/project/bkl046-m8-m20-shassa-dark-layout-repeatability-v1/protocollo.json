@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_M8M20_SHASSA_DARK_LAYOUT_PROTOCOL_V1",
+  "selectionReportSha256": "a6a126abe2a1a7a6b1fa02e519edbb81cd406934f4341a8bd286f79b14466f13",
+  "priorDarkReportSha256": "e077e5feb850fb34527f90ef90d9ffd0758120b8c534881de9d92b3581e40869",
+  "originalDarkReceiptSha256": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+  "darkArchiveSha256": "672cbb8862eea071310e92a49744f4058c6af1fc4313464ec1a141b09bdb1483",
+  "injectionProgramSha256": "454d3b6cd79e18b89b1f593d6b83c689885c5e9d87597fee7ed837983d34c7c8",
+  "injectionReportSha256": "d22407710a2e569ab43a61c8d2decf02c8e47d457ed62db3e2ceadd0ca496e8c",
+  "selectionRadiusArcmin": 4,
+  "partitions": 1716,
+  "profileTolerance": 0.05,
+  "design": "Evaluate the original, six globally lowest, and six spatially stratified reference cells frozen from the 4 arcmin SHASSA selection. Remeasure the same 14 chronological 180 s darks, with Bayer green pair and the exact frozen science support; keep 15th dark untouched. For each layout and each of mean and median, compare all unique balanced splits. Propagate the six-cell difference through a planar fit to the three fixed 2 ADU digital profiles, using aperture flux and relative L2; report interleaving and chronological split explicitly. Reproduce the original dark values and endpoint results. Quantiles are descriptive on reused frames. No independent optical truth or H-alpha to ADU conversion."
+}
