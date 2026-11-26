@@ -1,0 +1,36 @@
+{
+  "schema": "BKL046_CFA_BRACKET_REGISTERED_DOSE_RESPONSE_V1",
+  "parentProtocol": "7d7ac244278a97fbf56b7c8cfa8826ffb6c0d7d58a61ac8df71587d8549571c5",
+  "parentReport": "7d9ed1f6edb8558dcb2793196c0b8e50cf5346faf8e97af6f2b1fdca68f8e156",
+  "acquisition": "8b5c0176fac18978902da1bcb0a151be6e75a37860085959090e435ea35566aa",
+  "tileSizeCfaCells": 176,
+  "centersX": [
+    250,
+    620,
+    980,
+    1340,
+    1700
+  ],
+  "centersY": [
+    210,
+    500,
+    790,
+    1080
+  ],
+  "searchCells": 4,
+  "maximumShiftNativePx": 0.4,
+  "minimumCorrelation": 0.8,
+  "filterSigmaCfaCells": 3,
+  "anchorMinSignalDN": 70,
+  "anchorMarginDN": 32,
+  "maximumAnchorDisagreementPercent": 3,
+  "observedCeilingDN": 3651,
+  "relativeExpectedBins": [
+    0,
+    0.6,
+    0.9,
+    1.05,
+    20
+  ],
+  "scope": "Uninterpolated single photosite comparisons only in blocks with measured small shifts in every real dose. Estimate the later linear expectation only from the two shortest measurements. Report replicated failure and right censoring; not a calibrated full-well threshold or native validation."
+}
