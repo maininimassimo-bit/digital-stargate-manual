@@ -5,6 +5,14 @@ description: App Android nativa Allsky Pocket con Live, Meteo, Archivio, galleri
 
 # AllSky Manciano: progetto Android nativo
 
+## Beta 0.2.13 (build 15)
+
+- **Storico meteo.** Dalla scheda Meteo si apre una schermata dedicata con date di inizio e fine incluse e scorciatoie per le ultime 7 o 30 notti. Il riepilogo distingue le notti complete, parziali e senza dati. Il grafico permette di cambiare metrica fra copertura, umidità, temperatura, vento e pioggia e di aprire il dettaglio di una notte con un tocco o con i comandi precedente e successiva. Le date senza misure restano vuote nel grafico.
+- **Calcolo.** Le quote di sereno, nuvoloso e coperto sono ponderate sui secondi classificati. Si assegnano prima le quote intere e poi i punti percentuali residui alle categorie con i maggiori resti frazionari. Il totale visualizzato è 100% quando sono presenti secondi classificati. La stessa regola vale per **Meteo della notte** in Archivio. Umidità e vento sono medie dei riepiloghi notturni. La temperatura mostra il minimo e il massimo osservati nel periodo.
+- **Pioggia.** Il meteo corrente mostra lo stato del sensore se la misura è valida. I riepiloghi notturni pubblicano il campo facoltativo rain_condition con la priorità Pioggia rilevata, Solo bagnato, Asciutto. Lo storico conta le notti per stato e segnala quelle con dato mancante. L’unità è la notte e il sensore non misura un cumulato in millimetri. Il campo è stato verificato su 260 riepiloghi nel [catalogo pubblico](https://maininimassimo-bit.github.io/digital-stargate-manual/data/realtime/allsky-night-weather.json).
+- **Avvio.** Il video locale della cupola fotorealistica dura 3,8 secondi e include una traccia audio. Il pulsante **Salta** apre subito la Home. La Home si apre anche al termine del video o in caso di errore di riproduzione.
+- **Verifica su Motorola G84 (Android 15).** Nella copia di prova, selezionando le notti con data di inizio dal 23 al 25 novembre 2026, lo storico ha mostrato 49% sereno, 10% nuvoloso e 41% coperto. Verificati anche il passaggio tra Copertura e Umidità, la selezione di una notte dal grafico e l’avvio dell’animazione con audio. La build firmata è stata inviata a Google per il test chiuso Alpha. Al momento dell’invio Play Console indicava la revisione in corso.
+
 ## Beta 0.2.12 (build 14)
 
 - **Meteo:** mostra lo stato della copertura del cielo rilevato dal CloudWatcher di Manciano (Sereno, Nuvoloso o Coperto).
