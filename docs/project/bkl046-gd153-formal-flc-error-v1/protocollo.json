@@ -1,0 +1,29 @@
+{
+  "schema": "BKL046_GD153_FORMAL_FLC_ERR_V1",
+  "sourceProtocolSha256": "7636924bce5cb8ab6f2832052565d335bdcc083f90e2597bb40e28316e9ecfaa",
+  "naturalArchiveSha256": "bd1e086475564efa36f04a57c1d52ff57934f983e43b3beae77bdb5a14ccfe5e",
+  "naturalReportSha256": "8a77ba6a41a8835332a134cda0a8520d73367576289efbb1f6d6ea76b733ea83",
+  "cleanArchiveSha256": "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+  "cleanReportSha256": "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab",
+  "aperture": "local16to22:median:r10",
+  "radius": 10,
+  "skyAnnulus": [
+    16,
+    22
+  ],
+  "minSkyFraction": 0.7,
+  "samples": 8192,
+  "chunkSize": 512,
+  "baseSeed": 44291,
+  "targetFamilies": [
+    "clean",
+    "nativeCoreDq"
+  ],
+  "methods": [
+    "zero",
+    "area",
+    "annularMedian"
+  ],
+  "relativeReplayTolerance": 1e-10,
+  "scope": "Nominal centers only. Propagate an independent Gaussian draw per retained SCI pixel with sigma from ERR times PAM, including the finite sky annulus and reevaluating medians. Keep DQ selections, centers and calibration fixed. Matching target and sibling draws are independent per exposure. Directed reciprocal controls are not independent. This describes formal pixel errors under a diagonal model and omits calibrated pixel covariance, photometric systematics, model bias and missing-pixel truth."
+}
