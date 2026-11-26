@@ -28,7 +28,9 @@ def summarize(rows):
     if not sum(seconds.values()):
         raise ValueError("No classified weather intervals")
     temps = [float(row["Ambient Temperature"]) for row in rows]
-    return {
+    rain = {str(row.get("Rain Condition", "")).strip().lower() for row in rows}
+    condition = next((state for state in ("rain", "wet", "dry") if state in rain), None)
+    summary = {
         "start": rows[0]["Time"][:5],
         "end": rows[-1]["Time"][:5],
         "partial": max_gap >= 60 or rows[0]["Date"] == rows[-1]["Date"]
@@ -40,6 +42,9 @@ def summarize(rows):
         "humidity": round(mean(float(row["Relative Humidity"]) for row in rows)),
         "wind": round(mean(float(row["Wind Value"]) for row in rows), 1),
     }
+    if condition is not None:
+        summary["rain_condition"] = condition
+    return summary
 
 
 def main():
@@ -59,7 +64,9 @@ def main():
             raise ValueError(f"Invalid night file name: {path.name}")
         with path.open(encoding="utf-8") as file:
             summary = json.load(file)
-        if set(summary) != {"start", "end", "partial", "seconds", "min", "max", "humidity", "wind"}:
+        fields = {"start", "end", "partial", "seconds", "min", "max", "humidity", "wind"}
+        if (set(summary) - {"rain_condition"} != fields
+                or ("rain_condition" in summary and summary["rain_condition"] not in ("dry", "wet", "rain"))):
             raise ValueError(f"Invalid weather summary: {path.name}")
         nights.setdefault(path.stem, summary)
     output = ROOT / "docs/data/realtime/allsky-night-weather.json"
