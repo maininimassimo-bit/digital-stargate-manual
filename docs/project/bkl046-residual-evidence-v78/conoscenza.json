@@ -1,0 +1,649 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_20261126_V3",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "415d7d1ffa63e7bb75ca4ab12c32314a933bee5419b80e98a34b882a859cef2c",
+    "commit": "c58be1e10dfa80e4dd5504a3eb55d3b1ae952dcc"
+  },
+  "evidence": [
+    {
+      "id": "m8DarkRepeatability",
+      "level": "instrumentalRepeatabilityOnDarkFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "de418f8d692664440ed91c18b0fe7b945f214cd6",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-dark-anchor-repeatability-v1/riscontro.json",
+          "sha256": "e077e5feb850fb34527f90ef90d9ffd0758120b8c534881de9d92b3581e40869",
+          "archiveSha256": "5fe800221ad9919db6b639da84f831bd380d349645e3f2edb3985d4eb509639d",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-ripetibilita-dark.zip",
+          "copiedReport": "m8DarkRepeatability-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "cfaV3Token",
+      "level": "technicalPreconditionOnly",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "70147a9ac5ec36ea100df7a097f3b90c96e1f7fe",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-v3-ordinary-token-acl-v1/riscontro.json",
+          "sha256": "9c4c29f71055e9bb722f47e80249d513acc1cfc4de9457f1bea43575c6755425",
+          "archiveSha256": "80cac952ef8b935f0c7f0bdb5462385ba9488a87c51fcbee0c7e48f91417e5ec",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-controllo-posa-v3.zip",
+          "copiedReport": "cfaV3Token-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "cfaV3Staging",
+      "level": "inactiveLaboratoryStaging",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "2d416829e62562b44659238721f3929d8cb1c495",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-v3-inactive-stage-v1/riscontro.json",
+          "sha256": "bf2e7b6da7a3eae2ea898d366dc5905d421abad5c80fa5023464b4dab2a96b16",
+          "archiveSha256": "76ecdf48fdab02f82388894a27ba718250d89eebffd5813fb77b604d7a11cbfe",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-posa-offline-v3.zip",
+          "copiedReport": "cfaV3Staging-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "cfaV3ReviewDossier",
+      "level": "reviewDossierWithoutApproval",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "6ed9e3cf34e50992a6907ac81e91b86ff7ed6f64",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-v3-independent-review-dossier-v1/riscontro.json",
+          "sha256": "748ad2a5a14efe0ef71f7fd96aa2619cd5d8a572f3f29044d6aa47d9c6a94a8b",
+          "archiveSha256": "14e2d6fb90e8748508039c6e03e4a8d5ed301feb2bb06c268f5025f9e9ca837f",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-dossier-revisione-v3.zip",
+          "copiedReport": "cfaV3ReviewDossier-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8OrientationReconstructed",
+      "level": "reconstructedHeldOutPixelsSharedExposures",
+      "axes": [
+        "PSF_PIXEL/2",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "ff8914b39db4f590bd4b86c2f5fc58daf45d0686",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-orientation-transfer-v1/riscontro.json",
+          "sha256": "dd5822c4cd7bbe52b739e062a3006d41529d6b672c126e7981f0b9720130f05c",
+          "archiveSha256": "b2ee6323a1e17585ee277ac2aeb578209c7935b90a24e13142c184423c89dad1",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-orientazione-trasferimento.zip",
+          "copiedReport": "m8OrientationReconstructed-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8OrientationDisjoint",
+      "level": "detectorSamplesDisjointExposureHalves",
+      "axes": [
+        "PSF_PIXEL/2",
+        "PSF_PIXEL/3",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "b6d32799b0528941510501d8328ec6f54baed950",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-disjoint-exposures-v1/riscontro.json",
+          "sha256": "b1620be589bcf2e3e2327ca4557839a1b18957219aa12d63a5932191a5fcfced",
+          "archiveSha256": "6439a2d7c77b4118d6f207c5707b654f3fe27ef748ed2e751407c4da35a52321",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-posa-disgiunta.zip",
+          "copiedReport": "m8OrientationDisjoint-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8PsfModelSensitivity",
+      "level": "pairedModelSensitivityOnRealFrames",
+      "axes": [
+        "PSF_PIXEL/2",
+        "PSF_PIXEL/3",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "7d6bdd33aab02090bdeb62ea9494fbee201ef917",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-disjoint-model-sensitivity-v1/riscontro.json",
+          "sha256": "e92af352f4d19b3cd19a909e2167444a1882ae364b6e60bbbe1e0c0103197f65",
+          "archiveSha256": "0d0d2850975eb842a396b908cd2c4eb1881f5fc51a86042fc8c3bfa1d841ced2",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-sensibilita-modello.zip",
+          "copiedReport": "m8PsfModelSensitivity-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8PsfGreenParities",
+      "level": "nominalSameBandParityControl",
+      "axes": [
+        "PSF_PIXEL/2",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "bc13a6625cde5d3a1f22571e970ba11a63e47006",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-cfa-green-parities-v1/riscontro.json",
+          "sha256": "5031404b8c588bb8e349858fed4c39c0f3ed8d5e278f59e052e38749619808b8",
+          "archiveSha256": "cbb457ff20fa991bdffd6158b2f4dd066ce1feab834d6ce811f0fe428a1fc9fb",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-parita-verdi.zip",
+          "copiedReport": "m8PsfGreenParities-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "findings": {
+    "darkRepeatability": {
+      "mean": {
+        "anchorDeltaAdu": [
+          -0.0962437220982224,
+          -0.09971400669638797,
+          -0.08053152901788962,
+          -0.015206473214334437,
+          -0.004813058035722406,
+          -0.026681082589277594
+        ],
+        "maxAbsoluteAdu": 0.09971400669638797,
+        "planeCoefficientsAdu": [
+          -0.05383944430958156,
+          0.0012256463547613405,
+          0.05106414310514792
+        ],
+        "relativeProfileEffects": {
+          "broadDiffuse": {
+            "bothWithin5Pct": false,
+            "relativeFluxChange": 0.04233886023066665,
+            "relativeL2Change": 0.07338555137362002
+          },
+          "longFilament": {
+            "bothWithin5Pct": false,
+            "relativeFluxChange": 0.258379146822722,
+            "relativeL2Change": 0.17388280994596642
+          },
+          "shortFilament": {
+            "bothWithin5Pct": false,
+            "relativeFluxChange": 0.3645660438129694,
+            "relativeL2Change": 0.2649086919142727
+          }
+        }
+      },
+      "median": {
+        "anchorDeltaAdu": [
+          -0.14285714285716722,
+          -0.3571428571428896,
+          -0.14285714285711038,
+          0.07142857142861203,
+          0.035714285714277594,
+          0.0
+        ],
+        "maxAbsoluteAdu": 0.3571428571428896,
+        "planeCoefficientsAdu": [
+          -0.08967238470191082,
+          -0.01856017997749687,
+          0.1666666666666793
+        ],
+        "relativeProfileEffects": {
+          "broadDiffuse": {
+            "bothWithin5Pct": false,
+            "relativeFluxChange": 0.07050729993040733,
+            "relativeL2Change": 0.15776499093413562
+          },
+          "longFilament": {
+            "bothWithin5Pct": false,
+            "relativeFluxChange": 0.43028120978082274,
+            "relativeL2Change": 0.37381500065404766
+          },
+          "shortFilament": {
+            "bothWithin5Pct": false,
+            "relativeFluxChange": 0.6071152424869686,
+            "relativeL2Change": 0.5695033504000141
+          }
+        }
+      }
+    },
+    "cfaV3": {
+      "subject": "8d4ba1c9268399de1ac98dccf17c622877cb25eca23118ecfb8388241a22849a",
+      "verifiedArb": false,
+      "verifiedDossierFiles": 56,
+      "workingCopyFilesWithMutationRights": 56,
+      "productionProtectionVerified": false,
+      "verifiedRq": false
+    },
+    "psfReconstructed": {
+      "comparisons": {
+        "blueAB": {
+          "comparable": 1,
+          "medianDegrees": 0.0,
+          "within15Degrees": 1
+        },
+        "redAB": {
+          "comparable": 5,
+          "medianDegrees": 0.0,
+          "within15Degrees": 5
+        },
+        "redBlueA": {
+          "comparable": 0,
+          "medianDegrees": null,
+          "within15Degrees": 0
+        },
+        "redBlueB": {
+          "comparable": 0,
+          "medianDegrees": null,
+          "within15Degrees": 0
+        }
+      },
+      "qualified": {
+        "blueA": 1,
+        "blueB": 2,
+        "redA": 5,
+        "redB": 6
+      },
+      "stars": 19
+    },
+    "psfDisjointExposures": {
+      "chromaticComparable": 0,
+      "chromaticWithin15": 0,
+      "evaluatedFolds": {
+        "blue": 38,
+        "red": 38
+      },
+      "gainPassesBothFolds": {
+        "blue": 0,
+        "red": 6
+      },
+      "posesPerHalf": [
+        7,
+        7
+      ],
+      "qualified": {
+        "blue": 0,
+        "red": 6
+      },
+      "stars": 19
+    },
+    "psfModelSensitivity": {
+      "baseline": {
+        "bands": {
+          "blue": {
+            "common": 0,
+            "lost": [],
+            "new": [],
+            "qualified": 0,
+            "stableWithin15": 0
+          },
+          "red": {
+            "common": 6,
+            "lost": [],
+            "new": [],
+            "qualified": 6,
+            "stableWithin15": 6
+          }
+        },
+        "chromaticComparable": 0
+      },
+      "widths": {
+        "bands": {
+          "blue": {
+            "common": 0,
+            "lost": [],
+            "new": [
+              "14-2-1"
+            ],
+            "qualified": 1,
+            "stableWithin15": 0
+          },
+          "red": {
+            "common": 6,
+            "lost": [],
+            "new": [],
+            "qualified": 6,
+            "stableWithin15": 6
+          }
+        },
+        "chromaticComparable": 0
+      },
+      "widthsAndWings": {
+        "bands": {
+          "blue": {
+            "common": 0,
+            "lost": [],
+            "new": [
+              "12-1-1",
+              "14-2-1"
+            ],
+            "qualified": 2,
+            "stableWithin15": 0
+          },
+          "red": {
+            "common": 6,
+            "lost": [],
+            "new": [
+              "12-2-2",
+              "6-2-2"
+            ],
+            "qualified": 8,
+            "stableWithin15": 6
+          }
+        },
+        "chromaticComparable": 1
+      },
+      "wings": {
+        "bands": {
+          "blue": {
+            "common": 0,
+            "lost": [],
+            "new": [],
+            "qualified": 0,
+            "stableWithin15": 0
+          },
+          "red": {
+            "common": 6,
+            "lost": [],
+            "new": [
+              "12-2-2"
+            ],
+            "qualified": 7,
+            "stableWithin15": 6
+          }
+        },
+        "chromaticComparable": 0
+      }
+    },
+    "psfBayerGreenParity": {
+      "A": {
+        "greenParities": {
+          "comparable": 8,
+          "deltas": [
+            {
+              "deltaDegrees": 7.5,
+              "star": "12-0-2"
+            },
+            {
+              "deltaDegrees": 7.5,
+              "star": "14-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-1-0"
+            },
+            {
+              "deltaDegrees": 15.0,
+              "star": "4-1-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-0-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-0"
+            },
+            {
+              "deltaDegrees": 15.0,
+              "star": "6-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-2"
+            }
+          ],
+          "within15": 8
+        },
+        "qualified": {
+          "blue": 2,
+          "green1": 9,
+          "green2": 11,
+          "red": 8
+        },
+        "redBlue": {
+          "comparable": 1,
+          "deltas": [
+            {
+              "deltaDegrees": 82.5,
+              "star": "12-1-1"
+            }
+          ],
+          "within15": 0
+        }
+      },
+      "B": {
+        "greenParities": {
+          "comparable": 8,
+          "deltas": [
+            {
+              "deltaDegrees": 7.5,
+              "star": "12-0-2"
+            },
+            {
+              "deltaDegrees": 7.5,
+              "star": "14-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-1-0"
+            },
+            {
+              "deltaDegrees": 15.0,
+              "star": "4-1-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-0-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-0"
+            },
+            {
+              "deltaDegrees": 15.0,
+              "star": "6-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-2"
+            }
+          ],
+          "within15": 8
+        },
+        "qualified": {
+          "blue": 2,
+          "green1": 9,
+          "green2": 11,
+          "red": 8
+        },
+        "redBlue": {
+          "comparable": 1,
+          "deltas": [
+            {
+              "deltaDegrees": 82.5,
+              "star": "12-1-1"
+            }
+          ],
+          "within15": 0
+        }
+      },
+      "calibrationRepeat": {
+        "blue": {
+          "comparable": 2,
+          "deltas": [
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-1-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "14-2-1"
+            }
+          ],
+          "within15": 2
+        },
+        "green1": {
+          "comparable": 9,
+          "deltas": [
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-0-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "14-0-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "14-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-1-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-1-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-0-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-2"
+            }
+          ],
+          "within15": 9
+        },
+        "green2": {
+          "comparable": 11,
+          "deltas": [
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-0-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "14-1-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "14-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-1-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-1-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-2-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-0-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-0-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-2"
+            }
+          ],
+          "within15": 11
+        },
+        "red": {
+          "comparable": 8,
+          "deltas": [
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-0-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-0-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-1-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-1-1"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-1-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "12-2-2"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "4-1-0"
+            },
+            {
+              "deltaDegrees": 0.0,
+              "star": "6-2-2"
+            }
+          ],
+          "within15": 8
+        }
+      }
+    }
+  },
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}
