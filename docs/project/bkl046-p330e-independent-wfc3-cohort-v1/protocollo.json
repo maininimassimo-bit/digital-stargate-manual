@@ -1,0 +1,44 @@
+{
+  "schema": "BKL046_P330E_WFC3_INDEPENDENT_COHORT_V1",
+  "catalogSha256": "ec193a5fdb6325995866885ade70e3ffbf4d8b1aa30ede00fbb17852ca11c869",
+  "target": "P330E",
+  "proposals": [
+    "17682",
+    "17962"
+  ],
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "visits": [
+    "ifj410",
+    "ifj411",
+    "ifj412",
+    "ifj451",
+    "ifn911",
+    "ifn912"
+  ],
+  "expectedCountsPerVisit": [
+    2,
+    1,
+    2
+  ],
+  "productSizeLimit": 100663296,
+  "pam": {
+    "1": "308c90ce013750b1857450386e2002a092d3d69342351e3fa80e4115ee5d62cc",
+    "2": "a5738b6cad94ac6fa69aa38c8f610808454464762be9a84d9bac795a3f974b14"
+  },
+  "apertureRadii": [
+    5,
+    10
+  ],
+  "skyAnnulus": [
+    16,
+    22
+  ],
+  "minSkyFraction": 0.7,
+  "maxPeakDistancePx": 4,
+  "maxTripletSpanDays": 0.05,
+  "scope": "Select all 30 public WFC3/UVIS pointing observations in the frozen catalog for the two previously unused programs. Try only the exact root FLC science product, not HAP composites. Keep metadata, identity and DQ vetoes. At most one supported three-band triplet per visit/dither, because each visit exposes F606W once. Never combine across dither, chip or visits to supply a missing band."
+}
