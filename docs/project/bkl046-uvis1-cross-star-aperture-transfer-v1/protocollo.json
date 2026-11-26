@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_UVIS1_CROSS_STAR_APERTURE_TRANSFER_V1",
+  "chip": 1,
+  "gd153": [
+    "824efc802063acfe85cd9e9b9c2f6a75b21260389c612b0798e5390a09a1fab5",
+    "riscontro.json",
+    "84c97ba7275bc103b09abd64042c0d7a9efaa3a6ef74287150a7592ceb6cd456"
+  ],
+  "grw70": [
+    "fd33baa1618fa4875427a83f96e2eca5d6539293d70d077edf5afeb24b3b1c7f",
+    "riscontro-centro.json",
+    "0b16f9a4700b03733e172bd6ccbc8b3e4de301404a772a223cd8a4ace06e72fe"
+  ],
+  "nominalEE": [
+    "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+    "riscontro-verificato.json",
+    "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab"
+  ],
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "radii": [
+    "5",
+    "10"
+  ],
+  "minOtherStarVisits": 2,
+  "scope": "Match chip UVIS1, same circular radii, same median local background and same local centering operator using WCS projections of two other bands. Compute the observed aperture growth per triplet then median within visit; fit the empirical color aperture term only on the other star's visits. Score both directions equally with zero and archived nominal EE as comparators. These are fixed disjoint stars with repeated visits; fitting never uses the target star. Report shared calibrator/geometry limitations and no generalization confidence."
+}
