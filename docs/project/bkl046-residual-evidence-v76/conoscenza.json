@@ -1,0 +1,265 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_20261126_V1",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "commit": "84dd59378456901a73ebe824e067397246610e47",
+    "sha256": "f00fafccd08ef027f17fabb00d7fe224edad3c819fc17efb8a8acfe526437471"
+  },
+  "evidence": [
+    {
+      "id": "scaleSensitivity",
+      "level": "controlledPerturbationOnRealFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "397517b1276fd18b31c30e150544460fd08f6765",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-diffuse-scale-sensitivity-v1/IC1805.json",
+          "sha256": "45f4f64df16770a4113e3339d30245ec4a9cf42235ff2c9ab0785d6d36b5f5a6",
+          "archiveSha256": "c07294b5be9e9f0d4577da22191057710f3cb7f93cd327333f86e4d66430036d",
+          "archiveMember": "IC1805.json",
+          "archiveName": "BKL046-fondo-sensibilita-scala.zip",
+          "copiedReport": "scaleSensitivity-IC1805.json"
+        },
+        {
+          "path": "docs/project/bkl046-diffuse-scale-sensitivity-v1/M8M20.json",
+          "sha256": "ffb3f20cf9cba7bdffc341900c0b6c4549828cd29f7e2e3ba68e756d1feeb0b8",
+          "archiveSha256": "c07294b5be9e9f0d4577da22191057710f3cb7f93cd327333f86e4d66430036d",
+          "archiveMember": "M8M20.json",
+          "archiveName": "BKL046-fondo-sensibilita-scala.zip",
+          "copiedReport": "scaleSensitivity-M8M20.json"
+        }
+      ]
+    },
+    {
+      "id": "stellarScale",
+      "level": "finitePairedScaleSensitivity",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "23fb532884648ec8f69329d0eafa07ca12eaf465",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-empirical-scale-background-v1/riscontro.json",
+          "sha256": "1a5ce8a5cc51b87f438e34532ca064a36210a3dd9f5d2570622e644a26e593ed",
+          "archiveSha256": "b96cf8f9234605a81b10c0e64727fe984f1186cbb6c78528d4054be4fb18ad7f",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-scala-empirica.zip",
+          "copiedReport": "stellarScale-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "heldOutEdges",
+      "level": "spatialHoldoutOnRealFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "1eee114c9cbc9d7e2f9bd7b8583fb0f6288a7f19",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-diffuse-held-out-edges-v1/IC1805.json",
+          "sha256": "1499e5dbfbaf85c66593a2f45ae7c49b7aa6f44a9068fac9318bc3e683675800",
+          "archiveSha256": "82c387dfd5577d8aeb7583f1241db7b2654acefaf5fe967fa6e93c458c1cfb64",
+          "archiveMember": "IC1805.json",
+          "archiveName": "BKL046-fondo-bordi-esclusi.zip",
+          "copiedReport": "heldOutEdges-IC1805.json"
+        },
+        {
+          "path": "docs/project/bkl046-diffuse-held-out-edges-v1/M8M20.json",
+          "sha256": "7dc0b874e6451505897744dad79a9e8381398d241de1b8312320a9f7dcd64e42",
+          "archiveSha256": "82c387dfd5577d8aeb7583f1241db7b2654acefaf5fe967fa6e93c458c1cfb64",
+          "archiveMember": "M8M20.json",
+          "archiveName": "BKL046-fondo-bordi-esclusi.zip",
+          "copiedReport": "heldOutEdges-M8M20.json"
+        }
+      ]
+    },
+    {
+      "id": "archiveAudit",
+      "level": "isolatedWitnessReceiptReadback",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "5be64af5136e763b49137eac46e8176cde003e1d",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-archive-release-audit-v1/riscontro.json",
+          "sha256": "5f580e1d230f434f5240bc3d40563dc1012b2e855cafe07e322262eaf6b4bdd4",
+          "archiveSha256": "2a0b40bdfbee5b07d2a208d3452cfbbb6e8485f2970d25d067f53acb711b5a8e",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-riconciliazione-archivio.zip",
+          "copiedReport": "archiveAudit-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originPredictions",
+      "level": "syntheticHypothesisDesign",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "8086db8bb8007e576f547223d91969b32abd5f49",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-factorial-v1/riscontro.json",
+          "sha256": "b163bce49d61e476382715e1b74d8ce781a40df75e9ae97ed65f4b00ee4ee1cf",
+          "archiveSha256": "356170fad0768bc14a2a9d1303aa697b2eb0c7f0fdec46309e90e7c744ed25b0",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-fattoriale.zip",
+          "copiedReport": "originPredictions-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originClassifier",
+      "level": "syntheticOfflineClassifier",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "aa1806f0ed93274a73c1dcbf27aab56f8800d2f2",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-output-classifier-v1/riscontro.json",
+          "sha256": "00cf633cac87f32e4c765c37c7c71960684cc7946d161545e334793eb84a55dd",
+          "archiveSha256": "21518dc6911d89fbcfc39d6a81c6cdf8b9b2b8247ee392154abf098b692eb740",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-classificatore.zip",
+          "copiedReport": "originClassifier-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originDispatcher",
+      "level": "isolatedR4WithWindowsWitness",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "5ec2fc97b099ac66626674776621555fc18ac465",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-dispatcher-candidate-v1/riscontro.json",
+          "sha256": "c3b52e58d2d5eec948952d6272d9f9d98b45131f01ee9f8b7328b0137b3b2842",
+          "archiveSha256": "20545e6253843bdd991a6cb7ca73021bd6fe13071d9691902eabb593d925f8fb",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-dispatcher.zip",
+          "copiedReport": "originDispatcher-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originPreflightV3",
+      "level": "exactCandidateOfflinePreflight",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "5d0d48132ac2a61b78a9dc8c43156382a1640d44",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origine-launcher-revisione-v3/preflight-v3.json",
+          "sha256": "2455c18b91c9e0c42bbb5cab5e532ad5b7324735d3d215ba834839fbb8679064",
+          "archiveSha256": "9e5e763d65726a226c152d9407c36d22106657314f72e172a978db04fe3ab37c",
+          "archiveMember": "preflight-v3.json",
+          "archiveName": "BKL046-CFA-origine-launcher-revisione-v3.zip",
+          "copiedReport": "originPreflightV3-preflight-v3.json"
+        },
+        {
+          "path": "docs/project/bkl046-cfa-origine-launcher-revisione-v3/preflight-faults.json",
+          "sha256": "0db2ea2b15d425e94770f09ef18bfddd5160d49107debda29193ad36389e1c17",
+          "archiveSha256": "9e5e763d65726a226c152d9407c36d22106657314f72e172a978db04fe3ab37c",
+          "archiveMember": "preflight-faults.json",
+          "archiveName": "BKL046-CFA-origine-launcher-revisione-v3.zip",
+          "copiedReport": "originPreflightV3-preflight-faults.json"
+        }
+      ]
+    }
+  ],
+  "findings": {
+    "m8m20StellarScales": {
+      "outcomes": [
+        {
+          "status": "allFail",
+          "pairs": 6
+        },
+        {
+          "status": "allPass",
+          "pairs": 6
+        },
+        {
+          "status": "mixed",
+          "pairs": 15
+        }
+      ],
+      "trials": 1944.0
+    },
+    "heldOutEdges": [
+      {
+        "field": "IC1805",
+        "pairs": 72,
+        "checkerboardPass": 45,
+        "edgeFailuresAmongCheckerboardPass": 30,
+        "allEdgesPass": 16
+      },
+      {
+        "field": "M8M20",
+        "pairs": 27,
+        "checkerboardPass": 6,
+        "edgeFailuresAmongCheckerboardPass": 6,
+        "allEdgesPass": 1
+      }
+    ],
+    "cfaSyntheticSeparation": [
+      {
+        "acceptedByExactComparator": false,
+        "differentSupportSamples": 52,
+        "left": "baseline",
+        "maxAbsIntensityOnCommonSupport": 0.206982595922168,
+        "maxAbsWeight": 0.5588810524209675,
+        "right": "half-matrix-as-zero"
+      },
+      {
+        "acceptedByExactComparator": false,
+        "differentSupportSamples": 44,
+        "left": "baseline",
+        "maxAbsIntensityOnCommonSupport": 0.16840982810458538,
+        "maxAbsWeight": 0.30244047619047687,
+        "right": "zero-matrix-as-half"
+      },
+      {
+        "acceptedByExactComparator": false,
+        "differentSupportSamples": 82,
+        "left": "half-matrix-as-zero",
+        "maxAbsIntensityOnCommonSupport": 0.3272152674437257,
+        "maxAbsWeight": 0.7088087234893936,
+        "right": "zero-matrix-as-half"
+      }
+    ],
+    "isolatedArchiveAudit": {
+      "verifiedReleasePairs": 2,
+      "rejectedCases": 7
+    },
+    "cfaV3Preflight": {
+      "comparatorFilesVerified": 3824,
+      "rootsVerified": true,
+      "pixInsightProcesses": 0,
+      "nativeRuntimeFilesVerified": 3,
+      "nativeInputsVerified": {
+        "xdrz": 12,
+        "fits": 6
+      }
+    }
+  },
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}
