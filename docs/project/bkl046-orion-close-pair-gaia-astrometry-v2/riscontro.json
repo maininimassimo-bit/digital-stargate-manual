@@ -1,0 +1,163 @@
+{
+  "catalogRows": 752,
+  "nativeExecutions": 0,
+  "pairs": [
+    {
+      "calibration": [
+        {
+          "diagnostics": {
+            "ambiguousPeak": 2,
+            "centroidSupportInvalid": 3,
+            "measured": 4,
+            "outsideChipOrMargin": 7
+          },
+          "epochJulianYear": 2004.8359015260983,
+          "gaiaCandidates": 16,
+          "hstDetections": 4,
+          "root": "j93k28hcq",
+          "status": "INSUFFICIENT_TRAINING",
+          "trainCandidates": 2,
+          "uniquePeaks": 4
+        },
+        {
+          "diagnostics": {
+            "centroidSupportInvalid": 1,
+            "measured": 2,
+            "outsideChipOrMargin": 13
+          },
+          "epochJulianYear": 2005.2775724706569,
+          "gaiaCandidates": 16,
+          "hstDetections": 2,
+          "root": "j93k76hiq",
+          "status": "INSUFFICIENT_TRAINING",
+          "trainCandidates": 2,
+          "uniquePeaks": 2
+        }
+      ],
+      "h97": 232,
+      "sharedHoldoutCount": 0,
+      "status": "NO_SHARED_GAIA_HOLDOUT"
+    },
+    {
+      "calibration": [
+        {
+          "diagnostics": {
+            "centroidSupportInvalid": 7,
+            "measured": 8,
+            "outsideChipOrMargin": 50
+          },
+          "epochJulianYear": 2005.2613575493701,
+          "gaiaCandidates": 65,
+          "holdoutMatches": 1,
+          "hstDetections": 8,
+          "root": "j93k09o4q",
+          "status": "MEASURED",
+          "trainCandidates": 7,
+          "trainMatches": 5,
+          "translationArcsec": [
+            -0.0246891947636243,
+            0.020390865583683748
+          ],
+          "uniquePeaks": 8
+        },
+        {
+          "diagnostics": {
+            "ambiguousPeak": 1,
+            "centroidSupportInvalid": 7,
+            "measured": 13,
+            "outsideChipOrMargin": 43,
+            "peakTooFaint": 1
+          },
+          "epochJulianYear": 2004.818382291429,
+          "gaiaCandidates": 65,
+          "holdoutMatches": 4,
+          "hstDetections": 13,
+          "root": "j93k58lnq",
+          "status": "MEASURED",
+          "trainCandidates": 9,
+          "trainMatches": 9,
+          "translationArcsec": [
+            -0.0207292214127186,
+            0.01268162078040902
+          ],
+          "uniquePeaks": 13
+        }
+      ],
+      "h97": 345,
+      "holdout": [
+        {
+          "detectedIndices": [
+            6,
+            8
+          ],
+          "gaiaSourceId": "3017364303848914944",
+          "radiusMas": 1.1573050843857695,
+          "relative1DMas": [
+            -0.32300111362459916,
+            -1.1113169390153388
+          ]
+        }
+      ],
+      "limitMas": 20,
+      "p90Mas": 1.1573050843857695,
+      "primaryPass": false,
+      "recordedPeakDisagreementAfterRelativeTranslationMas": 215.02464007313202,
+      "sharedHoldoutCount": 1,
+      "status": "MEASURED"
+    },
+    {
+      "calibration": [
+        {
+          "diagnostics": {
+            "ambiguousPeak": 11,
+            "centroidSupportInvalid": 24,
+            "measured": 8,
+            "outsideChipOrMargin": 61
+          },
+          "epochJulianYear": 2005.2617128678987,
+          "gaiaCandidates": 104,
+          "holdoutMatches": 1,
+          "hstDetections": 8,
+          "root": "j93k0ap3q",
+          "status": "MEASURED",
+          "trainCandidates": 7,
+          "trainMatches": 5,
+          "translationArcsec": [
+            -0.027019023227762062,
+            0.011047096303101966
+          ],
+          "uniquePeaks": 8
+        },
+        {
+          "diagnostics": {
+            "ambiguousPeak": 10,
+            "centroidSupportInvalid": 28,
+            "measured": 13,
+            "outsideChipOrMargin": 53
+          },
+          "epochJulianYear": 2004.8304295003422,
+          "gaiaCandidates": 104,
+          "holdoutMatches": 2,
+          "hstDetections": 13,
+          "root": "j93k57noq",
+          "status": "MEASURED",
+          "trainCandidates": 11,
+          "trainMatches": 11,
+          "translationArcsec": [
+            0.004313594762518136,
+            0.03811433177720147
+          ],
+          "uniquePeaks": 13
+        }
+      ],
+      "h97": 488,
+      "sharedHoldoutCount": 0,
+      "status": "NO_SHARED_GAIA_HOLDOUT"
+    }
+  ],
+  "protocolSha256": "0b5eb25bb811e107ed62c14a90e791195cbdcdfd4519ac4c0ca17392718c76cf",
+  "qualityPoolRows": 413,
+  "rangeManifestSha256": "77ef6ce1ce600d135f5f33a64659931dc89f04f157b333cd15deadb1744320ea",
+  "schema": "BKL046_ORION_CLOSE_PAIR_GAIA_DR3_TARGETED_PEAKS_V2",
+  "scientificClosures": 0
+}
