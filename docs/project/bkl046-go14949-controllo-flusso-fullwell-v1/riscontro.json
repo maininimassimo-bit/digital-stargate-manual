@@ -1,0 +1,54 @@
+{
+  "protocol": "BKL046_GO14949_PHOTOMETRY_SATURATION_CONTROL_DEVELOPMENT_V1",
+  "protocolSha256": "fe965178f8414df8176dc2df514fedcf2fe299e721e2d44aebe65a923919ac24",
+  "previousReportExact": true,
+  "controlCandidates": 39,
+  "controlsMeasured": 37,
+  "saturatedDiagnostics": 3,
+  "saturatedBrightnessWithinControlRange": 0,
+  "referenceBrightnessControlRange": [
+    34.81059605684886,
+    789.3057539211403
+  ],
+  "referenceBrightnessSaturated": [
+    2127.8563902510955,
+    1546.8433466009462,
+    1251.6470428310633
+  ],
+  "saturatedRelativeToB40": {
+    "primary": [
+      0.013152947678234828,
+      0.006919892194204413,
+      0.00893191509721869
+    ],
+    "repeat": [
+      0.006701481705760459,
+      0.016967217960962122,
+      0.007150047568714957
+    ]
+  },
+  "controlsRelativeToB40": {
+    "primary": {
+      "minimum": -0.07099544031635774,
+      "median": 0.010178876997850583,
+      "maximum": 0.13075040638634405,
+      "p05p95": [
+        -0.01731221119249373,
+        0.048475332238228294
+      ]
+    },
+    "repeat": {
+      "minimum": -0.07954544983258105,
+      "median": 0.011982351176531125,
+      "maximum": 0.11331104148032733,
+      "p05p95": [
+        -0.019061554734681917,
+        0.047244000306149954
+      ]
+    }
+  },
+  "geometricAdmissionChanged": false,
+  "validatedSaturatedFluxRecovery": false,
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}
