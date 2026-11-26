@@ -1,0 +1,79 @@
+{
+  "candidateSha256": "d0c4ede52812083e5b74d7844d2eae99891bb7c0bb0e215423001b78fb9e3b65",
+  "deploymentApplied": false,
+  "fixtures": [
+    {
+      "candidateFalseRejections": 0,
+      "candidateGap": 0,
+      "comparisons": 240,
+      "fixture": "missing_calibration_evidence",
+      "historicGap": 0,
+      "runtimeAccepted": 1
+    },
+    {
+      "candidateFalseRejections": 0,
+      "candidateGap": 0,
+      "comparisons": 240,
+      "fixture": "calibration_verified",
+      "historicGap": 2,
+      "runtimeAccepted": 2
+    },
+    {
+      "candidateFalseRejections": 0,
+      "candidateGap": 0,
+      "comparisons": 240,
+      "fixture": "noise_control_only",
+      "historicGap": 15,
+      "runtimeAccepted": 3
+    },
+    {
+      "candidateFalseRejections": 0,
+      "candidateGap": 0,
+      "comparisons": 240,
+      "fixture": "noise_verified_sibling",
+      "historicGap": 23,
+      "runtimeAccepted": 4
+    },
+    {
+      "candidateFalseRejections": 0,
+      "candidateGap": 0,
+      "comparisons": 240,
+      "fixture": "noise_trial_budget_exhausted",
+      "historicGap": 3,
+      "runtimeAccepted": 3
+    },
+    {
+      "candidateFalseRejections": 0,
+      "candidateGap": 0,
+      "comparisons": 240,
+      "fixture": "terminal_linear",
+      "historicGap": 0,
+      "runtimeAccepted": 1
+    },
+    {
+      "candidateFalseRejections": 0,
+      "candidateGap": 0,
+      "comparisons": 240,
+      "fixture": "terminal_nonlinear",
+      "historicGap": 0,
+      "runtimeAccepted": 2
+    }
+  ],
+  "nativeExecutions": 0,
+  "programSha256": "07958ef3d2e6b717abc263fcbe4a709ae8fa1b223308e50906c9a4faded8e5bb",
+  "protocolSha256": "eeee0ee80f71f6e275459ce48d17bed60ffa159fbeed7f38e034b72153955d6b",
+  "providerCalls": 0,
+  "providerSchemaCompatibilityVerified": false,
+  "schema": "BKL046_ACTION_SPECIFIC_SCHEMA_OFFLINE_V1",
+  "scientificClosures": 0,
+  "staleBindingRejected": true,
+  "totals": {
+    "candidateFalseRejections": 0,
+    "candidateGap": 0,
+    "comparisons": 1680,
+    "historicGap": 43,
+    "runtimeAccepted": 16
+  },
+  "utf8RuntimeGuardStillRequired": true,
+  "vividnessBoundaryControls": 3
+}
