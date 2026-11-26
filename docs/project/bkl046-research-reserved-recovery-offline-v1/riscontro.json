@@ -1,0 +1,76 @@
+{
+  "cases": {
+    "cancelledBeforeRecovery": {
+      "final": {
+        "apiCalls": 1,
+        "decisions": 1,
+        "pendingPresent": false,
+        "status": "STOPPED_FOR_REVIEW"
+      },
+      "observed": "STOPPED_FOR_REVIEW",
+      "replay": "RESEARCH_DECISION_STATE"
+    },
+    "changedDecision": {
+      "final": {
+        "apiCalls": 1,
+        "decisions": 0,
+        "pendingPresent": true,
+        "status": "API_RESERVED"
+      },
+      "observed": "RESEARCH_DECISION_CHANGED"
+    },
+    "changedPending": {
+      "final": {
+        "apiCalls": 1,
+        "decisions": 0,
+        "pendingPresent": true,
+        "status": "API_RESERVED"
+      },
+      "observed": "RESEARCH_RESERVED_STATE_CHANGED"
+    },
+    "concurrentConsumers": {
+      "final": {
+        "apiCalls": 1,
+        "decisions": 1,
+        "pendingPresent": false,
+        "status": "STOPPED_FOR_REVIEW"
+      },
+      "rejected": 1,
+      "successes": 1
+    },
+    "missingReservation": {
+      "final": {
+        "apiCalls": 1,
+        "decisions": 0,
+        "pendingPresent": true,
+        "status": "API_RESERVED"
+      },
+      "observed": "RESEARCH_RESERVED_NO_KNOWN_RESPONSE_NO_RETRY"
+    },
+    "missingResult": {
+      "final": {
+        "apiCalls": 1,
+        "decisions": 0,
+        "pendingPresent": true,
+        "status": "API_RESERVED"
+      },
+      "observed": "RESEARCH_RESERVED_NO_KNOWN_RESPONSE_NO_RETRY"
+    },
+    "validRestart": {
+      "final": {
+        "apiCalls": 1,
+        "decisions": 1,
+        "pendingPresent": false,
+        "status": "STOPPED_FOR_REVIEW"
+      },
+      "observed": "STOPPED_FOR_REVIEW",
+      "replay": "RESEARCH_DECISION_STATE"
+    }
+  },
+  "flowSha256": "a3b68a2e27057962719cb92e7766e7aad71d5e5a8092cabf6befe1b71aee5cc3",
+  "nativeExecutions": 0,
+  "programSha256": "469a803bc708eee6c9da6b9ee316179ff078d6c15f545dab747228d56f3f688d",
+  "providerCalls": 0,
+  "schema": "BKL046_RESEARCH_RESERVED_RECOVERY_OFFLINE_V1",
+  "scientificClosures": 0
+}
