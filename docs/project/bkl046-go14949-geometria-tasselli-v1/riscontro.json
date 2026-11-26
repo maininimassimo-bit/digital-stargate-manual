@@ -1,0 +1,550 @@
+{
+  "protocol": "BKL046_GO14949_GEOMETRY_TILE_SENSITIVITY_PLAN_V1",
+  "protocolSha256": "eb0afc8c0312a54e5bf9609ebe5bc07d2ef7b779473231cbc5b8e2d1a2f25280",
+  "parentReceiptsExact": true,
+  "limitPx": 0.1,
+  "originalAdmissionChanged": false,
+  "admittedGeometries": 0,
+  "scores": {
+    "first": {
+      "heldSources": 40,
+      "heldTiles": 15,
+      "models": {
+        "translation": {
+          "fullP90Px": 0.09569955965310048,
+          "casesAboveLimit": 4,
+          "tilesContainingCasesAboveLimit": 4,
+          "p90WithoutSingleTile": [
+            {
+              "omittedTile": [
+                0,
+                1
+              ],
+              "excluded": 1,
+              "p90Px": 0.09241999524569143
+            },
+            {
+              "omittedTile": [
+                0,
+                3
+              ],
+              "excluded": 2,
+              "p90Px": 0.09693208501905691
+            },
+            {
+              "omittedTile": [
+                1,
+                0
+              ],
+              "excluded": 2,
+              "p90Px": 0.09693208501905691
+            },
+            {
+              "omittedTile": [
+                1,
+                2
+              ],
+              "excluded": 6,
+              "p90Px": 0.09248556044041344
+            },
+            {
+              "omittedTile": [
+                2,
+                1
+              ],
+              "excluded": 3,
+              "p90Px": 0.09555087140871195
+            },
+            {
+              "omittedTile": [
+                2,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.0963158223360787
+            },
+            {
+              "omittedTile": [
+                3,
+                0
+              ],
+              "excluded": 5,
+              "p90Px": 0.0987808730679915
+            },
+            {
+              "omittedTile": [
+                3,
+                2
+              ],
+              "excluded": 2,
+              "p90Px": 0.0927529079612453
+            },
+            {
+              "omittedTile": [
+                4,
+                1
+              ],
+              "excluded": 6,
+              "p90Px": 0.0993971357509697
+            },
+            {
+              "omittedTile": [
+                4,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.0963158223360787
+            },
+            {
+              "omittedTile": [
+                5,
+                0
+              ],
+              "excluded": 1,
+              "p90Px": 0.0963158223360787
+            },
+            {
+              "omittedTile": [
+                5,
+                2
+              ],
+              "excluded": 1,
+              "p90Px": 0.0963158223360787
+            },
+            {
+              "omittedTile": [
+                6,
+                1
+              ],
+              "excluded": 3,
+              "p90Px": 0.09308582067679913
+            },
+            {
+              "omittedTile": [
+                7,
+                0
+              ],
+              "excluded": 4,
+              "p90Px": 0.0981646103850133
+            },
+            {
+              "omittedTile": [
+                7,
+                2
+              ],
+              "excluded": 2,
+              "p90Px": 0.09693208501905691
+            }
+          ],
+          "diagnosticSubsetsAtOrBelowLimit": 15
+        },
+        "affine": {
+          "fullP90Px": 0.10157090581190827,
+          "casesAboveLimit": 5,
+          "tilesContainingCasesAboveLimit": 5,
+          "p90WithoutSingleTile": [
+            {
+              "omittedTile": [
+                0,
+                1
+              ],
+              "excluded": 1,
+              "p90Px": 0.09860213727461749
+            },
+            {
+              "omittedTile": [
+                0,
+                3
+              ],
+              "excluded": 2,
+              "p90Px": 0.10373319739333865
+            },
+            {
+              "omittedTile": [
+                1,
+                0
+              ],
+              "excluded": 2,
+              "p90Px": 0.09670655406147817
+            },
+            {
+              "omittedTile": [
+                1,
+                2
+              ],
+              "excluded": 6,
+              "p90Px": 0.09978190149122722
+            },
+            {
+              "omittedTile": [
+                2,
+                1
+              ],
+              "excluded": 3,
+              "p90Px": 0.10481434318405378
+            },
+            {
+              "omittedTile": [
+                2,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.09860213727461749
+            },
+            {
+              "omittedTile": [
+                3,
+                0
+              ],
+              "excluded": 5,
+              "p90Px": 0.10697663476548416
+            },
+            {
+              "omittedTile": [
+                3,
+                2
+              ],
+              "excluded": 2,
+              "p90Px": 0.10373319739333865
+            },
+            {
+              "omittedTile": [
+                4,
+                1
+              ],
+              "excluded": 6,
+              "p90Px": 0.10805778055619931
+            },
+            {
+              "omittedTile": [
+                4,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.10265205160262346
+            },
+            {
+              "omittedTile": [
+                5,
+                0
+              ],
+              "excluded": 1,
+              "p90Px": 0.10265205160262346
+            },
+            {
+              "omittedTile": [
+                5,
+                2
+              ],
+              "excluded": 1,
+              "p90Px": 0.10265205160262346
+            },
+            {
+              "omittedTile": [
+                6,
+                1
+              ],
+              "excluded": 3,
+              "p90Px": 0.10481434318405378
+            },
+            {
+              "omittedTile": [
+                7,
+                0
+              ],
+              "excluded": 4,
+              "p90Px": 0.10471572475815921
+            },
+            {
+              "omittedTile": [
+                7,
+                2
+              ],
+              "excluded": 2,
+              "p90Px": 0.10373319739333865
+            }
+          ],
+          "diagnosticSubsetsAtOrBelowLimit": 4
+        }
+      }
+    },
+    "second": {
+      "heldSources": 41,
+      "heldTiles": 15,
+      "models": {
+        "translation": {
+          "fullP90Px": 0.08172110504855307,
+          "casesAboveLimit": 3,
+          "tilesContainingCasesAboveLimit": 3,
+          "p90WithoutSingleTile": [
+            {
+              "omittedTile": [
+                0,
+                1
+              ],
+              "excluded": 1,
+              "p90Px": 0.08117223160675599
+            },
+            {
+              "omittedTile": [
+                0,
+                3
+              ],
+              "excluded": 2,
+              "p90Px": 0.08456014596073202
+            },
+            {
+              "omittedTile": [
+                1,
+                0
+              ],
+              "excluded": 2,
+              "p90Px": 0.08504803346455166
+            },
+            {
+              "omittedTile": [
+                1,
+                2
+              ],
+              "excluded": 6,
+              "p90Px": 0.08147716129664326
+            },
+            {
+              "omittedTile": [
+                2,
+                1
+              ],
+              "excluded": 4,
+              "p90Px": 0.08837496188055012
+            },
+            {
+              "omittedTile": [
+                2,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.08117223160675599
+            },
+            {
+              "omittedTile": [
+                3,
+                0
+              ],
+              "excluded": 5,
+              "p90Px": 0.09003842608854942
+            },
+            {
+              "omittedTile": [
+                3,
+                2
+              ],
+              "excluded": 3,
+              "p90Px": 0.0812942034827109
+            },
+            {
+              "omittedTile": [
+                4,
+                1
+              ],
+              "excluded": 5,
+              "p90Px": 0.09003842608854942
+            },
+            {
+              "omittedTile": [
+                4,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.08338456925655235
+            },
+            {
+              "omittedTile": [
+                5,
+                0
+              ],
+              "excluded": 1,
+              "p90Px": 0.08338456925655235
+            },
+            {
+              "omittedTile": [
+                5,
+                2
+              ],
+              "excluded": 1,
+              "p90Px": 0.08338456925655235
+            },
+            {
+              "omittedTile": [
+                6,
+                1
+              ],
+              "excluded": 3,
+              "p90Px": 0.08671149767255094
+            },
+            {
+              "omittedTile": [
+                7,
+                0
+              ],
+              "excluded": 4,
+              "p90Px": 0.08837496188055012
+            },
+            {
+              "omittedTile": [
+                7,
+                2
+              ],
+              "excluded": 2,
+              "p90Px": 0.08504803346455166
+            }
+          ],
+          "diagnosticSubsetsAtOrBelowLimit": 15
+        },
+        "affine": {
+          "fullP90Px": 0.1042814751031047,
+          "casesAboveLimit": 5,
+          "tilesContainingCasesAboveLimit": 5,
+          "p90WithoutSingleTile": [
+            {
+              "omittedTile": [
+                0,
+                1
+              ],
+              "excluded": 1,
+              "p90Px": 0.09950317737901375
+            },
+            {
+              "omittedTile": [
+                0,
+                3
+              ],
+              "excluded": 2,
+              "p90Px": 0.1081681964074226
+            },
+            {
+              "omittedTile": [
+                1,
+                0
+              ],
+              "excluded": 2,
+              "p90Px": 0.10175501804019887
+            },
+            {
+              "omittedTile": [
+                1,
+                2
+              ],
+              "excluded": 6,
+              "p90Px": 0.10215778722573095
+            },
+            {
+              "omittedTile": [
+                2,
+                1
+              ],
+              "excluded": 4,
+              "p90Px": 0.11205491771174036
+            },
+            {
+              "omittedTile": [
+                2,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.09950317737901375
+            },
+            {
+              "omittedTile": [
+                3,
+                0
+              ],
+              "excluded": 5,
+              "p90Px": 0.11399827836389931
+            },
+            {
+              "omittedTile": [
+                3,
+                2
+              ],
+              "excluded": 3,
+              "p90Px": 0.10056502131770065
+            },
+            {
+              "omittedTile": [
+                4,
+                1
+              ],
+              "excluded": 5,
+              "p90Px": 0.11399827836389931
+            },
+            {
+              "omittedTile": [
+                4,
+                3
+              ],
+              "excluded": 1,
+              "p90Px": 0.10622483575526365
+            },
+            {
+              "omittedTile": [
+                5,
+                0
+              ],
+              "excluded": 1,
+              "p90Px": 0.10622483575526365
+            },
+            {
+              "omittedTile": [
+                5,
+                2
+              ],
+              "excluded": 1,
+              "p90Px": 0.10622483575526365
+            },
+            {
+              "omittedTile": [
+                6,
+                1
+              ],
+              "excluded": 3,
+              "p90Px": 0.11011155705958156
+            },
+            {
+              "omittedTile": [
+                7,
+                0
+              ],
+              "excluded": 4,
+              "p90Px": 0.11205491771174036
+            },
+            {
+              "omittedTile": [
+                7,
+                2
+              ],
+              "excluded": 2,
+              "p90Px": 0.1081681964074226
+            }
+          ],
+          "diagnosticSubsetsAtOrBelowLimit": 2
+        }
+      }
+    }
+  },
+  "sharedHeldSources": {
+    "translation": {
+      "sharedAboveInFirst": 4,
+      "sharedAboveInSecond": 3,
+      "sharedAboveInBoth": 3,
+      "heldCommon": 39
+    },
+    "affine": {
+      "sharedAboveInFirst": 5,
+      "sharedAboveInSecond": 5,
+      "sharedAboveInBoth": 4,
+      "heldCommon": 39
+    }
+  },
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}
