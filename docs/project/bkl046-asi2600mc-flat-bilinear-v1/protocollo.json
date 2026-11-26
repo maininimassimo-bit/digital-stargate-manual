@@ -1,0 +1,40 @@
+{
+  "schema": "BKL046_ASI2600MC_FLAT_BILINEAR_PROTOCOL_V1",
+  "priorReportSha256": "1b418ca777cbb2a2f03634457853ebfa8ca5bdec5d6ec32b2510c64d61cfdb3c",
+  "priorFullSha256": "b146eb849d2055d490730860f5bce1d60664680c9bd8c54525e711999d13fff7",
+  "flatArchiveSha256": "a01bb46b1b0e82658f41f783e0f45da9b1a202b818cb1bccb4e7ff2eba1ba8ca",
+  "phaseXY": [
+    [
+      0,
+      0
+    ],
+    [
+      0.5,
+      0
+    ],
+    [
+      0,
+      0.5
+    ],
+    [
+      0.5,
+      0.5
+    ],
+    [
+      0.25,
+      0.75
+    ]
+  ],
+  "parityColumns": [
+    [
+      0,
+      30
+    ],
+    [
+      34,
+      64
+    ]
+  ],
+  "model": "Apply a bilinear shift separately to the four Bayer parity lattices. Compare direct output-block sum variance against full-weight and output-diagonal predicted variances under homoscedastic independent input. Use seven fixed disjoint chronological flat pairs and nine fixed tiles. Compare raw, opposite checkerboard tile stratum illumination scaling, and scaling plus a plane trained on the opposing parity half, with a four-column gap. Compare modes on identical interior support; retain both directional folds and all five phases. Compute descriptive quantiles over reused pairs, tiles and parities. No native run, no camera gain inference, no dose linearity.",
+  "priorInputs": "Original bias-subtracted means from covariance study; prior flat ratio is reproduced on the unresampled full tile for each pair, tile, parity"
+}
