@@ -1,0 +1,434 @@
+{
+  "protocol": "BKL046_NGC6341_GAIA_MATCHER_SYNTHETIC_TRUTH_V1",
+  "pilotSha256": "3d04b697eda86b3dfbd787172d4b5099f6c2334a4680f4899c1fb221e8883186",
+  "originalReportSha256": "b4402ddb36b9c9ecd8bb04f8491bba961c63032809abff7581f8c108dd1ed64c",
+  "originalReportReproduced": true,
+  "simulatedCentroids": true,
+  "realCalibratedCatalogueGeometry": true,
+  "simulatedPixelImages": false,
+  "catalogueRefittedToInjections": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0,
+  "results": [
+    {
+      "exposure": "j8f866kfq_flc.fits",
+      "chip": 2,
+      "predictedSourcesInOriginalPilot": 503,
+      "injectedSourceSites": 183,
+      "simulatedDetections": 213,
+      "casesByRadius": [
+        {
+          "radiusPx": 0.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "unmatched": 31
+            },
+            "offset_1_25": {
+              "unmatched": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "correct": 31
+            },
+            "offset_1_25": {
+              "unmatched": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "correct": 31
+            },
+            "offset_1_25": {
+              "correct": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 2.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "correct": 31
+            },
+            "offset_1_25": {
+              "correct": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        }
+      ]
+    },
+    {
+      "exposure": "j8f866kfq_flc.fits",
+      "chip": 1,
+      "predictedSourcesInOriginalPilot": 379,
+      "injectedSourceSites": 135,
+      "simulatedDetections": 157,
+      "casesByRadius": [
+        {
+          "radiusPx": 0.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "unmatched": 23
+            },
+            "offset_1_25": {
+              "unmatched": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "correct": 23
+            },
+            "offset_1_25": {
+              "unmatched": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "correct": 23
+            },
+            "offset_1_25": {
+              "correct": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 2.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "correct": 23
+            },
+            "offset_1_25": {
+              "correct": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        }
+      ]
+    },
+    {
+      "exposure": "j8f866khq_flc.fits",
+      "chip": 2,
+      "predictedSourcesInOriginalPilot": 503,
+      "injectedSourceSites": 183,
+      "simulatedDetections": 213,
+      "casesByRadius": [
+        {
+          "radiusPx": 0.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "unmatched": 31
+            },
+            "offset_1_25": {
+              "unmatched": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "correct": 31
+            },
+            "offset_1_25": {
+              "unmatched": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "correct": 31
+            },
+            "offset_1_25": {
+              "correct": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 2.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 31
+            },
+            "offset_0_75": {
+              "correct": 31
+            },
+            "offset_1_25": {
+              "correct": 31
+            },
+            "duplicate_detections": {
+              "unmatched": 60
+            },
+            "source_absent_decoy": {
+              "unmatched": 30
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 30
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        }
+      ]
+    },
+    {
+      "exposure": "j8f866khq_flc.fits",
+      "chip": 1,
+      "predictedSourcesInOriginalPilot": 379,
+      "injectedSourceSites": 135,
+      "simulatedDetections": 157,
+      "casesByRadius": [
+        {
+          "radiusPx": 0.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "unmatched": 23
+            },
+            "offset_1_25": {
+              "unmatched": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "correct": 23
+            },
+            "offset_1_25": {
+              "unmatched": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 1.5,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "correct": 23
+            },
+            "offset_1_25": {
+              "correct": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        },
+        {
+          "radiusPx": 2.0,
+          "byCase": {
+            "offset_0_25": {
+              "correct": 23
+            },
+            "offset_0_75": {
+              "correct": 23
+            },
+            "offset_1_25": {
+              "correct": 23
+            },
+            "duplicate_detections": {
+              "unmatched": 44
+            },
+            "source_absent_decoy": {
+              "unmatched": 22
+            },
+            "coincident_decoy": {
+              "accepted_decoy": 22
+            }
+          },
+          "duplicateTruthSourcesRecovered": 0
+        }
+      ]
+    }
+  ]
+}
