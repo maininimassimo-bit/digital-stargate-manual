@@ -1,0 +1,60 @@
+{
+  "schema": "BKL046_MOFFAT_PHASE_DISCRIMINATION_DEVELOPMENT_PLAN_V1",
+  "priorInformationReceiptSha256": "bd7e51e105493b123201cdef7613f7e744f1261353e99cfa8cbd841a986908b7",
+  "edgeSourceSha256": "d52c7a2f87b8a636cd35b4b5ca48ec27d909452e9435639225f805fde7d7d409",
+  "partition": "DEVELOPMENT_ONLY",
+  "geometry": [
+    25,
+    25
+  ],
+  "fluxElectrons": 10000,
+  "backgroundElectrons": 20,
+  "shapes": [
+    {
+      "id": "narrow_elliptical",
+      "alpha": 0.06,
+      "beta": 4.5,
+      "axisRatio": 0.35,
+      "angleDegrees": 0
+    },
+    {
+      "id": "broad_circular_control",
+      "alpha": 0.24,
+      "beta": 1.5,
+      "axisRatio": 1,
+      "angleDegrees": 0
+    }
+  ],
+  "phases": [
+    [
+      0,
+      0
+    ],
+    [
+      0.499,
+      0
+    ],
+    [
+      0.499,
+      0.499
+    ]
+  ],
+  "displacementsPx": [
+    -0.1,
+    -0.05,
+    -0.01,
+    0.01,
+    0.05,
+    0.1
+  ],
+  "quadratureDivisions": [
+    8,
+    16
+  ],
+  "quadratureOrder": 32,
+  "drawsPerHypothesis": 4096,
+  "probabilityModel": "Independent Poisson pixel counts with all parameters other than selected center coordinate known",
+  "pixelToleranceElectrons": 0.000001,
+  "fieldToleranceElectrons": 0.00001,
+  "doesNotFixScientificThresholds": true
+}
