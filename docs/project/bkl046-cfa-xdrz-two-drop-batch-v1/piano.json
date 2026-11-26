@@ -1,0 +1,253 @@
+{
+  "cases": [
+    {
+      "drop": 0.7,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-unmasked.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "070-unmasked",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "4b8167c8b0758f5bfde03bda68d2cb0e3c004246a66ba133b04aa3e4a373d7b8",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 0.7,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-mask-green.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "070-mask-green",
+      "rejection": true,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "8a404d51d98984e580d6ffad3cca43973d7ad932821d9f80b8d33c0de63401f1",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 0.7,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-mask-wrong-channel.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "070-mask-wrong-channel",
+      "rejection": true,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "b0d3782503afae394509ccc718c4be739b574ca225bf3d62d6bc15d9b0c2b51b",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 0.7,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-zero-detector.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "070-zero-detector",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "13a0775cf0dff32090a15332830814857c7d401d7310472346a6f24a85310c77",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 0.7,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-zero-reference.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "070-zero-reference",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "2d3e8045529c0cc58b953dc56bcc19ad45e1932bbf6f6af6fc0ab3c9c482f99c",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 0.7,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-unmasked.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "fractional",
+      "id": "070-fractional",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-testimone-larghezza-v1/input/",
+      "xdrzSha256": [
+        "0d588d22e9dd5299d7220d703ee8e9bf5ef5037a36b0780486ee4bce19d3761c",
+        "8edac8abe23fa8112434b4c9281c766bb461bae2a3fb60ad6517b7385a858559",
+        "12bc0415f66452617169bbcd3aec492de7a8ceaebeace784d6f60749dd29d49b"
+      ]
+    },
+    {
+      "drop": 1.0,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-unmasked.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "100-unmasked",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "4b8167c8b0758f5bfde03bda68d2cb0e3c004246a66ba133b04aa3e4a373d7b8",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 1.0,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-mask-green.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "100-mask-green",
+      "rejection": true,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "8a404d51d98984e580d6ffad3cca43973d7ad932821d9f80b8d33c0de63401f1",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 1.0,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-mask-wrong-channel.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "100-mask-wrong-channel",
+      "rejection": true,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "b0d3782503afae394509ccc718c4be739b574ca225bf3d62d6bc15d9b0c2b51b",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 1.0,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-zero-detector.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "100-zero-detector",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "13a0775cf0dff32090a15332830814857c7d401d7310472346a6f24a85310c77",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 1.0,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-zero-reference.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "integer",
+      "id": "100-zero-reference",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-valor-zero-tre-ingressi-v1/fixture/",
+      "xdrzSha256": [
+        "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+        "2d3e8045529c0cc58b953dc56bcc19ad45e1932bbf6f6af6fc0ab3c9c482f99c",
+        "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844"
+      ]
+    },
+    {
+      "drop": 1.0,
+      "files": [
+        "integer-a.xdrz",
+        "integer-b-unmasked.xdrz",
+        "integer-c.xdrz"
+      ],
+      "group": "fractional",
+      "id": "100-fractional",
+      "rejection": false,
+      "root": "O:/BKL046-CFA-XDRZ-testimone-larghezza-v1/input/",
+      "xdrzSha256": [
+        "0d588d22e9dd5299d7220d703ee8e9bf5ef5037a36b0780486ee4bce19d3761c",
+        "8edac8abe23fa8112434b4c9281c766bb461bae2a3fb60ad6517b7385a858559",
+        "12bc0415f66452617169bbcd3aec492de7a8ceaebeace784d6f60749dd29d49b"
+      ]
+    }
+  ],
+  "fractionalArchiveSha256": "e6c1a6c7c4a9199e9131f824153268a6ad64f90d0b33b6edc320c802c361c733",
+  "fractionalInputPins": {
+    "integer-a-cfa.fits": "ef3a3958294200529c93bb26b647b63b96942bc4a8ec5dac54b5205b46b42fa0",
+    "integer-a-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-a.xdrz": "0d588d22e9dd5299d7220d703ee8e9bf5ef5037a36b0780486ee4bce19d3761c",
+    "integer-b-cfa.fits": "37eb46cecc18f2fd55b1b92e098bbe8fdc4db778f4752f5f12a74a923089ebf2",
+    "integer-b-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-b-unmasked.xdrz": "8edac8abe23fa8112434b4c9281c766bb461bae2a3fb60ad6517b7385a858559",
+    "integer-c-cfa.fits": "af752828b3baf73487774de339cf520d103544a3c6a2b2eb1026f5286b307b91",
+    "integer-c-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-c.xdrz": "12bc0415f66452617169bbcd3aec492de7a8ceaebeace784d6f60749dd29d49b",
+    "predictions.npy": "e9177fb78eef9dd709342ffae675310bee5df716ccb04c35a8df90cc51c3b02d"
+  },
+  "fractionalReceiptSha256": "56b5901a64468d8ec2d46f9380d925be231d625bb42536e57569e80814c34432",
+  "integerInputPins": {
+    "detector-expected-rgb.fits": "832ef67264ad00802b58f262afcf1429e8952695068dc56ca827e4fd38d5542f",
+    "detector-expected-weight.fits": "60dd4ab539bceac2e1c1e4d812a3f51699177deb4ae8a296bc9a2c7ae0b331c1",
+    "integer-a-cfa.fits": "ef3a3958294200529c93bb26b647b63b96942bc4a8ec5dac54b5205b46b42fa0",
+    "integer-a-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-a.xdrz": "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+    "integer-b-cfa.fits": "37eb46cecc18f2fd55b1b92e098bbe8fdc4db778f4752f5f12a74a923089ebf2",
+    "integer-b-mask-green.xdrz": "8a404d51d98984e580d6ffad3cca43973d7ad932821d9f80b8d33c0de63401f1",
+    "integer-b-mask-wrong-channel.xdrz": "b0d3782503afae394509ccc718c4be739b574ca225bf3d62d6bc15d9b0c2b51b",
+    "integer-b-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-b-unmasked.xdrz": "4b8167c8b0758f5bfde03bda68d2cb0e3c004246a66ba133b04aa3e4a373d7b8",
+    "integer-b-zero-detector-cfa.fits": "8fe8c8bb506b3e0e04bfd6e520dc7df2bfaff84869377743167129e7e157ec0e",
+    "integer-b-zero-detector.xdrz": "13a0775cf0dff32090a15332830814857c7d401d7310472346a6f24a85310c77",
+    "integer-b-zero-reference-cfa.fits": "45f4f4f4d920c3d2248de544d762ba75ef034ff2109cc76e7594ce5f7d7ac2be",
+    "integer-b-zero-reference.xdrz": "2d3e8045529c0cc58b953dc56bcc19ad45e1932bbf6f6af6fc0ab3c9c482f99c",
+    "integer-c-cfa.fits": "af752828b3baf73487774de339cf520d103544a3c6a2b2eb1026f5286b307b91",
+    "integer-c-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-c.xdrz": "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844",
+    "reference-expected-rgb.fits": "2a4b6d48802ffbf39d7cf2f54928dff8befae256292d13619303d0df2b7149b7",
+    "reference-expected-weight.fits": "c422021f532c2d7700a78076ff1864ce08754cd8343d120727c6b3427a3fa97c",
+    "unmasked-expected-rgb.fits": "89d043e7c37742574f0489eec805736eac9b7252da97a74fbae3bda47a9e2a1e",
+    "unmasked-expected-weight.fits": "a9f08ec2b2e7ea1187158274a1b4ee3f106a1a0b143bb569d154173d6644383a",
+    "zero-detector-retained-expected-rgb.fits": "06b1eb7952ef0586c66159da07983d8c8efd76437736cbd2856c15eeb54630aa",
+    "zero-reference-retained-expected-rgb.fits": "6285d3b06924e6e8bb6cd685b20a6ce99e8ebd0a47cae399948f404ace334d79"
+  },
+  "integerOracleReportSha256": "8f8523fef29f27b9625b1e4208b50165ff22bbace63211516c4decffdb1e7ee5",
+  "integerReceiptSha256": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "nativeAdmissionRequested": false,
+  "operation": "BKL046_CFA_XDRZ_TWO_DROP_CONTROL_DSG_SHARED_001",
+  "schema": "BKL046_CFA_XDRZ_TWO_DROP_PLAN_CANDIDATE_V1",
+  "scope": "BATCH_COMPONENT_OFFLINE"
+}
