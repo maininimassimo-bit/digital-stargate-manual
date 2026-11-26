@@ -1,0 +1,25 @@
+{
+  "schema": "BKL046_ACS10054_DIFFERENTIAL_FILTER_SATURATION_V1",
+  "priorSha256": "aba1f4959a5ab4bc0e04dcc5d027fc4eb21ca9e8aaa004ca29e0a6b8c58502ae",
+  "pamSha256": "025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c",
+  "sourceRaDec": [
+    76.37765243846,
+    52.83116392105
+  ],
+  "centroidSearchPx": 40,
+  "maximumAstrometricSeparationArcsec": 1.5,
+  "radii": [
+    3,
+    5,
+    10
+  ],
+  "skyPx": [
+    15,
+    22
+  ],
+  "allowedDQ": [
+    0,
+    64
+  ],
+  "rules": "Six real exposures of G191B2B, per-band filters and exposure times. Compare local valid support, common symmetric support and recorded-center diagnostic. The centers are integer local maxima constrained by WCS. Report band ratios in electrons per second and flux-density units as photometry diagnostics only. Sequential measurements do not model RGB acquisition on a common CFA."
+}
