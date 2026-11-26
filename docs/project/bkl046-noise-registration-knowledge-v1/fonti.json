@@ -1,0 +1,79 @@
+{
+  "baseline": {
+    "path": "docs/project/BKL-046-KNOWLEDGE-DELIVERY-v1.171.json",
+    "commit": "18d543f5a0ad8004ff051dd003332aeec0c75627"
+  },
+  "ledger": "73d1e3f5dd2115da1839a011600a07c2f0ff349bed8519c5c119bf533d2f6aa1",
+  "studies": [
+    {
+      "dir": "BKL046-M8-M20-varianza-segnale-v1",
+      "h": "DSG-Shared-BKL046-M8-M20-varianza-segnale-631ec86092be",
+      "commit": "413b92367dec6df97b2735b4d74cad41b8e2ef0d",
+      "git": "docs/project/bkl046-m8-m20-flat-temporal-variance-v1",
+      "archive": "631ec86092be13e3202ffc9c880690802ea5b7efa6aaf84c47bb9d91963ebe91",
+      "files": {
+        "riscontro.json": "cad901998a6ade041a413437b968da050baf1a4e1c7c6b37cd4fcd3a0de103e8"
+      },
+      "axes": [
+        "NOISE_FLUX/1"
+      ]
+    },
+    {
+      "dir": "BKL046-M8-M20-rumore-aperture-RAW-v1",
+      "h": "DSG-Shared-BKL046-M8-M20-rumore-aperture-RAW-1d8b077ffbca",
+      "commit": "60d3896c0a362a96191fd32dd1601ed06d98bc2e",
+      "git": "docs/project/bkl046-m8-m20-raw-aperture-noise-v1",
+      "archive": "1d8b077ffbca58a55064f1c7c601208b83f6556ada42f826682f68aade9e569d",
+      "files": {
+        "riscontro.json": "8d3cf68ea4746f4a52a0c7f8a04415e26fa0f907243da8d72c68f3e3d98201d9"
+      },
+      "axes": [
+        "NOISE_FLUX/1",
+        "NOISE_FLUX/3"
+      ]
+    },
+    {
+      "dir": "BKL046-M8-M20-rumore-pari-raggio-incertezza-v1",
+      "h": "DSG-Shared-BKL046-M8-M20-rumore-pari-raggio-c7dc397fbe7a",
+      "commit": "0f7976708affe8b147fe2ef9fc64f5d866d8ca1f",
+      "git": "docs/project/bkl046-m8-m20-matched-radius-noise-uncertainty-v1",
+      "archive": "c7dc397fbe7ac95e6afd81142155db2466f67bd86517562163dde41e580d2377",
+      "files": {
+        "riscontro.json": "0170f9d57ebf387d78572d053f18139cbe04c98657174d6fd8a2a049b6a0aeeb"
+      },
+      "axes": [
+        "NOISE_FLUX/3",
+        "CFA_DITHER_DRIZZLE/4"
+      ]
+    },
+    {
+      "dir": "BKL046-IC1805-rumore-pari-raggio-incertezza-v1",
+      "h": "DSG-Shared-BKL046-IC1805-rumore-pari-raggio-2e0d23f369c6",
+      "commit": "6c09a8af6d870c39cb8fca8953375b3421ec77ad",
+      "git": "docs/project/bkl046-ic1805-matched-radius-noise-uncertainty-v1",
+      "archive": "2e0d23f369c6b3f5d65e1394385791b3f689e01e14a527335430979f241230c7",
+      "files": {
+        "riscontro.json": "799a54f25de078961dcd1e7a32384d0fc65c7605e70798b776d45be554f49d7e",
+        "trasferimento.json": "bf0cfa01af1d418a7ffcdf73860c206faec34ba04e3d2cb055bcd4b7624313f6"
+      },
+      "axes": [
+        "NOISE_FLUX/3",
+        "CFA_DITHER_DRIZZLE/4"
+      ]
+    },
+    {
+      "dir": "BKL046-M51-registrazione-tre-pose-v1",
+      "h": "DSG-Shared-BKL046-M51-registrazione-tre-pose-a03c237dee5f",
+      "commit": "18d543f5a0ad8004ff051dd003332aeec0c75627",
+      "git": "docs/project/bkl046-m51-three-pose-registration-v1",
+      "archive": "a03c237dee5fe2e4a2296622c93f90176c9397ff7f32a249812c1009912221fe",
+      "files": {
+        "riscontro.json": "1753018787212db11d5decce856f2ab1006642d8e3a1e54ff3290312c5923275"
+      },
+      "axes": [
+        "CFA_DITHER_DRIZZLE/2",
+        "CFA_DITHER_DRIZZLE/4"
+      ]
+    }
+  ]
+}

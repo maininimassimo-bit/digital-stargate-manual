@@ -1,0 +1,115 @@
+{
+  "schema": "BKL046_KNOWLEDGE_NOISE_REGISTRATION_ADDENDUM_V1",
+  "baseline": {
+    "commit": "18d543f5a0ad8004ff051dd003332aeec0c75627",
+    "path": "docs/project/BKL-046-KNOWLEDGE-DELIVERY-v1.171.json",
+    "sha256": "a4a9a6e50e67dde0a38251685e08a3bdd04aaa6ad5a07e45eac82cb222adb7dc"
+  },
+  "residualLedgerSha256": "73d1e3f5dd2115da1839a011600a07c2f0ff349bed8519c5c119bf533d2f6aa1",
+  "evidence": {
+    "BKL046-M8-M20-varianza-segnale-v1": {
+      "axes": {
+        "NOISE_FLUX/1": "Poisson-dominated, read-noise-dominated and mixed regimes"
+      },
+      "archiveSha256": "631ec86092be13e3202ffc9c880690802ea5b7efa6aaf84c47bb9d91963ebe91",
+      "archiveCopiesVerified": 2,
+      "commit": "413b92367dec6df97b2735b4d74cad41b8e2ef0d",
+      "files": {
+        "riscontro.json": {
+          "path": "docs/project/bkl046-m8-m20-flat-temporal-variance-v1/riscontro.json",
+          "gitBlob": "06a8a592806bebafb2a8c1c5e761b5a3c5cded64",
+          "sha256": "cad901998a6ade041a413437b968da050baf1a4e1c7c6b37cd4fcd3a0de103e8"
+        }
+      }
+    },
+    "BKL046-M8-M20-rumore-aperture-RAW-v1": {
+      "axes": {
+        "NOISE_FLUX/1": "Poisson-dominated, read-noise-dominated and mixed regimes",
+        "NOISE_FLUX/3": "Independent and resampled correlated noise"
+      },
+      "archiveSha256": "1d8b077ffbca58a55064f1c7c601208b83f6556ada42f826682f68aade9e569d",
+      "archiveCopiesVerified": 2,
+      "commit": "60d3896c0a362a96191fd32dd1601ed06d98bc2e",
+      "files": {
+        "riscontro.json": {
+          "path": "docs/project/bkl046-m8-m20-raw-aperture-noise-v1/riscontro.json",
+          "gitBlob": "99cc5c22c916c108a41b43cd092e195ac891d328",
+          "sha256": "8d3cf68ea4746f4a52a0c7f8a04415e26fa0f907243da8d72c68f3e3d98201d9"
+        }
+      }
+    },
+    "BKL046-M8-M20-rumore-pari-raggio-incertezza-v1": {
+      "axes": {
+        "NOISE_FLUX/3": "Independent and resampled correlated noise",
+        "CFA_DITHER_DRIZZLE/4": "Debayer/registration/drizzle alternatives at matched angular scale"
+      },
+      "archiveSha256": "c7dc397fbe7ac95e6afd81142155db2466f67bd86517562163dde41e580d2377",
+      "archiveCopiesVerified": 2,
+      "commit": "0f7976708affe8b147fe2ef9fc64f5d866d8ca1f",
+      "files": {
+        "riscontro.json": {
+          "path": "docs/project/bkl046-m8-m20-matched-radius-noise-uncertainty-v1/riscontro.json",
+          "gitBlob": "274e8e0a6f0b88d6272417ca496315935ddc0c9a",
+          "sha256": "0170f9d57ebf387d78572d053f18139cbe04c98657174d6fd8a2a049b6a0aeeb"
+        }
+      }
+    },
+    "BKL046-IC1805-rumore-pari-raggio-incertezza-v1": {
+      "axes": {
+        "NOISE_FLUX/3": "Independent and resampled correlated noise",
+        "CFA_DITHER_DRIZZLE/4": "Debayer/registration/drizzle alternatives at matched angular scale"
+      },
+      "archiveSha256": "2e0d23f369c6b3f5d65e1394385791b3f689e01e14a527335430979f241230c7",
+      "archiveCopiesVerified": 2,
+      "commit": "6c09a8af6d870c39cb8fca8953375b3421ec77ad",
+      "files": {
+        "riscontro.json": {
+          "path": "docs/project/bkl046-ic1805-matched-radius-noise-uncertainty-v1/riscontro.json",
+          "gitBlob": "b72125571853c15b245eda2e0de27e6163ec1918",
+          "sha256": "799a54f25de078961dcd1e7a32384d0fc65c7605e70798b776d45be554f49d7e"
+        },
+        "trasferimento.json": {
+          "path": "docs/project/bkl046-ic1805-matched-radius-noise-uncertainty-v1/trasferimento.json",
+          "gitBlob": "94c5e9ff71277aa9311c40fe799d3ee561b3d6e2",
+          "sha256": "bf0cfa01af1d418a7ffcdf73860c206faec34ba04e3d2cb055bcd4b7624313f6"
+        }
+      }
+    },
+    "BKL046-M51-registrazione-tre-pose-v1": {
+      "axes": {
+        "CFA_DITHER_DRIZZLE/2": "Subpixel dither diversity versus repeated identical offsets",
+        "CFA_DITHER_DRIZZLE/4": "Debayer/registration/drizzle alternatives at matched angular scale"
+      },
+      "archiveSha256": "a03c237dee5fe2e4a2296622c93f90176c9397ff7f32a249812c1009912221fe",
+      "archiveCopiesVerified": 2,
+      "commit": "18d543f5a0ad8004ff051dd003332aeec0c75627",
+      "files": {
+        "riscontro.json": {
+          "path": "docs/project/bkl046-m51-three-pose-registration-v1/riscontro.json",
+          "gitBlob": "6e43645ebdacb3bbb0529097259651619564e7e3",
+          "sha256": "1753018787212db11d5decce856f2ab1006642d8e3a1e54ff3290312c5923275"
+        }
+      }
+    }
+  },
+  "findings": {
+    "rawGainCalibrated": false,
+    "m8m20StableBilinearCases": 4,
+    "ic1805StableBilinearCases": 8,
+    "comparedEndpointsPerReconstructedField": 32,
+    "g1EndpointsReplicated": 0,
+    "g1EndpointsTested": 4,
+    "m51CommonHeldOutStars": 51,
+    "m51BestDirectP90Px": 0.3625583939304612,
+    "registrationDiagnosticThresholdPx": 0.3
+  },
+  "remaining": [
+    "Native matched-scale and matched-response measurements under the approved coordinator",
+    "Independent calibrated Bayer acquisition with acceptable registration and appropriate repeats",
+    "Absolute noise/flux calibration across read-noise, mixed and signal-dominated regimes",
+    "Verified complete knowledge delivery and remote corpus reconstruction"
+  ],
+  "scientificClosures": 0,
+  "finalKnowledge": false,
+  "fullGitHubTransfer": false
+}
