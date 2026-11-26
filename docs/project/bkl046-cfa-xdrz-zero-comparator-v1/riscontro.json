@@ -1,0 +1,24 @@
+{
+  "schema": "BKL046_CFA_XDRZ_ZERO_COMPARISON_V1",
+  "fixtureSha256": "a64038a4901d93bf6973e55f1fc888afbb5cd221ec9c8c5a0a94a2359eaaaf8d",
+  "absoluteTolerance": 1e-06,
+  "supportThreshold": 1e-08,
+  "nativeProvenanceVerified": false,
+  "scientificClosures": 0,
+  "mode": "OFFLINE_SELF_TEST",
+  "cases": {
+    "detector_retained": "ZERO_WEIGHT_RETAINED",
+    "reference_retained": "ZERO_WEIGHT_RETAINED",
+    "detector_excluded": "ZERO_SAMPLE_EXCLUDED",
+    "reference_excluded": "ZERO_SAMPLE_EXCLUDED",
+    "mixed_zero": "ZERO_BEHAVIOR_UNRESOLVED",
+    "unapplied_mask": "GREEN_MASK_NO_EFFECT",
+    "wrong_channel_changed": "INCOMPLETE_OR_UNMATCHED",
+    "swapped_zero": "INCOMPLETE_OR_UNMATCHED"
+  },
+  "auxiliaryChecks": [
+    "renormalized_weight_rejected",
+    "nonfinite_supported_intensity_rejected",
+    "remote_pixel_support_change_rejected"
+  ]
+}
