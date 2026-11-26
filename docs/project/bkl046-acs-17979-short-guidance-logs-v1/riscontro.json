@@ -1,0 +1,56 @@
+{
+  "protocolSha256": "b8e133873a2141d5b1dffd0cad0a0ed89a9233513bbff53dafc51c07864fc87a",
+  "rows": [
+    {
+      "actualMode": "GYRO",
+      "commandedMode": "FINE LOCK",
+      "endDifferenceSeconds": 0.449088,
+      "expFlag": "NORMAL",
+      "firstToLastReconstructedArcsec": 0.1707987216104911,
+      "guideAcquisitionFailed": true,
+      "guideFailure": "NOLOCK",
+      "guideRmsMas": [
+        null,
+        null
+      ],
+      "medianPointingDeg": [
+        5.631755809479387,
+        -72.05834301691772
+      ],
+      "medianPointingToTargetArcsec": 38.886052304572566,
+      "obs": "jfln02qtq",
+      "startDifferenceSeconds": 0.43328,
+      "takeDataFlagDown": true,
+      "takeDataOnSamples": 0,
+      "telemetryRoot": "jfln02qtj",
+      "totalJitSamples": 14
+    },
+    {
+      "actualMode": "FINE LOCK",
+      "commandedMode": "FINE LOCK",
+      "endDifferenceSeconds": 0.465792,
+      "expFlag": "NORMAL",
+      "firstToLastReconstructedArcsec": 0.001380237869898042,
+      "guideAcquisitionFailed": false,
+      "guideFailure": null,
+      "guideRmsMas": [
+        2.5,
+        2.2
+      ],
+      "medianPointingDeg": [
+        5.659172047615925,
+        -72.06503560607348
+      ],
+      "medianPointingToTargetArcsec": 0.25894050116483874,
+      "obs": "jfln02qzq",
+      "startDifferenceSeconds": 0.417152,
+      "takeDataFlagDown": false,
+      "takeDataOnSamples": 14,
+      "telemetryRoot": "jfln02qzj",
+      "totalJitSamples": 14
+    }
+  ],
+  "schema": "BKL046_ACS17979_SHORT_GUIDANCE_LOG_V1",
+  "scientificClosures": 0,
+  "separationBetweenReconstructedMedianPointingsArcsec": 38.78855291455509
+}

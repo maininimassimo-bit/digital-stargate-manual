@@ -1,0 +1,18 @@
+{
+  "schema": "BKL046_ACS17979_SHORT_GUIDANCE_LOG_V1",
+  "inputs": [
+    {
+      "obs": "jfln02qtq",
+      "flt": "c0784b3257b920ab740fbf94f30602f38285c268d974dd90b3fd6af54ef9e70a",
+      "jif": "0d59606dc1b76a4fdb62218d7939e5bee3d98a8a47f86f285494a82a4b4a9d95",
+      "jit": "c3f6f6ef81d4acde8e60bf2b32c147b6cf4a79de607ae205a75e6d59d4fda4df"
+    },
+    {
+      "obs": "jfln02qzq",
+      "flt": "fce45ac9f1b8f3b10ae9fa54845c13904e580d59e66614658b3e226557dd63a1",
+      "jif": "fae73069ef18325780ff14b1923223bf0b38c01bbde8b92e0cbed61ba733d165",
+      "jit": "035cb24d73e7c8bcd661c75c59008a25f586c16086e104edc6135047b9fdef52"
+    }
+  ],
+  "method": "Verify exposure identities and archived telemetry time brackets. Treat negative JIF RMS as missing. Compute spherical separation from reconstructed JIT pointing; no fit or photometry."
+}
