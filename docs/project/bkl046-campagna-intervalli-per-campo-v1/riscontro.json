@@ -1,0 +1,1661 @@
+{
+  "protocol": "BKL046_PAIRED_FIELD_INTERVAL_DEVELOPMENT_V1",
+  "scientificPlanSha256": "4392df161ab0c8f4075a6f83ce6e65160b5caf970b41b84898a33c16ba42433b",
+  "numpy": "2.3.5",
+  "generator": "PCG64",
+  "partition": "DEVELOPMENT_ONLY",
+  "sourcesPerField": 16,
+  "criticalTByIndependentFieldCount": {
+    "8": 2.365,
+    "16": 2.131,
+    "31": 2.042,
+    "61": 2.0,
+    "101": 1.984
+  },
+  "rows": [
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 8,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/8/development-A",
+      "seed": "7175326659243172233",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3873,
+          "coverFraction": 0.945556640625,
+          "medianHalfWidthFieldSd": 0.7939406530395929,
+          "rejectionCounts": [
+            223,
+            341,
+            692,
+            2066
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3855,
+          "coverFraction": 0.941162109375,
+          "medianHalfWidthFieldSd": 0.6919947691828308,
+          "rejectionCounts": [
+            241,
+            386,
+            874,
+            2544
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 8,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/8/development-B",
+      "seed": "16351522544436281789",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3877,
+          "coverFraction": 0.946533203125,
+          "medianHalfWidthFieldSd": 0.7918170744311562,
+          "rejectionCounts": [
+            219,
+            310,
+            678,
+            2002
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3876,
+          "coverFraction": 0.9462890625,
+          "medianHalfWidthFieldSd": 0.6917960717860396,
+          "rejectionCounts": [
+            220,
+            334,
+            835,
+            2524
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 16,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/16/development-A",
+      "seed": "9699231848063038183",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3901,
+          "coverFraction": 0.952392578125,
+          "medianHalfWidthFieldSd": 0.5234917116378857,
+          "rejectionCounts": [
+            195,
+            493,
+            1285,
+            3466
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3885,
+          "coverFraction": 0.948486328125,
+          "medianHalfWidthFieldSd": 0.4893760656235975,
+          "rejectionCounts": [
+            211,
+            523,
+            1477,
+            3663
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 16,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/16/development-B",
+      "seed": "12607163072220820648",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3897,
+          "coverFraction": 0.951416015625,
+          "medianHalfWidthFieldSd": 0.5218666605718194,
+          "rejectionCounts": [
+            199,
+            484,
+            1346,
+            3494
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3884,
+          "coverFraction": 0.9482421875,
+          "medianHalfWidthFieldSd": 0.48978196016592884,
+          "rejectionCounts": [
+            212,
+            534,
+            1500,
+            3661
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 31,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/31/development-A",
+      "seed": "4452168369366237884",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3908,
+          "coverFraction": 0.9541015625,
+          "medianHalfWidthFieldSd": 0.36423150075933663,
+          "rejectionCounts": [
+            188,
+            798,
+            2347,
+            4054
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3894,
+          "coverFraction": 0.95068359375,
+          "medianHalfWidthFieldSd": 0.3516029637535518,
+          "rejectionCounts": [
+            202,
+            852,
+            2474,
+            4067
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 31,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/31/development-B",
+      "seed": "17102492933548135950",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3866,
+          "coverFraction": 0.94384765625,
+          "medianHalfWidthFieldSd": 0.36286195586961906,
+          "rejectionCounts": [
+            230,
+            799,
+            2387,
+            4054
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3866,
+          "coverFraction": 0.94384765625,
+          "medianHalfWidthFieldSd": 0.35160187154286227,
+          "rejectionCounts": [
+            230,
+            834,
+            2525,
+            4071
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 61,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/61/development-A",
+      "seed": "14445508232498428393",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3905,
+          "coverFraction": 0.953369140625,
+          "medianHalfWidthFieldSd": 0.2551870502589782,
+          "rejectionCounts": [
+            191,
+            1359,
+            3538,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3902,
+          "coverFraction": 0.95263671875,
+          "medianHalfWidthFieldSd": 0.25093633992436015,
+          "rejectionCounts": [
+            194,
+            1424,
+            3601,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 61,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/61/development-B",
+      "seed": "14590241341366211431",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3891,
+          "coverFraction": 0.949951171875,
+          "medianHalfWidthFieldSd": 0.2545553050333219,
+          "rejectionCounts": [
+            205,
+            1390,
+            3524,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3876,
+          "coverFraction": 0.9462890625,
+          "medianHalfWidthFieldSd": 0.2509566323851686,
+          "rejectionCounts": [
+            220,
+            1433,
+            3556,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 101,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/101/development-A",
+      "seed": "5002275586989506330",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3902,
+          "coverFraction": 0.95263671875,
+          "medianHalfWidthFieldSd": 0.1968498663683665,
+          "rejectionCounts": [
+            194,
+            2047,
+            4011,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3902,
+          "coverFraction": 0.95263671875,
+          "medianHalfWidthFieldSd": 0.19496115121738686,
+          "rejectionCounts": [
+            194,
+            2077,
+            4014,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "independent_normal",
+      "sourceIntraclassCorrelation": 0.0,
+      "fields": 101,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/independent_normal/101/development-B",
+      "seed": "12894861451172798079",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3900,
+          "coverFraction": 0.9521484375,
+          "medianHalfWidthFieldSd": 0.19628018946937115,
+          "rejectionCounts": [
+            196,
+            2108,
+            4009,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 3911,
+          "coverFraction": 0.954833984375,
+          "medianHalfWidthFieldSd": 0.19492683522247536,
+          "rejectionCounts": [
+            185,
+            2125,
+            4027,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 8,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/8/development-A",
+      "seed": "9674802219102995636",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3902,
+          "coverFraction": 0.95263671875,
+          "medianHalfWidthFieldSd": 0.8010512009567965,
+          "rejectionCounts": [
+            194,
+            304,
+            660,
+            2032
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2550,
+          "coverFraction": 0.62255859375,
+          "medianHalfWidthFieldSd": 0.3105531046641987,
+          "rejectionCounts": [
+            1546,
+            1827,
+            2526,
+            3751
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 8,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/8/development-B",
+      "seed": "11732317124763069855",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3906,
+          "coverFraction": 0.95361328125,
+          "medianHalfWidthFieldSd": 0.7919946340589298,
+          "rejectionCounts": [
+            190,
+            302,
+            640,
+            1981
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2514,
+          "coverFraction": 0.61376953125,
+          "medianHalfWidthFieldSd": 0.31008824574908317,
+          "rejectionCounts": [
+            1582,
+            1800,
+            2458,
+            3740
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 16,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/16/development-A",
+      "seed": "11293639380336932145",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3909,
+          "coverFraction": 0.954345703125,
+          "medianHalfWidthFieldSd": 0.5240131599882596,
+          "rejectionCounts": [
+            187,
+            467,
+            1303,
+            3467
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2574,
+          "coverFraction": 0.62841796875,
+          "medianHalfWidthFieldSd": 0.22271237015915357,
+          "rejectionCounts": [
+            1522,
+            2119,
+            3145,
+            4059
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 16,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/16/development-B",
+      "seed": "9176661784377336535",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3906,
+          "coverFraction": 0.95361328125,
+          "medianHalfWidthFieldSd": 0.5181369027238519,
+          "rejectionCounts": [
+            190,
+            435,
+            1289,
+            3466
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2595,
+          "coverFraction": 0.633544921875,
+          "medianHalfWidthFieldSd": 0.22197252115080388,
+          "rejectionCounts": [
+            1501,
+            2062,
+            3113,
+            4057
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 31,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/31/development-A",
+      "seed": "1207202742966420128",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3892,
+          "coverFraction": 0.9501953125,
+          "medianHalfWidthFieldSd": 0.3624034698971393,
+          "rejectionCounts": [
+            204,
+            777,
+            2378,
+            4059
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2570,
+          "coverFraction": 0.62744140625,
+          "medianHalfWidthFieldSd": 0.16039486553279056,
+          "rejectionCounts": [
+            1526,
+            2519,
+            3714,
+            4095
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 31,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/31/development-B",
+      "seed": "8158915710172730664",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3892,
+          "coverFraction": 0.9501953125,
+          "medianHalfWidthFieldSd": 0.36390603857085,
+          "rejectionCounts": [
+            204,
+            780,
+            2369,
+            4049
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2547,
+          "coverFraction": 0.621826171875,
+          "medianHalfWidthFieldSd": 0.16052168527120836,
+          "rejectionCounts": [
+            1549,
+            2506,
+            3732,
+            4095
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 61,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/61/development-A",
+      "seed": "6287391503141504009",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3892,
+          "coverFraction": 0.9501953125,
+          "medianHalfWidthFieldSd": 0.2554289251522453,
+          "rejectionCounts": [
+            204,
+            1319,
+            3506,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2604,
+          "coverFraction": 0.6357421875,
+          "medianHalfWidthFieldSd": 0.11493404999798584,
+          "rejectionCounts": [
+            1492,
+            3058,
+            4042,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 61,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/61/development-B",
+      "seed": "14278426888477446912",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3875,
+          "coverFraction": 0.946044921875,
+          "medianHalfWidthFieldSd": 0.2546358989816456,
+          "rejectionCounts": [
+            221,
+            1358,
+            3532,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2552,
+          "coverFraction": 0.623046875,
+          "medianHalfWidthFieldSd": 0.1147783416494583,
+          "rejectionCounts": [
+            1544,
+            3039,
+            4038,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 101,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/101/development-A",
+      "seed": "16945705886617473398",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3876,
+          "coverFraction": 0.9462890625,
+          "medianHalfWidthFieldSd": 0.19612923514130748,
+          "rejectionCounts": [
+            220,
+            2152,
+            4001,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2601,
+          "coverFraction": 0.635009765625,
+          "medianHalfWidthFieldSd": 0.08924284999182071,
+          "rejectionCounts": [
+            1495,
+            3572,
+            4090,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_normal",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 101,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_normal/101/development-B",
+      "seed": "7531692421897684846",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3894,
+          "coverFraction": 0.95068359375,
+          "medianHalfWidthFieldSd": 0.19679729063485238,
+          "rejectionCounts": [
+            202,
+            2036,
+            4006,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2602,
+          "coverFraction": 0.63525390625,
+          "medianHalfWidthFieldSd": 0.08933021072530775,
+          "rejectionCounts": [
+            1494,
+            3525,
+            4092,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 8,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/8/development-A",
+      "seed": "521109842061617295",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3772,
+          "coverFraction": 0.9208984375,
+          "medianHalfWidthFieldSd": 0.7230753053496821,
+          "rejectionCounts": [
+            324,
+            200,
+            412,
+            2162
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2532,
+          "coverFraction": 0.6181640625,
+          "medianHalfWidthFieldSd": 0.30484916454011024,
+          "rejectionCounts": [
+            1564,
+            1733,
+            2448,
+            3859
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 8,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/8/development-B",
+      "seed": "16916102947177797355",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3796,
+          "coverFraction": 0.9267578125,
+          "medianHalfWidthFieldSd": 0.7099937321380807,
+          "rejectionCounts": [
+            300,
+            188,
+            399,
+            2153
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2556,
+          "coverFraction": 0.6240234375,
+          "medianHalfWidthFieldSd": 0.3039911408080642,
+          "rejectionCounts": [
+            1540,
+            1644,
+            2369,
+            3874
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 16,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/16/development-A",
+      "seed": "13445034847076199475",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3802,
+          "coverFraction": 0.92822265625,
+          "medianHalfWidthFieldSd": 0.488638015362137,
+          "rejectionCounts": [
+            294,
+            293,
+            1125,
+            3860
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2554,
+          "coverFraction": 0.62353515625,
+          "medianHalfWidthFieldSd": 0.2188653475399774,
+          "rejectionCounts": [
+            1542,
+            1979,
+            3144,
+            4076
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 16,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/16/development-B",
+      "seed": "7478160352950046424",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3803,
+          "coverFraction": 0.928466796875,
+          "medianHalfWidthFieldSd": 0.49074563705954344,
+          "rejectionCounts": [
+            293,
+            264,
+            1151,
+            3876
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2552,
+          "coverFraction": 0.623046875,
+          "medianHalfWidthFieldSd": 0.2189954141611581,
+          "rejectionCounts": [
+            1544,
+            1985,
+            3166,
+            4088
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 31,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/31/development-A",
+      "seed": "17177642468490723551",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3830,
+          "coverFraction": 0.93505859375,
+          "medianHalfWidthFieldSd": 0.3464520802096993,
+          "rejectionCounts": [
+            266,
+            575,
+            2435,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2546,
+          "coverFraction": 0.62158203125,
+          "medianHalfWidthFieldSd": 0.15899210874400901,
+          "rejectionCounts": [
+            1550,
+            2398,
+            3760,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 31,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/31/development-B",
+      "seed": "434175136067354616",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3852,
+          "coverFraction": 0.9404296875,
+          "medianHalfWidthFieldSd": 0.35104277329949984,
+          "rejectionCounts": [
+            244,
+            569,
+            2463,
+            4095
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2553,
+          "coverFraction": 0.623291015625,
+          "medianHalfWidthFieldSd": 0.15935849379396624,
+          "rejectionCounts": [
+            1543,
+            2410,
+            3800,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 61,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/61/development-A",
+      "seed": "9479765719624790180",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3859,
+          "coverFraction": 0.942138671875,
+          "medianHalfWidthFieldSd": 0.24943667590269158,
+          "rejectionCounts": [
+            237,
+            1272,
+            3743,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2549,
+          "coverFraction": 0.622314453125,
+          "medianHalfWidthFieldSd": 0.11428135219156799,
+          "rejectionCounts": [
+            1547,
+            3095,
+            4062,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 61,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/61/development-B",
+      "seed": "3673446492885301862",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3842,
+          "coverFraction": 0.93798828125,
+          "medianHalfWidthFieldSd": 0.249592013962393,
+          "rejectionCounts": [
+            254,
+            1276,
+            3773,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2544,
+          "coverFraction": 0.62109375,
+          "medianHalfWidthFieldSd": 0.11420018535708977,
+          "rejectionCounts": [
+            1552,
+            3114,
+            4051,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 101,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/101/development-A",
+      "seed": "15841222947311307383",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3914,
+          "coverFraction": 0.95556640625,
+          "medianHalfWidthFieldSd": 0.19467099811906563,
+          "rejectionCounts": [
+            182,
+            2074,
+            4071,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2660,
+          "coverFraction": 0.6494140625,
+          "medianHalfWidthFieldSd": 0.0890514013089365,
+          "rejectionCounts": [
+            1436,
+            3625,
+            4095,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_skew",
+      "sourceIntraclassCorrelation": 0.25,
+      "fields": 101,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_skew/101/development-B",
+      "seed": "5494306034096229385",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3862,
+          "coverFraction": 0.94287109375,
+          "medianHalfWidthFieldSd": 0.19480024716043856,
+          "rejectionCounts": [
+            234,
+            2111,
+            4075,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2565,
+          "coverFraction": 0.626220703125,
+          "medianHalfWidthFieldSd": 0.08907921238170947,
+          "rejectionCounts": [
+            1531,
+            3605,
+            4096,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 8,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/8/development-A",
+      "seed": "8037352691411566085",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3687,
+          "coverFraction": 0.900146484375,
+          "medianHalfWidthFieldSd": 0.7042059720616051,
+          "rejectionCounts": [
+            409,
+            221,
+            365,
+            2261
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1912,
+          "coverFraction": 0.466796875,
+          "medianHalfWidthFieldSd": 0.21429798320195959,
+          "rejectionCounts": [
+            2184,
+            2291,
+            2937,
+            4028
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 8,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/8/development-B",
+      "seed": "14529425517480074042",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3709,
+          "coverFraction": 0.905517578125,
+          "medianHalfWidthFieldSd": 0.7114800986193953,
+          "rejectionCounts": [
+            387,
+            205,
+            330,
+            2240
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1904,
+          "coverFraction": 0.46484375,
+          "medianHalfWidthFieldSd": 0.21418972672950665,
+          "rejectionCounts": [
+            2192,
+            2284,
+            2925,
+            4021
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 16,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/16/development-A",
+      "seed": "12519932457939506287",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3783,
+          "coverFraction": 0.923583984375,
+          "medianHalfWidthFieldSd": 0.493026110365758,
+          "rejectionCounts": [
+            313,
+            247,
+            1043,
+            3960
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1998,
+          "coverFraction": 0.48779296875,
+          "medianHalfWidthFieldSd": 0.15943225624113047,
+          "rejectionCounts": [
+            2098,
+            2539,
+            3531,
+            4095
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 16,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/16/development-B",
+      "seed": "3448306392528605917",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3763,
+          "coverFraction": 0.918701171875,
+          "medianHalfWidthFieldSd": 0.48668334921605294,
+          "rejectionCounts": [
+            333,
+            277,
+            1050,
+            3938
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1968,
+          "coverFraction": 0.48046875,
+          "medianHalfWidthFieldSd": 0.158649923039851,
+          "rejectionCounts": [
+            2128,
+            2493,
+            3489,
+            4093
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 31,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/31/development-A",
+      "seed": "3039096224009897381",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3812,
+          "coverFraction": 0.9306640625,
+          "medianHalfWidthFieldSd": 0.3477445770841337,
+          "rejectionCounts": [
+            284,
+            517,
+            2464,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1976,
+          "coverFraction": 0.482421875,
+          "medianHalfWidthFieldSd": 0.1167118131961015,
+          "rejectionCounts": [
+            2120,
+            2880,
+            3921,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 31,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/31/development-B",
+      "seed": "12287393792198902629",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3778,
+          "coverFraction": 0.92236328125,
+          "medianHalfWidthFieldSd": 0.3474300556920336,
+          "rejectionCounts": [
+            318,
+            538,
+            2510,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1973,
+          "coverFraction": 0.481689453125,
+          "medianHalfWidthFieldSd": 0.11646207634362288,
+          "rejectionCounts": [
+            2123,
+            2919,
+            3920,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 61,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/61/development-A",
+      "seed": "13916856257176542560",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3842,
+          "coverFraction": 0.93798828125,
+          "medianHalfWidthFieldSd": 0.24884444946119388,
+          "rejectionCounts": [
+            254,
+            1217,
+            3802,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1977,
+          "coverFraction": 0.482666015625,
+          "medianHalfWidthFieldSd": 0.08449143165576131,
+          "rejectionCounts": [
+            2119,
+            3365,
+            4085,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 61,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/61/development-B",
+      "seed": "3584323007919326212",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3836,
+          "coverFraction": 0.9365234375,
+          "medianHalfWidthFieldSd": 0.24848786829745356,
+          "rejectionCounts": [
+            260,
+            1218,
+            3809,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1971,
+          "coverFraction": 0.481201171875,
+          "medianHalfWidthFieldSd": 0.08440252486054077,
+          "rejectionCounts": [
+            2125,
+            3369,
+            4087,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 101,
+      "replicate": "development-A",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/101/development-A",
+      "seed": "10366128289219437027",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3833,
+          "coverFraction": 0.935791015625,
+          "medianHalfWidthFieldSd": 0.19338077965095982,
+          "rejectionCounts": [
+            263,
+            2052,
+            4073,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 2014,
+          "coverFraction": 0.49169921875,
+          "medianHalfWidthFieldSd": 0.06604398331767093,
+          "rejectionCounts": [
+            2082,
+            3759,
+            4096,
+            4096
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "clustered_strong_skew",
+      "sourceIntraclassCorrelation": 0.5,
+      "fields": 101,
+      "replicate": "development-B",
+      "seedNamespace": "DSG_PI_DEV_V2/paired-intervals/clustered_strong_skew/101/development-B",
+      "seed": "2120427218151728371",
+      "trials": 4096,
+      "effectsInFieldMeanSd": [
+        0.0,
+        0.2,
+        0.4,
+        0.8
+      ],
+      "measurements": [
+        {
+          "method": "field_t",
+          "covered": 3858,
+          "coverFraction": 0.94189453125,
+          "medianHalfWidthFieldSd": 0.1945867326603098,
+          "rejectionCounts": [
+            238,
+            2085,
+            4076,
+            4096
+          ]
+        },
+        {
+          "method": "naive_source_normal",
+          "covered": 1970,
+          "coverFraction": 0.48095703125,
+          "medianHalfWidthFieldSd": 0.06628259161403113,
+          "rejectionCounts": [
+            2126,
+            3775,
+            4096,
+            4096
+          ]
+        }
+      ]
+    }
+  ],
+  "calibrationOrVerificationSeedsConsumed": false,
+  "scientificThresholdsSet": false,
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}
