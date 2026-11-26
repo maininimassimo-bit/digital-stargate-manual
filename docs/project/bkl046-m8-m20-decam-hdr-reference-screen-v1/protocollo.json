@@ -1,0 +1,28 @@
+{
+  "schema": "BKL046_M8M20_DECAM_REFERENCE_CHECK_PROTOCOL_V1",
+  "rawSia": "https://datalab.noirlab.edu/sia/raw/nsa",
+  "querySizeDegrees": 0.05,
+  "targets": {
+    "M8": {
+      "ra": 270.904166667,
+      "dec": -24.386666667,
+      "catalogSha256": "b06580fecff9c5367088d95d38c5f9ce8fa5263f9ac7fdc12936c6c48d312d41",
+      "selected": {
+        "dec050437.fits.fz": "M8-dec050437.fits",
+        "dec088331.fits.fz": "M8-tentativo2-45s.fits",
+        "dec088332.fits.fz": "M8-dec088332.fits"
+      }
+    },
+    "M20": {
+      "ra": 270.675,
+      "dec": -22.971666667,
+      "catalogSha256": "20fe69955300f927b5a0de524759ba30bf13abcbbbce4b7e6f69edd2952ac042",
+      "selected": {
+        "c4d_140730_235822_ori.fits.fz": "M20-c4d_140730_235822_ori.fits",
+        "c4d_140731_001457_ori.fits.fz": "M20-c4d_140731_001457_ori.fits",
+        "c4d_140731_002553_ori.fits.fz": "M20-c4d_140731_002553_ori.fits"
+      }
+    }
+  },
+  "scope": "Check raw DECam r-band FITS cropped by NOIRLab. Confirm exposure/readout IDs, finite values, and catalog center WCS coverage. Bracket pixels using min/max of both header amplifier levels as conservative screening without determining the amplifier or calibrated saturation. Independent data with different instrument, epoch and passband; no calibrated flux equivalence."
+}
