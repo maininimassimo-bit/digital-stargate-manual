@@ -1,0 +1,9 @@
+# BKL-046 · Accesso effettivo al launcher CFA installato
+
+Il verificatore lega l'installatore e l'archivio alle impronte congelate. Nella modalità `probe`, il token ordinario apre per lettura ed esecuzione il binario PixInsight esistente senza avviarlo. Le sette richieste individuali di modifica, cancellazione o controllo ACL restituiscono 5. Tre richieste specifiche su Program Files restituiscono 5. Il controllo scrivibile in una directory temporanea restituisce 0 per la scrittura del file e la creazione di una sottodirectory. Il controllo osserva le aperture, senza usare i diritti per scrivere.
+
+La modalità `verify-installed` rilegge tutti i 3.858 file e le directory attese. Usa il verificatore di proprietà e DACL già fissato dall'installatore. Per ciascun oggetto richiede lettura ed esecuzione e verifica singolarmente il rifiuto delle scritture al contenuto e agli attributi, della cancellazione e delle modifiche a DACL e proprietario. Per le directory verifica inoltre il rifiuto della creazione e cancellazione dei figli. Gli errori di apertura diversi da accesso negato fermano la verifica. Dopo le aperture il verificatore ripete la rilettura dei byte e delle DACL.
+
+Su DSG-Shared è stato eseguito solo il collaudo effettivo dei controlli. La modalità installata si è fermata su WinError 2 perché manca `C:\Program Files\DigitalStarGate`. La ricezione del pacchetto, la posa amministrativa inattiva, la verifica con token ordinario e la revisione del soggetto installato restano passaggi distinti. La verifica non registra autorità e non richiede ammissione al coordinatore.
+
+Per ripetere usare Python 3.12 con `verifica-accesso.py <probe|verify-installed> <installatore-fissato> <zip-del-soggetto> <nuova-ricevuta>`. La ricevuta va in una directory scrivibile dal token ordinario. La funzione che produce la ricevuta rifiuta i file di output già presenti.
