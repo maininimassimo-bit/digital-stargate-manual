@@ -1,0 +1,24 @@
+{
+  "schema": "BKL046_TV4_MASK_CHOICE_RECONSTRUCTION_DEVELOPMENT_PLAN_V1",
+  "parentReceiptSha256": "c9981c80ed7d8b631dd4cc24713a3635ebf60b1dcbe8299fd3d4ff2e823f712a",
+  "parentProtocolSha256": "45a56dff86e09b8b87af667a5c13c07f398b3621d31c484374051d20a17ae4e3",
+  "parentSourceSha256": "30f55600f90af54800a79082e2b2568a128bc5c84a349d712f4a66744b2ff574",
+  "comparisons": [
+    "observed_digital_ceiling_only",
+    "forecast_above_threshold",
+    "observed_and_forecast"
+  ],
+  "predictorOffsetsDn": [
+    0,
+    128,
+    256
+  ],
+  "outcomes": [
+    "untagged_censored_pixels",
+    "changed_originally_uncensored_pixels",
+    "l1_reconstruction_dn",
+    "signed_integrated_dn_error"
+  ],
+  "noThresholdSelection": true,
+  "scientificClosures": 0
+}
