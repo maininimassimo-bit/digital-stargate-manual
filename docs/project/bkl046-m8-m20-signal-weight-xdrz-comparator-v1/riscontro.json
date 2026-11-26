@@ -1,0 +1,54 @@
+{
+  "admissionRequested": false,
+  "evidence": "OFFLINE_SYNTHETIC_FITS_FIXTURES",
+  "inputsSha256": "e1cd7fb73fed29cb51dc73104f21f2674fcf84510ca063a1b7c182f0c743c484",
+  "nativeExecutions": 0,
+  "nativeProvenanceVerified": false,
+  "oracleSha256": "7e1b375f032e78f6a66d236fd03fe74974a03313015fdcbf0e034e0dd50b58a5",
+  "protocolSha256": "319ddde76eb184047e3b2b7f7227eed58b793a2b29ae8ec9448553fcebf37de9",
+  "rejected": [
+    {
+      "case": "omittedMask",
+      "reason": "native weight differs"
+    },
+    {
+      "case": "zeroValueWithoutWeightRemoval",
+      "reason": "native weight differs"
+    },
+    {
+      "case": "pixelChanged",
+      "reason": "native intensity differs"
+    },
+    {
+      "case": "supportChanged",
+      "reason": "native support differs"
+    },
+    {
+      "case": "weightChanged",
+      "reason": "native weight differs"
+    },
+    {
+      "case": "wrongPackage",
+      "reason": "Convention bound to different inputs"
+    },
+    {
+      "case": "wrongOracle",
+      "reason": "Convention bound to different inputs"
+    },
+    {
+      "case": "omittedConvention",
+      "reason": "Unresolved origin or rejection coordinates"
+    },
+    {
+      "case": "invalidScale",
+      "reason": "Invalid RGB weight scale"
+    },
+    {
+      "case": "estimatedScaleFromOutput",
+      "reason": "Unresolved weight semantics"
+    }
+  ],
+  "schema": "BKL046_M8_M20_SIGNAL_WEIGHT_XDRZ_COMPARATOR_V1",
+  "scientificClosures": 0,
+  "validCases": 32
+}
