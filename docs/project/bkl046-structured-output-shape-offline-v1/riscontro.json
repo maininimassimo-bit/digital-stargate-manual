@@ -1,0 +1,87 @@
+{
+  "actualProviderSchemaAcceptanceVerified": false,
+  "documentation": "https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses",
+  "fixtures": [
+    {
+      "acceptedByBoth": 1,
+      "compared": 240,
+      "falseRejections": 0,
+      "fixture": "missing_calibration_evidence",
+      "remainingRuntimeReasons": {},
+      "runtimeAccepted": 1,
+      "wireAcceptsRuntimeRejects": 0
+    },
+    {
+      "acceptedByBoth": 2,
+      "compared": 240,
+      "falseRejections": 0,
+      "fixture": "calibration_verified",
+      "remainingRuntimeReasons": {},
+      "runtimeAccepted": 2,
+      "wireAcceptsRuntimeRejects": 0
+    },
+    {
+      "acceptedByBoth": 3,
+      "compared": 240,
+      "falseRejections": 0,
+      "fixture": "noise_control_only",
+      "remainingRuntimeReasons": {
+        "RESEARCH_IDENTICAL_TRIAL_REPLAY": 1
+      },
+      "runtimeAccepted": 3,
+      "wireAcceptsRuntimeRejects": 1
+    },
+    {
+      "acceptedByBoth": 4,
+      "compared": 240,
+      "falseRejections": 0,
+      "fixture": "noise_verified_sibling",
+      "remainingRuntimeReasons": {
+        "RESEARCH_IDENTICAL_TRIAL_REPLAY": 1
+      },
+      "runtimeAccepted": 4,
+      "wireAcceptsRuntimeRejects": 1
+    },
+    {
+      "acceptedByBoth": 3,
+      "compared": 240,
+      "falseRejections": 0,
+      "fixture": "noise_trial_budget_exhausted",
+      "remainingRuntimeReasons": {},
+      "runtimeAccepted": 3,
+      "wireAcceptsRuntimeRejects": 0
+    },
+    {
+      "acceptedByBoth": 1,
+      "compared": 240,
+      "falseRejections": 0,
+      "fixture": "terminal_linear",
+      "remainingRuntimeReasons": {},
+      "runtimeAccepted": 1,
+      "wireAcceptsRuntimeRejects": 0
+    },
+    {
+      "acceptedByBoth": 2,
+      "compared": 240,
+      "falseRejections": 0,
+      "fixture": "terminal_nonlinear",
+      "remainingRuntimeReasons": {},
+      "runtimeAccepted": 2,
+      "wireAcceptsRuntimeRejects": 0
+    }
+  ],
+  "nativeExecutions": 0,
+  "programSha256": "be34a8e4670a6f704ad139e2675038cc3114879eb219746050d085e1565985da",
+  "protocolSha256": "cb7fc108c1962129827b5ad0ce7e5eadb3babd6d72f22b42efb4c297d746d149",
+  "providerCalls": 0,
+  "schema": "BKL046_ADAPTER_STRUCTURED_OUTPUT_SHAPE_OFFLINE_V1",
+  "scientificClosures": 0,
+  "testedStructuralConstraints": "root object, nested branches, required closed objects",
+  "totals": {
+    "acceptedByBoth": 16,
+    "compared": 1680,
+    "falseRejections": 0,
+    "runtimeAccepted": 16,
+    "wireAcceptsRuntimeRejects": 2
+  }
+}
