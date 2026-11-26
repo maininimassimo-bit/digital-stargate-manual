@@ -1,0 +1,51 @@
+{
+  "schema": "BKL046_KNOWLEDGE_IC1805_CFA_ADDENDUM_V1",
+  "baselineKnowledgeSha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d",
+  "priorLocatorSha256": "4acd66e8d44482fc7bc9d8d4d3364d96fedede97711e12c39646b6ecfd32db50",
+  "axis": "CFA_DITHER_DRIZZLE/3",
+  "literalClosureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+  "stars": 72,
+  "testedFrames": 38,
+  "localOmissionsPerWidth": 2021,
+  "sourceReceipts": {
+    "geometric_weights": {
+      "path": "docs/project/bkl046-ic1805-pesi-copertura-v1/riscontro.json",
+      "commit": "a043921e5fb1cfb3fdd9730f68b3326b13206d93",
+      "sha256": "7a727ce4de53601ba19f63096179207fcda55cecef3651a33aee4cab334e8248"
+    },
+    "star_omission": {
+      "path": "docs/project/bkl046-ic1805-perdita-posa-v1/riepilogo.json",
+      "commit": "a043921e5fb1cfb3fdd9730f68b3326b13206d93",
+      "sha256": "5eeaffa5aec3c36a9bb15da62f084f1f9acf252f482e63c520fee71b09801173"
+    },
+    "field_omission": {
+      "path": "docs/project/bkl046-ic1805-perdita-posa-campo-v1/riscontro.json",
+      "commit": "a043921e5fb1cfb3fdd9730f68b3326b13206d93",
+      "sha256": "ce4e298ae2c567a49695704b04bd4eb3fcf789cb24fff983d78f8f34d589c200"
+    }
+  },
+  "scope": "Nominal CFA geometry, two interleaved halves, square-drop overlap weights",
+  "metrics": [
+    {
+      "widthPx": 1,
+      "positiveCoverage": 72,
+      "nominalEffectiveCoverage": 71,
+      "survivesEveryLocalOmission": 69,
+      "framesCausingAtLeastOneDowncrossing": 2,
+      "maximumSimultaneousDowncrossings": 1,
+      "framesCausingEmptyCell": 0
+    },
+    {
+      "widthPx": 0.7,
+      "positiveCoverage": 71,
+      "nominalEffectiveCoverage": 66,
+      "survivesEveryLocalOmission": 59,
+      "framesCausingAtLeastOneDowncrossing": 13,
+      "maximumSimultaneousDowncrossings": 3,
+      "framesCausingEmptyCell": 1
+    }
+  ],
+  "scientificClosure": false,
+  "nativeWeightModelVerified": false,
+  "completeStudy": false
+}
