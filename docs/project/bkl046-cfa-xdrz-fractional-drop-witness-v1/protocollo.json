@@ -1,0 +1,27 @@
+{
+  "schema": "BKL046_CFA_XDRZ_FRACTIONAL_DROP_WIDTH_WITNESS_V1",
+  "fixture": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "math": "5b10c3b383d78de2bfdec87d674ec9dd3f98cf0a61c21c5eb21176b6375a8e09",
+  "widths": [
+    0.7,
+    1
+  ],
+  "profiles": [
+    "raw",
+    "globalMax",
+    "channelMax"
+  ],
+  "fractionalBTranslation": [
+    1.3,
+    -1.2
+  ],
+  "fixtureRoot": "O:/BKL046-CFA-XDRZ-testimone-larghezza-v1/input/",
+  "sizeXY": [
+    32,
+    28
+  ],
+  "weightTolerance": 0.000001,
+  "intensityTolerance": 0.000002,
+  "minimumWrongWidthMapGap": 0.005,
+  "design": "Use the same three synthetic CFA inputs. Replace only the B translation with a frozen fractional translation. Inspect all pixels under both widths and all supported weight profiles. Translation-only geometry avoids an origin-versus-width ambiguity in the model."
+}
