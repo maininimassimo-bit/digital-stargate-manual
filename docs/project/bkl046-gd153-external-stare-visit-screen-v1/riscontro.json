@@ -1,0 +1,406 @@
+{
+  "associations": [
+    {
+      "association": "ibnx02050",
+      "filter": "F438W",
+      "publicCalwf3Flc": 0
+    },
+    {
+      "association": "ibnx02080",
+      "filter": "F606W",
+      "publicCalwf3Flc": 0
+    },
+    {
+      "association": "ibnx02090",
+      "filter": "F814W",
+      "publicCalwf3Flc": 0
+    },
+    {
+      "association": "ibnx14050",
+      "filter": "F438W",
+      "publicCalwf3Flc": 0
+    },
+    {
+      "association": "ibnx14080",
+      "filter": "F606W",
+      "publicCalwf3Flc": 0
+    },
+    {
+      "association": "ibnx14090",
+      "filter": "F814W",
+      "publicCalwf3Flc": 0
+    },
+    {
+      "association": "icrw06060",
+      "filter": "F438W",
+      "publicCalwf3Flc": 2
+    },
+    {
+      "association": "icrw060b0",
+      "filter": "F606W",
+      "publicCalwf3Flc": 2
+    },
+    {
+      "association": "icrw060g0",
+      "filter": "F814W",
+      "publicCalwf3Flc": 2
+    },
+    {
+      "association": "icrw07060",
+      "filter": "F438W",
+      "publicCalwf3Flc": 2
+    },
+    {
+      "association": "icrw07080",
+      "filter": "F606W",
+      "publicCalwf3Flc": 2
+    },
+    {
+      "association": "icrw070b0",
+      "filter": "F814W",
+      "publicCalwf3Flc": 2
+    }
+  ],
+  "groups": [
+    {
+      "chip": 1,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "matchedApertureGrowthMillimag": {},
+      "memberStates": [
+        "APERTURE_SUPPORT_REFUSED",
+        "CENTROID_OFFSET",
+        "CORE_DQ"
+      ],
+      "spanDays": 0.010821859999850858,
+      "visit": "icrw06"
+    },
+    {
+      "chip": 1,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "matchedApertureGrowthMillimag": {},
+      "memberStates": [
+        "APERTURE_SUPPORT_REFUSED",
+        "CORE_DQ",
+        "CORE_DQ"
+      ],
+      "spanDays": 0.010821489995578304,
+      "visit": "icrw06"
+    },
+    {
+      "chip": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "matchedApertureGrowthMillimag": {},
+      "memberStates": [
+        "CORE_DQ",
+        "CORE_DQ",
+        "CORE_DQ"
+      ],
+      "spanDays": 0.005185560003155842,
+      "visit": "icrw07"
+    },
+    {
+      "chip": 2,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "matchedApertureGrowthMillimag": {},
+      "memberStates": [
+        "CORE_DQ",
+        "CORE_DQ",
+        "CORE_DQ"
+      ],
+      "spanDays": 0.0051855500059900805,
+      "visit": "icrw07"
+    }
+  ],
+  "nativeExecutions": 0,
+  "newThreeBandVisits": [],
+  "programSha256": "fd9bd0048675217bb74fd836a2ecdd2bbff724b7ff84845595fca594458b89ba",
+  "protocolSha256": "c4a7956a92d7c7612090ae27bbf4f5e458e63d0b3fed6ed75f97590f961b6fb4",
+  "rows": [
+    {
+      "band": "F438W",
+      "centerXY": [
+        291.53704954969237,
+        280.877872667299
+      ],
+      "chip": 1,
+      "dateMjd": 57244.10790783,
+      "distanceFromGaiaPx": 2.0342340009513102,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "file": "icrw06b1q_flc.fits",
+      "gaiaPixelXY": [
+        293.4107102457121,
+        281.67002389453864
+      ],
+      "measurements": {},
+      "peakXY": [
+        292,
+        281
+      ],
+      "state": "APERTURE_SUPPORT_REFUSED",
+      "visit": "icrw06"
+    },
+    {
+      "band": "F438W",
+      "chip": 1,
+      "dateMjd": 57244.12504931,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "file": "icrw06bhq_flc.fits",
+      "gaiaPixelXY": [
+        295.9520915191316,
+        284.1901338510678
+      ],
+      "measurements": {},
+      "peakXY": [
+        300,
+        280
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw06"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        293.0659996668306,
+        277.5660982443459
+      ],
+      "chip": 1,
+      "dateMjd": 57244.11296598,
+      "distanceFromGaiaPx": 4.124751810996363,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "file": "icrw06b6q_flc.fits",
+      "gaiaPixelXY": [
+        293.4140932919322,
+        281.67613575396564
+      ],
+      "measurements": {},
+      "peakXY": [
+        293,
+        278
+      ],
+      "state": "CENTROID_OFFSET",
+      "visit": "icrw06"
+    },
+    {
+      "band": "F606W",
+      "chip": 1,
+      "dateMjd": 57244.13010709,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "file": "icrw06bmq_flc.fits",
+      "gaiaPixelXY": [
+        295.9554049662234,
+        284.1961535269091
+      ],
+      "measurements": {},
+      "peakXY": [
+        292,
+        284
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw06"
+    },
+    {
+      "band": "F814W",
+      "chip": 1,
+      "dateMjd": 57244.11872969,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "file": "icrw06bbq_flc.fits",
+      "gaiaPixelXY": [
+        293.41528281635726,
+        281.67686526554434
+      ],
+      "measurements": {},
+      "peakXY": [
+        290,
+        284
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw06"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        296.46101874799115,
+        282.76674275776264
+      ],
+      "chip": 1,
+      "dateMjd": 57244.1358708,
+      "distanceFromGaiaPx": 1.5165695122813256,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "file": "icrw06brq_flc.fits",
+      "gaiaPixelXY": [
+        295.95675013584344,
+        284.1970211405902
+      ],
+      "measurements": {},
+      "peakXY": [
+        296,
+        283
+      ],
+      "state": "APERTURE_SUPPORT_REFUSED",
+      "visit": "icrw06"
+    },
+    {
+      "band": "F438W",
+      "chip": 2,
+      "dateMjd": 57244.17864857,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "file": "icrw07c9q_flc.fits",
+      "gaiaPixelXY": [
+        258.1152872256709,
+        255.663505729036
+      ],
+      "measurements": {},
+      "peakXY": [
+        254,
+        252
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw07"
+    },
+    {
+      "band": "F438W",
+      "chip": 2,
+      "dateMjd": 57244.19596339,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "file": "icrw07crq_flc.fits",
+      "gaiaPixelXY": [
+        260.6289695649054,
+        258.1536453873729
+      ],
+      "measurements": {},
+      "peakXY": [
+        257,
+        254
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw07"
+    },
+    {
+      "band": "F606W",
+      "chip": 2,
+      "dateMjd": 57244.18066265,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "file": "icrw07cbq_flc.fits",
+      "gaiaPixelXY": [
+        258.1160823406384,
+        255.66326158003528
+      ],
+      "measurements": {},
+      "peakXY": [
+        254,
+        252
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw07"
+    },
+    {
+      "band": "F606W",
+      "chip": 2,
+      "dateMjd": 57244.19797746,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "file": "icrw07cwq_flc.fits",
+      "gaiaPixelXY": [
+        260.6300478997433,
+        258.15302547446896
+      ],
+      "measurements": {},
+      "peakXY": [
+        257,
+        254
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw07"
+    },
+    {
+      "band": "F814W",
+      "chip": 2,
+      "dateMjd": 57244.18383413,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "file": "icrw07ceq_flc.fits",
+      "gaiaPixelXY": [
+        258.1192732200345,
+        255.67123964378857
+      ],
+      "measurements": {},
+      "peakXY": [
+        255,
+        253
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw07"
+    },
+    {
+      "band": "F814W",
+      "chip": 2,
+      "dateMjd": 57244.20114894,
+      "dither": [
+        0.09919,
+        0.10577
+      ],
+      "file": "icrw07czq_flc.fits",
+      "gaiaPixelXY": [
+        260.6327992634378,
+        258.1611052089268
+      ],
+      "measurements": {},
+      "peakXY": [
+        258,
+        256
+      ],
+      "state": "CORE_DQ",
+      "visit": "icrw07"
+    }
+  ],
+  "schema": "BKL046_GD153_EXTERNAL_STARE_CANDIDATES_RESULT_V1",
+  "scientificClosures": 0,
+  "states": {
+    "APERTURE_SUPPORT_REFUSED": 2,
+    "CENTROID_OFFSET": 1,
+    "CORE_DQ": 9
+  }
+}
