@@ -1,0 +1,691 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_V84",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "90d1a49a5123f9f5dd84c85412ae0931eba1e9155d8dd7b271e119d404859c81",
+    "commit": "4a3d390b66e185a347dbd68e535a5f2dd48e4c14"
+  },
+  "sourceIndex": {
+    "sha256": "71e1996db2600cf9966c44531c966eb7c69e37155706024c5872ae832c3476f3",
+    "commit": "1c04dfc5a3f8c251f92e5bae2fcf19065a37df11"
+  },
+  "evidence": [
+    {
+      "id": "gd153ApertureTransfer",
+      "level": "sameStarVisitDisjointNominalAperture",
+      "commit": "3e8cbd72363812aa17b850450d0014a883c22fe5",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-visit-disjoint-aperture-color-v1/riscontro.json",
+          "sha256": "80a2bf25bd1614d30a8321bc18a70cdadb73b391b0873d44a167e33dd68a3eee",
+          "archiveSha256": "5a1ce4dee785a260797c43a924f7b2e87e298752a6476b08fdff36fcb250c097",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-trasferimento-aperture-v1.zip",
+          "copiedReport": "gd153ApertureTransfer-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ]
+    },
+    {
+      "id": "gd153ExternalVisits",
+      "level": "observedAdditionalVisitScreen",
+      "commit": "de73db575edf6e80a4d9de4106d114f7f66962d0",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-external-stare-visit-screen-v1/riscontro.json",
+          "sha256": "374cc3f29dd46a55bfe87a4af8e838429b332d91ae6025303a2dd349d3b8c51d",
+          "archiveSha256": "448eeeb966d4bda28aa6973f82620c2eeb639799b8beb04b2e86d6366d8e572a",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-visite-esterne-v1.zip",
+          "copiedReport": "gd153ExternalVisits-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ]
+    },
+    {
+      "id": "gd153CalibrationVisits",
+      "level": "observedCoreDqFlagsAcrossTwoChips",
+      "commit": "6038c448ec7cca3bf818eaf23c3591450a9dbdc4",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-calibration-visits-core-dq-v2/riscontro.json",
+          "sha256": "243415bb017ed8540f2250587427f5d48a72a389427a3f40e1497d918a75c7b2",
+          "archiveSha256": "f719995944bc6a7a8f9438a3b12540c02e5fe3e4abf143dec585f8c2949c973c",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-visite-calibrazione-v2.zip",
+          "copiedReport": "gd153CalibrationVisits-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ]
+    },
+    {
+      "id": "gd153JointDqCoverage",
+      "level": "geometricSupportNoFluxEstimate",
+      "commit": "95c7be3110e108cbb1546b18e8db475ab3910425",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-dither-dq-union-v1/riscontro.json",
+          "sha256": "95e85ce200a8e5ae026101a804fe5534d22a6f4cdfd517181eff9990ee0c8306",
+          "archiveSha256": "d1b7ab5ab8e7b421a93c048ace808bda2bf1665ba688c93138e34a8cfd0cbc8c",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-unione-DQ-v1.zip",
+          "copiedReport": "gd153JointDqCoverage-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3"
+      ]
+    },
+    {
+      "id": "gd153HeldOutMaskFlux",
+      "level": "inducedMissingSamplesKnownIntactFlux",
+      "commit": "e65c414f46dc42c248f7d7a1c3cf35605a3094ba",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-heldout-dq-flux-stress-v1/riscontro.json",
+          "sha256": "670003936733be601376adda7384523375c05413cbd18d1667ebe34512121927",
+          "archiveSha256": "7104c91982d85ee3ddf3b3fd2580d87153938e7a3bff2bc1f722bac6dc1ecb77",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-maschere-trattenute-v1.zip",
+          "copiedReport": "gd153HeldOutMaskFlux-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3"
+      ]
+    },
+    {
+      "id": "gd153HeldOutMaskColor",
+      "level": "inducedMissingSamplesMatchedColors",
+      "commit": "2e241d2bb8169a66b7ca4e76a3d9a6bb93c55928",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-heldout-dq-chromatic-stress-v1/riscontro.json",
+          "sha256": "ce6b98d4ae296679d63e70dd42e510b8e510595a83d3dc45a085abbeddbb5b6c",
+          "archiveSha256": "3b6b5b62875a75482dd2a16191cb1569db8e3f055ac11d234b26355b0a840acd",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-colore-lacune-v1.zip",
+          "copiedReport": "gd153HeldOutMaskColor-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ]
+    },
+    {
+      "id": "gd153CoreCoverageColor",
+      "level": "fixedGeometricRuleSameStressPopulation",
+      "commit": "95448fc5e86146ba659f5ce53d507ad4c4b1d2cf",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-geometric-color-coverage-v1/riscontro.json",
+          "sha256": "8cd594186ac2018c8d119476cf2c50e1eb1fb7229a662ab1b619c643bd2685c9",
+          "archiveSha256": "fc775eb6b759f6b6dd25211832b4b81ff37dd9215ea2cdab0db79f13a5059eea",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-colore-copertura-v1.zip",
+          "copiedReport": "gd153CoreCoverageColor-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ]
+    },
+    {
+      "id": "gd153NaturalDqSibling",
+      "level": "observedDamagedFluxSameVisitComparator",
+      "commit": "9bcc0ba7aafb600601d8d015d4445e1663c487a5",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-natural-dq-sibling-flux-v1/riscontro.json",
+          "sha256": "8a77ba6a41a8835332a134cda0a8520d73367576289efbb1f6d6ea76b733ea83",
+          "archiveSha256": "bd1e086475564efa36f04a57c1d52ff57934f983e43b3beae77bdb5a14ccfe5e",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-DQ-naturale-v1.zip",
+          "copiedReport": "gd153NaturalDqSibling-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ]
+    },
+    {
+      "id": "gd153ProjectedNaturalMask",
+      "level": "observedMaskWithKnownIntactComparison",
+      "commit": "1c04dfc5a3f8c251f92e5bae2fcf19065a37df11",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-natural-dq-projected-mask-v1/riscontro.json",
+          "sha256": "0886878a4e51e6ae5f58d96889eeac510d670c76dc20e19b2f4ef8524f2940ae",
+          "archiveSha256": "12d66f8245c68c9cc9e156ea966e81f2451316bcca11c5c727ae0417505581a2",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-WFC3-GD153-DQ-controfattuale-v1.zip",
+          "copiedReport": "gd153ProjectedNaturalMask-riscontro.json"
+        }
+      ],
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ]
+    }
+  ],
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "findings": {
+    "transfer": {
+      "F438W-F606W": {
+        "visitCount": 2,
+        "matchedVisits": 0,
+        "estimates": {
+          "nominal": {
+            "count": 4,
+            "maximumAbsMillimag": 8.158517638950453,
+            "medianAbsMillimag": 2.131408779986484
+          },
+          "uncorrected": {
+            "count": 4,
+            "maximumAbsMillimag": 5.303462904101934,
+            "medianAbsMillimag": 1.5047782945888457
+          },
+          "visits": 2
+        }
+      },
+      "F438W-F814W": {
+        "visitCount": 2,
+        "matchedVisits": 0,
+        "estimates": {
+          "nominal": {
+            "count": 4,
+            "maximumAbsMillimag": 7.915106003805124,
+            "medianAbsMillimag": 1.9984633736755768
+          },
+          "uncorrected": {
+            "count": 4,
+            "maximumAbsMillimag": 9.676734757704253,
+            "medianAbsMillimag": 6.956713782908992
+          },
+          "visits": 2
+        }
+      },
+      "F606W-F814W": {
+        "visitCount": 2,
+        "matchedVisits": 0,
+        "estimates": {
+          "nominal": {
+            "count": 4,
+            "maximumAbsMillimag": 3.195117919605435,
+            "medianAbsMillimag": 1.6537637610706621
+          },
+          "uncorrected": {
+            "count": 4,
+            "maximumAbsMillimag": 7.774421986581729,
+            "medianAbsMillimag": 6.233067828046956
+          },
+          "visits": 2
+        }
+      }
+    },
+    "screenedAdditionalFLC": 48,
+    "additionalQualifiedVisits": 0,
+    "support": {
+      "nearest": {
+        "core3": [
+          "icrw06",
+          "icrw07",
+          "iddn05",
+          "iddn06",
+          "idor02"
+        ],
+        "r10": [
+          "icrw07"
+        ]
+      },
+      "four": {
+        "core3": [
+          "icrw06",
+          "iddn06",
+          "idor02"
+        ],
+        "r10": []
+      },
+      "sixteen": {
+        "core3": [
+          "icrw06"
+        ],
+        "r10": []
+      }
+    },
+    "inducedCoreFlux": [
+      {
+        "cases": 18,
+        "measured": 18,
+        "medianAbsoluteRelativeError": 0.0025005774565304284,
+        "method": "annularMedian",
+        "p90AbsoluteRelativeError": 0.01943864080780116,
+        "policy": "nearest",
+        "subset": "coreMissing",
+        "withinOnePercent": 14
+      },
+      {
+        "cases": 53,
+        "measured": 53,
+        "medianAbsoluteRelativeError": 0.011675618388925058,
+        "method": "annularMedian",
+        "p90AbsoluteRelativeError": 0.03516834110424937,
+        "policy": "four",
+        "subset": "coreMissing",
+        "withinOnePercent": 23
+      }
+    ],
+    "inducedCoreColor": [
+      {
+        "cases": 12,
+        "color": "F438W-F814W",
+        "measured": 12,
+        "method": "zero",
+        "p90AbsoluteMillimag": 52.1434635589673,
+        "policy": "four",
+        "subset": "anyCoreMissing",
+        "visitConditionalP90Millimag": {
+          "iaah12": 98.0412383197024,
+          "iaah14": 49.06785506896254
+        },
+        "withinTenMillimag": 5
+      },
+      {
+        "cases": 12,
+        "color": "F438W-F814W",
+        "measured": 12,
+        "method": "area",
+        "p90AbsoluteMillimag": 42.521026841586306,
+        "policy": "four",
+        "subset": "anyCoreMissing",
+        "visitConditionalP90Millimag": {
+          "iaah12": 102.23245433029712,
+          "iaah14": 42.516968859594215
+        },
+        "withinTenMillimag": 2
+      },
+      {
+        "cases": 12,
+        "color": "F438W-F814W",
+        "measured": 12,
+        "method": "annularMedian",
+        "p90AbsoluteMillimag": 59.157439241939784,
+        "policy": "four",
+        "subset": "anyCoreMissing",
+        "visitConditionalP90Millimag": {
+          "iaah12": 62.099211218356174,
+          "iaah14": 27.84765358490921
+        },
+        "withinTenMillimag": 3
+      }
+    ],
+    "jointCoreColor": [
+      {
+        "policy": "nearest",
+        "kept": 23,
+        "pool": 28,
+        "scores": {
+          "annularMedian": {
+            "maxWorstColor": 1.3511578059867673,
+            "measured": 23,
+            "p90WorstColor": 0.6102279650848494,
+            "withinAllColors": {
+              "10": 23,
+              "20": 23,
+              "5": 23
+            }
+          },
+          "area": {
+            "maxWorstColor": 9.573644788228961,
+            "measured": 23,
+            "p90WorstColor": 6.768623108468316,
+            "withinAllColors": {
+              "10": 23,
+              "20": 23,
+              "5": 19
+            }
+          },
+          "zero": {
+            "maxWorstColor": 2.112322226888409,
+            "measured": 23,
+            "p90WorstColor": 1.1732753535985063,
+            "withinAllColors": {
+              "10": 23,
+              "20": 23,
+              "5": 23
+            }
+          }
+        }
+      },
+      {
+        "policy": "four",
+        "kept": 16,
+        "pool": 28,
+        "scores": {
+          "annularMedian": {
+            "maxWorstColor": 5.759932925253949,
+            "measured": 16,
+            "p90WorstColor": 2.614030203026764,
+            "withinAllColors": {
+              "10": 16,
+              "20": 16,
+              "5": 15
+            }
+          },
+          "area": {
+            "maxWorstColor": 37.37974493398454,
+            "measured": 16,
+            "p90WorstColor": 27.59085244010751,
+            "withinAllColors": {
+              "10": 10,
+              "20": 12,
+              "5": 2
+            }
+          },
+          "zero": {
+            "maxWorstColor": 8.595012521092533,
+            "measured": 16,
+            "p90WorstColor": 4.910692986422583,
+            "withinAllColors": {
+              "10": 16,
+              "20": 16,
+              "5": 14
+            }
+          }
+        }
+      }
+    ],
+    "naturalCoreDq": [
+      {
+        "file": "iaah11daq_flc.fits",
+        "band": "F606W",
+        "status": "MEASURED",
+        "references": 1,
+        "nominal": {
+          "annularMedian": 2.0100771750755246,
+          "area": -3.4021365595444615,
+          "zero": 3.5801139008809253
+        }
+      },
+      {
+        "file": "iaah13eoq_flc.fits",
+        "band": "F438W",
+        "status": "NO_CLEAN_SIBLING",
+        "references": 0,
+        "nominal": null
+      },
+      {
+        "file": "iaah13ewq_flc.fits",
+        "band": "F438W",
+        "status": "MEASURED",
+        "references": 1,
+        "nominal": {
+          "annularMedian": 43.821863551140915,
+          "area": 33.15285350606659,
+          "zero": 61.35537953028909
+        }
+      },
+      {
+        "file": "iaah13eqq_flc.fits",
+        "band": "F606W",
+        "status": "NO_CLEAN_SIBLING",
+        "references": 0,
+        "nominal": null
+      }
+    ],
+    "projectedNaturalMask": [
+      {
+        "comparableScenarios": 5,
+        "damaged": "iaah11daq_flc.fits",
+        "distinctIntactReferences": 1,
+        "distinctIntactVisits": 1,
+        "inducedMedian": -1.2103866731308817,
+        "inducedRange": [
+          -1.2103866731308817,
+          -1.2103866731308817
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 0.7260377862115399,
+        "observedRange": [
+          -0.4843488869193417,
+          2.0100771750755246
+        ],
+        "originalSameVisitComparator": true,
+        "policy": "nearest",
+        "scenarios": 5
+      },
+      {
+        "comparableScenarios": 25,
+        "damaged": "iaah11daq_flc.fits",
+        "distinctIntactReferences": 5,
+        "distinctIntactVisits": 3,
+        "inducedMedian": 0.4026709223826022,
+        "inducedRange": [
+          -1.3764459737427852,
+          2.39537690276941
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 0.12841935997775367,
+        "observedRange": [
+          -0.4843488869193417,
+          2.0100771750755246
+        ],
+        "originalSameVisitComparator": false,
+        "policy": "nearest",
+        "scenarios": 25
+      },
+      {
+        "comparableScenarios": 5,
+        "damaged": "iaah11daq_flc.fits",
+        "distinctIntactReferences": 1,
+        "distinctIntactVisits": 1,
+        "inducedMedian": 0.022719333291160784,
+        "inducedRange": [
+          -3.5092222370655874,
+          0.022719333291160784
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 0.3615056267546901,
+        "observedRange": [
+          -0.4843488869193417,
+          2.0100771750755246
+        ],
+        "originalSameVisitComparator": true,
+        "policy": "four",
+        "scenarios": 5
+      },
+      {
+        "comparableScenarios": 25,
+        "damaged": "iaah11daq_flc.fits",
+        "distinctIntactReferences": 5,
+        "distinctIntactVisits": 3,
+        "inducedMedian": 1.3806328354155235,
+        "inducedRange": [
+          -5.546558858200036,
+          2.532599581254326
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 0.08474992668974601,
+        "observedRange": [
+          -0.4843488869193417,
+          2.0100771750755246
+        ],
+        "originalSameVisitComparator": false,
+        "policy": "four",
+        "scenarios": 25
+      },
+      {
+        "comparableScenarios": 5,
+        "damaged": "iaah13ewq_flc.fits",
+        "distinctIntactReferences": 1,
+        "distinctIntactVisits": 1,
+        "inducedMedian": 1.053504998722869,
+        "inducedRange": [
+          1.053504998722869,
+          13.540837661096083
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 30.93317534748028,
+        "observedRange": [
+          42.852619416512105,
+          45.971763507255574
+        ],
+        "originalSameVisitComparator": true,
+        "policy": "nearest",
+        "scenarios": 5
+      },
+      {
+        "comparableScenarios": 30,
+        "damaged": "iaah13ewq_flc.fits",
+        "distinctIntactReferences": 6,
+        "distinctIntactVisits": 3,
+        "inducedMedian": 14.487924429406192,
+        "inducedRange": [
+          -1.2234576645436064,
+          35.52769855574906
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 7.324920860763044,
+        "observedRange": [
+          42.852619416512105,
+          45.971763507255574
+        ],
+        "originalSameVisitComparator": false,
+        "policy": "nearest",
+        "scenarios": 30
+      },
+      {
+        "comparableScenarios": 5,
+        "damaged": "iaah13ewq_flc.fits",
+        "distinctIntactReferences": 1,
+        "distinctIntactVisits": 1,
+        "inducedMedian": 15.056550600160811,
+        "inducedRange": [
+          15.056550600160811,
+          24.013217680023597
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 18.839401736488508,
+        "observedRange": [
+          42.852619416512105,
+          45.971763507255574
+        ],
+        "originalSameVisitComparator": true,
+        "policy": "four",
+        "scenarios": 5
+      },
+      {
+        "comparableScenarios": 30,
+        "damaged": "iaah13ewq_flc.fits",
+        "distinctIntactReferences": 6,
+        "distinctIntactVisits": 3,
+        "inducedMedian": 28.379241644570293,
+        "inducedRange": [
+          10.148886169051757,
+          85.09998599481104
+        ],
+        "method": "annularMedian",
+        "nearestAbsoluteDifference": 0.36255108109768486,
+        "observedRange": [
+          42.852619416512105,
+          45.971763507255574
+        ],
+        "originalSameVisitComparator": false,
+        "policy": "four",
+        "scenarios": 30
+      }
+    ]
+  },
+  "operationalEvidence": [
+    {
+      "id": "nativePathSnapshot",
+      "level": "operationalReadOnlyPrerequisites",
+      "commit": "01cc68e3314e010513aac7bd58c1078fa00636fa",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-native-paths-dsg-shared-checkpoint-v1/riscontro.json",
+          "sha256": "35ff484d4ea1acb00af9148f170075c732b623a93d320b45d3414f12ed79f9ea",
+          "archiveSha256": "44a3efa3711a5e3c82b6b57a9d700e5828720f0c69c0c960520b221fdb4d90c0",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-percorsi-nativi-dsg-shared-v1.zip",
+          "copiedReport": "nativePathSnapshot-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "releaseReadback",
+      "level": "offlineReleaseReadbackFixture",
+      "commit": "62c1a6f6013f41a4c3fd04fad9fd44041bc69bdc",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-delivery-release-readback-verifier-v1/riscontro.json",
+          "sha256": "cb4496758e196c093964c06e8ad3a72b26094d594893907f0497f261d6e48cdc",
+          "archiveSha256": "6f13089460bb054fe11e651ffd4fb21162b4f81ed823fe17bbba3428a9544d60",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-consegna-rilettura-release-v1.zip",
+          "copiedReport": "releaseReadback-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "logicalReplay",
+      "level": "fullOfflineLocalCorpusReplay",
+      "commit": "d9473c71c513e8a0b12f6efb2ec233f340f44448",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-delivery-logical-replay-v1/riscontro.json",
+          "sha256": "d0b54951bb9bfc5b226c7980170ef273280b07003d2f2f695f941e9c78f5585b",
+          "archiveSha256": "63c931854e1a1286f2e9d37992fb22abbe93de461a99ec3f2440a7667b29e183",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-ripristino-logico-v1.zip",
+          "copiedReport": "logicalReplay-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "operationalFindings": {
+    "nativePathPrerequisites": {
+      "stream34V11": "AUTHENTIC_ARB_RQ_AND_OPERATIONAL_ENROLLMENT_REQUIRED",
+      "cfaOrigineV3": "AUTHENTIC_ARB_RQ_AND_PROTECTED_DEPLOYMENT_REQUIRED",
+      "xdrzV4": "AUTHENTIC_ARB_RQ_AND_PROTECTED_DEPLOYMENT_REQUIRED",
+      "primary2048Build1719": "PRIMARY2048_EXACT_BUILD_ARB_RQ_AND_BINDING_REQUIRED",
+      "imageAnalysis": "INTEGRATED_REVIEWABLE_LAUNCHER_REQUIRED"
+    },
+    "releaseReadbackFixture": {
+      "assets": 81,
+      "bytes": 27582310714,
+      "refusals": 16,
+      "remoteTransferVerified": false
+    },
+    "localCorpusReplay": {
+      "verifiedCarrierFiles": 80,
+      "verifiedObjects": 10180,
+      "verifiedLogicalAliases": 11839,
+      "logicalAliasMapSha256": "457df7abbfd375e24bd45aaa43bbc362630fe6eeb1ee7cbe0ac078f1f264c097",
+      "recoveredObjectsSha256": "e2b18426df4b6ed8f9750db39e40f3189807d429c187c78d95b65e1eb685ac8d",
+      "source": "LOCAL_MIRROR_HARDLINK_FIXTURE"
+    }
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}
