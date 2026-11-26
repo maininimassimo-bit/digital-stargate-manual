@@ -1,0 +1,43 @@
+{
+  "schema": "BKL046_BLINDSOLVER_SOURCE_RECONCILIATION_V1",
+  "historical": {
+    "matrixSha256": "6a709bcb1ceb3963c296541f283d6e00c0a7f835ee7b878d19b844d20fd0ecf3",
+    "id": "src/scripts/BlindSolver2000.js",
+    "sha256": "6a754310323d02a34b814da89ecb19d3001680e3df8475ddb9148a3f3234136e",
+    "featureId": "BlindSolver : SetiAstro > Blind Solver 2000",
+    "filePresentAtHistoricalInstallPath": false
+  },
+  "installed": {
+    "id": "src/scripts/BlindSolver/BlindSolver.js",
+    "sha256": "cf117244161f18cfb2694486238bbddcd793d630d5114436f11fc645c0a1bd4e",
+    "featureId": "BlindSolver : Astrometry > BlindSolver",
+    "featureLine": 19,
+    "engine": "src/scripts/BlindSolver/BlindSolverEngine.js",
+    "engineSha256": "ce315e997ff707d5af66b6b6eb2ff367f636d5c2719020d4663735fed40ec4ac",
+    "localIndexConstructorLine": 592,
+    "gaiaReleaseSelectionLine": 960
+  },
+  "publicUpstreamVariants": [
+    {
+      "url": "https://github.com/setiastro/pixinsight-updates/blob/a357ba4ca7c7d27a3920d71abf9b372f50d5e57f/blindsolver2000.js",
+      "sha256": "ed0f9202f020215b5e8c1339f945a200093f11ddb9a3f02d96b0475be7416d86",
+      "featureIdMatchesHistoricalMatrix": true,
+      "referencesAstrometryNetApi": true,
+      "exactHistoricBytesVerified": false,
+      "lineEndingAndBomVariantsMatchHistoric": false
+    },
+    {
+      "url": "https://www.setiastro.com/s/BlindSolver2000-xz44.js",
+      "sha256": "20fda04153c10c8c4ef11d34a3d79a83aeaa6738d7805fe03774d30388af3490",
+      "featureIdMatchesHistoricalMatrix": true,
+      "referencesAstrometryNetApi": true,
+      "exactHistoricBytesVerified": false,
+      "lineEndingAndBomVariantsMatchHistoric": false
+    }
+  ],
+  "aliasSupportedByEvidence": false,
+  "historicalExactSourceRecovered": false,
+  "runtimeEquivalenceTested": false,
+  "scientificClosures": 0,
+  "canonicalRegistryChanged": false
+}
