@@ -1,0 +1,11 @@
+{
+  "schema": "BKL046_M8M20_SHASSA_ANCHOR_GEOMETRY_PROTOCOL_V1",
+  "sourceArchiveSha256": "e3af80f18f9da8aa94de52de1d4e7f9ce69f4198943a0299990c6aca7a755e3a",
+  "sourceReportSha256": "d78efc9b52a7db248500db0e14535199e34ff65044cb380fecb72e925b118db1",
+  "radiiArcmin": [
+    2,
+    4
+  ],
+  "minimumCoverage": 0.9,
+  "design": "Read all 192 geometrical cell centers on SHASSA tile 153, not a selection based on M8/M20 broadband values. Use identical projected circular apertures at both radii and reproduce the six pinned prior cells. At each radius compare original, lowest six medians via deterministic cell-ID tie breaks, and lowest eligible median per six fixed spatial strata (two row groups and three column groups). For equal independent unit-variance anchor errors fit a plane to normalized coordinates and evaluate prediction standard deviation across all 192 centers, including leave-one-anchor sensitivity. Report descriptive H-alpha values only. Cells reuse one survey tile, their apertures can overlap, and no uncertainty covariance or ADU conversion is inferred."
+}
