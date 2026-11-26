@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_M20_DECAM_R_REPEATABILITY_PROTOCOL_V1",
+  "sourceArchiveSha256": "91536c7dfc7b35103b8208b48e802396d9c7d28a05b24ea336c48a92be46fdaf",
+  "sourceReportSha256": "a0b1c6dc5840db14e87def9de306a0e53db4b8fc90f6465565befc5faa8970de",
+  "detectorRequired": "S16",
+  "controlFocusDetector": "FN1",
+  "peakBackgroundSnr": 12,
+  "peakStep": 5,
+  "margin": 30,
+  "searchPx": 8,
+  "centroidPx": 4,
+  "skyAnnulusPx": [
+    9,
+    13
+  ],
+  "aperturesPx": [
+    3,
+    5,
+    7
+  ],
+  "splitTilePx": 96,
+  "maxHoldoutOffsetPx": 1.25,
+  "minCenterSeparationPx": 18,
+  "scope": "Byte-identify crops in full CCDs and classify detector role. Exclude FN1 from transfer. Match bright isolated raw peaks in the two 180 s exposures on S16. Fit independent aperture ratios and constant WCS offsets on checkerboard tiles; evaluate on the other tiles. Diagnostic raw photometry only; no short science exposure, flat field, calibrated flux, or saturation recovery.",
+  "wideSha256": {
+    "wide-M20-c4d_140730_235822_ori.fits": "60f8187ac183643612d2c8013c74b860b88e25b5ea98553a1e1990d186595cac",
+    "wide-M20-c4d_140731_001457_ori.fits": "1a283a295e386550dccd9ce42b2fe1a67e54dadb4e1c57753e83281b890070cd",
+    "wide-M20-c4d_140731_002553_ori.fits": "2689e330b31e1f526b59a0ada6e3fab23a1fa4bfa21b55dfdee13202bc5af7b7"
+  }
+}
