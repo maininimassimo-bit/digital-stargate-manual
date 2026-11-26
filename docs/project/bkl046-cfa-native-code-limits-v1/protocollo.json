@@ -1,0 +1,75 @@
+{
+  "inputs": [
+    {
+      "camera": "EOS6D",
+      "file": "EOS6D-light-sample-1.CR2",
+      "group": "light",
+      "originMember": "WhirlpoolGalaxy/lights/IMG_1475.CR2",
+      "sha256": "4299380189d1d2a8c3c3855bc94796cec5c6fb2a193d6d7df884e14e0024f06f"
+    },
+    {
+      "camera": "EOS6D",
+      "file": "EOS6D-light-sample-2.CR2",
+      "group": "light",
+      "originMember": "WhirlpoolGalaxy/lights/IMG_1555.CR2",
+      "sha256": "33057a51122668ad3b3cbb5f1714046e95b5151b3c2f44904d4b45804b2b6a52"
+    },
+    {
+      "camera": "EOS6D",
+      "file": "EOS6D-light-sample-3.CR2",
+      "group": "light",
+      "originMember": "WhirlpoolGalaxy/lights/IMG_1636.CR2",
+      "sha256": "cbbe4f2816fbcd26acb1d45bbff0d91a3c0d08e96197cd267acb37d93649d7c3"
+    },
+    {
+      "camera": "EOS40D",
+      "file": "EOS40D-light-1.CR2",
+      "group": "light",
+      "originMember": "HeartNebula/lights/IMG_8491.CR2",
+      "sha256": "15cc4ea14179e1b5068c5b9064992bfd89bb5d1d97c774bcacbeaee84ca483f2"
+    },
+    {
+      "camera": "EOS40D",
+      "file": "EOS40D-light-2.CR2",
+      "group": "light",
+      "originMember": "HeartNebula/lights/IMG_8511.CR2",
+      "sha256": "ad027e9743844f49bf2905b12d1d28421001143a8dc7699ac44312dfc8e06020"
+    },
+    {
+      "camera": "EOS40D",
+      "file": "EOS40D-light-3.CR2",
+      "group": "light",
+      "originMember": "HeartNebula/lights/IMG_8530.CR2",
+      "sha256": "fe207df5ac7323c86ef3bdee8184ec7a366e8f929c8869c998793ccea7368aa3"
+    },
+    {
+      "camera": "EOS40D",
+      "file": "EOS40D-dark-1.CR2",
+      "group": "dark",
+      "originMember": "HeartNebula/darks/IMG_8439.CR2",
+      "sha256": "2131911a156d1c3dda0620af230a2710fb0eb0a97e0ad1f18ac71d1d0125357d"
+    },
+    {
+      "camera": "EOS40D",
+      "file": "EOS40D-dark-2.CR2",
+      "group": "dark",
+      "originMember": "HeartNebula/darks/IMG_8447.CR2",
+      "sha256": "1a6065cf236671f3d3550576f7543dcc47c50becf16b689eca5a2e5cd4072dff"
+    },
+    {
+      "camera": "EOS40D",
+      "file": "EOS40D-dark-3.CR2",
+      "group": "dark",
+      "originMember": "HeartNebula/darks/IMG_8455.CR2",
+      "sha256": "868e54e97d2c0622d799f6f59e39ed8e097e44b1fa622de3ce5464faf2db0917"
+    }
+  ],
+  "rawpyWheelSha256": "fb91f8fb21b56037ecc3c062ce2de4d97fdc7d4ecb1d2738280461d74c593562",
+  "schema": "BKL046_REAL_CFA_NATIVE_CODE_CLIPPING_V1",
+  "scope": "Use the stored visible CFA and preserve its four phases. Thresholds are decoder-declared, not measured full well. Compare recurrence in detector coordinates and the sampled 40D darks. No demosaic, colour conversion or signal recovery.",
+  "thresholdsBelowWhiteFraction": [
+    0.001,
+    0.01
+  ],
+  "exifSourceSha256": "b8d75d6cad057ebe33539f52df3a408184706f9a5d45ec55c491133df87d3ee2"
+}
