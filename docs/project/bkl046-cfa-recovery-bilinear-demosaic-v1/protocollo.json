@@ -1,0 +1,25 @@
+{
+  "schema": "BKL046_CFA_SYNCHRONIZED_RECOVERY_AFTER_BILINEAR_DEMOSAIC_V1",
+  "registeredReport": "de1e31b2438dd04cd0a3405bc4016962ff3bd4475b597fdf908f50c75b3d5148",
+  "registeredProtocol": "0fa01e48e44db897f7cddc30e8940363ecd1a511a856f9fa2a05c36f8e27289d",
+  "holdoutExposureSeconds": 0.5,
+  "anchorExposureSeconds": [
+    0.125,
+    0.25
+  ],
+  "targetExposureSeconds": [
+    1,
+    2
+  ],
+  "minimumSignalAnchorDN": 70,
+  "minimumSignalHoldoutDN": 200,
+  "minimumMarginDN": 32,
+  "maximumShortDisagreementPercent": 3,
+  "ceilingDN": 3651,
+  "transitionFraction": 0.05,
+  "scope": "Apply the same linear bilinear RGGB stencil to each estimate and the independently withheld mid-exposure. Require all 3x3 photosites to pass anchor and reference support. Compare RGB ratios at full-resolution pixels inside partial cells and at physical pixel pairs crossing qualified tile-internal boundaries. Stratify partial-cell pixels by whole-cell short-anchor eligibility of all cells touched by the 3x3 aperture.",
+  "edgeReferenceMaxFraction": 0.02,
+  "edgeEstimateMinFraction": 0.1,
+  "previousReport": "99340c3cff47404694ead0ad571ff84c930b8310122d8bde67d6523f54c7d74a",
+  "cellBenchmarkReport": "9e5ef2c058b8ea2fd95e3c99fbbf57b0630d253a02fa83d856c916003142d194"
+}
