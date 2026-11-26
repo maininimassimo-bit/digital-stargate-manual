@@ -1,0 +1,595 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_20261126_V5",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "commit": "d36c37e49923cd7736b0cea272ac6ed4ddeca367",
+    "sha256": "23a4c916403d9bbb4f8505541502280f10c514166c51043e39dda5431ae48035"
+  },
+  "sourceIndex": {
+    "commit": "279490ecdcb36037ec1b43cdde31d46401fae7ee",
+    "sha256": "f3c489c21b5db1eea9de45efa449d5c3c29ca219f84ae5b78600c1321b2d74f1"
+  },
+  "evidence": [
+    {
+      "id": "stream34ReadRetention",
+      "level": "pinnedJavascriptReadOnlyNativeApiFixture",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/3"
+      ],
+      "commit": "f20e62ab260833543a5e74bb9883b818ec3f5d59",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-stream34-v11-file-retention-offline/riscontro.json",
+          "sha256": "7df90eb077ee06a6d0a8c89a05a413ffa10cb36fae7499850697a1a6d4d197a1",
+          "archiveSha256": "0547d4f7ef49e3914ec99bd6c390d241b963805d0929a4f917f4657457124081",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-Stream34-js-retention-v11.zip",
+          "copiedReport": "stream34ReadRetention-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8ShassaSkyStructure",
+      "level": "independentNarrowbandAtlasObservations",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "08f5d5ef44a0d577430029c51043a2976e1931d2",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-shassa-anchor-reference-v1/riscontro.json",
+          "sha256": "d78efc9b52a7db248500db0e14535199e34ff65044cb380fecb72e925b118db1",
+          "archiveSha256": "e3af80f18f9da8aa94de52de1d4e7f9ce69f4198943a0299990c6aca7a755e3a",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-SHASSA-riferimento-v1.zip",
+          "copiedReport": "m8ShassaSkyStructure-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8ShassaAnchorGeometry",
+      "level": "geometryAndIndependentNarrowbandAtlas",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "502c6b22810c8bb880668ce8c806eb60bab92b2b",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-shassa-anchor-geometry-v1/riscontro.json",
+          "sha256": "a6a126abe2a1a7a6b1fa02e519edbb81cd406934f4341a8bd286f79b14466f13",
+          "archiveSha256": "2d740cfd48b88c408a44b8f40570cb82782264f936d33e152eb43456e4bb6585",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-SHASSA-geometria-v1.zip",
+          "copiedReport": "m8ShassaAnchorGeometry-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8ShassaDarkLayout",
+      "level": "conditionalDetectorRepeatabilityOnPinnedFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "2f4513980ee86525e01094ec5f6f9f2c5f640ac3",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-shassa-dark-layout-repeatability-v1/riscontro.json",
+          "sha256": "9586a8444b2643f2cb85c70e054c6a2c7f4b501b610df0f290451547227847eb",
+          "archiveSha256": "dfb322b97661bc5f090230c29a8c112438ed3670dcd695b34d64c192956d43af",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-SHASSA-dark-v1.zip",
+          "copiedReport": "m8ShassaDarkLayout-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8ShassaScienceHoldout",
+      "level": "correlatedRealExposureDifferencesAndSyntheticInjection",
+      "axes": [
+        "DIFFUSE_BACKGROUND/1",
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "c82645a777753540d8e705308f1cbd5190f82604",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-shassa-science-holdout-v1/riscontro.json",
+          "sha256": "cb1ecea3993264598d1bff80e729a7b4531040921e70c056ad112632782a3cc6",
+          "archiveSha256": "90afd1ced3003a31b04a89991e3e9e305d474ce30eb994b4dfd27b7cf4240789",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-SHASSA-posa-v1.zip",
+          "copiedReport": "m8ShassaScienceHoldout-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8OpticalAnchorInventory",
+      "level": "frozenSourceAcquisitionEvidenceAudit",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "279490ecdcb36037ec1b43cdde31d46401fae7ee",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-optical-anchor-acquisition-audit-v1/riscontro.json",
+          "sha256": "50e34ba75b7ef8266a01df54fe987f56368b2432fba9bc1e3c39018371b0ef98",
+          "archiveSha256": "7de1eaaa69739ec160e48bb22a216e55e05b8b618566641c36e83e46215a5900",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-inventario-cielo-v1.zip",
+          "copiedReport": "m8OpticalAnchorInventory-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "findings": {
+    "stream34": {
+      "subject": "0b029846da0412875e26595e2ead8361bc35fcef2c882ec2be95303b9582bdd1",
+      "read": {
+        "totalBytes": 139469422,
+        "files": 8,
+        "allocated": 8,
+        "opened": 8,
+        "closeCalls": 8,
+        "initialized": 8,
+        "updates": 139,
+        "finalized": 8,
+        "maximumReadRequest": 1048576,
+        "readCalls": 139,
+        "secondClaimRefused": true
+      },
+      "faults": 13,
+      "guards": 5,
+      "admissionRequested": false,
+      "actualPjsrMemoryBoundAttested": false
+    },
+    "shassaReference": [
+      {
+        "commonCells": [
+          0,
+          3
+        ],
+        "commonRangesRayleigh": [
+          657.5,
+          551.9
+        ],
+        "maxCenteredDifferenceRayleigh": 52.80000000000001,
+        "medianOffsetRayleigh": -35.30000000000001,
+        "radiusArcmin": 2,
+        "signedField119Minus153Rayleigh": [
+          17.5,
+          -88.10000000000002
+        ]
+      },
+      {
+        "commonCells": [
+          0,
+          3
+        ],
+        "commonRangesRayleigh": [
+          591.4,
+          574.2
+        ],
+        "maxCenteredDifferenceRayleigh": 8.59999999999998,
+        "medianOffsetRayleigh": -2.6999999999999744,
+        "radiusArcmin": 4,
+        "signedField119Minus153Rayleigh": [
+          5.900000000000006,
+          -11.299999999999955
+        ]
+      }
+    ],
+    "shassaGeometryAtFourArcmin": {
+      "cellsMeasured": 192,
+      "globalLowest": {
+        "cells": [
+          15,
+          187,
+          31,
+          152,
+          170,
+          11
+        ],
+        "leaveOneOut": [
+          {
+            "conditionNumber": 5.542004563961895,
+            "removed": 15,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 3.2790554260499998
+          },
+          {
+            "conditionNumber": 6.485706726335516,
+            "removed": 187,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 3.5629288920220614
+          },
+          {
+            "conditionNumber": 5.764539689757522,
+            "removed": 31,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 3.4081400714368466
+          },
+          {
+            "conditionNumber": 7.355839098359399,
+            "removed": 152,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 3.9365451894898618
+          },
+          {
+            "conditionNumber": 5.801525238236229,
+            "removed": 170,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 3.1675130799153504
+          },
+          {
+            "conditionNumber": 8.570348005336347,
+            "removed": 11,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 5.165614519757475
+          }
+        ],
+        "maxAnchorRayleigh": 60.7,
+        "medianAnchorRayleigh": 60.55,
+        "plane": {
+          "conditionNumber": 5.996524056965819,
+          "status": "FULL_RANK",
+          "worstPredictionStdPerUnitAnchorStd": 3.164432849165627
+        }
+      },
+      "original": {
+        "cells": [
+          17,
+          23,
+          30,
+          161,
+          167,
+          174
+        ],
+        "leaveOneOut": [
+          {
+            "conditionNumber": 1.9438576822068678,
+            "removed": 17,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.3038946900485422
+          },
+          {
+            "conditionNumber": 1.4270278099797458,
+            "removed": 23,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 0.9775252199076784
+          },
+          {
+            "conditionNumber": 2.047300728577208,
+            "removed": 30,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.371375877481612
+          },
+          {
+            "conditionNumber": 1.9438576822068678,
+            "removed": 161,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.3038946900485413
+          },
+          {
+            "conditionNumber": 1.427027809979746,
+            "removed": 167,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 0.9775252199076779
+          },
+          {
+            "conditionNumber": 2.0473007285772087,
+            "removed": 174,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.3713758774816127
+          }
+        ],
+        "maxAnchorRayleigh": 800.3,
+        "medianAnchorRayleigh": 179.10000000000002,
+        "plane": {
+          "conditionNumber": 1.507062390023519,
+          "status": "FULL_RANK",
+          "worstPredictionStdPerUnitAnchorStd": 0.8733560104417286
+        }
+      },
+      "stratifiedLowest": {
+        "cells": [
+          4,
+          10,
+          15,
+          115,
+          152,
+          187
+        ],
+        "leaveOneOut": [
+          {
+            "conditionNumber": 2.559824068283675,
+            "removed": 4,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.6075756805313541
+          },
+          {
+            "conditionNumber": 1.829976847019912,
+            "removed": 10,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.1073443152155855
+          },
+          {
+            "conditionNumber": 2.644006268475517,
+            "removed": 15,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.4566864741154797
+          },
+          {
+            "conditionNumber": 2.5554184039233836,
+            "removed": 115,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.4255745969876255
+          },
+          {
+            "conditionNumber": 2.0127265310778473,
+            "removed": 152,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.1469526002038624
+          },
+          {
+            "conditionNumber": 2.517881680084664,
+            "removed": 187,
+            "status": "FULL_RANK",
+            "worstPredictionStdPerUnitAnchorStd": 1.5387860712893158
+          }
+        ],
+        "maxAnchorRayleigh": 126.0,
+        "medianAnchorRayleigh": 68.55,
+        "plane": {
+          "conditionNumber": 2.0766039553580793,
+          "status": "FULL_RANK",
+          "worstPredictionStdPerUnitAnchorStd": 1.0690717196737354
+        }
+      }
+    },
+    "darkLayoutMeanBroadDiffuse": {
+      "original": {
+        "bothWithinTolerance": 1324,
+        "chronological": [
+          0.04088264704805072,
+          0.07818614928950024
+        ],
+        "flux": {
+          "max": 0.07171982467434328,
+          "median": 0.01585199485299408,
+          "p95": 0.044651273375612664
+        },
+        "interleaved": [
+          0.04233886023066038,
+          0.07338555137361519
+        ],
+        "l2": {
+          "max": 0.11232668922380909,
+          "median": 0.03468131146865201,
+          "p95": 0.07415256352277777
+        }
+      },
+      "globalLowest": {
+        "bothWithinTolerance": 854,
+        "chronological": [
+          0.014076248731298348,
+          0.034101277297052826
+        ],
+        "flux": {
+          "max": 0.08637837795477292,
+          "median": 0.02092905161684153,
+          "p95": 0.057500365042472495
+        },
+        "interleaved": [
+          0.03567847756144019,
+          0.05596848955665631
+        ],
+        "l2": {
+          "max": 0.15269057254640656,
+          "median": 0.05028705813164752,
+          "p95": 0.1175583346352464
+        }
+      },
+      "stratifiedLowest": {
+        "bothWithinTolerance": 1184,
+        "chronological": [
+          0.0014384377147103437,
+          0.016084748609832125
+        ],
+        "flux": {
+          "max": 0.06489601400681132,
+          "median": 0.01830942836956446,
+          "p95": 0.04663260264509303
+        },
+        "interleaved": [
+          0.045568105446613605,
+          0.07123926014843694
+        ],
+        "l2": {
+          "max": 0.10486430146421365,
+          "median": 0.03953392436005991,
+          "p95": 0.07597424773781208
+        }
+      }
+    },
+    "realFramesAndInjection": {
+      "pairs": 27,
+      "heldOutCells": 177,
+      "sharedReferences": 3,
+      "summary": {
+        "globalLowest": {
+          "offset": {
+            "injections": {
+              "broadDiffuse": {
+                "medianAbsoluteRelativeFluxError": 0.1661804899432151,
+                "medianRelativeL2": 0.252573048273431,
+                "passes": 0
+              },
+              "longFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              },
+              "shortFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              }
+            },
+            "medianOfHeldOutMedianAdu": 1.0909139153282297,
+            "medianOfHeldOutP90Adu": 2.4986277295890735
+          },
+          "passesByReference": {
+            "1": 1,
+            "13": 1,
+            "8": 4
+          },
+          "plane": {
+            "injections": {
+              "broadDiffuse": {
+                "medianAbsoluteRelativeFluxError": 0.395132977804432,
+                "medianRelativeL2": 0.7120701888434592,
+                "passes": 0
+              },
+              "longFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              },
+              "shortFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              }
+            },
+            "medianOfHeldOutMedianAdu": 1.0940286856408306,
+            "medianOfHeldOutP90Adu": 2.599281915413006
+          },
+          "planeNoWorseThanOriginalBoth": 6,
+          "planePasses": 6
+        },
+        "original": {
+          "offset": {
+            "injections": {
+              "broadDiffuse": {
+                "medianAbsoluteRelativeFluxError": 0.14741004752789072,
+                "medianRelativeL2": 0.22404438128069692,
+                "passes": 0
+              },
+              "longFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              },
+              "shortFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              }
+            },
+            "medianOfHeldOutMedianAdu": 0.9366315608305156,
+            "medianOfHeldOutP90Adu": 2.2090692464269135
+          },
+          "passesByReference": {
+            "1": 1,
+            "13": 0,
+            "8": 6
+          },
+          "plane": {
+            "injections": {
+              "broadDiffuse": {
+                "medianAbsoluteRelativeFluxError": 0.1474645354502767,
+                "medianRelativeL2": 0.22441768391169442,
+                "passes": 0
+              },
+              "longFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              },
+              "shortFilament": {
+                "medianAbsoluteRelativeFluxError": 0.0,
+                "medianRelativeL2": 0.0,
+                "passes": 27
+              }
+            },
+            "medianOfHeldOutMedianAdu": 0.8142447116696578,
+            "medianOfHeldOutP90Adu": 1.9756879829210232
+          },
+          "planeNoWorseThanOriginalBoth": 27,
+          "planePasses": 7
+        },
+        "stratifiedLowest": {
+          "offset": {
+            "injections": {
+              "broadDiffuse": {
+                "medianAbsoluteRelativeFluxError": 0.26689276251065747,
+                "medianRelativeL2": 0.405642796049452,
+                "passes": 0
+              },
+              "longFilament": {
+                "medianAbsoluteRelativeFluxError": 3.021968476037219E-05,
+                "medianRelativeL2": 1.783301156421299E-05,
+                "passes": 27
+              },
+              "shortFilament": {
+                "medianAbsoluteRelativeFluxError": 1.5142114850652658E-05,
+                "medianRelativeL2": 9.648106756401413E-06,
+                "passes": 27
+              }
+            },
+            "medianOfHeldOutMedianAdu": 0.9323690875618427,
+            "medianOfHeldOutP90Adu": 2.1291885150332788
+          },
+          "passesByReference": {
+            "1": 2,
+            "13": 2,
+            "8": 4
+          },
+          "plane": {
+            "injections": {
+              "broadDiffuse": {
+                "medianAbsoluteRelativeFluxError": 0.3320069018890293,
+                "medianRelativeL2": 0.595560473635576,
+                "passes": 0
+              },
+              "longFilament": {
+                "medianAbsoluteRelativeFluxError": 4.205629678609997E-05,
+                "medianRelativeL2": 3.6122488991403945E-05,
+                "passes": 27
+              },
+              "shortFilament": {
+                "medianAbsoluteRelativeFluxError": 2.1073061521323232E-05,
+                "medianRelativeL2": 1.95431729982506E-05,
+                "passes": 27
+              }
+            },
+            "medianOfHeldOutMedianAdu": 0.8104932492464858,
+            "medianOfHeldOutP90Adu": 1.9475098341770432
+          },
+          "planeNoWorseThanOriginalBoth": 18,
+          "planePasses": 8
+        }
+      }
+    },
+    "opticalIntake": {
+      "fitsVerified": 60,
+      "classified": "NO_SEPARATE_SKY_POINTING_IN_FOUR_PINNED_ARCHIVES",
+      "coobservedBroadbandAnchors": 0,
+      "largestSeparationDeg": 0.006878124515209805
+    }
+  },
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}
