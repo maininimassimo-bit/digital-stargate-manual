@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_IA_FIXED_SAMPLE_OPERATING_CHARACTERISTICS_V1",
+  "lineageGuard": "a7d3f8e52d9934038d996b710b2a9fa5f4cdb8c0c0132c72663bf341b28eacef",
+  "nativeFixture": "c2976d6ad12dfc2b80b74f62dfd8bb4905cc2f3b0a49abff9bd85e5911fd3abf",
+  "pLimit": "1/100",
+  "alpha": "1/20",
+  "families": [
+    1,
+    7,
+    70
+  ],
+  "errorCaps": [
+    0,
+    1,
+    2
+  ],
+  "historicalQuotas": [
+    721,
+    957,
+    1159
+  ],
+  "alternatives": [
+    "1/1000",
+    "1/400",
+    "1/200"
+  ],
+  "powerTarget": "4/5",
+  "searchCap": 40,
+  "design": "Fixed sample one-sided exact binomial check. Familywise error by illustrative Bonferroni allocation. Cases are independent Bernoulli experimental units and all assigned units belong in the frozen endpoint denominator. Compute per-endpoint power for nominated alternatives. Keep alternative composite unsafe-or-unresolved endpoint separate from the Owner's unsafe-only scope."
+}
