@@ -1,0 +1,29 @@
+{
+  "schema": "BKL046_M8M20_COOBSERVED_OPTICAL_ANCHOR_INTAKE_V1",
+  "disposition": "PROPOSED_AWAITING_ACQUISITION_EVIDENCE",
+  "axis": "DIFFUSE_BACKGROUND/2",
+  "existingSeries": {
+    "required": [
+      "Original sky-reference exposures linked by acquisition log to the 2020-08-18 sequence",
+      "Reference pointing and observation times, verified against the original frames",
+      "Optical train and passband record plus exposure, temperature, gain and calibration provenance"
+    ],
+    "certifiedExamples": 0
+  },
+  "independentSeriesDesign": {
+    "scope": "If the original co-observations cannot be recovered, freeze an independent experiment with genuinely paired science and reference pointings. Preserve dark/flat calibration and record optical configuration. Predefine bracketed sky visits, intended sky-free references, spatial controls, all refusal conditions and independent validation units before acquisition.",
+    "defensibleResiduals": [
+      "Reference path and absolute sky transfer must be identifiable",
+      "Reference and science scenes may contain real emission which needs an independent bound",
+      "Capture timing and exposure settings must support an uncertainty model for transfer, including correlated errors",
+      "Assess both aperture flux and shape at the fixed 5% diagnostic tolerance; retain insufficient support and any refusals"
+    ],
+    "priorAnchorBudget": {
+      "sourceReportSha256": "ed1c0284d7cdd7b96ed1aa182acd5020ddbf392be938dbaad2b8467aa14d6cbf",
+      "maxAdmissibleUniformErrorAduBroadDiffuse": 0.04182765454903203,
+      "scope": "Worst-case independent per-anchor box model, nominal six distributed positions, plane and one synthetic 2 ADU profile only. It is not an observed accuracy or an acceptance threshold for all acquisitions."
+    }
+  },
+  "approvalOrAdmissionClaimed": false,
+  "scientificClosures": 0
+}

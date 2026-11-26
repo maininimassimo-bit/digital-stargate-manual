@@ -1,0 +1,18 @@
+{
+  "schema": "BKL046_M8M20_OPTICAL_ANCHOR_ACQUISITION_AUDIT_V1",
+  "calibrationProtocolSha256": "232c4d2325a9fb8f1af064cc3b405f5b6595d9888ed2beaf1f21b135318c2e2b",
+  "calibrationReportSha256": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+  "referenceTangentDeg": [
+    271.294995,
+    -23.496667
+  ],
+  "targetPartition": {
+    "light": "Light",
+    "dark": "Dark",
+    "flat": "Flat",
+    "shortDark": "Bias"
+  },
+  "design": "Audit all inventory members of the four frozen M8/M20 archives against archive SHA-256, per-member SHA-256, type, date and exposure. Classify frames using FITS IMAGETYP first. Treat RA/DEC as object metadata, not an independent plate measurement. Exclude opaque dark/bias and illumination flats as optical background. No separate sky pointing or linked blank-sky control can be asserted by target light metadata alone. Report any other pointing separately; do not use chronology alone to claim co-observation.",
+  "targetMetadataContainmentScreenDeg": 1,
+  "containmentBasis": "One degree is smaller than the roughly 1.16 degree minimum half width of the 6248 by 4176 detector at the archived nominal plate scale of 1.99885 arcsec/px. The check is a metadata screen, not a pointing solution or independent sky-reference certification."
+}
