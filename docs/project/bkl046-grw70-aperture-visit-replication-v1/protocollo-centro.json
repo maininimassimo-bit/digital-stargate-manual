@@ -1,0 +1,18 @@
+{
+  "schema": "BKL046_GRW70_VISIT_DISJOINT_HELDOUT_CENTER_V1",
+  "primaryProtocol": "4e72fe525d1b3f52aae1aaa130ed0a8c3d4aa82270a3e8ffb3eaf47a6300743e",
+  "donorHalfBoxPx": 20,
+  "minimumDonorPeakElectrons": 1000,
+  "exclusionAroundPeakPx": 4,
+  "minimumProminenceRatio": 3,
+  "maximumDonorAgreementPx": 1.5,
+  "scope": "Apply the previous frozen donor rule to new visits. Score observed 10-minus-5 aperture changes. For each eligible new visit compare the prediction made from the median of at least two other same-chip visits. The earlier exploratory visit is withheld from these estimates. Report its comparison independently. Preserve primary absolute-screen refusals separately.",
+  "transfer": {
+    "trainingMinimumOtherVisits": 2,
+    "requireSameChip": true,
+    "reportAllIndependentVisits": true,
+    "allowTargetInTraining": false,
+    "priorExploratoryVisit": "ibbsz1",
+    "priorExploratoryReportSha256": "afa982258831b8a0b060581062ff0a28071e9d889a096df715535068dc27f3f6"
+  }
+}
