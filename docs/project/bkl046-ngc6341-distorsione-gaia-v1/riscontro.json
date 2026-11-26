@@ -1,0 +1,127 @@
+{
+  "protocol": "BKL046_NGC6341_DISTORTION_OMISSION_FIXED_GAIA_IDENTITIES_V1",
+  "pilotSha256": "3d04b697eda86b3dfbd787172d4b5099f6c2334a4680f4899c1fb221e8883186",
+  "originalReportSha256": "b4402ddb36b9c9ecd8bb04f8491bba961c63032809abff7581f8c108dd1ed64c",
+  "originalReportReproduced": true,
+  "trainingPartition": "even 256 px tiles",
+  "holdoutPartition": "odd 256 px tiles",
+  "holdoutScope": "Original mutual unambiguous <=1 px matches with distortion retained",
+  "trainingStrategy": "Reused original inliers and fit affine output from core-only WCS",
+  "heldIdentitiesRematched": false,
+  "rows": [
+    {
+      "exposure": "j8f866kfq_flc.fits",
+      "chip": 2,
+      "fixedTrainingPairs": 159,
+      "heldCentroidsInOriginalCohort": 395,
+      "fixedIdentities": 71,
+      "originalDistortionRetained": {
+        "count": 71,
+        "medianPx": 0.20590443346902054,
+        "p90Px": 0.4697360330197171,
+        "maximumPx": 0.6199947222304347,
+        "atMost1Px": 71
+      },
+      "distortionOmittedWithRefit": {
+        "count": 71,
+        "medianPx": 9.863381570772068,
+        "p90Px": 19.01003469653223,
+        "maximumPx": 39.98517406736936,
+        "atMost1Px": 0
+      },
+      "distortionOmittedTrainingResidual": {
+        "count": 159,
+        "medianPx": 9.605816039900462,
+        "p90Px": 19.209145199110086,
+        "maximumPx": 30.72405069568854,
+        "atMost1Px": 1
+      }
+    },
+    {
+      "exposure": "j8f866kfq_flc.fits",
+      "chip": 1,
+      "fixedTrainingPairs": 99,
+      "heldCentroidsInOriginalCohort": 341,
+      "fixedIdentities": 44,
+      "originalDistortionRetained": {
+        "count": 44,
+        "medianPx": 0.32378495583932165,
+        "p90Px": 0.5363024646648946,
+        "maximumPx": 0.8114983816744747,
+        "atMost1Px": 44
+      },
+      "distortionOmittedWithRefit": {
+        "count": 44,
+        "medianPx": 10.49299623719791,
+        "p90Px": 24.55713421786802,
+        "maximumPx": 42.87718615969072,
+        "atMost1Px": 0
+      },
+      "distortionOmittedTrainingResidual": {
+        "count": 99,
+        "medianPx": 9.563911604313562,
+        "p90Px": 20.01976813010351,
+        "maximumPx": 34.31743846557999,
+        "atMost1Px": 0
+      }
+    },
+    {
+      "exposure": "j8f866khq_flc.fits",
+      "chip": 2,
+      "fixedTrainingPairs": 119,
+      "heldCentroidsInOriginalCohort": 395,
+      "fixedIdentities": 71,
+      "originalDistortionRetained": {
+        "count": 71,
+        "medianPx": 0.20527838326835268,
+        "p90Px": 0.4774653725390842,
+        "maximumPx": 0.6400146746521661,
+        "atMost1Px": 71
+      },
+      "distortionOmittedWithRefit": {
+        "count": 71,
+        "medianPx": 9.025033741093148,
+        "p90Px": 17.779690845541275,
+        "maximumPx": 36.965288893195165,
+        "atMost1Px": 0
+      },
+      "distortionOmittedTrainingResidual": {
+        "count": 119,
+        "medianPx": 10.552148699040236,
+        "p90Px": 19.506372387035814,
+        "maximumPx": 28.142147953939503,
+        "atMost1Px": 0
+      }
+    },
+    {
+      "exposure": "j8f866khq_flc.fits",
+      "chip": 1,
+      "fixedTrainingPairs": 69,
+      "heldCentroidsInOriginalCohort": 341,
+      "fixedIdentities": 44,
+      "originalDistortionRetained": {
+        "count": 44,
+        "medianPx": 0.3111774434220691,
+        "p90Px": 0.5355741268299365,
+        "maximumPx": 0.8503128899506848,
+        "atMost1Px": 44
+      },
+      "distortionOmittedWithRefit": {
+        "count": 44,
+        "medianPx": 11.033258055617104,
+        "p90Px": 24.248750986967835,
+        "maximumPx": 44.338798728946976,
+        "atMost1Px": 0
+      },
+      "distortionOmittedTrainingResidual": {
+        "count": 69,
+        "medianPx": 8.686590624257136,
+        "p90Px": 20.29469126534151,
+        "maximumPx": 28.81368829819365,
+        "atMost1Px": 3
+      }
+    }
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}
