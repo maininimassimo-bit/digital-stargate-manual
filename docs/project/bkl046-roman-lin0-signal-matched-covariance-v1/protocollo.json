@@ -1,0 +1,7 @@
+{
+  "schema": "BKL046_ROMAN_PAIRED_SIGNAL_COVARIANCE_V1",
+  "parentProgram": "b8351d0b6b9bcf18aa2952e057cc44094a656daafb4729d3ed830be65b553043",
+  "parentPlan": "22063f3975fe59405d519d1b02dfa049f234532e68693b9bc3bf58fc8dc99373",
+  "parentDetail": "ba4bc684924e7f5182a75db87f475d0bebac526e2d56b4fb5d3fa9108fb47047",
+  "rule": "For each band and channel, use the source GAIN groups defined by the fixed read indices. Obtain source ADU anchors as the medians of the input pair mean signal over the same valid support. Predict the held LIN0 pair using linear interpolation between the two nearest bracketing source covariance shapes. Refuse extrapolation. Use the identical target scalar variance and mask for all comparisons. First replay the exact earlier LIN0 comparison for all 2880 cases. Summarize only accepted matches while preserving every out-of-range row. No calibration of incident dose."
+}
