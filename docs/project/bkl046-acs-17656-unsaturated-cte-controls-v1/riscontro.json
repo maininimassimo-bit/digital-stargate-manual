@@ -1,0 +1,104 @@
+{
+  "brightnessBins": [
+    {
+      "all": {
+        "changePercentagePoints": {
+          "max": -0.3531202515364984,
+          "median": -1.5430559172611158,
+          "min": -4.593926382252301,
+          "p90Abs": 3.5195259119520728
+        },
+        "flcLongMinusShortPercent": {
+          "max": 1.4582129369067554,
+          "median": 0.6805411955720819,
+          "min": -0.698507181492658,
+          "p90Abs": 1.2269999586345293
+        },
+        "fltLongMinusShortPercent": {
+          "max": 4.60271419865268,
+          "median": 2.0079529827920606,
+          "min": 0.3143131224833784,
+          "p90Abs": 4.0081739687613025
+        },
+        "n": 27
+      },
+      "holdout": {
+        "changePercentagePoints": {
+          "max": -0.39592977264966134,
+          "median": -1.1832138763908873,
+          "min": -4.593926382252301,
+          "p90Abs": 3.238164743567703
+        },
+        "flcLongMinusShortPercent": {
+          "max": 1.28146424219171,
+          "median": 0.8247391064011733,
+          "min": -0.698507181492658,
+          "p90Abs": 1.2552509639955955
+        },
+        "fltLongMinusShortPercent": {
+          "max": 3.895419200759642,
+          "median": 2.3989066867499576,
+          "min": 1.0968809913002309,
+          "p90Abs": 3.7276404162856647
+        },
+        "n": 7
+      },
+      "relativeShortRate": [
+        0.1,
+        0.25
+      ]
+    },
+    {
+      "all": {
+        "changePercentagePoints": null,
+        "flcLongMinusShortPercent": null,
+        "fltLongMinusShortPercent": null,
+        "n": 0
+      },
+      "holdout": {
+        "changePercentagePoints": null,
+        "flcLongMinusShortPercent": null,
+        "fltLongMinusShortPercent": null,
+        "n": 0
+      },
+      "relativeShortRate": [
+        0.25,
+        0.5
+      ]
+    },
+    {
+      "all": {
+        "changePercentagePoints": null,
+        "flcLongMinusShortPercent": null,
+        "fltLongMinusShortPercent": null,
+        "n": 0
+      },
+      "holdout": {
+        "changePercentagePoints": null,
+        "flcLongMinusShortPercent": null,
+        "fltLongMinusShortPercent": null,
+        "n": 0
+      },
+      "relativeShortRate": [
+        0.5,
+        2
+      ]
+    }
+  ],
+  "counts": {
+    "LONG_CENTROID": 73,
+    "OK": 27,
+    "SHORT_CENTROID": 2960,
+    "SHORT_EDGE": 10,
+    "SHORT_RATE_OUTSIDE_RANGE": 30,
+    "SHORT_REPEAT": 12,
+    "SHORT_SELECTED": 115,
+    "SHORT_SUPPORT": 57,
+    "SUPPORT": 15
+  },
+  "primaryTargetReferenceShortRate": 10535.820543459526,
+  "protocolSha256": "151750875abf12f1fc26cf144f702bc11bcd7fc24014fb081757ccc01fba6bc0",
+  "schema": "BKL046_ACS17656_UNSATURATED_FLUX_CONTROL_V1",
+  "scientificClosures": 0,
+  "targetFLCMeanLongMinusShortPercent": 2.088838430441653
+}

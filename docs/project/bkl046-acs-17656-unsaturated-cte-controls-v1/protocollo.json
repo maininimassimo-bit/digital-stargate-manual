@@ -1,0 +1,35 @@
+{
+  "schema": "BKL046_ACS17656_UNSATURATED_FLUX_CONTROL_V1",
+  "gaiaCode": "90169aa2e27cf02cf4c79c5bb6259f7f5d0271d0b2548a0ee168613839c1ea08",
+  "gaiaProtocol": "e3b4ebf14e293d56fa867836968c1d8c015c1984068228b03bbb5e5add1d83d9",
+  "cteProtocol": "68a72cb299fe5b3bed210b83415a90c766f0f33e183398c332e1f86031d01b10",
+  "cteReport": "e6d390fe513aa9b66ec0d4189596dd775a0278b68480b82e4d9bf83f4351a569",
+  "originalProtocol": "82ff2d6cc78f0d7b4e096212e7c6fab3a6b4ffa6d1d59bfe90b0975c6135e91c",
+  "siblingProtocol": "104cf3d3c07c6e23b96b3040ef09870da43d6a51ee5c1d5afe72a55d21701fe8",
+  "radiusPx": 10,
+  "skyPx": [
+    35,
+    48
+  ],
+  "minimumSkyPixels": 400,
+  "minimumSupportFraction": 0.94,
+  "originalSupportFraction": 0.97,
+  "minimumShortSupportFraction": 0.94,
+  "maximumShortRepeatPercent": 2,
+  "brightnessBins": [
+    [
+      0.1,
+      0.25
+    ],
+    [
+      0.25,
+      0.5
+    ],
+    [
+      0.5,
+      2
+    ]
+  ],
+  "heldout": "Prior frozen Gaia sky tiles",
+  "scope": "Select identities and brightness from two short unsaturated FLT controls. Determine long centroids without using ratios. For accepted controls use same aperture offsets in all eight detector stamps. This provides diagnostic comparisons and no scientific closure."
+}
