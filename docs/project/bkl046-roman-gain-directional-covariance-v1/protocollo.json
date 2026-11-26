@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_DIRECTIONAL_COVARIANCE_V1",
+  "spatialProgram": "ef4543fc5025e0b301a0c63ca55ab07752e30cc91aec44f97a188ff5e4d0cdfb",
+  "spatialReport": "174d01a1b2d53be23c49b3e3915a9151d7ec9dd5290557c69e16f1739acb3a55",
+  "spatialCapture": "8948884b38d16ed2f8ba1ed092f4151999542a86d5cf4ef483d63ff9108ad9d0",
+  "channelsProgram": "23207e128119ee2d45259b9b05197638838f971541cf71166e6c9ec3b6e03988",
+  "phases": [
+    [
+      0,
+      0
+    ],
+    [
+      0.5,
+      0
+    ],
+    [
+      0,
+      0.5
+    ],
+    [
+      0.5,
+      0.5
+    ],
+    [
+      0.25,
+      0.75
+    ]
+  ],
+  "design": "Use two archived noncentral bands, common 3x3 masks across all phases, 20 disjoint-in-pair exposures, 32 channels and the same ramp read indices. Duplicate the archived half/half reference exactly; the zero-shift case has identical full and diagonal analytical predictions. Compare directional differences within pair, channel, band and read. Quantiles are descriptive, not cross-exposure confidence intervals."
+}
