@@ -1,0 +1,126 @@
+{
+  "schema": "BKL046_INSTALLED_CANDIDATE_PROVENANCE_V1",
+  "ledgerSha256": "8262abbf38e1c68cedf124e9fced85520b450fc3c859d93629a756000ea7d494",
+  "priorInventorySha256": "903a27f3cf09d29c9d4a922a2aa84ff71ba29dd54c89a8bc9b87fd5e58fd58d8",
+  "runtimeSha256": "76d2339130b58be3d112b66cafc578d9f859d80c96842b2ba2dfbbdcdc8b2943",
+  "requirementCount": 4920,
+  "candidates": [
+    {
+      "id": "script_file:src/scripts/AstrometricRegistration/AstrometricRegistration.js",
+      "installedSha256": "02128a8ec755cbac515ef09e7b19c5badd368cf102d12357a38953335587dbcf",
+      "feature": "AstrometricRegistration : Image Registration > AstrometricRegistration",
+      "declarationLine": 20,
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "INSTALLED_FEATURE_DECLARATION",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "script_file:src/scripts/BlindSolver/BlindSolver.js",
+      "installedSha256": "cf117244161f18cfb2694486238bbddcd793d630d5114436f11fc645c0a1bd4e",
+      "feature": "BlindSolver : Astrometry > BlindSolver",
+      "declarationLine": 19,
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "INSTALLED_FEATURE_DECLARATION",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "script_file:src/scripts/FeatureRegistration/FeatureRegistration.js",
+      "installedSha256": "e915be8c5bde32dbd533900e784ff4a35b2f3794b645c5fb20f7919eaefe8aed",
+      "feature": "FeatureRegistration : Image Registration > FeatureRegistration",
+      "declarationLine": 20,
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "INSTALLED_FEATURE_DECLARATION",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "script_file:src/scripts/FilterGenerator/FilterGenerator.js",
+      "installedSha256": "3ac8db7645824e7eb55d027f6c1051f0fa70e077bec2d91e3ff366dec93ba748",
+      "feature": "FilterGenerator : Utilities > FilterGenerator",
+      "declarationLine": 20,
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "INSTALLED_FEATURE_DECLARATION",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "script_file:src/scripts/PhotometricAnalysis/PhotometricAnalysis.js",
+      "installedSha256": "cc1ab4d8cb29b5373ea7e659cd12ea4d1858b46c36e270d8a373a73d46b5f282",
+      "feature": "PhotometricAnalysis : Photometry > PhotometricAnalysis",
+      "declarationLine": 20,
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "INSTALLED_FEATURE_DECLARATION",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "script_file:src/scripts/SkyChartGenerator/SkyChartGenerator.js",
+      "installedSha256": "529db8144fb3ed27398abdcd3bedf1bf8dcb77661e5450ce1aac047757a70724",
+      "feature": "SkyChartGenerator : Astrometry > SkyChartGenerator | Render > SkyChartGenerator",
+      "declarationLine": 19,
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "INSTALLED_FEATURE_DECLARATION",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "script_file:src/scripts/WBPPLogAnalysis/WBPPLogAnalysis.js",
+      "installedSha256": "dfc4fa33bb8b977a4bfe37f4c64b65f8dbabb0709f0bc1b64396a26844a54c34",
+      "feature": "WBPPLogAnalysis : Batch Processing > WBPPLogAnalysis",
+      "declarationLine": 19,
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "INSTALLED_FEATURE_DECLARATION",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "process:ExtendedSources",
+      "observedCallSites": [
+        {
+          "path": "src/scripts/PhotometricAnalysis/PhotometricAnalysisData.js",
+          "line": 1461,
+          "scriptSha256": "b9b710d28267d9a60258406c44893faacc81c557a7f149b0b5642c7d1e9dec47",
+          "modulePath": "bin/ExtendedSources-pxm.dll",
+          "moduleSha256": "f62e2004f0bfd4e034214305d480c21aec4ee7ad8a2cfbba85fdad1e1e483ee6"
+        },
+        {
+          "path": "src/scripts/SkyChartGenerator/ChartLayers.js",
+          "line": 1544,
+          "scriptSha256": "3a2ba7387f96bbb6cb17e7e8143ded1cf81cf38981f408f6005dd829d36c3d6d",
+          "modulePath": "bin/ExtendedSources-pxm.dll",
+          "moduleSha256": "f62e2004f0bfd4e034214305d480c21aec4ee7ad8a2cfbba85fdad1e1e483ee6"
+        }
+      ],
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "CONSTRUCTOR_CALL_AND_INSTALLED_MODULE",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    },
+    {
+      "id": "process:ImageAnalysis",
+      "observedCallSites": [
+        {
+          "path": "src/scripts/BatchPreprocessing/BPP-SubframeAnalyzer.js",
+          "line": 409,
+          "scriptSha256": "2e238f66ec3e0aa31cb791b1be9190ce55e8321f6d8023694b289f10c33d4620",
+          "modulePath": "bin/ImageAnalysis-pxm.dll",
+          "moduleSha256": "fd421a2d4abe392a72ca9fd02c365716c202aaf3df8a61eabc7a8214893d16bc"
+        }
+      ],
+      "exactLedgerIdPresent": false,
+      "evidenceClass": "CONSTRUCTOR_CALL_AND_INSTALLED_MODULE",
+      "runtimeRegistrationObserved": false,
+      "scientificClosure": false
+    }
+  ],
+  "legacyBlindSolver": {
+    "ledgerId": "script_file:src/scripts/BlindSolver2000.js",
+    "installedAtIndexedPath": false,
+    "equivalenceToBlindSolverVerified": false
+  },
+  "canonicalScopeUpdated": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
