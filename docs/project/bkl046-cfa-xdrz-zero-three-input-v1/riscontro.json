@@ -1,0 +1,176 @@
+{
+  "schema": "BKL046_CFA_XDRZ_ZERO_THREE_INPUT_V1",
+  "fixtureManifestSha256": "6fd2da645650a19f4654276607612c0af5ba193734a0087fc221058aab4fe16b",
+  "parentPlanSha256": "377aea9a4decbf470a95c92f7f85852bc59f5e056b76a8c7ae110e842fcfd6e7",
+  "runtimeFiles": {
+    "bin/PixInsight.exe": "76d2339130b58be3d112b66cafc578d9f859d80c96842b2ba2dfbbdcdc8b2943",
+    "bin/ImageIntegration-pxm.dll": "8dab04a799b0d269ab00af9ad57617cb80c6f195b668c259dc63350b45d46433",
+    "src/scripts/BatchPreprocessing/BPP-processing.js": "8825a187d1c9ac1962720ee990636bdd190900587e46a24c30c37c2ae909f521"
+  },
+  "settings": {
+    "scale": 1,
+    "dropShrink": 0.7,
+    "kernel": "Square",
+    "useLUT": false,
+    "enableCFA": true,
+    "cfaPattern": "Auto reading RGGB from XDRZ",
+    "weighting": false,
+    "splines": false,
+    "localNormalization": false
+  },
+  "arms": [
+    {
+      "id": "unmasked",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-unmasked.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": false
+    },
+    {
+      "id": "mask-green",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-mask-green.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": true
+    },
+    {
+      "id": "mask-wrong-channel",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-mask-wrong-channel.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": true
+    },
+    {
+      "id": "zero-detector",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-zero-detector.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-zero-detector-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": false
+    },
+    {
+      "id": "zero-reference",
+      "xdrz": [
+        "integer-a.xdrz",
+        "integer-b-zero-reference.xdrz",
+        "integer-c.xdrz"
+      ],
+      "cfa": [
+        "integer-a-cfa.fits",
+        "integer-b-zero-reference-cfa.fits",
+        "integer-c-cfa.fits"
+      ],
+      "rejection": false
+    }
+  ],
+  "requiredExports": [
+    "effective parameters",
+    "console and exit",
+    "linear RGB",
+    "raw RGB weights"
+  ],
+  "nativeExecutions": 0,
+  "scientificClosures": 0,
+  "predictions": [
+    {
+      "model": "detector",
+      "detectorXY": [
+        14,
+        7
+      ],
+      "referenceXY": [
+        13,
+        8
+      ],
+      "originalSample": 0.75,
+      "included": [
+        0.5,
+        2
+      ],
+      "zeroWeightRetained": [
+        0.125,
+        2
+      ],
+      "sampleExcluded": [
+        0.25,
+        1
+      ]
+    },
+    {
+      "model": "reference",
+      "detectorXY": [
+        15,
+        6
+      ],
+      "referenceXY": [
+        14,
+        7
+      ],
+      "originalSample": 0.800000011920929,
+      "included": [
+        0.49000000953674316,
+        2
+      ],
+      "zeroWeightRetained": [
+        0.09000000357627869,
+        2
+      ],
+      "sampleExcluded": [
+        0.18000000715255737,
+        1
+      ]
+    }
+  ],
+  "outputs": {
+    "detector-expected-rgb.fits": "832ef67264ad00802b58f262afcf1429e8952695068dc56ca827e4fd38d5542f",
+    "detector-expected-weight.fits": "60dd4ab539bceac2e1c1e4d812a3f51699177deb4ae8a296bc9a2c7ae0b331c1",
+    "integer-a-cfa.fits": "ef3a3958294200529c93bb26b647b63b96942bc4a8ec5dac54b5205b46b42fa0",
+    "integer-a-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-a.xdrz": "7d7fef58576769ad2caa620bf278e3bb74ee471b869328987d2984aca9c6ee0a",
+    "integer-b-cfa.fits": "37eb46cecc18f2fd55b1b92e098bbe8fdc4db778f4752f5f12a74a923089ebf2",
+    "integer-b-mask-green.xdrz": "8a404d51d98984e580d6ffad3cca43973d7ad932821d9f80b8d33c0de63401f1",
+    "integer-b-mask-wrong-channel.xdrz": "b0d3782503afae394509ccc718c4be739b574ca225bf3d62d6bc15d9b0c2b51b",
+    "integer-b-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-b-unmasked.xdrz": "4b8167c8b0758f5bfde03bda68d2cb0e3c004246a66ba133b04aa3e4a373d7b8",
+    "integer-b-zero-detector-cfa.fits": "8fe8c8bb506b3e0e04bfd6e520dc7df2bfaff84869377743167129e7e157ec0e",
+    "integer-b-zero-detector.xdrz": "13a0775cf0dff32090a15332830814857c7d401d7310472346a6f24a85310c77",
+    "integer-b-zero-reference-cfa.fits": "45f4f4f4d920c3d2248de544d762ba75ef034ff2109cc76e7594ce5f7d7ac2be",
+    "integer-b-zero-reference.xdrz": "2d3e8045529c0cc58b953dc56bcc19ad45e1932bbf6f6af6fc0ab3c9c482f99c",
+    "integer-c-cfa.fits": "af752828b3baf73487774de339cf520d103544a3c6a2b2eb1026f5286b307b91",
+    "integer-c-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-c.xdrz": "c85141e16ab148e4f023e30ceabbc5f98c2c7a72170f74761846a5e6a863f844",
+    "reference-expected-rgb.fits": "2a4b6d48802ffbf39d7cf2f54928dff8befae256292d13619303d0df2b7149b7",
+    "reference-expected-weight.fits": "c422021f532c2d7700a78076ff1864ce08754cd8343d120727c6b3427a3fa97c",
+    "unmasked-expected-rgb.fits": "89d043e7c37742574f0489eec805736eac9b7252da97a74fbae3bda47a9e2a1e",
+    "unmasked-expected-weight.fits": "a9f08ec2b2e7ea1187158274a1b4ee3f106a1a0b143bb569d154173d6644383a",
+    "zero-detector-retained-expected-rgb.fits": "06b1eb7952ef0586c66159da07983d8c8efd76437736cbd2856c15eeb54630aa",
+    "zero-reference-retained-expected-rgb.fits": "6285d3b06924e6e8bb6cd685b20a6ce99e8ebd0a47cae399948f404ace334d79"
+  }
+}
