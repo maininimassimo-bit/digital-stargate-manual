@@ -1,0 +1,209 @@
+{
+  "capture": {
+    "dark": [
+      {
+        "file": "sample-1.CR2",
+        "iso": 800,
+        "maximumRaw": [
+          14043,
+          14043,
+          14043,
+          14042
+        ],
+        "seconds": 45.4
+      },
+      {
+        "file": "sample-2.CR2",
+        "iso": 800,
+        "maximumRaw": [
+          14043,
+          14042,
+          14043,
+          14042
+        ],
+        "seconds": 45.4
+      },
+      {
+        "file": "sample-3.CR2",
+        "iso": 800,
+        "maximumRaw": [
+          14043,
+          14043,
+          14043,
+          14042
+        ],
+        "seconds": 45.4
+      }
+    ],
+    "light": [
+      {
+        "file": "EOS6D-light-sample-1.CR2",
+        "iso": 800,
+        "maximumRaw": [
+          14043,
+          14042,
+          14100,
+          14042
+        ],
+        "seconds": 45.3
+      },
+      {
+        "file": "EOS6D-light-sample-2.CR2",
+        "iso": 800,
+        "maximumRaw": [
+          14043,
+          14042,
+          14043,
+          14042
+        ],
+        "seconds": 45.3
+      },
+      {
+        "file": "EOS6D-light-sample-3.CR2",
+        "iso": 800,
+        "maximumRaw": [
+          14043,
+          14043,
+          15757,
+          14042
+        ],
+        "seconds": 45.3
+      }
+    ]
+  },
+  "matchedDarkFiles": [],
+  "phases": [
+    {
+      "dark": [
+        {
+          "allDarkAtWhite": 7,
+          "dark": "sample-1.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 5,
+          "recurrentLightSitesAtWhiteInDark": 5,
+          "tailThresholdDN": 2082.0
+        },
+        {
+          "allDarkAtWhite": 6,
+          "dark": "sample-2.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 5,
+          "recurrentLightSitesAtWhiteInDark": 5,
+          "tailThresholdDN": 2082.0
+        },
+        {
+          "allDarkAtWhite": 6,
+          "dark": "sample-3.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 5,
+          "recurrentLightSitesAtWhiteInDark": 5,
+          "tailThresholdDN": 2089.0
+        }
+      ],
+      "darkAtWhiteInAllAndLightAtWhiteInAll": 5,
+      "lightHitInAllAtPlateau": 5,
+      "lightHitInAllAtWhite": 5,
+      "phase": "R"
+    },
+    {
+      "dark": [
+        {
+          "allDarkAtWhite": 10,
+          "dark": "sample-1.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 9,
+          "recurrentLightSitesAtWhiteInDark": 9,
+          "tailThresholdDN": 2082.0
+        },
+        {
+          "allDarkAtWhite": 10,
+          "dark": "sample-2.CR2",
+          "recurrentLightSiteDarkMaxDN": 14042,
+          "recurrentLightSitesAtDarkTail": 9,
+          "recurrentLightSitesAtWhiteInDark": 9,
+          "tailThresholdDN": 2082.0
+        },
+        {
+          "allDarkAtWhite": 11,
+          "dark": "sample-3.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 9,
+          "recurrentLightSitesAtWhiteInDark": 9,
+          "tailThresholdDN": 2092.0
+        }
+      ],
+      "darkAtWhiteInAllAndLightAtWhiteInAll": 9,
+      "lightHitInAllAtPlateau": 7,
+      "lightHitInAllAtWhite": 9,
+      "phase": "G1"
+    },
+    {
+      "dark": [
+        {
+          "allDarkAtWhite": 5,
+          "dark": "sample-1.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 4,
+          "recurrentLightSitesAtWhiteInDark": 4,
+          "tailThresholdDN": 2082.0
+        },
+        {
+          "allDarkAtWhite": 5,
+          "dark": "sample-2.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 4,
+          "recurrentLightSitesAtWhiteInDark": 4,
+          "tailThresholdDN": 2082.0
+        },
+        {
+          "allDarkAtWhite": 5,
+          "dark": "sample-3.CR2",
+          "recurrentLightSiteDarkMaxDN": 14043,
+          "recurrentLightSitesAtDarkTail": 4,
+          "recurrentLightSitesAtWhiteInDark": 4,
+          "tailThresholdDN": 2091.0
+        }
+      ],
+      "darkAtWhiteInAllAndLightAtWhiteInAll": 4,
+      "lightHitInAllAtPlateau": 4,
+      "lightHitInAllAtWhite": 4,
+      "phase": "G2"
+    },
+    {
+      "dark": [
+        {
+          "allDarkAtWhite": 7,
+          "dark": "sample-1.CR2",
+          "recurrentLightSiteDarkMaxDN": 14042,
+          "recurrentLightSitesAtDarkTail": 7,
+          "recurrentLightSitesAtWhiteInDark": 7,
+          "tailThresholdDN": 2081.0
+        },
+        {
+          "allDarkAtWhite": 7,
+          "dark": "sample-2.CR2",
+          "recurrentLightSiteDarkMaxDN": 14042,
+          "recurrentLightSitesAtDarkTail": 7,
+          "recurrentLightSitesAtWhiteInDark": 7,
+          "tailThresholdDN": 2081.0
+        },
+        {
+          "allDarkAtWhite": 7,
+          "dark": "sample-3.CR2",
+          "recurrentLightSiteDarkMaxDN": 14042,
+          "recurrentLightSitesAtDarkTail": 7,
+          "recurrentLightSitesAtWhiteInDark": 7,
+          "tailThresholdDN": 2085.0
+        }
+      ],
+      "darkAtWhiteInAllAndLightAtWhiteInAll": 7,
+      "lightHitInAllAtPlateau": 7,
+      "lightHitInAllAtWhite": 7,
+      "phase": "B"
+    }
+  ],
+  "protocolSha256": "803c558d532f7cc8e46e34952e2d93b74b8babb180f9bace3b401fd756df1104",
+  "schema": "BKL046_EOS6D_DARK_FIXED_HIGH_CODES_V1",
+  "scientificClosures": 0,
+  "temperatureVerified": false
+}
