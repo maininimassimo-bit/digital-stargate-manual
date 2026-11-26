@@ -1,0 +1,118 @@
+{
+  "archiveBytes": 63989165,
+  "archiveCount": 7,
+  "entries": [
+    {
+      "archiveBytes": 63924398,
+      "archiveSha256": "5fc6e3d231d775f6004b756dad5616f41b6434d42c2e5ed1bffee2becb0a8d16",
+      "axis": "CFA_DITHER_DRIZZLE/1",
+      "commit": "d4d37495ac9d929215ebf6656d9d068430300db1",
+      "gitBlob": "3a1992633da20887458c316e850989c09b167e69",
+      "id": "EOS6D",
+      "path": "docs/project/bkl046-cfa-m51-eos6d-v1/riscontro.json",
+      "receiptSha256": "01e6cd14008e54021a5982690be30ab583e35ed1eb4537dcc4ac5ccdc2fca25a",
+      "verifiedArchiveCopies": 2
+    },
+    {
+      "archiveBytes": 5972,
+      "archiveSha256": "3443e79887684e8c008c037ea8994b7fefd0043d10fcc4fd3d8823061d670400",
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "commit": "c2915172e3f4a790d24d9e592e049293ffbdca9a",
+      "gitBlob": "bdbe7ef9ba1107e26486191197e20cf0bdac0599",
+      "id": "CFA-registration",
+      "path": "docs/project/bkl046-m51-cfa-registration-v1/riscontro.json",
+      "receiptSha256": "3bf4620f711d49e138d1ec36d51f7f4087cd48616a7903a65565b9a45e05c376",
+      "verifiedArchiveCopies": 2
+    },
+    {
+      "archiveBytes": 6703,
+      "archiveSha256": "052aa154fdd1a3366b71392b5cddf120deff43c3221df2a38f5bed91968899b0",
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "commit": "fed7a2cac13f9183f93996d226b38d04ebe1a8df",
+      "gitBlob": "3cb265e809f23b1fe499af0dbebf57bc41c8ffda",
+      "id": "stellar-associations",
+      "path": "docs/project/bkl046-m51-stellar-cfa-association-v1/riscontro.json",
+      "receiptSha256": "78dbd7a475d33b0ce6c30bc39e02b0119467b5898c1b3b67f421e5f4dab367af",
+      "verifiedArchiveCopies": 2
+    },
+    {
+      "archiveBytes": 34618,
+      "archiveSha256": "4114447151b3da80c0b64b189a1a08cfb3a5d1525d6512e884a97a0e4939a51d",
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "commit": "201392e14a06f473a6932bea62a874eb641ee47d",
+      "gitBlob": "f9611690a749b2932aa3f5e557c4b9fa2a46dcc8",
+      "id": "Gaia-identities",
+      "path": "docs/project/bkl046-m51-gaia-identity-validation-v1/riscontro.json",
+      "receiptSha256": "0a6f366bb95b9d83526d2a45e63408ca8b286553249a26079adaf7e6259f1aad",
+      "verifiedArchiveCopies": 2
+    },
+    {
+      "archiveBytes": 6411,
+      "archiveSha256": "7fe3439b4332eb1dc4f1ee85b476f602ff9e9175be1fb53551c91df25356e01f",
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "commit": "34e6028ab15f292ea822602595202be4e78926f0",
+      "gitBlob": "e33626dee75ebc19fa70b773017e4ddfb5fa9193",
+      "id": "green-centroids",
+      "path": "docs/project/bkl046-m51-native-green-centroid-v1/riscontro.json",
+      "receiptSha256": "61f1a5dd0842ff43f4594adc26beac4e2c0176fffc6cb28ec8950f30e7239e8e",
+      "verifiedArchiveCopies": 2
+    },
+    {
+      "archiveBytes": 5567,
+      "archiveSha256": "be1503b02e3466d0139bfa71354a1dd81d6df7fae711b9dd1796c92a6696471e",
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "commit": "e0f8f3250caeb96e421cb93f27c73b865b51a5dd",
+      "gitBlob": "0f1ca253a981bbdbb15332359d82f4faf9e07fa8",
+      "id": "relative-distortion",
+      "path": "docs/project/bkl046-m51-relative-distortion-v1/riscontro.json",
+      "receiptSha256": "6b93c7b02491adefe12ed6ea2461e609a055709cfa77333fcaad0b7d10aceeaa",
+      "verifiedArchiveCopies": 2
+    },
+    {
+      "archiveBytes": 5496,
+      "archiveSha256": "4dd3d92d87f22b768397d37a274e5ade20be8f61d969622724f4dc3d58b1b637",
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "commit": "7f3a10476c0047904a7ad70d463f0b4282616bba",
+      "gitBlob": "4a4563727deb5fd70575f4396a5d31985ae802d1",
+      "id": "signal-weights",
+      "path": "docs/project/bkl046-m51-signal-weighted-registration-v1/riscontro.json",
+      "receiptSha256": "56028aa533f8b07e9effb694709366ab868fd7453c6069b8d7be966c4a6aabcb",
+      "verifiedArchiveCopies": 2
+    }
+  ],
+  "findings": {
+    "CFA_DITHER_DRIZZLE/1": {
+      "archiveFrames": 159,
+      "residual": "Independent camera phase and comparative native Bayer reduction remain open.",
+      "sampleFrames": 3,
+      "status": "OPEN",
+      "storedPhase": "RGGB"
+    },
+    "CFA_DITHER_DRIZZLE/2": {
+      "diagnosticP90NativePx": 0.3,
+      "residual": "Independent repeated fields, uncertainty and matched-scale native validation remain open.",
+      "status": "OPEN",
+      "weightedMatchingP90NativePx": [
+        0.450868966742668,
+        0.5781245828255844
+      ]
+    }
+  },
+  "ledgerScope": {
+    "axes": 25,
+    "completeGitHubTransfer": false,
+    "completeStudy": false,
+    "criteria": 14521,
+    "families": 7,
+    "finalKnowledge": false,
+    "ownerCriteriaOpen": 19,
+    "requirements": 4920,
+    "scientificClosures": 0
+  },
+  "nativeExecutionsOfSupplement": 0,
+  "parentResidualLedgerSha256": "bb1ce8b299d8b7923103c8449c7d1a877804ca17b57ba0ae5de85e4aa11b2376",
+  "previousDeliverySupplementSha256": "5fc0d56a57404db5bc4d72ea03df3b9c454f715f8877c24cb03cd4f854e7854f",
+  "productionAdmissionRequested": false,
+  "schema": "BKL046_CFA_M51_EVIDENCE_APPEND_V1",
+  "supplementalArchivesDeliveredThroughGitHub": false
+}
