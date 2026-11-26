@@ -1,0 +1,853 @@
+{
+  "protocol": "BKL046_TV4_ARTIFICIAL_CENSORING_RECOVERY_DEVELOPMENT_PLAN_V1",
+  "protocolSha256": "45a56dff86e09b8b87af667a5c13c07f398b3621d31c484374051d20a17ae4e3",
+  "exactParentReplay": true,
+  "originallyCensoredRegionEvaluationsExcluded": 120,
+  "regionEvaluations": 120,
+  "actualSaturatedFluxRecovered": false,
+  "anyThresholdSelected": false,
+  "summary": [
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 388192,
+          "actuallyChanged": 388177,
+          "baselineAbsoluteErrorDn": 456996324.0,
+          "recoveredAbsoluteErrorDn": 10856306.5,
+          "baselineSignedTotalErrorDn": -456996324.0,
+          "recoveredSignedTotalErrorDn": -5534330.5,
+          "fractionalMaeReduction": 0.9762442148221744,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 293124,
+          "actuallyChanged": 292880,
+          "baselineAbsoluteErrorDn": 164171978.0,
+          "recoveredAbsoluteErrorDn": 8363085.5,
+          "baselineSignedTotalErrorDn": -164171978.0,
+          "recoveredSignedTotalErrorDn": -4603333.5,
+          "fractionalMaeReduction": 0.9490589953177028,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 68390,
+          "actuallyChanged": 68207,
+          "baselineAbsoluteErrorDn": 21192965.0,
+          "recoveredAbsoluteErrorDn": 1899801.5,
+          "baselineSignedTotalErrorDn": -21192965.0,
+          "recoveredSignedTotalErrorDn": -817255.5,
+          "fractionalMaeReduction": 0.9103569745903888,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 170277,
+          "actuallyChanged": 170151,
+          "baselineAbsoluteErrorDn": 74503236.0,
+          "recoveredAbsoluteErrorDn": 125551218.5,
+          "baselineSignedTotalErrorDn": -74503236.0,
+          "recoveredSignedTotalErrorDn": 125551218.5,
+          "fractionalMaeReduction": -0.6851780572323061,
+          "framesWithLowerAbsoluteError": 0
+        },
+        {
+          "fraction": 0.75,
+          "marked": 23198,
+          "actuallyChanged": 23089,
+          "baselineAbsoluteErrorDn": 5015775.0,
+          "recoveredAbsoluteErrorDn": 11443350.0,
+          "baselineSignedTotalErrorDn": -5015775.0,
+          "recoveredSignedTotalErrorDn": 11443350.0,
+          "fractionalMaeReduction": -1.2814719559788865,
+          "framesWithLowerAbsoluteError": 0
+        },
+        {
+          "fraction": 0.8,
+          "marked": 159,
+          "actuallyChanged": 158,
+          "baselineAbsoluteErrorDn": 11171.0,
+          "recoveredAbsoluteErrorDn": 54956.5,
+          "baselineSignedTotalErrorDn": -11171.0,
+          "recoveredSignedTotalErrorDn": 54956.5,
+          "fractionalMaeReduction": -3.9195685256467643,
+          "framesWithLowerAbsoluteError": 0
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 299105,
+          "actuallyChanged": 298915,
+          "baselineAbsoluteErrorDn": 187757124.0,
+          "recoveredAbsoluteErrorDn": 152499680.0,
+          "baselineSignedTotalErrorDn": -187757124.0,
+          "recoveredSignedTotalErrorDn": 152459361.0,
+          "fractionalMaeReduction": 0.1877821903577943,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 91457,
+          "actuallyChanged": 91259,
+          "baselineAbsoluteErrorDn": 28600154.0,
+          "recoveredAbsoluteErrorDn": 24893022.5,
+          "baselineSignedTotalErrorDn": -28600154.0,
+          "recoveredSignedTotalErrorDn": 24859993.5,
+          "fractionalMaeReduction": 0.12961928456748872,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 3734,
+          "actuallyChanged": 3706,
+          "baselineAbsoluteErrorDn": 490950.0,
+          "recoveredAbsoluteErrorDn": 514240.5,
+          "baselineSignedTotalErrorDn": -490950.0,
+          "recoveredSignedTotalErrorDn": 510636.5,
+          "fractionalMaeReduction": -0.04743965780629389,
+          "framesWithLowerAbsoluteError": 1
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 392744,
+          "actuallyChanged": 392740,
+          "baselineAbsoluteErrorDn": 565269650.0,
+          "recoveredAbsoluteErrorDn": 10612505.5,
+          "baselineSignedTotalErrorDn": -565269650.0,
+          "recoveredSignedTotalErrorDn": 2449923.5,
+          "fractionalMaeReduction": 0.9812257645532535,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 337212,
+          "actuallyChanged": 337081,
+          "baselineAbsoluteErrorDn": 257712708.0,
+          "recoveredAbsoluteErrorDn": 9097887.0,
+          "baselineSignedTotalErrorDn": -257712708.0,
+          "recoveredSignedTotalErrorDn": 1774875.0,
+          "fractionalMaeReduction": 0.9646975615963804,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 142338,
+          "actuallyChanged": 142072,
+          "baselineAbsoluteErrorDn": 53803512.0,
+          "recoveredAbsoluteErrorDn": 3843387.5,
+          "baselineSignedTotalErrorDn": -53803512.0,
+          "recoveredSignedTotalErrorDn": 633708.5,
+          "fractionalMaeReduction": 0.9285662337432545,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 389082,
+          "actuallyChanged": 389060,
+          "baselineAbsoluteErrorDn": 462432346.0,
+          "recoveredAbsoluteErrorDn": 10651580.5,
+          "baselineSignedTotalErrorDn": -462432346.0,
+          "recoveredSignedTotalErrorDn": -4393015.5,
+          "fractionalMaeReduction": 0.9769661863143112,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 292166,
+          "actuallyChanged": 291993,
+          "baselineAbsoluteErrorDn": 173208853.0,
+          "recoveredAbsoluteErrorDn": 8041419.0,
+          "baselineSignedTotalErrorDn": -173208853.0,
+          "recoveredSignedTotalErrorDn": -3472198.0,
+          "fractionalMaeReduction": 0.9535738568743943,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 79427,
+          "actuallyChanged": 79227,
+          "baselineAbsoluteErrorDn": 23103148.0,
+          "recoveredAbsoluteErrorDn": 2104003.5,
+          "baselineSignedTotalErrorDn": -23103148.0,
+          "recoveredSignedTotalErrorDn": -683949.5,
+          "fractionalMaeReduction": 0.9089300081530015,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 388192,
+          "actuallyChanged": 388177,
+          "baselineAbsoluteErrorDn": 456996324.0,
+          "recoveredAbsoluteErrorDn": 10808440.0,
+          "baselineSignedTotalErrorDn": -456996324.0,
+          "recoveredSignedTotalErrorDn": -5533117.0,
+          "fractionalMaeReduction": 0.9763489563649094,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 293124,
+          "actuallyChanged": 292880,
+          "baselineAbsoluteErrorDn": 164171978.0,
+          "recoveredAbsoluteErrorDn": 8326151.0,
+          "baselineSignedTotalErrorDn": -164171978.0,
+          "recoveredSignedTotalErrorDn": -4621745.0,
+          "fractionalMaeReduction": 0.9492839697649255,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 68390,
+          "actuallyChanged": 68207,
+          "baselineAbsoluteErrorDn": 21192965.0,
+          "recoveredAbsoluteErrorDn": 1902916.5,
+          "baselineSignedTotalErrorDn": -21192965.0,
+          "recoveredSignedTotalErrorDn": -858920.5,
+          "fractionalMaeReduction": 0.9102099918534288,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 170277,
+          "actuallyChanged": 170151,
+          "baselineAbsoluteErrorDn": 74503236.0,
+          "recoveredAbsoluteErrorDn": 125749807.5,
+          "baselineSignedTotalErrorDn": -74503236.0,
+          "recoveredSignedTotalErrorDn": 125749807.5,
+          "fractionalMaeReduction": -0.6878435656137138,
+          "framesWithLowerAbsoluteError": 0
+        },
+        {
+          "fraction": 0.75,
+          "marked": 23198,
+          "actuallyChanged": 23089,
+          "baselineAbsoluteErrorDn": 5015775.0,
+          "recoveredAbsoluteErrorDn": 11470395.5,
+          "baselineSignedTotalErrorDn": -5015775.0,
+          "recoveredSignedTotalErrorDn": 11470395.5,
+          "fractionalMaeReduction": -1.2868640439413648,
+          "framesWithLowerAbsoluteError": 0
+        },
+        {
+          "fraction": 0.8,
+          "marked": 159,
+          "actuallyChanged": 158,
+          "baselineAbsoluteErrorDn": 11171.0,
+          "recoveredAbsoluteErrorDn": 55143.0,
+          "baselineSignedTotalErrorDn": -11171.0,
+          "recoveredSignedTotalErrorDn": 55143.0,
+          "fractionalMaeReduction": -3.9362635395219767,
+          "framesWithLowerAbsoluteError": 0
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 299105,
+          "actuallyChanged": 298915,
+          "baselineAbsoluteErrorDn": 187757124.0,
+          "recoveredAbsoluteErrorDn": 152796250.0,
+          "baselineSignedTotalErrorDn": -187757124.0,
+          "recoveredSignedTotalErrorDn": 152758466.0,
+          "fractionalMaeReduction": 0.1862026497593774,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 91457,
+          "actuallyChanged": 91259,
+          "baselineAbsoluteErrorDn": 28600154.0,
+          "recoveredAbsoluteErrorDn": 24982464.5,
+          "baselineSignedTotalErrorDn": -28600154.0,
+          "recoveredSignedTotalErrorDn": 24951442.5,
+          "fractionalMaeReduction": 0.12649195874959274,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 3734,
+          "actuallyChanged": 3706,
+          "baselineAbsoluteErrorDn": 490950.0,
+          "recoveredAbsoluteErrorDn": 517782.5,
+          "baselineSignedTotalErrorDn": -490950.0,
+          "recoveredSignedTotalErrorDn": 514362.5,
+          "fractionalMaeReduction": -0.054654241776148194,
+          "framesWithLowerAbsoluteError": 1
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 392744,
+          "actuallyChanged": 392740,
+          "baselineAbsoluteErrorDn": 565269650.0,
+          "recoveredAbsoluteErrorDn": 10552125.5,
+          "baselineSignedTotalErrorDn": -565269650.0,
+          "recoveredSignedTotalErrorDn": 2056417.5,
+          "fractionalMaeReduction": 0.9813325808311131,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 337212,
+          "actuallyChanged": 337081,
+          "baselineAbsoluteErrorDn": 257712708.0,
+          "recoveredAbsoluteErrorDn": 9053514.0,
+          "baselineSignedTotalErrorDn": -257712708.0,
+          "recoveredSignedTotalErrorDn": 1438017.0,
+          "fractionalMaeReduction": 0.9648697416970218,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 142338,
+          "actuallyChanged": 142072,
+          "baselineAbsoluteErrorDn": 53803512.0,
+          "recoveredAbsoluteErrorDn": 3826001.5,
+          "baselineSignedTotalErrorDn": -53803512.0,
+          "recoveredSignedTotalErrorDn": 493781.5,
+          "fractionalMaeReduction": 0.928889372500442,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 389082,
+          "actuallyChanged": 389060,
+          "baselineAbsoluteErrorDn": 462432346.0,
+          "recoveredAbsoluteErrorDn": 10781014.0,
+          "baselineSignedTotalErrorDn": -462432346.0,
+          "recoveredSignedTotalErrorDn": -4844650.0,
+          "fractionalMaeReduction": 0.9766862891550411,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 292166,
+          "actuallyChanged": 291993,
+          "baselineAbsoluteErrorDn": 173208853.0,
+          "recoveredAbsoluteErrorDn": 8139502.5,
+          "baselineSignedTotalErrorDn": -173208853.0,
+          "recoveredSignedTotalErrorDn": -3805679.5,
+          "fractionalMaeReduction": 0.9530075838560054,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 79427,
+          "actuallyChanged": 79227,
+          "baselineAbsoluteErrorDn": 23103148.0,
+          "recoveredAbsoluteErrorDn": 2121687.5,
+          "baselineSignedTotalErrorDn": -23103148.0,
+          "recoveredSignedTotalErrorDn": -771527.5,
+          "fractionalMaeReduction": 0.9081645713389361,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 388192,
+          "actuallyChanged": 388177,
+          "baselineAbsoluteErrorDn": 456996324.0,
+          "recoveredAbsoluteErrorDn": 14708163.5,
+          "baselineSignedTotalErrorDn": -456996324.0,
+          "recoveredSignedTotalErrorDn": 12840795.5,
+          "fractionalMaeReduction": 0.9678155759082211,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 293124,
+          "actuallyChanged": 292880,
+          "baselineAbsoluteErrorDn": 164171978.0,
+          "recoveredAbsoluteErrorDn": 10967194.5,
+          "baselineSignedTotalErrorDn": -164171978.0,
+          "recoveredSignedTotalErrorDn": 9436902.5,
+          "fractionalMaeReduction": 0.9331969156149169,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 68390,
+          "actuallyChanged": 68207,
+          "baselineAbsoluteErrorDn": 21192965.0,
+          "recoveredAbsoluteErrorDn": 2859597.5,
+          "baselineSignedTotalErrorDn": -21192965.0,
+          "recoveredSignedTotalErrorDn": 2553390.5,
+          "fractionalMaeReduction": 0.8650685498702045,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 170277,
+          "actuallyChanged": 170151,
+          "baselineAbsoluteErrorDn": 74503236.0,
+          "recoveredAbsoluteErrorDn": 5024343.0,
+          "baselineSignedTotalErrorDn": -74503236.0,
+          "recoveredSignedTotalErrorDn": 3854142.0,
+          "fractionalMaeReduction": 0.9325620836120461,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 23198,
+          "actuallyChanged": 23089,
+          "baselineAbsoluteErrorDn": 5015775.0,
+          "recoveredAbsoluteErrorDn": 640909.0,
+          "baselineSignedTotalErrorDn": -5015775.0,
+          "recoveredSignedTotalErrorDn": 445462.0,
+          "fractionalMaeReduction": 0.8722213416670405,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 159,
+          "actuallyChanged": 158,
+          "baselineAbsoluteErrorDn": 11171.0,
+          "recoveredAbsoluteErrorDn": 3725.0,
+          "baselineSignedTotalErrorDn": -11171.0,
+          "recoveredSignedTotalErrorDn": 2425.0,
+          "fractionalMaeReduction": 0.6665473099991048,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 299105,
+          "actuallyChanged": 298915,
+          "baselineAbsoluteErrorDn": 187757124.0,
+          "recoveredAbsoluteErrorDn": 9251573.0,
+          "baselineSignedTotalErrorDn": -187757124.0,
+          "recoveredSignedTotalErrorDn": 7325338.0,
+          "fractionalMaeReduction": 0.9507258483571575,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 91457,
+          "actuallyChanged": 91259,
+          "baselineAbsoluteErrorDn": 28600154.0,
+          "recoveredAbsoluteErrorDn": 2740528.0,
+          "baselineSignedTotalErrorDn": -28600154.0,
+          "recoveredSignedTotalErrorDn": 2061716.0,
+          "fractionalMaeReduction": 0.9041778586227193,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 3734,
+          "actuallyChanged": 3706,
+          "baselineAbsoluteErrorDn": 490950.0,
+          "recoveredAbsoluteErrorDn": 114109.5,
+          "baselineSignedTotalErrorDn": -490950.0,
+          "recoveredSignedTotalErrorDn": 89233.5,
+          "fractionalMaeReduction": 0.7675740910479683,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 392744,
+          "actuallyChanged": 392740,
+          "baselineAbsoluteErrorDn": 565269650.0,
+          "recoveredAbsoluteErrorDn": 16834914.0,
+          "baselineSignedTotalErrorDn": -565269650.0,
+          "recoveredSignedTotalErrorDn": 15272098.0,
+          "fractionalMaeReduction": 0.9702179057375537,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 337212,
+          "actuallyChanged": 337081,
+          "baselineAbsoluteErrorDn": 257712708.0,
+          "recoveredAbsoluteErrorDn": 14371259.0,
+          "baselineSignedTotalErrorDn": -257712708.0,
+          "recoveredSignedTotalErrorDn": 12955056.0,
+          "fractionalMaeReduction": 0.9442353498532172,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 142338,
+          "actuallyChanged": 142072,
+          "baselineAbsoluteErrorDn": 53803512.0,
+          "recoveredAbsoluteErrorDn": 6183747.5,
+          "baselineSignedTotalErrorDn": -53803512.0,
+          "recoveredSignedTotalErrorDn": 5584170.5,
+          "fractionalMaeReduction": 0.8850679580173131,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 389082,
+          "actuallyChanged": 389060,
+          "baselineAbsoluteErrorDn": 462432346.0,
+          "recoveredAbsoluteErrorDn": 16069427.5,
+          "baselineSignedTotalErrorDn": -462432346.0,
+          "recoveredSignedTotalErrorDn": 14440129.5,
+          "fractionalMaeReduction": 0.9652502087299922,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 292166,
+          "actuallyChanged": 291993,
+          "baselineAbsoluteErrorDn": 173208853.0,
+          "recoveredAbsoluteErrorDn": 12166334.0,
+          "baselineSignedTotalErrorDn": -173208853.0,
+          "recoveredSignedTotalErrorDn": 10931309.0,
+          "fractionalMaeReduction": 0.929759167679495,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 79427,
+          "actuallyChanged": 79227,
+          "baselineAbsoluteErrorDn": 23103148.0,
+          "recoveredAbsoluteErrorDn": 3679404.5,
+          "baselineSignedTotalErrorDn": -23103148.0,
+          "recoveredSignedTotalErrorDn": 3433500.5,
+          "fractionalMaeReduction": 0.8407401233805887,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 388192,
+          "actuallyChanged": 388177,
+          "baselineAbsoluteErrorDn": 456996324.0,
+          "recoveredAbsoluteErrorDn": 14673026.5,
+          "baselineSignedTotalErrorDn": -456996324.0,
+          "recoveredSignedTotalErrorDn": 12792600.5,
+          "fractionalMaeReduction": 0.9678924627411226,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 293124,
+          "actuallyChanged": 292880,
+          "baselineAbsoluteErrorDn": 164171978.0,
+          "recoveredAbsoluteErrorDn": 10936102.5,
+          "baselineSignedTotalErrorDn": -164171978.0,
+          "recoveredSignedTotalErrorDn": 9392774.5,
+          "fractionalMaeReduction": 0.9333863023810312,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 68390,
+          "actuallyChanged": 68207,
+          "baselineAbsoluteErrorDn": 21192965.0,
+          "recoveredAbsoluteErrorDn": 2847995.0,
+          "baselineSignedTotalErrorDn": -21192965.0,
+          "recoveredSignedTotalErrorDn": 2536719.0,
+          "fractionalMaeReduction": 0.8656160192780953,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 170277,
+          "actuallyChanged": 170151,
+          "baselineAbsoluteErrorDn": 74503236.0,
+          "recoveredAbsoluteErrorDn": 4945117.5,
+          "baselineSignedTotalErrorDn": -74503236.0,
+          "recoveredSignedTotalErrorDn": 3715733.5,
+          "fractionalMaeReduction": 0.9336254669528716,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 23198,
+          "actuallyChanged": 23089,
+          "baselineAbsoluteErrorDn": 5015775.0,
+          "recoveredAbsoluteErrorDn": 631231.5,
+          "baselineSignedTotalErrorDn": -5015775.0,
+          "recoveredSignedTotalErrorDn": 426278.5,
+          "fractionalMaeReduction": 0.8741507543699627,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 159,
+          "actuallyChanged": 158,
+          "baselineAbsoluteErrorDn": 11171.0,
+          "recoveredAbsoluteErrorDn": 3658.5,
+          "baselineSignedTotalErrorDn": -11171.0,
+          "recoveredSignedTotalErrorDn": 2286.5,
+          "fractionalMaeReduction": 0.6725002237937516,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 299105,
+          "actuallyChanged": 298915,
+          "baselineAbsoluteErrorDn": 187757124.0,
+          "recoveredAbsoluteErrorDn": 9372184.0,
+          "baselineSignedTotalErrorDn": -187757124.0,
+          "recoveredSignedTotalErrorDn": 7523678.0,
+          "fractionalMaeReduction": 0.9500834706010942,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 91457,
+          "actuallyChanged": 91259,
+          "baselineAbsoluteErrorDn": 28600154.0,
+          "recoveredAbsoluteErrorDn": 2774986.5,
+          "baselineSignedTotalErrorDn": -28600154.0,
+          "recoveredSignedTotalErrorDn": 2121978.5,
+          "fractionalMaeReduction": 0.902973022452956,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 3734,
+          "actuallyChanged": 3706,
+          "baselineAbsoluteErrorDn": 490950.0,
+          "recoveredAbsoluteErrorDn": 115467.5,
+          "baselineSignedTotalErrorDn": -490950.0,
+          "recoveredSignedTotalErrorDn": 91581.5,
+          "fractionalMaeReduction": 0.7648080252571545,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 392744,
+          "actuallyChanged": 392740,
+          "baselineAbsoluteErrorDn": 565269650.0,
+          "recoveredAbsoluteErrorDn": 16684646.5,
+          "baselineSignedTotalErrorDn": -565269650.0,
+          "recoveredSignedTotalErrorDn": 15076241.5,
+          "fractionalMaeReduction": 0.9704837390438351,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 337212,
+          "actuallyChanged": 337081,
+          "baselineAbsoluteErrorDn": 257712708.0,
+          "recoveredAbsoluteErrorDn": 14243854.5,
+          "baselineSignedTotalErrorDn": -257712708.0,
+          "recoveredSignedTotalErrorDn": 12787035.5,
+          "fractionalMaeReduction": 0.9447297162389059,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 142338,
+          "actuallyChanged": 142072,
+          "baselineAbsoluteErrorDn": 53803512.0,
+          "recoveredAbsoluteErrorDn": 6129857.5,
+          "baselineSignedTotalErrorDn": -53803512.0,
+          "recoveredSignedTotalErrorDn": 5513704.5,
+          "fractionalMaeReduction": 0.8860695654960219,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "results": [
+        {
+          "fraction": 0.7,
+          "marked": 389082,
+          "actuallyChanged": 389060,
+          "baselineAbsoluteErrorDn": 462432346.0,
+          "recoveredAbsoluteErrorDn": 16117419.0,
+          "baselineSignedTotalErrorDn": -462432346.0,
+          "recoveredSignedTotalErrorDn": 14505572.0,
+          "fractionalMaeReduction": 0.9651464281436749,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.75,
+          "marked": 292166,
+          "actuallyChanged": 291993,
+          "baselineAbsoluteErrorDn": 173208853.0,
+          "recoveredAbsoluteErrorDn": 12202123.0,
+          "baselineSignedTotalErrorDn": -173208853.0,
+          "recoveredSignedTotalErrorDn": 10980068.0,
+          "fractionalMaeReduction": 0.929552544291717,
+          "framesWithLowerAbsoluteError": 6
+        },
+        {
+          "fraction": 0.8,
+          "marked": 79427,
+          "actuallyChanged": 79227,
+          "baselineAbsoluteErrorDn": 23103148.0,
+          "recoveredAbsoluteErrorDn": 3689796.0,
+          "baselineSignedTotalErrorDn": -23103148.0,
+          "recoveredSignedTotalErrorDn": 3446494.0,
+          "fractionalMaeReduction": 0.8402903361914142,
+          "framesWithLowerAbsoluteError": 6
+        }
+      ]
+    }
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}
