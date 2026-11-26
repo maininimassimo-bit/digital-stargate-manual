@@ -1,0 +1,49 @@
+{
+  "schema": "BKL046_GD153_NATURAL_DQ_SAME_VISIT_V1",
+  "cleanArchive": "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+  "cleanReport": "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab",
+  "poseProtocol": "7636924bce5cb8ab6f2832052565d335bdcc083f90e2597bb40e28316e9ecfaa",
+  "aperture": "local16to22:median:r10",
+  "radiusPx": 10,
+  "coreRadiusPx": 3,
+  "skyAnnulusPx": [
+    16,
+    22
+  ],
+  "minimumGoodSkyFraction": 0.7,
+  "maximumPredictionSpreadPx": 1,
+  "maximumSameVisitTimeSpanDays": 0.05,
+  "relativeCleanReplayTolerance": 1e-10,
+  "phasesPx": [
+    [
+      0,
+      0
+    ],
+    [
+      -0.25,
+      0
+    ],
+    [
+      0.25,
+      0
+    ],
+    [
+      0,
+      -0.25
+    ],
+    [
+      0,
+      0.25
+    ]
+  ],
+  "methods": [
+    "zero",
+    "area",
+    "annularMedian"
+  ],
+  "flagsRejectedEntireAperture": [
+    256,
+    2048
+  ],
+  "scope": "Leave the evaluated FLC out of the same-visit same-filter clean references. Project the measured centers of siblings through celestial WCS to predict its center. Measure only DQ-zero retained samples from the evaluated exposure, and compare against the sibling median flux. Compare with clean held-out controls and record reference counts. Fixed phase offsets measure sensitivity and do not tune the center. A sibling is a comparison, not the hidden true value."
+}
