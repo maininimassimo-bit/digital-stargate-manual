@@ -1,0 +1,4322 @@
+{
+  "nativeExecutions": 0,
+  "numericalCheck": {
+    "expectedSeparationPx": 1.4733974345029925,
+    "heldoutGain": 11249.74076158044,
+    "kind": "same-library noiseless numerical check",
+    "recoveredSeparationPx": 1.4768690011671266
+  },
+  "protocolSha256": "ce6eb1280d7415942b185425996357a9a0526be4e114174a651fa0dcf4bad5db",
+  "psfShape": [
+    9,
+    90,
+    101,
+    101
+  ],
+  "results": [
+    {
+      "catalogFluxRatio": 0.6546361740672749,
+      "catalogRow": 2,
+      "catalogSeparationMas": 43.0,
+      "fitPixels": 309,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 12.125423999005195,
+              "parametersPx": [
+                0.020729128114971355,
+                -0.38625000000000015,
+                -0.7496873843449139,
+                -0.73875
+              ],
+              "secondaryToPrimaryFlux": 0.6845861768219761,
+              "separationPx": 0.8472295159346447,
+              "trainingChi2": 1672.0654809760674
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.923900657490351,
+              "parametersPx": [
+                -0.7532291281149712,
+                -0.6262499999999998,
+                0.09718738434491388,
+                -0.4087499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.8378340248161255,
+              "separationPx": 0.8777895503276592,
+              "trainingChi2": 457.43389647478233
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 2.143293032389595,
+              "parametersPx": [
+                -0.7307291281149713,
+                -0.6137499999999998,
+                0.14468738434491382,
+                -0.3937499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.9473164749526195,
+              "separationPx": 0.902637286116316,
+              "trainingChi2": 286.1474236321597
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.7808465058519725,
+              "parametersPx": [
+                -0.7657291281149712,
+                -0.6287499999999999,
+                0.10968738434491387,
+                -0.41125
+              ],
+              "secondaryToPrimaryFlux": 0.7879932837213367,
+              "separationNominalMas": 45.10156095656303,
+              "separationPx": 0.9020312191312605,
+              "trainingChi2": 172.61166696862168
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 2.6467981279978994,
+              "parametersPx": [
+                -0.5700000000000001,
+                -0.5875,
+                0.26750000000000007,
+                -0.335
+              ],
+              "secondaryToPrimaryFlux": 0.6034024145741754,
+              "separationPx": 0.8747356743611182,
+              "trainingChi2": 196.81734444272394
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 2.5039069463894856,
+              "parametersPx": [
+                -0.6082291281149712,
+                -0.60375,
+                0.22718738434491392,
+                -0.33125000000000004
+              ],
+              "secondaryToPrimaryFlux": 0.7272438671301998,
+              "separationPx": 0.8787360236673113,
+              "trainingChi2": 244.47224650080983
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 2.3001888293834307,
+              "parametersPx": [
+                0.25749999999999995,
+                -0.36250000000000004,
+                -0.6325,
+                -0.5599999999999998
+              ],
+              "secondaryToPrimaryFlux": 0.6899492645498576,
+              "separationPx": 0.9116502893105446,
+              "trainingChi2": 186.21349935236702
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 2.3064727217601813,
+              "parametersPx": [
+                -0.7532291281149712,
+                -0.61625,
+                0.10968738434491387,
+                -0.41125000000000006
+              ],
+              "secondaryToPrimaryFlux": 0.8493996229783446,
+              "separationPx": 0.886932865258657,
+              "trainingChi2": 339.64998638209136
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 6.688824616303617,
+              "parametersPx": [
+                -0.49,
+                -0.5075000000000001,
+                0.2525000000000001,
+                -0.49250000000000005
+              ],
+              "secondaryToPrimaryFlux": 0.3399272591512023,
+              "separationPx": 0.7426514996955168,
+              "trainingChi2": 1108.6229086324342
+            }
+          ],
+          "heldoutGain": 15.902036269842359,
+          "holdoutPixels": 152,
+          "one": {
+            "focusIndex": 5,
+            "heldoutChi2PerPixel": 17.68288277569433,
+            "parametersPx": [
+              -0.3125,
+              -0.5475
+            ],
+            "trainingChi2": 770.3101166513072
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 13.64653371670011,
+              "parametersPx": [
+                -0.32749999999999996,
+                -0.5075000000000001
+              ],
+              "trainingChi2": 2026.270667271106
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 12.87803671702829,
+              "parametersPx": [
+                -0.3125,
+                -0.5324999999999999
+              ],
+              "trainingChi2": 1159.3202848346623
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 14.204446827343514,
+              "parametersPx": [
+                -0.3125,
+                -0.5324999999999999
+              ],
+              "trainingChi2": 1052.2503771332752
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 16.83329156260981,
+              "parametersPx": [
+                -0.3125,
+                -0.5475
+              ],
+              "trainingChi2": 871.1231174377522
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 17.746864010088725,
+              "parametersPx": [
+                -0.3125,
+                -0.5475
+              ],
+              "trainingChi2": 780.6172032335684
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 17.68288277569433,
+              "parametersPx": [
+                -0.3125,
+                -0.5475
+              ],
+              "trainingChi2": 770.3101166513072
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 16.016491517644585,
+              "parametersPx": [
+                -0.325,
+                -0.535
+              ],
+              "trainingChi2": 987.2801793353058
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 13.330589843172127,
+              "parametersPx": [
+                -0.3125,
+                -0.535
+              ],
+              "trainingChi2": 1079.8559444514
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 10.345033863969064,
+              "parametersPx": [
+                -0.32749999999999996,
+                -0.52
+              ],
+              "trainingChi2": 1403.3771058778939
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 157,
+          "two": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 1.7808465058519725,
+            "parametersPx": [
+              -0.7657291281149712,
+              -0.6287499999999999,
+              0.10968738434491387,
+              -0.41125
+            ],
+            "secondaryToPrimaryFlux": 0.7879932837213367,
+            "separationNominalMas": 45.10156095656303,
+            "separationPx": 0.9020312191312605,
+            "trainingChi2": 172.61166696862168
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 12.242378198014892,
+              "parametersPx": [
+                0.09749999999999998,
+                -0.49250000000000005,
+                -0.7325,
+                -0.505
+              ],
+              "secondaryToPrimaryFlux": 0.8723000332660699,
+              "separationPx": 0.830094121169401,
+              "trainingChi2": 1314.7438046385719
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 3.5877354157028405,
+              "parametersPx": [
+                0.09250000000000004,
+                -0.44000000000000006,
+                -0.7925,
+                -0.5599999999999998
+              ],
+              "secondaryToPrimaryFlux": 0.7640770907864112,
+              "separationPx": 0.8930985387962518,
+              "trainingChi2": 377.9007371676832
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 2.0421861799705496,
+              "parametersPx": [
+                0.10500000000000004,
+                -0.4125000000000001,
+                -0.7925,
+                -0.5999999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.8121666843341243,
+              "separationPx": 0.9168764911371651,
+              "trainingChi2": 286.16340373263637
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.2717312083580785,
+              "parametersPx": [
+                0.10500000000000001,
+                -0.39250000000000007,
+                -0.78,
+                -0.62
+              ],
+              "secondaryToPrimaryFlux": 0.8100773706766761,
+              "separationPx": 0.9137730845237235,
+              "trainingChi2": 227.65159722532002
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 2.905766830047719,
+              "parametersPx": [
+                0.05250000000000005,
+                -0.33,
+                -0.7524999999999997,
+                -0.6649999999999997
+              ],
+              "secondaryToPrimaryFlux": 0.7199907657713406,
+              "separationPx": 0.8719231617522265,
+              "trainingChi2": 253.2168650968514
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 4.194594343407677,
+              "parametersPx": [
+                0.0482291281149713,
+                -0.2587500000000001,
+                -0.6546873843449139,
+                -0.6762499999999998
+              ],
+              "secondaryToPrimaryFlux": 0.8854534319027922,
+              "separationPx": 0.8175560369104785,
+              "trainingChi2": 239.27805392028876
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 2.0036241532055725,
+              "parametersPx": [
+                0.07999999999999999,
+                -0.38000000000000006,
+                -0.7899999999999999,
+                -0.6
+              ],
+              "secondaryToPrimaryFlux": 0.7054242592391986,
+              "separationNominalMas": 44.869254506844655,
+              "separationPx": 0.8973850901368932,
+              "trainingChi2": 215.02385175723353
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 2.8489112469086373,
+              "parametersPx": [
+                -0.805,
+                -0.56,
+                0.09250000000000007,
+                -0.44
+              ],
+              "secondaryToPrimaryFlux": 0.7401440247522736,
+              "separationPx": 0.9054867475562522,
+              "trainingChi2": 312.6402207063711
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 8.22370089028508,
+              "parametersPx": [
+                -0.555,
+                -0.49249999999999994,
+                0.17500000000000004,
+                -0.49249999999999994
+              ],
+              "secondaryToPrimaryFlux": 0.6031762608718789,
+              "separationPx": 0.7300000000000001,
+              "trainingChi2": 858.4519181188483
+            }
+          ],
+          "heldoutGain": 20.282312555970048,
+          "holdoutPixels": 157,
+          "one": {
+            "focusIndex": 5,
+            "heldoutChi2PerPixel": 22.28593670917562,
+            "parametersPx": [
+              -0.2325,
+              -0.38
+            ],
+            "trainingChi2": 1232.1776480377268
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 14.004985062475848,
+              "parametersPx": [
+                -0.325,
+                -0.49250000000000005
+              ],
+              "trainingChi2": 1885.3951284450604
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 12.662190306810889,
+              "parametersPx": [
+                -0.2875,
+                -0.44
+              ],
+              "trainingChi2": 1318.238539474219
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 12.583507017102594,
+              "parametersPx": [
+                -0.2875,
+                -0.44
+              ],
+              "trainingChi2": 1468.3327539732302
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 12.178045697574992,
+              "parametersPx": [
+                -0.3,
+                -0.4325
+              ],
+              "trainingChi2": 1474.5728676520946
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 15.92695022212684,
+              "parametersPx": [
+                -0.27499999999999997,
+                -0.4075
+              ],
+              "trainingChi2": 1366.203884780754
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 22.28593670917562,
+              "parametersPx": [
+                -0.2325,
+                -0.38
+              ],
+              "trainingChi2": 1232.1776480377268
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 23.181936308413956,
+              "parametersPx": [
+                -0.2325,
+                -0.38
+              ],
+              "trainingChi2": 1313.0272308829904
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 12.519489209930367,
+              "parametersPx": [
+                -0.2875,
+                -0.44
+              ],
+              "trainingChi2": 1340.601119334925
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 11.860517220917085,
+              "parametersPx": [
+                -0.3,
+                -0.45249999999999996
+              ],
+              "trainingChi2": 1261.0728630771196
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 152,
+          "two": {
+            "focusIndex": 6,
+            "heldoutChi2PerPixel": 2.0036241532055725,
+            "parametersPx": [
+              0.07999999999999999,
+              -0.38000000000000006,
+              -0.7899999999999999,
+              -0.6
+            ],
+            "secondaryToPrimaryFlux": 0.7054242592391986,
+            "separationNominalMas": 44.869254506844655,
+            "separationPx": 0.8973850901368932,
+            "trainingChi2": 215.02385175723353
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 24,
+      "passBothFolds": true,
+      "root": "j93k08j8q",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.6546361740672749,
+      "catalogRow": 2,
+      "catalogSeparationMas": 43.0,
+      "fitPixels": 312,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 10.107270989670399,
+              "parametersPx": [
+                0.24822912811497133,
+                -0.32625,
+                -0.722187384344914,
+                -0.7587499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.15878309037163899,
+              "separationPx": 1.06243327209515,
+              "trainingChi2": 545.5755738869343
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.616246916024206,
+              "parametersPx": [
+                -0.18822912811497128,
+                -0.52125,
+                0.5821873843449139,
+                -0.22375
+              ],
+              "secondaryToPrimaryFlux": 0.8561769394244556,
+              "separationNominalMas": 41.29309423713766,
+              "separationPx": 0.8258618847427531,
+              "trainingChi2": 210.04936200998765
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 3.9932951276084427,
+              "parametersPx": [
+                -0.1325,
+                -0.48,
+                0.75,
+                -0.21750000000000003
+              ],
+              "secondaryToPrimaryFlux": 0.5041219331995763,
+              "separationPx": 0.9207130388997432,
+              "trainingChi2": 277.4052482924997
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 2.9971568499135857,
+              "parametersPx": [
+                -0.2807291281149713,
+                -0.4312500000000001,
+                0.6596873843449138,
+                -0.2887500000000001
+              ],
+              "secondaryToPrimaryFlux": 0.8380719979343675,
+              "separationPx": 0.9511516529487888,
+              "trainingChi2": 510.1739233629535
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 4.36729589229709,
+              "parametersPx": [
+                -0.2532291281149713,
+                -0.38875,
+                0.7546873843449138,
+                -0.31375000000000003
+              ],
+              "secondaryToPrimaryFlux": 0.664268200144331,
+              "separationPx": 1.0107030701889144,
+              "trainingChi2": 724.8677251726447
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 4.74377886441607,
+              "parametersPx": [
+                -0.258132938682637,
+                -0.36124999999999985,
+                0.7868988160479112,
+                -0.3237500000000003
+              ],
+              "secondaryToPrimaryFlux": 0.6470352599742403,
+              "separationPx": 1.0457043647203585,
+              "trainingChi2": 767.5553657870042
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 4.518180266062291,
+              "parametersPx": [
+                -0.2507291281149713,
+                -0.5137499999999999,
+                0.5996873843449138,
+                -0.21625
+              ],
+              "secondaryToPrimaryFlux": 0.9980813204776252,
+              "separationPx": 0.9009519935404071,
+              "trainingChi2": 526.2286164126372
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 3.821567959114732,
+              "parametersPx": [
+                -0.14822912811497127,
+                -0.52125,
+                0.6346873843449139,
+                -0.20875000000000002
+              ],
+              "secondaryToPrimaryFlux": 0.6801196677028243,
+              "separationPx": 0.8429795463013022,
+              "trainingChi2": 246.58969143352311
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 6.530538949974074,
+              "parametersPx": [
+                0.2682291281149713,
+                -0.35125000000000006,
+                -0.46218738434491385,
+                -0.5287499999999997
+              ],
+              "secondaryToPrimaryFlux": 0.2298202749720832,
+              "separationPx": 0.7516744851822904,
+              "trainingChi2": 350.5589148388123
+            }
+          ],
+          "heldoutGain": 9.895673473330815,
+          "holdoutPixels": 152,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 12.511920389355021,
+            "parametersPx": [
+              0.12749999999999997,
+              -0.4325
+            ],
+            "trainingChi2": 443.8246266439018
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 17.50072813650812,
+              "parametersPx": [
+                0.1075,
+                -0.44749999999999995
+              ],
+              "trainingChi2": 731.8858792954748
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 22.294286879893026,
+              "parametersPx": [
+                0.12,
+                -0.48
+              ],
+              "trainingChi2": 871.6763520131948
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 30.961091395950067,
+              "parametersPx": [
+                0.1075,
+                -0.4925
+              ],
+              "trainingChi2": 1085.2634123971845
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 38.180216470810414,
+              "parametersPx": [
+                0.12,
+                -0.5075000000000001
+              ],
+              "trainingChi2": 1580.463949079116
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 35.9549424547388,
+              "parametersPx": [
+                0.1325,
+                -0.4925
+              ],
+              "trainingChi2": 1905.1474397757763
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 37.462997152790564,
+              "parametersPx": [
+                0.1325,
+                -0.4925
+              ],
+              "trainingChi2": 2029.160385929813
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 28.426120586491823,
+              "parametersPx": [
+                0.13999999999999999,
+                -0.4725
+              ],
+              "trainingChi2": 1594.0781724565022
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 26.66687220864101,
+              "parametersPx": [
+                0.12,
+                -0.4925
+              ],
+              "trainingChi2": 991.3089356321552
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 12.511920389355021,
+              "parametersPx": [
+                0.12749999999999997,
+                -0.4325
+              ],
+              "trainingChi2": 443.8246266439018
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 160,
+          "two": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 2.616246916024206,
+            "parametersPx": [
+              -0.18822912811497128,
+              -0.52125,
+              0.5821873843449139,
+              -0.22375
+            ],
+            "secondaryToPrimaryFlux": 0.8561769394244556,
+            "separationNominalMas": 41.29309423713766,
+            "separationPx": 0.8258618847427531,
+            "trainingChi2": 210.04936200998765
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 4.627046113395366,
+              "parametersPx": [
+                0.5175,
+                -0.24749999999999997,
+                -0.2925000000000001,
+                -0.4999999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.7724658997016705,
+              "separationPx": 0.8484434276956833,
+              "trainingChi2": 772.6809268821598
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.0522327384632795,
+              "parametersPx": [
+                -0.18000000000000005,
+                -0.38,
+                0.7300000000000001,
+                -0.28500000000000003
+              ],
+              "secondaryToPrimaryFlux": 0.6156514907693904,
+              "separationNominalMas": 45.74726767797177,
+              "separationPx": 0.9149453535594354,
+              "trainingChi2": 152.8064286244121
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 2.7601409105627055,
+              "parametersPx": [
+                -0.2381329386826371,
+                -0.37625000000000003,
+                0.7243988160479112,
+                -0.34625
+              ],
+              "secondaryToPrimaryFlux": 0.7486670385371271,
+              "separationPx": 0.9629991582886605,
+              "trainingChi2": 194.30095029157863
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 9.502585017363153,
+              "parametersPx": [
+                -0.19750000000000004,
+                -0.29750000000000004,
+                0.7374999999999998,
+                -0.48250000000000004
+              ],
+              "secondaryToPrimaryFlux": 0.7114158417789834,
+              "separationPx": 0.95312643442515,
+              "trainingChi2": 355.03791115239187
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 14.213150810584315,
+              "parametersPx": [
+                -0.18500000000000003,
+                -0.26,
+                0.7525,
+                -0.5475000000000001
+              ],
+              "secondaryToPrimaryFlux": 0.7275147466800267,
+              "separationPx": 0.9805929328727594,
+              "trainingChi2": 457.16991689299186
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 17.15954849048942,
+              "parametersPx": [
+                -0.16,
+                -0.2075,
+                0.7224999999999999,
+                -0.5599999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.7427842586424052,
+              "separationPx": 0.9502960065158644,
+              "trainingChi2": 441.20744807220615
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 7.306233583821585,
+              "parametersPx": [
+                -0.17,
+                -0.3,
+                0.7525,
+                -0.42750000000000005
+              ],
+              "secondaryToPrimaryFlux": 0.6223110851210057,
+              "separationPx": 0.9312692951021202,
+              "trainingChi2": 312.3321275851115
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 2.1728539763799963,
+              "parametersPx": [
+                -0.19500000000000003,
+                -0.38,
+                0.7425,
+                -0.3125
+              ],
+              "secondaryToPrimaryFlux": 0.6373956804245461,
+              "separationPx": 0.9399268588565816,
+              "trainingChi2": 165.77498728070844
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 4.409266929821624,
+              "parametersPx": [
+                0.3732291281149712,
+                -0.38125,
+                -0.4921873843449139,
+                -0.24375000000000002
+              ],
+              "secondaryToPrimaryFlux": 0.2998985808448709,
+              "separationPx": 0.8762716416946463,
+              "trainingChi2": 562.7707416405829
+            }
+          ],
+          "heldoutGain": 20.651153527542366,
+          "holdoutPixels": 160,
+          "one": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 22.703386266005644,
+            "parametersPx": [
+              0.13999999999999999,
+              -0.26
+            ],
+            "trainingChi2": 857.8795336000504
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 10.864280466528374,
+              "parametersPx": [
+                0.16749999999999998,
+                -0.2875
+              ],
+              "trainingChi2": 1382.700337970757
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 22.703386266005644,
+              "parametersPx": [
+                0.13999999999999999,
+                -0.26
+              ],
+              "trainingChi2": 857.8795336000504
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 26.148521529145704,
+              "parametersPx": [
+                0.1525,
+                -0.26
+              ],
+              "trainingChi2": 1226.9214281369018
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 34.52171839181984,
+              "parametersPx": [
+                0.13999999999999999,
+                -0.26
+              ],
+              "trainingChi2": 1569.744978423162
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 36.33486746254506,
+              "parametersPx": [
+                0.13999999999999999,
+                -0.26
+              ],
+              "trainingChi2": 1741.8185852180618
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 40.13302180403001,
+              "parametersPx": [
+                0.1525,
+                -0.2475
+              ],
+              "trainingChi2": 1531.1070132932232
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 31.753508846727993,
+              "parametersPx": [
+                0.1525,
+                -0.26
+              ],
+              "trainingChi2": 1203.0217598812328
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 24.37506035948129,
+              "parametersPx": [
+                0.13999999999999999,
+                -0.26
+              ],
+              "trainingChi2": 1006.0467141262121
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 8.865124673572678,
+              "parametersPx": [
+                0.1525,
+                -0.2875
+              ],
+              "trainingChi2": 922.7429902296104
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 152,
+          "two": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 2.0522327384632795,
+            "parametersPx": [
+              -0.18000000000000005,
+              -0.38,
+              0.7300000000000001,
+              -0.28500000000000003
+            ],
+            "secondaryToPrimaryFlux": 0.6156514907693904,
+            "separationNominalMas": 45.74726767797177,
+            "separationPx": 0.9149453535594354,
+            "trainingChi2": 152.8064286244121
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 24,
+      "passBothFolds": false,
+      "root": "j93k59v0q",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.591561634175474,
+      "catalogRow": 3,
+      "catalogSeparationMas": 60.0,
+      "fitPixels": 312,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 24.888591514785684,
+              "parametersPx": [
+                -0.17125,
+                -0.07563293868263705,
+                0.49625000000000014,
+                0.7668988160479111
+              ],
+              "secondaryToPrimaryFlux": 0.35027386336443833,
+              "separationPx": 1.0749027898974572,
+              "trainingChi2": 527.3514732951046
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 21.10653569544205,
+              "parametersPx": [
+                0.21250000000000002,
+                0.7999999999999999,
+                -0.16750000000000018,
+                -0.2975000000000001
+              ],
+              "secondaryToPrimaryFlux": 0.7788406615285742,
+              "separationNominalMas": 58.071211671533085,
+              "separationPx": 1.1614242334306617,
+              "trainingChi2": 317.1492212328792
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 21.67048162754,
+              "parametersPx": [
+                0.21125000000000013,
+                0.795632938682637,
+                -0.16125000000000045,
+                -0.33189881604791116
+              ],
+              "secondaryToPrimaryFlux": 0.7991129701017096,
+              "separationPx": 1.1874696240012834,
+              "trainingChi2": 355.6995479214765
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 23.11418898549624,
+              "parametersPx": [
+                0.18375000000000016,
+                0.795632938682637,
+                -0.14875000000000047,
+                -0.39189881604791116
+              ],
+              "secondaryToPrimaryFlux": 0.8897893629661529,
+              "separationPx": 1.2332023023386776,
+              "trainingChi2": 418.61717810602784
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 24.271372037518496,
+              "parametersPx": [
+                0.15625000000000017,
+                0.7906329386826371,
+                -0.11375000000000048,
+                -0.43189881604791114
+              ],
+              "secondaryToPrimaryFlux": 0.9561060509455015,
+              "separationPx": 1.2519919693530601,
+              "trainingChi2": 437.70957213943313
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 24.093309063450587,
+              "parametersPx": [
+                0.16375000000000015,
+                0.833132938682637,
+                -0.10875000000000049,
+                -0.40439881604791117
+              ],
+              "secondaryToPrimaryFlux": 0.9217150065024954,
+              "separationPx": 1.2671783986347265,
+              "trainingChi2": 427.57821727875705
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 22.24718185678195,
+              "parametersPx": [
+                0.19875000000000012,
+                0.8731329386826372,
+                -0.14125000000000046,
+                -0.3493988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.7845434183960761,
+              "separationPx": 1.268930215309161,
+              "trainingChi2": 367.0165605663748
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 21.25181165562832,
+              "parametersPx": [
+                0.22125000000000014,
+                0.8106329386826371,
+                -0.16375000000000045,
+                -0.3043988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.7598883072181531,
+              "separationPx": 1.17962740475859,
+              "trainingChi2": 330.3841747900459
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 22.636552957055056,
+              "parametersPx": [
+                0.24572912811497133,
+                0.7237499999999998,
+                -0.13468738434491392,
+                -0.13874999999999982
+              ],
+              "secondaryToPrimaryFlux": 0.5972197633517197,
+              "separationPx": 0.942668007811945,
+              "trainingChi2": 417.49576490627203
+            }
+          ],
+          "heldoutGain": 5.748602592825421,
+          "holdoutPixels": 153,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 26.855138288267472,
+            "parametersPx": [
+              0.06749999999999999,
+              0.1925
+            ],
+            "trainingChi2": 708.0223881552539
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 26.867909607629567,
+              "parametersPx": [
+                0.052500000000000005,
+                0.16749999999999998
+              ],
+              "trainingChi2": 862.69842880703
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 30.42026079712742,
+              "parametersPx": [
+                0.09249999999999999,
+                0.32749999999999996
+              ],
+              "trainingChi2": 1081.8384749227898
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 31.454898601580663,
+              "parametersPx": [
+                0.095,
+                0.3525
+              ],
+              "trainingChi2": 1272.0543062778145
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 33.71556059869961,
+              "parametersPx": [
+                0.1075,
+                0.38
+              ],
+              "trainingChi2": 1503.165570482592
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 34.3871186868403,
+              "parametersPx": [
+                0.1075,
+                0.38
+              ],
+              "trainingChi2": 1556.9511044069632
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 35.018583728445165,
+              "parametersPx": [
+                0.1,
+                0.4075
+              ],
+              "trainingChi2": 1515.0632691013695
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 33.22041055098978,
+              "parametersPx": [
+                0.1075,
+                0.38
+              ],
+              "trainingChi2": 1331.8144272979348
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 30.797560755619607,
+              "parametersPx": [
+                0.09249999999999999,
+                0.33999999999999997
+              ],
+              "trainingChi2": 1157.3925203090266
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 26.855138288267472,
+              "parametersPx": [
+                0.06749999999999999,
+                0.1925
+              ],
+              "trainingChi2": 708.0223881552539
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 159,
+          "two": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 21.10653569544205,
+            "parametersPx": [
+              0.21250000000000002,
+              0.7999999999999999,
+              -0.16750000000000018,
+              -0.2975000000000001
+            ],
+            "secondaryToPrimaryFlux": 0.7788406615285742,
+            "separationNominalMas": 58.071211671533085,
+            "separationPx": 1.1614242334306617,
+            "trainingChi2": 317.1492212328792
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 4.875520322236619,
+              "parametersPx": [
+                0.09250000000000003,
+                0.5575000000000001,
+                -0.2800000000000001,
+                -0.5
+              ],
+              "secondaryToPrimaryFlux": 0.6468400633555506,
+              "separationPx": 1.1211879860219696,
+              "trainingChi2": 3482.834271457289
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.144399494141409,
+              "parametersPx": [
+                -0.20875000000000005,
+                -0.25813293868263704,
+                0.24125000000000016,
+                0.7843988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.7696907877664092,
+              "separationNominalMas": 56.775268815337995,
+              "separationPx": 1.13550537630676,
+              "trainingChi2": 3186.557886994385
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 2.6043524590694274,
+              "parametersPx": [
+                -0.15625000000000003,
+                -0.19063293868263706,
+                0.2662500000000001,
+                0.8918988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.5720062733622252,
+              "separationPx": 1.1620590561585071,
+              "trainingChi2": 3224.0978779826405
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 3.356404908036579,
+              "parametersPx": [
+                -0.16000000000000003,
+                -0.18,
+                0.31250000000000006,
+                0.9500000000000001
+              ],
+              "secondaryToPrimaryFlux": 0.5326781092748224,
+              "separationPx": 1.2248086585258942,
+              "trainingChi2": 3285.02474760141
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 3.6038246477693354,
+              "parametersPx": [
+                -0.14375000000000002,
+                -0.17813293868263702,
+                0.30875000000000014,
+                0.9968988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.510613249396543,
+              "separationPx": 1.2591488691275357,
+              "trainingChi2": 3318.98403418002
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 3.9134702733555264,
+              "parametersPx": [
+                -0.12250000000000001,
+                -0.15499999999999997,
+                0.30000000000000004,
+                1.0275
+              ],
+              "secondaryToPrimaryFlux": 0.4900316742519462,
+              "separationPx": 1.255711949453377,
+              "trainingChi2": 3292.9525389316755
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 2.989779952324807,
+              "parametersPx": [
+                -0.135,
+                -0.16749999999999998,
+                0.28750000000000003,
+                0.9999999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.5078893777123384,
+              "separationPx": 1.2415967541839017,
+              "trainingChi2": 3231.2941984311005
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 2.2450573802333524,
+              "parametersPx": [
+                -0.20875000000000005,
+                -0.25813293868263704,
+                0.25375000000000014,
+                0.7968988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.748872319324305,
+              "separationPx": 1.151954102162851,
+              "trainingChi2": 3197.061861206411
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 3.6487292426279323,
+              "parametersPx": [
+                3.122502256758253e-17,
+                0.51,
+                -0.1325000000000001,
+                -0.4925
+              ],
+              "secondaryToPrimaryFlux": 0.5718496339663642,
+              "separationPx": 1.0112183245966224,
+              "trainingChi2": 3349.219930603709
+            }
+          ],
+          "heldoutGain": 8.277172888294539,
+          "holdoutPixels": 159,
+          "one": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 10.421572382435947,
+            "parametersPx": [
+              -0.04,
+              0.1325
+            ],
+            "trainingChi2": 3597.853967612763
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 6.092886013297988,
+              "parametersPx": [
+                -0.0275,
+                0.12
+              ],
+              "trainingChi2": 3835.4781862406376
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 10.421572382435947,
+              "parametersPx": [
+                -0.04,
+                0.1325
+              ],
+              "trainingChi2": 3597.853967612763
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 13.03078475453135,
+              "parametersPx": [
+                -0.0275,
+                0.1325
+              ],
+              "trainingChi2": 3663.037679535201
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 17.05236713513691,
+              "parametersPx": [
+                -0.04,
+                0.1325
+              ],
+              "trainingChi2": 3814.595934382219
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 17.290661248895763,
+              "parametersPx": [
+                -0.04,
+                0.1325
+              ],
+              "trainingChi2": 3915.578937153826
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 19.292790841749074,
+              "parametersPx": [
+                -0.0275,
+                0.1325
+              ],
+              "trainingChi2": 3875.113774925663
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 15.356909608376549,
+              "parametersPx": [
+                -0.04,
+                0.14500000000000002
+              ],
+              "trainingChi2": 3771.657876720089
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 11.460075934947785,
+              "parametersPx": [
+                -0.04,
+                0.1325
+              ],
+              "trainingChi2": 3627.9750847097184
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 5.434998569573623,
+              "parametersPx": [
+                -0.0275,
+                0.13999999999999999
+              ],
+              "trainingChi2": 3702.217111238958
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 153,
+          "two": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 2.144399494141409,
+            "parametersPx": [
+              -0.20875000000000005,
+              -0.25813293868263704,
+              0.24125000000000016,
+              0.7843988160479113
+            ],
+            "secondaryToPrimaryFlux": 0.7696907877664092,
+            "separationNominalMas": 56.775268815337995,
+            "separationPx": 1.13550537630676,
+            "trainingChi2": 3186.557886994385
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 24,
+      "passBothFolds": false,
+      "root": "j93k26w7q",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.591561634175474,
+      "catalogRow": 3,
+      "catalogSeparationMas": 60.0,
+      "fitPixels": 311,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 4.346623032332229,
+              "parametersPx": [
+                0.001250000000000081,
+                -0.31927087188502873,
+                -0.6712500000000002,
+                -1.2546873843449138
+              ],
+              "secondaryToPrimaryFlux": 0.12378740295811377,
+              "separationPx": 1.1520678373180178,
+              "trainingChi2": 496.05938638169226
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 1.6555677746112738,
+              "parametersPx": [
+                0.08875000000000015,
+                -0.19686706131736295,
+                -0.5087500000000004,
+                -1.1443988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.3136810830410302,
+              "separationPx": 1.1201886788495734,
+              "trainingChi2": 221.19425455060716
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 1.4874451344451616,
+              "parametersPx": [
+                0.11625000000000016,
+                -0.16936706131736295,
+                -0.49625000000000036,
+                -1.144398816047911
+              ],
+              "secondaryToPrimaryFlux": 0.351101423944105,
+              "separationPx": 1.1514526359051562,
+              "trainingChi2": 193.66280685300836
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.4202066126418391,
+              "parametersPx": [
+                0.1462500000000001,
+                -0.07427087188502875,
+                -0.3762500000000002,
+                -1.0696873843449137
+              ],
+              "secondaryToPrimaryFlux": 0.49867000363085867,
+              "separationNominalMas": 56.210770393177334,
+              "separationPx": 1.1242154078635467,
+              "trainingChi2": 170.15486192983832
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 1.5645434195956034,
+              "parametersPx": [
+                -0.28125,
+                -1.0032291281149714,
+                0.15125000000000008,
+                0.019687384344913916
+              ],
+              "secondaryToPrimaryFlux": 0.6698106020497939,
+              "separationPx": 1.11059193291825,
+              "trainingChi2": 181.39495843100394
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 1.84209983062876,
+              "parametersPx": [
+                -0.2275,
+                -0.9550000000000001,
+                0.13250000000000003,
+                0.075
+              ],
+              "secondaryToPrimaryFlux": 0.7647020681677208,
+              "separationPx": 1.0911003620199198,
+              "trainingChi2": 187.19654795025983
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 1.5153480057255853,
+              "parametersPx": [
+                -0.30625,
+                -0.9732291281149712,
+                0.1637500000000001,
+                -0.017812615655086097
+              ],
+              "secondaryToPrimaryFlux": 0.6392858629026711,
+              "separationPx": 1.0647632188806155,
+              "trainingChi2": 173.26929157647976
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 1.5384872129297213,
+              "parametersPx": [
+                0.10375000000000016,
+                -0.16936706131736295,
+                -0.49625000000000036,
+                -1.144398816047911
+              ],
+              "secondaryToPrimaryFlux": 0.3466900047913789,
+              "separationPx": 1.1448523584868628,
+              "trainingChi2": 200.74589231222325
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 3.025640405318186,
+              "parametersPx": [
+                0.0012500000000000844,
+                -0.2792708718850287,
+                -0.49625000000000014,
+                -1.0896873843449137
+              ],
+              "secondaryToPrimaryFlux": 0.17859778580600616,
+              "separationPx": 0.9509369977383586,
+              "trainingChi2": 343.9765931430943
+            }
+          ],
+          "heldoutGain": 3.749710687877432,
+          "holdoutPixels": 155,
+          "one": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 5.169917300519271,
+            "parametersPx": [
+              -0.07999999999999999,
+              -0.4525
+            ],
+            "trainingChi2": 351.81272673948945
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 5.777639333400965,
+              "parametersPx": [
+                -0.06749999999999999,
+                -0.44749999999999995
+              ],
+              "trainingChi2": 522.7923080062046
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 5.169917300519271,
+              "parametersPx": [
+                -0.07999999999999999,
+                -0.4525
+              ],
+              "trainingChi2": 351.81272673948945
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 5.522364561383704,
+              "parametersPx": [
+                -0.07999999999999999,
+                -0.4525
+              ],
+              "trainingChi2": 352.66216241890453
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 6.435152215813668,
+              "parametersPx": [
+                -0.07999999999999999,
+                -0.46749999999999997
+              ],
+              "trainingChi2": 408.6946892549106
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 6.542159448732364,
+              "parametersPx": [
+                -0.07999999999999999,
+                -0.45499999999999996
+              ],
+              "trainingChi2": 504.41708835699126
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 7.199350817367538,
+              "parametersPx": [
+                -0.06749999999999999,
+                -0.465
+              ],
+              "trainingChi2": 549.2879323199681
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 6.396006755692646,
+              "parametersPx": [
+                -0.07999999999999999,
+                -0.46749999999999997
+              ],
+              "trainingChi2": 408.6235547589603
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 5.29322214012494,
+              "parametersPx": [
+                -0.07999999999999999,
+                -0.4525
+              ],
+              "trainingChi2": 358.1603351074553
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 4.1123847699927705,
+              "parametersPx": [
+                -0.07999999999999999,
+                -0.4325
+              ],
+              "trainingChi2": 372.10676711848157
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 156,
+          "two": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 1.4202066126418391,
+            "parametersPx": [
+              0.1462500000000001,
+              -0.07427087188502875,
+              -0.3762500000000002,
+              -1.0696873843449137
+            ],
+            "secondaryToPrimaryFlux": 0.49867000363085867,
+            "separationNominalMas": 56.210770393177334,
+            "separationPx": 1.1242154078635467,
+            "trainingChi2": 170.15486192983832
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 6.600603791807325,
+              "parametersPx": [
+                -0.25125,
+                -0.730632938682637,
+                0.5087500000000001,
+                0.2118988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.39915054311790943,
+              "separationPx": 1.2107708737310485,
+              "trainingChi2": 519.6861058678755
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 3.3656741401951025,
+              "parametersPx": [
+                -0.34125,
+                -0.8106329386826371,
+                0.31125000000000014,
+                0.0793988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.7573145684012368,
+              "separationPx": 1.103590854632612,
+              "trainingChi2": 245.77862827719264
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 1.7058500892810224,
+              "parametersPx": [
+                0.18375000000000014,
+                -0.06936706131736291,
+                -0.40125000000000044,
+                -0.9468988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.6921453416040503,
+              "separationPx": 1.0546501697532105,
+              "trainingChi2": 218.82733455668853
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.2819549829746582,
+              "parametersPx": [
+                0.14125000000000013,
+                -0.029367061317362952,
+                -0.36375000000000046,
+                -1.0443988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.6337040774735493,
+              "separationPx": 1.1337171001230317,
+              "trainingChi2": 203.57085394515389
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 1.3769365537479878,
+              "parametersPx": [
+                0.10125000000000015,
+                -0.01686706131736295,
+                -0.2987500000000004,
+                -1.1368988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.555138408047563,
+              "separationNominalMas": 59.465770229704226,
+              "separationPx": 1.1893154045940846,
+              "trainingChi2": 197.76502789071867
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 1.5584332237711727,
+              "parametersPx": [
+                0.09500000000000006,
+                -0.002499999999999978,
+                -0.27250000000000013,
+                -1.145
+              ],
+              "secondaryToPrimaryFlux": 0.531886004915856,
+              "separationPx": 1.2001510321622026,
+              "trainingChi2": 199.9444120319048
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 1.1997407507848867,
+              "parametersPx": [
+                0.10875000000000007,
+                -0.1342708718850287,
+                -0.4262500000000002,
+                -1.1021873843449137
+              ],
+              "secondaryToPrimaryFlux": 0.3909496870700215,
+              "separationPx": 1.1059328076752706,
+              "trainingChi2": 199.65368132396569
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 1.7749482029165773,
+              "parametersPx": [
+                0.18375000000000014,
+                -0.05686706131736291,
+                -0.38875000000000043,
+                -0.9193988160479111
+              ],
+              "secondaryToPrimaryFlux": 0.7347332872997706,
+              "separationPx": 1.0352377881040469,
+              "trainingChi2": 224.88697053451955
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 3.427305471354915,
+              "parametersPx": [
+                0.2662500000000001,
+                -0.10927087188502868,
+                -0.28625000000000017,
+                -0.7096873843449139
+              ],
+              "secondaryToPrimaryFlux": 0.8824470136184892,
+              "separationPx": 0.8159388692999566,
+              "trainingChi2": 393.8946268331754
+            }
+          ],
+          "heldoutGain": 1.937178563049377,
+          "holdoutPixels": 156,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 3.314115116797365,
+            "parametersPx": [
+              0.0125,
+              -0.33999999999999997
+            ],
+            "trainingChi2": 450.0315236102076
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 4.673930500486184,
+              "parametersPx": [
+                0.04,
+                -0.3525
+              ],
+              "trainingChi2": 680.1029494449369
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 4.071050504382146,
+              "parametersPx": [
+                0.0275,
+                -0.32749999999999996
+              ],
+              "trainingChi2": 457.0098020457401
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 4.234921768385529,
+              "parametersPx": [
+                0.0275,
+                -0.32749999999999996
+              ],
+              "trainingChi2": 487.8403190856794
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 5.047277754724179,
+              "parametersPx": [
+                0.025,
+                -0.3125
+              ],
+              "trainingChi2": 525.6895189476252
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 5.539829200274598,
+              "parametersPx": [
+                0.025,
+                -0.3125
+              ],
+              "trainingChi2": 546.5860997308972
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 6.119975982438725,
+              "parametersPx": [
+                0.015,
+                -0.2875
+              ],
+              "trainingChi2": 532.1448669401392
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 5.0684029915509035,
+              "parametersPx": [
+                0.0275,
+                -0.3125
+              ],
+              "trainingChi2": 463.67146454998834
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 4.16118002369672,
+              "parametersPx": [
+                0.0275,
+                -0.32749999999999996
+              ],
+              "trainingChi2": 454.7374050600197
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 3.314115116797365,
+              "parametersPx": [
+                0.0125,
+                -0.33999999999999997
+              ],
+              "trainingChi2": 450.0315236102076
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 155,
+          "two": {
+            "focusIndex": 4,
+            "heldoutChi2PerPixel": 1.3769365537479878,
+            "parametersPx": [
+              0.10125000000000015,
+              -0.01686706131736295,
+              -0.2987500000000004,
+              -1.1368988160479112
+            ],
+            "secondaryToPrimaryFlux": 0.555138408047563,
+            "separationNominalMas": 59.465770229704226,
+            "separationPx": 1.1893154045940846,
+            "trainingChi2": 197.76502789071867
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 23,
+      "passBothFolds": true,
+      "root": "j93k78j2q",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.328095293113119,
+      "catalogRow": 8,
+      "catalogSeparationMas": 100.0,
+      "fitPixels": 312,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 7.105345271410979,
+              "parametersPx": [
+                0.381867061317363,
+                0.14375000000000004,
+                1.6443988160479113,
+                1.77375
+              ],
+              "secondaryToPrimaryFlux": 0.29436889978846825,
+              "separationPx": 2.061767792866839,
+              "trainingChi2": 822.4891614083986
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.2829754848145205,
+              "parametersPx": [
+                0.41625,
+                0.14936706131736296,
+                1.56875,
+                1.8843988160479115
+              ],
+              "secondaryToPrimaryFlux": 0.2946467833372817,
+              "separationPx": 2.082928572928838,
+              "trainingChi2": 313.17994952029994
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 1.774737829296285,
+              "parametersPx": [
+                0.42698729810778063,
+                0.14250000000000004,
+                1.559038105676658,
+                1.9025
+              ],
+              "secondaryToPrimaryFlux": 0.2989924406987541,
+              "separationPx": 2.092639250066133,
+              "trainingChi2": 246.42066855069268
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.5109051883362663,
+              "parametersPx": [
+                0.41624999999999995,
+                0.09686706131736293,
+                1.4612500000000002,
+                1.8468988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.34766878758367553,
+              "separationNominalMas": 101.9146228782367,
+              "separationPx": 2.038292457564734,
+              "trainingChi2": 219.21673839535185
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 1.4335822997120893,
+              "parametersPx": [
+                0.43436706131736286,
+                0.10125000000000003,
+                1.4368988160479113,
+                1.8912499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.3501061770678915,
+              "separationPx": 2.0516261645931286,
+              "trainingChi2": 223.08413894461248
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 1.5185355797909688,
+              "parametersPx": [
+                0.44125,
+                0.09686706131736293,
+                1.40625,
+                1.8843988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.3711570623650788,
+              "separationPx": 2.031377555790669,
+              "trainingChi2": 231.6121388581872
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 1.387275331326147,
+              "parametersPx": [
+                0.4218670613173629,
+                0.11625000000000002,
+                1.4643988160479113,
+                1.86625
+              ],
+              "secondaryToPrimaryFlux": 0.3387502416860207,
+              "separationPx": 2.0370008491950995,
+              "trainingChi2": 232.34033058868175
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 1.9920741941278801,
+              "parametersPx": [
+                0.41625,
+                0.13686706131736295,
+                1.55375,
+                1.8718988160479115
+              ],
+              "secondaryToPrimaryFlux": 0.3070605763504203,
+              "separationPx": 2.0746665852428836,
+              "trainingChi2": 271.41511318466524
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 4.960236592491396,
+              "parametersPx": [
+                0.43,
+                0.17948729810778072,
+                1.7025000000000003,
+                1.9440381056766582
+              ],
+              "secondaryToPrimaryFlux": 0.24343647539635346,
+              "separationPx": 2.175521960930751,
+              "trainingChi2": 668.6244164071239
+            }
+          ],
+          "heldoutGain": 9.479913008812288,
+          "holdoutPixels": 155,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 10.990818197148554,
+            "parametersPx": [
+              0.5075000000000001,
+              0.2475
+            ],
+            "trainingChi2": 1805.834671341749
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 12.60982304600759,
+              "parametersPx": [
+                0.5075000000000001,
+                0.2475
+              ],
+              "trainingChi2": 1999.6712376864898
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 12.36788530107933,
+              "parametersPx": [
+                0.52,
+                0.2475
+              ],
+              "trainingChi2": 1870.7028383318823
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 12.662751420798877,
+              "parametersPx": [
+                0.52,
+                0.26
+              ],
+              "trainingChi2": 1904.557791796665
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 13.732230893180061,
+              "parametersPx": [
+                0.5325,
+                0.235
+              ],
+              "trainingChi2": 1975.3954287419624
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 14.786481000338426,
+              "parametersPx": [
+                0.5325,
+                0.2325
+              ],
+              "trainingChi2": 2067.8910197303344
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 15.264904950318527,
+              "parametersPx": [
+                0.5325,
+                0.235
+              ],
+              "trainingChi2": 2115.7919659313566
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 14.121206154680388,
+              "parametersPx": [
+                0.52,
+                0.2475
+              ],
+              "trainingChi2": 2008.0809575684225
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 12.510584918055857,
+              "parametersPx": [
+                0.52,
+                0.2475
+              ],
+              "trainingChi2": 1890.981559388875
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 10.990818197148554,
+              "parametersPx": [
+                0.5075000000000001,
+                0.2475
+              ],
+              "trainingChi2": 1805.834671341749
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 157,
+          "two": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 1.5109051883362663,
+            "parametersPx": [
+              0.41624999999999995,
+              0.09686706131736293,
+              1.4612500000000002,
+              1.8468988160479114
+            ],
+            "secondaryToPrimaryFlux": 0.34766878758367553,
+            "separationNominalMas": 101.9146228782367,
+            "separationPx": 2.038292457564734,
+            "trainingChi2": 219.21673839535185
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 6.4147666506096925,
+              "parametersPx": [
+                0.50375,
+                0.1568670613173629,
+                1.45625,
+                1.9468988160479115
+              ],
+              "secondaryToPrimaryFlux": 0.26908950068106374,
+              "separationPx": 2.027675993087586,
+              "trainingChi2": 822.6080062796589
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.2615646964245237,
+              "parametersPx": [
+                0.44875,
+                0.14186706131736296,
+                1.4537499999999999,
+                1.9168988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.3100444172946859,
+              "separationPx": 2.0397947765159636,
+              "trainingChi2": 293.96063066393833
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 1.767540932785993,
+              "parametersPx": [
+                0.4474999999999998,
+                0.1369872981077806,
+                1.46,
+                1.9090381056766577
+              ],
+              "secondaryToPrimaryFlux": 0.31229997566128764,
+              "separationPx": 2.040911638118003,
+              "trainingChi2": 228.90601027376297
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.5113805172828494,
+              "parametersPx": [
+                0.43625,
+                0.12936706131736295,
+                1.4437500000000003,
+                1.9043988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.3235154190491992,
+              "separationPx": 2.041027677495288,
+              "trainingChi2": 193.98440246435692
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 1.5221537999673376,
+              "parametersPx": [
+                0.43749999999999994,
+                0.12698729810778084,
+                1.435,
+                1.899038105676658
+              ],
+              "secondaryToPrimaryFlux": 0.33406488029677894,
+              "separationPx": 2.0335118181622427,
+              "trainingChi2": 201.4836113095445
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 1.5465719957365491,
+              "parametersPx": [
+                0.43624999999999997,
+                0.12936706131736303,
+                1.44125,
+                1.9193988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.34091733609270364,
+              "separationPx": 2.0528610968459913,
+              "trainingChi2": 210.21858626419143
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 1.5686819557844807,
+              "parametersPx": [
+                0.4375000000000001,
+                0.1394872981077808,
+                1.4525000000000003,
+                1.899038105676658
+              ],
+              "secondaryToPrimaryFlux": 0.329751742455103,
+              "separationNominalMas": 101.56579203176983,
+              "separationPx": 2.0313158406353966,
+              "trainingChi2": 192.9366081873482
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 1.9792729985273956,
+              "parametersPx": [
+                0.44875,
+                0.14186706131736296,
+                1.4537499999999999,
+                1.9168988160479112
+              ],
+              "secondaryToPrimaryFlux": 0.3101630493198919,
+              "separationPx": 2.0397947765159636,
+              "trainingChi2": 254.7041363040598
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 5.294429478965934,
+              "parametersPx": [
+                0.5075000000000001,
+                0.16749999999999995,
+                1.4075,
+                1.945
+              ],
+              "secondaryToPrimaryFlux": 0.27182538603673456,
+              "separationPx": 1.9923619776536592,
+              "trainingChi2": 561.1072961948901
+            }
+          ],
+          "heldoutGain": 18.033324434362868,
+          "holdoutPixels": 157,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 19.60200639014735,
+            "parametersPx": [
+              0.7,
+              0.43999999999999995
+            ],
+            "trainingChi2": 1425.0685402819138
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 18.767498562574964,
+              "parametersPx": [
+                0.6875,
+                0.4149999999999999
+              ],
+              "trainingChi2": 1761.5367532024704
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 33.90197456920583,
+              "parametersPx": [
+                0.7525,
+                0.5725
+              ],
+              "trainingChi2": 1648.0915215156092
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 32.36186837846425,
+              "parametersPx": [
+                0.7374999999999998,
+                0.5574999999999999
+              ],
+              "trainingChi2": 1745.4955971267414
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 36.63454647695829,
+              "parametersPx": [
+                0.74,
+                0.5725
+              ],
+              "trainingChi2": 1852.7164458087354
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 39.9025661222198,
+              "parametersPx": [
+                0.74,
+                0.5875000000000001
+              ],
+              "trainingChi2": 1913.1351109777843
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 42.84054536816042,
+              "parametersPx": [
+                0.7525,
+                0.6000000000000001
+              ],
+              "trainingChi2": 1912.2567741243406
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 41.54217934253118,
+              "parametersPx": [
+                0.7550000000000001,
+                0.6000000000000001
+              ],
+              "trainingChi2": 1779.5823896583174
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 34.347017011980185,
+              "parametersPx": [
+                0.7525,
+                0.5725
+              ],
+              "trainingChi2": 1676.876025158306
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 19.60200639014735,
+              "parametersPx": [
+                0.7,
+                0.43999999999999995
+              ],
+              "trainingChi2": 1425.0685402819138
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 155,
+          "two": {
+            "focusIndex": 6,
+            "heldoutChi2PerPixel": 1.5686819557844807,
+            "parametersPx": [
+              0.4375000000000001,
+              0.1394872981077808,
+              1.4525000000000003,
+              1.899038105676658
+            ],
+            "secondaryToPrimaryFlux": 0.329751742455103,
+            "separationNominalMas": 101.56579203176983,
+            "separationPx": 2.0313158406353966,
+            "trainingChi2": 192.9366081873482
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 24,
+      "passBothFolds": true,
+      "root": "j93k4aqyq",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.328095293113119,
+      "catalogRow": 8,
+      "catalogSeparationMas": 100.0,
+      "fitPixels": 310,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 10.758533989035241,
+              "parametersPx": [
+                0.3899999999999999,
+                0.011987298107780698,
+                1.7275,
+                1.7515381056766581
+              ],
+              "secondaryToPrimaryFlux": 0.2222696940464523,
+              "separationPx": 2.1942978973041773,
+              "trainingChi2": 1464.0241594596519
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.5497879848282605,
+              "parametersPx": [
+                0.41625,
+                -0.030632938682637067,
+                1.53375,
+                1.7318988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.28686859550867766,
+              "separationPx": 2.086941407043702,
+              "trainingChi2": 343.07777152993344
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 2.12353660814549,
+              "parametersPx": [
+                0.41624999999999995,
+                -0.055632938682637065,
+                1.5362500000000003,
+                1.7193988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.2978424459372073,
+              "separationPx": 2.098841997459983,
+              "trainingChi2": 245.9214298349054
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.6679313638755533,
+              "parametersPx": [
+                0.41750000000000004,
+                -0.08051270189221935,
+                1.5050000000000003,
+                1.704038105676658
+              ],
+              "secondaryToPrimaryFlux": 0.3247921290748835,
+              "separationPx": 2.0898033005033594,
+              "trainingChi2": 176.16656270550217
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 1.2417495770749445,
+              "parametersPx": [
+                0.44249999999999995,
+                -0.06801270189221935,
+                1.5025000000000004,
+                1.729038105676658
+              ],
+              "secondaryToPrimaryFlux": 0.3197423860646921,
+              "separationNominalMas": 104.31912102994296,
+              "separationPx": 2.0863824205988593,
+              "trainingChi2": 160.7726267308168
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 1.2504280564595953,
+              "parametersPx": [
+                0.44936706131736276,
+                -0.06374999999999999,
+                1.496898816047911,
+                1.71625
+              ],
+              "secondaryToPrimaryFlux": 0.3207039896306389,
+              "separationPx": 2.0653626260705074,
+              "trainingChi2": 161.9770936639511
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 1.3268684997824436,
+              "parametersPx": [
+                0.45374999999999993,
+                -0.04572912811497126,
+                1.4937500000000001,
+                1.7571873843449142
+              ],
+              "secondaryToPrimaryFlux": 0.3018866369873427,
+              "separationPx": 2.0813716513156693,
+              "trainingChi2": 199.06370024034877
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 2.1964064069436593,
+              "parametersPx": [
+                0.41624999999999995,
+                -0.04313293868263707,
+                1.5212500000000002,
+                1.7443988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.2938891725269767,
+              "separationPx": 2.101498221310233,
+              "trainingChi2": 282.84001275114474
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 7.009964846373663,
+              "parametersPx": [
+                0.43125,
+                0.021867061317362955,
+                1.6687500000000002,
+                1.7843988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.2224254753831406,
+              "separationPx": 2.15358409086656,
+              "trainingChi2": 1049.0643200561083
+            }
+          ],
+          "heldoutGain": 10.600671519519853,
+          "holdoutPixels": 150,
+          "one": {
+            "focusIndex": 1,
+            "heldoutChi2PerPixel": 11.842421096594798,
+            "parametersPx": [
+              0.52,
+              0.1075
+            ],
+            "trainingChi2": 1837.8224773285265
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 12.830474890946917,
+              "parametersPx": [
+                0.4925,
+                0.1325
+              ],
+              "trainingChi2": 2317.43127037421
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 11.842421096594798,
+              "parametersPx": [
+                0.52,
+                0.1075
+              ],
+              "trainingChi2": 1837.8224773285265
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 12.189518736435911,
+              "parametersPx": [
+                0.5325,
+                0.1075
+              ],
+              "trainingChi2": 1844.674878996425
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 14.078077605977999,
+              "parametersPx": [
+                0.5475000000000001,
+                0.09249999999999999
+              ],
+              "trainingChi2": 1977.4731428438322
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 14.7292346947115,
+              "parametersPx": [
+                0.5475,
+                0.09249999999999999
+              ],
+              "trainingChi2": 2005.5955954987544
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 15.335392130932028,
+              "parametersPx": [
+                0.5724999999999999,
+                0.09249999999999999
+              ],
+              "trainingChi2": 1945.1788310501756
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 13.876650069389713,
+              "parametersPx": [
+                0.5475,
+                0.1075
+              ],
+              "trainingChi2": 1902.4654347877452
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 11.933995171735582,
+              "parametersPx": [
+                0.5325,
+                0.1075
+              ],
+              "trainingChi2": 1849.0862102520275
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 10.664305315177808,
+              "parametersPx": [
+                0.5075000000000001,
+                0.1325
+              ],
+              "trainingChi2": 1961.7936403516032
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 160,
+          "two": {
+            "focusIndex": 4,
+            "heldoutChi2PerPixel": 1.2417495770749445,
+            "parametersPx": [
+              0.44249999999999995,
+              -0.06801270189221935,
+              1.5025000000000004,
+              1.729038105676658
+            ],
+            "secondaryToPrimaryFlux": 0.3197423860646921,
+            "separationNominalMas": 104.31912102994296,
+            "separationPx": 2.0863824205988593,
+            "trainingChi2": 160.7726267308168
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 12.072030762477826,
+              "parametersPx": [
+                0.54625,
+                0.01686706131736293,
+                1.2512500000000004,
+                1.7518988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.21897323355620574,
+              "separationPx": 1.8727947538167036,
+              "trainingChi2": 1180.7641953047635
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.714668257288982,
+              "parametersPx": [
+                0.46374999999999983,
+                -0.023132938682637078,
+                1.3937500000000003,
+                1.7468988160479115
+              ],
+              "secondaryToPrimaryFlux": 0.2893572100821509,
+              "separationPx": 1.9994780350767811,
+              "trainingChi2": 305.0217383356028
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 1.9201947280722713,
+              "parametersPx": [
+                0.45375000000000004,
+                -0.020632938682637113,
+                1.4312500000000001,
+                1.7568988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.28967984797644386,
+              "separationPx": 2.02857718341587,
+              "trainingChi2": 227.64785162001212
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.3723465553354965,
+              "parametersPx": [
+                0.4512500000000001,
+                -0.04313293868263707,
+                1.43875,
+                1.7368988160479113
+              ],
+              "secondaryToPrimaryFlux": 0.30713674613323017,
+              "separationPx": 2.0356004759896074,
+              "trainingChi2": 169.02659532771256
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 1.1334016960908708,
+              "parametersPx": [
+                0.4499999999999999,
+                -0.04051270189221931,
+                1.4650000000000003,
+                1.771538105676658
+              ],
+              "secondaryToPrimaryFlux": 0.31685187471133136,
+              "separationNominalMas": 103.84788309362666,
+              "separationPx": 2.0769576618725334,
+              "trainingChi2": 151.85953217565324
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 3.8401880096499985,
+              "parametersPx": [
+                0.45125000000000015,
+                -0.05813293868263705,
+                1.2537500000000001,
+                1.5368988160479111
+              ],
+              "secondaryToPrimaryFlux": 0.3332278725883708,
+              "separationPx": 1.7855342473889464,
+              "trainingChi2": 192.09885863629876
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 1.4368612325167096,
+              "parametersPx": [
+                0.4499999999999999,
+                -0.038012701892219315,
+                1.4225,
+                1.7440381056766578
+              ],
+              "secondaryToPrimaryFlux": 0.3101035432729332,
+              "separationPx": 2.0301382540991852,
+              "trainingChi2": 176.80856097152568
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 2.1756270242585827,
+              "parametersPx": [
+                0.45375000000000004,
+                -0.020632938682637113,
+                1.41625,
+                1.7543988160479111
+              ],
+              "secondaryToPrimaryFlux": 0.28925221550575964,
+              "separationPx": 2.019193893686738,
+              "trainingChi2": 258.3539398586021
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 8.541213748275451,
+              "parametersPx": [
+                0.53125,
+                0.029367061317362938,
+                1.24875,
+                1.7518988160479114
+              ],
+              "secondaryToPrimaryFlux": 0.24575116349778925,
+              "separationPx": 1.865990861728723,
+              "trainingChi2": 762.3909665866391
+            }
+          ],
+          "heldoutGain": 13.428440773596211,
+          "holdoutPixels": 160,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 14.561842469687083,
+            "parametersPx": [
+              0.6475,
+              0.2075
+            ],
+            "trainingChi2": 1473.39526513912
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 16.498486022976206,
+              "parametersPx": [
+                0.635,
+                0.16749999999999998
+              ],
+              "trainingChi2": 1748.4699448594438
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 11.94963236575061,
+              "parametersPx": [
+                0.5399999999999998,
+                0.12749999999999997
+              ],
+              "trainingChi2": 1719.7337850736974
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 15.385147043520396,
+              "parametersPx": [
+                0.6225,
+                0.23749999999999993
+              ],
+              "trainingChi2": 1908.1856456652386
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 12.72279092335789,
+              "parametersPx": [
+                0.5075000000000001,
+                0.1075
+              ],
+              "trainingChi2": 2007.3089177760721
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 20.417126504067237,
+              "parametersPx": [
+                0.6475,
+                0.3
+              ],
+              "trainingChi2": 2266.338736252597
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 12.830827890912,
+              "parametersPx": [
+                0.5075000000000001,
+                0.1075
+              ],
+              "trainingChi2": 2085.4620610032675
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 19.274588176881025,
+              "parametersPx": [
+                0.6475,
+                0.3
+              ],
+              "trainingChi2": 2096.828765023738
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 15.498223869387127,
+              "parametersPx": [
+                0.6225,
+                0.23749999999999993
+              ],
+              "trainingChi2": 1853.0357889710049
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 14.561842469687083,
+              "parametersPx": [
+                0.6475,
+                0.2075
+              ],
+              "trainingChi2": 1473.39526513912
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 150,
+          "two": {
+            "focusIndex": 4,
+            "heldoutChi2PerPixel": 1.1334016960908708,
+            "parametersPx": [
+              0.4499999999999999,
+              -0.04051270189221931,
+              1.4650000000000003,
+              1.771538105676658
+            ],
+            "secondaryToPrimaryFlux": 0.31685187471133136,
+            "separationNominalMas": 103.84788309362666,
+            "separationPx": 2.0769576618725334,
+            "trainingChi2": 151.85953217565324
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 24,
+      "passBothFolds": true,
+      "root": "j93k4cq6q",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.519995996533516,
+      "catalogRow": 10,
+      "catalogSeparationMas": 165.0,
+      "cause": "OUTSIDE_CHIPS",
+      "passBothFolds": false,
+      "root": "j93k1akvq",
+      "status": "UNAVAILABLE_CLEAN_CENTER"
+    },
+    {
+      "catalogFluxRatio": 0.519995996533516,
+      "catalogRow": 10,
+      "catalogSeparationMas": 165.0,
+      "cause": "OUTSIDE_CHIPS",
+      "passBothFolds": false,
+      "root": "j93k1bokq",
+      "status": "UNAVAILABLE_CLEAN_CENTER"
+    },
+    {
+      "catalogFluxRatio": 0.519995996533516,
+      "catalogRow": 10,
+      "catalogSeparationMas": 165.0,
+      "fitPixels": 313,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 1.0426512455306147,
+              "parametersPx": [
+                -0.055000000000000035,
+                -0.4325,
+                3.1449999999999996,
+                -0.7599999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.4897570299596363,
+              "separationPx": 3.2167151334863333,
+              "trainingChi2": 148.75485672212426
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 1.0375763003737117,
+              "parametersPx": [
+                -0.040000000000000056,
+                -0.48,
+                3.1199999999999997,
+                -0.7125
+              ],
+              "secondaryToPrimaryFlux": 0.4995129632826457,
+              "separationPx": 3.1685416598176515,
+              "trainingChi2": 124.53876671089726
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 1.1067501063594969,
+              "parametersPx": [
+                -0.03301270189221923,
+                -0.47999999999999976,
+                3.0965381056766583,
+                -0.6750000000000007
+              ],
+              "secondaryToPrimaryFlux": 0.4954195808332868,
+              "separationPx": 3.1356200753846144,
+              "trainingChi2": 124.34642531571464
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 1.2296284561266617,
+              "parametersPx": [
+                -0.03551270189221924,
+                -0.49499999999999983,
+                3.071538105676658,
+                -0.6375000000000006
+              ],
+              "secondaryToPrimaryFlux": 0.4930921600062398,
+              "separationPx": 3.1103168601951814,
+              "trainingChi2": 127.04710518723641
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 1.3244076867365417,
+              "parametersPx": [
+                -0.03301270189221923,
+                -0.4949999999999998,
+                3.0565381056766583,
+                -0.6375000000000006
+              ],
+              "secondaryToPrimaryFlux": 0.4940996202060553,
+              "separationPx": 3.0928353403551094,
+              "trainingChi2": 131.4065376022843
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 1.3693407922034924,
+              "parametersPx": [
+                -0.025000000000000005,
+                -0.49250000000000005,
+                3.0524999999999993,
+                -0.6275000000000001
+              ],
+              "secondaryToPrimaryFlux": 0.4973539253600019,
+              "separationPx": 3.0804595842179125,
+              "trainingChi2": 135.16648403067035
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 1.1670684426294422,
+              "parametersPx": [
+                -0.04000000000000005,
+                -0.49500000000000005,
+                3.0725,
+                -0.62
+              ],
+              "secondaryToPrimaryFlux": 0.5104356732209951,
+              "separationPx": 3.1150090288793706,
+              "trainingChi2": 125.10366214797244
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 1.0509074790540858,
+              "parametersPx": [
+                -0.04000000000000002,
+                -0.48,
+                3.1100000000000003,
+                -0.6974999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.5016802647099572,
+              "separationNominalMas": 157.87500000000003,
+              "separationPx": 3.1575000000000006,
+              "trainingChi2": 123.59806116511368
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 1.0140138400551635,
+              "parametersPx": [
+                -0.055000000000000035,
+                -0.43499999999999994,
+                3.1449999999999996,
+                -0.7724999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.48984519909056634,
+              "separationPx": 3.217748630642238,
+              "trainingChi2": 136.8489187191684
+            }
+          ],
+          "heldoutGain": 2.01559197288562,
+          "holdoutPixels": 153,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 3.066499451939706,
+            "parametersPx": [
+              0.09249999999999999,
+              -0.44749999999999995
+            ],
+            "trainingChi2": 427.71322768975574
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 3.0847160344960165,
+              "parametersPx": [
+                0.09249999999999999,
+                -0.44749999999999995
+              ],
+              "trainingChi2": 437.9139525869301
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 3.316901195593167,
+              "parametersPx": [
+                0.07999999999999999,
+                -0.4925
+              ],
+              "trainingChi2": 452.8537590651265
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 3.4710491224848945,
+              "parametersPx": [
+                0.07999999999999999,
+                -0.505
+              ],
+              "trainingChi2": 464.45752677845314
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 3.6626684129989076,
+              "parametersPx": [
+                0.07999999999999999,
+                -0.5075000000000001
+              ],
+              "trainingChi2": 479.4477129522708
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 3.797370123894221,
+              "parametersPx": [
+                0.07999999999999999,
+                -0.52
+              ],
+              "trainingChi2": 489.901897746915
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 3.8128637136403527,
+              "parametersPx": [
+                0.095,
+                -0.52
+              ],
+              "trainingChi2": 492.8500138957925
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 3.55161226977828,
+              "parametersPx": [
+                0.09249999999999999,
+                -0.5075000000000001
+              ],
+              "trainingChi2": 473.36516711800766
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 3.356531983943273,
+              "parametersPx": [
+                0.07999999999999999,
+                -0.4925
+              ],
+              "trainingChi2": 456.86841008847125
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 3.066499451939706,
+              "parametersPx": [
+                0.09249999999999999,
+                -0.44749999999999995
+              ],
+              "trainingChi2": 427.71322768975574
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 160,
+          "two": {
+            "focusIndex": 7,
+            "heldoutChi2PerPixel": 1.0509074790540858,
+            "parametersPx": [
+              -0.04000000000000002,
+              -0.48,
+              3.1100000000000003,
+              -0.6974999999999999
+            ],
+            "secondaryToPrimaryFlux": 0.5016802647099572,
+            "separationNominalMas": 157.87500000000003,
+            "separationPx": 3.1575000000000006,
+            "trainingChi2": 123.59806116511368
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 1.0379170983255501,
+              "parametersPx": [
+                -0.06051270189221939,
+                -0.5025,
+                3.251538105676658,
+                -0.6700000000000002
+              ],
+              "secondaryToPrimaryFlux": 0.5323447909388506,
+              "separationPx": 3.316283582855612,
+              "trainingChi2": 138.78685382484218
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 0.877056970816254,
+              "parametersPx": [
+                -0.07301270189221937,
+                -0.435,
+                3.199038105676658,
+                -0.7074999999999999
+              ],
+              "secondaryToPrimaryFlux": 0.568358220256328,
+              "separationPx": 3.283378250721677,
+              "trainingChi2": 138.73463302898665
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 0.9122713402599694,
+              "parametersPx": [
+                -0.08051270189221939,
+                -0.4124999999999999,
+                3.1840381056766582,
+                -0.7050000000000001
+              ],
+              "secondaryToPrimaryFlux": 0.5821482778863782,
+              "separationPx": 3.277628445263223,
+              "trainingChi2": 143.25052455716147
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 0.9986267631025416,
+              "parametersPx": [
+                -0.09551270189221935,
+                -0.4099999999999999,
+                3.169038105676658,
+                -0.715
+              ],
+              "secondaryToPrimaryFlux": 0.6010670918512223,
+              "separationPx": 3.278767600059298,
+              "trainingChi2": 150.36241957225752
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 2.471831555963999,
+              "parametersPx": [
+                -0.24563293868263703,
+                -0.4562499999999998,
+                1.5918988160479113,
+                -0.8012500000000004
+              ],
+              "secondaryToPrimaryFlux": 0.36688788593322647,
+              "separationPx": 1.8696384542587714,
+              "trainingChi2": 450.5355619104141
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 1.0940735241854291,
+              "parametersPx": [
+                -0.07625,
+                -0.3818670613173629,
+                3.1812500000000004,
+                -0.7243988160479111
+              ],
+              "secondaryToPrimaryFlux": 0.5883618701279709,
+              "separationPx": 3.2754593957182236,
+              "trainingChi2": 162.7294843075574
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 0.9566359928964111,
+              "parametersPx": [
+                -0.07801270189221933,
+                -0.4025,
+                3.186538105676658,
+                -0.7100000000000001
+              ],
+              "secondaryToPrimaryFlux": 0.5839288538937623,
+              "separationPx": 3.2790011017379377,
+              "trainingChi2": 147.6431513729613
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 0.8816394004151732,
+              "parametersPx": [
+                -0.08000000000000004,
+                -0.42749999999999994,
+                3.1874999999999996,
+                -0.7075000000000001
+              ],
+              "secondaryToPrimaryFlux": 0.5756034396398567,
+              "separationPx": 3.2794749960931244,
+              "trainingChi2": 139.8125457071418
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 0.9586847772860878,
+              "parametersPx": [
+                -0.06301270189221936,
+                -0.4875,
+                3.249038105676658,
+                -0.67
+              ],
+              "secondaryToPrimaryFlux": 0.5196014702639763,
+              "separationNominalMas": 165.85375185624875,
+              "separationPx": 3.317075037124975,
+              "trainingChi2": 135.97608822453373
+            }
+          ],
+          "heldoutGain": 1.7833823437522272,
+          "holdoutPixels": 160,
+          "one": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 2.742067121038315,
+            "parametersPx": [
+              0.065,
+              -0.46499999999999997
+            ],
+            "trainingChi2": 457.41087400053283
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 2.8068647888189053,
+              "parametersPx": [
+                0.09249999999999999,
+                -0.48000000000000004
+              ],
+              "trainingChi2": 460.5289214264272
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 2.928570851974173,
+              "parametersPx": [
+                0.052500000000000005,
+                -0.4125
+              ],
+              "trainingChi2": 493.51753746898004
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 3.052616484201045,
+              "parametersPx": [
+                0.04,
+                -0.38749999999999996
+              ],
+              "trainingChi2": 510.4344557403779
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 3.2122336223027226,
+              "parametersPx": [
+                0.025,
+                -0.3725
+              ],
+              "trainingChi2": 532.2494440835862
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 3.3034929464245764,
+              "parametersPx": [
+                -0.0275,
+                -0.3725
+              ],
+              "trainingChi2": 545.8546845818399
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 3.3904670243025334,
+              "parametersPx": [
+                0.0125,
+                -0.3525
+              ],
+              "trainingChi2": 545.4586355076808
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 3.174506120675528,
+              "parametersPx": [
+                0.0275,
+                -0.38
+              ],
+              "trainingChi2": 518.5758420034896
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 2.981668848079964,
+              "parametersPx": [
+                0.04,
+                -0.39999999999999997
+              ],
+              "trainingChi2": 498.8677778885112
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 2.742067121038315,
+              "parametersPx": [
+                0.065,
+                -0.46499999999999997
+              ],
+              "trainingChi2": 457.41087400053283
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 153,
+          "two": {
+            "focusIndex": 8,
+            "heldoutChi2PerPixel": 0.9586847772860878,
+            "parametersPx": [
+              -0.06301270189221936,
+              -0.4875,
+              3.249038105676658,
+              -0.67
+            ],
+            "secondaryToPrimaryFlux": 0.5196014702639763,
+            "separationNominalMas": 165.85375185624875,
+            "separationPx": 3.317075037124975,
+            "trainingChi2": 135.97608822453373
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 25,
+      "passBothFolds": true,
+      "root": "j93k27gpq",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.2754228703338167,
+      "catalogRow": 14,
+      "catalogSeparationMas": 273.0,
+      "fitPixels": 312,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 7.24202316606391,
+              "parametersPx": [
+                -0.41177087188502864,
+                0.15624999999999992,
+                -0.824687384344914,
+                -0.22374999999999987
+              ],
+              "secondaryToPrimaryFlux": 0.023174826963350766,
+              "separationPx": 0.5611595550839659,
+              "trainingChi2": 1167.5252308974746
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 6.229206472464869,
+              "parametersPx": [
+                -0.3717708718850286,
+                0.22124999999999995,
+                -0.6696873843449139,
+                0.028750000000000137
+              ],
+              "secondaryToPrimaryFlux": 0.451213656049053,
+              "separationPx": 0.35469775640150436,
+              "trainingChi2": 1056.918339412722
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 6.105699948749317,
+              "parametersPx": [
+                -0.3817708718850287,
+                0.19624999999999992,
+                -0.7871873843449139,
+                0.028750000000000137
+              ],
+              "secondaryToPrimaryFlux": 0.28768795484135895,
+              "separationPx": 0.438655671996996,
+              "trainingChi2": 1040.8840813505017
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 6.096280360568505,
+              "parametersPx": [
+                -0.4167708718850287,
+                0.09125,
+                -0.6896873843449137,
+                0.31125
+              ],
+              "secondaryToPrimaryFlux": 0.29879808433601296,
+              "separationNominalMas": 17.527365943950805,
+              "separationPx": 0.3505473188790161,
+              "trainingChi2": 1031.8480761825665
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 6.059218725642625,
+              "parametersPx": [
+                -0.43625,
+                0.019270871885028712,
+                -0.53875,
+                0.38218738434491395
+              ],
+              "secondaryToPrimaryFlux": 0.5706240563272603,
+              "separationPx": 0.37711357044800975,
+              "trainingChi2": 1032.8992196535894
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 6.052465334629527,
+              "parametersPx": [
+                -0.48749999999999993,
+                0.0025000000000000022,
+                -0.4474999999999999,
+                0.39250000000000007
+              ],
+              "secondaryToPrimaryFlux": 0.719914275733384,
+              "separationPx": 0.3920459156782532,
+              "trainingChi2": 1034.361088366858
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 5.987738781846248,
+              "parametersPx": [
+                -0.3842708718850287,
+                0.24624999999999997,
+                -0.712187384344914,
+                0.016250000000000146
+              ],
+              "secondaryToPrimaryFlux": 0.4340873557602648,
+              "separationPx": 0.4005361895557679,
+              "trainingChi2": 1032.2307691877136
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 6.184711184999203,
+              "parametersPx": [
+                -0.36927087188502866,
+                0.19624999999999992,
+                -0.7996873843449138,
+                0.028750000000000137
+              ],
+              "secondaryToPrimaryFlux": 0.28323354507773474,
+              "separationPx": 0.46185996167467297,
+              "trainingChi2": 1047.9539337112249
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 6.9008508288073145,
+              "parametersPx": [
+                -0.2917708718850287,
+                0.021250000000000015,
+                -0.577187384344914,
+                0.24875
+              ],
+              "secondaryToPrimaryFlux": 0.9848472808285355,
+              "separationPx": 0.36499155549788254,
+              "trainingChi2": 1115.5629018087009
+            }
+          ],
+          "heldoutGain": -0.04362438658251211,
+          "holdoutPixels": 154,
+          "one": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 6.052655973985993,
+            "parametersPx": [
+              -0.48,
+              0.1475
+            ],
+            "trainingChi2": 1030.9565375863026
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 7.2558564524109155,
+              "parametersPx": [
+                -0.42,
+                0.13999999999999999
+              ],
+              "trainingChi2": 1167.2282768745392
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 6.258677464077063,
+              "parametersPx": [
+                -0.4725,
+                0.1525
+              ],
+              "trainingChi2": 1056.753891255382
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 6.154495915917658,
+              "parametersPx": [
+                -0.4725,
+                0.1525
+              ],
+              "trainingChi2": 1041.6904994943839
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 6.052655973985993,
+              "parametersPx": [
+                -0.48,
+                0.1475
+              ],
+              "trainingChi2": 1030.9565375863026
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 5.998899957157655,
+              "parametersPx": [
+                -0.4925,
+                0.16
+              ],
+              "trainingChi2": 1033.7077458701228
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 6.017186339063679,
+              "parametersPx": [
+                -0.48749999999999993,
+                0.165
+              ],
+              "trainingChi2": 1036.4230605716389
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 6.012210498469666,
+              "parametersPx": [
+                -0.4875,
+                0.165
+              ],
+              "trainingChi2": 1033.8692766222052
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 6.207918092812019,
+              "parametersPx": [
+                -0.4725,
+                0.1525
+              ],
+              "trainingChi2": 1048.1670756247945
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 6.794429607544595,
+              "parametersPx": [
+                -0.4325,
+                0.1525
+              ],
+              "trainingChi2": 1114.3813048151571
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 158,
+          "two": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 6.096280360568505,
+            "parametersPx": [
+              -0.4167708718850287,
+              0.09125,
+              -0.6896873843449137,
+              0.31125
+            ],
+            "secondaryToPrimaryFlux": 0.29879808433601296,
+            "separationNominalMas": 17.527365943950805,
+            "separationPx": 0.3505473188790161,
+            "trainingChi2": 1031.8480761825665
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 9.521077157839176,
+              "parametersPx": [
+                -0.7537499999999999,
+                -0.0007291281149712607,
+                0.08625000000000019,
+                0.7471873843449138
+              ],
+              "secondaryToPrimaryFlux": 0.31483705232270753,
+              "separationPx": 1.1247129009708023,
+              "trainingChi2": 1007.4021702155013
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 8.390284551652913,
+              "parametersPx": [
+                -0.7357291281149714,
+                0.018750000000000006,
+                0.16218738434491387,
+                0.7437499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.29002371735722776,
+              "separationPx": 1.1540706492013924,
+              "trainingChi2": 916.8208421881046
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 8.18866621937123,
+              "parametersPx": [
+                -0.7156329386826371,
+                0.01125000000000003,
+                0.16939881604791132,
+                0.7537499999999998
+              ],
+              "secondaryToPrimaryFlux": 0.2858812092798158,
+              "separationPx": 1.155243462167795,
+              "trainingChi2": 903.025795379418
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 7.726334195866828,
+              "parametersPx": [
+                -0.65875,
+                0.03927087188502873,
+                0.19125000000000011,
+                0.827187384344914
+              ],
+              "secondaryToPrimaryFlux": 0.22412415440727437,
+              "separationNominalMas": 57.950677964260024,
+              "separationPx": 1.1590135592852004,
+              "trainingChi2": 896.4285053597243
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 7.27501793662876,
+              "parametersPx": [
+                -0.5937499999999999,
+                0.09177087188502875,
+                0.24875000000000017,
+                0.9896873843449139
+              ],
+              "secondaryToPrimaryFlux": 0.1424216460396154,
+              "separationPx": 1.231284010026981,
+              "trainingChi2": 898.4506944989621
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 7.16007327032057,
+              "parametersPx": [
+                -0.5812499999999999,
+                0.10427087188502875,
+                0.14875000000000016,
+                1.022187384344914
+              ],
+              "secondaryToPrimaryFlux": 0.1355374225217545,
+              "separationPx": 1.1728046401027408,
+              "trainingChi2": 902.7963303879258
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 7.510440804428357,
+              "parametersPx": [
+                -0.6532291281149712,
+                0.07125000000000001,
+                0.19968738434491398,
+                0.7662499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.20930046212365447,
+              "separationPx": 1.1002234215043476,
+              "trainingChi2": 899.218133327775
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 8.271820834648942,
+              "parametersPx": [
+                -0.7207291281149713,
+                0.018750000000000006,
+                0.17468738434491388,
+                0.7562499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.27692693361736376,
+              "separationPx": 1.1600331808986428,
+              "trainingChi2": 909.1232831349769
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 8.650411951012842,
+              "parametersPx": [
+                -0.74125,
+                0.03927087188502873,
+                0.003750000000000187,
+                0.6671873843449139
+              ],
+              "secondaryToPrimaryFlux": 0.2981716515527672,
+              "separationPx": 0.9743224038375518,
+              "trainingChi2": 978.6695641494017
+            }
+          ],
+          "heldoutGain": -1.075373259101137,
+          "holdoutPixels": 158,
+          "one": {
+            "focusIndex": 4,
+            "heldoutChi2PerPixel": 6.650960936765691,
+            "parametersPx": [
+              -0.49999999999999994,
+              0.1925
+            ],
+            "trainingChi2": 910.6433883863315
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 7.990553898499433,
+              "parametersPx": [
+                -0.5524999999999999,
+                0.1925
+              ],
+              "trainingChi2": 1043.0809550924985
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 6.928360421844684,
+              "parametersPx": [
+                -0.5275,
+                0.1925
+              ],
+              "trainingChi2": 941.4024174381725
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 6.832209129971665,
+              "parametersPx": [
+                -0.5249999999999999,
+                0.1925
+              ],
+              "trainingChi2": 928.0802163471118
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 6.662163803348289,
+              "parametersPx": [
+                -0.5125,
+                0.18
+              ],
+              "trainingChi2": 915.2434722936221
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 6.650960936765691,
+              "parametersPx": [
+                -0.49999999999999994,
+                0.1925
+              ],
+              "trainingChi2": 910.6433883863315
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 6.6595223232548975,
+              "parametersPx": [
+                -0.49999999999999994,
+                0.1925
+              ],
+              "trainingChi2": 914.2349319023542
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 6.663009148080522,
+              "parametersPx": [
+                -0.5125,
+                0.1925
+              ],
+              "trainingChi2": 913.814716726891
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 6.879800853964502,
+              "parametersPx": [
+                -0.5275,
+                0.1925
+              ],
+              "trainingChi2": 934.0334475114543
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 7.501939655688864,
+              "parametersPx": [
+                -0.5524999999999999,
+                0.18
+              ],
+              "trainingChi2": 988.8747402504637
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 154,
+          "two": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 7.726334195866828,
+            "parametersPx": [
+              -0.65875,
+              0.03927087188502873,
+              0.19125000000000011,
+              0.827187384344914
+            ],
+            "secondaryToPrimaryFlux": 0.22412415440727437,
+            "separationNominalMas": 57.950677964260024,
+            "separationPx": 1.1590135592852004,
+            "trainingChi2": 896.4285053597243
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 24,
+      "passBothFolds": false,
+      "root": "j93k3bmmq",
+      "status": "MEASURED"
+    },
+    {
+      "catalogFluxRatio": 0.2754228703338167,
+      "catalogRow": 14,
+      "catalogSeparationMas": 273.0,
+      "fitPixels": 312,
+      "folds": [
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 8.58370951825351,
+              "parametersPx": [
+                0.17875,
+                -0.006770871885028732,
+                0.7537499999999999,
+                -0.2546873843449139
+              ],
+              "secondaryToPrimaryFlux": 0.021192715349854455,
+              "separationPx": 0.6261689845004081,
+              "trainingChi2": 1562.4671880438095
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 7.517293577690055,
+              "parametersPx": [
+                0.14677087188502877,
+                0.0012500000000000705,
+                1.6171873843449136,
+                -0.5037500000000001
+              ],
+              "secondaryToPrimaryFlux": 0.07390383478261499,
+              "separationPx": 1.554718534048749,
+              "trainingChi2": 1359.2544322986537
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 7.4636458064088504,
+              "parametersPx": [
+                0.13177087188502878,
+                0.016250000000000073,
+                1.5196873843449137,
+                -0.4962500000000002
+              ],
+              "secondaryToPrimaryFlux": 0.08537261194308458,
+              "separationPx": 1.4795163045937716,
+              "trainingChi2": 1326.5857485616016
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 7.441133277973915,
+              "parametersPx": [
+                0.11927087188502879,
+                0.028750000000000074,
+                1.449687384344914,
+                -0.5037500000000001
+              ],
+              "secondaryToPrimaryFlux": 0.09245352020079761,
+              "separationNominalMas": 71.65131447897387,
+              "separationPx": 1.4330262895794774,
+              "trainingChi2": 1300.6440942320994
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 7.327561470515386,
+              "parametersPx": [
+                0.1717708718850288,
+                0.04125000000000007,
+                1.419687384344914,
+                -0.49375000000000024
+              ],
+              "secondaryToPrimaryFlux": 0.07102282324279283,
+              "separationPx": 1.357763094972773,
+              "trainingChi2": 1300.7359705527688
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 7.261966116257753,
+              "parametersPx": [
+                0.21875,
+                0.020729128114971268,
+                1.2337500000000001,
+                -0.4321873843449139
+              ],
+              "secondaryToPrimaryFlux": 0.042135014393450125,
+              "separationPx": 1.1114667639020186,
+              "trainingChi2": 1309.354546983358
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 7.607397307768313,
+              "parametersPx": [
+                0.11249999999999996,
+                0.065,
+                1.4725000000000001,
+                -0.5
+              ],
+              "secondaryToPrimaryFlux": 0.1067060818332291,
+              "separationPx": 1.4726931112760733,
+              "trainingChi2": 1315.373855570715
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 7.5269323235417565,
+              "parametersPx": [
+                0.13177087188502878,
+                0.01625000000000007,
+                1.5521873843449137,
+                -0.5037500000000001
+              ],
+              "secondaryToPrimaryFlux": 0.08384479995697416,
+              "separationPx": 1.5126080354370404,
+              "trainingChi2": 1346.592090361958
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 8.045846562027792,
+              "parametersPx": [
+                0.15927087188502878,
+                0.0012500000000000705,
+                1.6421873843449135,
+                -0.5037500000000001
+              ],
+              "secondaryToPrimaryFlux": 0.05455914317212122,
+              "separationPx": 1.5665460040886727,
+              "trainingChi2": 1518.6419395973355
+            }
+          ],
+          "heldoutGain": -0.15891128549758715,
+          "holdoutPixels": 153,
+          "one": {
+            "focusIndex": 5,
+            "heldoutChi2PerPixel": 7.282221992476328,
+            "parametersPx": [
+              0.26,
+              0.0
+            ],
+            "trainingChi2": 1312.4628841714382
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 8.57951319224578,
+              "parametersPx": [
+                0.2075,
+                0.0
+              ],
+              "trainingChi2": 1560.3969600737805
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 7.638800081948764,
+              "parametersPx": [
+                0.22,
+                0.0
+              ],
+              "trainingChi2": 1383.202831055182
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 7.567709515340607,
+              "parametersPx": [
+                0.22,
+                -0.0125
+              ],
+              "trainingChi2": 1351.8318485126636
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 7.41338102993632,
+              "parametersPx": [
+                0.2325,
+                -0.0125
+              ],
+              "trainingChi2": 1322.6013518004509
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 7.316939488833371,
+              "parametersPx": [
+                0.26,
+                0.0
+              ],
+              "trainingChi2": 1313.1919233661015
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 7.282221992476328,
+              "parametersPx": [
+                0.26,
+                0.0
+              ],
+              "trainingChi2": 1312.4628841714382
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 7.4588833615173655,
+              "parametersPx": [
+                0.235,
+                0.0
+              ],
+              "trainingChi2": 1347.8744561597955
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 7.586816740667005,
+              "parametersPx": [
+                0.22,
+                0.0
+              ],
+              "trainingChi2": 1370.5214774935798
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 8.13823670444593,
+              "parametersPx": [
+                0.22,
+                0.0
+              ],
+              "trainingChi2": 1531.548268710048
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 159,
+          "two": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 7.441133277973915,
+            "parametersPx": [
+              0.11927087188502879,
+              0.028750000000000074,
+              1.449687384344914,
+              -0.5037500000000001
+            ],
+            "secondaryToPrimaryFlux": 0.09245352020079761,
+            "separationNominalMas": 71.65131447897387,
+            "separationPx": 1.4330262895794774,
+            "trainingChi2": 1300.6440942320994
+          }
+        },
+        {
+          "dualByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 12.385878206129874,
+              "parametersPx": [
+                0.6106329386826371,
+                -0.24875,
+                -0.2718988160479112,
+                0.2562499999999999
+              ],
+              "secondaryToPrimaryFlux": 0.5989465329832131,
+              "separationPx": 1.0168024872647492,
+              "trainingChi2": 1182.2877521516607
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 9.074971953681374,
+              "parametersPx": [
+                0.07,
+                0.0125,
+                1.0475,
+                -0.2475
+              ],
+              "secondaryToPrimaryFlux": 0.31665920425538485,
+              "separationPx": 1.0114871477186451,
+              "trainingChi2": 1107.19370709326
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 8.76230172369375,
+              "parametersPx": [
+                0.06999999999999999,
+                0.0125,
+                1.06,
+                -0.26
+              ],
+              "secondaryToPrimaryFlux": 0.2989762014293293,
+              "separationPx": 1.0268185087930584,
+              "trainingChi2": 1100.9411180884244
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 8.345037005730996,
+              "parametersPx": [
+                0.1225,
+                0.0,
+                1.1624999999999999,
+                -0.26
+              ],
+              "secondaryToPrimaryFlux": 0.18790144729587127,
+              "separationNominalMas": 53.60037313302958,
+              "separationPx": 1.0720074626605915,
+              "trainingChi2": 1096.431436185709
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 8.692532637792835,
+              "parametersPx": [
+                0.024270871885028775,
+                0.08125000000000007,
+                0.6546873843449137,
+                -0.24375000000000022
+              ],
+              "secondaryToPrimaryFlux": 0.5957279903509598,
+              "separationPx": 0.7092601632561104,
+              "trainingChi2": 1099.7199838394076
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 8.606195046722137,
+              "parametersPx": [
+                0.06427087188502878,
+                0.06875000000000007,
+                0.6171873843449138,
+                -0.20625000000000018
+              ],
+              "secondaryToPrimaryFlux": 0.5243212245175877,
+              "separationPx": 0.6175286792941703,
+              "trainingChi2": 1100.2294046069362
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 8.514391485423861,
+              "parametersPx": [
+                0.0975,
+                0.0125,
+                1.1425,
+                -0.26
+              ],
+              "secondaryToPrimaryFlux": 0.23294799369565652,
+              "separationPx": 1.0799450217487927,
+              "trainingChi2": 1096.93766349476
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 8.948193056545716,
+              "parametersPx": [
+                0.06999999999999999,
+                0.0125,
+                1.0475,
+                -0.2475
+              ],
+              "secondaryToPrimaryFlux": 0.3080111909669563,
+              "separationPx": 1.0114871477186451,
+              "trainingChi2": 1103.6238676307626
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 12.098332987873286,
+              "parametersPx": [
+                0.528132938682637,
+                -0.19375,
+                -0.3818988160479112,
+                0.34874999999999995
+              ],
+              "secondaryToPrimaryFlux": 0.447480514957658,
+              "separationPx": 1.0594640364910746,
+              "trainingChi2": 1150.432818201273
+            }
+          ],
+          "heldoutGain": -0.05304027315782811,
+          "holdoutPixels": 159,
+          "one": {
+            "focusIndex": 5,
+            "heldoutChi2PerPixel": 8.291996732573168,
+            "parametersPx": [
+              0.2325,
+              0.0
+            ],
+            "trainingChi2": 1108.442809057372
+          },
+          "singleByFocus": [
+            {
+              "focusIndex": 0,
+              "heldoutChi2PerPixel": 10.207212616043977,
+              "parametersPx": [
+                0.3,
+                -0.0125
+              ],
+              "trainingChi2": 1288.3388204673197
+            },
+            {
+              "focusIndex": 1,
+              "heldoutChi2PerPixel": 8.733163712879886,
+              "parametersPx": [
+                0.2325,
+                0.0
+              ],
+              "trainingChi2": 1164.4652483216453
+            },
+            {
+              "focusIndex": 2,
+              "heldoutChi2PerPixel": 8.522805689775813,
+              "parametersPx": [
+                0.22,
+                0.0
+              ],
+              "trainingChi2": 1153.039513041943
+            },
+            {
+              "focusIndex": 3,
+              "heldoutChi2PerPixel": 8.346222253547065,
+              "parametersPx": [
+                0.22,
+                0.0
+              ],
+              "trainingChi2": 1130.6237408829747
+            },
+            {
+              "focusIndex": 4,
+              "heldoutChi2PerPixel": 8.292986133082874,
+              "parametersPx": [
+                0.2325,
+                0.0
+              ],
+              "trainingChi2": 1114.5727920049017
+            },
+            {
+              "focusIndex": 5,
+              "heldoutChi2PerPixel": 8.291996732573168,
+              "parametersPx": [
+                0.2325,
+                0.0
+              ],
+              "trainingChi2": 1108.442809057372
+            },
+            {
+              "focusIndex": 6,
+              "heldoutChi2PerPixel": 8.50600220418184,
+              "parametersPx": [
+                0.22,
+                0.0
+              ],
+              "trainingChi2": 1137.400356943875
+            },
+            {
+              "focusIndex": 7,
+              "heldoutChi2PerPixel": 8.64413948655512,
+              "parametersPx": [
+                0.22,
+                0.0
+              ],
+              "trainingChi2": 1157.1422582173468
+            },
+            {
+              "focusIndex": 8,
+              "heldoutChi2PerPixel": 9.706108448796288,
+              "parametersPx": [
+                0.2325,
+                0.0
+              ],
+              "trainingChi2": 1235.737341323546
+            }
+          ],
+          "status": "MEASURED",
+          "trainingPixels": 153,
+          "two": {
+            "focusIndex": 3,
+            "heldoutChi2PerPixel": 8.345037005730996,
+            "parametersPx": [
+              0.1225,
+              0.0,
+              1.1624999999999999,
+              -0.26
+            ],
+            "secondaryToPrimaryFlux": 0.18790144729587127,
+            "separationNominalMas": 53.60037313302958,
+            "separationPx": 1.0720074626605915,
+            "trainingChi2": 1096.431436185709
+          }
+        }
+      ],
+      "minimumCleanWingSectors": 24,
+      "passBothFolds": false,
+      "root": "j93k49dfq",
+      "status": "MEASURED"
+    }
+  ],
+  "schema": "BKL046_ORION_F555W_PUBLISHED_PAIR_POSITIVE_CONTROLS_EPSF_V1",
+  "scientificClosures": 0
+}
