@@ -1,0 +1,90 @@
+{
+  "schema": "BKL046_CFA_POSITIVE_RESPONSE_V1",
+  "parentFixtureSha256": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "mode": "OFFLINE_MODEL_SELF_TEST",
+  "cases": {
+    "baseline": [
+      "integer-a.xdrz",
+      "integer-b-baseline.xdrz",
+      "integer-c.xdrz"
+    ],
+    "first": [
+      "integer-a.xdrz",
+      "integer-b-first.xdrz",
+      "integer-c.xdrz"
+    ],
+    "second": [
+      "integer-a.xdrz",
+      "integer-b-second.xdrz",
+      "integer-c.xdrz"
+    ]
+  },
+  "result": {
+    "status": "COMPATIBLE_LOCAL_LINEAR_RESPONSE",
+    "probes": [
+      {
+        "referenceXY": [
+          13,
+          8
+        ],
+        "input": [
+          0.75,
+          0.25,
+          0.5
+        ],
+        "output": [
+          0.5,
+          0.25,
+          0.375
+        ],
+        "secantSlopesFromBaseline": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "referenceXY": [
+          14,
+          7
+        ],
+        "input": [
+          0.800000011920929,
+          0.30000001192092896,
+          0.550000011920929
+        ],
+        "output": [
+          0.49000000953674316,
+          0.24000000953674316,
+          0.36500000953674316
+        ],
+        "secantSlopesFromBaseline": [
+          0.5,
+          0.5
+        ]
+      }
+    ],
+    "maxChangeOutsideProbesOnModeledSupport": 0.0,
+    "modeledHalfShareMatched": true,
+    "absoluteWeightEstablished": false
+  },
+  "sha256": {
+    "baseline-rgb.fits": "549e1847a6c527420db6ef51eb508dc80703ae0ec1ca77ffea5d77477aaa2e88",
+    "first-rgb.fits": "6dc03bed4ebeba71a0ab865b7a5929b78a0f25947cb0b7604e99e3a040dd3f7b",
+    "integer-a-cfa.fits": "ef3a3958294200529c93bb26b647b63b96942bc4a8ec5dac54b5205b46b42fa0",
+    "integer-a-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-a.xdrz": "f4d82157f0e9fa6336c6d914ff444d94cf7e86683a8d26de409176031218881b",
+    "integer-b-baseline.xdrz": "ee27a41abfddbd18b3232ed628a21b8d8e760c33b27023cd8475324fcb72df54",
+    "integer-b-cfa.fits": "37eb46cecc18f2fd55b1b92e098bbe8fdc4db778f4752f5f12a74a923089ebf2",
+    "integer-b-first-cfa.fits": "7f84f1fffc74cd1068a93e731ca6f6061451b4db09c8158762479857ae3f62ee",
+    "integer-b-first.xdrz": "3272a5656eb0a07584440fad1dddcfae15c3e9939e237d2d3da56fbc4be15c72",
+    "integer-b-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-b-second-cfa.fits": "ad52f6a87f64b782d17000f24303cca5c45fd3d256ef8ec21248857355f630a4",
+    "integer-b-second.xdrz": "1537765adead6ffae4a1a63d551b889445442a8d92aab5a2d1c93b0d39d30f3e",
+    "integer-c-cfa.fits": "af752828b3baf73487774de339cf520d103544a3c6a2b2eb1026f5286b307b91",
+    "integer-c-rgb.fits": "7a20bf16b54277c46cdb9a02ab79222d4e04e74ea1169ee8a2af3f6b0b66f25b",
+    "integer-c.xdrz": "a21c4d9bb776adab5f80bf88195d243e237bd00253afb5601e0796aa4dfa6a4e",
+    "second-rgb.fits": "eb087d948da6b3823e9b97c9edbe72d9338b53340688198a9d480b7ce806ee3b"
+  },
+  "nativeProvenanceVerified": false,
+  "scientificClosures": 0
+}
