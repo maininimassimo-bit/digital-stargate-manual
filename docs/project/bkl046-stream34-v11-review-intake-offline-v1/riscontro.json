@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_STREAM34_REVIEW_INTAKE_OFFLINE_RESULT_V1",
+  "protocolSha256": "e75923240c976f842fcf5feae427541ea117f469ee75d2b9e52152aa56097a69",
+  "programSha256": "321621b732da0606a8725e94a61ea1959b1d55e2b97cb3c2c18a3ffd70f1a43a",
+  "subjectSha256": "0b029846da0412875e26595e2ead8361bc35fcef2c882ec2be95303b9582bdd1",
+  "outcomes": {
+    "arbOnly": "ARB_VERIFIED_RQ_PENDING",
+    "complete": "BOTH_RECEIPTS_VERIFIED"
+  },
+  "refusals": {
+    "rqBeforeArb": "ARB_REQUIRED_FIRST",
+    "wrongTrustPin": "TRUST_DIGEST_CHANGED",
+    "sameTrustKey": "TRUST_ROLES_NOT_INDEPENDENT",
+    "foreignSubject": "APPROVAL_SUBJECT_CHANGED",
+    "historicalSubjectInOrigin": "ORIGIN_BINDING_MISMATCH",
+    "signatureFromDifferentRole": "ORIGIN_SIGNATURE_INVALID",
+    "arbRequestedChanges": "REVIEW_NOT_APPROVED",
+    "arbApparentApprovalWithBlockers": "REVIEW_NOT_APPROVED",
+    "sameReviewer": "RQ_ARB_LINK",
+    "rqOtherArb": "RQ_ARB_LINK",
+    "modifiedReceipt": "ORIGIN_BINDING_MISMATCH",
+    "rqUnlinkedOrigin": "ORIGIN_BINDING_MISMATCH",
+    "unsignedTimeOrderCannotAuthorize": "ORIGIN_BINDING_MISMATCH"
+  },
+  "actualApprovalsVerified": false,
+  "enrollmentAttempted": false,
+  "admissionRequested": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
