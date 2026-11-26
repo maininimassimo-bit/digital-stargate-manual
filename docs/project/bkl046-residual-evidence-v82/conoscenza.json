@@ -1,0 +1,287 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_V82",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "ca37bac8f6392dc10a6ce0fc76f12ac40fd6833a5f545632fbd9387efb77bb23",
+    "commit": "c29cadc49237d3302e7d1dd14a502ce8d875c2f6"
+  },
+  "sourceIndex": {
+    "sha256": "913870e278aa381b65b26c44320e15fe1621f15c85a6b4990ceb582f86547ddb",
+    "commit": "56a66dd4a94572164cb2a5f1ed535e172cf4880e"
+  },
+  "evidence": [
+    {
+      "id": "stream34ReviewIntakeV11",
+      "level": "reviewIntakeFixtureOnly",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "8ca811f3f1bd781cc479f5c44e96e6a5f36a84df",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-stream34-v11-review-intake-offline-v1/riscontro.json",
+          "sha256": "a22c70425425d96506d2b490d97366ac044817b716a3f8269097746592e67bc7",
+          "archiveSha256": "893575388dbf84495fdf11441bd65c541f47e86e38994731a7f459477ec10cc1",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-Stream34-ingresso-revisioni-v11.zip",
+          "copiedReport": "stream34ReviewIntakeV11-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "stream34MemoryOrderingV11",
+      "level": "simulatedLaunchOrderOnly",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "3632e2806e6a644f4980d6257a820a95fd0cc527",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-stream34-v11-memory-order-offline-v1/riscontro.json",
+          "sha256": "5061446e9e1e0fab985835aceb877b514e927c687f9b5d5e381ae71571c27c41",
+          "archiveSha256": "ad06645e5ee12c1d8fbc2bb33dd2f5da2e538f1b512c4a948127dffb7577d575",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-Stream34-memoria-ordine-v11.zip",
+          "copiedReport": "stream34MemoryOrderingV11-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "stream34VmCommitCrosscheckV11",
+      "level": "diagnosticProcessSamplesOnly",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "c088e2c823066232bcc71fc78ab3c5c48e59b39d",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-stream34-commit-vm-crosscheck-v11/riscontro.json",
+          "sha256": "aa5d8f9c98a75f078c07d62f1323b17c87b051295a4ae3c38541e79796ae62cc",
+          "archiveSha256": "6db82f46a7152817da076fd6ae5e2d48471a7c90ceb0da93b76cfc1fb5150b8d",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-Stream34-commit-due-contatori-v11.zip",
+          "copiedReport": "stream34VmCommitCrosscheckV11-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8RawClipParity",
+      "level": "rawStoredCodeCountsOnly",
+      "axes": [
+        "SATURATION_BLEND/1",
+        "SATURATION_BLEND/3"
+      ],
+      "commit": "05ac49306898d5a1f6671fe661bec19dca59ca5d",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-raw-ceiling-by-bayer-parity-v1/riscontro.json",
+          "sha256": "e34bbb1a5dbdcd16351659ad18827be728063c6b33c50f7a62278be804b803ec",
+          "archiveSha256": "af0d6166440ccbd37287afa4ec27c2b38af1b5d7bb3f40a0fb6401eaab644409",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-clipping-parita-v1.zip",
+          "copiedReport": "m8RawClipParity-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8BilinearClipLineage",
+      "level": "offlineBilinearStoredCodeLineageOnly",
+      "axes": [
+        "SATURATION_BLEND/1",
+        "SATURATION_BLEND/3"
+      ],
+      "commit": "56a66dd4a94572164cb2a5f1ed535e172cf4880e",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-bilinear-clip-lineage-v1/riscontro.json",
+          "sha256": "3e89f1215064dce4bc44eb3f5d1ff80b62759edb318365bbfb1b845b774b3bf2",
+          "archiveSha256": "7153ce40f2a6dc2960240017481adc9a779d1f0e83a03dc6266b01be296ed429",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-clipping-debayer-v1.zip",
+          "copiedReport": "m8BilinearClipLineage-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "deliveryEvidence": [
+    {
+      "id": "exactOperationDistributionScope",
+      "level": "operationalAndDeliveryBoundary",
+      "axes": [],
+      "commit": "84e75fabd345d06f833ab177352395919adb361f",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-exact-operation-distribution-scope-v1/riscontro.json",
+          "sha256": "619b899ca06f87077fef2f79125004148ed2b56e41725df26bda08bd15269780",
+          "archiveSha256": "b719eb59faa3c90e914a2797b47cf01e5530964f143c3a20c1b0ade044926bde",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-perimetri-operativi-v1.zip",
+          "copiedReport": "exactOperationDistributionScope-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "freshLocalByteReadback",
+      "level": "localTransferReadinessOnly",
+      "axes": [],
+      "commit": "f35ec486bb796c4284a662231b5473c043a38b7e",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-delivery-fresh-local-byte-readback-v1/riscontro.json",
+          "sha256": "46b1b5d0bc1b705885758a145e2d587d6352299b90e14ef5e1cf7cb41ea69de6",
+          "archiveSha256": "0194f6bf88c553fa57173d66c1d7c1a021090b4d0c9dee614df8ff812358b8ae",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-GitHub-corpus-impronte-v1.zip",
+          "copiedReport": "freshLocalByteReadback-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "findings": {
+    "stream34": {
+      "reviewRefusals": {
+        "rqBeforeArb": "ARB_REQUIRED_FIRST",
+        "wrongTrustPin": "TRUST_DIGEST_CHANGED",
+        "sameTrustKey": "TRUST_ROLES_NOT_INDEPENDENT",
+        "foreignSubject": "APPROVAL_SUBJECT_CHANGED",
+        "historicalSubjectInOrigin": "ORIGIN_BINDING_MISMATCH",
+        "signatureFromDifferentRole": "ORIGIN_SIGNATURE_INVALID",
+        "arbRequestedChanges": "REVIEW_NOT_APPROVED",
+        "arbApparentApprovalWithBlockers": "REVIEW_NOT_APPROVED",
+        "sameReviewer": "RQ_ARB_LINK",
+        "rqOtherArb": "RQ_ARB_LINK",
+        "modifiedReceipt": "ORIGIN_BINDING_MISMATCH",
+        "rqUnlinkedOrigin": "ORIGIN_BINDING_MISMATCH",
+        "unsignedTimeOrderCannotAuthorize": "ORIGIN_BINDING_MISMATCH"
+      },
+      "authenticReviewsVerified": false,
+      "launcherContextObserved": false,
+      "diagnosticMemory": {
+        "maximumBracketSpanUs": 343,
+        "maximumCommitDistanceOutsideBracketBytes": 0,
+        "minExactPhysicalAvailableBytes": 11788361728,
+        "minExactProcessCommitAvailableBytes": 13079330816,
+        "processCommitVsSystemBracket": {
+          "ABOVE_BRACKET": 0,
+          "BELOW_BRACKET": 0,
+          "WITHIN_BRACKET": 16
+        },
+        "samples": 16,
+        "streamPhysicalVsSystemBracket": {
+          "ABOVE_BRACKET": 0,
+          "BELOW_BRACKET": 0,
+          "WITHIN_BRACKET": 16
+        },
+        "thresholdRefusals": 0,
+        "totalPhysicalBytes": 17178710016
+      }
+    },
+    "rawClipping": {
+      "allClipped": 4803,
+      "mixed": 24186
+    },
+    "bilinearClipping": {
+      "B": {
+        "affected": 87796,
+        "allContributorsClipped": 25623,
+        "directAffected": 12944,
+        "interpolatedAffected": 74852,
+        "thresholds": {
+          "62000": {
+            "affectedDetected": 27578,
+            "affectedHidden": 60218,
+            "flaggedWithoutClippedContributor": 816
+          },
+          "64880": {
+            "affectedDetected": 25976,
+            "affectedHidden": 61820,
+            "flaggedWithoutClippedContributor": 148
+          },
+          "65535": {
+            "affectedDetected": 25623,
+            "affectedHidden": 62173,
+            "flaggedWithoutClippedContributor": 0
+          }
+        }
+      },
+      "G": {
+        "affected": 103052,
+        "allContributorsClipped": 43776,
+        "directAffected": 33327,
+        "interpolatedAffected": 69725,
+        "thresholds": {
+          "62000": {
+            "affectedDetected": 46804,
+            "affectedHidden": 56248,
+            "flaggedWithoutClippedContributor": 2110
+          },
+          "64880": {
+            "affectedDetected": 44244,
+            "affectedHidden": 58808,
+            "flaggedWithoutClippedContributor": 373
+          },
+          "65535": {
+            "affectedDetected": 43776,
+            "affectedHidden": 59276,
+            "flaggedWithoutClippedContributor": 0
+          }
+        }
+      },
+      "R": {
+        "affected": 98479,
+        "allContributorsClipped": 22521,
+        "directAffected": 13395,
+        "interpolatedAffected": 85084,
+        "thresholds": {
+          "62000": {
+            "affectedDetected": 24085,
+            "affectedHidden": 74394,
+            "flaggedWithoutClippedContributor": 890
+          },
+          "64880": {
+            "affectedDetected": 22766,
+            "affectedHidden": 75713,
+            "flaggedWithoutClippedContributor": 138
+          },
+          "65535": {
+            "affectedDetected": 22521,
+            "affectedHidden": 75958,
+            "flaggedWithoutClippedContributor": 0
+          }
+        }
+      }
+    },
+    "distribution": {
+      "publicRepositoryVisibility": "public",
+      "publicLocatorSha256": "913870e278aa381b65b26c44320e15fe1621f15c85a6b4990ceb582f86547ddb",
+      "releaseState": "INTERIM_REGISTERED_BASELINE",
+      "knowledgeSha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d",
+      "completeTransferVerified": false,
+      "remotePayloadReadbackVerified": false,
+      "approvedDestinationOrDistributionPerimeterRecordedInLocator": false
+    },
+    "localReadback": {
+      "carriersPerVolume": 80,
+      "bytesAcrossVolumes": 54957729992,
+      "capsule": {
+        "capsule": "BKL046-Conoscenza-PixInsight-v1.171.zip",
+        "capsuleBytes": 103445718,
+        "capsuleSha256": "25be4e999a09fecf4f883c7896714161e6c87ad177d30642abe160f58f9332f3",
+        "inner": "Conoscenza-PixInsight-v1.171.json",
+        "innerBytes": 3030957683,
+        "innerSha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d"
+      }
+    }
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}
