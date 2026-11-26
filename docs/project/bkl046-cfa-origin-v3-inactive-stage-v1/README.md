@@ -1,0 +1,7 @@
+# BKL-046 · Posa inattiva della candidata CFA v3
+
+Il kit controlla le impronte dello ZIP e del soggetto esatto, posa i 56 file in una directory nuova e li rilegge dopo la rinomina. Mantiene il modulo di attivazione con valore nullo. In laboratorio sono state provate la creazione del percorso di progetto, la posa in un percorso già presente e la conservazione di un file adiacente. Una destinazione della stessa versione già esistente viene respinta.
+
+Il collaudo ha respinto uno ZIP alterato, un'autorità modificata dopo la posa e l'avvio senza iscrizione. Il processo Node del collaudo riceve un ambiente esplicito che esclude NODE_OPTIONS e NODE_PATH del chiamante. Il token ordinario è stato respinto dalla modalità per la posa sotto Program Files. La cartella di destinazione del progetto risulta assente.
+
+L'esecutore accetta modalità, ZIP esatto, Node esatto e percorso nuovo per il rapporto. La modalità lab esegue il collaudo isolato. La modalità protected-inactive è predisposta per la sola copia inattiva con operatore locale elevato dopo la revisione prevista. La qualifica effettiva richiederà test sul token ordinario e sulla catena protetta prima di configurare l'iscrizione. Nessuna ammissione o prova nativa è stata avviata. [Controllo dei permessi](../bkl046-cfa-origin-v3-ordinary-token-acl-v1/README.md)
