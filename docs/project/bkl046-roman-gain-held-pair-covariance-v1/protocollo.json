@@ -1,0 +1,21 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_HELD_PAIR_COVARIANCE_V1",
+  "captureSHA": "8948884b38d16ed2f8ba1ed092f4151999542a86d5cf4ef483d63ff9108ad9d0",
+  "spatialReportSHA": "174d01a1b2d53be23c49b3e3915a9151d7ec9dd5290557c69e16f1739acb3a55",
+  "channelsProgramSHA": "23207e128119ee2d45259b9b05197638838f971541cf71166e6c9ec3b6e03988",
+  "phase": [
+    0.5,
+    0.5
+  ],
+  "bands": [
+    "lower",
+    "upper"
+  ],
+  "frames": [
+    0,
+    1,
+    5,
+    10
+  ],
+  "design": "Reproduce all prior half/half endpoints using the original support. For each band/channel/frame, average trace-normalized 3x3-patch covariance from nine remaining disjoint exposure pairs. Use nonoverlapping patches on a fixed grid free of rails. Evaluate on the omitted pair, multiplying shape by the same input variance used by the independent-input model. Compare error relative to empirical output-sum variance, holding parameters constant over all folds. Pairs are disjoint in exposures; tiles and readings are dependent."
+}
