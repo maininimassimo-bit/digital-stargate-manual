@@ -1,0 +1,29 @@
+{
+  "schema": "BKL046_NGC6341_PSF_CENTER_STRESS_V1",
+  "parentProgram": "5a3455f1bf368958a2997120a5379ad98b821bd0b1236c0c54f8a7e59d69042b",
+  "parentProtocol": "bf6cf108b68c08f5d6bd89446961311fc0803d8c8c9d02e5f5c0d8104a9a75e3",
+  "parentReport": "afd102626da62ae986d9d58c5c3f1764b50b2e7111e53b531d6d821d77aaaa82",
+  "shiftsPx": [
+    [
+      0,
+      0
+    ],
+    [
+      -0.125,
+      0
+    ],
+    [
+      0.125,
+      0
+    ],
+    [
+      0,
+      -0.125
+    ],
+    [
+      0,
+      0.125
+    ]
+  ],
+  "design": "Change only the PSF template center in validation, leaving the science pixels, quality mask, circular aperture, affine background coordinates and nominal training losses unchanged. Keep candidates selected on the unperturbed training exposure. Keep both exposure directions, all stars, both chips and all failures. Compare all shifts on common measured star support and retain any support differences. No probability distribution for centers or new native run."
+}
