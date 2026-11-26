@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_M8M20_PSF_DISJOINT_EXPOSURE_PROTOCOL_V1",
+  "mosaicSha256": "7285425ff3667612296a78307ab813b6d1d419aa35f73e46dd1b096a6b54b910",
+  "manifestSha256": "e794f06fdd0cbdf735e36acf52a45526711daa7de96c960da3965a058e8e37a1",
+  "priorSha256": "1cf6f1b055a9ad2b45ed80d7cfc0b294f957f3621a2592d39d2bb6608058f2d8",
+  "heldOutStars": 19,
+  "expectedPosesPerHalf": 7,
+  "calibration": "A",
+  "axisRatios": [
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95,
+    1
+  ],
+  "angleStep": 15,
+  "widthFactors": [
+    0.85,
+    1,
+    1.15
+  ],
+  "beta": 2.5,
+  "radius": 8,
+  "minValid": 30,
+  "minGain": 0.1,
+  "maxRatio": 0.85,
+  "maxAngularDifference": 15,
+  "design": "Use the exact archival exposure halves. Fit native parity red and blue mosaics without interpolation. Choose circular and elliptical shapes separately in seven exposures and score their fixed shapes in the seven other exposures. Fit nuisance amplitude and affine background independently in each exposure and normalize residual energy per exposure. Swap halves. Keep only positive amplitude models and the cross-half improvement and angle criteria. Map each fixed reference center through the archived local reference-to-frame mosaic affine before using native detector parity samples. No inference of absolute astronomical truth."
+}
