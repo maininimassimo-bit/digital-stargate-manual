@@ -1,0 +1,218 @@
+{
+  "schema": "BKL046_M51_RAW_CFA_SHIFT_PLAN_V1",
+  "protocolSha256": "fe62b1c372e20dec8cbc7365e12c5e196a64e799a59d31d21a3639b2d1afc7b0",
+  "records": [
+    {
+      "sha256": "33057a51122668ad3b3cbb5f1714046e95b5151b3c2f44904d4b45804b2b6a52",
+      "coarse": {
+        "stored": {
+          "xy": [
+            26,
+            -10
+          ],
+          "correlation": 0.7531118831287906,
+          "searchEdge": false
+        },
+        "rotate180": {
+          "xy": [
+            -28,
+            25
+          ],
+          "correlation": 0.366106168355414,
+          "searchEdge": false
+        }
+      },
+      "selectedOrientation": "stored",
+      "tiles": [
+        {
+          "originYX": [
+            460,
+            650
+          ],
+          "status": "MEASURED",
+          "peak": {
+            "xy": [
+              1,
+              0
+            ],
+            "correlation": 0.8018337290366138,
+            "searchEdge": false
+          },
+          "shiftXY": [
+            418.0,
+            -159.05
+          ]
+        },
+        {
+          "originYX": [
+            460,
+            2470
+          ],
+          "status": "MEASURED",
+          "peak": {
+            "xy": [
+              1,
+              3
+            ],
+            "correlation": 0.7189109519260494,
+            "searchEdge": false
+          },
+          "shiftXY": [
+            418.35,
+            -153.7
+          ]
+        },
+        {
+          "originYX": [
+            460,
+            4250
+          ],
+          "status": "MEASURED",
+          "peak": {
+            "xy": [
+              1,
+              6
+            ],
+            "correlation": 0.6805089209426299,
+            "searchEdge": false
+          },
+          "shiftXY": [
+            418.3,
+            -148.7
+          ]
+        },
+        {
+          "originYX": [
+            1510,
+            650
+          ],
+          "status": "MEASURED",
+          "peak": {
+            "xy": [
+              0,
+              0
+            ],
+            "correlation": 0.9627008170682606,
+            "searchEdge": false
+          },
+          "shiftXY": [
+            415.65,
+            -159.25
+          ]
+        },
+        {
+          "originYX": [
+            1510,
+            2470
+          ],
+          "status": "MEASURED",
+          "peak": {
+            "xy": [
+              0,
+              3
+            ],
+            "correlation": 0.9298109206638348,
+            "searchEdge": false
+          },
+          "shiftXY": [
+            415.55,
+            -153.9
+          ]
+        },
+        {
+          "originYX": [
+            1510,
+            4250
+          ],
+          "status": "UNRELIABLE_LOCAL_PEAK",
+          "peak": {
+            "xy": [
+              -1,
+              6
+            ],
+            "correlation": 0.2718987133833016,
+            "searchEdge": false
+          }
+        },
+        {
+          "originYX": [
+            2570,
+            650
+          ],
+          "status": "UNRELIABLE_LOCAL_PEAK",
+          "peak": {
+            "xy": [
+              -2,
+              1
+            ],
+            "correlation": 0.24842982857919158,
+            "searchEdge": false
+          }
+        },
+        {
+          "originYX": [
+            2570,
+            2470
+          ],
+          "status": "UNRELIABLE_LOCAL_PEAK",
+          "peak": {
+            "xy": [
+              -2,
+              4
+            ],
+            "correlation": 0.11290010166608304,
+            "searchEdge": false
+          }
+        },
+        {
+          "originYX": [
+            2570,
+            4250
+          ],
+          "status": "UNRELIABLE_LOCAL_PEAK",
+          "peak": {
+            "xy": [
+              -2,
+              5
+            ],
+            "correlation": 0.20487424478764152,
+            "searchEdge": false
+          }
+        }
+      ],
+      "outcome": {
+        "acceptedTiles": 5,
+        "classification": "INSUFFICIENT_LOCAL_EVIDENCE"
+      }
+    },
+    {
+      "sha256": "cbbe4f2816fbcd26acb1d45bbff0d91a3c0d08e96197cd267acb37d93649d7c3",
+      "coarse": {
+        "stored": {
+          "xy": [
+            12,
+            4
+          ],
+          "correlation": 0.2552558570372803,
+          "searchEdge": false
+        },
+        "rotate180": {
+          "xy": [
+            -14,
+            11
+          ],
+          "correlation": 0.2952581406246199,
+          "searchEdge": false
+        }
+      },
+      "selectedOrientation": null,
+      "tiles": [],
+      "outcome": {
+        "classification": "ORIENTATION_OR_COARSE_SHIFT_UNRESOLVED"
+      }
+    }
+  ],
+  "deliberateDitherProven": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}
