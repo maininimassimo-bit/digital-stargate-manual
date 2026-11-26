@@ -1,0 +1,20 @@
+{
+  "schema": "BKL046_M8M20_PSF_DISJOINT_MODEL_SENSITIVITY_PROTOCOL_V1",
+  "programSha256": "8be4874901a2024084ae3a1aaf93166eed9e9e962f0cee26f1937f10369d6add",
+  "previousProtocolSha256": "0f5c46bcf58e7747b642383d73e7c235500653acf5023024d498c9b48ae85462",
+  "previousReportSha256": "b1620be589bcf2e3e2327ca4557839a1b18957219aa12d63a5932191a5fcfced",
+  "extendedWidths": [
+    0.7,
+    0.85,
+    1,
+    1.15,
+    1.3
+  ],
+  "extendedBeta": [
+    1.8,
+    2.5,
+    3.5,
+    5
+  ],
+  "design": "Replay archived baseline byte for byte. With the exact same Bayer samples and disjoint exposure halves, expand width grid alone, beta grid alone, and both. Give circular and elliptical models the same choices and retain all published angular and residual thresholds. Report stability, lost and new positive stars. This tests model sensitivity, without an independent physical orientation reference."
+}
