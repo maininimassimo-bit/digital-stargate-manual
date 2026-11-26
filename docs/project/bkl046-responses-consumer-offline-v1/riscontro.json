@@ -1,0 +1,30 @@
+{
+  "consumerSha256": "d64320d31c62d626dc9b68d4a380fe7192e40bb861e0dd953da18f4c7bf60ea8",
+  "nativeExecutions": 0,
+  "negativeFixtures": {
+    "completionWithError": "RESPONSE_NOT_COMPLETED",
+    "duplicateId": "DUPLICATE_RESPONSE_ID",
+    "duplicateNestedKey": "DUPLICATE_JSON_KEY",
+    "excessiveNesting": "MALFORMED_JSON",
+    "incomplete": "RESPONSE_INCOMPLETE",
+    "longUtf8": "RESEARCH_DECISION_TEXT_LIMIT",
+    "mixedRefusal": "RESPONSE_REFUSAL",
+    "multipleTexts": "SINGLE_STRUCTURED_TEXT_REQUIRED",
+    "nonfiniteJson": "NONFINITE_JSON_NUMBER",
+    "nonterminal": "RESPONSE_NOT_COMPLETED",
+    "oversize": "RESPONSE_SIZE",
+    "providerMismatch": "MODEL_IDENTITY_MISMATCH",
+    "refusal": "RESPONSE_REFUSAL",
+    "staleBinding": "WIRE_REJECTED",
+    "truncatedJson": "MALFORMED_JSON",
+    "twoMessages": "ASSISTANT_MESSAGE_REQUIRED",
+    "unexpectedTool": "UNEXPECTED_OUTPUT_ITEM"
+  },
+  "programSha256": "837d1dc93355488a4e905c5c94a806b7cd6bbaca6057169a77a0dcbeb0881c53",
+  "protocolSha256": "e93bd2774213a1c662ba9416b674b0a9230d3e53c035569a33c44a5e15698923",
+  "providerCalls": 0,
+  "reasoningAndSingleTextFixtureAccepted": true,
+  "schema": "BKL046_ADAPTER_RESPONSES_CONSUMER_OFFLINE_V1",
+  "scientificClosures": 0,
+  "validArchivedDecisionsPreserved": 16
+}

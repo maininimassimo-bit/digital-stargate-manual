@@ -1,0 +1,8 @@
+{
+  "schema": "BKL046_ADAPTER_RESPONSES_CONSUMER_OFFLINE_PROTOCOL_V1",
+  "transportProgramSha256": "be34a8e4670a6f704ad139e2675038cc3114879eb219746050d085e1565985da",
+  "transportProtocolSha256": "cb7fc108c1962129827b5ad0ce7e5eadb3babd6d72f22b42efb4c297d746d149",
+  "documentation": "https://developers.openai.com/api/reference/resources/responses/methods/create",
+  "fixedModelFixture": "fixture-model-2026-01-01",
+  "scope": "Only offline response-body fixtures for a single fixed-model, no-tool evaluation. Check completed state, explicit refusals, single assistant text, exact model and response replay. Validate nested decision with the archived wire and runtime checks. The body alone does not establish HTTP provenance or a deployable model, and no provider call is made."
+}
