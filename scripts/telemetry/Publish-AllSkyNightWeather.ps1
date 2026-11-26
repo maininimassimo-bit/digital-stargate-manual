@@ -16,12 +16,16 @@ $humidity = [Collections.Generic.List[double]]::new()
 $wind = [Collections.Generic.List[double]]::new()
 $first = $last = $previous = $null
 $partial = $false
+$rainRank = 0
+$rainStates = @{dry=1; wet=2; rain=3}
 $header = Get-Content -LiteralPath $source -TotalCount 1
 $lines = @($header) + @(Get-Content -LiteralPath $source -Tail 25000)
 foreach ($row in ($lines | ConvertFrom-Csv)) {
     $stamp = [datetime]::MinValue
     if (![datetime]::TryParseExact("$($row.Date) $($row.Time)", 'yyyy-MM-dd HH:mm:ss', $culture, [Globalization.DateTimeStyles]::None, [ref]$stamp)) { continue }
     if ($stamp -lt $start -or $stamp -ge $end) { continue }
+    $rain = ([string]$row.'Rain Condition').Trim()
+    if ($rainStates.ContainsKey($rain)) { $rainRank = [math]::Max($rainRank, $rainStates[$rain]) }
     $temp = $hum = $speed = 0.0
     $style = [Globalization.NumberStyles]::Float
     if (![double]::TryParse($row.'Ambient Temperature', $style, $culture, [ref]$temp) -or
@@ -49,6 +53,7 @@ $summary = [ordered]@{
     humidity = [math]::Round(($humidity | Measure-Object -Average).Average)
     wind = [math]::Round(($wind | Measure-Object -Average).Average, 1)
 }
+if ($rainRank) { $summary['rain_condition'] = @('','dry','wet','rain')[$rainRank] }
 $json = $summary | ConvertTo-Json -Depth 3 -Compress
 if ($Preview) { "$key $json"; return }
 function Git-Checked {
