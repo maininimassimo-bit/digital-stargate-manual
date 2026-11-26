@@ -1,0 +1,7 @@
+# BKL-046 · Coefficienti Gaia XP continui per GD71 e GD153
+
+Sono state estratte due righe dai file ufficiali Gaia DR3 del CDN ESA. Il trasferimento a intervalli ha ripreso due letture interrotte. Il programma ha verificato formato 206, intervallo ed ETag di ogni risposta, poi ha ricostruito l'ETag multipart di ciascun file completo e calcolato SHA-256. Il documento di acquisizione lega gli originali ai due identificatori. [Distribuzione ESA](https://cdn.gea.esac.esa.int/Gaia/gdr3/Spectroscopy/xp_continuous_mean_spectrum/)
+
+Le righe continue coincidono con le sorgenti campionate e riportano lo stesso identificatore di soluzione per entrambe le rappresentazioni. Ogni banda ha 55 coefficienti e 1.485 correlazioni distinte. Nelle quattro matrici ricostruite dai coefficienti l'autovalore minimo è positivo. Questo controllo riguarda i coefficienti e precede l'applicazione delle basi spettrali e della combinazione BP/RP. I dati provengono da ESA Gaia e DPAC. [Schema Gaia XP continuo](https://gaia.aip.de/metadata/gaiadr3/xp_continuous_mean_spectrum/)
+
+Il pacchetto pubblico contiene codice, metadati di acquisizione e riscontro. I gzip e le righe estratte sono conservati su H:. Per riprodurre con Python e NumPy 2.3.5 passare la directory dei gzip e di cdn.json, gli spettri campionati fissati, una nuova directory di uscita, un percorso per il riscontro e l'impronta SHA-256 della ricevuta CDN. Restano da propagare la covarianza condizionata e le limitazioni del modello ai rapporti ACS.
