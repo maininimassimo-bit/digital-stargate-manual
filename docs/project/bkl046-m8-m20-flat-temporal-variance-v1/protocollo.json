@@ -1,0 +1,44 @@
+{
+  "schema": "BKL046_M8_M20_SPATIAL_FLAT_TEMPORAL_VARIANCE_V1",
+  "calibrationReceipt": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+  "flats": "a01bb46b1b0e82658f41f783e0f45da9b1a202b818cb1bccb4e7ff2eba1ba8ca",
+  "shortDarks": "66b9e0db9eb4491425ab6d97eb7d25af2041b5c7f621a33e313a84b06206c0ce",
+  "width": 128,
+  "x": [
+    256,
+    1280,
+    2304,
+    3328,
+    4352,
+    5376,
+    6016
+  ],
+  "y": [
+    256,
+    1152,
+    2048,
+    2944,
+    3840
+  ],
+  "calibrationPairs": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "validationPairs": [
+    1,
+    3,
+    5
+  ],
+  "minimumValidPerParity": 3500,
+  "hotDarkAboveMedian": 100,
+  "rawSaturationAdu": 62000,
+  "parities": [
+    "R",
+    "G1",
+    "G2",
+    "B"
+  ],
+  "design": "Paired chronological exposures, darkest background and nuisance image scaling estimated from training pairs or training tiles as applicable. Fit affine variance as a function of signal and compare a constant-variance baseline. Evaluate the intersection of reserved pairs and tiles. Subtract a local mean by estimating unbiased variance of the balanced difference. One exposure level with spatial throughput variation cannot identify a calibrated hardware gain on its own."
+}
