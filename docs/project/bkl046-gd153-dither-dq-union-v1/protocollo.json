@@ -1,0 +1,39 @@
+{
+  "schema": "BKL046_GD153_DITHER_DQ_UNION_PROTOCOL_V1",
+  "sources": [
+    {
+      "archive": "448eeeb966d4bda28aa6973f82620c2eeb639799b8beb04b2e86d6366d8e572a",
+      "report": "374cc3f29dd46a55bfe87a4af8e838429b332d91ae6025303a2dd349d3b8c51d",
+      "capture": "d6aa59766915bb5c9534fe9084368f656be80fc804376f8900d7c6bc9c62a5c1"
+    },
+    {
+      "archive": "f719995944bc6a7a8f9438a3b12540c02e5fe3e4abf143dec585f8c2949c973c",
+      "report": "243415bb017ed8540f2250587427f5d48a72a389427a3f40e1497d918a75c7b2",
+      "capture": "e5e51871dcd329d3e2b534fe9019840777e87915ded695379ef10efa4e7487dd"
+    }
+  ],
+  "phases": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0.5
+    ],
+    [
+      0.5,
+      0
+    ],
+    [
+      0.5,
+      0.5
+    ]
+  ],
+  "policies": [
+    "nearest",
+    "four",
+    "sixteen"
+  ],
+  "scope": "Project a grid around the Gaia-predicted source in two exposures of the same band. Use DQ zero finite data only. Compare nearest, a 2-by-2 footprint and a 4-by-4 footprint under four source grid phases. Preserve exposure-mode rejection. Count geometric support, not photometric estimates or validated stellar association."
+}
