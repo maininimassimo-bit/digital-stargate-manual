@@ -1,0 +1,83 @@
+{
+  "independentAstrophysicalSources": 0,
+  "nativeExecutions": 0,
+  "protocolSha256": "4ae0f1748c455e9f2f112e53d95aaf1d26cfb28ba04f2e487c62b89dae931fa7",
+  "results": [
+    {
+      "allPairCount": 58653,
+      "allPairMinimumEigenvalue": 0.018219387053335256,
+      "case": "historical-lower-triangle",
+      "fullMinimumEigenvalue": -0.09416396032684778,
+      "shortestContiguousWindow": {
+        "minimumEigenvalue": -0.01659559341488624,
+        "minimumEigenvalueAtWidthBelow": 1.4601896575983493e-13,
+        "startIndex": 148,
+        "width": 8,
+        "widthBelow": 7,
+        "widthsExhaustivelyChecked": [
+          6,
+          7,
+          8,
+          11,
+          22,
+          43,
+          86,
+          172
+        ]
+      },
+      "triples": {
+        "belowDeterminantScreen": 0,
+        "checked": 6666891,
+        "minimumDeterminant": 1.2560850915166455e-05,
+        "smallestDeterminantWitness": [
+          147,
+          148,
+          149
+        ],
+        "witnessBelowEigenvalueTolerance": false,
+        "witnessMinimumEigenvalue": 5.908298876595076e-05
+      }
+    },
+    {
+      "allPairCount": 58653,
+      "allPairMinimumEigenvalue": 0.018219387053334923,
+      "case": "formal-conditional",
+      "fullMinimumEigenvalue": -5.070930766039778e-15,
+      "shortestContiguousWindow": null,
+      "triples": {
+        "belowDeterminantScreen": 0,
+        "checked": 6666891,
+        "minimumDeterminant": 1.2560850915499522e-05,
+        "smallestDeterminantWitness": [
+          147,
+          148,
+          149
+        ],
+        "witnessBelowEigenvalueTolerance": false,
+        "witnessMinimumEigenvalue": 5.90829887661186e-05
+      }
+    },
+    {
+      "allPairCount": 58653,
+      "allPairMinimumEigenvalue": 1.0,
+      "case": "diagonal-only",
+      "fullMinimumEigenvalue": 1.0,
+      "shortestContiguousWindow": null,
+      "triples": {
+        "belowDeterminantScreen": 0,
+        "checked": 6666891,
+        "minimumDeterminant": 1.0,
+        "smallestDeterminantWitness": [
+          0,
+          1,
+          2
+        ],
+        "witnessBelowEigenvalueTolerance": false,
+        "witnessMinimumEigenvalue": 1.0
+      }
+    }
+  ],
+  "sampleCount": 343,
+  "schema": "BKL046_GAIA_XP_COVARIANCE_SUPPORT_RESULT_V1",
+  "scientificClosures": 0
+}
