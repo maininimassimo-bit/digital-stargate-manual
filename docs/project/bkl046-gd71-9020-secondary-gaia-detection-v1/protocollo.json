@@ -1,0 +1,13 @@
+{
+  "schema":"BKL046_GD71_9020_ASTROMETRY_DIAGNOSTIC_PROTOCOL_V1",
+  "ingressSha256":"899ff9bd6a5d6dc2414fb5d35383bcc73758203b79d5edb2e99c76dfbc971c40",
+  "rejectedMeasurementSha256":"35060181ff44cddd9b30a97afec1fb8ebac6162922675c9da812f459807ca119",
+  "gaiaFieldSha256":"9a52d608ef6d53ba3dea6042d0618b625ecf1806f1f17342d31edc6394239df7",
+  "gd71Id":"3348071631670500736",
+  "gaiaFieldCenter":[88.115083333333,15.887008333333],
+  "gaiaFieldRadiusDegrees":0.01,
+  "gaiaFieldFilter":"only the archived cone and rows used; separate rows originally included by exact ID",
+  "candidateRule":"5x5 integrated flux maximum with eligible center and 95 percent accepted window support, then use the window centroid. Preserve source identity failure unless a second independent catalogue reference is matched.",
+  "eligibleDq":[0,64],
+  "minimumWindowPixels":24
+}

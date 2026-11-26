@@ -1,0 +1,13 @@
+{
+  "schema":"BKL046_GD71_9020_SECOND_REFERENCE_PROTOCOL_V1",
+  "precedingReceiptSha256":"9ee4eb9fa69c733b7742867b15cce2796190762ffdc841e0b1e303fdc39278f2",
+  "precedingVerifierSha256":"e9eb04515869b6c71a48bacfb340772e6ee2039498ad987f075dd3e0a8eb573e",
+  "targetGaiaId":"3348071631670500736",
+  "secondGaiaId":"3348071631668046208",
+  "aperturePx":2.5,
+  "skyAnnulusPx":[6,10],
+  "acceptedDq":[0,64],
+  "minimumIndividualDiagnosticSnr":5,
+  "criterion":"Signal in the fixed aperture must exceed the diagnostic noise threshold in each repeat of at least one band in each visit. The aperture is predicted from Gaia relative to the target candidate and not scanned for a peak.",
+  "scope":"Frozen-position visibility test. Diagnostic ERR plus a local sky component is not a full uncertainty model or an independent plate calibration."
+}
