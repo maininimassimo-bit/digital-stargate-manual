@@ -1,0 +1,439 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_20261126_V4",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "commit": "e4c7d449eb90e9e69cfeb4f0c9d69f6d6ef64977",
+    "sha256": "6b7b671a1cff6e37d40a355c21381d9db6aaf4e0571bdbfb62100ab2c620aa39"
+  },
+  "sourceIndex": {
+    "commit": "3ae6e47f986d9daa1553c6cf112e23941de9af65",
+    "sha256": "6faa55e1d905701f3905eea137694a6403f3dd97921361043ee575580febc3b7"
+  },
+  "evidence": [
+    {
+      "id": "native64Adjudication",
+      "level": "historicalCorrelatedCorpusOfflineAdjudication",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "f5d8e012c12abaa968d96bae41d27fe8b3fefc5a",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-native64-offline-adjudication-v1/riscontro.json",
+          "sha256": "737b974e5b2b9340081445292a6a9602e0354cb9afbdde634f18aa043209061a",
+          "archiveSha256": "2285c8443f3e8ee734de52c689a88176b34054058e0bdc9144eee4fc81ac50ff",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-native64-adjudicazione.zip",
+          "copiedReport": "native64Adjudication-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "native64Projection",
+      "level": "offlineProjectionIdentity",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "5e969775090f3272561f1bca728d7f77eb59bd01",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-native64-request-projection-v1/riscontro.json",
+          "sha256": "235fca85a505eef4782d4462818e3f70698884ae9724733408dba0a211fa1a7f",
+          "archiveSha256": "90fd4669b480e0fac8e4b8d567535dbebf9ef9fb6e6e96312b9647d39000916f",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-native64-proiezione-richieste.zip",
+          "copiedReport": "native64Projection-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "knowledge18To20",
+      "level": "fixedReaderHistoricalComparison",
+      "axes": [
+        "VERSION_BACKEND/1"
+      ],
+      "commit": "5efe1cdd5f5ae525410ed650d885d6117e8616ea",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-knowledge-v18-v20-vm-replay-v1/riscontro.json",
+          "sha256": "e8d5142b3350ddeb2f803f6ab2f562ad6b5fb3b7c9f7a3350a7af915ea65601c",
+          "archiveSha256": "f500fab9d4e1b3526a635d8d260c54155e2355b68f16e19b792a9abb8fc0719a",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-versioni-v18-v20-replica.zip",
+          "copiedReport": "knowledge18To20-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "pinnedAdapters",
+      "level": "exactArchivedParserComparison",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "f1b7c91a4f99fb03f02795d963cfe9bf6db86bed",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-adapter-contract-pair-vm-replay-v1/riscontro.json",
+          "sha256": "bae3833f706fd674d6216e4711e345a18a3d18851159a473b1789a385e7b4d4e",
+          "archiveSha256": "52ebb5f59088c4181e60ea7ba6ba7020277d5118bad99366bf30bcf1ac1719ad",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-adattatori-replica.zip",
+          "copiedReport": "pinnedAdapters-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "actionSchema",
+      "level": "offlineSchemaCandidate",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "65fa19083dd6cc16de49c449486af3325db19482",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-adapter-action-specific-schema-offline-v1/riscontro.json",
+          "sha256": "15ea9d32e5a0a8cdba328d2f33301ff0273d35ff27247b1d6efde95d181223ed",
+          "archiveSha256": "af788afdb76fe54116bc65e261a4effccdb8588fd061add5f8fa8e08df7693c9",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-schema-azioni.zip",
+          "copiedReport": "actionSchema-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "wireSchema",
+      "level": "offlineStructuredOutputShape",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "cb3e458c0bc25a7bf2e1d61e4a413850a66e1944",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-structured-output-shape-offline-v1/riscontro.json",
+          "sha256": "f0600c0dd1d9f50e3f37e658c4de2438b924734e4b9e86472cff388a45d62bf2",
+          "archiveSha256": "5dc07d6e7894457a8f9acd6fbf9559bc22acf574b0c5e5172f22d974f4e135a2",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-schema-trasporto.zip",
+          "copiedReport": "wireSchema-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "messageConsumption",
+      "level": "proposedMessageConsumerFixtures",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "69484ec05cb502590be9904fcce1c2034cbafe47",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-responses-consumer-offline-v1/riscontro.json",
+          "sha256": "0a7601eaf286c3c7dae658475bfd21869bd66e2b12ca885245f1d4475faaf3f0",
+          "archiveSha256": "489bc9bafd18f844fb62199f04ff746cc94ab9bd800961cc07a8b02e34f13cea",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-consumo-risposta.zip",
+          "copiedReport": "messageConsumption-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "reservedRecovery",
+      "level": "actualRecoveryLogicLocalStorageFixture",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "1d9e078e2ee645b3ce3286f769aabb06123da6b6",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-research-reserved-recovery-offline-v1/riscontro.json",
+          "sha256": "cffc331110dae1daf419f5862f9d40bb487668cd42b97fc7c53f32bd48afbf8b",
+          "archiveSha256": "e40181a7057d01fe177df58ce67e1d1cd5dec23f586059e66ab5fc3b1ee86d12",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-recupero-prenotazione.zip",
+          "copiedReport": "reservedRecovery-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "forcedFunction",
+      "level": "actualAdapterFakeTransport",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "f413daa330142193c6855bcbc93b6d00d8c67cbe",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-forced-function-offline-v1/riscontro.json",
+          "sha256": "a1100852236da13b4bca81a0cb4064e853ba1f5295e663e62c6fce5c8d9fd296",
+          "archiveSha256": "00e96833d81127b0f562872a49de7e2f551e8b43ea4a9c682917919e36ccebb3",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-function-call.zip",
+          "copiedReport": "forcedFunction-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "forcedFunctionCorrection",
+      "level": "offlineCorrectionCandidate",
+      "axes": [
+        "VERSION_BACKEND/2"
+      ],
+      "commit": "6453722fd0da5175a91e813843282e776b8c97d6",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-forced-function-correction-offline-v1/riscontro.json",
+          "sha256": "60d94ab9803d3437b83b48ea776ba59d59935e41fffed69abecdc66d8ae2fa94",
+          "archiveSha256": "65bda91068a57886604cd19bf39a90664f53028942766a8b563e23e23ce4f3f9",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-IA-function-call-correzione.zip",
+          "copiedReport": "forcedFunctionCorrection-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "darkPartitions",
+      "level": "oneDetectorCohortPartitionSensitivity",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "3ae6e47f986d9daa1553c6cf112e23941de9af65",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-dark-partition-sensitivity-v1/riscontro.json",
+          "sha256": "0cd43bb9d4dc3f791d87ff205a2531520b5371a066ce045c53e1b0071da94a43",
+          "archiveSha256": "213b18541aae532a7c79e4f1723e83223d5a0b149423424c5d28e6940856fd45",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-dark-partizioni.zip",
+          "copiedReport": "darkPartitions-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "findings": {
+    "native64": {
+      "historicalPackets": 64,
+      "fixtureResponses": 704,
+      "independentConfirmationUnits": 0,
+      "modelVisibleRequests": 64,
+      "originalLabelsReconstructed": 256
+    },
+    "fixedReader": {
+      "versions": 3,
+      "comparisons": [
+        {
+          "after": 19,
+          "before": 18,
+          "changedDecisions": 0,
+          "changedEvidenceRows": [
+            "process:DrizzleIntegration"
+          ],
+          "rows": 4920
+        },
+        {
+          "after": 20,
+          "before": 19,
+          "changedDecisions": 0,
+          "changedEvidenceRows": [],
+          "rows": 4920
+        }
+      ]
+    },
+    "exactAdapters": {
+      "pairedDecisions": 1680,
+      "schemaInvalidRemoved": 841,
+      "remainingRuntimeRejections": 43,
+      "schemaCandidate": {
+        "candidateFalseRejections": 0,
+        "candidateGap": 0,
+        "comparisons": 1680,
+        "historicGap": 43,
+        "runtimeAccepted": 16
+      },
+      "wireCandidate": {
+        "acceptedByBoth": 16,
+        "compared": 1680,
+        "falseRejections": 0,
+        "runtimeAccepted": 16,
+        "wireAcceptsRuntimeRejects": 2
+      },
+      "liveProviderAcceptanceVerified": false
+    },
+    "proposedMessageConsumer": {
+      "validPreserved": 16,
+      "negativeFixtures": 17
+    },
+    "actualReservationRecovery": {
+      "cases": 7,
+      "concurrentConsumers": {
+        "final": {
+          "apiCalls": 1,
+          "decisions": 1,
+          "pendingPresent": false,
+          "status": "STOPPED_FOR_REVIEW"
+        },
+        "rejected": 1,
+        "successes": 1
+      }
+    },
+    "actualToolAdapter": {
+      "cases": 24,
+      "callWithoutIdAccepted": true,
+      "text301Accepted": true
+    },
+    "candidateCorrection": {
+      "patchSha256": "2a012a529d622661f053232d9f0a5f2bca53a88434b2676c3dc583c25a882bc1",
+      "differentialCases": 16,
+      "historicalCasesReplayed": 24,
+      "deploymentApplied": false
+    },
+    "darkSplitSensitivity": {
+      "mean": {
+        "adjacentPaired": {
+          "maxAnchorDifferenceAdu": {
+            "maximum": 0.1427525111607224,
+            "median": 0.07278006417413962,
+            "minimum": 0.026402064732110375,
+            "p05": 0.0401611328125,
+            "p95": 0.12314627511160836
+          },
+          "maxPlaneCornerAdu": {
+            "maximum": 0.1372079638268856,
+            "median": 0.06291284741143441,
+            "minimum": 0.007352857824497469,
+            "p05": 0.02204216927410254,
+            "p95": 0.11403059881337863
+          }
+        },
+        "all": {
+          "maxAnchorDifferenceAdu": {
+            "maximum": 0.1714390345982224,
+            "median": 0.0668858119419724,
+            "minimum": 0.014822823660665563,
+            "p05": 0.034476143973208195,
+            "p95": 0.1186000279017776
+          },
+          "maxPlaneCornerAdu": {
+            "maximum": 0.1555307200217175,
+            "median": 0.05862419510793302,
+            "minimum": 0.0068703436759027375,
+            "p05": 0.022146161325787436,
+            "p95": 0.1143426150176664
+          }
+        },
+        "chronological": {
+          "deltasAdu": [
+            -0.1387241908482224,
+            -0.06985909598216722,
+            -0.10205078125,
+            0.019496372767889625,
+            -0.015869140625,
+            -0.005336216517889625
+          ],
+          "maxAnchorDifferenceAdu": 0.1387241908482224,
+          "maxPlaneCornerAdu": 0.12384232877567136,
+          "planeAdu": [
+            -0.051990470414226456,
+            0.0032018397602472004,
+            0.0686500186011977
+          ]
+        },
+        "originalInterleaved": {
+          "deltasAdu": [
+            -0.0962437220982224,
+            -0.09971400669638797,
+            -0.08053152901788962,
+            -0.015206473214334437,
+            -0.004813058035722406,
+            -0.026681082589277594
+          ],
+          "maxAnchorDifferenceAdu": 0.09971400669638797,
+          "maxPlaneCornerAdu": 0.1061292337694908,
+          "planeAdu": [
+            -0.05383944430958154,
+            0.0012256463547613524,
+            0.051064143105147904
+          ]
+        }
+      },
+      "median": {
+        "adjacentPaired": {
+          "maxAnchorDifferenceAdu": {
+            "maximum": 0.3571428571428896,
+            "median": 0.21428571428566556,
+            "minimum": 0.07142857142861203,
+            "p05": 0.10714285714283278,
+            "p95": 0.34642857142859784
+          },
+          "maxPlaneCornerAdu": {
+            "maximum": 0.3248148668916317,
+            "median": 0.1587731221096923,
+            "minimum": 0.047271434820650174,
+            "p05": 0.06849182914637987,
+            "p95": 0.2912331271090997
+          }
+        },
+        "all": {
+          "maxAnchorDifferenceAdu": {
+            "maximum": 0.5,
+            "median": 0.21428571428566556,
+            "minimum": 0.07142857142861203,
+            "p05": 0.14285714285711038,
+            "p95": 0.3214285714285552
+          },
+          "maxPlaneCornerAdu": {
+            "maximum": 0.43259826896638365,
+            "median": 0.1788760779902382,
+            "minimum": 0.040662885889306846,
+            "p05": 0.06601127984004374,
+            "p95": 0.31354674415698247
+          }
+        },
+        "chronological": {
+          "deltasAdu": [
+            -0.2857142857142776,
+            -0.21428571428566556,
+            -0.2857142857142776,
+            -0.07142857142861203,
+            0.035714285714277594,
+            0.0
+          ],
+          "maxAnchorDifferenceAdu": 0.2857142857142776,
+          "maxPlaneCornerAdu": 0.3228463629546141,
+          "planeAdu": [
+            -0.13649465691788232,
+            0.01968503937009037,
+            0.1666666666666414
+          ]
+        },
+        "originalInterleaved": {
+          "deltasAdu": [
+            -0.14285714285716722,
+            -0.3571428571428896,
+            -0.14285714285711038,
+            0.07142857142861203,
+            0.035714285714277594,
+            0.0
+          ],
+          "maxAnchorDifferenceAdu": 0.3571428571428896,
+          "maxPlaneCornerAdu": 0.27489923134608685,
+          "planeAdu": [
+            -0.08967238470191077,
+            -0.018560179977496802,
+            0.1666666666666793
+          ]
+        }
+      }
+    }
+  },
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}
