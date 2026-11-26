@@ -1,0 +1,280 @@
+{
+  "exactArchiveReplay": true,
+  "fixtures": [
+    {
+      "fixture": "missing_calibration_evidence",
+      "gaps": []
+    },
+    {
+      "fixture": "calibration_verified",
+      "gaps": [
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "86ed62d19ea0ab9cc031d719c811241583ea248a457931d830bedc1cb97a94e4",
+          "reason": "RESEARCH_VERIFIED_SELECTION"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "2b8ac87934a76f22179a9142fd2591868aee3f9b405a35ef837cd5863d2fbfd6",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        }
+      ]
+    },
+    {
+      "fixture": "noise_control_only",
+      "gaps": [
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "05daa5839ac09405bbc9765dbd1debf42a1804d9bc064dedc707512699642426",
+          "reason": "RESEARCH_STEP_FIELDS"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "d199f4ba167708c1cd21d8e7f2ca826635b584daadd64d56ee00aab0648a2cfc",
+          "reason": "RESEARCH_IDENTICAL_TRIAL_REPLAY"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "8d4da037aeda4f5e95129e4012e1e49c3746cef8403feef465e6bfce268812ef",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "70330aba3b3150a266f2eb6823198a680c3c69bc0a3072a43bc90d377ce4a018",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "6b639d77e74a20cb0be5ab1e8a259ba81aae5d4b8c571e271143d5af7a5a2d01",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "dc83e632590392c26201a433dd44883eda07c2d3ce6f28b1e852ee72248cfe2d",
+          "reason": "RESEARCH_VERIFIED_SELECTION"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "abf9a71608c5fc8dab543624447d785fd93343e6ff6f6830183d28905c77c5a2",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "4a72cb865627f6cb5827e0b2705152f6474fc2323e92498d61eb54d7f89f2781",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "2bf0902d0626419b535f80376b302e3022c4dca9e947af4d5d8647d22bf5702e",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "c65b47fc093e338b34974d41e86bfc466343e268b69dd9fad4156ece25cae04d",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "31f6c333bdf0a5ad69bc21362af158f20e71aff770dcd4adcb82a8c78c6de7c2",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "a13966858211c2de011973668aeb1f1bd8f06e16181aee5b5fc8bf585defc3d3",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "61564bcb821743374803f5044b1c30b557b2bf7db8d5fb3a99987b4408e3527d",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "82886c337afeb217382dabb7afc29fc1a09e9aba9ba117fa4ca9e637fef3220c",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "c3057308cdfc64fd315a96c69c722c674ae411f914fe4559ddb7831444e2b240",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        }
+      ]
+    },
+    {
+      "fixture": "noise_verified_sibling",
+      "gaps": [
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "aad2a0988e9dfbd88e237e15853ee37cca9b1f38bf3ff6b0ef50d009767ea1f7",
+          "reason": "RESEARCH_STEP_FIELDS"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "720f3c43d94dc1a7c07688cc526e92efbecff1049b6da95262b01a7bce322089",
+          "reason": "RESEARCH_IDENTICAL_TRIAL_REPLAY"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "a911893ad38227bc27ac5dbab0e747f03992bb387e7158a21ca9c98b665b7656",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "e98b113929b35d7d345af4994b19c4d5c40c61af5caaa93cc239431be40821dd",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "06ac2f5ea34bd8000f03b94b04f6afc1ff5b5c858291e4b661b6300eb96e0a0d",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "8adb5453665a38dc055754fded7a083f47b529c1dd577f070a8109855523e674",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "93271be6e3f9eefe44384806b9214d1d6541824b65e00d3a900d2c332f3c0e08",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "TEST",
+          "fixtureDecisionSha256": "0aec887c705b2366369d2652db97a633208b647c0a668ba04e9578e7a7b6c2cb",
+          "reason": "RESEARCH_EXACT_PARENT_REQUIRED"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "6c4e4aac7d0a758ac442a33b06886bfa3ac2913898a6c633cbcd374903299332",
+          "reason": "RESEARCH_VERIFIED_SELECTION"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "586aaaa11801cc1c4b1cc3cafeddb9eaf000eff387c758678ebc451391171b87",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "5228d5bef4f103043866d70f16fe117f64358625c3a3fb994491da87edce3a18",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "8b3e30c1d9cace65d309b3746217d06bdd3014076f53b524b2c16479d69287d7",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "1b03c044c25b516322df1ac3d8f6a54932cefa8f0116a9900c93ce7a6f3d502e",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "d204eb87fe27fa4c825a04144f7bb2326c677f50bfa2f38ec67474470dceaf92",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "d5eebc1591c2bd96b0423ccba9413dd209bf1afd580aeff5f0966a549461daf6",
+          "reason": "RESEARCH_SELECTION_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "a7180ed8c13173eaaaf62c863445700cbe764e8ebef074d817f6c0afc98e3998",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "22d770b1ac5c679d922c2653f708791b016970e90b61d257aaff60af5cd72c4f",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "7fe5b05a0c555df3b3677ac28e1da48e5317660baf8eb14a4ff4ba08de068946",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "e8ad72825dcaab26e90bc42b87f9c54bf3a89c6c23348a12646b71e085b0f451",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "9a75cb624251c2eb286e06dbc09bba935ec8f9fd944a06611d1a88aaaa35c297",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "5178b971d5286e2d36c68b6cd96bc6848b8b88fc07403cebe64f1371eff49cc9",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "24e79ffb5f8e2b2d71d61598337fdc3d6e1c8d5b77fe7ddc6dbd19ade95ddb7e",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "2413f349cb6bdc368ee34a3d0b0e8b40e120369efb8f457c496ef8ae7d209d37",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        }
+      ]
+    },
+    {
+      "fixture": "noise_trial_budget_exhausted",
+      "gaps": [
+        {
+          "action": "SELECT",
+          "fixtureDecisionSha256": "ca576c44ce548b8d18c1e671729473116a82851a776d2c529daa124f937433c9",
+          "reason": "RESEARCH_VERIFIED_SELECTION"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "2e38b877d7226ff288448072ef8603699926d63a141b12f0835c5711838bc6fc",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        },
+        {
+          "action": "STOP",
+          "fixtureDecisionSha256": "2584ffeb5b3f120b035acb4a08d6d78f520697fee6d84afcb4c0d3448baa27fb",
+          "reason": "RESEARCH_TERMINAL_FIELDS"
+        }
+      ]
+    },
+    {
+      "fixture": "terminal_linear",
+      "gaps": []
+    },
+    {
+      "fixture": "terminal_nonlinear",
+      "gaps": []
+    }
+  ],
+  "gapsByAction": {
+    "SELECT": 14,
+    "STOP": 16,
+    "TEST": 13
+  },
+  "gapsByReason": {
+    "RESEARCH_EXACT_PARENT_REQUIRED": 9,
+    "RESEARCH_IDENTICAL_TRIAL_REPLAY": 2,
+    "RESEARCH_SELECTION_FIELDS": 10,
+    "RESEARCH_STEP_FIELDS": 2,
+    "RESEARCH_TERMINAL_FIELDS": 16,
+    "RESEARCH_VERIFIED_SELECTION": 4
+  },
+  "invalidRemoved": 841,
+  "nativeExecutions": 0,
+  "pairedDecisions": 1680,
+  "programSha256": "c01018d17b97389e230aa0f72742d03ec6dd1de9a4d338110603981b56821a4b",
+  "protocolSha256": "4e9ad93f3d966c7e0a40b1e9a53081049a75bf87898455ed97d3133d3d357d72",
+  "providerCalls": 0,
+  "remainingRuntimeRejections": 43,
+  "revisions": [
+    "0100107a5cad081aebe64c96c133a2ad4d8205d6",
+    "4248c62d28b20e2570546447710a48a13aea35ab"
+  ],
+  "schema": "BKL046_VM_ADAPTER_OFFLINE_REPLAY_V1",
+  "scientificClosures": 0,
+  "sourceBlobs": 12,
+  "stopControlsPreserved": 7
+}
