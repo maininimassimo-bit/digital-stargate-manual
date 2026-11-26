@@ -1,0 +1,31 @@
+{
+  "schema": "BKL046_47TUC_BACKGROUND_APERTURE_SENSITIVITY_V1",
+  "sourceArchive": "e53e4b2c715f81eaf5a865f6ae9e263461ab610cd3c554efad2d3949ce2e6847",
+  "sourceReport": "7b0ff956b68368f400cc3452208a7944edbf9d6ba101c71fb3783579057d4afe",
+  "sourceProgram": "28edbe42674e436266e3927324fdebcd4e069491e255d10fea3a2587d63d709c",
+  "sourceProtocol": "3e7df34612344d0c3b851191724b6d258c1c99c319b635c1c5e50af9477175e9",
+  "sourceAcquisition": "3d6bf1d72f4966fbcdf8620b44294cca7815c9ce764158719cd82c9bbf2dbea7",
+  "skyGeometry": {
+    "local": [
+      16,
+      22
+    ],
+    "outside": [
+      24,
+      30
+    ],
+    "wide": [
+      32,
+      38
+    ]
+  },
+  "planeRadius": [
+    16,
+    30
+  ],
+  "planeIterations": 3,
+  "planeSigmaClip": 3,
+  "planeMinimumPixels": 100,
+  "minimumSkyFraction": 0.7,
+  "scope": "Fix source roster, matched peaks, centroids, chip PAM and 5/10 pixel support. Verify exact local-median replay, then change only the sky estimate to two outer median annuli or a robust local plane. Report per-chip effects on the aperture color term and matched sample before/after the archived physical-chip EE correction. No new stars and no infinite aperture signed flux or background truth."
+}
