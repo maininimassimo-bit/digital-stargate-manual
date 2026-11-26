@@ -1,0 +1,18 @@
+{
+  "schema": "BKL046_GAIA_DR3_GRW70_WFC3_POINTING_RECHECK_V1",
+  "gaiaCsv": "07fa2bacf40e1bce6fe47a810f8fef2abacfa160ff9b34a209ce746d3b67aed0",
+  "gaiaAdql": "34809d07794cdc481785d857cc7a048fe3a8d3352eeab364e05d1b4eee39d1a6",
+  "gaiaSource": "1686708050268594944",
+  "gaiaService": "https://gaia.ari.uni-heidelberg.de/tap/sync",
+  "legacyProtocol": "cd890601b037508ce9eeca7d9bb78cbec39f7230235f1fcada1f28cf85122e54",
+  "legacyMeasure": "e31c40aa70771d90df45c16884061c8629bc23d1ad87af2d61296d6326bc0b3a",
+  "legacyAcquisition": "f79146dee9da7a903d488c295548a5f6c0940137da696182bbb9642a5b7b767d",
+  "legacyReport": "2fe1d00e4f0e8df7bf0b426580541f3f49feafbcd8eb8b8ec38c2b97caa1fddf",
+  "calspecJ2000HmsDms": [
+    "13:38:50.478",
+    "+70:17:07.64"
+  ],
+  "calspecRadialVelocityKms": 26,
+  "maxJ2000MatchArcsec": 0.3,
+  "scope": "Repeat exactly the radius, sky, DQ and peak rules of the frozen 12 GRW70 exposures. Replace only seed world coordinates with Gaia DR3 proper motion and distance propagated to exposure midpoint and subtract the Earth barycentric position. Record barycentric-only and zero radial velocity controls. Official CALSPEC radial velocity supplies perspective motion. No instrumental WCS refit and no reclassification of the original archived protocol. Group only same visit, dither and chip."
+}
