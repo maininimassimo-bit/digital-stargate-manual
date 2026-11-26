@@ -1,0 +1,137 @@
+{
+  "crossBlockBoundsHoldWithFixedPublishedMarginals": true,
+  "formalConditionalAssumesIndependentBpRp": true,
+  "instrumentSystematicsIncluded": false,
+  "modelSolutionId": "4545469030156206114",
+  "nativeExecutions": 0,
+  "observedUncertaintyCombined": false,
+  "protocolSha256": "e003c02ce90a3087660986c8ce28c3c44c4ae6835fc5a1a34486d9ad4900e727",
+  "schema": "BKL046_GAIAXP_ACS_STANDARD_COVARIANCE_RESULT_V1",
+  "scientificClosures": 0,
+  "targets": {
+    "GD153": {
+      "catalogueSolutionId": "4545469030156206080",
+      "historicalCorrelationFailsTolerance": true,
+      "historicalCorrelationMinimum": -0.018777091127631807,
+      "numericalReplay": {
+        "error": 1.7327218875262673e-06,
+        "flux": 1.1462776841719702e-05
+      },
+      "ratios": {
+        "F658N/F606W": {
+          "full": {
+            "conditional": 0.00903541107092487,
+            "diagonalOnly": 0.006065494295924049,
+            "lowerUnknownCross": 0.008504074607027776,
+            "upperUnknownCross": 0.009537191490123748
+          },
+          "masked": {
+            "conditional": 0.009087757850701912,
+            "diagonalOnly": 0.006060784780200612,
+            "lowerUnknownCross": 0.008525406670540173,
+            "upperUnknownCross": 0.00961728270396049
+          },
+          "observedApertureVersusSampledGaia": 0.013595845238900894,
+          "observedResidualDividedByUpperGaiaFormalSigma": 1.4255606855519354,
+          "sampledGaiaVersusCalspecSameGrid": 0.0018246043956353653
+        },
+        "F658N/F660N": {
+          "full": {
+            "conditional": 0.005975158517918278,
+            "diagonalOnly": 0.004711791843599237,
+            "lowerUnknownCross": 0.005974986342493909,
+            "upperUnknownCross": 0.00597533068838152
+          },
+          "masked": {
+            "conditional": 0.00597758506532436,
+            "diagonalOnly": 0.004711653657350548,
+            "lowerUnknownCross": 0.005977451804276465,
+            "upperUnknownCross": 0.005977718323401472
+          },
+          "observedApertureVersusSampledGaia": -0.035398479893398505,
+          "observedResidualDividedByUpperGaiaFormalSigma": 5.924103909801609,
+          "sampledGaiaVersusCalspecSameGrid": 0.03207753472254771
+        },
+        "F660N/F606W": {
+          "full": {
+            "conditional": 0.011602678289149262,
+            "diagonalOnly": 0.007995340713481685,
+            "lowerUnknownCross": 0.01107460084921426,
+            "upperUnknownCross": 0.012107745578495364
+          },
+          "masked": {
+            "conditional": 0.011691670949502577,
+            "diagonalOnly": 0.00798994893483238,
+            "lowerUnknownCross": 0.011132972601613762,
+            "upperUnknownCross": 0.012224862381008726
+          },
+          "observedApertureVersusSampledGaia": 0.050792295171673496,
+          "observedResidualDividedByUpperGaiaFormalSigma": 4.195024981519762,
+          "sampledGaiaVersusCalspecSameGrid": -0.02931265269236294
+        }
+      }
+    },
+    "GD71": {
+      "catalogueSolutionId": "4545469030156206080",
+      "historicalCorrelationFailsTolerance": true,
+      "historicalCorrelationMinimum": -0.05697668203031237,
+      "numericalReplay": {
+        "error": 1.9634757313369278e-06,
+        "flux": 9.46430788895114e-06
+      },
+      "ratios": {
+        "F658N/F606W": {
+          "full": {
+            "conditional": 0.011158815700262033,
+            "diagonalOnly": 0.007423293088029668,
+            "lowerUnknownCross": 0.010494529971340517,
+            "upperUnknownCross": 0.011785719169633412
+          },
+          "masked": {
+            "conditional": 0.011220933478397949,
+            "diagonalOnly": 0.007418309181572064,
+            "lowerUnknownCross": 0.010516821320833945,
+            "upperUnknownCross": 0.011883398737689326
+          },
+          "observedApertureVersusSampledGaia": -0.02763119272315795,
+          "observedResidualDividedByUpperGaiaFormalSigma": 2.344463865586694,
+          "sampledGaiaVersusCalspecSameGrid": 0.00375740368620181
+        },
+        "F658N/F660N": {
+          "full": {
+            "conditional": 0.00715721238419683,
+            "diagonalOnly": 0.005727040668262807,
+            "lowerUnknownCross": 0.007156948174373153,
+            "upperUnknownCross": 0.007157476584267512
+          },
+          "masked": {
+            "conditional": 0.007160269071041518,
+            "diagonalOnly": 0.005726870378061766,
+            "lowerUnknownCross": 0.007160061471768571,
+            "upperUnknownCross": 0.007160476664295668
+          },
+          "observedApertureVersusSampledGaia": -0.03809096375181209,
+          "observedResidualDividedByUpperGaiaFormalSigma": 5.321842594013917,
+          "sampledGaiaVersusCalspecSameGrid": 0.03982524679415378
+        },
+        "F660N/F606W": {
+          "full": {
+            "conditional": 0.014187721353056884,
+            "diagonalOnly": 0.009754048661153501,
+            "lowerUnknownCross": 0.013527410123660221,
+            "upperUnknownCross": 0.014818638592335922
+          },
+          "masked": {
+            "conditional": 0.014298506928501906,
+            "diagonalOnly": 0.009747989658215179,
+            "lowerUnknownCross": 0.013598873490477809,
+            "upperUnknownCross": 0.01496546827061599
+          },
+          "observedApertureVersusSampledGaia": 0.010873971066381882,
+          "observedResidualDividedByUpperGaiaFormalSigma": 0.7338036486027678,
+          "sampledGaiaVersusCalspecSameGrid": -0.03468644680358679
+        }
+      }
+    }
+  }
+}
