@@ -1,0 +1,43 @@
+{
+  "schema": "BKL046_ACS17979_VISIT02_SHORT_EXPOSURE_PHASE_TEST_V1",
+  "files": [
+    {
+      "id": "jfln02qzq",
+      "sha256": "fce45ac9f1b8f3b10ae9fa54845c13904e580d59e66614658b3e226557dd63a1"
+    },
+    {
+      "id": "jfln02qtq",
+      "sha256": "c0784b3257b920ab740fbf94f30602f38285c268d974dd90b3fd6af54ef9e70a"
+    }
+  ],
+  "filteredClipE": [
+    -40,
+    450
+  ],
+  "backgroundBoxWidthPx": 9,
+  "templatePx": 256,
+  "searchPx": 110,
+  "globalSearchPx": 1000,
+  "tileCentersX": [
+    600,
+    1450,
+    2500,
+    3400
+  ],
+  "tileCentersY": [
+    460,
+    1010,
+    1550
+  ],
+  "excludedPeakRadiusPx": 3,
+  "minimumTemplateCorrelation": 0.2,
+  "minimumPeakMargin": 0.025,
+  "controls": {
+    "shiftXY": [
+      21,
+      -17
+    ],
+    "scale": 0.6
+  },
+  "scope": "Search convention is offset of the location in the moving image relative to the reference image. Pairwise image registration diagnostic. It does not estimate absolute astrometry or photometric recovery."
+}
