@@ -1,0 +1,12 @@
+{
+  "schema": "BKL046_ROMAN_LIN0_PAIRED_TRANSFER_UNCERTAINTY_V1",
+  "parentReport": "8a7230f5214f34ba0b88a5e6ec2e280a88d0ecda4e4c9563ac0cd048087218f5",
+  "detail": "c8baf27c6392623a6b77eab821a2952f3985e822df4c1ba02ed58cd7faf190db",
+  "seed": 460051,
+  "replicates": 10000,
+  "channelBlockSizes": [
+    4,
+    8
+  ],
+  "design": "Keep the per-row predictions frozen. Sample the 15 entire held-out exposure pairs with replacement. Cross that draw independently with draws of contiguous channel blocks (4 or 8 channels). Use one common set of draws for every model, band and percentile. Separately omit each pair. Targets are gain-minus-LIN0 differences of group medians and p95 absolute errors; resampling intervals are descriptive and conditional on the two observed sessions and fixed models."
+}

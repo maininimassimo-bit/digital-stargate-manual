@@ -1,0 +1,313 @@
+{
+  "channels": 32,
+  "cohort": 960,
+  "exposurePairs": 15,
+  "nativeExecutions": 0,
+  "outsideGainRangeRetained": 1920,
+  "parentReceiptSha256": "8a7230f5214f34ba0b88a5e6ec2e280a88d0ecda4e4c9563ac0cd048087218f5",
+  "protocolSha256": "61ce0e97a77c121a9839afbcf9e1b80b2a6b7a994775c06864de714dbadac482",
+  "schema": "BKL046_ROMAN_LIN0_PAIRED_TRANSFER_UNCERTAINTY_V1",
+  "scientificClosures": 0,
+  "summary": [
+    {
+      "band": "lower",
+      "differencePercentagePoints": -0.049983573248618685,
+      "intervals": {
+        "pairsAndChannels4": [
+          -0.9009528992538431,
+          0.5760385986428309
+        ],
+        "pairsAndChannels8": [
+          -0.8220028208923992,
+          0.5043634256592383
+        ],
+        "pairsOnly": [
+          -0.4161946326824495,
+          0.1606916438535851
+        ]
+      },
+      "leaveOnePair": [
+        -0.16677878250270783,
+        -0.021910693865268005
+      ],
+      "model": "gainEmpirical",
+      "percentile": 50,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "lower",
+      "differencePercentagePoints": 0.0562430877750042,
+      "intervals": {
+        "pairsAndChannels4": [
+          -0.7099464299438181,
+          0.8329899313496886
+        ],
+        "pairsAndChannels8": [
+          -0.6440580740635157,
+          0.8782386328723968
+        ],
+        "pairsOnly": [
+          -0.3924250688158601,
+          0.47789260760636887
+        ]
+      },
+      "leaveOnePair": [
+        -0.06576835971735528,
+        0.12263277863953093
+      ],
+      "model": "gainRawCovariance",
+      "percentile": 50,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "lower",
+      "differencePercentagePoints": 8.153599206143102,
+      "intervals": {
+        "pairsAndChannels4": [
+          5.8977680060679,
+          9.597162106432645
+        ],
+        "pairsAndChannels8": [
+          5.85682432306798,
+          9.581052668943945
+        ],
+        "pairsOnly": [
+          6.118175534577326,
+          9.377327374555678
+        ]
+      },
+      "leaveOnePair": [
+        7.527467467123472,
+        8.470800300877551
+      ],
+      "model": "gainRawIndependent",
+      "percentile": 50,
+      "robustDirection": "lin0Lower"
+    },
+    {
+      "band": "upper",
+      "differencePercentagePoints": -0.1938043725458749,
+      "intervals": {
+        "pairsAndChannels4": [
+          -0.7302689009477461,
+          0.3745065819255333
+        ],
+        "pairsAndChannels8": [
+          -0.6426236646223116,
+          0.31854656227749967
+        ],
+        "pairsOnly": [
+          -0.46080224863029623,
+          0.0574150568580678
+        ]
+      },
+      "leaveOnePair": [
+        -0.23659257850343063,
+        -0.1272567989795803
+      ],
+      "model": "gainEmpirical",
+      "percentile": 50,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "upper",
+      "differencePercentagePoints": 0.19913189534136455,
+      "intervals": {
+        "pairsAndChannels4": [
+          -0.5573720064120863,
+          0.8861706511399825
+        ],
+        "pairsAndChannels8": [
+          -0.5830529456541929,
+          0.8747797942085744
+        ],
+        "pairsOnly": [
+          -0.2658929673498234,
+          0.5350315111130632
+        ]
+      },
+      "leaveOnePair": [
+        0.021947062130012185,
+        0.2711702091977408
+      ],
+      "model": "gainRawCovariance",
+      "percentile": 50,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "upper",
+      "differencePercentagePoints": 8.9588102469978,
+      "intervals": {
+        "pairsAndChannels4": [
+          7.6862793151423645,
+          10.327752901022047
+        ],
+        "pairsAndChannels8": [
+          7.689001886479243,
+          10.256908293218881
+        ],
+        "pairsOnly": [
+          8.102505990985279,
+          9.711105840656368
+        ]
+      },
+      "leaveOnePair": [
+        8.807096691910099,
+        9.124733291789278
+      ],
+      "model": "gainRawIndependent",
+      "percentile": 50,
+      "robustDirection": "lin0Lower"
+    },
+    {
+      "band": "lower",
+      "differencePercentagePoints": 0.24412175553204796,
+      "intervals": {
+        "pairsAndChannels4": [
+          -1.799446568274632,
+          1.7996278019617764
+        ],
+        "pairsAndChannels8": [
+          -1.754310284785987,
+          1.4160925020245907
+        ],
+        "pairsOnly": [
+          -1.0863399197693218,
+          1.0912634901209861
+        ]
+      },
+      "leaveOnePair": [
+        -0.30170638517649506,
+        0.4272059878450113
+      ],
+      "model": "gainEmpirical",
+      "percentile": 95,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "lower",
+      "differencePercentagePoints": -0.1819573938994179,
+      "intervals": {
+        "pairsAndChannels4": [
+          -2.275698749558347,
+          1.6663941429620204
+        ],
+        "pairsAndChannels8": [
+          -2.241962775811422,
+          1.2612408599657954
+        ],
+        "pairsOnly": [
+          -1.5831052926648386,
+          0.8230869492334009
+        ]
+      },
+      "leaveOnePair": [
+        -0.6766549879514888,
+        -0.01084196202550125
+      ],
+      "model": "gainRawCovariance",
+      "percentile": 95,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "lower",
+      "differencePercentagePoints": 9.24885986457472,
+      "intervals": {
+        "pairsAndChannels4": [
+          6.073786576397348,
+          11.295722123592817
+        ],
+        "pairsAndChannels8": [
+          6.254609553857107,
+          11.265553721936909
+        ],
+        "pairsOnly": [
+          6.560233756303001,
+          10.845757448436865
+        ]
+      },
+      "leaveOnePair": [
+        8.220365946433741,
+        9.839675655556308
+      ],
+      "model": "gainRawIndependent",
+      "percentile": 95,
+      "robustDirection": "lin0Lower"
+    },
+    {
+      "band": "upper",
+      "differencePercentagePoints": 0.32594798520512724,
+      "intervals": {
+        "pairsAndChannels4": [
+          -1.6808994341177002,
+          21.195438284160304
+        ],
+        "pairsAndChannels8": [
+          -1.632360021949135,
+          18.367404683821253
+        ],
+        "pairsOnly": [
+          -0.842961470413095,
+          2.722949713418632
+        ]
+      },
+      "leaveOnePair": [
+        0.1589317738734164,
+        0.5112398950626096
+      ],
+      "model": "gainEmpirical",
+      "percentile": 95,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "upper",
+      "differencePercentagePoints": 1.5526110080276712,
+      "intervals": {
+        "pairsAndChannels4": [
+          -0.8828545088940133,
+          23.154198316855343
+        ],
+        "pairsAndChannels8": [
+          -0.8266344807267179,
+          20.412966019122912
+        ],
+        "pairsOnly": [
+          -0.22463339335407062,
+          3.0869342048829242
+        ]
+      },
+      "leaveOnePair": [
+        1.178127279058605,
+        2.172048574448296
+      ],
+      "model": "gainRawCovariance",
+      "percentile": 95,
+      "robustDirection": "mixed"
+    },
+    {
+      "band": "upper",
+      "differencePercentagePoints": 9.742418982035947,
+      "intervals": {
+        "pairsAndChannels4": [
+          6.949700687046554,
+          29.823456445984284
+        ],
+        "pairsAndChannels8": [
+          6.964252199767313,
+          27.377140129524914
+        ],
+        "pairsOnly": [
+          8.087001361032058,
+          11.956085440128373
+        ]
+      },
+      "leaveOnePair": [
+        9.45207770429759,
+        10.454852342820086
+      ],
+      "model": "gainRawIndependent",
+      "percentile": 95,
+      "robustDirection": "lin0Lower"
+    }
+  ]
+}
