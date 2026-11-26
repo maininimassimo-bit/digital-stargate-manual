@@ -1,0 +1,56 @@
+{
+  "schema": "BKL046_ACS_9661_SATURATED_FLUX_V1",
+  "referenceReport": "353b9ac8ec20733a5a97de4362a9cf9f44b73194b6a5a6e9693eea6e0c2814da",
+  "pam": "025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c",
+  "files": [
+    {
+      "id": "j8mj90pmq",
+      "sha256": "7b03133945d30bf20770024dbbe850c3ff5502b833bbead4042bd8b82bd4eceb"
+    },
+    {
+      "id": "j8mj90pnq",
+      "sha256": "22b972f39fbedda524d65936812762e8f33881da9b0eff00701833187a331c76"
+    }
+  ],
+  "radii": [
+    5,
+    8,
+    10,
+    15,
+    20,
+    30
+  ],
+  "skyAnnuli": [
+    [
+      35,
+      48
+    ],
+    [
+      42,
+      55
+    ]
+  ],
+  "registrationAnnulus": [
+    4,
+    12
+  ],
+  "registrationExcludedColumnHalfWidth": 2,
+  "registrationShiftPx": 5,
+  "minimumCorrelation": 0.8,
+  "minimumCorrelationGap": 0.005,
+  "bleedSearchPx": 25,
+  "bleedPaddingPx": [
+    0,
+    2,
+    4
+  ],
+  "primary": {
+    "radiusPx": 20,
+    "skyPx": [
+      35,
+      48
+    ],
+    "acceptanceDifferentialPercent": 2
+  },
+  "scope": "Match same-visit observations. Use the short pose as held-out flux reference for the long pose. Include the recorded DQ256 samples only under the bleed hypothesis with DQ2048 excluded. Relative rates and nominal error propagation are diagnostic and do not establish general recovery or native validation."
+}
