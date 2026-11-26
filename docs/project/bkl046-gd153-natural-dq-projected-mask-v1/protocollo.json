@@ -1,0 +1,43 @@
+{
+  "schema": "BKL046_GD153_NATURAL_MASK_COUNTERFACTUAL_V1",
+  "sameVisitArchive": "bd1e086475564efa36f04a57c1d52ff57934f983e43b3beae77bdb5a14ccfe5e",
+  "sameVisitReport": "8a77ba6a41a8835332a134cda0a8520d73367576289efbb1f6d6ea76b733ea83",
+  "cleanArchive": "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+  "cleanReport": "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab",
+  "poseProtocol": "7636924bce5cb8ab6f2832052565d335bdcc083f90e2597bb40e28316e9ecfaa",
+  "geometryProgram": "3f4bee56aabe287e0bf244602eef23dcc94e554ccfcf875a775583de6863e26f",
+  "estimatorProgram": "4975b52ef0d38443a4a03f5b9dc01194c48ead23ae50f3d02286f84e63935d35",
+  "geometryArchive": "d1b7ab5ab8e7b421a93c048ace808bda2bf1665ba688c93138e34a8cfd0cbc8c",
+  "estimatorArchive": "7104c91982d85ee3ddf3b3fd2580d87153938e7a3bff2bc1f722bac6dc1ecb77",
+  "comparisonAperture": "local16to22:median:r10",
+  "policies": [
+    "nearest",
+    "four"
+  ],
+  "phaseOffsetsPx": [
+    [
+      0,
+      0
+    ],
+    [
+      -0.25,
+      0
+    ],
+    [
+      0.25,
+      0
+    ],
+    [
+      0,
+      -0.25
+    ],
+    [
+      0,
+      0.25
+    ]
+  ],
+  "radiusPx": 10,
+  "coreRadiusPx": 3,
+  "identityTolerance": 1e-10,
+  "scope": "For each naturally core-flagged exposure with a same-visit comparator, use only its DQ and finite-pixel mask. Project each eligible clean same-band aperture into the damaged frame, with the WCS-predicted centers aligned. In each clean aperture measure the change when masking is the sole intervention, hold sky fixed, and compare with the separately observed natural sibling difference. Rank comparisons require the same method and use paired phase scenarios, with same-visit sibling and other visits shown separately. No cancellation or exact attribution is inferred across exposures."
+}
