@@ -1,0 +1,28 @@
+{
+  "schema": "BKL046_NGC6341_PSF_ANGLE_HELD_EXPOSURE_V1",
+  "positions": "7f094328aee738a929a1c208eb90eeab37fbe78c6b46ed6204bcd7f393ac8c7b",
+  "files": {
+    "j8f866kfq_flc.fits": "884be6b89a9b843302ca1862609f5aceaf8d2ae2dd7ffe53bdfc9eb0478e6b9a",
+    "j8f866khq_flc.fits": "dab5801808c25eee20b1579a3d1932db6858e9761c72b1d95f1fd87a1d7719f7"
+  },
+  "radius": 4.5,
+  "minValid": 45,
+  "zonePixels": 512,
+  "ratios": [
+    0.6,
+    0.8,
+    1
+  ],
+  "fwhm": [
+    1.5,
+    2,
+    2.5,
+    3
+  ],
+  "betas": [
+    2.5,
+    4
+  ],
+  "angleStep": 15,
+  "design": "Use all 736 archived seed pairs and nominal centers. Extract SCI and DQ in fixed circular support; refuse windows with saturation flag 256 and require at least 45 DQ-zero finite pixels. Use fixed pixel-integrated Moffat grid, per-exposure positive amplitude and affine background fitting, and energy-normalized residual. Learn own and neighbor-only zone angles from each exposure, fit width, wings and axial ratio on the same training exposure, and test on the other exposure. Define zones by 5-second position on each physical CCD. Leave the chosen target out of every zone prediction. Preserve all exclusions. Distinct field and detector, same filter across two exposures, no independent measurement of absolute geometric truth."
+}
