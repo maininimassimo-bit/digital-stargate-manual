@@ -5,6 +5,14 @@ description: App Android nativa Allsky Pocket con Live, Meteo, Archivio, galleri
 
 # AllSky Manciano: progetto Android nativo
 
+## Beta 0.2.12 (build 14)
+
+- **Meteo:** mostra lo stato della copertura del cielo rilevato dal CloudWatcher di Manciano (Sereno, Nuvoloso o Coperto).
+- **Archivio:** la scheda **Meteo della notte** compare sotto il timelapse, lo startrail o il keogramma selezionato. La data del prodotto identifica la sera di inizio notte. Il riepilogo riporta la condizione prevalente, le percentuali sul tempo classificato, la temperatura minima e massima, l’umidità e il vento medi. Le notti con copertura incompleta dei dati sono indicate come parziali.
+- **Acquisizione e pubblicazione:** un’attività giornaliera sull’EAGLE di Manciano legge il CSV del CloudWatcher con lo [script di pubblicazione](https://github.com/maininimassimo-bit/digital-stargate-manual/blob/main/scripts/telemetry/Publish-AllSkyNightWeather.ps1). La finestra va dalle 19:00 alle 06:00 locali del giorno successivo. Gli intervalli di almeno 60 secondi tra misure consecutive sono esclusi dal calcolo della copertura e rendono il riepilogo parziale. L’attività pubblica i riepiloghi aggregati nel repository e GitHub Pages genera il [catalogo JSON](https://maininimassimo-bit.github.io/digital-stargate-manual/data/realtime/allsky-night-weather.json) che l’app scarica automaticamente.
+- **Importazione storica del 26 novembre 2026:** lo [script di importazione](https://github.com/maininimassimo-bit/digital-stargate-manual/blob/main/scripts/telemetry/Import-AllSkyNightWeather.ps1) ha incrociato il CSV storico con le date dei tre cataloghi AllSky e aggiunto 226 riepiloghi, conservando i 34 già pubblicati. Il catalogo verificato dopo la pubblicazione conteneva 260 notti (150 complete e 110 parziali), dal 29–30 aprile 2025 al 25–26 novembre 2026. [Commit dell’importazione](https://github.com/maininimassimo-bit/digital-stargate-manual/commit/e497d197deba71ea30e51fa9994e8a54a1c25710).
+- **Verifica sul Motorola G84 (Android 15):** testata la build 14 in Timelapse, Startrail e Keogrammi. In tutte e tre le sezioni, passando dalla notte del 24–25 novembre a quella del 23–24 novembre, il riepilogo è passato da 25% sereno e 49% coperto a 100% sereno e 0% coperto. In Startrail e Keogrammi è cambiata anche l’immagine associata alla data.
+
 ## Beta 0.2.11 (build 13)
 
 - **Sfondo:** paesaggio illustrativo ispirato alla Maremma, con la Via Lattea sul bordo destro e la cupola all'orizzonte. La risorsa locale `drawable-nodpi/manciano_night.png` è condivisa dalle schermate principali. Compose la adatta al contenitore e applica un velo scuro per mantenere il contrasto dei testi. Il fotogramma Live resta separato.
