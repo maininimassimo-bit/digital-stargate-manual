@@ -1,0 +1,8 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_LIN0_ABSOLUTE_TRANSFER_V1",
+  "parentProgram": "fe00f2555cf369f52fe88bbc685092414139d341a9d24e02f497ffbaac7d36a3",
+  "parentProtocol": "ca37dea21c01e52236c782d2df2566bc86e8c8bdcc13e1aca65bef818d4d3795",
+  "parentReport": "f264d691ee7cb2b88d6128152a962cdc4da6a05107d2498618fa27fd80137063",
+  "capture": "edfce4e4134528b790f3fd2e972527495b75bd59e8b0d9876d2d7f1b2bc1bc2e",
+  "decision": "Reject interpolation outside the GAIN range. For each LIN0 pair estimate target signal from the other fourteen LIN0 pairs in its channel, band and reading. Use predictions fit solely on ten GAIN pairs at each source anchor. Compare against the exact held-out aperture variance and the empirical baseline from the other fourteen LIN0 pairs. Preserve refused rows."
+}
