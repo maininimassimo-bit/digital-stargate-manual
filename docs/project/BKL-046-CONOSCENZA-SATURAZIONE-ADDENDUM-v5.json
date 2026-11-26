@@ -1,0 +1,835 @@
+{
+  "protocol": "BKL046_KNOWLEDGE_SATURATION_ADDENDUM_V5",
+  "status": "INTERIM",
+  "baselineVersion": "1.171",
+  "previousAddendum": {
+    "commit": "21e7d072e618b1da9208f9a225c1f72d182d89ff",
+    "path": "docs/project/BKL-046-CONOSCENZA-SATURAZIONE-ADDENDUM-v4.json",
+    "sha256": "81de6834afe1aa07921fbac1eaef85324f2b58a89a521ac487bb25819ffaf9fd",
+    "archiveSha256": "b7d7d7529b7a03c490056a5cd4bcf6f701f660bbd256664ade4c212ae8c2dd84"
+  },
+  "inheritedResidualLedgerSha256": "a3da1432a46dc69ffb1a16ec3a5fcf13650c99ffbe98f91003b8807af9d7c8f3",
+  "axes": [
+    {
+      "id": "SATURATION_BLEND/1",
+      "title": "Unsaturated, detector-saturated and near-limit cores",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/2",
+      "title": "Close pairs and extended-plus-point overlap",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/3",
+      "title": "Channel-dependent saturation",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/4",
+      "title": "Mask transition and recomposition cases",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "rawEligibility",
+      "commit": "6dc49bfa3f3ab77397f8572f36b7db64f92931fd",
+      "files": [
+        {
+          "path": "docs/project/bkl046-m42-eos40d-exposure-inventory-v1/protocollo.json",
+          "sha256": "a3ce0549b73b0ee502ef408b6725d1565bb8285f3b2679943d2452849e0e0da1"
+        },
+        {
+          "path": "docs/project/bkl046-m42-eos40d-exposure-inventory-v1/riscontro.json",
+          "sha256": "9d2e2496ca4a35f45593d90ea18fe8f8d4a3a199174c9917b9b5fdd1079be447"
+        }
+      ],
+      "archiveSha256": "13f037ea0387343ec36ddd42a4787f7e268ba6f11c187015a19658f8342f149c",
+      "archiveMembers": 181
+    },
+    {
+      "id": "exposureMembers",
+      "commit": "9a5d19b5f6ae35b9dcd7ca6880295602343b73ab",
+      "files": [
+        {
+          "path": "docs/project/bkl046-orion-acs-f658n-exposure-members-v1/protocollo.json",
+          "sha256": "428cc6ae41ecfc3cfea155952dc57f4338679232b0a33ab63e91708d521dbfad"
+        },
+        {
+          "path": "docs/project/bkl046-orion-acs-f658n-exposure-members-v1/protocollo-intestazioni.json",
+          "sha256": "e55193046301ed273387769bab2ca23fe8cccfc003a2cad0bcdd973b34bdd8b4"
+        },
+        {
+          "path": "docs/project/bkl046-orion-acs-f658n-exposure-members-v1/riscontro.json",
+          "sha256": "b5e44a746b0a28a1332c0413cb26d63301c5fc60ad5005c12776531c4c7045e3"
+        },
+        {
+          "path": "docs/project/bkl046-orion-acs-f658n-exposure-members-v1/riscontro-intestazioni.json",
+          "sha256": "f079421e7dabf0dfcbaf2473d0e405902b5cf02113c584b2446d3dfc9e3a9ca6"
+        }
+      ],
+      "archiveSha256": "cd5e9abb2014e1075d7dfb55615c22c3ba6584564b1affe561585a907b837acd",
+      "archiveMembers": 30
+    },
+    {
+      "id": "detectorSupport",
+      "commit": "0a43b7aed4074b8e11399c0aee1f79a8faa5152a",
+      "files": [
+        {
+          "path": "docs/project/bkl046-orion-acs-f658n-detector-support-v1/protocollo.json",
+          "sha256": "b63de0f2cf4d5ffc1870b628d04ccb5a14bfb68b6918cdacbbfc1444d463161a"
+        },
+        {
+          "path": "docs/project/bkl046-orion-acs-f658n-detector-support-v1/riscontro.json",
+          "sha256": "80f9562e5afa97e5bc09bb9c5e819ff4459f9fccd63654012812301d7e07a74a"
+        }
+      ],
+      "archiveSha256": "3045019d1e63243eda3f97785a28e179fee4da720d01f66d74f36e59fe77e08a",
+      "archiveMembers": 181
+    },
+    {
+      "id": "repeatSaturation",
+      "commit": "5c625350478c2b99d11ad52720087f6a9d951cbb",
+      "files": [
+        {
+          "path": "docs/project/bkl046-orion-f658n-repeat-saturation-v1/protocollo.json",
+          "sha256": "68076caff39fad34437e150377efeece11151dcf748584de8736cf0dd9fd73f3"
+        },
+        {
+          "path": "docs/project/bkl046-orion-f658n-repeat-saturation-v1/riscontro.json",
+          "sha256": "6214c9c0311fc3143f5ff0346859f92a06b2c829a9245d1b7a54b2d04a65270a"
+        }
+      ],
+      "archiveSha256": "2b0b32fc1a4252a66051d52ad630c294a52b4a263411496a49631631ae77eb60",
+      "archiveMembers": 96
+    },
+    {
+      "id": "heldout340",
+      "commit": "2de60f08f7d7faf96dce9ef565527da3bb672296",
+      "files": [
+        {
+          "path": "docs/project/bkl046-orion-f658n-heldout-photometry-references-v1/protocollo.json",
+          "sha256": "8f9575af3828ab8330d563da68975831e2bc98c8145f37abef27f0f9c2fee6c8"
+        },
+        {
+          "path": "docs/project/bkl046-orion-f658n-heldout-photometry-references-v1/riscontro.json",
+          "sha256": "226b0084cd31c39922ac317178e7e3912d9ec6bcfbf07fbf964d2f342adaf83b"
+        }
+      ],
+      "archiveSha256": "183b2b166132777e329ef48d13cedd26e744c2605ea3079b9252aecab1847b86",
+      "archiveMembers": 46
+    },
+    {
+      "id": "heldout509",
+      "commit": "4d2376484395aaf88f3426ded0a66d9035085e29",
+      "files": [
+        {
+          "path": "docs/project/bkl046-orion-f658n-alternative-holdout-509-v1/protocollo.json",
+          "sha256": "a83f159a446b42f947163d8fb538c98c413a70e7a281411085b6effb7a64e4bd"
+        },
+        {
+          "path": "docs/project/bkl046-orion-f658n-alternative-holdout-509-v1/riscontro.json",
+          "sha256": "d9600f21359b16827d37ced551bb39c1f4e36086420349eab7b3585a127479dd"
+        }
+      ],
+      "archiveSha256": "d5ea2efddaf2d04a5eb150dfa3ec312e82520cf465a85f80d737445862da78de",
+      "archiveMembers": 55
+    }
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0,
+  "completeStudy": false,
+  "findings": {
+    "canonM42RawExposureGroups": {
+      "Canon EOS 40D | ISO 1600 | 30/1 s": 134
+    },
+    "narrowBandSearch": {
+      "filter": "F658N",
+      "catalogRows": 326,
+      "objectHeadersVerified": 9,
+      "durationsSeconds": [
+        150.0,
+        340.0,
+        509.0,
+        774.0,
+        822.0
+      ],
+      "gains": [
+        2.0
+      ],
+      "distinctEpochs": [
+        "2003-12-29",
+        "2004-01-14",
+        "2005-04-06",
+        "2015-01-31"
+      ]
+    },
+    "fixedPatch": {
+      "skyPositions": 25921,
+      "cleanReferencePositions": 20559,
+      "saturatedInBothLongest": 0
+    },
+    "fullDetectorScreen": {
+      "matchedOneToOne": 76,
+      "cleanReferenceDisks": 3,
+      "components": [
+        {
+          "id": "jcaz07f5q",
+          "count": 98
+        },
+        {
+          "id": "jcaz07ffq",
+          "count": 111
+        }
+      ]
+    },
+    "photometricReferenceChecks": [
+      {
+        "id": "5/5",
+        "heldout340": {
+          "status": "DIAGNOSTIC_FLC_APERTURES",
+          "maxPairwisePeakSeparationArcsec": 0.01030387555398053,
+          "passesPrimary": false,
+          "comparisons": [
+            {
+              "radiusPx": 3,
+              "annulusPx": [
+                12,
+                18
+              ],
+              "status": "MEASURED",
+              "shortRepeatPct": 0.5203906379688699,
+              "heldoutMinusShortPct": 36.81687617498197
+            },
+            {
+              "radiusPx": 5,
+              "annulusPx": [
+                12,
+                18
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 8,
+              "annulusPx": [
+                12,
+                18
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 3,
+              "annulusPx": [
+                16,
+                24
+              ],
+              "status": "MEASURED",
+              "shortRepeatPct": 0.45426574470019027,
+              "heldoutMinusShortPct": 36.83520902710874
+            },
+            {
+              "radiusPx": 5,
+              "annulusPx": [
+                16,
+                24
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 8,
+              "annulusPx": [
+                16,
+                24
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            }
+          ]
+        },
+        "heldout509": [
+          {
+            "id": "j8oc01svq",
+            "measurement": "OUTSIDE_ALL_CHIPS",
+            "maxPairwisePeakSeparationArcsec": null,
+            "passesPrimary": false,
+            "comparisons": []
+          },
+          {
+            "id": "j8oc01sxq",
+            "measurement": "OUTSIDE_ALL_CHIPS",
+            "maxPairwisePeakSeparationArcsec": null,
+            "passesPrimary": false,
+            "comparisons": []
+          },
+          {
+            "id": "j8oc01szq",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": 0.026423655283274748,
+            "passesPrimary": false,
+            "comparisons": [
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "MEASURED",
+                "shortRepeatPct": 0.5203906379688699,
+                "heldoutMinusShortPct": 21.27569702768255
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "MEASURED",
+                "shortRepeatPct": 0.45426574470019027,
+                "heldoutMinusShortPct": 21.267291661441668
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              }
+            ]
+          },
+          {
+            "id": "j8oc01t1q",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": 0.022127944443650016,
+            "passesPrimary": false,
+            "comparisons": [
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "MEASURED",
+                "shortRepeatPct": 0.5203906379688699,
+                "heldoutMinusShortPct": 20.384500037620576
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "MEASURED",
+                "shortRepeatPct": 0.45426574470019027,
+                "heldoutMinusShortPct": 20.299728538950777
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              }
+            ]
+          }
+        ],
+        "qualifiedForReconstruction": false
+      },
+      {
+        "id": "6/7",
+        "heldout340": {
+          "status": "DIAGNOSTIC_FLC_APERTURES",
+          "maxPairwisePeakSeparationArcsec": 0.242257283310091,
+          "passesPrimary": false,
+          "comparisons": [
+            {
+              "radiusPx": 3,
+              "annulusPx": [
+                12,
+                18
+              ],
+              "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 5,
+              "annulusPx": [
+                12,
+                18
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 8,
+              "annulusPx": [
+                12,
+                18
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 3,
+              "annulusPx": [
+                16,
+                24
+              ],
+              "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 5,
+              "annulusPx": [
+                16,
+                24
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            },
+            {
+              "radiusPx": 8,
+              "annulusPx": [
+                16,
+                24
+              ],
+              "status": "SUPPORT_INCOMPLETE",
+              "shortRepeatPct": null,
+              "heldoutMinusShortPct": null
+            }
+          ]
+        },
+        "heldout509": [
+          {
+            "id": "j8oc01svq",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": 0.10207398537976947,
+            "passesPrimary": false,
+            "comparisons": [
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              }
+            ]
+          },
+          {
+            "id": "j8oc01sxq",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": 0.2010713516736824,
+            "passesPrimary": false,
+            "comparisons": [
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              }
+            ]
+          },
+          {
+            "id": "j8oc01szq",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": 0.17935427702389817,
+            "passesPrimary": false,
+            "comparisons": [
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              }
+            ]
+          },
+          {
+            "id": "j8oc01t1q",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": 0.21472586669230267,
+            "passesPrimary": false,
+            "comparisons": [
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  12,
+                  18
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 3,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 5,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              },
+              {
+                "radiusPx": 8,
+                "annulusPx": [
+                  16,
+                  24
+                ],
+                "status": "SUPPORT_INCOMPLETE",
+                "shortRepeatPct": null,
+                "heldoutMinusShortPct": null
+              }
+            ]
+          }
+        ],
+        "qualifiedForReconstruction": false
+      },
+      {
+        "id": "18/22",
+        "heldout340": {
+          "status": "NO_ASSOCIATED_PEAK_IN_AT_LEAST_ONE_REFERENCE",
+          "maxPairwisePeakSeparationArcsec": null,
+          "passesPrimary": false,
+          "comparisons": []
+        },
+        "heldout509": [
+          {
+            "id": "j8oc01svq",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": null,
+            "passesPrimary": false,
+            "comparisons": []
+          },
+          {
+            "id": "j8oc01sxq",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": null,
+            "passesPrimary": false,
+            "comparisons": []
+          },
+          {
+            "id": "j8oc01szq",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": null,
+            "passesPrimary": false,
+            "comparisons": []
+          },
+          {
+            "id": "j8oc01t1q",
+            "measurement": "MEASURED_WITH_RETAINED_FAILURES",
+            "maxPairwisePeakSeparationArcsec": null,
+            "passesPrimary": false,
+            "comparisons": []
+          }
+        ],
+        "qualifiedForReconstruction": false
+      }
+    ],
+    "qualifiedAstronomicalRecoveryCases": 0
+  },
+  "decisions": [
+    {
+      "axis": "SATURATION_BLEND/1",
+      "use": [
+        "exposureMembers",
+        "detectorSupport"
+      ],
+      "decision": "Resolve archive associations to individual exposures and confirm chip support with WCS and DQ arrays."
+    },
+    {
+      "axis": "SATURATION_BLEND/3",
+      "use": [
+        "rawEligibility",
+        "exposureMembers"
+      ],
+      "decision": "Retain the single-exposure DSLR collection as an optional constant-time control. Keep the F658N evidence within a single-filter astronomical scope."
+    },
+    {
+      "axis": "SATURATION_BLEND/4",
+      "use": [
+        "repeatSaturation",
+        "heldout340",
+        "heldout509"
+      ],
+      "decision": "Require clean apertures, astrometric association and photometric agreement before comparing reconstruction with a held-out exposure. Treat the Orion cases as rejected references and retain the diagnosis by exposure."
+    }
+  ],
+  "remaining": [
+    "Holdout acquired in a controlled astronomical bracket. Freeze comparable same-field controls and test residual flux, local backgrounds, astrometry and uncertainty before evaluating a saturated target.",
+    "Separate repeatable detector full-well saturation from reconstruction fidelity. Use independent tests for pair and extended-plus-point overlap.",
+    "Complete the CFA astronomical comparison on per-phase inputs and qualify the native PixInsight path after authenticated review and coordinator admission."
+  ]
+}
