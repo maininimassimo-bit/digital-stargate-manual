@@ -1,0 +1,129 @@
+{
+  "fullReportSha256": "c765a73cad82963c76a7d20f87224e283c2ce90a16ba2b58e0b255906beb8540",
+  "nativeExecutions": 0,
+  "programSha256": "d5d4c5c84fe67ef021fbe5a4d935db130abc77ebb5253b4fb6bc7da49e6266d9",
+  "protocolSha256": "d2cd8c6bb6887f25bbd4fa75faa6f6cf8f93a255b99e243a53a0b048ed8e226d",
+  "schema": "BKL046_M8M20_BLIND_DIFFUSE_MASK_V1",
+  "scientificClosures": 0,
+  "source": "87a03c9d2019dcafee99f993abaafdb13a08153a7770d03ab431eea75ad36e92",
+  "summary": {
+    "jointPass": {
+      "broadDiffuse": {
+        "abstained": 0,
+        "evaluated": 148,
+        "maskChanges": 34,
+        "medianCleanCellsRejected": 0.0,
+        "medianContaminatedCellsKept": 189.0,
+        "models": {
+          "offset": {
+            "medianFluxError": -0.5039119053023249,
+            "medianRelativeL2": 0.7658815185041952,
+            "passes": 0
+          },
+          "plane": {
+            "medianFluxError": -0.5039117989001355,
+            "medianRelativeL2": 0.7658822793620012,
+            "passes": 0
+          }
+        }
+      },
+      "longFilament": {
+        "abstained": 0,
+        "evaluated": 148,
+        "maskChanges": 21,
+        "medianCleanCellsRejected": 1.5,
+        "medianContaminatedCellsKept": 32.0,
+        "models": {
+          "offset": {
+            "medianFluxError": -0.4662488615644066,
+            "medianRelativeL2": 0.2751392480103687,
+            "passes": 0
+          },
+          "plane": {
+            "medianFluxError": -0.46616919526673073,
+            "medianRelativeL2": 0.2757498149353269,
+            "passes": 0
+          }
+        }
+      },
+      "shortFilament": {
+        "abstained": 0,
+        "evaluated": 148,
+        "maskChanges": 15,
+        "medianCleanCellsRejected": 1.5,
+        "medianContaminatedCellsKept": 32.0,
+        "models": {
+          "offset": {
+            "medianFluxError": -0.3497131600775845,
+            "medianRelativeL2": 0.22282685977656566,
+            "passes": 0
+          },
+          "plane": {
+            "medianFluxError": -0.34971229139698584,
+            "medianRelativeL2": 0.22285956531203788,
+            "passes": 0
+          }
+        }
+      }
+    },
+    "unitControl": {
+      "broadDiffuse": {
+        "abstained": 0,
+        "evaluated": 27,
+        "maskChanges": 17,
+        "medianCleanCellsRejected": 0.0,
+        "medianContaminatedCellsKept": 183.0,
+        "models": {
+          "offset": {
+            "medianFluxError": -0.5064758232865089,
+            "medianRelativeL2": 0.769778345267732,
+            "passes": 0
+          },
+          "plane": {
+            "medianFluxError": -0.5064758144287778,
+            "medianRelativeL2": 0.770128451245331,
+            "passes": 0
+          }
+        }
+      },
+      "longFilament": {
+        "abstained": 0,
+        "evaluated": 27,
+        "maskChanges": 11,
+        "medianCleanCellsRejected": 6.0,
+        "medianContaminatedCellsKept": 29.0,
+        "models": {
+          "offset": {
+            "medianFluxError": -0.47095252694132056,
+            "medianRelativeL2": 0.27791493940906553,
+            "passes": 1
+          },
+          "plane": {
+            "medianFluxError": -0.4764587225563929,
+            "medianRelativeL2": 0.281175477772347,
+            "passes": 0
+          }
+        }
+      },
+      "shortFilament": {
+        "abstained": 0,
+        "evaluated": 27,
+        "maskChanges": 10,
+        "medianCleanCellsRejected": 6.0,
+        "medianContaminatedCellsKept": 29.0,
+        "models": {
+          "offset": {
+            "medianFluxError": -0.3528725483416603,
+            "medianRelativeL2": 0.22483992833121413,
+            "passes": 1
+          },
+          "plane": {
+            "medianFluxError": -0.35601384508975886,
+            "medianRelativeL2": 0.2273245977536801,
+            "passes": 0
+          }
+        }
+      }
+    }
+  }
+}
