@@ -1,0 +1,33 @@
+{
+  "schema": "BKL046_ACS_COMMON_WING_DIAGNOSTIC_V1",
+  "parentProtocolSha256": "05bb5018fea7908d973cb6775a23c60406413ee4031055cef890ef24594216dd",
+  "parentReportSha256": "a83aa1e9a7a6d408ca6f4f7b2d5ffe6f4a3555d0681dc9bc5d3535e30a3f0842",
+  "wingAnnuli": [
+    [
+      4,
+      8
+    ],
+    [
+      6,
+      10
+    ]
+  ],
+  "skyAnnuli": [
+    [
+      15,
+      22
+    ],
+    [
+      20,
+      30
+    ]
+  ],
+  "stripeHalfWidths": [
+    1,
+    2,
+    3
+  ],
+  "minimumWingCoverage": 0.85,
+  "minimumSkyCoverage": 0.8,
+  "method": "Use integer peak centers from the pinned receipt and unmodified FLT bytes. Form the union of DQ exclusions from all six stamps with all rotations and reflections of the detector offsets; apply the shared mask to every pose. Use the median in each shared sky annulus. Compare sums in detector stripes along X and Y, and 100*(Y-X)/total shared annulus flux. Retain all settings and repeat exposures. This is a post-diagnostic sensitivity study with no correction or saturation recovery."
+}
