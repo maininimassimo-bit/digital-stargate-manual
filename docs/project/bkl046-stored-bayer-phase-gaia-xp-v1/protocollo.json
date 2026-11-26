@@ -1,0 +1,54 @@
+{
+  "schema": "BKL046_CFA_STORED_PHASE_XP_FOUR_HYPOTHESES_V1",
+  "inputs": {
+    "joinedGaia": "a7f6cf854bd974f6eda3f37efbb3908897f1fdae394b52cab12273452aaeca08",
+    "passband": "85cb3da99a2aae435b45615404d50362db21727daf89fb8ed077903a9113ec4b",
+    "canonFlux": "e064f9f21f1fb3810d3ecfbd713f824779339bfe301406e218300c366a375df1",
+    "zwoFlux": "834820e97e02d7c1b1e09f6b90bd92df81c1108698d8719c3226b59c54853306"
+  },
+  "parityOrder": [
+    "0,0",
+    "0,1",
+    "1,0",
+    "1,1"
+  ],
+  "blueAndRedIndexes": {
+    "RGGB": [
+      3,
+      0
+    ],
+    "BGGR": [
+      0,
+      3
+    ],
+    "GRBG": [
+      2,
+      1
+    ],
+    "GBRG": [
+      1,
+      2
+    ]
+  },
+  "methods": [
+    "drop1",
+    "drop07",
+    "bilinearByParity"
+  ],
+  "radiiIndex": 1,
+  "models": {
+    "IC1805": [
+      "stockCanon400to720",
+      "stockCanon410to690"
+    ],
+    "M8M20": [
+      "pixSonyQE_UVIR_LPro",
+      "sirilIMX571_LPro"
+    ]
+  },
+  "calibrations": [
+    "A",
+    "B"
+  ],
+  "comparison": "Per-pattern color offset trained on archived calibration A cohort. Slope fixed at +1. Rank heldout P90 absolute error separately for both calibrations and each approximate spectral recipe. Exploratory replay of previously analyzed stars."
+}
