@@ -54,6 +54,14 @@ def main():
         with path.open(encoding="utf-8-sig", newline="") as file:
             rows = sorted(csv.DictReader(file), key=lambda row: (row["Date"], row["Time"]))
         nights[key] = summarize(rows)
+    for path in sorted((ROOT / "data/allsky-night-weather").glob("*.json")):
+        if not re.fullmatch(r"\d{8}", path.stem):
+            raise ValueError(f"Invalid night file name: {path.name}")
+        with path.open(encoding="utf-8") as file:
+            summary = json.load(file)
+        if set(summary) != {"start", "end", "partial", "seconds", "min", "max", "humidity", "wind"}:
+            raise ValueError(f"Invalid weather summary: {path.name}")
+        nights.setdefault(path.stem, summary)
     output = ROOT / "docs/data/realtime/allsky-night-weather.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps({"schema_version": 1, "nights": nights}, allow_nan=False), encoding="utf-8")
