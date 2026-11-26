@@ -1,0 +1,24 @@
+{
+  "schema": "BKL046_M51_WEIGHTED_REGISTRATION_SPATIAL_UNCERTAINTY_V1",
+  "sourceCode": "3e8f985807ced63d269a808f944f3d26e705b39ee899ea903c40681cd5d0349c",
+  "sourceReport": "56028aa533f8b07e9effb694709366ab868fd7453c6069b8d7be966c4a6aabcb",
+  "frameWidth": 5496,
+  "frameHeight": 3670,
+  "columns": 4,
+  "rows": 3,
+  "minOccupiedBlocks": 6,
+  "minDeleteBlockStars": 20,
+  "draws": 10000,
+  "randomSeed": 46051,
+  "endpoints": [
+    "p90Unit",
+    "p90Weighted",
+    "deltaWeightedMinusUnit"
+  ],
+  "percentiles": [
+    0.025,
+    0.5,
+    0.975
+  ],
+  "scope": "Paired spatial-block bootstrap of held-out residuals conditional on the fitted training transformations and this field. Blocks defined by the first exposure preview centers. Delete-one block sensitivity uses the same residuals. Marginal intervals per method and comparison; no inter-field or inter-camera inference."
+}
