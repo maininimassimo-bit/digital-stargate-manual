@@ -1,0 +1,38 @@
+{
+  "schema": "BKL046_IA_CONFIRMATORY_LINEAGE_GUARD_V1",
+  "inputs": {
+    "gain": [
+      "BKL046-ROMAN-GAIN-fasce-v1/cattura/acquisizione.json",
+      "8948884b38d16ed2f8ba1ed092f4151999542a86d5cf4ef483d63ff9108ad9d0"
+    ],
+    "lin0": [
+      "BKL046-ROMAN-LIN0-covarianza-v1/cattura/acquisizione.json",
+      "edfce4e4134528b790f3fd2e972527495b75bd59e8b0d9876d2d7f1b2bc1bc2e"
+    ],
+    "m8": [
+      "BKL046-CFA-M8-M20-risoluzione-v1/protocollo.json",
+      "1b37bca2d7b5666c9eb95fc721f46b80ae3693b96c17bfbf853d8da0ce64072a"
+    ],
+    "ic1805": [
+      "BKL046-CFA-IC1805-risoluzione-v1/protocollo.json",
+      "5a7a70de8961877c3822ceb55666608fa68223f0a9209638e05d57547dc6024c"
+    ],
+    "m51": [
+      "BKL046-CFA-Whirlpool-EOS6D-v1/riscontro.json",
+      "01e6cd14008e54021a5982690be30ab583e35ed1eb4537dcc4ac5ccdc2fca25a"
+    ],
+    "cross": [
+      "BKL046-ROMAN-LIN0-varianza-predittiva-v1/riscontro.json",
+      "8a7230f5214f34ba0b88a5e6ec2e280a88d0ecda4e4c9563ac0cd048087218f5"
+    ],
+    "native64": [
+      "BKL046-IA-native64-contabilita-esaustiva-v1/riscontro.json",
+      "c2976d6ad12dfc2b80b74f62dfd8bb4905cc2f3b0a49abff9bd85e5911fd3abf"
+    ],
+    "gainRamp": [
+      "BKL046-ROMAN-GAIN-rampa-v1/acquisizione.json",
+      "6bf59ebdb660cbd1cd7a6b9d175fc849e61589fd8e47c6e3faf74633fa95bb07"
+    ]
+  },
+  "rule": "Block reuse of exposed evaluation data, exact byte overlap, transitive data dependencies, missing lineage and incomplete attestations. When the intended scope is transfer to a different detector, also reject shared declared physical detector identity. Declared method reuse is outside data lineage unless it carries fitted values or source results. Fixtures are not independent units."
+}
