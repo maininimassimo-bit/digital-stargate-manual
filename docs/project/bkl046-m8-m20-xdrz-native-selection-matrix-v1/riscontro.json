@@ -1,0 +1,2153 @@
+{
+  "admissionRequested": false,
+  "casesPerFixedOriginAndMask": 8,
+  "chosenConvention": null,
+  "conditionalCaseCount": 32,
+  "descriptorsPerCase": 14,
+  "fullOracleSha256": "1078c6fb7bf0df8e6eeba5f253c7b0a288837d4cf76c6e21c9c037a4debbb9e7",
+  "identicalRejectionMaps": 8,
+  "inputSha256": "e1cd7fb73fed29cb51dc73104f21f2674fcf84510ca063a1b7c182f0c743c484",
+  "largestDifferentMaskSamples": 4,
+  "nativeExecutions": 0,
+  "originSerializationTranslations": [
+    1.634388650627638e-05,
+    0.00019392142478171995
+  ],
+  "protocolSha256": "0a684bc26b7f285babb1ebf1207790e610fbcc325d42a96e1f3265a90a891f7a",
+  "rejectionMapComparisons": 112,
+  "runs": [
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-center0-detector.xdrz",
+          "sha256": "32136e1c6d94f763491dd7af0d038fba8d0423d1c5f9cbdd7dd9a412ba59c361"
+        },
+        {
+          "name": "f02-A-unit-center0-detector.xdrz",
+          "sha256": "27e0156993525ee2da9e0f91b7f5b35fa0a2439d87268d4beea5cf6e1300a6cd"
+        },
+        {
+          "name": "f03-A-unit-center0-detector.xdrz",
+          "sha256": "80cb718a69dc717604f6e86453a9fa01fa3f61d81cbc52884a4b6d2ce428abeb"
+        },
+        {
+          "name": "f04-A-unit-center0-detector.xdrz",
+          "sha256": "15056794f86bcb7f5d702da0170d1b25a63d0408cdbdf9476d05792b3335faf3"
+        },
+        {
+          "name": "f05-A-unit-center0-detector.xdrz",
+          "sha256": "63b5c589328f33800b627f11762ab1cd01496b71267487aafc9f57913e613da7"
+        },
+        {
+          "name": "f06-A-unit-center0-detector.xdrz",
+          "sha256": "0fdd2e04e0ae57c1d558fee2b27133bf5b8cb4c341dfa958d6742c07ebce8dbb"
+        },
+        {
+          "name": "f07-A-unit-center0-detector.xdrz",
+          "sha256": "c0e53b0713cef91c1ccc59c95d79ee4d7aea04264d95174546e09e71e02957d2"
+        },
+        {
+          "name": "f08-A-unit-center0-detector.xdrz",
+          "sha256": "e56b493d35ebee58b5bae79dbf729263b617552cc876477943eb8ec0c50d8123"
+        },
+        {
+          "name": "f09-A-unit-center0-detector.xdrz",
+          "sha256": "45d9a2274dee2bbd7ac0a3288683ed8841adcba993d1340fe088c34e95f7d4d3"
+        },
+        {
+          "name": "f10-A-unit-center0-detector.xdrz",
+          "sha256": "f79fe14ba9bb5755a265651b5ec1d488b45eaf46f95571a60e4f820924f4a0ab"
+        },
+        {
+          "name": "f11-A-unit-center0-detector.xdrz",
+          "sha256": "6e1df2c9be9c8ae189e06f9dd67dba9857df48b86c6a7d8edbf532f2dcc53b7f"
+        },
+        {
+          "name": "f12-A-unit-center0-detector.xdrz",
+          "sha256": "c7fd49e6c3cffd1cc2887ede013b0194b552cdf1d5e9b50ea1d3b25cd3db4dee"
+        },
+        {
+          "name": "f13-A-unit-center0-detector.xdrz",
+          "sha256": "6b640849a43a29b543602a2d1b1e274235df471be519a5a6743e8447d65b558d"
+        },
+        {
+          "name": "f14-A-unit-center0-detector.xdrz",
+          "sha256": "9c384da46a09555055621df7ba68ac37a5ea8544ad0efb72d0af39475fcdafb1"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-center0-reference.xdrz",
+          "sha256": "32136e1c6d94f763491dd7af0d038fba8d0423d1c5f9cbdd7dd9a412ba59c361"
+        },
+        {
+          "name": "f02-A-unit-center0-reference.xdrz",
+          "sha256": "81b9cb74212822f4e40c89436216ed41007115b0175c83aca42294e5535fc750"
+        },
+        {
+          "name": "f03-A-unit-center0-reference.xdrz",
+          "sha256": "2ba80a2689a8c3d76b731455e9c825d43c15951057480760cc7b760567fbbba6"
+        },
+        {
+          "name": "f04-A-unit-center0-reference.xdrz",
+          "sha256": "125c73c4d18045048ae0140b60b62183ebc8e9adf61e62894ac9044009167dcd"
+        },
+        {
+          "name": "f05-A-unit-center0-reference.xdrz",
+          "sha256": "471499d2da65f9ebdb16f8c1ea849d74980eb0c054d17adf3e277f73b882f4be"
+        },
+        {
+          "name": "f06-A-unit-center0-reference.xdrz",
+          "sha256": "46579b73308dee0cd47fd8189052e46b4709e05d235d0a077ca404d0837eb0c8"
+        },
+        {
+          "name": "f07-A-unit-center0-reference.xdrz",
+          "sha256": "2cc76143a79e6176b3d4132e143281c5e39634d2ba6d56038ef7ff20d631e6ca"
+        },
+        {
+          "name": "f08-A-unit-center0-reference.xdrz",
+          "sha256": "ff013ba4f7bb1e968c1f9f893790822572ded352bfadad3fe362dea38d7d47fb"
+        },
+        {
+          "name": "f09-A-unit-center0-reference.xdrz",
+          "sha256": "6f1d3d74efcd4886a90d5d378b4de9b3d4134bdb614a89e640abdd416947b5fb"
+        },
+        {
+          "name": "f10-A-unit-center0-reference.xdrz",
+          "sha256": "f85453f1be8774bdb1591e63c6cbf321b3cc5e4dc0cb2539e9a381b852f8eb45"
+        },
+        {
+          "name": "f11-A-unit-center0-reference.xdrz",
+          "sha256": "317ae2a1a50cf1ce759b814f1a19a24344b1a7eaa6dd5940a875bc8681446356"
+        },
+        {
+          "name": "f12-A-unit-center0-reference.xdrz",
+          "sha256": "f10d355aede7ed75754b752e86f6a4c4d4d86de3b46561c45e27eaea013376b0"
+        },
+        {
+          "name": "f13-A-unit-center0-reference.xdrz",
+          "sha256": "147454d45b762de00c652eee7176123df13236d3d023396042d4ca889bca9bb4"
+        },
+        {
+          "name": "f14-A-unit-center0-reference.xdrz",
+          "sha256": "eae4e5dc62a7064aada30090bc50f4deed7125a93948f74e82c02534ad307a6c"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-edge05-detector.xdrz",
+          "sha256": "c1540e6bf6e64708913f3b4327b9122fe1e60d3844efd3c750061960be081891"
+        },
+        {
+          "name": "f02-A-unit-edge05-detector.xdrz",
+          "sha256": "d87ea144793f0e80fb58fbc8bfcbd376d2743f754cc96fe81ec340095ff1f42e"
+        },
+        {
+          "name": "f03-A-unit-edge05-detector.xdrz",
+          "sha256": "b758088db709709b36122bdfc688054948e28ec0d89295dca031f74d83790f4f"
+        },
+        {
+          "name": "f04-A-unit-edge05-detector.xdrz",
+          "sha256": "f74ddce1cf82542e917b76ffba05c60e8c0810b30df1195ab0ba7a209947c648"
+        },
+        {
+          "name": "f05-A-unit-edge05-detector.xdrz",
+          "sha256": "a69f0db15b6e6275b0e28e091cb9dc18b7e81d64036cc0131129574d8b7cd445"
+        },
+        {
+          "name": "f06-A-unit-edge05-detector.xdrz",
+          "sha256": "42a1cd88a767793923170a17cc19fea450cd4dc451fa4b9eeedd180abd6cef54"
+        },
+        {
+          "name": "f07-A-unit-edge05-detector.xdrz",
+          "sha256": "29cadc5e36fea4f9713f54a62bb754d8dee969d5ba86b7eb1b864b6b1fe38f3c"
+        },
+        {
+          "name": "f08-A-unit-edge05-detector.xdrz",
+          "sha256": "ebcf2c24f712ba9937bc3473037396101d429327b44eea102852e06a109799c0"
+        },
+        {
+          "name": "f09-A-unit-edge05-detector.xdrz",
+          "sha256": "e8ac6740e6072c069378ff5e27dabe4ccd79784d5aff5ed0d0aeb70c6d7cb7a2"
+        },
+        {
+          "name": "f10-A-unit-edge05-detector.xdrz",
+          "sha256": "fba166221c8a0fe47421ed05bc8433ebc776e43a0f4210ba44351449b3da13ca"
+        },
+        {
+          "name": "f11-A-unit-edge05-detector.xdrz",
+          "sha256": "e58a1874977a7e050e41939f7acfc1e9c7ece05b378de942d739cc29efd33c20"
+        },
+        {
+          "name": "f12-A-unit-edge05-detector.xdrz",
+          "sha256": "05e874e38344e9637d0dc43f04d2fb005e518d6ec5e514ff7cd247e60f2d1783"
+        },
+        {
+          "name": "f13-A-unit-edge05-detector.xdrz",
+          "sha256": "621e60147db482a4041c4e3ffe2eeec9868463ae519bd32e19e414c981153bc0"
+        },
+        {
+          "name": "f14-A-unit-edge05-detector.xdrz",
+          "sha256": "2c6b6a3c2610f6a0f1ba1a74c3beaafb7ea2254038923ece8355ed65bdc05e77"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-edge05-reference.xdrz",
+          "sha256": "c1540e6bf6e64708913f3b4327b9122fe1e60d3844efd3c750061960be081891"
+        },
+        {
+          "name": "f02-A-unit-edge05-reference.xdrz",
+          "sha256": "789479900a02790434c7b14309c5c79b084e5e3443ba3f5156cfb7c87973e880"
+        },
+        {
+          "name": "f03-A-unit-edge05-reference.xdrz",
+          "sha256": "244680c87b890a558b10cb2b979c0943393078e3840710737c7c9f67654f2af7"
+        },
+        {
+          "name": "f04-A-unit-edge05-reference.xdrz",
+          "sha256": "548b1dfffc3d0edca2c4c0469ed960461a802bedc6d2b212eab71c572dab07e1"
+        },
+        {
+          "name": "f05-A-unit-edge05-reference.xdrz",
+          "sha256": "2ecc256f93347293b29b72d5c5b91c83940b36847fda21e088bc962477fad36f"
+        },
+        {
+          "name": "f06-A-unit-edge05-reference.xdrz",
+          "sha256": "5c5d736396bdec846d62aa3f621c12362a56d2feb4fcb09013f7a97ab0092037"
+        },
+        {
+          "name": "f07-A-unit-edge05-reference.xdrz",
+          "sha256": "6748dfff9d5f8d9a88f304c59675f82ecd4bfde334e74bdc142f1cba0d862572"
+        },
+        {
+          "name": "f08-A-unit-edge05-reference.xdrz",
+          "sha256": "26ed606bef055447ef4df7015e6972235b8bc6c180a64e3f1944beda90b0394f"
+        },
+        {
+          "name": "f09-A-unit-edge05-reference.xdrz",
+          "sha256": "be000efd9bdab1de26cafdebd78754fcdf7bad571a149e37501e7a78ca67dd8f"
+        },
+        {
+          "name": "f10-A-unit-edge05-reference.xdrz",
+          "sha256": "ae76ac05286d0b22b9e9ee0badf596b5f55f8dc0cfe7d013823c3258f31ae949"
+        },
+        {
+          "name": "f11-A-unit-edge05-reference.xdrz",
+          "sha256": "6c60267f5d8fce34f1a817e82de032d59b7de80b454bdb21c49060684de97cc8"
+        },
+        {
+          "name": "f12-A-unit-edge05-reference.xdrz",
+          "sha256": "759503fceb83913da1ecdac70e573a7241d95e6e47d491dcc7d47bf5cd4b999e"
+        },
+        {
+          "name": "f13-A-unit-edge05-reference.xdrz",
+          "sha256": "9c6ac54136035a95c97981d8f8a9160602947f99c4720dd447882b7e95cc8ea8"
+        },
+        {
+          "name": "f14-A-unit-edge05-reference.xdrz",
+          "sha256": "1e680d66648a6ddc2d1f7171ca283b4329753edf68a26833d1185034281ca88c"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-center0-detector.xdrz",
+          "sha256": "32136e1c6d94f763491dd7af0d038fba8d0423d1c5f9cbdd7dd9a412ba59c361"
+        },
+        {
+          "name": "f02-A-unit-center0-detector.xdrz",
+          "sha256": "27e0156993525ee2da9e0f91b7f5b35fa0a2439d87268d4beea5cf6e1300a6cd"
+        },
+        {
+          "name": "f03-A-unit-center0-detector.xdrz",
+          "sha256": "80cb718a69dc717604f6e86453a9fa01fa3f61d81cbc52884a4b6d2ce428abeb"
+        },
+        {
+          "name": "f04-A-unit-center0-detector.xdrz",
+          "sha256": "15056794f86bcb7f5d702da0170d1b25a63d0408cdbdf9476d05792b3335faf3"
+        },
+        {
+          "name": "f05-A-unit-center0-detector.xdrz",
+          "sha256": "63b5c589328f33800b627f11762ab1cd01496b71267487aafc9f57913e613da7"
+        },
+        {
+          "name": "f06-A-unit-center0-detector.xdrz",
+          "sha256": "0fdd2e04e0ae57c1d558fee2b27133bf5b8cb4c341dfa958d6742c07ebce8dbb"
+        },
+        {
+          "name": "f07-A-unit-center0-detector.xdrz",
+          "sha256": "c0e53b0713cef91c1ccc59c95d79ee4d7aea04264d95174546e09e71e02957d2"
+        },
+        {
+          "name": "f08-A-unit-center0-detector.xdrz",
+          "sha256": "e56b493d35ebee58b5bae79dbf729263b617552cc876477943eb8ec0c50d8123"
+        },
+        {
+          "name": "f09-A-unit-center0-detector.xdrz",
+          "sha256": "45d9a2274dee2bbd7ac0a3288683ed8841adcba993d1340fe088c34e95f7d4d3"
+        },
+        {
+          "name": "f10-A-unit-center0-detector.xdrz",
+          "sha256": "f79fe14ba9bb5755a265651b5ec1d488b45eaf46f95571a60e4f820924f4a0ab"
+        },
+        {
+          "name": "f11-A-unit-center0-detector.xdrz",
+          "sha256": "6e1df2c9be9c8ae189e06f9dd67dba9857df48b86c6a7d8edbf532f2dcc53b7f"
+        },
+        {
+          "name": "f12-A-unit-center0-detector.xdrz",
+          "sha256": "c7fd49e6c3cffd1cc2887ede013b0194b552cdf1d5e9b50ea1d3b25cd3db4dee"
+        },
+        {
+          "name": "f13-A-unit-center0-detector.xdrz",
+          "sha256": "6b640849a43a29b543602a2d1b1e274235df471be519a5a6743e8447d65b558d"
+        },
+        {
+          "name": "f14-A-unit-center0-detector.xdrz",
+          "sha256": "9c384da46a09555055621df7ba68ac37a5ea8544ad0efb72d0af39475fcdafb1"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-center0-reference.xdrz",
+          "sha256": "32136e1c6d94f763491dd7af0d038fba8d0423d1c5f9cbdd7dd9a412ba59c361"
+        },
+        {
+          "name": "f02-A-unit-center0-reference.xdrz",
+          "sha256": "81b9cb74212822f4e40c89436216ed41007115b0175c83aca42294e5535fc750"
+        },
+        {
+          "name": "f03-A-unit-center0-reference.xdrz",
+          "sha256": "2ba80a2689a8c3d76b731455e9c825d43c15951057480760cc7b760567fbbba6"
+        },
+        {
+          "name": "f04-A-unit-center0-reference.xdrz",
+          "sha256": "125c73c4d18045048ae0140b60b62183ebc8e9adf61e62894ac9044009167dcd"
+        },
+        {
+          "name": "f05-A-unit-center0-reference.xdrz",
+          "sha256": "471499d2da65f9ebdb16f8c1ea849d74980eb0c054d17adf3e277f73b882f4be"
+        },
+        {
+          "name": "f06-A-unit-center0-reference.xdrz",
+          "sha256": "46579b73308dee0cd47fd8189052e46b4709e05d235d0a077ca404d0837eb0c8"
+        },
+        {
+          "name": "f07-A-unit-center0-reference.xdrz",
+          "sha256": "2cc76143a79e6176b3d4132e143281c5e39634d2ba6d56038ef7ff20d631e6ca"
+        },
+        {
+          "name": "f08-A-unit-center0-reference.xdrz",
+          "sha256": "ff013ba4f7bb1e968c1f9f893790822572ded352bfadad3fe362dea38d7d47fb"
+        },
+        {
+          "name": "f09-A-unit-center0-reference.xdrz",
+          "sha256": "6f1d3d74efcd4886a90d5d378b4de9b3d4134bdb614a89e640abdd416947b5fb"
+        },
+        {
+          "name": "f10-A-unit-center0-reference.xdrz",
+          "sha256": "f85453f1be8774bdb1591e63c6cbf321b3cc5e4dc0cb2539e9a381b852f8eb45"
+        },
+        {
+          "name": "f11-A-unit-center0-reference.xdrz",
+          "sha256": "317ae2a1a50cf1ce759b814f1a19a24344b1a7eaa6dd5940a875bc8681446356"
+        },
+        {
+          "name": "f12-A-unit-center0-reference.xdrz",
+          "sha256": "f10d355aede7ed75754b752e86f6a4c4d4d86de3b46561c45e27eaea013376b0"
+        },
+        {
+          "name": "f13-A-unit-center0-reference.xdrz",
+          "sha256": "147454d45b762de00c652eee7176123df13236d3d023396042d4ca889bca9bb4"
+        },
+        {
+          "name": "f14-A-unit-center0-reference.xdrz",
+          "sha256": "eae4e5dc62a7064aada30090bc50f4deed7125a93948f74e82c02534ad307a6c"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-edge05-detector.xdrz",
+          "sha256": "c1540e6bf6e64708913f3b4327b9122fe1e60d3844efd3c750061960be081891"
+        },
+        {
+          "name": "f02-A-unit-edge05-detector.xdrz",
+          "sha256": "d87ea144793f0e80fb58fbc8bfcbd376d2743f754cc96fe81ec340095ff1f42e"
+        },
+        {
+          "name": "f03-A-unit-edge05-detector.xdrz",
+          "sha256": "b758088db709709b36122bdfc688054948e28ec0d89295dca031f74d83790f4f"
+        },
+        {
+          "name": "f04-A-unit-edge05-detector.xdrz",
+          "sha256": "f74ddce1cf82542e917b76ffba05c60e8c0810b30df1195ab0ba7a209947c648"
+        },
+        {
+          "name": "f05-A-unit-edge05-detector.xdrz",
+          "sha256": "a69f0db15b6e6275b0e28e091cb9dc18b7e81d64036cc0131129574d8b7cd445"
+        },
+        {
+          "name": "f06-A-unit-edge05-detector.xdrz",
+          "sha256": "42a1cd88a767793923170a17cc19fea450cd4dc451fa4b9eeedd180abd6cef54"
+        },
+        {
+          "name": "f07-A-unit-edge05-detector.xdrz",
+          "sha256": "29cadc5e36fea4f9713f54a62bb754d8dee969d5ba86b7eb1b864b6b1fe38f3c"
+        },
+        {
+          "name": "f08-A-unit-edge05-detector.xdrz",
+          "sha256": "ebcf2c24f712ba9937bc3473037396101d429327b44eea102852e06a109799c0"
+        },
+        {
+          "name": "f09-A-unit-edge05-detector.xdrz",
+          "sha256": "e8ac6740e6072c069378ff5e27dabe4ccd79784d5aff5ed0d0aeb70c6d7cb7a2"
+        },
+        {
+          "name": "f10-A-unit-edge05-detector.xdrz",
+          "sha256": "fba166221c8a0fe47421ed05bc8433ebc776e43a0f4210ba44351449b3da13ca"
+        },
+        {
+          "name": "f11-A-unit-edge05-detector.xdrz",
+          "sha256": "e58a1874977a7e050e41939f7acfc1e9c7ece05b378de942d739cc29efd33c20"
+        },
+        {
+          "name": "f12-A-unit-edge05-detector.xdrz",
+          "sha256": "05e874e38344e9637d0dc43f04d2fb005e518d6ec5e514ff7cd247e60f2d1783"
+        },
+        {
+          "name": "f13-A-unit-edge05-detector.xdrz",
+          "sha256": "621e60147db482a4041c4e3ffe2eeec9868463ae519bd32e19e414c981153bc0"
+        },
+        {
+          "name": "f14-A-unit-edge05-detector.xdrz",
+          "sha256": "2c6b6a3c2610f6a0f1ba1a74c3beaafb7ea2254038923ece8355ed65bdc05e77"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-unit-edge05-reference.xdrz",
+          "sha256": "c1540e6bf6e64708913f3b4327b9122fe1e60d3844efd3c750061960be081891"
+        },
+        {
+          "name": "f02-A-unit-edge05-reference.xdrz",
+          "sha256": "789479900a02790434c7b14309c5c79b084e5e3443ba3f5156cfb7c87973e880"
+        },
+        {
+          "name": "f03-A-unit-edge05-reference.xdrz",
+          "sha256": "244680c87b890a558b10cb2b979c0943393078e3840710737c7c9f67654f2af7"
+        },
+        {
+          "name": "f04-A-unit-edge05-reference.xdrz",
+          "sha256": "548b1dfffc3d0edca2c4c0469ed960461a802bedc6d2b212eab71c572dab07e1"
+        },
+        {
+          "name": "f05-A-unit-edge05-reference.xdrz",
+          "sha256": "2ecc256f93347293b29b72d5c5b91c83940b36847fda21e088bc962477fad36f"
+        },
+        {
+          "name": "f06-A-unit-edge05-reference.xdrz",
+          "sha256": "5c5d736396bdec846d62aa3f621c12362a56d2feb4fcb09013f7a97ab0092037"
+        },
+        {
+          "name": "f07-A-unit-edge05-reference.xdrz",
+          "sha256": "6748dfff9d5f8d9a88f304c59675f82ecd4bfde334e74bdc142f1cba0d862572"
+        },
+        {
+          "name": "f08-A-unit-edge05-reference.xdrz",
+          "sha256": "26ed606bef055447ef4df7015e6972235b8bc6c180a64e3f1944beda90b0394f"
+        },
+        {
+          "name": "f09-A-unit-edge05-reference.xdrz",
+          "sha256": "be000efd9bdab1de26cafdebd78754fcdf7bad571a149e37501e7a78ca67dd8f"
+        },
+        {
+          "name": "f10-A-unit-edge05-reference.xdrz",
+          "sha256": "ae76ac05286d0b22b9e9ee0badf596b5f55f8dc0cfe7d013823c3258f31ae949"
+        },
+        {
+          "name": "f11-A-unit-edge05-reference.xdrz",
+          "sha256": "6c60267f5d8fce34f1a817e82de032d59b7de80b454bdb21c49060684de97cc8"
+        },
+        {
+          "name": "f12-A-unit-edge05-reference.xdrz",
+          "sha256": "759503fceb83913da1ecdac70e573a7241d95e6e47d491dcc7d47bf5cd4b999e"
+        },
+        {
+          "name": "f13-A-unit-edge05-reference.xdrz",
+          "sha256": "9c6ac54136035a95c97981d8f8a9160602947f99c4720dd447882b7e95cc8ea8"
+        },
+        {
+          "name": "f14-A-unit-edge05-reference.xdrz",
+          "sha256": "1e680d66648a6ddc2d1f7171ca283b4329753edf68a26833d1185034281ca88c"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-center0-detector.xdrz",
+          "sha256": "3aa299010336b76f1e0bf56810b20768e66a21786642a09b1d70109198b640ad"
+        },
+        {
+          "name": "f02-B-unit-center0-detector.xdrz",
+          "sha256": "893cd91a8d051a79a14298ad5b9234d9afb337b1b67603402f53055ca22ce127"
+        },
+        {
+          "name": "f03-B-unit-center0-detector.xdrz",
+          "sha256": "dc8aa15a1710e6ba4cbf1f82fff7b561335d646bed6856433ed2752520213821"
+        },
+        {
+          "name": "f04-B-unit-center0-detector.xdrz",
+          "sha256": "3b51a966c353566029bd373c49666d09a55e39ffcdde91eb9aa25379fa838489"
+        },
+        {
+          "name": "f05-B-unit-center0-detector.xdrz",
+          "sha256": "338351d8f791a3e99ed1146c98d064304208d31f57e0b518b74ec630744a68ff"
+        },
+        {
+          "name": "f06-B-unit-center0-detector.xdrz",
+          "sha256": "2ab414dc6612a6bba8a997dc575623a94f60a9ed3e15b3a6ba7775b9a8466e0c"
+        },
+        {
+          "name": "f07-B-unit-center0-detector.xdrz",
+          "sha256": "5b4aefdb502120aa8eea1e131d878a82a66390668dd901a722c7ab0f19403bc4"
+        },
+        {
+          "name": "f08-B-unit-center0-detector.xdrz",
+          "sha256": "4a9b2c8767d3f02c8b2a180ae737e5cd31f1a91b172db2724f64aebd62ddbbd0"
+        },
+        {
+          "name": "f09-B-unit-center0-detector.xdrz",
+          "sha256": "04231b6da2d23b8d6712fbd2c9f5757f02ae9b4671635c0e22bdf5415f72f75d"
+        },
+        {
+          "name": "f10-B-unit-center0-detector.xdrz",
+          "sha256": "a7fde2689467b556c566053bb04a675a01b2ce19a974c16842980b8f50744d53"
+        },
+        {
+          "name": "f11-B-unit-center0-detector.xdrz",
+          "sha256": "af0ee4bf74c11b647826b72c52b820bd7e770fa5c80739c0b7196471c6926bcc"
+        },
+        {
+          "name": "f12-B-unit-center0-detector.xdrz",
+          "sha256": "ab43933d1e199783b5c41a416199482148011f9cc3ed720892869a9dfbe7a05a"
+        },
+        {
+          "name": "f13-B-unit-center0-detector.xdrz",
+          "sha256": "97333ed9521f64dfc92a1bdea5effc312c811eb556e7881ceb12ab785b3954d0"
+        },
+        {
+          "name": "f14-B-unit-center0-detector.xdrz",
+          "sha256": "767c5663d7205f9c9870672b0f5b3829f168b1ab2c923d5d625607870cde45c3"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-center0-reference.xdrz",
+          "sha256": "3aa299010336b76f1e0bf56810b20768e66a21786642a09b1d70109198b640ad"
+        },
+        {
+          "name": "f02-B-unit-center0-reference.xdrz",
+          "sha256": "9636425154f311110e481405971e1f776e6b0de553943f199bf7f5f161301040"
+        },
+        {
+          "name": "f03-B-unit-center0-reference.xdrz",
+          "sha256": "466a55d7ae429cb4d512c3dc5b73ff9172501b9d7cd453a7e79b35eaef335d23"
+        },
+        {
+          "name": "f04-B-unit-center0-reference.xdrz",
+          "sha256": "3d32095c76e2704f37e1bfe24742278c3aa1ec38d100eef188e4a2455bee9d83"
+        },
+        {
+          "name": "f05-B-unit-center0-reference.xdrz",
+          "sha256": "8ff1dfe95811f212496ae9d00c551f110ad9737d0744d25e5dea2e5c7ff0e90e"
+        },
+        {
+          "name": "f06-B-unit-center0-reference.xdrz",
+          "sha256": "3b8da321af826ef347c9bad25545462d8ce17bce580a94b4c008ea400cfe82bb"
+        },
+        {
+          "name": "f07-B-unit-center0-reference.xdrz",
+          "sha256": "9c5754d771955fa848f659170516e427eeb9c004f78f4e61d1a4f5d469495e62"
+        },
+        {
+          "name": "f08-B-unit-center0-reference.xdrz",
+          "sha256": "1be34d5a0dafcbdb65a7d62a5ee21a2f4e4292aa1a20f4f79dd33a047ddf3597"
+        },
+        {
+          "name": "f09-B-unit-center0-reference.xdrz",
+          "sha256": "fc6a69a28a9bd78b5b1d83e52ee4890e4fd73224f1d764dd0f853681997a40db"
+        },
+        {
+          "name": "f10-B-unit-center0-reference.xdrz",
+          "sha256": "1fac1352ca12b352bb992a87509b7257ca22e1b0898cdcb1dccd8f3934971d2a"
+        },
+        {
+          "name": "f11-B-unit-center0-reference.xdrz",
+          "sha256": "c7b92041a0a05693340e6bb30ef0454f92d0e31fe4f49c5a6ade8e47c2cfe1fd"
+        },
+        {
+          "name": "f12-B-unit-center0-reference.xdrz",
+          "sha256": "ad851bd7eee63234d1919f13f5001cf918661d41eae892770bd06cd2669dfe43"
+        },
+        {
+          "name": "f13-B-unit-center0-reference.xdrz",
+          "sha256": "05ac78be6f010c4a9769475a5caab4247a94420a766708b6b346798a27808af8"
+        },
+        {
+          "name": "f14-B-unit-center0-reference.xdrz",
+          "sha256": "c5ffca6cbf2fec7fa3bc27b6dcd2d00ebf386779ee8d141ae01466f62af7c7e7"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-edge05-detector.xdrz",
+          "sha256": "99cb151853e78fefb91f2a7251b1f7083646954c4e564856c7a11548649bfa17"
+        },
+        {
+          "name": "f02-B-unit-edge05-detector.xdrz",
+          "sha256": "65f926bf0a451d8c10bd09065720891a85466aa4c424077012f79b5ae68ef554"
+        },
+        {
+          "name": "f03-B-unit-edge05-detector.xdrz",
+          "sha256": "dc230799709428534cefedd62dd507545222d9bc790cf01c5d1c5eaf784fe37e"
+        },
+        {
+          "name": "f04-B-unit-edge05-detector.xdrz",
+          "sha256": "bcaadf8507d57a3f1f89480efdd0bd0caabcc94fab5dc2225b7faf70532700b3"
+        },
+        {
+          "name": "f05-B-unit-edge05-detector.xdrz",
+          "sha256": "80869d0aed3c7a32ab2b071316aff7cdea0a6169af08887d1a7a137067a36fc8"
+        },
+        {
+          "name": "f06-B-unit-edge05-detector.xdrz",
+          "sha256": "03aa93814c6af4b5184ca23228f3e48f24ebb6e188675cb0ba5aa8735153a4a0"
+        },
+        {
+          "name": "f07-B-unit-edge05-detector.xdrz",
+          "sha256": "d18ce0d31221213067093829344e3910dac605c16dc4ab2cfe2bec54ef37411a"
+        },
+        {
+          "name": "f08-B-unit-edge05-detector.xdrz",
+          "sha256": "1c38eadf228d404bbc23bdfe59fe0ffce05a68cc044a003e81808b705c6d58b5"
+        },
+        {
+          "name": "f09-B-unit-edge05-detector.xdrz",
+          "sha256": "e47331a967f4091d96270854e3ecb410273ad4f4dc184cdadeebb90032b53122"
+        },
+        {
+          "name": "f10-B-unit-edge05-detector.xdrz",
+          "sha256": "0c3c5c9474679c0d8918707477526c3b62f5deef7ac727f1708985834d72ca52"
+        },
+        {
+          "name": "f11-B-unit-edge05-detector.xdrz",
+          "sha256": "71d555e4aba731e3c3ed889b0bfb9ea30106c8f6aa8fcc00e025977308184ff2"
+        },
+        {
+          "name": "f12-B-unit-edge05-detector.xdrz",
+          "sha256": "c85890221243f239e99b8860880b90b6a86c0b100fd4860977a352356f4d6d46"
+        },
+        {
+          "name": "f13-B-unit-edge05-detector.xdrz",
+          "sha256": "2d9a1033e72bee4d558ec13a34267aab20dfa6ed3543945a4aa9357ffcc16e57"
+        },
+        {
+          "name": "f14-B-unit-edge05-detector.xdrz",
+          "sha256": "26a9521bcd57a76541e7efafc676fca551f6367da7f19163f6bc465f38e2173e"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-edge05-reference.xdrz",
+          "sha256": "99cb151853e78fefb91f2a7251b1f7083646954c4e564856c7a11548649bfa17"
+        },
+        {
+          "name": "f02-B-unit-edge05-reference.xdrz",
+          "sha256": "2dffa2a5e5b3d8a0d800b19574b4ca47ec06cc3099da015f86e7fc3e83dd8ff2"
+        },
+        {
+          "name": "f03-B-unit-edge05-reference.xdrz",
+          "sha256": "52afc579ffd7831198248e8732385a27b78b1bbb0edcfbb42cd08a19599a73eb"
+        },
+        {
+          "name": "f04-B-unit-edge05-reference.xdrz",
+          "sha256": "84add4db6565a2c6f7465c4bad2a49ef46873e36db49b1093c1b9b6a142ca911"
+        },
+        {
+          "name": "f05-B-unit-edge05-reference.xdrz",
+          "sha256": "ea7f33b994f3ce49343d719e87ca2ebad50a4dd2e8fbc3f7f77cc921ac3a1c76"
+        },
+        {
+          "name": "f06-B-unit-edge05-reference.xdrz",
+          "sha256": "331b220f8794f8c8aa1e8f0febc9ede29ead5678f6f72c95b8ae7e31cf09d0e8"
+        },
+        {
+          "name": "f07-B-unit-edge05-reference.xdrz",
+          "sha256": "91c1e073ea00331bccfd20b90ccb64ce43f4043fd623bf29e1d398892238b8df"
+        },
+        {
+          "name": "f08-B-unit-edge05-reference.xdrz",
+          "sha256": "72165352b8a5a359a0655d0fd24de08091124f5d64608d83a259e0eeaae694e4"
+        },
+        {
+          "name": "f09-B-unit-edge05-reference.xdrz",
+          "sha256": "e378dadcad9949ae0db88d76da8f0621acf0d6dc37382c67de0861b62001691d"
+        },
+        {
+          "name": "f10-B-unit-edge05-reference.xdrz",
+          "sha256": "9cb8d3b7d248213ba88a27cf612ed0b4a8bf5d28502ee33815719731c6c1a373"
+        },
+        {
+          "name": "f11-B-unit-edge05-reference.xdrz",
+          "sha256": "18566ed97942647e2947af9df0ae7975441879a24f3505909215ea5d831789e9"
+        },
+        {
+          "name": "f12-B-unit-edge05-reference.xdrz",
+          "sha256": "288b712c9cb4886c7ab4d6de02e4c2295b2fbbdeac65f423ca980f4dec59c710"
+        },
+        {
+          "name": "f13-B-unit-edge05-reference.xdrz",
+          "sha256": "6f76086ee0accb4428ec7047be95d26719b0db09a8c41a79380408f4a37ac25a"
+        },
+        {
+          "name": "f14-B-unit-edge05-reference.xdrz",
+          "sha256": "f516ec58037ffe88c324909cc0fe01bb5de45b1c61b41dd6a415088a690556e5"
+        }
+      ],
+      "drop": 1,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-center0-detector.xdrz",
+          "sha256": "3aa299010336b76f1e0bf56810b20768e66a21786642a09b1d70109198b640ad"
+        },
+        {
+          "name": "f02-B-unit-center0-detector.xdrz",
+          "sha256": "893cd91a8d051a79a14298ad5b9234d9afb337b1b67603402f53055ca22ce127"
+        },
+        {
+          "name": "f03-B-unit-center0-detector.xdrz",
+          "sha256": "dc8aa15a1710e6ba4cbf1f82fff7b561335d646bed6856433ed2752520213821"
+        },
+        {
+          "name": "f04-B-unit-center0-detector.xdrz",
+          "sha256": "3b51a966c353566029bd373c49666d09a55e39ffcdde91eb9aa25379fa838489"
+        },
+        {
+          "name": "f05-B-unit-center0-detector.xdrz",
+          "sha256": "338351d8f791a3e99ed1146c98d064304208d31f57e0b518b74ec630744a68ff"
+        },
+        {
+          "name": "f06-B-unit-center0-detector.xdrz",
+          "sha256": "2ab414dc6612a6bba8a997dc575623a94f60a9ed3e15b3a6ba7775b9a8466e0c"
+        },
+        {
+          "name": "f07-B-unit-center0-detector.xdrz",
+          "sha256": "5b4aefdb502120aa8eea1e131d878a82a66390668dd901a722c7ab0f19403bc4"
+        },
+        {
+          "name": "f08-B-unit-center0-detector.xdrz",
+          "sha256": "4a9b2c8767d3f02c8b2a180ae737e5cd31f1a91b172db2724f64aebd62ddbbd0"
+        },
+        {
+          "name": "f09-B-unit-center0-detector.xdrz",
+          "sha256": "04231b6da2d23b8d6712fbd2c9f5757f02ae9b4671635c0e22bdf5415f72f75d"
+        },
+        {
+          "name": "f10-B-unit-center0-detector.xdrz",
+          "sha256": "a7fde2689467b556c566053bb04a675a01b2ce19a974c16842980b8f50744d53"
+        },
+        {
+          "name": "f11-B-unit-center0-detector.xdrz",
+          "sha256": "af0ee4bf74c11b647826b72c52b820bd7e770fa5c80739c0b7196471c6926bcc"
+        },
+        {
+          "name": "f12-B-unit-center0-detector.xdrz",
+          "sha256": "ab43933d1e199783b5c41a416199482148011f9cc3ed720892869a9dfbe7a05a"
+        },
+        {
+          "name": "f13-B-unit-center0-detector.xdrz",
+          "sha256": "97333ed9521f64dfc92a1bdea5effc312c811eb556e7881ceb12ab785b3954d0"
+        },
+        {
+          "name": "f14-B-unit-center0-detector.xdrz",
+          "sha256": "767c5663d7205f9c9870672b0f5b3829f168b1ab2c923d5d625607870cde45c3"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-center0-reference.xdrz",
+          "sha256": "3aa299010336b76f1e0bf56810b20768e66a21786642a09b1d70109198b640ad"
+        },
+        {
+          "name": "f02-B-unit-center0-reference.xdrz",
+          "sha256": "9636425154f311110e481405971e1f776e6b0de553943f199bf7f5f161301040"
+        },
+        {
+          "name": "f03-B-unit-center0-reference.xdrz",
+          "sha256": "466a55d7ae429cb4d512c3dc5b73ff9172501b9d7cd453a7e79b35eaef335d23"
+        },
+        {
+          "name": "f04-B-unit-center0-reference.xdrz",
+          "sha256": "3d32095c76e2704f37e1bfe24742278c3aa1ec38d100eef188e4a2455bee9d83"
+        },
+        {
+          "name": "f05-B-unit-center0-reference.xdrz",
+          "sha256": "8ff1dfe95811f212496ae9d00c551f110ad9737d0744d25e5dea2e5c7ff0e90e"
+        },
+        {
+          "name": "f06-B-unit-center0-reference.xdrz",
+          "sha256": "3b8da321af826ef347c9bad25545462d8ce17bce580a94b4c008ea400cfe82bb"
+        },
+        {
+          "name": "f07-B-unit-center0-reference.xdrz",
+          "sha256": "9c5754d771955fa848f659170516e427eeb9c004f78f4e61d1a4f5d469495e62"
+        },
+        {
+          "name": "f08-B-unit-center0-reference.xdrz",
+          "sha256": "1be34d5a0dafcbdb65a7d62a5ee21a2f4e4292aa1a20f4f79dd33a047ddf3597"
+        },
+        {
+          "name": "f09-B-unit-center0-reference.xdrz",
+          "sha256": "fc6a69a28a9bd78b5b1d83e52ee4890e4fd73224f1d764dd0f853681997a40db"
+        },
+        {
+          "name": "f10-B-unit-center0-reference.xdrz",
+          "sha256": "1fac1352ca12b352bb992a87509b7257ca22e1b0898cdcb1dccd8f3934971d2a"
+        },
+        {
+          "name": "f11-B-unit-center0-reference.xdrz",
+          "sha256": "c7b92041a0a05693340e6bb30ef0454f92d0e31fe4f49c5a6ade8e47c2cfe1fd"
+        },
+        {
+          "name": "f12-B-unit-center0-reference.xdrz",
+          "sha256": "ad851bd7eee63234d1919f13f5001cf918661d41eae892770bd06cd2669dfe43"
+        },
+        {
+          "name": "f13-B-unit-center0-reference.xdrz",
+          "sha256": "05ac78be6f010c4a9769475a5caab4247a94420a766708b6b346798a27808af8"
+        },
+        {
+          "name": "f14-B-unit-center0-reference.xdrz",
+          "sha256": "c5ffca6cbf2fec7fa3bc27b6dcd2d00ebf386779ee8d141ae01466f62af7c7e7"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-edge05-detector.xdrz",
+          "sha256": "99cb151853e78fefb91f2a7251b1f7083646954c4e564856c7a11548649bfa17"
+        },
+        {
+          "name": "f02-B-unit-edge05-detector.xdrz",
+          "sha256": "65f926bf0a451d8c10bd09065720891a85466aa4c424077012f79b5ae68ef554"
+        },
+        {
+          "name": "f03-B-unit-edge05-detector.xdrz",
+          "sha256": "dc230799709428534cefedd62dd507545222d9bc790cf01c5d1c5eaf784fe37e"
+        },
+        {
+          "name": "f04-B-unit-edge05-detector.xdrz",
+          "sha256": "bcaadf8507d57a3f1f89480efdd0bd0caabcc94fab5dc2225b7faf70532700b3"
+        },
+        {
+          "name": "f05-B-unit-edge05-detector.xdrz",
+          "sha256": "80869d0aed3c7a32ab2b071316aff7cdea0a6169af08887d1a7a137067a36fc8"
+        },
+        {
+          "name": "f06-B-unit-edge05-detector.xdrz",
+          "sha256": "03aa93814c6af4b5184ca23228f3e48f24ebb6e188675cb0ba5aa8735153a4a0"
+        },
+        {
+          "name": "f07-B-unit-edge05-detector.xdrz",
+          "sha256": "d18ce0d31221213067093829344e3910dac605c16dc4ab2cfe2bec54ef37411a"
+        },
+        {
+          "name": "f08-B-unit-edge05-detector.xdrz",
+          "sha256": "1c38eadf228d404bbc23bdfe59fe0ffce05a68cc044a003e81808b705c6d58b5"
+        },
+        {
+          "name": "f09-B-unit-edge05-detector.xdrz",
+          "sha256": "e47331a967f4091d96270854e3ecb410273ad4f4dc184cdadeebb90032b53122"
+        },
+        {
+          "name": "f10-B-unit-edge05-detector.xdrz",
+          "sha256": "0c3c5c9474679c0d8918707477526c3b62f5deef7ac727f1708985834d72ca52"
+        },
+        {
+          "name": "f11-B-unit-edge05-detector.xdrz",
+          "sha256": "71d555e4aba731e3c3ed889b0bfb9ea30106c8f6aa8fcc00e025977308184ff2"
+        },
+        {
+          "name": "f12-B-unit-edge05-detector.xdrz",
+          "sha256": "c85890221243f239e99b8860880b90b6a86c0b100fd4860977a352356f4d6d46"
+        },
+        {
+          "name": "f13-B-unit-edge05-detector.xdrz",
+          "sha256": "2d9a1033e72bee4d558ec13a34267aab20dfa6ed3543945a4aa9357ffcc16e57"
+        },
+        {
+          "name": "f14-B-unit-edge05-detector.xdrz",
+          "sha256": "26a9521bcd57a76541e7efafc676fca551f6367da7f19163f6bc465f38e2173e"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-unit-edge05-reference.xdrz",
+          "sha256": "99cb151853e78fefb91f2a7251b1f7083646954c4e564856c7a11548649bfa17"
+        },
+        {
+          "name": "f02-B-unit-edge05-reference.xdrz",
+          "sha256": "2dffa2a5e5b3d8a0d800b19574b4ca47ec06cc3099da015f86e7fc3e83dd8ff2"
+        },
+        {
+          "name": "f03-B-unit-edge05-reference.xdrz",
+          "sha256": "52afc579ffd7831198248e8732385a27b78b1bbb0edcfbb42cd08a19599a73eb"
+        },
+        {
+          "name": "f04-B-unit-edge05-reference.xdrz",
+          "sha256": "84add4db6565a2c6f7465c4bad2a49ef46873e36db49b1093c1b9b6a142ca911"
+        },
+        {
+          "name": "f05-B-unit-edge05-reference.xdrz",
+          "sha256": "ea7f33b994f3ce49343d719e87ca2ebad50a4dd2e8fbc3f7f77cc921ac3a1c76"
+        },
+        {
+          "name": "f06-B-unit-edge05-reference.xdrz",
+          "sha256": "331b220f8794f8c8aa1e8f0febc9ede29ead5678f6f72c95b8ae7e31cf09d0e8"
+        },
+        {
+          "name": "f07-B-unit-edge05-reference.xdrz",
+          "sha256": "91c1e073ea00331bccfd20b90ccb64ce43f4043fd623bf29e1d398892238b8df"
+        },
+        {
+          "name": "f08-B-unit-edge05-reference.xdrz",
+          "sha256": "72165352b8a5a359a0655d0fd24de08091124f5d64608d83a259e0eeaae694e4"
+        },
+        {
+          "name": "f09-B-unit-edge05-reference.xdrz",
+          "sha256": "e378dadcad9949ae0db88d76da8f0621acf0d6dc37382c67de0861b62001691d"
+        },
+        {
+          "name": "f10-B-unit-edge05-reference.xdrz",
+          "sha256": "9cb8d3b7d248213ba88a27cf612ed0b4a8bf5d28502ee33815719731c6c1a373"
+        },
+        {
+          "name": "f11-B-unit-edge05-reference.xdrz",
+          "sha256": "18566ed97942647e2947af9df0ae7975441879a24f3505909215ea5d831789e9"
+        },
+        {
+          "name": "f12-B-unit-edge05-reference.xdrz",
+          "sha256": "288b712c9cb4886c7ab4d6de02e4c2295b2fbbdeac65f423ca980f4dec59c710"
+        },
+        {
+          "name": "f13-B-unit-edge05-reference.xdrz",
+          "sha256": "6f76086ee0accb4428ec7047be95d26719b0db09a8c41a79380408f4a37ac25a"
+        },
+        {
+          "name": "f14-B-unit-edge05-reference.xdrz",
+          "sha256": "f516ec58037ffe88c324909cc0fe01bb5de45b1c61b41dd6a415088a690556e5"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "unit",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-center0-detector.xdrz",
+          "sha256": "addb2e23c18675b8b36172618d7b05f5036ff2f69a894315e620a9c1c4da0be1"
+        },
+        {
+          "name": "f02-A-signal-center0-detector.xdrz",
+          "sha256": "4b6195ea380d1588211a362dc04f66f99dbd71cfae9d3a1021828be108447afd"
+        },
+        {
+          "name": "f03-A-signal-center0-detector.xdrz",
+          "sha256": "4f98f5b59479292dd11ed50072d1d8455de91ad4746f78924307f81929553830"
+        },
+        {
+          "name": "f04-A-signal-center0-detector.xdrz",
+          "sha256": "a31cdb6b3ae66fd529c9fa0e2488884f50647bfc79be5c56e24106d973ae18d4"
+        },
+        {
+          "name": "f05-A-signal-center0-detector.xdrz",
+          "sha256": "ab4ef7decd0597798aaef13481a0b791348e34e600bc80d5049cd7e490a48a58"
+        },
+        {
+          "name": "f06-A-signal-center0-detector.xdrz",
+          "sha256": "d774d07fcfbaa8d813374f5523f3008e389096fea78f2bd742b030f1778dec0b"
+        },
+        {
+          "name": "f07-A-signal-center0-detector.xdrz",
+          "sha256": "c798b2aeea44d7e84c529dde94babe300d8022684d66139f92fbbf4fcb552e2d"
+        },
+        {
+          "name": "f08-A-signal-center0-detector.xdrz",
+          "sha256": "6499f6e789b9a547d1e5941cff0642d6b78e21205e8ef8dd56070ea7f958465c"
+        },
+        {
+          "name": "f09-A-signal-center0-detector.xdrz",
+          "sha256": "3304b77a81fa3ce39c168a73045f47f9cd0d2e4777635112fdd46423e4655991"
+        },
+        {
+          "name": "f10-A-signal-center0-detector.xdrz",
+          "sha256": "d873bcf86a7e6dbea6c658657333574ab225bcc3786a73325f846cbd7e02c1f1"
+        },
+        {
+          "name": "f11-A-signal-center0-detector.xdrz",
+          "sha256": "f9fa1bfe3156c6325e333b16c0f5794f2be542ae8212677c178d732c65c9756f"
+        },
+        {
+          "name": "f12-A-signal-center0-detector.xdrz",
+          "sha256": "08f16d0d0a6d1dfa4504e0deb1fb96966ad209f6ff17363e03d098f90649daa8"
+        },
+        {
+          "name": "f13-A-signal-center0-detector.xdrz",
+          "sha256": "ed1c1550ffb31ab04846a03f31b63ed8c60e757b695ef75c8035185541154232"
+        },
+        {
+          "name": "f14-A-signal-center0-detector.xdrz",
+          "sha256": "413cb7fed4c6a7382c46c4a1e6c881b7cf6b75c4b6da492c1a03c233b5274546"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-center0-reference.xdrz",
+          "sha256": "addb2e23c18675b8b36172618d7b05f5036ff2f69a894315e620a9c1c4da0be1"
+        },
+        {
+          "name": "f02-A-signal-center0-reference.xdrz",
+          "sha256": "cb30eb7605eddfb53215bfddc4c7e87a3a9abc92c2c137696a2fdd273f6224b4"
+        },
+        {
+          "name": "f03-A-signal-center0-reference.xdrz",
+          "sha256": "cbc1b4bdbf2961fad14aa85cb73a96a9e4d84067a22322d1411427df5fff41a6"
+        },
+        {
+          "name": "f04-A-signal-center0-reference.xdrz",
+          "sha256": "674bd616466ae0741a38e83116df382ae2ccb7bf7632b6932ccedbd67142d1c9"
+        },
+        {
+          "name": "f05-A-signal-center0-reference.xdrz",
+          "sha256": "3a9a2357c4e30209348aa0bb8f49b96a896d8f28b05bed8fa3fc6cb672e32729"
+        },
+        {
+          "name": "f06-A-signal-center0-reference.xdrz",
+          "sha256": "bc58b0caf615d47edce0cc32b95b5bee18418806cbaf2faedf758b880f0b2d6d"
+        },
+        {
+          "name": "f07-A-signal-center0-reference.xdrz",
+          "sha256": "d169c5717dd8ab84702e0f8583c1cd5cad4f53911308c6bd659caecab861b3d2"
+        },
+        {
+          "name": "f08-A-signal-center0-reference.xdrz",
+          "sha256": "a6ea89b1fc48bedd7084e04d0e27273594cae9d834e05af2a22bfac3cac41c61"
+        },
+        {
+          "name": "f09-A-signal-center0-reference.xdrz",
+          "sha256": "e1a7020b6f23552e715970eb2fa722988f5af171dd7b5546c24032ab0f8ae30c"
+        },
+        {
+          "name": "f10-A-signal-center0-reference.xdrz",
+          "sha256": "6fcfc99ee5dd222a43ffe452a11a2bd780963be78dd751020fb644e676098a65"
+        },
+        {
+          "name": "f11-A-signal-center0-reference.xdrz",
+          "sha256": "6ff28e1a5655d6b29668a654c5129507a09ff3515a16d507c6969a725d7446a0"
+        },
+        {
+          "name": "f12-A-signal-center0-reference.xdrz",
+          "sha256": "a32c9f4eade2523c8ad0f48ab0ca25b0a2529154bc7aff6016197b39d224c4f5"
+        },
+        {
+          "name": "f13-A-signal-center0-reference.xdrz",
+          "sha256": "3d8b59ac26765ff8222815ebd32ff5b2fc68dac535589be1392cb6da30883d82"
+        },
+        {
+          "name": "f14-A-signal-center0-reference.xdrz",
+          "sha256": "714a92181db09c190294e7a13d2df391e1af44b8dac0078fcd7a053996c34be3"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-edge05-detector.xdrz",
+          "sha256": "2d7d08ebf4073fbabf24123f50e19205acb30633191e6f5bf5db6a6df10e6e73"
+        },
+        {
+          "name": "f02-A-signal-edge05-detector.xdrz",
+          "sha256": "886322eb4f57837eaee4065ce1277c151e3f859e016d3fc60908c2ff9196badd"
+        },
+        {
+          "name": "f03-A-signal-edge05-detector.xdrz",
+          "sha256": "22f9418ea07beb13722407f9b863d171d9e3cc89dac14aec1c91602f62045660"
+        },
+        {
+          "name": "f04-A-signal-edge05-detector.xdrz",
+          "sha256": "28a51c9c95f05d6b22540fb9170483e6fa3be7df40aee6801a35cc3501a6be03"
+        },
+        {
+          "name": "f05-A-signal-edge05-detector.xdrz",
+          "sha256": "c0ca1d04722be79609afe72cd7c02c25611e2802fa1bcd6fbf5d3df7ea2c9027"
+        },
+        {
+          "name": "f06-A-signal-edge05-detector.xdrz",
+          "sha256": "6312c46791f9809b53ad41f450a11e279c915676e91fe35e5be4f21faedaca06"
+        },
+        {
+          "name": "f07-A-signal-edge05-detector.xdrz",
+          "sha256": "993093cfbe401cc9f1a34c49d02a903c40e5bc93856c4924c9a0cc3808bea4c8"
+        },
+        {
+          "name": "f08-A-signal-edge05-detector.xdrz",
+          "sha256": "4861463fe338a163697d874791cc962a79ad4adfecb42d07773a835c83d4552e"
+        },
+        {
+          "name": "f09-A-signal-edge05-detector.xdrz",
+          "sha256": "1f2e8cb85f0414b146109dd7780cc7a51f73a939f3a6ea9415edc6a0a59e8bbc"
+        },
+        {
+          "name": "f10-A-signal-edge05-detector.xdrz",
+          "sha256": "113fd4b66e2ae767481ec5cf3511a69226bd570ed17d1ba52c466b5b70edacd1"
+        },
+        {
+          "name": "f11-A-signal-edge05-detector.xdrz",
+          "sha256": "5a9add7d7909197e25cacaafee8d51947e5e3c5d0c6635ca2e5ef0d884933c58"
+        },
+        {
+          "name": "f12-A-signal-edge05-detector.xdrz",
+          "sha256": "7d1a8894697bb9ed57165d4ba19c0f886b84db270d85a25ce695659cd9b8aaa9"
+        },
+        {
+          "name": "f13-A-signal-edge05-detector.xdrz",
+          "sha256": "a7ddc33fd99581f18dd71ca8f9f65663c6cf7a256ebc8818718daca58f680f37"
+        },
+        {
+          "name": "f14-A-signal-edge05-detector.xdrz",
+          "sha256": "ea14800899f5ef92b926839f0f5de3ab41c6579446a2b394de08449108e288df"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-edge05-reference.xdrz",
+          "sha256": "2d7d08ebf4073fbabf24123f50e19205acb30633191e6f5bf5db6a6df10e6e73"
+        },
+        {
+          "name": "f02-A-signal-edge05-reference.xdrz",
+          "sha256": "aec0e1666d021fa79b8642a993807727e33b70803481505b5bfcf47b33703120"
+        },
+        {
+          "name": "f03-A-signal-edge05-reference.xdrz",
+          "sha256": "73cf7f0f1aad35a06557d606cf9321492966b882124e33e4b6f28b312694ae6b"
+        },
+        {
+          "name": "f04-A-signal-edge05-reference.xdrz",
+          "sha256": "bdca1cdcc462c01a0ca2056c1dcd4caffda1cca4730106ab7ccadcd80bbabde8"
+        },
+        {
+          "name": "f05-A-signal-edge05-reference.xdrz",
+          "sha256": "9cba3552867e5e762ec81db2702d9b8b49752fcbbf398152771e007547af1d4f"
+        },
+        {
+          "name": "f06-A-signal-edge05-reference.xdrz",
+          "sha256": "85d382ac50cee43358e948dcffbd4f2d6f2ca540368bb07787758c315a58b032"
+        },
+        {
+          "name": "f07-A-signal-edge05-reference.xdrz",
+          "sha256": "880042f47e8b22ae8b0cb32075c81c65d5df1f4ad3c89073018e135410ff3d99"
+        },
+        {
+          "name": "f08-A-signal-edge05-reference.xdrz",
+          "sha256": "57c4e2ecfb0bc2441e2d0f265c625c79023838e6a5e7efad2d2f715477176971"
+        },
+        {
+          "name": "f09-A-signal-edge05-reference.xdrz",
+          "sha256": "f97af716b29c9515313537a9e8c65243a928eff9956cf987ee95d1309abec2f6"
+        },
+        {
+          "name": "f10-A-signal-edge05-reference.xdrz",
+          "sha256": "056dcd355151ca93f232bc60719d587f8e126ea665939334ef3e1be8eea0786a"
+        },
+        {
+          "name": "f11-A-signal-edge05-reference.xdrz",
+          "sha256": "f8bab792f397ed9c0d638cb8c5d03b8b30cb35b9e2f5a5951fc519439accda56"
+        },
+        {
+          "name": "f12-A-signal-edge05-reference.xdrz",
+          "sha256": "dfeb4785c6bcaacd898a16ff356ffc873a5c4b1d0c0724e43b3406585c956f4d"
+        },
+        {
+          "name": "f13-A-signal-edge05-reference.xdrz",
+          "sha256": "e5f7696f72abe795f38a0e3a61f04a1cd6f37cad3259c2af54e5b6f508c2ac69"
+        },
+        {
+          "name": "f14-A-signal-edge05-reference.xdrz",
+          "sha256": "b54d423ffc1b918e6af6d898ad84ee6b7bf496def50f07950bdedc471951a17d"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-center0-detector.xdrz",
+          "sha256": "addb2e23c18675b8b36172618d7b05f5036ff2f69a894315e620a9c1c4da0be1"
+        },
+        {
+          "name": "f02-A-signal-center0-detector.xdrz",
+          "sha256": "4b6195ea380d1588211a362dc04f66f99dbd71cfae9d3a1021828be108447afd"
+        },
+        {
+          "name": "f03-A-signal-center0-detector.xdrz",
+          "sha256": "4f98f5b59479292dd11ed50072d1d8455de91ad4746f78924307f81929553830"
+        },
+        {
+          "name": "f04-A-signal-center0-detector.xdrz",
+          "sha256": "a31cdb6b3ae66fd529c9fa0e2488884f50647bfc79be5c56e24106d973ae18d4"
+        },
+        {
+          "name": "f05-A-signal-center0-detector.xdrz",
+          "sha256": "ab4ef7decd0597798aaef13481a0b791348e34e600bc80d5049cd7e490a48a58"
+        },
+        {
+          "name": "f06-A-signal-center0-detector.xdrz",
+          "sha256": "d774d07fcfbaa8d813374f5523f3008e389096fea78f2bd742b030f1778dec0b"
+        },
+        {
+          "name": "f07-A-signal-center0-detector.xdrz",
+          "sha256": "c798b2aeea44d7e84c529dde94babe300d8022684d66139f92fbbf4fcb552e2d"
+        },
+        {
+          "name": "f08-A-signal-center0-detector.xdrz",
+          "sha256": "6499f6e789b9a547d1e5941cff0642d6b78e21205e8ef8dd56070ea7f958465c"
+        },
+        {
+          "name": "f09-A-signal-center0-detector.xdrz",
+          "sha256": "3304b77a81fa3ce39c168a73045f47f9cd0d2e4777635112fdd46423e4655991"
+        },
+        {
+          "name": "f10-A-signal-center0-detector.xdrz",
+          "sha256": "d873bcf86a7e6dbea6c658657333574ab225bcc3786a73325f846cbd7e02c1f1"
+        },
+        {
+          "name": "f11-A-signal-center0-detector.xdrz",
+          "sha256": "f9fa1bfe3156c6325e333b16c0f5794f2be542ae8212677c178d732c65c9756f"
+        },
+        {
+          "name": "f12-A-signal-center0-detector.xdrz",
+          "sha256": "08f16d0d0a6d1dfa4504e0deb1fb96966ad209f6ff17363e03d098f90649daa8"
+        },
+        {
+          "name": "f13-A-signal-center0-detector.xdrz",
+          "sha256": "ed1c1550ffb31ab04846a03f31b63ed8c60e757b695ef75c8035185541154232"
+        },
+        {
+          "name": "f14-A-signal-center0-detector.xdrz",
+          "sha256": "413cb7fed4c6a7382c46c4a1e6c881b7cf6b75c4b6da492c1a03c233b5274546"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-center0-reference.xdrz",
+          "sha256": "addb2e23c18675b8b36172618d7b05f5036ff2f69a894315e620a9c1c4da0be1"
+        },
+        {
+          "name": "f02-A-signal-center0-reference.xdrz",
+          "sha256": "cb30eb7605eddfb53215bfddc4c7e87a3a9abc92c2c137696a2fdd273f6224b4"
+        },
+        {
+          "name": "f03-A-signal-center0-reference.xdrz",
+          "sha256": "cbc1b4bdbf2961fad14aa85cb73a96a9e4d84067a22322d1411427df5fff41a6"
+        },
+        {
+          "name": "f04-A-signal-center0-reference.xdrz",
+          "sha256": "674bd616466ae0741a38e83116df382ae2ccb7bf7632b6932ccedbd67142d1c9"
+        },
+        {
+          "name": "f05-A-signal-center0-reference.xdrz",
+          "sha256": "3a9a2357c4e30209348aa0bb8f49b96a896d8f28b05bed8fa3fc6cb672e32729"
+        },
+        {
+          "name": "f06-A-signal-center0-reference.xdrz",
+          "sha256": "bc58b0caf615d47edce0cc32b95b5bee18418806cbaf2faedf758b880f0b2d6d"
+        },
+        {
+          "name": "f07-A-signal-center0-reference.xdrz",
+          "sha256": "d169c5717dd8ab84702e0f8583c1cd5cad4f53911308c6bd659caecab861b3d2"
+        },
+        {
+          "name": "f08-A-signal-center0-reference.xdrz",
+          "sha256": "a6ea89b1fc48bedd7084e04d0e27273594cae9d834e05af2a22bfac3cac41c61"
+        },
+        {
+          "name": "f09-A-signal-center0-reference.xdrz",
+          "sha256": "e1a7020b6f23552e715970eb2fa722988f5af171dd7b5546c24032ab0f8ae30c"
+        },
+        {
+          "name": "f10-A-signal-center0-reference.xdrz",
+          "sha256": "6fcfc99ee5dd222a43ffe452a11a2bd780963be78dd751020fb644e676098a65"
+        },
+        {
+          "name": "f11-A-signal-center0-reference.xdrz",
+          "sha256": "6ff28e1a5655d6b29668a654c5129507a09ff3515a16d507c6969a725d7446a0"
+        },
+        {
+          "name": "f12-A-signal-center0-reference.xdrz",
+          "sha256": "a32c9f4eade2523c8ad0f48ab0ca25b0a2529154bc7aff6016197b39d224c4f5"
+        },
+        {
+          "name": "f13-A-signal-center0-reference.xdrz",
+          "sha256": "3d8b59ac26765ff8222815ebd32ff5b2fc68dac535589be1392cb6da30883d82"
+        },
+        {
+          "name": "f14-A-signal-center0-reference.xdrz",
+          "sha256": "714a92181db09c190294e7a13d2df391e1af44b8dac0078fcd7a053996c34be3"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-edge05-detector.xdrz",
+          "sha256": "2d7d08ebf4073fbabf24123f50e19205acb30633191e6f5bf5db6a6df10e6e73"
+        },
+        {
+          "name": "f02-A-signal-edge05-detector.xdrz",
+          "sha256": "886322eb4f57837eaee4065ce1277c151e3f859e016d3fc60908c2ff9196badd"
+        },
+        {
+          "name": "f03-A-signal-edge05-detector.xdrz",
+          "sha256": "22f9418ea07beb13722407f9b863d171d9e3cc89dac14aec1c91602f62045660"
+        },
+        {
+          "name": "f04-A-signal-edge05-detector.xdrz",
+          "sha256": "28a51c9c95f05d6b22540fb9170483e6fa3be7df40aee6801a35cc3501a6be03"
+        },
+        {
+          "name": "f05-A-signal-edge05-detector.xdrz",
+          "sha256": "c0ca1d04722be79609afe72cd7c02c25611e2802fa1bcd6fbf5d3df7ea2c9027"
+        },
+        {
+          "name": "f06-A-signal-edge05-detector.xdrz",
+          "sha256": "6312c46791f9809b53ad41f450a11e279c915676e91fe35e5be4f21faedaca06"
+        },
+        {
+          "name": "f07-A-signal-edge05-detector.xdrz",
+          "sha256": "993093cfbe401cc9f1a34c49d02a903c40e5bc93856c4924c9a0cc3808bea4c8"
+        },
+        {
+          "name": "f08-A-signal-edge05-detector.xdrz",
+          "sha256": "4861463fe338a163697d874791cc962a79ad4adfecb42d07773a835c83d4552e"
+        },
+        {
+          "name": "f09-A-signal-edge05-detector.xdrz",
+          "sha256": "1f2e8cb85f0414b146109dd7780cc7a51f73a939f3a6ea9415edc6a0a59e8bbc"
+        },
+        {
+          "name": "f10-A-signal-edge05-detector.xdrz",
+          "sha256": "113fd4b66e2ae767481ec5cf3511a69226bd570ed17d1ba52c466b5b70edacd1"
+        },
+        {
+          "name": "f11-A-signal-edge05-detector.xdrz",
+          "sha256": "5a9add7d7909197e25cacaafee8d51947e5e3c5d0c6635ca2e5ef0d884933c58"
+        },
+        {
+          "name": "f12-A-signal-edge05-detector.xdrz",
+          "sha256": "7d1a8894697bb9ed57165d4ba19c0f886b84db270d85a25ce695659cd9b8aaa9"
+        },
+        {
+          "name": "f13-A-signal-edge05-detector.xdrz",
+          "sha256": "a7ddc33fd99581f18dd71ca8f9f65663c6cf7a256ebc8818718daca58f680f37"
+        },
+        {
+          "name": "f14-A-signal-edge05-detector.xdrz",
+          "sha256": "ea14800899f5ef92b926839f0f5de3ab41c6579446a2b394de08449108e288df"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "A",
+      "descriptors": [
+        {
+          "name": "f01-A-signal-edge05-reference.xdrz",
+          "sha256": "2d7d08ebf4073fbabf24123f50e19205acb30633191e6f5bf5db6a6df10e6e73"
+        },
+        {
+          "name": "f02-A-signal-edge05-reference.xdrz",
+          "sha256": "aec0e1666d021fa79b8642a993807727e33b70803481505b5bfcf47b33703120"
+        },
+        {
+          "name": "f03-A-signal-edge05-reference.xdrz",
+          "sha256": "73cf7f0f1aad35a06557d606cf9321492966b882124e33e4b6f28b312694ae6b"
+        },
+        {
+          "name": "f04-A-signal-edge05-reference.xdrz",
+          "sha256": "bdca1cdcc462c01a0ca2056c1dcd4caffda1cca4730106ab7ccadcd80bbabde8"
+        },
+        {
+          "name": "f05-A-signal-edge05-reference.xdrz",
+          "sha256": "9cba3552867e5e762ec81db2702d9b8b49752fcbbf398152771e007547af1d4f"
+        },
+        {
+          "name": "f06-A-signal-edge05-reference.xdrz",
+          "sha256": "85d382ac50cee43358e948dcffbd4f2d6f2ca540368bb07787758c315a58b032"
+        },
+        {
+          "name": "f07-A-signal-edge05-reference.xdrz",
+          "sha256": "880042f47e8b22ae8b0cb32075c81c65d5df1f4ad3c89073018e135410ff3d99"
+        },
+        {
+          "name": "f08-A-signal-edge05-reference.xdrz",
+          "sha256": "57c4e2ecfb0bc2441e2d0f265c625c79023838e6a5e7efad2d2f715477176971"
+        },
+        {
+          "name": "f09-A-signal-edge05-reference.xdrz",
+          "sha256": "f97af716b29c9515313537a9e8c65243a928eff9956cf987ee95d1309abec2f6"
+        },
+        {
+          "name": "f10-A-signal-edge05-reference.xdrz",
+          "sha256": "056dcd355151ca93f232bc60719d587f8e126ea665939334ef3e1be8eea0786a"
+        },
+        {
+          "name": "f11-A-signal-edge05-reference.xdrz",
+          "sha256": "f8bab792f397ed9c0d638cb8c5d03b8b30cb35b9e2f5a5951fc519439accda56"
+        },
+        {
+          "name": "f12-A-signal-edge05-reference.xdrz",
+          "sha256": "dfeb4785c6bcaacd898a16ff356ffc873a5c4b1d0c0724e43b3406585c956f4d"
+        },
+        {
+          "name": "f13-A-signal-edge05-reference.xdrz",
+          "sha256": "e5f7696f72abe795f38a0e3a61f04a1cd6f37cad3259c2af54e5b6f508c2ac69"
+        },
+        {
+          "name": "f14-A-signal-edge05-reference.xdrz",
+          "sha256": "b54d423ffc1b918e6af6d898ad84ee6b7bf496def50f07950bdedc471951a17d"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-center0-detector.xdrz",
+          "sha256": "342782dc42e582763b6f247ae405a4ffee74178dbf518f6352d450967798bd01"
+        },
+        {
+          "name": "f02-B-signal-center0-detector.xdrz",
+          "sha256": "443b9af2db871c0f0c67b4daafb563c483259025d833a39814d883a9469e3291"
+        },
+        {
+          "name": "f03-B-signal-center0-detector.xdrz",
+          "sha256": "ed624f46c69cebce4ee0ddea632c73bd0efcf000a29b3ca1af830df6f3c3faed"
+        },
+        {
+          "name": "f04-B-signal-center0-detector.xdrz",
+          "sha256": "18c99c1a7da451e118ab23c2a7d2146762e8e16c1b53e903d20bfd53b0c43483"
+        },
+        {
+          "name": "f05-B-signal-center0-detector.xdrz",
+          "sha256": "1316dca875aaff74efb8e998e920bef40087fd689d1ecd772f80f68560a4fadb"
+        },
+        {
+          "name": "f06-B-signal-center0-detector.xdrz",
+          "sha256": "18887890e05e3015b6c406f748212cb375dd84672ca466df679db2a93901529b"
+        },
+        {
+          "name": "f07-B-signal-center0-detector.xdrz",
+          "sha256": "09dea3282f06ea7091e18cfef22e172c0f3d832f492a1dcbd7c66f1071dfafb6"
+        },
+        {
+          "name": "f08-B-signal-center0-detector.xdrz",
+          "sha256": "3af6e01bc4fb6647ef43fd8f1d9a7db45c187eebcaa076259b5950d95d19a5c1"
+        },
+        {
+          "name": "f09-B-signal-center0-detector.xdrz",
+          "sha256": "fb10a8d21007e5b32864c175206a47ecb22173c687e2976a333365ad0f12a328"
+        },
+        {
+          "name": "f10-B-signal-center0-detector.xdrz",
+          "sha256": "bc351d5662aae4158a9989e1bd1de416418f86f300198695bda3bfb0e37ff80e"
+        },
+        {
+          "name": "f11-B-signal-center0-detector.xdrz",
+          "sha256": "6aa9521fc4f829c1186758be1d57caea8772d444cad140942d383c2e9c36a656"
+        },
+        {
+          "name": "f12-B-signal-center0-detector.xdrz",
+          "sha256": "4337de5260434e5b18724c324bbc673d9c06353ed1870d1025b4ba5285170896"
+        },
+        {
+          "name": "f13-B-signal-center0-detector.xdrz",
+          "sha256": "75632b1d16b19554af6939be68bd7e3ba4200107b15fcf458f51ac980b7f62f3"
+        },
+        {
+          "name": "f14-B-signal-center0-detector.xdrz",
+          "sha256": "078b2d1d6fa0cccaf2d0d04d9bf7685fde2fa4ce7da9c88440267bb49a6517ae"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-center0-reference.xdrz",
+          "sha256": "342782dc42e582763b6f247ae405a4ffee74178dbf518f6352d450967798bd01"
+        },
+        {
+          "name": "f02-B-signal-center0-reference.xdrz",
+          "sha256": "e8d37a78c86ca9e7f5110b9b73690464177bfac2ad8f8a3b7ebdbfb45cd8a2ff"
+        },
+        {
+          "name": "f03-B-signal-center0-reference.xdrz",
+          "sha256": "1fcfffc717709d95008e64dfbd36261488ef7ec9a249d9dc375e00fe0403082b"
+        },
+        {
+          "name": "f04-B-signal-center0-reference.xdrz",
+          "sha256": "83f38e0838f1a2b9ed5c14e25880e527fdfd0130d5e56b1542ed9a1533eaeb0e"
+        },
+        {
+          "name": "f05-B-signal-center0-reference.xdrz",
+          "sha256": "05b3cc5829552bd39e6e27228eaeab2c6a1e67c679e25c5193304a593425ba6f"
+        },
+        {
+          "name": "f06-B-signal-center0-reference.xdrz",
+          "sha256": "13f34dd115a3e9708b1be60c05aaf1fa91c85ac632fadca2af76cb57f96fc6b5"
+        },
+        {
+          "name": "f07-B-signal-center0-reference.xdrz",
+          "sha256": "69bdd3f6e9acc9fa743c8a0d7e9f62c069f7603b07bf9fc57ed5253b5d1a6eb1"
+        },
+        {
+          "name": "f08-B-signal-center0-reference.xdrz",
+          "sha256": "f81b92476d166e25d1d398a2b526a8f1384722f1b8663dfa9e815213d998f20d"
+        },
+        {
+          "name": "f09-B-signal-center0-reference.xdrz",
+          "sha256": "52ee55e8ab876571f919d262897882fd57cc262ae3dfdda7460d7e037652b525"
+        },
+        {
+          "name": "f10-B-signal-center0-reference.xdrz",
+          "sha256": "8f5edaad3416056346d2cb7cca0489263875b758336c3d4edf7e1c84b0f67d27"
+        },
+        {
+          "name": "f11-B-signal-center0-reference.xdrz",
+          "sha256": "ea222b57fd03063af18b3fc080955f88d0f9f3576595e18acf4626453bbbdf33"
+        },
+        {
+          "name": "f12-B-signal-center0-reference.xdrz",
+          "sha256": "929e27fc14471bced0ed05fc8f8e87f220b7c9af6892518a3026eacf800033d4"
+        },
+        {
+          "name": "f13-B-signal-center0-reference.xdrz",
+          "sha256": "1b903b8911d8fd655e4d4a1bdb874b070ba8eb7fa529adcbed4555c5b0c6ecb7"
+        },
+        {
+          "name": "f14-B-signal-center0-reference.xdrz",
+          "sha256": "c11e8cc379f82b5bb5c9bd303982bd7642fb7ae6793c6c5f7ab8ccfde81e278b"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-edge05-detector.xdrz",
+          "sha256": "1b87f10ecaff2874d31bd1376750ed17f71b9852aa3b67ef630f4f3e856dddcf"
+        },
+        {
+          "name": "f02-B-signal-edge05-detector.xdrz",
+          "sha256": "600d91e3ecaee4a05a7963bd12bc3b316afdcaf777f867cde2c49feb222c4ced"
+        },
+        {
+          "name": "f03-B-signal-edge05-detector.xdrz",
+          "sha256": "23736f31751e982007fdc781ccd4a54a3f5d5d1b4d331f35b02f2c9a4798bd65"
+        },
+        {
+          "name": "f04-B-signal-edge05-detector.xdrz",
+          "sha256": "1911ab79d596e1cc9622186f2586d96a1ee85cf4b240e4bc0cc546d0bf30cee6"
+        },
+        {
+          "name": "f05-B-signal-edge05-detector.xdrz",
+          "sha256": "163f2f40a424fe7e0def52ff53e61ffcb8dc3cf3fef30b151e614bc40c577a4e"
+        },
+        {
+          "name": "f06-B-signal-edge05-detector.xdrz",
+          "sha256": "8e5767b6af5f7a9fbcc701cb095a53056be5172e381d5577ca7388fc266da85e"
+        },
+        {
+          "name": "f07-B-signal-edge05-detector.xdrz",
+          "sha256": "c81966346ac7a3cea886672dc411749184a52040d5e3ef8008b484e2aaf60ffd"
+        },
+        {
+          "name": "f08-B-signal-edge05-detector.xdrz",
+          "sha256": "7fc74424f26efa780995ad1a42fc625b9cc2b3bac0681a5440a0d394af350146"
+        },
+        {
+          "name": "f09-B-signal-edge05-detector.xdrz",
+          "sha256": "7fe3d0de7c6d24ed3e75bcf04060e8e7260209b1529fc37ab72c2db8592ea71a"
+        },
+        {
+          "name": "f10-B-signal-edge05-detector.xdrz",
+          "sha256": "43f6b0a82147c4191fd159e30fc3552b36b10f2d1477069f65ac5ace7fe4ba0c"
+        },
+        {
+          "name": "f11-B-signal-edge05-detector.xdrz",
+          "sha256": "28bf88d0db8c1ae2b4c68b7a60628631f6bd50fea42608f58d961faec402f7f6"
+        },
+        {
+          "name": "f12-B-signal-edge05-detector.xdrz",
+          "sha256": "9fff9da317a81380f1ce771e6b2792591968c61ed1f7fa3a59e4ce2ac3de27fa"
+        },
+        {
+          "name": "f13-B-signal-edge05-detector.xdrz",
+          "sha256": "8b0f3df0bc08d7e0c5ea419d495ed9d1381e3ba80a9fe04e3189ccc3c39766a3"
+        },
+        {
+          "name": "f14-B-signal-edge05-detector.xdrz",
+          "sha256": "8134d77996462084a569bbdf2d873cdf208ed9c528dc1a49b929dd73940a3bb7"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-edge05-reference.xdrz",
+          "sha256": "1b87f10ecaff2874d31bd1376750ed17f71b9852aa3b67ef630f4f3e856dddcf"
+        },
+        {
+          "name": "f02-B-signal-edge05-reference.xdrz",
+          "sha256": "031b9b7fd10f0b27098922dac98ae3d6d606dbb7866e431be11b4a2c7dbf8dee"
+        },
+        {
+          "name": "f03-B-signal-edge05-reference.xdrz",
+          "sha256": "27fe661d59ca1ad2d2270ccbf7e59b625ede1775ed73f60944ff6bf09671e306"
+        },
+        {
+          "name": "f04-B-signal-edge05-reference.xdrz",
+          "sha256": "93c2b97f60228d1bd3a752eb9e1c623156a07412e10e5cafe1a3c5fe41341665"
+        },
+        {
+          "name": "f05-B-signal-edge05-reference.xdrz",
+          "sha256": "765cae1046d816beca10839b269600659f300098a71af770125e3969f7ef504f"
+        },
+        {
+          "name": "f06-B-signal-edge05-reference.xdrz",
+          "sha256": "e9768c923aaad5d57d18f4a6d4b322959e59d5b1f1a4fed08cf0ac70a77651be"
+        },
+        {
+          "name": "f07-B-signal-edge05-reference.xdrz",
+          "sha256": "c5a9b851ef86d7c23d6c05e13b91df36c89e733c15723f58feb13863d09c2352"
+        },
+        {
+          "name": "f08-B-signal-edge05-reference.xdrz",
+          "sha256": "7992b80dc4be7c344a94a34b9aae522613a2333eec66d405dbb0925107997c57"
+        },
+        {
+          "name": "f09-B-signal-edge05-reference.xdrz",
+          "sha256": "dfeb6e88152566363591ea57143a5c5689f0e050f6c2f02d52b41cb0c2effc15"
+        },
+        {
+          "name": "f10-B-signal-edge05-reference.xdrz",
+          "sha256": "a33489d53e3651de6152096c5308f8ffc6c8e534e3b158e9d653f79811d9d946"
+        },
+        {
+          "name": "f11-B-signal-edge05-reference.xdrz",
+          "sha256": "9cec1f9e46a7bb43170d9b867fac64a29c4e48fdab96d2507c9c4d91ede77c8d"
+        },
+        {
+          "name": "f12-B-signal-edge05-reference.xdrz",
+          "sha256": "74758d2a362b70f38355498a79cd0af3b134111e4a8dd0206b600ef842649f14"
+        },
+        {
+          "name": "f13-B-signal-edge05-reference.xdrz",
+          "sha256": "73ead85bfd594c88977ad3f98c12f93059379fcf678e840920514bc9f099861e"
+        },
+        {
+          "name": "f14-B-signal-edge05-reference.xdrz",
+          "sha256": "438792d81491cd714b649df63d0979d3afe8c27beb7c9af76859496275ae3e92"
+        }
+      ],
+      "drop": 1,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-center0-detector.xdrz",
+          "sha256": "342782dc42e582763b6f247ae405a4ffee74178dbf518f6352d450967798bd01"
+        },
+        {
+          "name": "f02-B-signal-center0-detector.xdrz",
+          "sha256": "443b9af2db871c0f0c67b4daafb563c483259025d833a39814d883a9469e3291"
+        },
+        {
+          "name": "f03-B-signal-center0-detector.xdrz",
+          "sha256": "ed624f46c69cebce4ee0ddea632c73bd0efcf000a29b3ca1af830df6f3c3faed"
+        },
+        {
+          "name": "f04-B-signal-center0-detector.xdrz",
+          "sha256": "18c99c1a7da451e118ab23c2a7d2146762e8e16c1b53e903d20bfd53b0c43483"
+        },
+        {
+          "name": "f05-B-signal-center0-detector.xdrz",
+          "sha256": "1316dca875aaff74efb8e998e920bef40087fd689d1ecd772f80f68560a4fadb"
+        },
+        {
+          "name": "f06-B-signal-center0-detector.xdrz",
+          "sha256": "18887890e05e3015b6c406f748212cb375dd84672ca466df679db2a93901529b"
+        },
+        {
+          "name": "f07-B-signal-center0-detector.xdrz",
+          "sha256": "09dea3282f06ea7091e18cfef22e172c0f3d832f492a1dcbd7c66f1071dfafb6"
+        },
+        {
+          "name": "f08-B-signal-center0-detector.xdrz",
+          "sha256": "3af6e01bc4fb6647ef43fd8f1d9a7db45c187eebcaa076259b5950d95d19a5c1"
+        },
+        {
+          "name": "f09-B-signal-center0-detector.xdrz",
+          "sha256": "fb10a8d21007e5b32864c175206a47ecb22173c687e2976a333365ad0f12a328"
+        },
+        {
+          "name": "f10-B-signal-center0-detector.xdrz",
+          "sha256": "bc351d5662aae4158a9989e1bd1de416418f86f300198695bda3bfb0e37ff80e"
+        },
+        {
+          "name": "f11-B-signal-center0-detector.xdrz",
+          "sha256": "6aa9521fc4f829c1186758be1d57caea8772d444cad140942d383c2e9c36a656"
+        },
+        {
+          "name": "f12-B-signal-center0-detector.xdrz",
+          "sha256": "4337de5260434e5b18724c324bbc673d9c06353ed1870d1025b4ba5285170896"
+        },
+        {
+          "name": "f13-B-signal-center0-detector.xdrz",
+          "sha256": "75632b1d16b19554af6939be68bd7e3ba4200107b15fcf458f51ac980b7f62f3"
+        },
+        {
+          "name": "f14-B-signal-center0-detector.xdrz",
+          "sha256": "078b2d1d6fa0cccaf2d0d04d9bf7685fde2fa4ce7da9c88440267bb49a6517ae"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-center0-reference.xdrz",
+          "sha256": "342782dc42e582763b6f247ae405a4ffee74178dbf518f6352d450967798bd01"
+        },
+        {
+          "name": "f02-B-signal-center0-reference.xdrz",
+          "sha256": "e8d37a78c86ca9e7f5110b9b73690464177bfac2ad8f8a3b7ebdbfb45cd8a2ff"
+        },
+        {
+          "name": "f03-B-signal-center0-reference.xdrz",
+          "sha256": "1fcfffc717709d95008e64dfbd36261488ef7ec9a249d9dc375e00fe0403082b"
+        },
+        {
+          "name": "f04-B-signal-center0-reference.xdrz",
+          "sha256": "83f38e0838f1a2b9ed5c14e25880e527fdfd0130d5e56b1542ed9a1533eaeb0e"
+        },
+        {
+          "name": "f05-B-signal-center0-reference.xdrz",
+          "sha256": "05b3cc5829552bd39e6e27228eaeab2c6a1e67c679e25c5193304a593425ba6f"
+        },
+        {
+          "name": "f06-B-signal-center0-reference.xdrz",
+          "sha256": "13f34dd115a3e9708b1be60c05aaf1fa91c85ac632fadca2af76cb57f96fc6b5"
+        },
+        {
+          "name": "f07-B-signal-center0-reference.xdrz",
+          "sha256": "69bdd3f6e9acc9fa743c8a0d7e9f62c069f7603b07bf9fc57ed5253b5d1a6eb1"
+        },
+        {
+          "name": "f08-B-signal-center0-reference.xdrz",
+          "sha256": "f81b92476d166e25d1d398a2b526a8f1384722f1b8663dfa9e815213d998f20d"
+        },
+        {
+          "name": "f09-B-signal-center0-reference.xdrz",
+          "sha256": "52ee55e8ab876571f919d262897882fd57cc262ae3dfdda7460d7e037652b525"
+        },
+        {
+          "name": "f10-B-signal-center0-reference.xdrz",
+          "sha256": "8f5edaad3416056346d2cb7cca0489263875b758336c3d4edf7e1c84b0f67d27"
+        },
+        {
+          "name": "f11-B-signal-center0-reference.xdrz",
+          "sha256": "ea222b57fd03063af18b3fc080955f88d0f9f3576595e18acf4626453bbbdf33"
+        },
+        {
+          "name": "f12-B-signal-center0-reference.xdrz",
+          "sha256": "929e27fc14471bced0ed05fc8f8e87f220b7c9af6892518a3026eacf800033d4"
+        },
+        {
+          "name": "f13-B-signal-center0-reference.xdrz",
+          "sha256": "1b903b8911d8fd655e4d4a1bdb874b070ba8eb7fa529adcbed4555c5b0c6ecb7"
+        },
+        {
+          "name": "f14-B-signal-center0-reference.xdrz",
+          "sha256": "c11e8cc379f82b5bb5c9bd303982bd7642fb7ae6793c6c5f7ab8ccfde81e278b"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "center0",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-edge05-detector.xdrz",
+          "sha256": "1b87f10ecaff2874d31bd1376750ed17f71b9852aa3b67ef630f4f3e856dddcf"
+        },
+        {
+          "name": "f02-B-signal-edge05-detector.xdrz",
+          "sha256": "600d91e3ecaee4a05a7963bd12bc3b316afdcaf777f867cde2c49feb222c4ced"
+        },
+        {
+          "name": "f03-B-signal-edge05-detector.xdrz",
+          "sha256": "23736f31751e982007fdc781ccd4a54a3f5d5d1b4d331f35b02f2c9a4798bd65"
+        },
+        {
+          "name": "f04-B-signal-edge05-detector.xdrz",
+          "sha256": "1911ab79d596e1cc9622186f2586d96a1ee85cf4b240e4bc0cc546d0bf30cee6"
+        },
+        {
+          "name": "f05-B-signal-edge05-detector.xdrz",
+          "sha256": "163f2f40a424fe7e0def52ff53e61ffcb8dc3cf3fef30b151e614bc40c577a4e"
+        },
+        {
+          "name": "f06-B-signal-edge05-detector.xdrz",
+          "sha256": "8e5767b6af5f7a9fbcc701cb095a53056be5172e381d5577ca7388fc266da85e"
+        },
+        {
+          "name": "f07-B-signal-edge05-detector.xdrz",
+          "sha256": "c81966346ac7a3cea886672dc411749184a52040d5e3ef8008b484e2aaf60ffd"
+        },
+        {
+          "name": "f08-B-signal-edge05-detector.xdrz",
+          "sha256": "7fc74424f26efa780995ad1a42fc625b9cc2b3bac0681a5440a0d394af350146"
+        },
+        {
+          "name": "f09-B-signal-edge05-detector.xdrz",
+          "sha256": "7fe3d0de7c6d24ed3e75bcf04060e8e7260209b1529fc37ab72c2db8592ea71a"
+        },
+        {
+          "name": "f10-B-signal-edge05-detector.xdrz",
+          "sha256": "43f6b0a82147c4191fd159e30fc3552b36b10f2d1477069f65ac5ace7fe4ba0c"
+        },
+        {
+          "name": "f11-B-signal-edge05-detector.xdrz",
+          "sha256": "28bf88d0db8c1ae2b4c68b7a60628631f6bd50fea42608f58d961faec402f7f6"
+        },
+        {
+          "name": "f12-B-signal-edge05-detector.xdrz",
+          "sha256": "9fff9da317a81380f1ce771e6b2792591968c61ed1f7fa3a59e4ce2ac3de27fa"
+        },
+        {
+          "name": "f13-B-signal-edge05-detector.xdrz",
+          "sha256": "8b0f3df0bc08d7e0c5ea419d495ed9d1381e3ba80a9fe04e3189ccc3c39766a3"
+        },
+        {
+          "name": "f14-B-signal-edge05-detector.xdrz",
+          "sha256": "8134d77996462084a569bbdf2d873cdf208ed9c528dc1a49b929dd73940a3bb7"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "detector",
+      "origin": "edge05",
+      "selected": false
+    },
+    {
+      "calibration": "B",
+      "descriptors": [
+        {
+          "name": "f01-B-signal-edge05-reference.xdrz",
+          "sha256": "1b87f10ecaff2874d31bd1376750ed17f71b9852aa3b67ef630f4f3e856dddcf"
+        },
+        {
+          "name": "f02-B-signal-edge05-reference.xdrz",
+          "sha256": "031b9b7fd10f0b27098922dac98ae3d6d606dbb7866e431be11b4a2c7dbf8dee"
+        },
+        {
+          "name": "f03-B-signal-edge05-reference.xdrz",
+          "sha256": "27fe661d59ca1ad2d2270ccbf7e59b625ede1775ed73f60944ff6bf09671e306"
+        },
+        {
+          "name": "f04-B-signal-edge05-reference.xdrz",
+          "sha256": "93c2b97f60228d1bd3a752eb9e1c623156a07412e10e5cafe1a3c5fe41341665"
+        },
+        {
+          "name": "f05-B-signal-edge05-reference.xdrz",
+          "sha256": "765cae1046d816beca10839b269600659f300098a71af770125e3969f7ef504f"
+        },
+        {
+          "name": "f06-B-signal-edge05-reference.xdrz",
+          "sha256": "e9768c923aaad5d57d18f4a6d4b322959e59d5b1f1a4fed08cf0ac70a77651be"
+        },
+        {
+          "name": "f07-B-signal-edge05-reference.xdrz",
+          "sha256": "c5a9b851ef86d7c23d6c05e13b91df36c89e733c15723f58feb13863d09c2352"
+        },
+        {
+          "name": "f08-B-signal-edge05-reference.xdrz",
+          "sha256": "7992b80dc4be7c344a94a34b9aae522613a2333eec66d405dbb0925107997c57"
+        },
+        {
+          "name": "f09-B-signal-edge05-reference.xdrz",
+          "sha256": "dfeb6e88152566363591ea57143a5c5689f0e050f6c2f02d52b41cb0c2effc15"
+        },
+        {
+          "name": "f10-B-signal-edge05-reference.xdrz",
+          "sha256": "a33489d53e3651de6152096c5308f8ffc6c8e534e3b158e9d653f79811d9d946"
+        },
+        {
+          "name": "f11-B-signal-edge05-reference.xdrz",
+          "sha256": "9cec1f9e46a7bb43170d9b867fac64a29c4e48fdab96d2507c9c4d91ede77c8d"
+        },
+        {
+          "name": "f12-B-signal-edge05-reference.xdrz",
+          "sha256": "74758d2a362b70f38355498a79cd0af3b134111e4a8dd0206b600ef842649f14"
+        },
+        {
+          "name": "f13-B-signal-edge05-reference.xdrz",
+          "sha256": "73ead85bfd594c88977ad3f98c12f93059379fcf678e840920514bc9f099861e"
+        },
+        {
+          "name": "f14-B-signal-edge05-reference.xdrz",
+          "sha256": "438792d81491cd714b649df63d0979d3afe8c27beb7c9af76859496275ae3e92"
+        }
+      ],
+      "drop": 0.7,
+      "geometry": "signal",
+      "mask": "reference",
+      "origin": "edge05",
+      "selected": false
+    }
+  ],
+  "schema": "BKL046_M8_M20_XDRZ_CONVENTION_AND_CASE_MATRIX_V1",
+  "scientificClosures": 0,
+  "validationRequired": {
+    "origin": {
+      "candidateSubjectSha256": "8d4ba1c9268399de1ac98dccf17c622877cb25eca23118ecfb8388241a22849a",
+      "verifiedNativeReceipt": false
+    },
+    "rejectionAndWeights": {
+      "candidateSubjectSha256": "e989cc4ca7b4f1844fabebf7572250f8fc4f02fd902a1866aa93b6f7630240c5",
+      "coveredWidthsOfFrozenCandidate": [
+        0.7
+      ],
+      "uncoveredScientificWidths": [
+        1
+      ],
+      "verifiedNativeReceipt": false
+    },
+    "scienceLauncher": {
+      "reviewedAndAdmitted": false
+    }
+  }
+}
