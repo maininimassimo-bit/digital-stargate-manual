@@ -1,0 +1,14 @@
+{
+  "schema": "BKL046_M8M20_BILINEAR_CLIP_LINEAGE_PROTOCOL_V1",
+  "sourceArchiveSha256": "daa8ba4ee748f7616f3db0371b60d95752ff98d00ceaef280fe8f6e8ab937c76",
+  "captureReceiptSha256": "28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59",
+  "priorClipReportSha256": "e34bbb1a5dbdcd16351659ad18827be728063c6b33c50f7a62278be804b803ec",
+  "priorClipArchiveSha256": "af0d6166440ccbd37287afa4ec27c2b38af1b5d7bb3f40a0fb6401eaab644409",
+  "thresholds": [
+    65535,
+    64880,
+    62000
+  ],
+  "edgeTrimNativePixels": 2,
+  "scope": "Apply an explicit full-resolution bilinear RGGB stencil to all 15 frozen raw lights. At each output color location compare an exact rational output threshold against whether any contributor hit the raw stored-code ceiling. Compare the fixed digital, 99 percent, and historical mask thresholds. Check that equality at the digital ceiling is equivalent to every positively weighted contributor at the ceiling. Pixels and frames share supports and sky; no physical full well, flux recovery, or native PixInsight behavior."
+}
