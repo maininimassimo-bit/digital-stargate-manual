@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_SPATIAL_BAND_V1",
+  "rampArchiveSha256": "e9da7238075250b17b45119353680ad23f1811d601e93f75c8897b0b7df52eb1",
+  "acquisitionProgramSha256": "1bdcf3c212ec512b4b77967b375707098e2fb33205f0ae05fe6dae73d901d855",
+  "rampCaptureSha256": "6bf59ebdb660cbd1cd7a6b9d175fc849e61589fd8e47c6e3faf74633fa95bb07",
+  "channelsProgramSha256": "23207e128119ee2d45259b9b05197638838f971541cf71166e6c9ec3b6e03988",
+  "channelsReportSha256": "8425642df2f72d2870369452ba59365c1c2adab3b055f426273427d577b5d39d",
+  "bands": {
+    "lower": [
+      512,
+      576
+    ],
+    "upper": [
+      3520,
+      3584
+    ]
+  },
+  "centerBand": [
+    1920,
+    1984
+  ],
+  "frames": [
+    0,
+    1,
+    5,
+    10
+  ],
+  "minRetainedBlocks": 769,
+  "design": "Hold exposure pairing, channels, relative reads, crop width and half-pixel bilinear operator fixed. Use two disjoint new 64-row bands and the archived center band. Within each band/channel use a single union mask for storage rails over the four reads and 20 exposures. Compare full and diagonal prediction against measured variance at all eligible pairs, bands and channels. Summarize descriptive medians per channel and band, and retain paired changes versus the center. No independent dose, native execution or full FITS verification."
+}
