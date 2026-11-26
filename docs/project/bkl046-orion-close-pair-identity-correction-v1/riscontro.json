@@ -1,0 +1,528 @@
+{
+  "identities": {
+    "232": {
+      "agreementArcsec": 2.2333651199183548e-08,
+      "gaiaId": "3017266168126793984",
+      "motionCatalog": {
+        "dec": -5.500418791031319,
+        "pmdec": -1.9208782497296586,
+        "pmra": 0.04726577325071535,
+        "ra": 83.76249688809773,
+        "ref_epoch": 2016.0
+      },
+      "name": "V* KZ Ori",
+      "simbadICRSJ2000": [
+        83.76249667706,
+        -5.50041025379
+      ],
+      "status": "IDENTIFIED"
+    },
+    "345": {
+      "agreementArcsec": 1.7242964188826053e-08,
+      "gaiaId": "3017364235129434624",
+      "motionCatalog": {
+        "dec": -5.3793666918500245,
+        "pmdec": -2.396463210521208,
+        "pmra": 2.263259849800874,
+        "ra": 83.79372625078615,
+        "ref_epoch": 2016.0
+      },
+      "name": "V* V1487 Ori A",
+      "simbadICRSJ2000": [
+        83.79371614736,
+        -5.379356040899999
+      ],
+      "status": "IDENTIFIED"
+    },
+    "488": {
+      "alternatives": [
+        {
+          "icrsJ2000": [
+            83.81599697065457,
+            -5.389575105200834
+          ],
+          "name": "Parenago 1867"
+        },
+        {
+          "icrsJ2000": [
+            83.81554420913542,
+            -5.389577392020834
+          ],
+          "name": "Parenago 1866"
+        }
+      ],
+      "status": "AMBIGUOUS_IDENTIFIER"
+    }
+  },
+  "nativeExecutions": 0,
+  "observations": [
+    {
+      "atCatalog": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 5,
+            "total": 5,
+            "unflagged": 0
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 23,
+            "total": 29,
+            "unflagged": 6
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 56,
+            "total": 113,
+            "unflagged": 57
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            27,
+            23,
+            9,
+            23,
+            25,
+            10,
+            20,
+            25
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 162
+        }
+      },
+      "atPeak": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 5,
+            "total": 5,
+            "unflagged": 0
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 27,
+            "total": 29,
+            "unflagged": 2
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 54,
+            "total": 113,
+            "unflagged": 58
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            27,
+            20,
+            16,
+            24,
+            27,
+            15,
+            14,
+            25
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 168
+        }
+      },
+      "ccdGain": 2.0,
+      "chip": 2,
+      "date": "2004-11-01",
+      "dqAtPeak": 256,
+      "expSeconds": 385.0,
+      "h97": 232,
+      "nacoSeparationMas": 57.5,
+      "observationEpochJulianYear": 2004.8359015260983,
+      "oldStampContainsUpdatedTarget": false,
+      "oldToNewDetectorPx": 29.120439557122072,
+      "peakAtOuterSearch": false,
+      "peakOffsetArcsec": 0.12534325395246218,
+      "peakSkyRaDec": [
+        83.76246429720685,
+        -5.500399820871006
+      ],
+      "peakXY": [
+        2541,
+        1893
+      ],
+      "root": "j93k28hcq",
+      "scienceExtVer": 1,
+      "stampFile": "j93k28hcq.npz",
+      "stampSha256": "bdfa2c760176197aa315b0f405d9cbdb24b71bd12043be45ee0bb178183ca5e3",
+      "startUtc": "19:30:46",
+      "status": "RECORDED",
+      "targetCoordinatesAtExposureEpoch": [
+        83.76249674084198,
+        -5.500412834121892
+      ],
+      "xyCatalogNearest": [
+        2542,
+        1891
+      ]
+    },
+    {
+      "atCatalog": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 5,
+            "total": 5,
+            "unflagged": 0
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 28,
+            "total": 29,
+            "unflagged": 1
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 60,
+            "total": 113,
+            "unflagged": 52
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            27,
+            17,
+            14,
+            24,
+            27,
+            15,
+            15,
+            25
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 164
+        }
+      },
+      "atPeak": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 5,
+            "total": 5,
+            "unflagged": 0
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 28,
+            "total": 29,
+            "unflagged": 1
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 60,
+            "total": 113,
+            "unflagged": 52
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            27,
+            18,
+            15,
+            25,
+            27,
+            15,
+            14,
+            25
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 166
+        }
+      },
+      "ccdGain": 2.0,
+      "chip": 2,
+      "date": "2005-04-12",
+      "dqAtPeak": 256,
+      "expSeconds": 385.0,
+      "h97": 232,
+      "nacoSeparationMas": 57.5,
+      "observationEpochJulianYear": 2005.2775724706569,
+      "oldStampContainsUpdatedTarget": false,
+      "oldToNewDetectorPx": 28.861739379323623,
+      "peakAtOuterSearch": false,
+      "peakOffsetArcsec": 0.0734952919733082,
+      "peakSkyRaDec": [
+        83.76251711229793,
+        -5.50041065344804
+      ],
+      "peakXY": [
+        3996,
+        367
+      ],
+      "root": "j93k76hiq",
+      "scienceExtVer": 1,
+      "stampFile": "j93k76hiq.npz",
+      "stampSha256": "e64f0d742aaf548c20292ff46941de0391a8dca6211ab7f064900c9727e6f06e",
+      "startUtc": "03:12:01",
+      "status": "RECORDED",
+      "targetCoordinatesAtExposureEpoch": [
+        83.76249674666768,
+        -5.500413069787479
+      ],
+      "xyCatalogNearest": [
+        3996,
+        366
+      ]
+    },
+    {
+      "atCatalog": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 5,
+            "total": 5,
+            "unflagged": 0
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 26,
+            "total": 29,
+            "unflagged": 3
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 47,
+            "total": 113,
+            "unflagged": 65
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            26,
+            20,
+            16,
+            24,
+            27,
+            19,
+            14,
+            24
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 170
+        }
+      },
+      "atPeak": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 4,
+            "total": 5,
+            "unflagged": 1
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 15,
+            "total": 29,
+            "unflagged": 14
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 44,
+            "total": 113,
+            "unflagged": 68
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            23,
+            9,
+            26,
+            24,
+            27,
+            24,
+            11,
+            20
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 164
+        }
+      },
+      "ccdGain": 2.0,
+      "chip": 2,
+      "date": "2005-04-06",
+      "dqAtPeak": 256,
+      "expSeconds": 385.0,
+      "h97": 345,
+      "nacoSeparationMas": 56.2,
+      "observationEpochJulianYear": 2005.2613575493701,
+      "oldStampContainsUpdatedTarget": false,
+      "oldToNewDetectorPx": 29.427877939124322,
+      "peakAtOuterSearch": false,
+      "peakOffsetArcsec": 0.09025015628870527,
+      "peakSkyRaDec": [
+        83.79371402942694,
+        -5.379384020694823
+      ],
+      "peakXY": [
+        3493,
+        1993
+      ],
+      "root": "j93k09o4q",
+      "scienceExtVer": 1,
+      "stampFile": "j93k09o4q.npz",
+      "stampSha256": "79c939b59e10cd6529d9d1c2a81c13dbf2fb1815f366d063d8ff7185f7409764",
+      "startUtc": "05:03:37",
+      "status": "RECORDED",
+      "targetCoordinatesAtExposureEpoch": [
+        83.79371946971581,
+        -5.379359543305146
+      ],
+      "xyCatalogNearest": [
+        3495,
+        1993
+      ]
+    },
+    {
+      "atCatalog": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 5,
+            "total": 5,
+            "unflagged": 0
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 28,
+            "total": 29,
+            "unflagged": 1
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 50,
+            "total": 113,
+            "unflagged": 62
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            26,
+            20,
+            16,
+            25,
+            27,
+            20,
+            15,
+            25
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 174
+        }
+      },
+      "atPeak": {
+        "disks": {
+          "1": {
+            "adc": 0,
+            "fullWell": 5,
+            "total": 5,
+            "unflagged": 0
+          },
+          "3": {
+            "adc": 0,
+            "fullWell": 23,
+            "total": 29,
+            "unflagged": 6
+          },
+          "6": {
+            "adc": 0,
+            "fullWell": 50,
+            "total": 113,
+            "unflagged": 62
+          }
+        },
+        "wing": {
+          "cleanPerSector": [
+            25,
+            14,
+            21,
+            25,
+            27,
+            25,
+            10,
+            24
+          ],
+          "pixels": 208,
+          "radii": [
+            4,
+            9
+          ],
+          "unflagged": 171
+        }
+      },
+      "ccdGain": 2.0,
+      "chip": 2,
+      "date": "2004-10-26",
+      "dqAtPeak": 256,
+      "expSeconds": 385.0,
+      "h97": 345,
+      "nacoSeparationMas": 56.2,
+      "observationEpochJulianYear": 2004.818382291429,
+      "oldStampContainsUpdatedTarget": false,
+      "oldToNewDetectorPx": 28.442925306655784,
+      "peakAtOuterSearch": false,
+      "peakOffsetArcsec": 0.06180681725481672,
+      "peakSkyRaDec": [
+        83.79372104265157,
+        -5.379342179232359
+      ],
+      "peakXY": [
+        3200,
+        268
+      ],
+      "root": "j93k58lnq",
+      "scienceExtVer": 1,
+      "stampFile": "j93k58lnq.npz",
+      "stampSha256": "3f57f16514df6fbd9b8180222f0525fcdff916caefe24243c161c8e958dcc1c1",
+      "startUtc": "09:56:21",
+      "status": "RECORDED",
+      "targetCoordinatesAtExposureEpoch": [
+        83.79371918999271,
+        -5.379359248423504
+      ],
+      "xyCatalogNearest": [
+        3201,
+        268
+      ]
+    }
+  ],
+  "protocolSha256": "0b053be24692ea30e8827f9ac2fd148293f4621455ce244a82080943fd936b91",
+  "rangeManifestSha256": "834a98ed418a45fd3684150bd3fe1398a65201316c8b3a827b17dfe036260bce",
+  "schema": "BKL046_ORION_CLOSE_PAIR_IDENTITY_RECONCILIATION_V1",
+  "scientificClosures": 0
+}
