@@ -1,0 +1,18 @@
+{
+  "schema": "BKL046_M8_M20_SIGNAL_WEIGHTED_TRANSFER_V1",
+  "sourceCode": "db436b4e9d79216f04b2b8454c9a649e9a11fa4c6c6e2500f44f86290f91211b",
+  "sourceReport": "aaadaabe9c31bd79f56b539c1c4d5301b017f87a75b9c193e753404742592e77",
+  "frames": 14,
+  "trainingTracks": 49,
+  "testTracks": 54,
+  "thresholdPx": 0.3,
+  "weightRatioCap": 16,
+  "estimators": [
+    "unit",
+    "huber",
+    "signal",
+    "signalHuber"
+  ],
+  "signal": "For each frame evaluate both native green subplanes at the existing preview window. Use peak above median divided by the robust ring-noise estimate. Use the minimum across green parities and the two frames. Clip the squared ratio to the training median to [0.25,4].",
+  "comparison": "Use exact archived stellar centroids and same train and held-out IDs. Huber uses source parameters with either unit or signal base weights. Reused tracks and fixed reference prevent independence across exposures."
+}
