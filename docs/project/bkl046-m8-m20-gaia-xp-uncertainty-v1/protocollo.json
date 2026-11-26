@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_M8_M20_XP_COLOR_PAIRED_SENSITIVITY_V1",
+  "colorReport": "ccd2105e3b53e827e8ed105d18819e0802a9f475a6e8e6b25eacd975e9b2ad2c",
+  "catalogJoin": "a7f6cf854bd974f6eda3f37efbb3908897f1fdae394b52cab12273452aaeca08",
+  "heldout": 19,
+  "regions": 4,
+  "starDraws": 20000,
+  "seed": 46052,
+  "probabilities": [
+    0.025,
+    0.5,
+    0.975
+  ],
+  "endpoint": "P90 absolute weighted residual minus P90 absolute unit residual, in magnitudes.",
+  "design": "Resample paired held-out stars jointly over both models and calibrations. Also enumerate the 4^4 equally weighted ordered spatial block resamples and delete each single star or block. Region is frozen raw star ordinal prefix. All results conditional on the existing calibration offsets and field."
+}
