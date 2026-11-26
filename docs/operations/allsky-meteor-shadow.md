@@ -176,3 +176,27 @@ La API locale di revisione, interrogata come utente del server web con la sola o
 Non sono state compiute operazioni di approvazione/rifiuto, copie in galleria, pubblicazioni, riavvii o cambi a codice, configurazione, soglie, maschere, calibrazione o servizi Allsky. Il solo aggiornamento è documentale; non è necessario un nuovo backup della configurazione invariata. Immagini, anteprime, identificativi puntuali, metadati individuali e registri dei candidati non sono aggiunti a Git, allegati o portale.
 
 Il controllo attesta attività e risultati del worker sui fotogrammi registrati; **zero candidati non dimostra assenza di meteore nel cielo**, soprattutto in presenza di numerose esclusioni del filtro. Non viene certificata la sensibilità scientifica del rilevatore. Il percorso umano completo di revisione/pubblicazione di un nuovo candidato reale non è stato esercitato perché la coda è vuota. Non è emersa una correzione da applicare alla configurazione; eventuali future variazioni del filtro richiederanno una valutazione separata e autorizzazione Owner.
+
+
+## Bonifica reversibile della galleria pubblica del 26 novembre 2026
+
+La bonifica autorizzata riguarda soltanto le copie del rilevatore ordinario già presenti nella galleria pubblica. Le classificazioni di probabile artefatto sono provvisorie: non costituiscono esclusioni scientifiche né esempi etichettati singolarmente dall’Owner.
+
+| Verifica | Esito |
+| --- | ---: |
+| Immagini pubbliche inventariate | 422 |
+| Con metadati storici disponibili | 129 |
+| Senza metadati storici disponibili | 293 |
+| Immagini trasferite in quarantena privata | 103 |
+| File trasferiti, comprese le miniature | 206 |
+| Immagini conservate nella galleria | 319 |
+
+Le 319 immagini conservate comprendono 293 casi senza metadati storici e 26 con tracce sottili o valutazione incerta. Gli originali amministrativi delle 103 immagini ritirate restano invariati. Sono rimasti invariati anche gli 11 file protetti di configurazione e codice; acquisizione, calibrazione, soglie e servizi non sono stati modificati o riavviati. Lo storico temporale privato precedente è rimasto escluso e non è stato consultato.
+
+La verifica HTTP ha restituito 200 per la galleria con 319 immagini; le copie quarantinate risultano assenti. Un controllo diretto ha restituito 404 per una copia rimossa e 200 per una conservata. Questi conteggi descrivono l’istante della bonifica: le successive acquisizioni possono incrementare la galleria.
+
+Il backup preventivo dell’intera galleria e i manifesti restano privati sul Raspberry e nell’archivio locale su J:, fuori da Git. Sono stati verificati checksum dell’archivio e hash di tutte le 422 immagini originali. La quarantena è esterna alla radice web, con permessi 0700 sul Raspberry; la copia locale è accessibile al solo account proprietario.
+
+Il report privato successivo comprende soltanto le 319 immagini conservate, con caselle per proporre ulteriori spostamenti. Salvare una selezione non modifica la galleria: un successivo intervento richiede richiesta esplicita e nuova verifica di inventario e hash. Report, selezioni, immagini, anteprime e dettagli individuali non vengono pubblicati nel repository.
+
+La bonifica è una tantum e non introduce filtri nella produzione: il rilevatore ordinario mantiene la pubblicazione automatica esistente. Il controllo delle 08:00 resta in sola lettura e non autorizza quarantene automatiche. Per annullare il trasferimento consultare la [procedura di ripristino della galleria](allsky-configuration-backup.md#ripristino-della-bonifica-della-galleria).
