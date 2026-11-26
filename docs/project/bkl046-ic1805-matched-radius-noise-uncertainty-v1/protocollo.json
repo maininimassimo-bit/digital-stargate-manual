@@ -1,0 +1,15 @@
+{
+  "schema": "BKL046_IC1805_MATCHED_RADIUS_PAIRED_UNCERTAINTY_V1",
+  "parentProgramSha256": "b5c440a116b84fac9acaa294ba7bcd6eb250957ff5a032954e03ad29c0351814",
+  "parentReceiptSha256": "b0a7b9c3ffdd72d8127c6d741243791275083ccc0d811885a1711c90b96c76e4",
+  "heldoutTiles": [[2,1],[2,3],[2,5],[4,1],[4,3],[4,5],[6,1],[6,3],[6,5]],
+  "seed": 46051,
+  "starReplicates": 10000,
+  "tileReplicates": 10000,
+  "quantiles": [0.025,0.975],
+  "endpoint": "100*(sample SD bilinear/sample SD matched drop - 1), all paired valid windows, fixed trained Gaussian widths",
+  "starResampling": "Stars sampled with replacement within each tile, preserving all their valid windows and shared draws across methods, apertures, calibrations and parities.",
+  "regionResampling": "Sample nine tiles with replacement 10000 times, preserving original window weights. Also omit each tile once.",
+  "decision": "Stable direction requires both percentile intervals and every leave-one-tile estimate strictly on the same side of zero. Compare the four stable M8 M20 contrasts by exact parity, aperture, drop and calibration label.",
+  "scope": "Independent IC 1805 field and camera. Registration outside tolerance and no matched dark flats. Descriptive exploratory transfer, no native admission or scientific closure."
+}
