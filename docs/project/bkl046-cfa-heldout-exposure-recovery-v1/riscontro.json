@@ -1,0 +1,1565 @@
+{
+  "protocolSha256": "0e8a9185dd04c4e616d7380984011325790bbee017ecf75e315a57090bbc6680",
+  "scenes": {
+    "1": {
+      "anchorAndHoldoutSitesByPhase": [
+        41186,
+        74202,
+        75320,
+        19446
+      ],
+      "exposures": [
+        {
+          "partialPhaseCells": 1504,
+          "partialPhaseRatios": {
+            "metadataHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 51.250652650366256,
+                "medianSignedPct": 51.250652650366256,
+                "n": 1504,
+                "p90AbsPct": 96.10062778318432
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 39.11902068094511,
+                "medianSignedPct": 39.11902068094511,
+                "n": 1504,
+                "p90AbsPct": 55.72625767423033
+              }
+            },
+            "observedCeilingFade": {
+              "BoverMeanG": {
+                "medianAbsPct": 4.486979130666824,
+                "medianSignedPct": 4.481570585312189,
+                "n": 1504,
+                "p90AbsPct": 11.20669170111945
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 1.3875886129908088,
+                "medianSignedPct": -0.5801945583325807,
+                "n": 1504,
+                "p90AbsPct": 3.5190610267583473
+              }
+            },
+            "observedCeilingHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 4.507482193433832,
+                "medianSignedPct": 4.504143411747763,
+                "n": 1504,
+                "p90AbsPct": 11.188037408158852
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 1.3989224907645037,
+                "medianSignedPct": -0.5536747202835812,
+                "n": 1504,
+                "p90AbsPct": 3.6066675212819064
+              }
+            },
+            "rawRecorded": {
+              "BoverMeanG": {
+                "medianAbsPct": 51.250652650366256,
+                "medianSignedPct": 51.250652650366256,
+                "n": 1504,
+                "p90AbsPct": 96.10062778318432
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 39.11902068094511,
+                "medianSignedPct": 39.11902068094511,
+                "n": 1504,
+                "p90AbsPct": 55.72625767423033
+              }
+            }
+          },
+          "phaseData": {
+            "B": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 9.902912621359228,
+                  "medianSignedPct": -7.7173913043478315,
+                  "n": 756,
+                  "p90AbsPct": 27.77320630674836
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 2.1253317550777417,
+                  "medianSignedPct": -1.9468990201255643,
+                  "n": 756,
+                  "p90AbsPct": 6.798636155532889
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 2.1253317550777417,
+                  "medianSignedPct": -1.9468990201255643,
+                  "n": 756,
+                  "p90AbsPct": 6.798636155532889
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 9.902912621359228,
+                  "medianSignedPct": -7.7173913043478315,
+                  "n": 756,
+                  "p90AbsPct": 27.77320630674836
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 12.40728253540122,
+                  "medianSignedPct": 12.40728253540122,
+                  "n": 121,
+                  "p90AbsPct": 17.674586033117357
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 4.596334807262803,
+                  "medianSignedPct": 4.596334807262803,
+                  "n": 121,
+                  "p90AbsPct": 12.783980815103702
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 12.40728253540122,
+                  "medianSignedPct": 12.40728253540122,
+                  "n": 121,
+                  "p90AbsPct": 17.674586033117357
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 12.40728253540122,
+                  "medianSignedPct": 12.40728253540122,
+                  "n": 121,
+                  "p90AbsPct": 17.674586033117357
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.80327868852459,
+                  "medianSignedPct": -0.16233766233766378,
+                  "n": 18569,
+                  "p90AbsPct": 6.57439446366781
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.80327868852459,
+                  "medianSignedPct": -0.16233766233766378,
+                  "n": 18569,
+                  "p90AbsPct": 6.57439446366781
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.80327868852459,
+                  "medianSignedPct": -0.16233766233766378,
+                  "n": 18569,
+                  "p90AbsPct": 6.57439446366781
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.80327868852459,
+                  "medianSignedPct": -0.16233766233766378,
+                  "n": 18569,
+                  "p90AbsPct": 6.57439446366781
+                }
+              }
+            },
+            "G1": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 32.323634914308485,
+                  "medianSignedPct": -32.323634914308485,
+                  "n": 3780,
+                  "p90AbsPct": 44.620201028944564
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.1162049476748148,
+                  "medianSignedPct": 0.7781495650573178,
+                  "n": 3780,
+                  "p90AbsPct": 2.6549669548434425
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.1162049476748148,
+                  "medianSignedPct": 0.7781495650573178,
+                  "n": 3780,
+                  "p90AbsPct": 2.6549669548434425
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 32.323634914308485,
+                  "medianSignedPct": -32.323634914308485,
+                  "n": 3780,
+                  "p90AbsPct": 44.620201028944564
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.963281615169421,
+                  "medianSignedPct": -1.9193422363143586,
+                  "n": 222,
+                  "p90AbsPct": 3.19019012365644
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.133077825553308,
+                  "medianSignedPct": -0.9517263908284834,
+                  "n": 222,
+                  "p90AbsPct": 2.484121187638525
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.963281615169421,
+                  "medianSignedPct": -1.9193422363143586,
+                  "n": 222,
+                  "p90AbsPct": 3.19019012365644
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.963281615169421,
+                  "medianSignedPct": -1.9193422363143586,
+                  "n": 222,
+                  "p90AbsPct": 3.19019012365644
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.3494318181818232,
+                  "medianSignedPct": -0.7067137809187329,
+                  "n": 70200,
+                  "p90AbsPct": 3.2520325203251987
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.3494318181818232,
+                  "medianSignedPct": -0.7067137809187329,
+                  "n": 70200,
+                  "p90AbsPct": 3.2520325203251987
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.3494318181818232,
+                  "medianSignedPct": -0.7067137809187329,
+                  "n": 70200,
+                  "p90AbsPct": 3.2520325203251987
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.3494318181818232,
+                  "medianSignedPct": -0.7067137809187329,
+                  "n": 70200,
+                  "p90AbsPct": 3.2520325203251987
+                }
+              }
+            },
+            "G2": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 31.8892900120337,
+                  "medianSignedPct": -31.8892900120337,
+                  "n": 3499,
+                  "p90AbsPct": 44.96661327184267
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.2866015971606082,
+                  "medianSignedPct": 1.025446259020124,
+                  "n": 3499,
+                  "p90AbsPct": 2.8151121521682314
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.2866015971606082,
+                  "medianSignedPct": 1.025446259020124,
+                  "n": 3499,
+                  "p90AbsPct": 2.8151121521682314
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 31.8892900120337,
+                  "medianSignedPct": -31.8892900120337,
+                  "n": 3499,
+                  "p90AbsPct": 44.96661327184267
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 2.3545326561987157,
+                  "medianSignedPct": -2.3404635563681775,
+                  "n": 250,
+                  "p90AbsPct": 3.868228179573987
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.3882065000726473,
+                  "medianSignedPct": -1.2219847500133885,
+                  "n": 250,
+                  "p90AbsPct": 2.676843603158819
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 2.3545326561987157,
+                  "medianSignedPct": -2.3404635563681775,
+                  "n": 250,
+                  "p90AbsPct": 3.868228179573987
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 2.3545326561987157,
+                  "medianSignedPct": -2.3404635563681775,
+                  "n": 250,
+                  "p90AbsPct": 3.868228179573987
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.4802631578947345,
+                  "medianSignedPct": -0.9090909090909038,
+                  "n": 71571,
+                  "p90AbsPct": 3.401360544217691
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.4802631578947345,
+                  "medianSignedPct": -0.9090909090909038,
+                  "n": 71571,
+                  "p90AbsPct": 3.401360544217691
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.4802631578947345,
+                  "medianSignedPct": -0.9090909090909038,
+                  "n": 71571,
+                  "p90AbsPct": 3.401360544217691
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.4802631578947345,
+                  "medianSignedPct": -0.9090909090909038,
+                  "n": 71571,
+                  "p90AbsPct": 3.401360544217691
+                }
+              }
+            },
+            "R": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 17.211116528522673,
+                  "medianSignedPct": -17.211116528522673,
+                  "n": 2904,
+                  "p90AbsPct": 40.45656822757991
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.9053778457923878,
+                  "medianSignedPct": 0.3559642336819713,
+                  "n": 2904,
+                  "p90AbsPct": 2.265334500285834
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.9053778457923878,
+                  "medianSignedPct": 0.3559642336819713,
+                  "n": 2904,
+                  "p90AbsPct": 2.265334500285834
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 17.211116528522673,
+                  "medianSignedPct": -17.211116528522673,
+                  "n": 2904,
+                  "p90AbsPct": 40.45656822757991
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.8440475394117806,
+                  "medianSignedPct": 1.710968690116843,
+                  "n": 252,
+                  "p90AbsPct": 3.7680047508787995
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.0379181158529316,
+                  "medianSignedPct": 0.8232809485771875,
+                  "n": 252,
+                  "p90AbsPct": 2.5109537205174175
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.8440475394117806,
+                  "medianSignedPct": 1.710968690116843,
+                  "n": 252,
+                  "p90AbsPct": 3.7680047508787995
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.8440475394117806,
+                  "medianSignedPct": 1.710968690116843,
+                  "n": 252,
+                  "p90AbsPct": 3.7680047508787995
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.3736263736263687,
+                  "medianSignedPct": -0.4555808656036442,
+                  "n": 38030,
+                  "p90AbsPct": 3.384219403094522
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.3736263736263687,
+                  "medianSignedPct": -0.4555808656036442,
+                  "n": 38030,
+                  "p90AbsPct": 3.384219403094522
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.3736263736263687,
+                  "medianSignedPct": -0.4555808656036442,
+                  "n": 38030,
+                  "p90AbsPct": 3.384219403094522
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.3736263736263687,
+                  "medianSignedPct": -0.4555808656036442,
+                  "n": 38030,
+                  "p90AbsPct": 3.384219403094522
+                }
+              }
+            }
+          },
+          "seconds": 1.0
+        },
+        {
+          "partialPhaseCells": 855,
+          "partialPhaseRatios": {
+            "metadataHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 64.13555231576431,
+                "medianSignedPct": 64.13555231576431,
+                "n": 855,
+                "p90AbsPct": 161.2438778996434
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 52.02702702702702,
+                "medianSignedPct": 52.02702702702702,
+                "n": 855,
+                "p90AbsPct": 154.7162361628394
+              }
+            },
+            "observedCeilingFade": {
+              "BoverMeanG": {
+                "medianAbsPct": 6.40912831365914,
+                "medianSignedPct": 6.40912831365914,
+                "n": 855,
+                "p90AbsPct": 20.294378537175756
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 2.7527829084479705,
+                "medianSignedPct": 1.8139461258755762,
+                "n": 855,
+                "p90AbsPct": 26.86971424661669
+              }
+            },
+            "observedCeilingHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 7.543916274561502,
+                "medianSignedPct": 7.543916274561502,
+                "n": 855,
+                "p90AbsPct": 20.90493355305586
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 2.761342058863425,
+                "medianSignedPct": 1.867166103660045,
+                "n": 855,
+                "p90AbsPct": 27.301592684945646
+              }
+            },
+            "rawRecorded": {
+              "BoverMeanG": {
+                "medianAbsPct": 64.13555231576431,
+                "medianSignedPct": 64.13555231576431,
+                "n": 855,
+                "p90AbsPct": 161.2438778996434
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 52.02702702702702,
+                "medianSignedPct": 52.02702702702702,
+                "n": 855,
+                "p90AbsPct": 154.7162361628394
+              }
+            }
+          },
+          "phaseData": {
+            "B": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 22.958257713248642,
+                  "medianSignedPct": -22.46575342465753,
+                  "n": 4362,
+                  "p90AbsPct": 52.828086763070075
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.3923132997724241,
+                  "medianSignedPct": -0.7134969897735932,
+                  "n": 4362,
+                  "p90AbsPct": 3.7856346079092615
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.3923132997724241,
+                  "medianSignedPct": -0.7134969897735932,
+                  "n": 4362,
+                  "p90AbsPct": 3.7856346079092615
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 22.958257713248642,
+                  "medianSignedPct": -22.46575342465753,
+                  "n": 4362,
+                  "p90AbsPct": 52.828086763070075
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 12.879971611234165,
+                  "medianSignedPct": 12.879971611234165,
+                  "n": 190,
+                  "p90AbsPct": 24.773453996983406
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 5.631614064115908,
+                  "medianSignedPct": 5.485596429152528,
+                  "n": 190,
+                  "p90AbsPct": 16.960462756164162
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 12.879971611234165,
+                  "medianSignedPct": 12.879971611234165,
+                  "n": 190,
+                  "p90AbsPct": 24.773453996983406
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 12.879971611234165,
+                  "medianSignedPct": 12.879971611234165,
+                  "n": 190,
+                  "p90AbsPct": 24.773453996983406
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.8211920529801362,
+                  "medianSignedPct": 1.3745704467353903,
+                  "n": 14894,
+                  "p90AbsPct": 5.6560650694184265
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.8211920529801362,
+                  "medianSignedPct": 1.3745704467353903,
+                  "n": 14894,
+                  "p90AbsPct": 5.6560650694184265
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.8211920529801362,
+                  "medianSignedPct": 1.3745704467353903,
+                  "n": 14894,
+                  "p90AbsPct": 5.6560650694184265
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.8211920529801362,
+                  "medianSignedPct": 1.3745704467353903,
+                  "n": 14894,
+                  "p90AbsPct": 5.6560650694184265
+                }
+              }
+            },
+            "G1": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 55.28048149128459,
+                  "medianSignedPct": -55.28048149128459,
+                  "n": 6692,
+                  "p90AbsPct": 71.18126272912424
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.258718095418987,
+                  "medianSignedPct": 0.38132387917796384,
+                  "n": 6692,
+                  "p90AbsPct": 3.1467447041217538
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.258718095418987,
+                  "medianSignedPct": 0.38132387917796384,
+                  "n": 6692,
+                  "p90AbsPct": 3.1467447041217538
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 55.28048149128459,
+                  "medianSignedPct": -55.28048149128459,
+                  "n": 6692,
+                  "p90AbsPct": 71.18126272912424
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.777389277389274,
+                  "medianSignedPct": -0.3231492361927102,
+                  "n": 179,
+                  "p90AbsPct": 5.488349779690169
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.0869521769022894,
+                  "medianSignedPct": -0.5910933277904817,
+                  "n": 179,
+                  "p90AbsPct": 3.1889237108578445
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.777389277389274,
+                  "medianSignedPct": -0.3231492361927102,
+                  "n": 179,
+                  "p90AbsPct": 5.488349779690169
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.777389277389274,
+                  "medianSignedPct": -0.3231492361927102,
+                  "n": 179,
+                  "p90AbsPct": 5.488349779690169
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.283987915407847,
+                  "medianSignedPct": 0.45811518324607725,
+                  "n": 67331,
+                  "p90AbsPct": 3.3028455284552893
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.283987915407847,
+                  "medianSignedPct": 0.45811518324607725,
+                  "n": 67331,
+                  "p90AbsPct": 3.3028455284552893
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.283987915407847,
+                  "medianSignedPct": 0.45811518324607725,
+                  "n": 67331,
+                  "p90AbsPct": 3.3028455284552893
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.283987915407847,
+                  "medianSignedPct": 0.45811518324607725,
+                  "n": 67331,
+                  "p90AbsPct": 3.3028455284552893
+                }
+              }
+            },
+            "G2": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 54.182406907717215,
+                  "medianSignedPct": -54.182406907717215,
+                  "n": 6400,
+                  "p90AbsPct": 71.03377686796316
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.3499067371118334,
+                  "medianSignedPct": 0.6484342305603241,
+                  "n": 6400,
+                  "p90AbsPct": 3.230457575953429
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.3499067371118334,
+                  "medianSignedPct": 0.6484342305603241,
+                  "n": 6400,
+                  "p90AbsPct": 3.230457575953429
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 54.182406907717215,
+                  "medianSignedPct": -54.182406907717215,
+                  "n": 6400,
+                  "p90AbsPct": 71.03377686796316
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.7835550181378501,
+                  "medianSignedPct": -0.9314903846153855,
+                  "n": 225,
+                  "p90AbsPct": 3.8474861961082296
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.174911660777389,
+                  "medianSignedPct": -0.676628776590471,
+                  "n": 225,
+                  "p90AbsPct": 2.8653250561588606
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.7835550181378501,
+                  "medianSignedPct": -0.9314903846153855,
+                  "n": 225,
+                  "p90AbsPct": 3.8474861961082296
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.7835550181378501,
+                  "medianSignedPct": -0.9314903846153855,
+                  "n": 225,
+                  "p90AbsPct": 3.8474861961082296
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.273885350318471,
+                  "medianSignedPct": 0.03759398496241406,
+                  "n": 68695,
+                  "p90AbsPct": 3.173374613003088
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.273885350318471,
+                  "medianSignedPct": 0.03759398496241406,
+                  "n": 68695,
+                  "p90AbsPct": 3.173374613003088
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.273885350318471,
+                  "medianSignedPct": 0.03759398496241406,
+                  "n": 68695,
+                  "p90AbsPct": 3.173374613003088
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.273885350318471,
+                  "medianSignedPct": 0.03759398496241406,
+                  "n": 68695,
+                  "p90AbsPct": 3.173374613003088
+                }
+              }
+            },
+            "R": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 50.653875518560056,
+                  "medianSignedPct": -50.6108202443281,
+                  "n": 5458,
+                  "p90AbsPct": 66.87475614514241
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.999565406345071,
+                  "medianSignedPct": 0.12775576655500442,
+                  "n": 5458,
+                  "p90AbsPct": 2.7469819864601175
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.999565406345071,
+                  "medianSignedPct": 0.12775576655500442,
+                  "n": 5458,
+                  "p90AbsPct": 2.7469819864601175
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 50.653875518560056,
+                  "medianSignedPct": -50.6108202443281,
+                  "n": 5458,
+                  "p90AbsPct": 66.87475614514241
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 3.2289002557544855,
+                  "medianSignedPct": 2.8822815533980473,
+                  "n": 127,
+                  "p90AbsPct": 22.8291033281993
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.9398398172262632,
+                  "medianSignedPct": 1.3441397209841943,
+                  "n": 127,
+                  "p90AbsPct": 10.664220519403743
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 3.2289002557544855,
+                  "medianSignedPct": 2.8822815533980473,
+                  "n": 127,
+                  "p90AbsPct": 22.8291033281993
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 3.2289002557544855,
+                  "medianSignedPct": 2.8822815533980473,
+                  "n": 127,
+                  "p90AbsPct": 22.8291033281993
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.3970588235294068,
+                  "medianSignedPct": 0.7894736842105177,
+                  "n": 35601,
+                  "p90AbsPct": 3.7197231833909994
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.3970588235294068,
+                  "medianSignedPct": 0.7894736842105177,
+                  "n": 35601,
+                  "p90AbsPct": 3.7197231833909994
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.3970588235294068,
+                  "medianSignedPct": 0.7894736842105177,
+                  "n": 35601,
+                  "p90AbsPct": 3.7197231833909994
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.3970588235294068,
+                  "medianSignedPct": 0.7894736842105177,
+                  "n": 35601,
+                  "p90AbsPct": 3.7197231833909994
+                }
+              }
+            }
+          },
+          "seconds": 2.0
+        }
+      ],
+      "qualifiedTiles": 11
+    },
+    "2": {
+      "anchorAndHoldoutSitesByPhase": [
+        80911,
+        123817,
+        123189,
+        96900
+      ],
+      "exposures": [
+        {
+          "partialPhaseCells": 21964,
+          "partialPhaseRatios": {
+            "metadataHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 1.2780661924824854,
+                "medianSignedPct": -0.22816514023338286,
+                "n": 21964,
+                "p90AbsPct": 3.0057784214276118
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 5.5633671085249965,
+                "medianSignedPct": 5.562840310052996,
+                "n": 21964,
+                "p90AbsPct": 9.603041918516302
+              }
+            },
+            "observedCeilingFade": {
+              "BoverMeanG": {
+                "medianAbsPct": 1.2591175381450659,
+                "medianSignedPct": 0.05009879326456357,
+                "n": 21964,
+                "p90AbsPct": 2.984790040384529
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 5.563745696448496,
+                "medianSignedPct": 5.5633671085249965,
+                "n": 21964,
+                "p90AbsPct": 9.603041918516302
+              }
+            },
+            "observedCeilingHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 1.4687044753345924,
+                "medianSignedPct": 0.4572259325434702,
+                "n": 21964,
+                "p90AbsPct": 3.2342831321085463
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 5.564287386821675,
+                "medianSignedPct": 5.56402828239253,
+                "n": 21964,
+                "p90AbsPct": 9.603041918516302
+              }
+            },
+            "rawRecorded": {
+              "BoverMeanG": {
+                "medianAbsPct": 42.93462513965501,
+                "medianSignedPct": 42.93462513965501,
+                "n": 21964,
+                "p90AbsPct": 47.899012100606114
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 48.81889644719754,
+                "medianSignedPct": 48.81889644719754,
+                "n": 21964,
+                "p90AbsPct": 78.09385176194675
+              }
+            }
+          },
+          "phaseData": {
+            "B": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 0.814426992437467,
+                  "medianSignedPct": 0.32626427406199365,
+                  "n": 17231,
+                  "p90AbsPct": 1.9855595667870096
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.814426992437467,
+                  "medianSignedPct": 0.32626427406199365,
+                  "n": 17231,
+                  "p90AbsPct": 1.9855595667870096
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.814426992437467,
+                  "medianSignedPct": 0.32626427406199365,
+                  "n": 17231,
+                  "p90AbsPct": 1.9855595667870096
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 2.4125452352231624,
+                  "medianSignedPct": 0.1769911504424737,
+                  "n": 17231,
+                  "p90AbsPct": 9.488272921108742
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 0.9469696969697017,
+                  "medianSignedPct": 0.5663939584644506,
+                  "n": 7663,
+                  "p90AbsPct": 2.4696050216047687
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.6463900991457558,
+                  "medianSignedPct": 1.6215081283892818,
+                  "n": 7663,
+                  "p90AbsPct": 3.228942220884617
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 3.1725888324872997,
+                  "medianSignedPct": 3.1725888324872997,
+                  "n": 7663,
+                  "p90AbsPct": 4.459679803190535
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 3.1725888324872997,
+                  "medianSignedPct": 3.1725888324872997,
+                  "n": 7663,
+                  "p90AbsPct": 4.459679803190535
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.2839879154078582,
+                  "medianSignedPct": 0.8928571428571397,
+                  "n": 72006,
+                  "p90AbsPct": 3.3355572607149053
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.2839879154078582,
+                  "medianSignedPct": 0.8928571428571397,
+                  "n": 72006,
+                  "p90AbsPct": 3.3355572607149053
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.2839879154078582,
+                  "medianSignedPct": 0.8928571428571397,
+                  "n": 72006,
+                  "p90AbsPct": 3.3355572607149053
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.2839879154078582,
+                  "medianSignedPct": 0.8928571428571397,
+                  "n": 72006,
+                  "p90AbsPct": 3.3355572607149053
+                }
+              }
+            },
+            "G1": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 1.0723235656211583,
+                  "medianSignedPct": 1.0101010101010166,
+                  "n": 38432,
+                  "p90AbsPct": 2.336217643038983
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.0723235656211583,
+                  "medianSignedPct": 1.0101010101010166,
+                  "n": 38432,
+                  "p90AbsPct": 2.336217643038983
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.0723235656211583,
+                  "medianSignedPct": 1.0101010101010166,
+                  "n": 38432,
+                  "p90AbsPct": 2.336217643038983
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 28.47514743049705,
+                  "medianSignedPct": -28.47514743049705,
+                  "n": 38432,
+                  "p90AbsPct": 37.61939750183688
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 0.8502885691499928,
+                  "medianSignedPct": 0.357568660960772,
+                  "n": 2012,
+                  "p90AbsPct": 2.074565888576433
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.6867362459617388,
+                  "medianSignedPct": -0.16206698291792443,
+                  "n": 2012,
+                  "p90AbsPct": 1.6946369919972497
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.81008166439821,
+                  "medianSignedPct": -0.7016841561451492,
+                  "n": 2012,
+                  "p90AbsPct": 1.9404910347307436
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 0.81008166439821,
+                  "medianSignedPct": -0.7016841561451492,
+                  "n": 2012,
+                  "p90AbsPct": 1.9404910347307436
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 0.8849557522123908,
+                  "medianSignedPct": 0.0,
+                  "n": 83373,
+                  "p90AbsPct": 2.3379791256721565
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.8849557522123908,
+                  "medianSignedPct": 0.0,
+                  "n": 83373,
+                  "p90AbsPct": 2.3379791256721565
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.8849557522123908,
+                  "medianSignedPct": 0.0,
+                  "n": 83373,
+                  "p90AbsPct": 2.3379791256721565
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 0.8849557522123908,
+                  "medianSignedPct": 0.0,
+                  "n": 83373,
+                  "p90AbsPct": 2.3379791256721565
+                }
+              }
+            },
+            "G2": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 1.2998266897746857,
+                  "medianSignedPct": 1.2809564474807855,
+                  "n": 36660,
+                  "p90AbsPct": 2.559824906388207
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.2998266897746857,
+                  "medianSignedPct": 1.2809564474807855,
+                  "n": 36660,
+                  "p90AbsPct": 2.559824906388207
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.2998266897746857,
+                  "medianSignedPct": 1.2809564474807855,
+                  "n": 36660,
+                  "p90AbsPct": 2.559824906388207
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 28.02034760491734,
+                  "medianSignedPct": -28.02034760491734,
+                  "n": 36660,
+                  "p90AbsPct": 37.20414201183432
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 0.9476591653494626,
+                  "medianSignedPct": 0.5325445651568783,
+                  "n": 2040,
+                  "p90AbsPct": 2.350535075690353
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.710358275790679,
+                  "medianSignedPct": -0.26847786711926,
+                  "n": 2040,
+                  "p90AbsPct": 1.7586026820873104
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.0676160339408158,
+                  "medianSignedPct": -1.0213285554751095,
+                  "n": 2040,
+                  "p90AbsPct": 2.250356727270815
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.0676160339408158,
+                  "medianSignedPct": -1.0213285554751095,
+                  "n": 2040,
+                  "p90AbsPct": 2.250356727270815
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 0.9100642398286896,
+                  "medianSignedPct": -0.17162471395880674,
+                  "n": 84489,
+                  "p90AbsPct": 2.3517574792182523
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.9100642398286896,
+                  "medianSignedPct": -0.17162471395880674,
+                  "n": 84489,
+                  "p90AbsPct": 2.3517574792182523
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.9100642398286896,
+                  "medianSignedPct": -0.17162471395880674,
+                  "n": 84489,
+                  "p90AbsPct": 2.3517574792182523
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 0.9100642398286896,
+                  "medianSignedPct": -0.17162471395880674,
+                  "n": 84489,
+                  "p90AbsPct": 2.3517574792182523
+                }
+              }
+            },
+            "R": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 4.1255636153331725,
+                  "medianSignedPct": -4.1255636153331725,
+                  "n": 40,
+                  "p90AbsPct": 7.722087292267178
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 4.1255636153331725,
+                  "medianSignedPct": -4.1255636153331725,
+                  "n": 40,
+                  "p90AbsPct": 7.722087292267178
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 4.1255636153331725,
+                  "medianSignedPct": -4.1255636153331725,
+                  "n": 40,
+                  "p90AbsPct": 7.722087292267178
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 9.301588406546557,
+                  "medianSignedPct": 1.4949017707945877,
+                  "n": 40,
+                  "p90AbsPct": 21.850635839079523
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 2.962928628081124,
+                  "medianSignedPct": -2.962928628081124,
+                  "n": 2,
+                  "p90AbsPct": 3.6843731652297476
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 7.762734913832248,
+                  "medianSignedPct": 7.762734913832248,
+                  "n": 2,
+                  "p90AbsPct": 8.774683853082767
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 15.359280203537184,
+                  "medianSignedPct": 15.359280203537184,
+                  "n": 2,
+                  "p90AbsPct": 17.570789942626416
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 15.359280203537184,
+                  "medianSignedPct": 15.359280203537184,
+                  "n": 2,
+                  "p90AbsPct": 17.570789942626416
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 2.3026315789473673,
+                  "medianSignedPct": 2.130681818181812,
+                  "n": 80869,
+                  "p90AbsPct": 8.298363186610755
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 2.3026315789473673,
+                  "medianSignedPct": 2.130681818181812,
+                  "n": 80869,
+                  "p90AbsPct": 8.298363186610755
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 2.3026315789473673,
+                  "medianSignedPct": 2.130681818181812,
+                  "n": 80869,
+                  "p90AbsPct": 8.298363186610755
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 2.3026315789473673,
+                  "medianSignedPct": 2.130681818181812,
+                  "n": 80869,
+                  "p90AbsPct": 8.298363186610755
+                }
+              }
+            }
+          },
+          "seconds": 1.0
+        },
+        {
+          "partialPhaseCells": 17290,
+          "partialPhaseRatios": {
+            "metadataHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 3.3313686809125107,
+                "medianSignedPct": 2.8691511393395097,
+                "n": 17290,
+                "p90AbsPct": 9.970367535561017
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 7.775707575372238,
+                "medianSignedPct": 7.775707575372238,
+                "n": 17290,
+                "p90AbsPct": 13.21894726190517
+              }
+            },
+            "observedCeilingFade": {
+              "BoverMeanG": {
+                "medianAbsPct": 3.4269143499282895,
+                "medianSignedPct": 3.053163007885107,
+                "n": 17290,
+                "p90AbsPct": 9.971273699769213
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 7.837473392582483,
+                "medianSignedPct": 7.837473392582483,
+                "n": 17290,
+                "p90AbsPct": 13.244601151055644
+              }
+            },
+            "observedCeilingHard": {
+              "BoverMeanG": {
+                "medianAbsPct": 3.5486058831366796,
+                "medianSignedPct": 3.2254712995102075,
+                "n": 17290,
+                "p90AbsPct": 10.045786658174844
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 8.004608493597477,
+                "medianSignedPct": 8.004608493597477,
+                "n": 17290,
+                "p90AbsPct": 13.452680110474349
+              }
+            },
+            "rawRecorded": {
+              "BoverMeanG": {
+                "medianAbsPct": 50.088378414265506,
+                "medianSignedPct": 50.088378414265506,
+                "n": 17290,
+                "p90AbsPct": 86.7435214896828
+              },
+              "RoverMeanG": {
+                "medianAbsPct": 75.13022870009563,
+                "medianSignedPct": 75.13022870009563,
+                "n": 17290,
+                "p90AbsPct": 111.02016914656875
+              }
+            }
+          },
+          "phaseData": {
+            "B": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 0.910273081924573,
+                  "medianSignedPct": 0.3024803387779773,
+                  "n": 52691,
+                  "p90AbsPct": 2.2342995169082114
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.910273081924573,
+                  "medianSignedPct": 0.3024803387779773,
+                  "n": 52691,
+                  "p90AbsPct": 2.2342995169082114
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.910273081924573,
+                  "medianSignedPct": 0.3024803387779773,
+                  "n": 52691,
+                  "p90AbsPct": 2.2342995169082114
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 45.01295336787565,
+                  "medianSignedPct": -45.01295336787565,
+                  "n": 52691,
+                  "p90AbsPct": 51.45797598627787
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.3398294762484775,
+                  "medianSignedPct": 0.0,
+                  "n": 1394,
+                  "p90AbsPct": 3.9609986190316997
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.9460303608397456,
+                  "medianSignedPct": 1.6928695513666714,
+                  "n": 1394,
+                  "p90AbsPct": 8.801866034943922
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 3.540493157055735,
+                  "medianSignedPct": 3.527018717031971,
+                  "n": 1394,
+                  "p90AbsPct": 11.074991098701348
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 3.540493157055735,
+                  "medianSignedPct": 3.527018717031971,
+                  "n": 1394,
+                  "p90AbsPct": 11.074991098701348
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 2.93141592920354,
+                  "medianSignedPct": 2.600297176820199,
+                  "n": 42815,
+                  "p90AbsPct": 10.062001844410773
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 2.93141592920354,
+                  "medianSignedPct": 2.600297176820199,
+                  "n": 42815,
+                  "p90AbsPct": 10.062001844410773
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 2.93141592920354,
+                  "medianSignedPct": 2.600297176820199,
+                  "n": 42815,
+                  "p90AbsPct": 10.062001844410773
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 2.93141592920354,
+                  "medianSignedPct": 2.600297176820199,
+                  "n": 42815,
+                  "p90AbsPct": 10.062001844410773
+                }
+              }
+            },
+            "G1": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 0.9891196834816984,
+                  "medianSignedPct": 0.586080586080584,
+                  "n": 92013,
+                  "p90AbsPct": 2.3023637605372076
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 0.9891196834816984,
+                  "medianSignedPct": 0.586080586080584,
+                  "n": 92013,
+                  "p90AbsPct": 2.3023637605372076
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 0.9891196834816984,
+                  "medianSignedPct": 0.586080586080584,
+                  "n": 92013,
+                  "p90AbsPct": 2.3023637605372076
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 42.75118004045852,
+                  "medianSignedPct": -42.75118004045852,
+                  "n": 92013,
+                  "p90AbsPct": 65.43159609120521
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.1806375442739103,
+                  "medianSignedPct": -0.11933174224343368,
+                  "n": 1913,
+                  "p90AbsPct": 2.770723287277148
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.1203225514179627,
+                  "medianSignedPct": -0.7520159463622278,
+                  "n": 1913,
+                  "p90AbsPct": 2.62282186132311
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.5587529976019199,
+                  "medianSignedPct": -1.5186915887850483,
+                  "n": 1913,
+                  "p90AbsPct": 3.1544260271557034
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.5587529976019199,
+                  "medianSignedPct": -1.5186915887850483,
+                  "n": 1913,
+                  "p90AbsPct": 3.1544260271557034
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.2315270935960632,
+                  "medianSignedPct": -0.4961832061068705,
+                  "n": 29891,
+                  "p90AbsPct": 3.0087527352297583
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.2315270935960632,
+                  "medianSignedPct": -0.4961832061068705,
+                  "n": 29891,
+                  "p90AbsPct": 3.0087527352297583
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.2315270935960632,
+                  "medianSignedPct": -0.4961832061068705,
+                  "n": 29891,
+                  "p90AbsPct": 3.0087527352297583
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.2315270935960632,
+                  "medianSignedPct": -0.4961832061068705,
+                  "n": 29891,
+                  "p90AbsPct": 3.0087527352297583
+                }
+              }
+            },
+            "G2": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 1.1011011011011096,
+                  "medianSignedPct": 0.8389261744966348,
+                  "n": 90874,
+                  "p90AbsPct": 2.470059880239517
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.1011011011011096,
+                  "medianSignedPct": 0.8389261744966348,
+                  "n": 90874,
+                  "p90AbsPct": 2.470059880239517
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.1011011011011096,
+                  "medianSignedPct": 0.8389261744966348,
+                  "n": 90874,
+                  "p90AbsPct": 2.470059880239517
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 42.087312414733965,
+                  "medianSignedPct": -42.087312414733965,
+                  "n": 90874,
+                  "p90AbsPct": 65.14778325123153
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.292596944770863,
+                  "medianSignedPct": -0.35545023696682554,
+                  "n": 1910,
+                  "p90AbsPct": 2.990582036218276
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.4139533264330817,
+                  "medianSignedPct": -1.2024239995813646,
+                  "n": 1910,
+                  "p90AbsPct": 3.067904667326369
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 2.326617584635582,
+                  "medianSignedPct": -2.301436854848987,
+                  "n": 1910,
+                  "p90AbsPct": 3.8841597776352583
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 2.326617584635582,
+                  "medianSignedPct": -2.301436854848987,
+                  "n": 1910,
+                  "p90AbsPct": 3.8841597776352583
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.4501891551071844,
+                  "medianSignedPct": -0.9111617312072884,
+                  "n": 30405,
+                  "p90AbsPct": 3.3333333333333326
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.4501891551071844,
+                  "medianSignedPct": -0.9111617312072884,
+                  "n": 30405,
+                  "p90AbsPct": 3.3333333333333326
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.4501891551071844,
+                  "medianSignedPct": -0.9111617312072884,
+                  "n": 30405,
+                  "p90AbsPct": 3.3333333333333326
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 1.4501891551071844,
+                  "medianSignedPct": -0.9111617312072884,
+                  "n": 30405,
+                  "p90AbsPct": 3.3333333333333326
+                }
+              }
+            },
+            "R": {
+              "atCeiling": {
+                "metadataHard": {
+                  "medianAbsPct": 1.0638297872340496,
+                  "medianSignedPct": -0.20964360587002462,
+                  "n": 30312,
+                  "p90AbsPct": 2.5974025974025983
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 1.0638297872340496,
+                  "medianSignedPct": -0.20964360587002462,
+                  "n": 30312,
+                  "p90AbsPct": 2.5974025974025983
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 1.0638297872340496,
+                  "medianSignedPct": -0.20964360587002462,
+                  "n": 30312,
+                  "p90AbsPct": 2.5974025974025983
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 9.680851063829788,
+                  "medianSignedPct": -9.488272921108742,
+                  "n": 30312,
+                  "p90AbsPct": 19.2197906755471
+                }
+              },
+              "belowCeilingTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 1.464713715046606,
+                  "medianSignedPct": 0.2680965147453085,
+                  "n": 1303,
+                  "p90AbsPct": 9.344539661612833
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 6.62190340949298,
+                  "medianSignedPct": 6.62190340949298,
+                  "n": 1303,
+                  "p90AbsPct": 11.019371774239389
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 10.264227642276413,
+                  "medianSignedPct": 10.264227642276413,
+                  "n": 1303,
+                  "p90AbsPct": 16.756090189203892
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 10.264227642276413,
+                  "medianSignedPct": 10.264227642276413,
+                  "n": 1303,
+                  "p90AbsPct": 16.756090189203892
+                }
+              },
+              "belowTransition": {
+                "metadataHard": {
+                  "medianAbsPct": 6.259097833894478,
+                  "medianSignedPct": 6.258967075266819,
+                  "n": 49296,
+                  "p90AbsPct": 11.991402246748128
+                },
+                "observedCeilingFade": {
+                  "medianAbsPct": 6.259097833894478,
+                  "medianSignedPct": 6.258967075266819,
+                  "n": 49296,
+                  "p90AbsPct": 11.991402246748128
+                },
+                "observedCeilingHard": {
+                  "medianAbsPct": 6.259097833894478,
+                  "medianSignedPct": 6.258967075266819,
+                  "n": 49296,
+                  "p90AbsPct": 11.991402246748128
+                },
+                "rawRecorded": {
+                  "medianAbsPct": 6.259097833894478,
+                  "medianSignedPct": 6.258967075266819,
+                  "n": 49296,
+                  "p90AbsPct": 11.991402246748128
+                }
+              }
+            }
+          },
+          "seconds": 2.0
+        }
+      ],
+      "qualifiedTiles": 6
+    }
+  },
+  "schema": "BKL046_CFA_HELDOUT_MID_EXPOSURE_RECOVERY_V1",
+  "scientificClosures": 0
+}

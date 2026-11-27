@@ -1,0 +1,6436 @@
+{
+  "protocol": "BKL046_ACS_FULL_WELL_MASK_SUPPORT_DEVELOPMENT_V1",
+  "protocolSha256": "4b81b01ce0a9e99a8d6b86a91939660e140265160bbaae37cdb58a796322f9fb",
+  "sourceReportsRevalidatedAtRadius3": true,
+  "commonGuideForecasts": 63,
+  "pureAtOriginalRadiusBothExposures": [
+    2,
+    10,
+    11
+  ],
+  "admittedGeometries": 0,
+  "realSaturatedFluxRecovered": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0,
+  "rows": [
+    {
+      "sourceIndex": 1,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "4096": 1,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 3,
+                "4096": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "1024": 3,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 2,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 24,
+                "256": 5
+              },
+              "fullWellPixels": 5
+            },
+            "replica": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 25,
+                "256": 4
+              },
+              "fullWellPixels": 4
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 1,
+              "PURE_FULL_WELL": 8
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 1,
+              "PURE_FULL_WELL": 8
+            }
+          },
+          "relativeWellFlagOverlap": 4,
+          "relativeWellFlagUnion": 5
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 75,
+                "256": 5,
+                "64": 1
+              },
+              "fullWellPixels": 5
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 76,
+                "256": 4,
+                "64": 1
+              },
+              "fullWellPixels": 4
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 4,
+          "relativeWellFlagUnion": 5
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 137,
+                "1024": 2,
+                "16": 1,
+                "256": 5,
+                "64": 4
+              },
+              "fullWellPixels": 5
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 138,
+                "1024": 2,
+                "16": 1,
+                "256": 4,
+                "64": 4
+              },
+              "fullWellPixels": 4
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 4,
+          "relativeWellFlagUnion": 5
+        }
+      ]
+    },
+    {
+      "sourceIndex": 7,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 10,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 26,
+                "256": 3
+              },
+              "fullWellPixels": 3
+            },
+            "replica": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 26,
+                "256": 3
+              },
+              "fullWellPixels": 3
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "PURE_FULL_WELL": 9
+            },
+            "replica": {
+              "PURE_FULL_WELL": 9
+            }
+          },
+          "relativeWellFlagOverlap": 3,
+          "relativeWellFlagUnion": 3
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 74,
+                "1024": 2,
+                "16": 1,
+                "256": 3,
+                "64": 1
+              },
+              "fullWellPixels": 3
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 74,
+                "1024": 2,
+                "16": 1,
+                "256": 3,
+                "64": 1
+              },
+              "fullWellPixels": 3
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 3,
+          "relativeWellFlagUnion": 3
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 137,
+                "1024": 2,
+                "16": 4,
+                "256": 3,
+                "64": 3
+              },
+              "fullWellPixels": 3
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 137,
+                "1024": 2,
+                "16": 4,
+                "256": 3,
+                "64": 3
+              },
+              "fullWellPixels": 3
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 3,
+          "relativeWellFlagUnion": 3
+        }
+      ]
+    },
+    {
+      "sourceIndex": 11,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 28,
+                "256": 1
+              },
+              "fullWellPixels": 1
+            },
+            "replica": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 28,
+                "256": 1
+              },
+              "fullWellPixels": 1
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "PURE_FULL_WELL": 9
+            },
+            "replica": {
+              "PURE_FULL_WELL": 9
+            }
+          },
+          "relativeWellFlagOverlap": 1,
+          "relativeWellFlagUnion": 1
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 80,
+                "256": 1
+              },
+              "fullWellPixels": 1
+            },
+            "replica": {
+              "classification": "PURE_FULL_WELL",
+              "dqWords": {
+                "0": 80,
+                "256": 1
+              },
+              "fullWellPixels": 1
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "PURE_FULL_WELL": 6,
+              "FULL_WELL_MIXED_DQ": 3
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 5,
+              "PURE_FULL_WELL": 4
+            }
+          },
+          "relativeWellFlagOverlap": 1,
+          "relativeWellFlagUnion": 1
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 145,
+                "256": 1,
+                "64": 2,
+                "96": 1
+              },
+              "fullWellPixels": 1
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 145,
+                "256": 1,
+                "64": 2,
+                "96": 1
+              },
+              "fullWellPixels": 1
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 1,
+          "relativeWellFlagUnion": 1
+        }
+      ]
+    },
+    {
+      "sourceIndex": 14,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 8,
+              "OTHER_DQ": 1
+            },
+            "replica": {
+              "CLEAR": 8,
+              "OTHER_DQ": 1
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 15,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 21,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 74,
+                "1024": 4,
+                "4096": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 137,
+                "1024": 6,
+                "16": 1,
+                "4096": 3,
+                "48": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 140,
+                "1024": 6,
+                "16": 1,
+                "48": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 22,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "4096": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "1024": 1,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "1024": 1,
+                "16": 1,
+                "4096": 5
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 25,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 22,
+                "256": 6,
+                "64": 1
+              },
+              "fullWellPixels": 6
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 22,
+                "256": 6,
+                "64": 1
+              },
+              "fullWellPixels": 6
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "PURE_FULL_WELL": 3,
+              "FULL_WELL_MIXED_DQ": 6
+            },
+            "replica": {
+              "PURE_FULL_WELL": 3,
+              "FULL_WELL_MIXED_DQ": 6
+            }
+          },
+          "relativeWellFlagOverlap": 6,
+          "relativeWellFlagUnion": 6
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 73,
+                "256": 6,
+                "64": 2
+              },
+              "fullWellPixels": 6
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 73,
+                "256": 6,
+                "64": 2
+              },
+              "fullWellPixels": 6
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 6,
+          "relativeWellFlagUnion": 6
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 134,
+                "1024": 1,
+                "16": 3,
+                "256": 6,
+                "64": 5
+              },
+              "fullWellPixels": 6
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 134,
+                "1024": 1,
+                "16": 3,
+                "256": 6,
+                "64": 5
+              },
+              "fullWellPixels": 6
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 6,
+          "relativeWellFlagUnion": 6
+        }
+      ]
+    },
+    {
+      "sourceIndex": 32,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 3,
+              "CLEAR": 6
+            },
+            "replica": {
+              "OTHER_DQ": 3,
+              "CLEAR": 6
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "4144": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "4144": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 2,
+                "16": 2,
+                "4144": 1,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 2,
+                "4144": 1,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 34,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 1,
+                "256": 3,
+                "64": 2
+              },
+              "fullWellPixels": 3
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 1,
+                "256": 3,
+                "64": 2
+              },
+              "fullWellPixels": 3
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 3,
+          "relativeWellFlagUnion": 3
+        }
+      ]
+    },
+    {
+      "sourceIndex": 40,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 2,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 2,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 60,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 65,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 73,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 27,
+                "16": 1,
+                "4096": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 1,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "1024": 1,
+                "16": 2,
+                "4096": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 139,
+                "1024": 3,
+                "16": 3,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 138,
+                "1024": 3,
+                "16": 3,
+                "4096": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 78,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 8,
+              "CLEAR": 1
+            },
+            "replica": {
+              "OTHER_DQ": 8,
+              "CLEAR": 1
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 80,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 3,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 3,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 84,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 103,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "16": 1,
+                "4096": 2,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 2,
+                "16": 1,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 139,
+                "1024": 2,
+                "16": 1,
+                "4096": 2,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 104,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "1024": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "CLEAR": 6,
+              "OTHER_DQ": 3
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "1024": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "1024": 4,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "1024": 3,
+                "16": 2,
+                "4096": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 106,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 145,
+                "16": 3,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 145,
+                "16": 3,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 112,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "16": 3,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "16": 3,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 5,
+                "32": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 5,
+                "32": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 132,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 5,
+              "CLEAR": 4
+            },
+            "replica": {
+              "OTHER_DQ": 5,
+              "CLEAR": 4
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 2,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 2,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 2,
+                "16": 3,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 2,
+                "16": 3,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 133,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 5,
+              "OTHER_DQ": 4
+            },
+            "replica": {
+              "OTHER_DQ": 6,
+              "CLEAR": 3
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "1024": 1,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "1024": 1,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 140,
+                "1024": 6,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 140,
+                "1024": 6,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 135,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "16": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "16": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 144,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 4,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 4,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 148,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 3,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 3,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 4,
+                "16": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "1024": 3,
+                "16": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 149,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "16": 1,
+                "48": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "16": 1,
+                "48": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 1,
+                "48": 1,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 1,
+                "48": 1,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 153,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "1024": 1,
+                "4112": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "1024": 1,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 156,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 3,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 3,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "1024": 3,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "1024": 3,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 161,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "16": 2,
+                "4096": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 75,
+                "16": 2,
+                "4096": 3,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "16": 3,
+                "4096": 2,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 138,
+                "16": 3,
+                "4096": 5,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 168,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 3,
+              "CLEAR": 6
+            },
+            "replica": {
+              "OTHER_DQ": 3,
+              "CLEAR": 6
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 2,
+                "4112": 1,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 3,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 169,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 147,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 174,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 7,
+              "OTHER_DQ": 2
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 4,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 4,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 176,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "1024": 1,
+                "16": 1,
+                "4096": 1,
+                "48": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 1,
+                "16": 1,
+                "48": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 138,
+                "1024": 3,
+                "16": 2,
+                "4096": 4,
+                "48": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "1024": 3,
+                "16": 2,
+                "48": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 180,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 140,
+                "1024": 2,
+                "16": 2,
+                "4096": 2,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 3,
+                "16": 2,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 187,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 3,
+              "CLEAR": 6
+            },
+            "replica": {
+              "OTHER_DQ": 6,
+              "CLEAR": 3
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 200,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "1024": 2,
+                "16": 2,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "1024": 2,
+                "16": 2,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 208,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "1024": 1,
+                "16": 1,
+                "4096": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "1024": 1,
+                "16": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 219,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "1024": 1,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 73,
+                "1024": 1,
+                "16": 1,
+                "4096": 6
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 140,
+                "1024": 4,
+                "16": 3,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 124,
+                "1024": 4,
+                "16": 3,
+                "4096": 16,
+                "4160": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 221,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 6,
+              "OTHER_DQ": 3
+            },
+            "replica": {
+              "CLEAR": 6,
+              "OTHER_DQ": 3
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 3,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 3,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 227,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 235,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "16": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "16": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 236,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "4096": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 73,
+                "16": 1,
+                "4096": 7
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 6,
+              "CLEAR": 3
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 136,
+                "16": 3,
+                "4096": 8,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "16": 3,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 238,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 8,
+              "OTHER_DQ": 1
+            },
+            "replica": {
+              "CLEAR": 8,
+              "OTHER_DQ": 1
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 74,
+                "1024": 3,
+                "16": 2,
+                "4096": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "1024": 3,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 131,
+                "1024": 4,
+                "16": 5,
+                "4096": 5,
+                "4112": 1,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 134,
+                "1024": 4,
+                "16": 5,
+                "4096": 2,
+                "4112": 1,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 244,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 249,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 145,
+                "16": 3,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 145,
+                "16": 3,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 252,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 3,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 3,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 254,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 27,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 27,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "16": 2,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "16": 2,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "16": 6,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 140,
+                "16": 6,
+                "4096": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 255,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 78,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 2,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 2,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 256,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 3,
+              "OTHER_DQ": 6
+            },
+            "replica": {
+              "CLEAR": 3,
+              "OTHER_DQ": 6
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 145,
+                "16": 1,
+                "4096": 1,
+                "4112": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 257,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 1,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 1,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 3,
+                "16": 2,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 141,
+                "1024": 3,
+                "16": 2,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 281,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "16": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 4,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 4,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 284,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "1024": 2,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "1024": 2,
+                "16": 2,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 138,
+                "1024": 6,
+                "16": 3,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 139,
+                "1024": 5,
+                "16": 3,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 295,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "64": 5
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 134,
+                "128": 6,
+                "16": 1,
+                "192": 1,
+                "64": 7
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 134,
+                "128": 6,
+                "16": 1,
+                "192": 1,
+                "64": 7
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 302,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 28,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 5,
+              "CLEAR": 4
+            },
+            "replica": {
+              "OTHER_DQ": 5,
+              "CLEAR": 4
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "16": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "16": 1,
+                "64": 4
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 321,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 26,
+                "16": 1,
+                "4096": 1,
+                "48": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 27,
+                "16": 1,
+                "48": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 76,
+                "1024": 2,
+                "16": 1,
+                "4096": 1,
+                "48": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 2,
+                "16": 1,
+                "48": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 144,
+                "1024": 2,
+                "16": 1,
+                "4096": 1,
+                "48": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 145,
+                "1024": 2,
+                "16": 1,
+                "48": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 326,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 81
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 3,
+              "CLEAR": 6
+            },
+            "replica": {
+              "OTHER_DQ": 3,
+              "CLEAR": 6
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 146,
+                "16": 1,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 143,
+                "16": 1,
+                "4096": 3,
+                "64": 2
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 337,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "1024": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 79,
+                "1024": 1,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "1024": 2,
+                "16": 2,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "1024": 2,
+                "16": 2,
+                "64": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 359,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 148,
+                "64": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 361,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "CLEAR",
+              "dqWords": {
+                "0": 29
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "CLEAR": 9
+            },
+            "replica": {
+              "CLEAR": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 80,
+                "16": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 77,
+                "16": 1,
+                "4096": 3
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 142,
+                "16": 2,
+                "64": 4,
+                "96": 1
+              },
+              "fullWellPixels": 0
+            },
+            "replica": {
+              "classification": "OTHER_DQ",
+              "dqWords": {
+                "0": 135,
+                "16": 2,
+                "4096": 7,
+                "64": 4,
+                "96": 1
+              },
+              "fullWellPixels": 0
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "OTHER_DQ": 9
+            },
+            "replica": {
+              "OTHER_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 0,
+          "relativeWellFlagUnion": 0
+        }
+      ]
+    },
+    {
+      "sourceIndex": 365,
+      "radii": [
+        {
+          "radiusPx": 3,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 26,
+                "1024": 1,
+                "256": 2
+              },
+              "fullWellPixels": 2
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 26,
+                "1024": 1,
+                "256": 2
+              },
+              "fullWellPixels": 2
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "PURE_FULL_WELL": 3,
+              "FULL_WELL_MIXED_DQ": 6
+            },
+            "replica": {
+              "PURE_FULL_WELL": 3,
+              "FULL_WELL_MIXED_DQ": 6
+            }
+          },
+          "relativeWellFlagOverlap": 2,
+          "relativeWellFlagUnion": 2
+        },
+        {
+          "radiusPx": 5,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 1,
+                "16": 1,
+                "256": 2
+              },
+              "fullWellPixels": 2
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 77,
+                "1024": 1,
+                "16": 1,
+                "256": 2
+              },
+              "fullWellPixels": 2
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 2,
+          "relativeWellFlagUnion": 2
+        },
+        {
+          "radiusPx": 7,
+          "originalCenters": {
+            "primary": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 139,
+                "1024": 1,
+                "16": 3,
+                "256": 2,
+                "48": 1,
+                "64": 3
+              },
+              "fullWellPixels": 2
+            },
+            "replica": {
+              "classification": "FULL_WELL_MIXED_DQ",
+              "dqWords": {
+                "0": 139,
+                "1024": 1,
+                "16": 3,
+                "256": 2,
+                "48": 1,
+                "64": 3
+              },
+              "fullWellPixels": 2
+            }
+          },
+          "classificationUnderPerturbation": {
+            "primary": {
+              "FULL_WELL_MIXED_DQ": 9
+            },
+            "replica": {
+              "FULL_WELL_MIXED_DQ": 9
+            }
+          },
+          "relativeWellFlagOverlap": 2,
+          "relativeWellFlagUnion": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "BKL046_GRW70_11907_BAND_HELD_OUT_CENTER_V1",
+  "primaryProtocol": "5a29fe307ed70d255f5796ac0a0a71a2d4ae1178e6979319b658bf2f7d096139",
+  "acquisition": "9e6902c9f5ac8672f851bc64524272744205a1ef408286c8baee4a8c6bde8019",
+  "primaryReport": "b7a44a65ce3fa2e122084b3daf920324228813cddf5a0a29a8cb1ff5996b1357",
+  "donorHalfBoxPx": 20,
+  "minimumDonorPeakElectrons": 1000,
+  "exclusionAroundPeakPx": 4,
+  "minimumProminenceRatio": 3,
+  "maximumDonorAgreementPx": 1.5,
+  "scope": "Exploratory test, separate from original Gaia absolute screen. Two other bands only predict the target center using DQ-zero finite peaks from fixed larger Gaia-centered boxes and the original WCS. Equal-weight center of two projected donors if agreement passes. Apply unchanged four-pixel, DQ and aperture checks to the held-out target. Independence is from the held-out target image for center prediction, not from the common visit, target or instrument."
+}

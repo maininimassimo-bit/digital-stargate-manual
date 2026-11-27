@@ -1,0 +1,42 @@
+{
+  "schema": "BKL046_ASI2600MC_NATIVE_BILINEAR_REFERENCE_PROTOCOL_V1",
+  "priorArchiveSha256": "dec8591cbc89f2ae747b51d3239628069d5fdbe5fe22336fb3dd78f87c82f9d5",
+  "priorReportSha256": "1b418ca777cbb2a2f03634457853ebfa8ca5bdec5d6ec32b2510c64d61cfdb3c",
+  "offlineResampleReportSha256": "0ec52bc040a3ac508a7bc5d4d80b08863dce80825f4450ef9b61482ff968bb09",
+  "pairIndices": [
+    0,
+    6
+  ],
+  "tileIndex": 4,
+  "phaseSixteenths": [
+    [
+      0,
+      0
+    ],
+    [
+      8,
+      0
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      8,
+      8
+    ],
+    [
+      4,
+      12
+    ]
+  ],
+  "outputROI": {
+    "xStart": 1,
+    "yStart": 1,
+    "xStop": 63,
+    "yStop": 63
+  },
+  "absoluteToleranceEncoded": 2.384185791015625e-7,
+  "inputTransform": "From sampled Bayer parity tiles use exactly 0.5 + (B-A)/65536, encoded Float32. Synthetic sentinel is supplied separately. Use same-size Float32 output with no physical FITS scaling. On the zero-based output ROI (x,y), expected input coordinate is (x+fx,y+fy). The mask never depends on output residuals.",
+  "operationalStatus": "REFERENCE_ONLY_REVIEW_REQUIRED"
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "BKL046_DIFFUSE_HELD_OUT_EDGES_PROTOCOL_V1",
+  "inputs": {
+    "IC1805": "636ed2f17a6a5315a87808afad6f05e6c309fc8bed1f0aa47ca5fc9bcac6c9a8",
+    "M8M20": "a84d66047802b999c61cce84b80e2cf79dc85032532fc9b30cf6c015684a9564"
+  },
+  "bandWidthCells": 2,
+  "bands": {
+    "left": [
+      0,
+      0
+    ],
+    "right": [
+      0,
+      14
+    ],
+    "top": [
+      1,
+      0
+    ],
+    "bottom": [
+      1,
+      10
+    ],
+    "innerLeft": [
+      0,
+      4
+    ],
+    "innerRight": [
+      0,
+      10
+    ],
+    "innerTop": [
+      1,
+      3
+    ],
+    "innerBottom": [
+      1,
+      7
+    ]
+  },
+  "minimumMedianImprovement": 0.1,
+  "design": "Keep the archived unit-scale real comparison pairs, registration, common support and cell medians. Fit the constant and affine models on cells outside each fixed band and score only cells inside it. Interior comparison bands have the same width, test count and training count as the corresponding edge orientation. The original checkerboard metrics must reproduce exactly. Evaluate all four edges separately; require success on each edge for the all-edges diagnostic. No model selection or calibration from withheld cells."
+}

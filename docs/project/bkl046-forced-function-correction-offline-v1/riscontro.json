@@ -1,0 +1,93 @@
+{
+  "baseCommit": "f413daa330142193c6855bcbc93b6d00d8c67cbe",
+  "candidateSha256": "f1690de564b37c0dc0bad4d9f98e6be5e628b0a7c52d151f683eb0697bd61d87",
+  "differentialCases": {
+    "callIdWithSeparators": {
+      "candidate": "RESEARCH_PROVIDER_TOOL",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "emptyCallId": {
+      "candidate": "RESEARCH_PROVIDER_TOOL",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "historicByteLimit": {
+      "candidate": "RESEARCH_DECISION_TEXT_LIMIT",
+      "original": "RESEARCH_DECISION_TEXT_LIMIT",
+      "retryRefusedBoth": true
+    },
+    "invalidBinding": {
+      "candidate": "RESEARCH_DECISION_CHANGED",
+      "original": "RESEARCH_DECISION_CHANGED",
+      "retryRefusedBoth": true
+    },
+    "limitations300Unicode": {
+      "candidate": "ACCEPTED",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "limitations301Ascii": {
+      "candidate": "RESEARCH_DECISION_TEXT_LIMIT",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "limitations301Unicode": {
+      "candidate": "RESEARCH_DECISION_TEXT_LIMIT",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "longCallId": {
+      "candidate": "RESEARCH_PROVIDER_TOOL",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "maxCallId": {
+      "candidate": "ACCEPTED",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "missingCallId": {
+      "candidate": "RESEARCH_PROVIDER_TOOL",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "nullCallId": {
+      "candidate": "RESEARCH_PROVIDER_TOOL",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "rationale300Ascii": {
+      "candidate": "ACCEPTED",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "rationale301Ascii": {
+      "candidate": "RESEARCH_DECISION_TEXT_LIMIT",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "select": {
+      "candidate": "ACCEPTED",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "stop": {
+      "candidate": "ACCEPTED",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    },
+    "test": {
+      "candidate": "ACCEPTED",
+      "original": "ACCEPTED",
+      "retryRefusedBoth": true
+    }
+  },
+  "nativeExecutions": 0,
+  "originalSuiteReplayed": 24,
+  "patchSha256": "2a012a529d622661f053232d9f0a5f2bca53a88434b2676c3dc583c25a882bc1",
+  "providerCalls": 0,
+  "schema": "BKL046_RESEARCH_PROVIDER_CORRECTION_OFFLINE_V1",
+  "scientificClosures": 0,
+  "testSha256": "ea6fdd57d88ab8862234da9f3319d13a5fbf7001e27b59884dea7b1871bf8fd0"
+}

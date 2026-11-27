@@ -1,0 +1,27 @@
+{
+  "schema": "BKL046_M51_RELATIVE_SPATIAL_DISTORTION_V1",
+  "parentCode": "1c664df2d1c5335a250d00e2e716032799c5f6ec0ed53eec5b65290cebfa3b3c",
+  "parentReport": "61f1a5dd0842ff43f4594adc26beac4e2c0176fffc6cb28ec8950f30e7239e8e",
+  "detectorShapeYX": [
+    3670,
+    5496
+  ],
+  "methods": [
+    "pairedPreview",
+    "jointGreen"
+  ],
+  "models": [
+    "similarity",
+    "affine",
+    "similarityPlusRadialDifference",
+    "quadratic"
+  ],
+  "minimumTrain": 20,
+  "minimumTest": 20,
+  "diagnosticP90Px": 0.3,
+  "maxCondition": 10000,
+  "fixtureTolerancePx": 1e-7,
+  "radialModel": "Use the baseline similarity to express the reference radial vector in target coordinates. Fit a single coefficient for the difference of that vector and the radial vector of the baseline-predicted target position, including on held-out stars, with a fresh simultaneous similarity fit.",
+  "partition": "Exact corresponding training and held-out Gaia IDs from the common centroid sample. No held-out parameter fitting.",
+  "quadratic": "Independent second-order polynomial for each target coordinate, using detector-centered normalized coordinates."
+}

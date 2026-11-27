@@ -1,0 +1,130 @@
+{
+  "designSha256": "54a0476169d466f7172eef69836c532ad38b7eca25512a008becfa77e6a664ba",
+  "distinctSession": true,
+  "envelopesDescriptiveOnly": true,
+  "gainEstimated": false,
+  "independentFramesBetweenPairingSchemes": false,
+  "nativeExecutions": 0,
+  "protocol": "BKL046_TV4_HOLDOUT_XCAL65_RESULT_V1",
+  "runs": {
+    "AB": {
+      "frames": [
+        {
+          "ccdTemperatureK": 167.846,
+          "integrationMs": 3.5,
+          "name": "i030306_211836_603_a.fit",
+          "rawMaxDn": 16383,
+          "rawMinDn": 4674,
+          "rejectedPixelCount": 30126,
+          "utc": "2003-03-06T21:18:36.603"
+        },
+        {
+          "ccdTemperatureK": 167.846,
+          "integrationMs": 3.5,
+          "name": "i030306_211844_403_a.fit",
+          "rawMaxDn": 16383,
+          "rawMinDn": 4627,
+          "rejectedPixelCount": 34063,
+          "utc": "2003-03-06T21:18:44.403"
+        },
+        {
+          "ccdTemperatureK": 167.846,
+          "integrationMs": 3.5,
+          "name": "i030306_211848_353_a.fit",
+          "rawMaxDn": 16383,
+          "rawMinDn": 4618,
+          "rejectedPixelCount": 20277,
+          "utc": "2003-03-06T21:18:48.353"
+        },
+        {
+          "ccdTemperatureK": 167.846,
+          "integrationMs": 3.5,
+          "name": "i030306_211851_753_a.fit",
+          "rawMaxDn": 16383,
+          "rawMinDn": 4564,
+          "rejectedPixelCount": 22153,
+          "utc": "2003-03-06T21:18:51.753"
+        },
+        {
+          "ccdTemperatureK": 167.813,
+          "integrationMs": 3.5,
+          "name": "i030306_211855_086_a.fit",
+          "rawMaxDn": 16383,
+          "rawMinDn": 4622,
+          "rejectedPixelCount": 23988,
+          "utc": "2003-03-06T21:18:55.086"
+        },
+        {
+          "ccdTemperatureK": 167.025,
+          "integrationMs": 3.5,
+          "name": "i030306_211858_436_a.fit",
+          "rawMaxDn": 16383,
+          "rawMinDn": 4697,
+          "rejectedPixelCount": 25902,
+          "utc": "2003-03-06T21:18:58.436"
+        }
+      ],
+      "pairs": [
+        {
+          "indices": [
+            0,
+            1
+          ],
+          "mode": "adjacent",
+          "status": "ABSTAIN_SUPPORT"
+        },
+        {
+          "indices": [
+            2,
+            3
+          ],
+          "mode": "adjacent",
+          "status": "ABSTAIN_SUPPORT"
+        },
+        {
+          "indices": [
+            4,
+            5
+          ],
+          "mode": "adjacent",
+          "status": "ABSTAIN_SUPPORT"
+        },
+        {
+          "indices": [
+            0,
+            3
+          ],
+          "mode": "separated",
+          "status": "ABSTAIN_SUPPORT"
+        },
+        {
+          "indices": [
+            1,
+            4
+          ],
+          "mode": "separated",
+          "status": "ABSTAIN_SUPPORT"
+        },
+        {
+          "indices": [
+            2,
+            5
+          ],
+          "mode": "separated",
+          "status": "ABSTAIN_SUPPORT"
+        }
+      ],
+      "summary": {
+        "adjacent": {
+          "pairs": 0,
+          "summaries": {}
+        },
+        "separated": {
+          "pairs": 0,
+          "summaries": {}
+        }
+      }
+    }
+  },
+  "scientificClosures": 0
+}

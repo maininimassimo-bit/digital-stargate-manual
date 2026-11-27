@@ -1,0 +1,69 @@
+{
+  "protocol": "BKL046_ACS11677_SAME_VISIT_REPEAT_DQ_V1",
+  "measuredFiles": [
+    {
+      "target": "jbb502igq",
+      "sha256": "d6f2fcecdedf99dc6b2d64f19de15b1fc5a190ccceed3b7691b514fdc3264cdb"
+    },
+    {
+      "target": "jbb502ijq",
+      "sha256": "7015e7f3e9e674d90b6b7aabc51bfe2b0ecf18fa6bf416c97850f73b727a48e3"
+    }
+  ],
+  "commonQualifiedFootprints": 276,
+  "projectedCenterDisplacementPx": {
+    "min": 0.09849150559745827,
+    "median": 0.11617409350907701,
+    "max": 0.14384644963661775
+  },
+  "sameSourceStateCount": 254,
+  "transitionCounts": [
+    {
+      "first": "PEAK_SUPPORT_OR_RELOCATION",
+      "second": "PEAK_SUPPORT_OR_RELOCATION",
+      "count": 69
+    },
+    {
+      "first": "PEAK_SUPPORT_OR_RELOCATION",
+      "second": "SHORT_FULL_WELL",
+      "count": 2
+    },
+    {
+      "first": "PEAK_SUPPORT_OR_RELOCATION",
+      "second": "SHORT_OTHER_DQ",
+      "count": 6
+    },
+    {
+      "first": "SHORT_FULL_WELL",
+      "second": "PEAK_SUPPORT_OR_RELOCATION",
+      "count": 2
+    },
+    {
+      "first": "SHORT_FULL_WELL",
+      "second": "SHORT_FULL_WELL",
+      "count": 13
+    },
+    {
+      "first": "SHORT_FULL_WELL",
+      "second": "SHORT_OTHER_DQ",
+      "count": 1
+    },
+    {
+      "first": "SHORT_OTHER_DQ",
+      "second": "PEAK_SUPPORT_OR_RELOCATION",
+      "count": 11
+    },
+    {
+      "first": "SHORT_OTHER_DQ",
+      "second": "SHORT_OTHER_DQ",
+      "count": 172
+    }
+  ],
+  "diagnosticCommonSitesByMask": {
+    "0": 0,
+    "16": 6,
+    "80": 88
+  },
+  "eligibleForStellarFlux": 0,
+  "scientificClosure": false
+}

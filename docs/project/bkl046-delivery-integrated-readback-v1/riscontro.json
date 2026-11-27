@@ -1,0 +1,22 @@
+{
+  "protocol": "BKL046_RELEASE_RECONSTRUCTION_JOIN_FIXTURE_V1",
+  "positiveFixtureAccepted": true,
+  "rejectedCases": [
+    "wrong_release_id",
+    "capsule_unverified",
+    "short_readback",
+    "release_changes_during_replay",
+    "incorrect_corpus_carrier_pins",
+    "duplicate_logical_alias_digest",
+    "object_digest_changed",
+    "local_fixture_report",
+    "wrong_reconstruction_plan",
+    "reused_asset_id"
+  ],
+  "releaseSubjectAssets": 81,
+  "candidateLogicalObjects": 10180,
+  "remoteCalls": 0,
+  "githubReadbackPerformed": false,
+  "githubTransferVerified": false,
+  "scientificClosures": 0
+}

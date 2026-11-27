@@ -1,0 +1,68 @@
+{
+  "nativeExecutions": 0,
+  "negative": [
+    {
+      "case": "foreign reservation",
+      "rejection": "IA_TERMINAL_RESERVATION"
+    },
+    {
+      "case": "foreign operation",
+      "rejection": "IA_TERMINAL_RETURN_BINDING"
+    },
+    {
+      "case": "replaced frame",
+      "rejection": "IA_TERMINAL_FRAME"
+    },
+    {
+      "case": "replaced console",
+      "rejection": "IA_TERMINAL_CONSOLE"
+    },
+    {
+      "case": "foreign process",
+      "rejection": "F06_UI_CLOSE_ORIGINAL"
+    },
+    {
+      "case": "process exited before action",
+      "rejection": "F06_CLOSE_EXIT_NOT_AFTER_ACTION"
+    },
+    {
+      "case": "nonzero process exit",
+      "rejection": "F06_CLOSE_NONZERO_EXIT"
+    },
+    {
+      "case": "expired evidence",
+      "rejection": "F06_UI_CLOSE_FRESHNESS"
+    },
+    {
+      "case": "wrong return marker",
+      "rejection": "F06_UI_CLOSE_NATIVE_MARKER"
+    },
+    {
+      "case": "modal window",
+      "rejection": "F06_UI_CLOSE_ACTION_OR_STATE"
+    },
+    {
+      "case": "different receipt bytes",
+      "rejection": "F06_UI_CLOSE_DIGEST"
+    },
+    {
+      "case": "duplicate receipt field",
+      "rejection": "F06_UI_CLOSE_DUPLICATE_FIELD"
+    }
+  ],
+  "positive": {
+    "closureSha256": "c28e6ca92bca79c26682670777e9facfb77fe32f9e3085c12b75fdfee53ae976",
+    "consoleSha256": "0e19c9780ce29e31c054d51b2a1873365e2c26dbfed1c9cbb5c0523980d6e32e",
+    "frameSha256": "4882ae945f6cd43a205cb7379bda51fb80ac87167bbf2bd4f3d7aa5184bc438d",
+    "measurementSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "nativeOriginVerifiedByValidator": false,
+    "operation": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "reservation": "00000000-0000-4000-8000-000000000001",
+    "returnSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "scientificAcceptance": false
+  },
+  "productionRegistryModified": false,
+  "protocol": "BKL046_IMAGEANALYSIS_TERMINAL_EVIDENCE_OFFLINE_V1",
+  "scientificClosures": 0,
+  "supervisorIntegrated": false
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "BKL046_M51_RAW_HEADROOM_RECURRENCE_V1",
+  "cfaProtocolSha256": "0b583f77e34562c4e0ddcf5ecca99161cfb5849f82d544fd417312473f541b17",
+  "cfaReportSha256": "ac2787bb91a925e7a204d21225e0e622495e6d2e7387794a37a051f9a0c597a0",
+  "associationSha256": "78dbd7a475d33b0ce6c30bc39e02b0119467b5898c1b3b67f421e5f4dab367af",
+  "plateauCodes": [
+    14042,
+    14043
+  ],
+  "matchRadiiNativePx": [
+    1,
+    2,
+    4
+  ],
+  "positionControlsNativePx": [
+    [
+      32,
+      0
+    ],
+    [
+      -32,
+      0
+    ],
+    [
+      0,
+      32
+    ],
+    [
+      0,
+      -32
+    ]
+  ],
+  "scope": "Compare repeated high RAW codes at equal detector coordinates and positions predicted from a previously fitted field similarity. Fixed thresholds only. No physical saturation law, bad-pixel classification or correction inferred."
+}

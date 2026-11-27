@@ -1,0 +1,97 @@
+{
+  "calibratedDoseMatched": false,
+  "detailSha256": "c8baf27c6392623a6b77eab821a2952f3985e822df4c1ba02ed58cd7faf190db",
+  "nativeExecutions": 0,
+  "parentReceiptSha256": "f264d691ee7cb2b88d6128152a962cdc4da6a05107d2498618fa27fd80137063",
+  "rowsVerified": 2880,
+  "schema": "BKL046_ROMAN_GAIN_LIN0_ABSOLUTE_TRANSFER_V1",
+  "scientificClosures": 0,
+  "summary": [
+    {
+      "accepted": 480,
+      "band": "lower",
+      "frame": 1,
+      "models": {
+        "gainEmpirical": {
+          "medianAbsolute": 0.045045519290097646,
+          "medianSigned": -0.00301439087595351,
+          "p95Absolute": 0.13346732768319272
+        },
+        "gainRawCovariance": {
+          "medianAbsolute": 0.046107785900333875,
+          "medianSigned": 0.003132643080504094,
+          "p95Absolute": 0.12920653618887806
+        },
+        "gainRawIndependent": {
+          "medianAbsolute": 0.12708134708401486,
+          "medianSigned": -0.12708134708401486,
+          "p95Absolute": 0.22351470877361945
+        },
+        "lin0Empirical": {
+          "medianAbsolute": 0.04554535502258383,
+          "medianSigned": -0.0014456990886101417,
+          "p95Absolute": 0.13102611012787224
+        }
+      },
+      "previousSignalEligibilityChanged": 0,
+      "refused": 0
+    },
+    {
+      "accepted": 0,
+      "band": "lower",
+      "frame": 5,
+      "previousSignalEligibilityChanged": 0,
+      "refused": 480
+    },
+    {
+      "accepted": 0,
+      "band": "lower",
+      "frame": 10,
+      "previousSignalEligibilityChanged": 0,
+      "refused": 480
+    },
+    {
+      "accepted": 480,
+      "band": "upper",
+      "frame": 1,
+      "models": {
+        "gainEmpirical": {
+          "medianAbsolute": 0.040239059953437406,
+          "medianSigned": 0.0044188309501072,
+          "p95Absolute": 0.1312681115526828
+        },
+        "gainRawCovariance": {
+          "medianAbsolute": 0.0441684226323098,
+          "medianSigned": 0.009793604650608412,
+          "p95Absolute": 0.14353474178090825
+        },
+        "gainRawIndependent": {
+          "medianAbsolute": 0.13176520614887416,
+          "medianSigned": -0.13176520614887416,
+          "p95Absolute": 0.225432821520991
+        },
+        "lin0Empirical": {
+          "medianAbsolute": 0.042177103678896155,
+          "medianSigned": 0.00036856147476049816,
+          "p95Absolute": 0.12800863170063154
+        }
+      },
+      "previousSignalEligibilityChanged": 0,
+      "refused": 0
+    },
+    {
+      "accepted": 0,
+      "band": "upper",
+      "frame": 5,
+      "previousSignalEligibilityChanged": 0,
+      "refused": 480
+    },
+    {
+      "accepted": 0,
+      "band": "upper",
+      "frame": 10,
+      "previousSignalEligibilityChanged": 0,
+      "refused": 480
+    }
+  ]
+}

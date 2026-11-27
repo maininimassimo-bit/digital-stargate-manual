@@ -1,0 +1,160 @@
+{
+  "apertureColumns": [
+    "APER#0.20",
+    "APER#0.40"
+  ],
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "catalogSha256": "2dd286a01760ccd6fa8786a909be44c8edd411d72b23efabc1fde38ae32e0f4a",
+  "csv": {
+    "1": "222dc1fc05a55d58221cf76b4d9edbe36fc41ff09f82d79fcbe59d9078cf6948",
+    "2": "57dfa01d79a27d4dd16bb69ee03ecc7bd104c7b2df1ab8ca0b7f8ef450f311e2"
+  },
+  "detectSecondaryAboveElectron": 15,
+  "edgeMargin": 40,
+  "localMaxSignalElectron": 200,
+  "maxPeakOffsetPx": 4,
+  "maxTimeSpanDays": 0.05,
+  "minSkyFraction": 0.7,
+  "minimumCentralElectron": 200,
+  "minimumIdentityPeakFactor": 4,
+  "neighborPeakFraction": 0.02,
+  "neighborRadius": 30,
+  "pam": {
+    "1": "308c90ce013750b1857450386e2002a092d3d69342351e3fa80e4115ee5d62cc",
+    "2": "a5738b6cad94ac6fa69aa38c8f610808454464762be9a84d9bac795a3f974b14"
+  },
+  "proposal": 11452,
+  "radiusPx": [
+    5,
+    10
+  ],
+  "schema": "BKL046_WFC3_OUTSIDE_EE_STAR_COHORT_V1",
+  "scope": "Independent sky fields outside the listed standard-star EE training set. Detect from F606W, no other-band filtering in selection. Demand mutually isolated sources and finite DQ-zero apertures in all bands. Treat comparisons as nested in each physical field, with no field-population inference from individual stars.",
+  "selected": [
+    {
+      "proposal": "11452",
+      "rows": [
+        {
+          "calib_level": 3,
+          "dataRights": "PUBLIC",
+          "dataproduct_type": "image",
+          "filters": "F438W",
+          "instrument_name": "WFC3/UVIS",
+          "obs_id": "iaby01kbq",
+          "obsid": 23817463,
+          "project": "HST",
+          "proposal_id": "11452",
+          "s_dec": -72.06777777778,
+          "s_ra": 5.660416666667,
+          "t_exptime": 35,
+          "t_max": 55029.69198630787,
+          "t_min": 55029.69158133102,
+          "target_name": "47TUC"
+        },
+        {
+          "calib_level": 3,
+          "dataRights": "PUBLIC",
+          "dataproduct_type": "image",
+          "filters": "F814W",
+          "instrument_name": "WFC3/UVIS",
+          "obs_id": "iaby01keq",
+          "obsid": 23817465,
+          "project": "HST",
+          "proposal_id": "11452",
+          "s_dec": -72.06777777778,
+          "s_ra": 5.660416666667,
+          "t_exptime": 35,
+          "t_max": 55029.69968295139,
+          "t_min": 55029.699277974534,
+          "target_name": "47TUC"
+        },
+        {
+          "calib_level": 3,
+          "dataRights": "PUBLIC",
+          "dataproduct_type": "image",
+          "filters": "F606W",
+          "instrument_name": "WFC3/UVIS",
+          "obs_id": "iaby01kjq",
+          "obsid": 23817468,
+          "project": "HST",
+          "proposal_id": "11452",
+          "s_dec": -72.06777777778,
+          "s_ra": 5.660416666667,
+          "t_exptime": 35,
+          "t_max": 55029.72070146991,
+          "t_min": 55029.720296493055,
+          "target_name": "47TUC"
+        }
+      ],
+      "target": "NGC104",
+      "visit": "iaby01"
+    },
+    {
+      "proposal": "11452",
+      "rows": [
+        {
+          "calib_level": 3,
+          "dataRights": "PUBLIC",
+          "dataproduct_type": "image",
+          "filters": "F438W",
+          "instrument_name": "WFC3/UVIS",
+          "obs_id": "iaby02wzq",
+          "obsid": 23817493,
+          "project": "HST",
+          "proposal_id": "11452",
+          "s_dec": -47.47956944444,
+          "s_ra": 201.6968333333,
+          "t_exptime": 35,
+          "t_max": 55027.151210729164,
+          "t_min": 55027.15080575232,
+          "target_name": "OMEGA-CEN"
+        },
+        {
+          "calib_level": 3,
+          "dataRights": "PUBLIC",
+          "dataproduct_type": "image",
+          "filters": "F814W",
+          "instrument_name": "WFC3/UVIS",
+          "obs_id": "iaby02x2q",
+          "obsid": 23817495,
+          "project": "HST",
+          "proposal_id": "11452",
+          "s_dec": -47.47956944444,
+          "s_ra": 201.6968333333,
+          "t_exptime": 35,
+          "t_max": 55027.15917369213,
+          "t_min": 55027.15876871528,
+          "target_name": "OMEGA-CEN"
+        },
+        {
+          "calib_level": 3,
+          "dataRights": "PUBLIC",
+          "dataproduct_type": "image",
+          "filters": "F606W",
+          "instrument_name": "WFC3/UVIS",
+          "obs_id": "iaby02x7q",
+          "obsid": 23817498,
+          "project": "HST",
+          "proposal_id": "11452",
+          "s_dec": -47.47956944444,
+          "s_ra": 201.6968333333,
+          "t_exptime": 35,
+          "t_max": 55027.1807244213,
+          "t_min": 55027.180319444444,
+          "target_name": "OMEGA-CEN"
+        }
+      ],
+      "target": "NGC5139",
+      "visit": "iaby02"
+    }
+  ],
+  "selection": "All public 35-second exposures of NGC104 and NGC5139 in proposal 11452 in each of the three bands.",
+  "skyAnnulus": [
+    16,
+    22
+  ]
+}

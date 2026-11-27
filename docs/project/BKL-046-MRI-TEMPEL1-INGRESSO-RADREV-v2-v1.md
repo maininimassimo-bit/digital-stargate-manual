@@ -1,0 +1,6 @@
+# BKL-046 — Verifica degli ingressi RADREV v2 per Tempel 1
+
+Il verificatore usa le 60 pose del volume DIMV9P_3101 riconciliate con l’indice PDS. Per ogni coppia richiede versione, prodotto, esposizione, immagine, filtro e istante del catalogo, il riscontro delle impronte contro il manifest del volume e tre immagini FITS da 512 × 512. Lo script riceve il manifest originale accompagnato da un’impronta SHA-256 verificata alla fonte. Registra nuovi SHA-256 delle coppie accettate. [Catalogo RADREV v2 del PDS](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-MRI-3%2F4-9P-ENCOUNTER-V2.0)
+
+Due ripetizioni offline hanno respinto lo stesso FITS v3 autentico con la sua etichetta e tre controlli su prodotto o checksum. Il percorso di accettazione resta da verificare su coppie v2 autentiche. I tentativi dalla VM verso quattro nomi del nodo Small Bodies per la prima esposizione hanno esaurito il tempo di connessione. I rilevamenti non stabiliscono la disponibilità generale dei dati. Nessuna coppia v2 acquisita o accettata e nessuna chiusura scientifica. [Archivio della missione Deep Impact del nodo Small Bodies](https://sbn.astro.umd.edu/data_sb/missions/deepimpact/index.shtml)
+SHA-256 archivio H: ac76d784ee95b4114bd3dbebe7871a27e98fa9e63bc1958da47064611df7621c.

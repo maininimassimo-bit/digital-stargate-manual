@@ -1,0 +1,5 @@
+SELECT source_id,ref_epoch,ra,dec,pmra,pmdec,phot_g_mean_mag,has_xp_continuous,has_xp_sampled
+FROM gaiadr3.gaia_source
+WHERE source_id IN (3944400490365194368,1686708050268594944,740620316527646848)
+OR 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',88.115083333333,15.887008333333,0.01))
+ORDER BY source_id

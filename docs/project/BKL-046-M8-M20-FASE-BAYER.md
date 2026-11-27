@@ -1,0 +1,11 @@
+# BKL-046 · Fase Bayer nelle pose M8 e M20
+
+La serie del tutorial Siril contiene 15 pose FITS a due dimensioni, da 180 s, con gain 100, binning 1 × 1, ZWO ASI2600MC Pro e intestazione RGGB. Lo ZIP acquisito è fissato da SHA-256 `daa8ba4ee748f7616f3db0371b60d95752ff98d00ceaef280fe8f6e8ab937c76`. Sono stati verificati i 15 membri e conservate le impronte individuali. [Tutorial e dati di Colmic](https://siril.org/tutorials/tuto-scripts/index.html)
+
+Gli spostamenti sono misurati rispetto alla prima posa con correlazione e interpolazione locale della trasformata discreta di Fourier, su quattro tessere fisse. Per la registrazione si usa una previsualizzazione a metà scala con la media dei due verdi di ogni cella CFA, senza demosaicizzare gli originali. I risultati sono riportati in pixel nativi. Due controlli analitici recuperano lo spostamento nullo e un offset frazionario noto. I test non determinano l'accuratezza assoluta sul cielo.
+
+La classificazione arrotonda lo spostamento sui due assi e calcola la parità modulo due. Cinque pose, inclusa la prima, rispettano il limite di dispersione di 0,30 px fra tessere rispetto alla mediana e il margine nominale di 0,10 px dai confini di parità. Coprono nominalmente quattro celle. Richiedendo inoltre che tutte le tessere restino nella stessa cella anche aggiungendo mezzo passo della griglia, restano quattro pose in tre celle. La cella (1,0) perde il suo unico caso perché una tessera tocca il confine. La dispersione radiale massima osservata raggiunge 0,729 px nelle pose finali.
+
+Le misure descrivono la diversità di campionamento di questa sequenza e la sensibilità della classificazione alla posizione nel campo. La cella mancante riguarda il criterio adottato e non dimostra la presenza di lacune in ogni ricostruzione. I metadati letti non attestano un programma di dither. Rotazione, deriva, variazione della PSF e bias della previsualizzazione possono contribuire alla dispersione. Restano da qualificare la registrazione locale e il confronto fra ricostruzioni CFA a scala comune, con flusso e rumore misurati. Zero avvii nativi e zero chiusure scientifiche.
+
+SHA-256 della ricevuta `28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59`.

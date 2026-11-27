@@ -1,0 +1,7 @@
+# BKL-046 — Estensione del confronto ePSF a due pose F606W
+
+**Posa da 10 secondi, GO-10569.** Il protocollo usa il modello ePSF standard SM4 per la sorgente e il modello SM3 per la posa precedente alla missione SM4. Le due librerie STScI sono vincolate per SHA-256. Solo la coppia 2 → 1 ha abbastanza ancoraggi in stima e verifica. Il P90 affine scende da 0,1964 a 0,1368 pixel, sopra il limite di 0,1000 pixel. Le altre coppie hanno campioni insufficienti. [Modelli ePSF ACS di STScI](https://www.stsci.edu/hst/instrumentation/acs/data-analysis/psf)
+
+**Seconda posa da 40 secondi, GO-11880.** Lo stesso metodo ePSF della prima posa, applicato senza cambiare i parametri, ottiene P90 affini di 0,0776 e 0,0594 pixel sui 50 e 57 riferimenti indipendenti dalle tessere di stima. Le due coppie rispettano il limite. Il ripetersi del risultato riguarda una seconda esposizione della stessa visita.
+
+Nelle due pose da 40 secondi, 276 centri delle scie ricadono nelle coppie qualificate in entrambi i casi. La posizione prevista sul rivelatore si sposta di appena 0,116 pixel in mediana. L'esito del filtro coincide in 254 casi. Nessun centro supera il controllo DQ e di segnale previsto per la misura del flusso. La maschera diagnostica che ignora i bit 16 e 64 ammetterebbe 88 centri comuni al solo controllo di sensibilità. La prova sostiene la ripetibilità geometrica nello stesso puntamento. Resta da verificare il recupero fotometrico su esposizioni che spostino le sorgenti in altre zone del rivelatore.

@@ -1,0 +1,7 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_LEVEL_TRANSFER_V1",
+  "parentCode": "61ece8dd0f1c3bf9cce02f62c3896377a4625ad869d090c15d1f6dcf8d662213",
+  "parentReceipt": "5a9c9debf4b6a233cc03df2d24847452dc83f8ed6bd7b42a6de24110d29f64e2",
+  "parentPolicy": "186ce5e83d89b97a1ebd19f5b774600d679e6a8979c0773a3aba70ee695d621a",
+  "design": "For each held-out disjoint exposure pair, exclude those same two exposures at every reading from all covariance estimates. Calibrate normalized matrices in the same band and channel at each level separately and in the mean of the two alternative levels. Compare against the exact same-level and independent-input endpoints using the held-out scalar variance and fixed half/half support. Summarize transfer by band and direction across 320 rows, and compare within exposure pair. No measurement of incident dose."
+}

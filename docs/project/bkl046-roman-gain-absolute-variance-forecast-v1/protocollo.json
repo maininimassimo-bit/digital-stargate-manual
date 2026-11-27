@@ -1,0 +1,6 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_ABSOLUTE_HELD_PAIR_V1",
+  "heritagePolicy": "fa76662763c5dee4f57be07124081272587d9439f9edae7e050fa4ac8a2be9e9",
+  "heritageReceipt": "cf8d96b4cab9d03c9fc22c0c26301e53aff16331b2eb0c2dbf3cc2e2635be469",
+  "design": "For each band, channel, reading and held-out exposure pair, exclude the pair at every level. Predict absolute sum variance with median training raw variance times independent or matched covariance gain, or median training sum variance. Also fit linear relations across only the other two readings using training-only median raw signals: direct sum-variance interpolation/extrapolation and raw variance scaled by the pooled other-level covariance gain. Training-only target signal is allowed. Keep negative predictions, report separately. The holdout provides only the evaluation target. Absolute relative error has denominator reference sum variance."
+}

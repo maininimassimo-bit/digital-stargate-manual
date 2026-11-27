@@ -1,0 +1,2933 @@
+{
+  "protocol": "BKL046_TV4_DIGITAL_CLIP_MASK_OPERATING_POINTS_V1",
+  "protocolSha256": "49b8118618bb0a894ee38fbb5fd9dd3ccedf4ce507600865615711297521a589",
+  "parentReportSha256": "8b08fa4c9fa2ce80f94692d23c56d07ef939fa75ed8592ebe2f18b8d87fbceed",
+  "exactParentReplay": true,
+  "evaluatedFrames": 12,
+  "anyThresholdSelected": false,
+  "saturationFluxRecovered": false,
+  "results": [
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "center",
+      "frames": 6,
+      "saturated": 179248,
+      "unsaturated": 213968,
+      "counts": {
+        "-256": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 131954,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 82014
+        },
+        "0": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 81147,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 132821
+        },
+        "64": {
+          "correctMarked": 179225,
+          "unsaturatedMarked": 67048,
+          "saturatedUnmarked": 23,
+          "correctUnmarked": 146920
+        },
+        "128": {
+          "correctMarked": 179026,
+          "unsaturatedMarked": 52880,
+          "saturatedUnmarked": 222,
+          "correctUnmarked": 161088
+        },
+        "256": {
+          "correctMarked": 174153,
+          "unsaturatedMarked": 27236,
+          "saturatedUnmarked": 5095,
+          "correctUnmarked": 186732
+        },
+        "512": {
+          "correctMarked": 133274,
+          "unsaturatedMarked": 9084,
+          "saturatedUnmarked": 45974,
+          "correctUnmarked": 204884
+        },
+        "1024": {
+          "correctMarked": 56968,
+          "unsaturatedMarked": 4,
+          "saturatedUnmarked": 122280,
+          "correctUnmarked": 213964
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 23,
+          "unsaturatedDeferred": 28345,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 67048
+        },
+        "256": {
+          "saturatedDeferred": 5095,
+          "unsaturatedDeferred": 104718,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 27236
+        },
+        "512": {
+          "saturatedDeferred": 45974,
+          "unsaturatedDeferred": 159584,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 9084
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 3519,
+      "unsaturated": 389697,
+      "counts": {
+        "-256": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 279300,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 110397
+        },
+        "0": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 208614,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 181083
+        },
+        "64": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 189225,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 200472
+        },
+        "128": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 170802,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 218895
+        },
+        "256": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 134841,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 254856
+        },
+        "512": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 74151,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 315546
+        },
+        "1024": {
+          "correctMarked": 2190,
+          "unsaturatedMarked": 10515,
+          "saturatedUnmarked": 1329,
+          "correctUnmarked": 379182
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 37896,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 189225
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 144459,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 134841
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 258318,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 74151
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 32915,
+      "unsaturated": 360301,
+      "counts": {
+        "-256": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 268482,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 91819
+        },
+        "0": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 204163,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 156138
+        },
+        "64": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 185988,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 174313
+        },
+        "128": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 168114,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 192187
+        },
+        "256": {
+          "correctMarked": 32914,
+          "unsaturatedMarked": 131850,
+          "saturatedUnmarked": 1,
+          "correctUnmarked": 228451
+        },
+        "512": {
+          "correctMarked": 30775,
+          "unsaturatedMarked": 67465,
+          "saturatedUnmarked": 2140,
+          "correctUnmarked": 292836
+        },
+        "1024": {
+          "correctMarked": 11165,
+          "unsaturatedMarked": 9331,
+          "saturatedUnmarked": 21750,
+          "correctUnmarked": 350970
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 35508,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 185988
+        },
+        "256": {
+          "saturatedDeferred": 1,
+          "unsaturatedDeferred": 136632,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 131850
+        },
+        "512": {
+          "saturatedDeferred": 2140,
+          "unsaturatedDeferred": 247329,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 67465
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 265119,
+      "unsaturated": 128097,
+      "counts": {
+        "-256": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 85215,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 42882
+        },
+        "0": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 56133,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 71964
+        },
+        "64": {
+          "correctMarked": 265113,
+          "unsaturatedMarked": 47261,
+          "saturatedUnmarked": 6,
+          "correctUnmarked": 80836
+        },
+        "128": {
+          "correctMarked": 265095,
+          "unsaturatedMarked": 38265,
+          "saturatedUnmarked": 24,
+          "correctUnmarked": 89832
+        },
+        "256": {
+          "correctMarked": 264232,
+          "unsaturatedMarked": 18948,
+          "saturatedUnmarked": 887,
+          "correctUnmarked": 109149
+        },
+        "512": {
+          "correctMarked": 234407,
+          "unsaturatedMarked": 239,
+          "saturatedUnmarked": 30712,
+          "correctUnmarked": 127858
+        },
+        "1024": {
+          "correctMarked": 129068,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 136051,
+          "correctUnmarked": 128097
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 6,
+          "unsaturatedDeferred": 17096,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 47261
+        },
+        "256": {
+          "saturatedDeferred": 887,
+          "unsaturatedDeferred": 66267,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 18948
+        },
+        "512": {
+          "saturatedDeferred": 30712,
+          "unsaturatedDeferred": 106300,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 239
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 38824,
+      "unsaturated": 354392,
+      "counts": {
+        "-256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 268382,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 86010
+        },
+        "0": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 224702,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 129690
+        },
+        "64": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 212246,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 142146
+        },
+        "128": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 199166,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 155226
+        },
+        "256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 171722,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 182670
+        },
+        "512": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 115940,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 238452
+        },
+        "1024": {
+          "correctMarked": 37479,
+          "unsaturatedMarked": 30051,
+          "saturatedUnmarked": 1345,
+          "correctUnmarked": 324341
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 24420,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 212246
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 96660,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 171722
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 185262,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 115940
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "center",
+      "frames": 6,
+      "saturated": 179248,
+      "unsaturated": 213968,
+      "counts": {
+        "-256": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 131972,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 81996
+        },
+        "0": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 81158,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 132810
+        },
+        "64": {
+          "correctMarked": 179225,
+          "unsaturatedMarked": 67003,
+          "saturatedUnmarked": 23,
+          "correctUnmarked": 146965
+        },
+        "128": {
+          "correctMarked": 179022,
+          "unsaturatedMarked": 52920,
+          "saturatedUnmarked": 226,
+          "correctUnmarked": 161048
+        },
+        "256": {
+          "correctMarked": 174210,
+          "unsaturatedMarked": 27252,
+          "saturatedUnmarked": 5038,
+          "correctUnmarked": 186716
+        },
+        "512": {
+          "correctMarked": 133350,
+          "unsaturatedMarked": 8952,
+          "saturatedUnmarked": 45898,
+          "correctUnmarked": 205016
+        },
+        "1024": {
+          "correctMarked": 56774,
+          "unsaturatedMarked": 4,
+          "saturatedUnmarked": 122474,
+          "correctUnmarked": 213964
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 23,
+          "unsaturatedDeferred": 28435,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 67003
+        },
+        "256": {
+          "saturatedDeferred": 5038,
+          "unsaturatedDeferred": 104720,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 27252
+        },
+        "512": {
+          "saturatedDeferred": 45898,
+          "unsaturatedDeferred": 159722,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 8952
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 3519,
+      "unsaturated": 389697,
+      "counts": {
+        "-256": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 279627,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 110070
+        },
+        "0": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 209067,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 180630
+        },
+        "64": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 189783,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 199914
+        },
+        "128": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 171267,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 218430
+        },
+        "256": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 135345,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 254352
+        },
+        "512": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 74511,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 315186
+        },
+        "1024": {
+          "correctMarked": 2202,
+          "unsaturatedMarked": 10584,
+          "saturatedUnmarked": 1317,
+          "correctUnmarked": 379113
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 37926,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 189783
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 144282,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 135345
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 258234,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 74511
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 32915,
+      "unsaturated": 360301,
+      "counts": {
+        "-256": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 268717,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 91584
+        },
+        "0": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 204475,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 155826
+        },
+        "64": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 186337,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 173964
+        },
+        "128": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 168427,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 191874
+        },
+        "256": {
+          "correctMarked": 32914,
+          "unsaturatedMarked": 132098,
+          "saturatedUnmarked": 1,
+          "correctUnmarked": 228203
+        },
+        "512": {
+          "correctMarked": 30788,
+          "unsaturatedMarked": 67684,
+          "saturatedUnmarked": 2127,
+          "correctUnmarked": 292617
+        },
+        "1024": {
+          "correctMarked": 11203,
+          "unsaturatedMarked": 9365,
+          "saturatedUnmarked": 21712,
+          "correctUnmarked": 350936
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 35436,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 186337
+        },
+        "256": {
+          "saturatedDeferred": 1,
+          "unsaturatedDeferred": 136619,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 132098
+        },
+        "512": {
+          "saturatedDeferred": 2127,
+          "unsaturatedDeferred": 247287,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 67684
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 265119,
+      "unsaturated": 128097,
+      "counts": {
+        "-256": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 85011,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 43086
+        },
+        "0": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 55851,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 72246
+        },
+        "64": {
+          "correctMarked": 265113,
+          "unsaturatedMarked": 47013,
+          "saturatedUnmarked": 6,
+          "correctUnmarked": 81084
+        },
+        "128": {
+          "correctMarked": 265092,
+          "unsaturatedMarked": 38022,
+          "saturatedUnmarked": 27,
+          "correctUnmarked": 90075
+        },
+        "256": {
+          "correctMarked": 264221,
+          "unsaturatedMarked": 18667,
+          "saturatedUnmarked": 898,
+          "correctUnmarked": 109430
+        },
+        "512": {
+          "correctMarked": 234001,
+          "unsaturatedMarked": 209,
+          "saturatedUnmarked": 31118,
+          "correctUnmarked": 127888
+        },
+        "1024": {
+          "correctMarked": 128748,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 136371,
+          "correctUnmarked": 128097
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 6,
+          "unsaturatedDeferred": 17112,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 47013
+        },
+        "256": {
+          "saturatedDeferred": 898,
+          "unsaturatedDeferred": 66344,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 18667
+        },
+        "512": {
+          "saturatedDeferred": 31118,
+          "unsaturatedDeferred": 106216,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 209
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 38824,
+      "unsaturated": 354392,
+      "counts": {
+        "-256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 267992,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 86400
+        },
+        "0": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 224234,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 130158
+        },
+        "64": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 211724,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 142668
+        },
+        "128": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 198596,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 155796
+        },
+        "256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 171098,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 183294
+        },
+        "512": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 115418,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 238974
+        },
+        "1024": {
+          "correctMarked": 37436,
+          "unsaturatedMarked": 29782,
+          "saturatedUnmarked": 1388,
+          "correctUnmarked": 324610
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 24432,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 211724
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 96894,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 171098
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 185466,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 115418
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "postAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "center",
+      "frames": 6,
+      "saturated": 179248,
+      "unsaturated": 213968,
+      "counts": {
+        "-256": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 141733,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 72235
+        },
+        "0": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 94888,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 119080
+        },
+        "64": {
+          "correctMarked": 179243,
+          "unsaturatedMarked": 80954,
+          "saturatedUnmarked": 5,
+          "correctUnmarked": 133014
+        },
+        "128": {
+          "correctMarked": 179223,
+          "unsaturatedMarked": 67122,
+          "saturatedUnmarked": 25,
+          "correctUnmarked": 146846
+        },
+        "256": {
+          "correctMarked": 178084,
+          "unsaturatedMarked": 38676,
+          "saturatedUnmarked": 1164,
+          "correctUnmarked": 175292
+        },
+        "512": {
+          "correctMarked": 144024,
+          "unsaturatedMarked": 12340,
+          "saturatedUnmarked": 35224,
+          "correctUnmarked": 201628
+        },
+        "1024": {
+          "correctMarked": 65480,
+          "unsaturatedMarked": 6,
+          "saturatedUnmarked": 113768,
+          "correctUnmarked": 213962
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 5,
+          "unsaturatedDeferred": 26885,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 80954
+        },
+        "256": {
+          "saturatedDeferred": 1164,
+          "unsaturatedDeferred": 103057,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 38676
+        },
+        "512": {
+          "saturatedDeferred": 35224,
+          "unsaturatedDeferred": 163196,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 12340
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 3519,
+      "unsaturated": 389697,
+      "counts": {
+        "-256": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 30828,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 358869
+        },
+        "0": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 13440,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 376257
+        },
+        "64": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 10347,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 379350
+        },
+        "128": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 7719,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 381978
+        },
+        "256": {
+          "correctMarked": 3517,
+          "unsaturatedMarked": 3641,
+          "saturatedUnmarked": 2,
+          "correctUnmarked": 386056
+        },
+        "512": {
+          "correctMarked": 2531,
+          "unsaturatedMarked": 58,
+          "saturatedUnmarked": 988,
+          "correctUnmarked": 389639
+        },
+        "1024": {
+          "correctMarked": 126,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 3393,
+          "correctUnmarked": 389697
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 6693,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 10347
+        },
+        "256": {
+          "saturatedDeferred": 2,
+          "unsaturatedDeferred": 27187,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 3641
+        },
+        "512": {
+          "saturatedDeferred": 988,
+          "unsaturatedDeferred": 56975,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 58
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 32915,
+      "unsaturated": 360301,
+      "counts": {
+        "-256": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 86569,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 273732
+        },
+        "0": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 44718,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 315583
+        },
+        "64": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 35685,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 324616
+        },
+        "128": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 27702,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 332599
+        },
+        "256": {
+          "correctMarked": 32853,
+          "unsaturatedMarked": 12505,
+          "saturatedUnmarked": 62,
+          "correctUnmarked": 347796
+        },
+        "512": {
+          "correctMarked": 22903,
+          "unsaturatedMarked": 62,
+          "saturatedUnmarked": 10012,
+          "correctUnmarked": 360239
+        },
+        "1024": {
+          "correctMarked": 3364,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 29551,
+          "correctUnmarked": 360301
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 18279,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 35685
+        },
+        "256": {
+          "saturatedDeferred": 62,
+          "unsaturatedDeferred": 74064,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 12505
+        },
+        "512": {
+          "saturatedDeferred": 10012,
+          "unsaturatedDeferred": 135301,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 62
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 265119,
+      "unsaturated": 128097,
+      "counts": {
+        "-256": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 89055,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 39042
+        },
+        "0": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 61331,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 66766
+        },
+        "64": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 52973,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 75124
+        },
+        "128": {
+          "correctMarked": 265113,
+          "unsaturatedMarked": 44159,
+          "saturatedUnmarked": 6,
+          "correctUnmarked": 83938
+        },
+        "256": {
+          "correctMarked": 264794,
+          "unsaturatedMarked": 25392,
+          "saturatedUnmarked": 325,
+          "correctUnmarked": 102705
+        },
+        "512": {
+          "correctMarked": 242921,
+          "unsaturatedMarked": 595,
+          "saturatedUnmarked": 22198,
+          "correctUnmarked": 127502
+        },
+        "1024": {
+          "correctMarked": 137764,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 127355,
+          "correctUnmarked": 128097
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 16342,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 52973
+        },
+        "256": {
+          "saturatedDeferred": 325,
+          "unsaturatedDeferred": 63663,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 25392
+        },
+        "512": {
+          "saturatedDeferred": 22198,
+          "unsaturatedDeferred": 108608,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 595
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CU",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 38824,
+      "unsaturated": 354392,
+      "counts": {
+        "-256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 277112,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 77280
+        },
+        "0": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 236474,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 117918
+        },
+        "64": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 224342,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 130050
+        },
+        "128": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 212048,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 142344
+        },
+        "256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 185816,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 168576
+        },
+        "512": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 129686,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 224706
+        },
+        "1024": {
+          "correctMarked": 38426,
+          "unsaturatedMarked": 38260,
+          "saturatedUnmarked": 398,
+          "correctUnmarked": 316132
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 23346,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 224342
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 91296,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 185816
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 178140,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 129686
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "parallelOverscan",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "center",
+      "frames": 6,
+      "saturated": 179248,
+      "unsaturated": 213968,
+      "counts": {
+        "-256": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 141722,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 72246
+        },
+        "0": {
+          "correctMarked": 179248,
+          "unsaturatedMarked": 94874,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 119094
+        },
+        "64": {
+          "correctMarked": 179243,
+          "unsaturatedMarked": 80959,
+          "saturatedUnmarked": 5,
+          "correctUnmarked": 133009
+        },
+        "128": {
+          "correctMarked": 179223,
+          "unsaturatedMarked": 67089,
+          "saturatedUnmarked": 25,
+          "correctUnmarked": 146879
+        },
+        "256": {
+          "correctMarked": 178070,
+          "unsaturatedMarked": 38662,
+          "saturatedUnmarked": 1178,
+          "correctUnmarked": 175306
+        },
+        "512": {
+          "correctMarked": 144008,
+          "unsaturatedMarked": 12352,
+          "saturatedUnmarked": 35240,
+          "correctUnmarked": 201616
+        },
+        "1024": {
+          "correctMarked": 65430,
+          "unsaturatedMarked": 6,
+          "saturatedUnmarked": 113818,
+          "correctUnmarked": 213962
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 5,
+          "unsaturatedDeferred": 26863,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 80959
+        },
+        "256": {
+          "saturatedDeferred": 1178,
+          "unsaturatedDeferred": 103060,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 38662
+        },
+        "512": {
+          "saturatedDeferred": 35240,
+          "unsaturatedDeferred": 163162,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 12352
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 3519,
+      "unsaturated": 389697,
+      "counts": {
+        "-256": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 30789,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 358908
+        },
+        "0": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 13407,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 376290
+        },
+        "64": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 10305,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 379392
+        },
+        "128": {
+          "correctMarked": 3519,
+          "unsaturatedMarked": 7671,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 382026
+        },
+        "256": {
+          "correctMarked": 3517,
+          "unsaturatedMarked": 3623,
+          "saturatedUnmarked": 2,
+          "correctUnmarked": 386074
+        },
+        "512": {
+          "correctMarked": 2534,
+          "unsaturatedMarked": 58,
+          "saturatedUnmarked": 985,
+          "correctUnmarked": 389639
+        },
+        "1024": {
+          "correctMarked": 126,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 3393,
+          "correctUnmarked": 389697
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 6684,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 10305
+        },
+        "256": {
+          "saturatedDeferred": 2,
+          "unsaturatedDeferred": 27166,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 3623
+        },
+        "512": {
+          "saturatedDeferred": 985,
+          "unsaturatedDeferred": 56921,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 58
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 32915,
+      "unsaturated": 360301,
+      "counts": {
+        "-256": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 86803,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 273498
+        },
+        "0": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 44911,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 315390
+        },
+        "64": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 35845,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 324456
+        },
+        "128": {
+          "correctMarked": 32915,
+          "unsaturatedMarked": 27853,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 332448
+        },
+        "256": {
+          "correctMarked": 32855,
+          "unsaturatedMarked": 12607,
+          "saturatedUnmarked": 60,
+          "correctUnmarked": 347694
+        },
+        "512": {
+          "correctMarked": 23011,
+          "unsaturatedMarked": 65,
+          "saturatedUnmarked": 9904,
+          "correctUnmarked": 360236
+        },
+        "1024": {
+          "correctMarked": 3372,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 29543,
+          "correctUnmarked": 360301
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 18300,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 35845
+        },
+        "256": {
+          "saturatedDeferred": 60,
+          "unsaturatedDeferred": 74196,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 12607
+        },
+        "512": {
+          "saturatedDeferred": 9904,
+          "unsaturatedDeferred": 135578,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 65
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 265119,
+      "unsaturated": 128097,
+      "counts": {
+        "-256": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 88893,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 39204
+        },
+        "0": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 61161,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 66936
+        },
+        "64": {
+          "correctMarked": 265119,
+          "unsaturatedMarked": 52791,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 75306
+        },
+        "128": {
+          "correctMarked": 265113,
+          "unsaturatedMarked": 44001,
+          "saturatedUnmarked": 6,
+          "correctUnmarked": 84096
+        },
+        "256": {
+          "correctMarked": 264792,
+          "unsaturatedMarked": 25200,
+          "saturatedUnmarked": 327,
+          "correctUnmarked": 102897
+        },
+        "512": {
+          "correctMarked": 242662,
+          "unsaturatedMarked": 572,
+          "saturatedUnmarked": 22457,
+          "correctUnmarked": 127525
+        },
+        "1024": {
+          "correctMarked": 137466,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 127653,
+          "correctUnmarked": 128097
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 16410,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 52791
+        },
+        "256": {
+          "saturatedDeferred": 327,
+          "unsaturatedDeferred": 63693,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 25200
+        },
+        "512": {
+          "saturatedDeferred": 22457,
+          "unsaturatedDeferred": 108541,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 572
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CU",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 38824,
+      "unsaturated": 354392,
+      "counts": {
+        "-256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 277094,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 77298
+        },
+        "0": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 236438,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 117954
+        },
+        "64": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 224354,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 130038
+        },
+        "128": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 212024,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 142368
+        },
+        "256": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 185804,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 168588
+        },
+        "512": {
+          "correctMarked": 38824,
+          "unsaturatedMarked": 129722,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 224670
+        },
+        "1024": {
+          "correctMarked": 38420,
+          "unsaturatedMarked": 38272,
+          "saturatedUnmarked": 404,
+          "correctUnmarked": 316120
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 23334,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 224354
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 91290,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 185804
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 178146,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 129722
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "center",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q00",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q01",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q10",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    },
+    {
+      "training": "preAlignment",
+      "model": "raw",
+      "group": "CW",
+      "region": "q11",
+      "frames": 6,
+      "saturated": 0,
+      "unsaturated": 393216,
+      "counts": {
+        "-256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "0": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "64": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "128": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "256": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "512": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        },
+        "1024": {
+          "correctMarked": 0,
+          "unsaturatedMarked": 0,
+          "saturatedUnmarked": 0,
+          "correctUnmarked": 393216
+        }
+      },
+      "abstention": {
+        "64": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "256": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        },
+        "512": {
+          "saturatedDeferred": 0,
+          "unsaturatedDeferred": 0,
+          "saturatedDecidedSafe": 0,
+          "unsaturatedDecidedMarked": 0
+        }
+      }
+    }
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}

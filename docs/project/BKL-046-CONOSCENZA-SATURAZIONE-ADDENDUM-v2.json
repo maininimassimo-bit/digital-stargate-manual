@@ -1,0 +1,266 @@
+{
+  "protocol": "BKL046_KNOWLEDGE_SATURATION_ADDENDUM_V2",
+  "status": "INTERIM",
+  "baselineVersion": "1.171",
+  "previousAddendum": {
+    "path": "docs/project/BKL-046-CONOSCENZA-SATURAZIONE-ADDENDUM-v1.json",
+    "verifiedAtCommit": "8da015387313cb9e9b0f31c5bbf4e0b6cf9ef40f",
+    "sha256": "b447405cdbaa526abd47f834fd68240c32563b0a772185757e943e81337c19f8"
+  },
+  "residualLedgerSha256": "a3da1432a46dc69ffb1a16ec3a5fcf13650c99ffbe98f91003b8807af9d7c8f3",
+  "completeStudy": false,
+  "scientificClosures": 0,
+  "nativeExecutions": 0,
+  "axes": [
+    {
+      "id": "SATURATION_BLEND/1",
+      "title": "Unsaturated, detector-saturated and near-limit cores",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/2",
+      "title": "Close pairs and extended-plus-point overlap",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/3",
+      "title": "Channel-dependent saturation",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/4",
+      "title": "Mask transition and recomposition cases",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "rawCore",
+      "githubCommit": "c4ee655854ff22b6a4d7917e5341fe48f74dfc36",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-saturation-diagnostic-v1/protocollo.json",
+          "sha256": "05bb5018fea7908d973cb6775a23c60406413ee4031055cef890ef24594216dd"
+        },
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-saturation-diagnostic-v1/riscontro.json",
+          "sha256": "a83aa1e9a7a6d408ca6f4f7b2d5ffe6f4a3555d0681dc9bc5d3535e30a3f0842"
+        },
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-saturation-diagnostic-v1/README.md",
+          "sha256": "c81b0d112d497152c26d5c9ea43dc9898242e3ecc8e03892c6966428f6890219"
+        },
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-saturation-diagnostic-v1/verifica.py",
+          "sha256": "b39c7bcf690be6936b9119c9eac026b3746e302ae620ccad1769cfe0786d417c"
+        }
+      ],
+      "archiveSha256": "5ccd00950bf8d118eafe8786d5dd7977f7b09236e2952dad4d60839a0e023a92",
+      "archiveMembers": 14
+    },
+    {
+      "id": "sharedWings",
+      "githubCommit": "5267529b6d2a8b40f50e93fedfa181eefc729bbd",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-common-wings-v1/protocollo.json",
+          "sha256": "fdc094bed3288e2fae542109394cbd8b7ce6ce83e2dee050d42979adcdce0112"
+        },
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-common-wings-v1/riscontro.json",
+          "sha256": "42e9898de3b3e909a9f61500025bd28b9ae5f635e26a259460998d68baa257af"
+        },
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-common-wings-v1/README.md",
+          "sha256": "4ebfeeb6fb400c55673bfa6c71866db5ae7fe664dd0ff0143e1317f75c360528"
+        },
+        {
+          "path": "docs/project/bkl046-acs-g191b2b-common-wings-v1/verifica.py",
+          "sha256": "cfa3a936713572c83e72ee5b965e8dd0b3c76a0c2dea8cd3d1a1cf3da861fad0"
+        }
+      ],
+      "archiveSha256": "7263503b27a54a611b5b26ad766372239bb1ea33fbf370cfa42da826f0b7ce9a",
+      "archiveMembers": 4
+    },
+    {
+      "id": "referenceSelection",
+      "githubCommit": "1a74f25c53940f9f7a48161552d3962324543e94",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-independent-reference-v1/protocollo.json",
+          "sha256": "2cc408df0ffd23fa9db2a99a0b1bd7235a169057f2c3dc484d89fb741c0cbb6b"
+        },
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-independent-reference-v1/riscontro.json",
+          "sha256": "353b9ac8ec20733a5a97de4362a9cf9f44b73194b6a5a6e9693eea6e0c2814da"
+        },
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-independent-reference-v1/README.md",
+          "sha256": "764688f0714da07e8ae16506b48247d67ab691840b43275b06b7a06775849fd2"
+        },
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-independent-reference-v1/verifica.py",
+          "sha256": "5848dcdf2536d968ed233d2a92bd2a6c63a5c6e6221bb65c2366ac9958508850"
+        }
+      ],
+      "archiveSha256": "4c0b07d8ecec13607beb9fbfa74534760a4da8899e0e907ffe325208142c26be",
+      "archiveMembers": 22
+    },
+    {
+      "id": "gain4Integrated",
+      "githubCommit": "fa2bb23c69baeeb8f271799c6c4daee9c6a92738",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-9661-saturated-flux-v1/protocollo.json",
+          "sha256": "52e04c742e9311ffce6518183b6c3f6921e7140ac48295b6cab207b9d3f1f43e"
+        },
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-9661-saturated-flux-v1/riscontro.json",
+          "sha256": "29763457d0e3bb8f89e78fe4a42caa5f62525d97cb391ddbb123477be35a401e"
+        },
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-9661-saturated-flux-v1/README.md",
+          "sha256": "d879bcd7a86d4d2f24f9e85ed09e71ffba6add9c70810bdeea7587b7df1f26eb"
+        },
+        {
+          "path": "docs/project/bkl046-g191b2b-f606w-9661-saturated-flux-v1/verifica.py",
+          "sha256": "01b28fba2abba95817bd8f046af1eacfaa8f6453a86afd993950096d8f32c6fe"
+        }
+      ],
+      "archiveSha256": "867d59b18a24f3ada0dca8d81b609f2b7d78c7a8eb7ddd26ec7d985d0a61d6a0",
+      "archiveMembers": 5
+    },
+    {
+      "id": "gain2Rejected",
+      "githubCommit": "8da015387313cb9e9b0f31c5bbf4e0b6cf9ef40f",
+      "publicFiles": [
+        {
+          "path": "docs/project/bkl046-acs-17979-gain2-trail-screen-v1/protocollo.json",
+          "sha256": "eca05722d4522fa01a9ef98ea9b726be6fbfa4299b34e940f0c885ecbfea06fa"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17979-gain2-trail-screen-v1/riscontro.json",
+          "sha256": "8eeceebcdeca31f831a2655c3d917a025c402de4b63640954b1a0ff7d432bbd1"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17979-gain2-trail-screen-v1/README.md",
+          "sha256": "48a7f42e549fd8fd9b986b218da12848fe202f33864fbbe3a98f576829f8a057"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17979-gain2-trail-screen-v1/verifica.py",
+          "sha256": "776d6a0f1ed5cc816d640e6b40b5a77d2ecd60ef0bee19d42b42694cf9afaa68"
+        }
+      ],
+      "archiveSha256": "0ee408ff24d2ef0f0c2b890cbca9f24811a785290018a6d039560f6d0d813ddb",
+      "archiveMembers": 12
+    }
+  ],
+  "findings": {
+    "rawCenter": {
+      "exposures": [
+        "j8v604xdq",
+        "j8v604xeq"
+      ],
+      "rawDN": [
+        42716,
+        42761
+      ],
+      "fltAdcFlagCounts": [
+        0,
+        0
+      ],
+      "recordedFluxRemovedAt10PxPercent": [
+        14.610809529456695,
+        14.706692750130966
+      ]
+    },
+    "commonWings": {
+      "settings": 4,
+      "stripeWidths": 3,
+      "comparisonsBracketingG191B2B": 12
+    },
+    "heldOutControl": {
+      "obs": "j8mj90pmq",
+      "seconds": 0.5079,
+      "gain": 4,
+      "aperture": "WFC1-2K"
+    },
+    "gain4Integrated": {
+      "visit": "9661/90",
+      "radiusPx": 20,
+      "shortVsLongSeconds": [
+        0.5079,
+        3.0
+      ],
+      "includingRecordedDQ256Percent": -1.1294899051566776,
+      "excludingDQ256OnlyFromLongPercent": -57.63073713238933,
+      "errOnlyPercentagePoints": 0.22174615224062386,
+      "observedFullWellPixels": 14,
+      "diagnosticTolerancePercent": 2,
+      "corePixelsReconstructed": false
+    },
+    "gain2Screen": {
+      "visit": "17979/02",
+      "longIndividualExposureSeconds": 150,
+      "shortExposureSeconds": [
+        40,
+        40
+      ],
+      "mixedTrailComponents": 2,
+      "eligibleTrails": 0,
+      "observedFlags": [
+        "12544"
+      ]
+    }
+  },
+  "decisionRules": [
+    {
+      "rule": "DISTINGUISH_FULL_WELL_AND_ADC",
+      "axis": "SATURATION_BLEND/1",
+      "evidence": [
+        "rawCore"
+      ],
+      "action": "Read instrument DQ and verified RAW at matched detector coordinates. Record both ADC and full-well flags.",
+      "limit": "A recorded central value is not an independent true flux."
+    },
+    {
+      "rule": "MATCH_SUPPORT_BEFORE_COMPARING_WINGS",
+      "axis": "SATURATION_BLEND/1",
+      "evidence": [
+        "sharedWings"
+      ],
+      "action": "Use a common symmetric mask; record all removed offsets and retain both repeats.",
+      "limit": "Directional wing differences do not isolate redistributed charge or separate morphology from pixel phase."
+    },
+    {
+      "rule": "HOLD_OUT_AN_UNSATURATED_EXPOSURE",
+      "axis": "SATURATION_BLEND/1",
+      "evidence": [
+        "referenceSelection",
+        "gain4Integrated"
+      ],
+      "action": "Verify same detector configuration and match registered wings. Quantify the integrated flux and report the registration, aperture and background support of the comparison.",
+      "limit": "One gain-4 pair and an ERR-only estimate do not warrant transfer or per-pixel reconstruction."
+    },
+    {
+      "rule": "PRESERVE_MIXED_PIXEL_FLAGS",
+      "axis": "SATURATION_BLEND/4",
+      "evidence": [
+        "gain2Rejected"
+      ],
+      "action": "Keep flags separate and record exclusions before testing aperture or recomposition.",
+      "limit": "A rejected FLT component does not establish failure of recovery with a separately qualified reference."
+    }
+  ],
+  "remaining": [
+    "SATURATION_BLEND/1: Independent gain-2 pair with unclipped short reference and qualified long support; representative uncertainty and detector response.",
+    "SATURATION_BLEND/2: Independent observed overlap cases, bounds on false structures and model and morphology sensitivity.",
+    "SATURATION_BLEND/3: Physical channel-dependent saturation response and independent multiband references.",
+    "SATURATION_BLEND/4: Mask boundary, ringing, adaptive recomposition and false or merged structure tests with representative uncertainty.",
+    "Reproducible native validation under exact peer reviews and common coordinator admission."
+  ]
+}

@@ -1,0 +1,7 @@
+# BKL-046 · Convergenza su profili Moffat fortemente sottocampionati
+
+Il protocollo di sviluppo aggiunge 72 profili, con alfa tra 0,06 e 0,24 pixel, rapporto assiale fino a 0,35 e fasi vicine al bordo e all'angolo. Le tolleranze del protocollo storico sono 10⁻⁶ elettroni per pixel e 10⁻⁵ elettroni sulla somma del campo. Il confronto tra gli ordini non suddivisi 128 e 256 non raggiunge la tolleranza per pixel in cinque casi. Lo scarto massimo è 0,151 elettroni per pixel, anche quando la differenza nella somma del campo si annulla.
+
+Il secondo protocollo verifica gli stessi casi suddividendo ogni lato in segmenti. La regola con quattro segmenti e 32 nodi per segmento rientra nella tolleranza su tutti i 72 casi. Lo scarto massimo rispetto a otto segmenti con 64 nodi è 3,09 × 10⁻⁸ elettroni per pixel. La verifica bidimensionale indipendente su quattro pixel per caso concorda con il riferimento suddiviso entro 5,98 × 10⁻¹⁰ elettroni. Entrambi i rapporti conservano i cinque fallimenti iniziali.
+
+Questi risultati riguardano la convergenza per profili analitici. Il campionamento delle PSF strumentali, il comportamento su immagini reali e la calibrazione restano aperti. Il pacchetto conserva due protocolli, due verificatori e due rapporti. Per il replay servono il codice congelato dell'integrale sul contorno e NumPy 2.3.5. [Metodo del contorno](../bkl046-moffat-integrale-bordi-v1/README.md)

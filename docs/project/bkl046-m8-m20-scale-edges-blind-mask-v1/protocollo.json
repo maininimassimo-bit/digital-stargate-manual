@@ -1,0 +1,7 @@
+{
+  "schema": "BKL046_M8M20_SCALE_EDGE_BLIND_MASK_PROTOCOL_V1",
+  "knownProgramSha256": "12bc8e9ac268bd6a89bdd7ffaff0a81c6754ec943a9d5262a1ee2e8caffeb67d",
+  "knownProtocolSha256": "fe4f8bbf1fb103ca5cbb316c3f90ba9124a9d2626a9c7f827951c0a4664db6ac",
+  "knownReportSha256": "87a03c9d2019dcafee99f993abaafdb13a08153a7770d03ab431eea75ad36e92",
+  "design": "Use the archived 3-MAD positive-residual mask with one-cell Chebyshev dilation. Fit its preliminary plane on even cells and use their residual median and scale. Recompute mask independently before and after injection. Apply the known-profile control's identical support and conditioning rules. Fit fixed offset and plane separately on the retained cells. Measure known signal transfer and mask coverage only after both fits. Report false retention of cells whose actual injection peak crosses 2 percent. No tuning on evaluated trials."
+}

@@ -1,0 +1,870 @@
+{
+  "nativeExecutions": 0,
+  "protocolSha256": "8f9575af3828ab8330d563da68975831e2bc98c8145f37abef27f0f9c2fee6c8",
+  "rangeManifestSha256": "0591260d6f3c09e63cf721e0be93fc9ba047d82ab988d61f4ea249df05e329ba",
+  "results": [
+    {
+      "candidate": [
+        5,
+        5
+      ],
+      "comparison": {
+        "comparisons": [
+          {
+            "annulusPx": [
+              12,
+              18
+            ],
+            "heldoutMinusShortPct": 36.81687617498197,
+            "passesPhotometricTolerance": false,
+            "radiusPx": 3,
+            "shortRepeatPct": 0.5203906379688699,
+            "status": "MEASURED"
+          },
+          {
+            "annulusPx": [
+              12,
+              18
+            ],
+            "radiusPx": 5,
+            "referenceStatuses": [
+              "MEASURED",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          },
+          {
+            "annulusPx": [
+              12,
+              18
+            ],
+            "radiusPx": 8,
+            "referenceStatuses": [
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          },
+          {
+            "annulusPx": [
+              16,
+              24
+            ],
+            "heldoutMinusShortPct": 36.83520902710874,
+            "passesPhotometricTolerance": false,
+            "radiusPx": 3,
+            "shortRepeatPct": 0.45426574470019027,
+            "status": "MEASURED"
+          },
+          {
+            "annulusPx": [
+              16,
+              24
+            ],
+            "radiusPx": 5,
+            "referenceStatuses": [
+              "MEASURED",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          },
+          {
+            "annulusPx": [
+              16,
+              24
+            ],
+            "radiusPx": 8,
+            "referenceStatuses": [
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          }
+        ],
+        "maxPairwisePeakSeparationArcsec": 0.01030387555398053,
+        "primaryPass": false,
+        "status": "DIAGNOSTIC_FLC_APERTURES",
+        "withinAstrometricTolerance": true
+      },
+      "observations": [
+        {
+          "chip": 2,
+          "detectedXY": [
+            1784.7685572664047,
+            930.1202860948209
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 537,
+                  "fluxDensity": 1.0998395819235026e-15,
+                  "formalSigma": 4.723637474497887e-18,
+                  "formalSnr": 232.83742409559352,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "backgroundPixels": 537,
+                  "fluxDensity": 1.1716380239146055e-15,
+                  "formalSigma": 6.102350855178963e-18,
+                  "formalSnr": 191.99781391138072,
+                  "goodPixels": 78,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "8": {
+                  "goodPixels": 197,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 963,
+                  "fluxDensity": 1.1007836268021926e-15,
+                  "formalSigma": 4.708313026862691e-18,
+                  "formalSnr": 233.79576092791822,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "backgroundPixels": 963,
+                  "fluxDensity": 1.1741570232279177e-15,
+                  "formalSigma": 6.016053228117271e-18,
+                  "formalSnr": 195.1706507083833,
+                  "goodPixels": 78,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "8": {
+                  "goodPixels": 197,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.03241209019752728,
+          "photflam": 1.9726475e-18,
+          "root": "j8mf01esq",
+          "skyRaDec": [
+            83.78554425408466,
+            -5.421658843930716
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            1784.2695812808113,
+            929.7376624461523
+          ]
+        },
+        {
+          "chip": 2,
+          "detectedXY": [
+            1784.7668437478835,
+            930.1024295518184
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 536,
+                  "fluxDensity": 1.1055779751711237e-15,
+                  "formalSigma": 4.73667461730978e-18,
+                  "formalSnr": 233.40804773266075,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 77,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 196,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 962,
+                  "fluxDensity": 1.1057954933384455e-15,
+                  "formalSigma": 4.717466006790693e-18,
+                  "formalSnr": 234.40454933785983,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 77,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 196,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.031830328541879366,
+          "photflam": 1.9726477e-18,
+          "root": "j8mf01euq",
+          "skyRaDec": [
+            83.78554413742187,
+            -5.421659172792853
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            1784.2627061146045,
+            929.7446005268079
+          ]
+        },
+        {
+          "chip": 2,
+          "detectedXY": [
+            448.84116700224314,
+            55.23738302233551
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 553,
+                  "fluxDensity": 1.5086917041157336e-15,
+                  "formalSigma": 3.7786118623771696e-18,
+                  "formalSnr": 399.2714147588045,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 78,
+                  "pixels": 79,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 193,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 986,
+                  "fluxDensity": 1.5096885756964894e-15,
+                  "formalSigma": 3.7702840316158626e-18,
+                  "formalSnr": 400.4177306104626,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 78,
+                  "pixels": 79,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 193,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.025697242224274962,
+          "photflam": 1.9776242e-18,
+          "root": "j93k0aofq",
+          "skyRaDec": [
+            83.78554701237763,
+            -5.421659195930459
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            448.40559213464724,
+            55.55880262134078
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": [
+        6,
+        7
+      ],
+      "comparison": {
+        "comparisons": [
+          {
+            "annulusPx": [
+              12,
+              18
+            ],
+            "radiusPx": 3,
+            "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR"
+          },
+          {
+            "annulusPx": [
+              12,
+              18
+            ],
+            "radiusPx": 5,
+            "referenceStatuses": [
+              "MEASURED",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          },
+          {
+            "annulusPx": [
+              12,
+              18
+            ],
+            "radiusPx": 8,
+            "referenceStatuses": [
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          },
+          {
+            "annulusPx": [
+              16,
+              24
+            ],
+            "radiusPx": 3,
+            "status": "NONPOSITIVE_OR_LOW_FORMAL_SNR"
+          },
+          {
+            "annulusPx": [
+              16,
+              24
+            ],
+            "radiusPx": 5,
+            "referenceStatuses": [
+              "MEASURED",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          },
+          {
+            "annulusPx": [
+              16,
+              24
+            ],
+            "radiusPx": 8,
+            "referenceStatuses": [
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE",
+              "INCOMPLETE_APERTURE"
+            ],
+            "status": "SUPPORT_INCOMPLETE"
+          }
+        ],
+        "maxPairwisePeakSeparationArcsec": 0.242257283310091,
+        "primaryPass": false,
+        "status": "DIAGNOSTIC_FLC_APERTURES",
+        "withinAstrometricTolerance": false
+      },
+      "observations": [
+        {
+          "chip": 2,
+          "detectedXY": [
+            1648.420079878921,
+            1159.7703180798217
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 564,
+                  "fluxDensity": 1.2716574592487778e-17,
+                  "formalSigma": 3.0570356911914043e-18,
+                  "formalSnr": 4.159773021011674,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "backgroundPixels": 564,
+                  "fluxDensity": 3.415972913651815e-17,
+                  "formalSigma": 5.33877043447761e-18,
+                  "formalSnr": 6.398426296046689,
+                  "goodPixels": 80,
+                  "pixels": 80,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "8": {
+                  "goodPixels": 201,
+                  "pixels": 202,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 990,
+                  "fluxDensity": 1.2550992693410749e-17,
+                  "formalSigma": 3.0152544015731307e-18,
+                  "formalSnr": 4.162498755283333,
+                  "goodPixels": 29,
+                  "pixels": 29,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "backgroundPixels": 990,
+                  "fluxDensity": 3.372906435763696e-17,
+                  "formalSigma": 5.154739406389267e-18,
+                  "formalSnr": 6.543311251744365,
+                  "goodPixels": 80,
+                  "pixels": 80,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "8": {
+                  "goodPixels": 201,
+                  "pixels": 202,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.19615039668958023,
+          "photflam": 1.9726475e-18,
+          "root": "j8mf01esq",
+          "skyRaDec": [
+            83.78781871038825,
+            -5.418869441386432
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            1644.465097469761,
+            1160.4662128286795
+          ]
+        },
+        {
+          "chip": 2,
+          "detectedXY": [
+            1648.0968103973562,
+            1157.7872336657113
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 553,
+                  "fluxDensity": 1.640383221922413e-17,
+                  "formalSigma": 3.000281349723325e-18,
+                  "formalSnr": 5.467431319645017,
+                  "goodPixels": 28,
+                  "pixels": 28,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 77,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 199,
+                  "pixels": 200,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 993,
+                  "fluxDensity": 1.4201313491757692e-17,
+                  "formalSigma": 2.9574782219365187e-18,
+                  "formalSnr": 4.801831975100345,
+                  "goodPixels": 28,
+                  "pixels": 28,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 77,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 199,
+                  "pixels": 200,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.21670372581857536,
+          "photflam": 1.9726477e-18,
+          "root": "j8mf01euq",
+          "skyRaDec": [
+            83.78781927123046,
+            -5.418897789773442
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            1644.4559492585634,
+            1160.4745362214394
+          ]
+        },
+        {
+          "chip": 2,
+          "detectedXY": [
+            676.6347687231646,
+            178.0925105382608
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 547,
+                  "fluxDensity": 7.340053538599784e-18,
+                  "formalSigma": 2.0308510765575886e-18,
+                  "formalSnr": 3.6142746375286188,
+                  "goodPixels": 28,
+                  "pixels": 28,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 77,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 198,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 972,
+                  "fluxDensity": 5.81186543861139e-18,
+                  "formalSigma": 1.9981063811257626e-18,
+                  "formalSnr": 2.9086866913146534,
+                  "goodPixels": 28,
+                  "pixels": 28,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 77,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 198,
+                  "pixels": 201,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.04107480343628193,
+          "photflam": 1.9776242e-18,
+          "root": "j93k0aofq",
+          "skyRaDec": [
+            83.78788341947325,
+            -5.4188765732183555
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            676.9458021718657,
+            177.31367544404353
+          ]
+        }
+      ]
+    },
+    {
+      "candidate": [
+        18,
+        22
+      ],
+      "comparison": {
+        "status": "NO_ASSOCIATED_PEAK_IN_AT_LEAST_ONE_REFERENCE"
+      },
+      "observations": [
+        {
+          "root": "j8mf01esq",
+          "status": "PEAK_ABSENT_OR_ON_SEARCH_EDGE"
+        },
+        {
+          "chip": 1,
+          "detectedXY": [
+            1601.8752469948708,
+            1139.8236842032954
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 557,
+                  "fluxDensity": 3.1393745776834715e-17,
+                  "formalSigma": 3.1245251753438046e-18,
+                  "formalSnr": 10.047525308667206,
+                  "goodPixels": 28,
+                  "pixels": 28,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "backgroundPixels": 557,
+                  "fluxDensity": 7.107135738047588e-17,
+                  "formalSigma": 5.5130944998634384e-18,
+                  "formalSnr": 12.891372963448449,
+                  "goodPixels": 78,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "8": {
+                  "goodPixels": 194,
+                  "pixels": 200,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 994,
+                  "fluxDensity": 3.5756861108055825e-17,
+                  "formalSigma": 3.1176560918027583e-18,
+                  "formalSnr": 11.469148634472933,
+                  "goodPixels": 28,
+                  "pixels": 28,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "backgroundPixels": 994,
+                  "fluxDensity": 8.329738665472593e-17,
+                  "formalSigma": 5.482816526697449e-18,
+                  "formalSnr": 15.192444658530231,
+                  "goodPixels": 78,
+                  "pixels": 78,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "8": {
+                  "goodPixels": 194,
+                  "pixels": 200,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.18732391289058084,
+          "photflam": 1.9726477e-18,
+          "root": "j8mf01euq",
+          "skyRaDec": [
+            83.79216137177151,
+            -5.390775252674744
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            1604.2705234877292,
+            1136.5573042837823
+          ]
+        },
+        {
+          "chip": 2,
+          "detectedXY": [
+            2740.110214878092,
+            76.9975229167728
+          ],
+          "measurements": [
+            {
+              "annulusPx": [
+                12,
+                18
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 560,
+                  "fluxDensity": 2.7576003146667597e-17,
+                  "formalSigma": 2.254383993861196e-18,
+                  "formalSnr": 12.2321677326305,
+                  "goodPixels": 27,
+                  "pixels": 27,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 76,
+                  "pixels": 77,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 196,
+                  "pixels": 199,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            },
+            {
+              "annulusPx": [
+                16,
+                24
+              ],
+              "apertures": {
+                "3": {
+                  "backgroundPixels": 987,
+                  "fluxDensity": 3.3723568143160916e-17,
+                  "formalSigma": 2.298735443409171e-18,
+                  "formalSnr": 14.670486871315092,
+                  "goodPixels": 27,
+                  "pixels": 27,
+                  "saturatedPixels": 0,
+                  "status": "MEASURED"
+                },
+                "5": {
+                  "goodPixels": 76,
+                  "pixels": 77,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                },
+                "8": {
+                  "goodPixels": 196,
+                  "pixels": 199,
+                  "saturatedPixels": 0,
+                  "status": "INCOMPLETE_APERTURE"
+                }
+              }
+            }
+          ],
+          "offsetFromCandidateArcsec": 0.21667685990775498,
+          "photflam": 1.9776242e-18,
+          "root": "j93k0aofq",
+          "skyRaDec": [
+            83.79214592847161,
+            -5.390755580777213
+          ],
+          "status": "MEASURED_WITH_RETAINED_FAILURES",
+          "wcsPredictionXY": [
+            2735.9317032858967,
+            76.26603650108744
+          ]
+        }
+      ]
+    }
+  ],
+  "schema": "BKL046_M42_F658N_HELDOUT_PHOTOMETRY_REFERENCES_V1",
+  "scientificClosures": 0
+}

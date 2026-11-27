@@ -1,0 +1,17 @@
+{
+  "schema": "BKL046_M8_M20_WEIGHTED_APERTURE_XP_COLOR_V1",
+  "apertureCode": "55b2a6e6cf097a587f7ae199f99e3e07dfc3de201bc0fd4d4776370ecb35e9a3",
+  "apertureReport": "44c114aa9983dc6c1a8dc846af385cdc61b3fe3ce3e635f77017ceb5f0a0dafe",
+  "gaiaJoin": "a7f6cf854bd974f6eda3f37efbb3908897f1fdae394b52cab12273452aaeca08",
+  "passband": "85cb3da99a2aae435b45615404d50362db21727daf89fb8ed077903a9113ec4b",
+  "models": [
+    "pixSonyQE_UVIR_LPro",
+    "sirilIMX571_LPro"
+  ],
+  "minimumPairedPosesPerStar": 12,
+  "train": 20,
+  "test": 19,
+  "color": "Native B minus R = -2.5 log10 of each exposure's paired flux ratio. Estimate the median across valid paired exposures separately for each star, center method and calibration.",
+  "reference": "Use two frozen Gaia XP synthetic B-R response approximations. Fit a shared color offset per response model from only the training stars, unit-weight centers, calibration A. Reuse the offset everywhere, with slope one.",
+  "scope": "Compare held-out color errors and color shifts. A common zero point remains fitted. No independent absolute throughput, per-band zero point or native reconstruction claim."
+}

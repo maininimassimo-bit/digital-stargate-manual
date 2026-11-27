@@ -1,0 +1,9 @@
+# BKL-046 · Launcher XDRZ v2 con identità storage fissate
+
+Su DSG-Shared sono state create le due directory dedicate previste dalla candidata. La directory di lavoro su O: e l'archivio H: tramite U: hanno superato creazione esclusiva, rilettura e rimozione del solo file di prova. U: e il percorso UNC hanno restituito la stessa identità di directory e letto lo stesso oggetto. Il riscontro registra circa 224 GiB liberi su O: e 3.737 GiB sull'archivio H: al momento della misura.
+
+Il soggetto v2 fissa le identità di O:, U: e UNC. Il bootstrap le verifica prima del preflight e prima dei ruoli che usano lo storage. Un'identità di archivio alterata è stata respinta. Il preflight ha verificato i 3.824 file del comparatore e non ha rilevato processi PixInsight. Il collaudo di autorizzazione ha accettato una firma doppia di prova e ha respinto dodici casi negativi. [Prova storage](storage-proof.json) · [Preflight v2](preflight.json)
+
+Il nuovo soggetto è 6eaa236ab528dcc655788a39ad9962fe86be2a151c57b78b09594c97cb8baf96. Le firme eventualmente riferite a un soggetto precedente richiedono una nuova revisione. La configurazione gestita resta vuota. Servono le approvazioni indipendenti sul soggetto v2, la posa protetta e l'ammissione al momento dell'esecuzione. Nessuna richiesta di ammissione, nessun avvio PixInsight e nessuna modifica del coordinatore. [Primo pacchetto di revisione](../bkl046-cfa-origin-launcher-review-v1/README.md)
+
+Le prove si ripetono con collaudo.cjs e preflight-test.ps1, usando gli interpreti e le directory fissati dal soggetto. Il pacchetto contiene i report e i pin riletti in replica.

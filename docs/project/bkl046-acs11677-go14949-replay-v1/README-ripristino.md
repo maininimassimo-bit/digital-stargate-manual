@@ -1,0 +1,5 @@
+# BKL-046 — Riproduzione del confronto GO-14949 da copie ripristinate
+
+In una cartella nuova su DSG-Shared sono stati ripristinati e verificati 14 ingressi. I tre FITS e diversi protocolli e script provengono da quattro archivi su H:. Un helper è stato riscaricato dalla revisione GitHub indicata nel rapporto. Due file ausiliari sono stati copiati dalla VM e verificati con le impronte congelate, quindi inclusi nella nuova capsula. Il runtime Python, Astropy e NumPy era già installato sulla VM.
+
+Le tre modifiche al launcher di replay riguardano i percorsi di lettura. Il programma, eseguito sui FITS ripristinati, ha riprodotto byte per byte i due rapporti per esposizione e la sintesi. Per ricostruire il test servono anche i FITS custoditi negli archivi indicati e il runtime registrato. La ripetizione conferma l'esito dei controlli GO-14949 e lascia aperta la qualifica scientifica.

@@ -1,0 +1,8 @@
+{
+  "schema": "BKL046_ADAPTER_STRUCTURED_OUTPUT_SHAPE_OFFLINE_PROTOCOL_V1",
+  "candidateProgramSha256": "d0c4ede52812083e5b74d7844d2eae99891bb7c0bb0e215423001b78fb9e3b65",
+  "parentVerifierSha256": "07958ef3d2e6b717abc263fcbe4a709ae8fa1b223308e50906c9a4faded8e5bb",
+  "parentProtocolSha256": "eeee0ee80f71f6e275459ce48d17bed60ffa159fbeed7f38e034b72153955d6b",
+  "reference": "https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses",
+  "design": "Use a required decision object containing nested action branches. Strip local not constraints from serialization only. Keep the archive-pinned runtime decide as the authoritative second check. Replay the fixed decision matrix; no provider requests, deployment, schema acceptance, or model qualification."
+}

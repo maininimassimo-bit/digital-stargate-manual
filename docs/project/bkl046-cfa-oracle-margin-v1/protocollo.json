@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_CFA_FROZEN_ORACLE_MARGIN_PROTOCOL_V1",
+  "manifest": "6fd2da645650a19f4654276607612c0af5ba193734a0087fc221058aab4fe16b",
+  "generator": "2534b8cc45f665b536f29acdb7261f88de9c0d85f827c63bc24a5ac354d57c73",
+  "comparator": "c04623fb80badca0db83917c237a9d7fef5041d0fd9b6a6a371f86cf8397c54f",
+  "shearVariants": [
+    "center0",
+    "edge05"
+  ],
+  "dropShrink": 0.7,
+  "channels": "RGGB",
+  "design": "Compare frozen integer mask oracles using the exact comparator and report support differences and max absolute differences. Test roundtrip through Float32 for each oracle. For shear read immutable matrices and origins from all six XDRZ files and samples from all three archived FITS CFA data. Render twice for each variant, once converting the serialized coordinates into the center-zero convention, and once reading the raw matrix as center-zero. Reuse the frozen generator polygon primitives. This tests offline discriminating power, not native numerical precision or origin behavior."
+}

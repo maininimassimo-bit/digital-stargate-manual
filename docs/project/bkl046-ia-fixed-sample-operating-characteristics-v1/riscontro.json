@@ -1,0 +1,156 @@
+{
+  "actualRiskEstimate": null,
+  "alternatives": [
+    "1/1000",
+    "1/400",
+    "1/200"
+  ],
+  "familywiseAlpha": "1/20",
+  "historicalQuotasArithmeticallyReproduced": true,
+  "minimumFixedDesignAtPowerTargetByAlternative": {
+    "1/1000": {
+      "maxEvents": 2,
+      "power": 0.8883432038600907,
+      "units": 1159
+    },
+    "1/200": {
+      "maxEvents": 29,
+      "power": 0.8056679387596574,
+      "units": 5046
+    },
+    "1/400": {
+      "maxEvents": 6,
+      "power": 0.8152726213346645,
+      "units": 1849
+    }
+  },
+  "nativeExecutions": 0,
+  "omittedByScoredOnlyFixture": 128,
+  "omittedUnsafeByCompleteOnlyFixture": 2770,
+  "ownerPlanAmendmentApproved": false,
+  "pLimit": "1/100",
+  "protocolSha256": "3309816c6065b5e4c424e78cfebcbeb39c0e3c9d6e351db67b16f749a56e3dce",
+  "providerCalls": 0,
+  "schema": "BKL046_IA_FIXED_SAMPLE_OPERATING_CHARACTERISTICS_V1",
+  "scientificClosures": 0,
+  "tables": [
+    {
+      "allocatedAlpha": "1/20",
+      "fixedCaps": [
+        {
+          "independentUnitsPerEndpoint": 299,
+          "maxEvents": 0,
+          "powerAtAlternatives": [
+            0.7414484806367362,
+            0.47310594270678824,
+            0.22340924607110277
+          ],
+          "tailAtLimit": 0.04953625663766248,
+          "tailOneFewer": 0.050036622866325736
+        },
+        {
+          "independentUnitsPerEndpoint": 473,
+          "maxEvents": 1,
+          "powerAtAlternatives": [
+            0.9179483650693319,
+            0.6688786762806903,
+            0.3153794484850397
+          ],
+          "tailAtLimit": 0.049797538819849045,
+          "tailOneFewer": 0.050212606248028896
+        },
+        {
+          "independentUnitsPerEndpoint": 628,
+          "maxEvents": 2,
+          "powerAtAlternatives": [
+            0.9741006355362566,
+            0.791219648739466,
+            0.3919566039316693
+          ],
+          "tailAtLimit": 0.049790154540288185,
+          "tailOneFewer": 0.05015727492673656
+        }
+      ],
+      "simultaneousEndpoints": 1
+    },
+    {
+      "allocatedAlpha": "1/140",
+      "fixedCaps": [
+        {
+          "independentUnitsPerEndpoint": 492,
+          "maxEvents": 0,
+          "powerAtAlternatives": [
+            0.6112518790281493,
+            0.2918427738887187,
+            0.0849093911794035
+          ],
+          "tailAtLimit": 0.007120586097206635,
+          "tailOneFewer": 0.007192511209299632
+        },
+        {
+          "independentUnitsPerEndpoint": 700,
+          "maxEvents": 1,
+          "powerAtAlternatives": [
+            0.8442472386580958,
+            0.4775928846414156,
+            0.1352269140545615
+          ],
+          "tailAtLimit": 0.007104733678427168,
+          "tailOneFewer": 0.007167516814433295
+        },
+        {
+          "independentUnitsPerEndpoint": 880,
+          "maxEvents": 2,
+          "powerAtAlternatives": [
+            0.9404858309821328,
+            0.6226467174341741,
+            0.18442798295914029
+          ],
+          "tailAtLimit": 0.007116392353766683,
+          "tailOneFewer": 0.007173740456870196
+        }
+      ],
+      "simultaneousEndpoints": 7
+    },
+    {
+      "allocatedAlpha": "1/1400",
+      "fixedCaps": [
+        {
+          "independentUnitsPerEndpoint": 721,
+          "maxEvents": 0,
+          "powerAtAlternatives": [
+            0.4860903628796346,
+            0.16451444727331105,
+            0.026942706345796114
+          ],
+          "tailAtLimit": 0.0007128124965150795,
+          "tailOneFewer": 0.0007200126227425046
+        },
+        {
+          "independentUnitsPerEndpoint": 957,
+          "maxEvents": 1,
+          "powerAtAlternatives": [
+            0.7515806571837381,
+            0.30969647714352166,
+            0.04795048799100654
+          ],
+          "tailAtLimit": 0.00070943065948014,
+          "tailOneFewer": 0.0007159180304479911
+        },
+        {
+          "independentUnitsPerEndpoint": 1159,
+          "maxEvents": 2,
+          "powerAtAlternatives": [
+            0.8883432038600907,
+            0.446281739456212,
+            0.07128101485584698
+          ],
+          "tailAtLimit": 0.0007089515582718749,
+          "tailOneFewer": 0.0007149812745512506
+        }
+      ],
+      "simultaneousEndpoints": 70
+    }
+  ],
+  "verifiedIndependentUnits": 0
+}

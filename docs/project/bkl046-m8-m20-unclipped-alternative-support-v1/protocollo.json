@@ -1,0 +1,15 @@
+{
+  "schema": "BKL046_M8M20_UNCLIPPED_ALTERNATIVES_PROTOCOL_V1",
+  "coordinateProtocolArchiveSha256": "b9d9420f62939629ccace44fe7791a2a52910bfbf7c5e733b2a5676126897ff3",
+  "coordinateReportSha256": "fd5f92ef0a556f10a2e5714851dc3b7b1c0bd249e4093db8d6778ed40317d8df",
+  "coordinateProgramSha256": "fd4575cf037555045cf56b486a7826fe18d8476ed22d6797ec5e914908513e5a",
+  "radii": [
+    1,
+    1.5
+  ],
+  "thresholds": [
+    62000,
+    65535
+  ],
+  "scope": "For each clipped CFA event in the same fixed common interior, project its center to each of the 14 other exposures under the two fixed affine models. Check the nearest detector sample of the same CFA parity, breaking ties toward the larger index on each axis. Count only within the fixed radius, and exclude the known defective site also in targets. Report each geometry and the conservative intersection that picks the same target sample and meets the bound under both. This measures alternative sample availability, not reconstruction, comparability at identical subpixel phase, sensor linearity, or photometric accuracy."
+}

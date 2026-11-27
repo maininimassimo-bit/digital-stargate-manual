@@ -1,0 +1,8 @@
+{
+  "schema": "BKL046_DARK_SPLIT_SENSITIVITY_PROTOCOL_V1",
+  "priorReportSha256": "e077e5feb850fb34527f90ef90d9ffd0758120b8c534881de9d92b3581e40869",
+  "sourceArchiveSha256": "5fe800221ad9919db6b639da84f831bd380d349645e3f2edb3985d4eb509639d",
+  "allPartitions": 1716,
+  "adjacentPairedPartitions": 64,
+  "design": "The 14 darks, six cells, chronological order, two per-exposure statistics and support come from the pinned split report. Hold the fifteenth dark out. Enumerate distinct disjoint 7 versus 7 partitions, treating complements as equal and keeping the earliest frame in the first half. Prespecify an adjacent-paired subset with one member per chronological pair per half. Compare the original interleaving and early-versus-late split. Endpoints are absolute maximum anchor difference and maximum of the absolute fitted plane at four normalized field corners. Use inclusive sample quantiles as descriptive summaries, not confidence bounds. No optical truth, new acquisition, or inference about science-image flux."
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_RAMP_V1",
+  "base": "https://archive.stsci.edu/dcl/triplet-tests/fr03/20210901231005_gain/",
+  "exposures": 21,
+  "headerBytes": 17280,
+  "frames": [
+    0,
+    1,
+    5,
+    10
+  ],
+  "bandRows": [
+    1920,
+    1984
+  ],
+  "channels": [
+    8,
+    15,
+    22
+  ],
+  "channelOffset": [
+    32,
+    96
+  ],
+  "design": "Use all 21 published GAIN entries. First 20 in 10 disjoint adjacent exposure pairs, E021 inventoried but held out. Use ramp frame minus frame zero at fixed indices 1, 5, 10. Compare variance of frame differences and offline half-pixel bilinear sums over separate detector regions inside three output channels. Treat signal as detector-measured ADU; frames share pedestal and repeated exposures share conditions. No independent incident photon dose or in-flight detector claim."
+}

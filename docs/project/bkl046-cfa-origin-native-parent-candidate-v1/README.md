@@ -1,0 +1,9 @@
+# BKL-046 · Parent candidato per l'avvio del controllo XDRZ
+
+Il nuovo parent riceve il legame R4 prima di preparare il comando. Custodisce i 18 ingressi, scrive e rilegge lo script e lo trattiene in sola lettura. Subito prima dell'unica chiamata di avvio rilegge i record R4 vincolati. Il percorso previsto osserva l'handle del processo creato, verifica l'eseguibile, attende il marcatore e passa il contesto al supervisore di finestra. In caso di errore dopo la creazione attende l'uscita del processo originale tenendo gli handle degli ingressi aperti, senza riprovare.
+
+Nel collaudo l'avvio è intercettato: nessun eseguibile PixInsight parte. Su copie NTFS il programma verifica che al momento della chiamata sia lo script sia un FITS risultino indisponibili in scrittura. Il controllo respinge lo script alterato prima della verifica R4 e omette l'avvio se la rilettura R4 fallisce. Gli errori simulati di creazione e di identità non proseguono verso la prontezza. Dopo una creazione simulata, prima di liberare i file viene richiesta l'osservazione dell'uscita.
+
+Il collaudo intercetta la creazione, la rilettura R4, la prontezza e il supervisore. Le prove con testimoni Windows e R4 isolato restano evidenze separate. Il parent candidato deve essere collegato all'entrypoint gestito, tutelato e revisionato sul soggetto esatto. Il registro canonico non è stato letto dal collaudo. [Barriera R4](../bkl046-cfa-origin-parent-barrier-v1/README.md) · [Prontezza della finestra](../bkl046-cfa-origin-ready-window-v1/README.md)
+
+Il collaudo riceve la directory del kit, la directory delle fonti del custode degli ingressi e il nuovo percorso del rapporto. Il kit contiene il parent e i moduli usati, con il manifesto delle loro impronte.

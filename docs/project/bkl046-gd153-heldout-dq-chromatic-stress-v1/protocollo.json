@@ -1,0 +1,29 @@
+{
+  "schema": "BKL046_GD153_HELDOUT_DQ_CHROMATIC_STRESS_PROTOCOL_V1",
+  "clean": {
+    "archive": "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+    "report": "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab"
+  },
+  "masked": {
+    "archive": "7104c91982d85ee3ddf3b3fd2580d87153938e7a3bff2bc1f722bac6dc1ecb77",
+    "report": "670003936733be601376adda7384523375c05413cbd18d1667ebe34512121927"
+  },
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "requireAperture": "local16to22:median:r10",
+  "maxTripletSpanDays": 0.05,
+  "methods": [
+    "zero",
+    "area",
+    "annularMedian"
+  ],
+  "policies": [
+    "nearest",
+    "four"
+  ],
+  "reportingThresholdMillimag": 10,
+  "scope": "Pair only the three bands of each qualifying time-limited reference triplet with the same mask visit and chip. Convert estimated-to-true aperture flux ratios to color errors. Score pooled and by reference visit, with and without simulated core holes. Finite stress, one star, repeated masks, no actual damaged color truth."
+}

@@ -1,0 +1,9 @@
+# BKL-046 – Catalogo delle variabili in PhotometricAnalysis 1.0.0
+
+Il ramo di esclusione delle variabili dipende dalla disponibilità di coordinate stellari e da un risultato VSX. La ricerca usa un cono che copre le stelle presenti, con un margine di un minuto d'arco. Se il database VSX locale risulta disponibile, il wrapper invoca ExtendedSources con ricerca VSX e filtro per le voci marcate costanti o inesistenti. L'errore del ramo locale interrompe questa ricerca. Il ramo remoto è selezionato all'inizio quando il database risulta indisponibile, e prova i mirror VizieR configurati.
+
+L'abbinamento richiede separazione inferiore al maggiore fra 3″ e 1,5 volte la scala in arcosecondi per pixel. Fra le voci compatibili sceglie la più vicina. Quando entrambe le magnitudini sono note, scarta il candidato VSX più debole di oltre tre magnitudini. La selezione delle stelle di confronto può escludere le variabili note soltanto quando la mappa delle corrispondenze è disponibile. Per una decisione riproducibile conservare catalogo, esito, scala e stelle escluse. Un fallimento della consultazione lascia l'esclusione delle variabili non verificata.
+
+Il test riproduce il ramo locale con catalogo simulato. Ha verificato il limite di 180° sul raggio, l'assenza di download dopo un errore locale, l'abbinamento a cavallo di RA 0°, il veto di magnitudine e il cambio di esito a 4″ al variare della scala. Restano da verificare le interrogazioni native di ExtendedSources e la qualità astrometrica e fotometrica della selezione. [Riscontro offline](riscontro.json)
+
+Fonti installate. PhotometricAnalysisData.js, righe 1352–1481, SHA-256 b9b710d28267d9a60258406c44893faacc81c557a7f149b0b5642c7d1e9dec47. PhotometricAnalysisEngine.js, righe 2613–2734 e 2978–3017, SHA-256 948f93e09d8a3f227c6e1dc86ee375834762a7e9229fed8b058fd093421edca7.

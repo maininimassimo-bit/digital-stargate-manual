@@ -1,0 +1,112 @@
+{
+  "protocol": "BKL046_BLINDSOLVER_INDEX_METHOD_REPLAY_V1",
+  "engineSha256": "ce315e997ff707d5af66b6b6eb2ff367f636d5c2719020d4663735fed40ec4ac",
+  "node": "24.22.3",
+  "v8": "13.6.233.17-node.63",
+  "excerpts": [
+    {
+      "line": 953,
+      "sha256": "9e254b02aa2eb1f91ac11ca0ffeb86d81383193cc330e10f40a87cc7ab53d993"
+    },
+    {
+      "line": 975,
+      "sha256": "a86e52ef28b9c3f85813e0fed18c199645e39fd85d4cca6f0482e941719fad8e"
+    }
+  ],
+  "cases": [
+    {
+      "name": "gaia-absent",
+      "calls": {
+        "gaia": [],
+        "fileExists": []
+      },
+      "outcome": "NO_CONFIGURED_INDEX"
+    },
+    {
+      "name": "get-info-error",
+      "calls": {
+        "gaia": [
+          [
+            "get-info",
+            7,
+            0
+          ]
+        ],
+        "fileExists": []
+      },
+      "outcome": "NO_CONFIGURED_INDEX"
+    },
+    {
+      "name": "blank-configured-path",
+      "calls": {
+        "gaia": [
+          [
+            "get-info",
+            7,
+            0
+          ]
+        ],
+        "fileExists": []
+      },
+      "outcome": "NO_CONFIGURED_INDEX"
+    },
+    {
+      "name": "missing-then-present",
+      "calls": {
+        "gaia": [
+          [
+            "get-info",
+            7,
+            0
+          ],
+          [
+            "get-info",
+            7,
+            0
+          ]
+        ],
+        "fileExists": [
+          "X:/fixture/gdr3-index.xpsd",
+          "X:/fixture/gdr3-index.xpsd"
+        ]
+      },
+      "outcome": "REJECT_THEN_RETRY_SUCCESS"
+    },
+    {
+      "name": "filesystem-error",
+      "calls": {
+        "gaia": [
+          [
+            "get-info",
+            7,
+            0
+          ]
+        ],
+        "fileExists": [
+          "X:/fixture/gdr3-index.xpsd"
+        ]
+      },
+      "outcome": "ERROR_PROPAGATED_NO_CACHE"
+    },
+    {
+      "name": "trim-and-cache",
+      "calls": {
+        "gaia": [
+          [
+            "get-info",
+            7,
+            0
+          ]
+        ],
+        "fileExists": [
+          "X:/fixture/gdr3-index.xpsd"
+        ]
+      },
+      "outcome": "CACHED_PATH_NOT_RECHECKED"
+    }
+  ],
+  "gaiaAndFileSimulated": true,
+  "indexBytesRead": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

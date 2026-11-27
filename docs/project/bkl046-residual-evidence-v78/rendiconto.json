@@ -1,0 +1,1526 @@
+{
+  "schema": "BKL046_RESIDUAL_EVIDENCE_APPENDIX_V78",
+  "baselineKnowledge": "1.171",
+  "parentLedgerSha256": "415d7d1ffa63e7bb75ca4ab12c32314a933bee5419b80e98a34b882a859cef2c",
+  "axisAuthoritySha256": "bb1ce8b299d8b7923103c8449c7d1a877804ca17b57ba0ae5de85e4aa11b2376",
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "evidence": [
+    {
+      "id": "ic1805Masks",
+      "level": "analyticalInjectionRealFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/1",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "6678e605cdbc84d440df55dfdc783a5395b160c4",
+      "path": "docs/project/bkl046-ic1805-diffuse-background-replica-v1/riscontro-maschera.json",
+      "reportSha256": "df638614160189a166732bbfa0b51be2059cd3a2ef067b835eb401f38f0efe7d",
+      "archiveSha256": "1072d787b14e2ae1cd63b4665959f2151cc3fe50adf142e9feffe96aab4107ca",
+      "archiveName": "BKL046-IC1805-fondo-diffuso-replica.zip",
+      "verifiedGitHub": true,
+      "verifiedH": true,
+      "verifiedKHostedO": true,
+      "remaining": "Verificare altre morfologie, supporto del fit, incertezza e risposta nativa."
+    },
+    {
+      "id": "ic1805Paired",
+      "level": "realDifferencesAndPostAlignmentInjection",
+      "axes": [
+        "DIFFUSE_BACKGROUND/1",
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "675ceb0c80bd2d20457d232df3c9c0f837a16354",
+      "path": "docs/project/bkl046-ic1805-differential-background-v1/riscontro.json",
+      "reportSha256": "03814858228663afd612862f92931cfffa94c2b4303f0b9b39ecab2118bd99c9",
+      "archiveSha256": "3224baae8a04403ac67ffde9565c9b883c4b562b57be2eae9644848d6ce78826",
+      "archiveName": "BKL046-IC1805-fondo-differenziale.zip",
+      "verifiedGitHub": true,
+      "verifiedH": true,
+      "verifiedKHostedO": true,
+      "remaining": "Separare effetti additivi e moltiplicativi con scala fotometrica qualificata."
+    },
+    {
+      "id": "diffuseKnowledge",
+      "level": "semanticReconciliation",
+      "axes": [
+        "DIFFUSE_BACKGROUND/1",
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "f300087016edf8bf5b2ad27d685d0fff829a6aeb",
+      "path": "docs/project/bkl046-diffuse-background-knowledge-v1/conoscenza.json",
+      "reportSha256": "2ba55adad24e5b737d713503404901c07b46f4afdac7018dbdea756a9911ed2b",
+      "archiveSha256": "e7ba7e5f1d73bf91604c3598464b20b4684c4cf4764fb6c17084d53d55bd6cf5",
+      "archiveName": "BKL046-conoscenza-fondo-diffuso.zip",
+      "verifiedGitHub": true,
+      "verifiedH": true,
+      "verifiedKHostedO": true,
+      "remaining": "Riconciliare le regole con le condizioni native effettive di ABE e DBE."
+    },
+    {
+      "id": "ic1805Reference",
+      "level": "withheldExposuresSameSequence",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "fe58b31421f82171f0ce6786b7552ef96db43e4d",
+      "path": "docs/project/bkl046-ic1805-reference-transfer-v1/riscontro.json",
+      "reportSha256": "636ed2f17a6a5315a87808afad6f05e6c309fc8bed1f0aa47ca5fc9bcac6c9a8",
+      "archiveSha256": "8163e5e702ce4735f4fcc7f24a020e3c9c37069721a5ff71f22accc952ad5d56",
+      "archiveName": "BKL046-IC1805-fondo-riferimento.zip",
+      "verifiedGitHub": true,
+      "verifiedH": true,
+      "verifiedKHostedO": true,
+      "remaining": "Fissare la selezione del riferimento prima della verifica."
+    },
+    {
+      "id": "m8m20Reference",
+      "level": "independentFieldAndCamera",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "7e175a56a66749cf4f10029017ba848b53ad789c",
+      "path": "docs/project/bkl046-m8-m20-reference-transfer-v1/riscontro.json",
+      "reportSha256": "a84d66047802b999c61cce84b80e2cf79dc85032532fc9b30cf6c015684a9564",
+      "archiveSha256": "f45e5d8080292c7fdfdd486671997f6d8e458ff371adb122a7ad69da3ab7c207",
+      "archiveName": "BKL046-M8-M20-fondo-riferimento.zip",
+      "verifiedGitHub": true,
+      "verifiedH": true,
+      "verifiedKHostedO": true,
+      "remaining": "Usare nuove acquisizioni e controllare l’errore rispetto a riferimenti indipendenti."
+    },
+    {
+      "id": "cfaV4",
+      "level": "preAdmissionTechnicalOnly",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "91b28d61cd24895e81816f76e7054e56e78dfc19",
+      "path": "docs/project/bkl046-cfa-v4-review-intake/riscontro.json",
+      "reportSha256": "2012340afbf0fd6dbf960211b625ac1f23d4585d6b7e77ae26efb22255b181b7",
+      "archiveSha256": "223305888c60ff6be52bedb620ae3e4c1dd1f505e5a160e7dfb6ae265e70731e",
+      "archiveName": "BKL046-CFA-fascicolo-revisione-v4.zip",
+      "verifiedGitHub": true,
+      "verifiedH": true,
+      "verifiedKHostedO": true,
+      "remaining": "Ottenere ARB e RQ sul soggetto, attivazione protetta e ammissione. Confrontare le uscite native alla stessa scala."
+    },
+    {
+      "id": "scaleSensitivity",
+      "level": "controlledPerturbationOnRealFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "397517b1276fd18b31c30e150544460fd08f6765",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-diffuse-scale-sensitivity-v1/IC1805.json",
+          "sha256": "45f4f64df16770a4113e3339d30245ec4a9cf42235ff2c9ab0785d6d36b5f5a6",
+          "archiveSha256": "c07294b5be9e9f0d4577da22191057710f3cb7f93cd327333f86e4d66430036d",
+          "archiveMember": "IC1805.json",
+          "archiveName": "BKL046-fondo-sensibilita-scala.zip",
+          "copiedReport": "scaleSensitivity-IC1805.json"
+        },
+        {
+          "path": "docs/project/bkl046-diffuse-scale-sensitivity-v1/M8M20.json",
+          "sha256": "ffb3f20cf9cba7bdffc341900c0b6c4549828cd29f7e2e3ba68e756d1feeb0b8",
+          "archiveSha256": "c07294b5be9e9f0d4577da22191057710f3cb7f93cd327333f86e4d66430036d",
+          "archiveMember": "M8M20.json",
+          "archiveName": "BKL046-fondo-sensibilita-scala.zip",
+          "copiedReport": "scaleSensitivity-M8M20.json"
+        }
+      ]
+    },
+    {
+      "id": "stellarScale",
+      "level": "finitePairedScaleSensitivity",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "23fb532884648ec8f69329d0eafa07ca12eaf465",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-empirical-scale-background-v1/riscontro.json",
+          "sha256": "1a5ce8a5cc51b87f438e34532ca064a36210a3dd9f5d2570622e644a26e593ed",
+          "archiveSha256": "b96cf8f9234605a81b10c0e64727fe984f1186cbb6c78528d4054be4fb18ad7f",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-scala-empirica.zip",
+          "copiedReport": "stellarScale-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "heldOutEdges",
+      "level": "spatialHoldoutOnRealFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "1eee114c9cbc9d7e2f9bd7b8583fb0f6288a7f19",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-diffuse-held-out-edges-v1/IC1805.json",
+          "sha256": "1499e5dbfbaf85c66593a2f45ae7c49b7aa6f44a9068fac9318bc3e683675800",
+          "archiveSha256": "82c387dfd5577d8aeb7583f1241db7b2654acefaf5fe967fa6e93c458c1cfb64",
+          "archiveMember": "IC1805.json",
+          "archiveName": "BKL046-fondo-bordi-esclusi.zip",
+          "copiedReport": "heldOutEdges-IC1805.json"
+        },
+        {
+          "path": "docs/project/bkl046-diffuse-held-out-edges-v1/M8M20.json",
+          "sha256": "7dc0b874e6451505897744dad79a9e8381398d241de1b8312320a9f7dcd64e42",
+          "archiveSha256": "82c387dfd5577d8aeb7583f1241db7b2654acefaf5fe967fa6e93c458c1cfb64",
+          "archiveMember": "M8M20.json",
+          "archiveName": "BKL046-fondo-bordi-esclusi.zip",
+          "copiedReport": "heldOutEdges-M8M20.json"
+        }
+      ]
+    },
+    {
+      "id": "archiveAudit",
+      "level": "isolatedWitnessReceiptReadback",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "5be64af5136e763b49137eac46e8176cde003e1d",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-archive-release-audit-v1/riscontro.json",
+          "sha256": "5f580e1d230f434f5240bc3d40563dc1012b2e855cafe07e322262eaf6b4bdd4",
+          "archiveSha256": "2a0b40bdfbee5b07d2a208d3452cfbbb6e8485f2970d25d067f53acb711b5a8e",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-riconciliazione-archivio.zip",
+          "copiedReport": "archiveAudit-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originPredictions",
+      "level": "syntheticHypothesisDesign",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "8086db8bb8007e576f547223d91969b32abd5f49",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-factorial-v1/riscontro.json",
+          "sha256": "b163bce49d61e476382715e1b74d8ce781a40df75e9ae97ed65f4b00ee4ee1cf",
+          "archiveSha256": "356170fad0768bc14a2a9d1303aa697b2eb0c7f0fdec46309e90e7c744ed25b0",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-fattoriale.zip",
+          "copiedReport": "originPredictions-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originClassifier",
+      "level": "syntheticOfflineClassifier",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "aa1806f0ed93274a73c1dcbf27aab56f8800d2f2",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-output-classifier-v1/riscontro.json",
+          "sha256": "00cf633cac87f32e4c765c37c7c71960684cc7946d161545e334793eb84a55dd",
+          "archiveSha256": "21518dc6911d89fbcfc39d6a81c6cdf8b9b2b8247ee392154abf098b692eb740",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-classificatore.zip",
+          "copiedReport": "originClassifier-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originDispatcher",
+      "level": "isolatedR4WithWindowsWitness",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "5ec2fc97b099ac66626674776621555fc18ac465",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-dispatcher-candidate-v1/riscontro.json",
+          "sha256": "c3b52e58d2d5eec948952d6272d9f9d98b45131f01ee9f8b7328b0137b3b2842",
+          "archiveSha256": "20545e6253843bdd991a6cb7ca73021bd6fe13071d9691902eabb593d925f8fb",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-dispatcher.zip",
+          "copiedReport": "originDispatcher-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "originPreflightV3",
+      "level": "exactCandidateOfflinePreflight",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "5d0d48132ac2a61b78a9dc8c43156382a1640d44",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origine-launcher-revisione-v3/preflight-v3.json",
+          "sha256": "2455c18b91c9e0c42bbb5cab5e532ad5b7324735d3d215ba834839fbb8679064",
+          "archiveSha256": "9e5e763d65726a226c152d9407c36d22106657314f72e172a978db04fe3ab37c",
+          "archiveMember": "preflight-v3.json",
+          "archiveName": "BKL046-CFA-origine-launcher-revisione-v3.zip",
+          "copiedReport": "originPreflightV3-preflight-v3.json"
+        },
+        {
+          "path": "docs/project/bkl046-cfa-origine-launcher-revisione-v3/preflight-faults.json",
+          "sha256": "0db2ea2b15d425e94770f09ef18bfddd5160d49107debda29193ad36389e1c17",
+          "archiveSha256": "9e5e763d65726a226c152d9407c36d22106657314f72e172a978db04fe3ab37c",
+          "archiveMember": "preflight-faults.json",
+          "archiveName": "BKL046-CFA-origine-launcher-revisione-v3.zip",
+          "copiedReport": "originPreflightV3-preflight-faults.json"
+        }
+      ]
+    },
+    {
+      "id": "m8ScaleAndEdges",
+      "level": "jointHeldOutResidualOnRealFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "48881357f0fcd590a4e182dac4fea1cd5b4d6c40",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-scale-and-held-out-edges-v1/riscontro.json",
+          "sha256": "026956314fa60c8e80d41ee6fc7b775d1d42f5c0b3cf973c9bd5f93d75afa8ec",
+          "archiveSha256": "896efd28c7bf28d1e48ed752335925979010cfc58c4b5b98d268c1dab7a2cc10",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-scala-e-bordi.zip",
+          "copiedReport": "m8ScaleAndEdges-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8FullGridInjection",
+      "level": "digitalInjectionOnRealFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/1",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "19376595e2ac96fbccb6ac862e1264f6538b9c51",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-scale-edges-diffuse-injection-v1/riscontro.json",
+          "sha256": "d22407710a2e569ab43a61c8d2decf02c8e47d457ed62db3e2ceadd0ca496e8c",
+          "archiveSha256": "7660ec078f29fae69055a2b587506ba7444bd200a561442b7260558f396d081f",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-scala-e-bordi-iniezioni.zip",
+          "copiedReport": "m8FullGridInjection-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8KnownMask",
+      "level": "injectionTruthOnlyMask",
+      "axes": [
+        "DIFFUSE_BACKGROUND/1",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "5f53467c9a47c1a4673c32f7a97f84e836d15a3e",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-scale-edges-known-profile-mask-v1/riscontro.json",
+          "sha256": "87a03c9d2019dcafee99f993abaafdb13a08153a7770d03ab431eea75ad36e92",
+          "archiveSha256": "b474925628b83e7ef9d2ea0c79a4d7ee229673439b7b38e1158318d5ea16c1c9",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-scala-bordi-maschera.zip",
+          "copiedReport": "m8KnownMask-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8BlindMask",
+      "level": "fixedDataDerivedMaskOnDigitalInjections",
+      "axes": [
+        "DIFFUSE_BACKGROUND/1",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "fea59b0b58b1986728c9bdf9d90fb61393fc9aa4",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-scale-edges-blind-mask-v1/riscontro.json",
+          "sha256": "fdcbc15e3bef4f46493b357bdd3246f1112761f0a5dafafb6e487d081ff38a40",
+          "archiveSha256": "805c104f78026d2ec1986316272f14524b34255109fa87974a8c81b7a35d297e",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-scala-bordi-maschera-cieca.zip",
+          "copiedReport": "m8BlindMask-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8ReferenceBudget",
+      "level": "hypotheticalBoundedReferenceErrorBudget",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2",
+        "DIFFUSE_BACKGROUND/3"
+      ],
+      "commit": "d8c2616031b223dd8bac5068a0ab60c130f7330d",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-background-anchor-error-budget-v1/riscontro.json",
+          "sha256": "ed1c0284d7cdd7b96ed1aa182acd5020ddbf392be938dbaad2b8467aa14d6cbf",
+          "archiveSha256": "ac62596fbb234e47a7bf806a54d7a292fd3a1af481c8bc39c65814776bc6ddec",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-budget-riferimenti.zip",
+          "copiedReport": "m8ReferenceBudget-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "stream34VmPrerequisites",
+      "level": "technicalPreconditionOnly",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/3"
+      ],
+      "commit": "155037f6e4ca3cd3258e5b7cfeef079f938110df",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-stream34-v11-readonly-prerequisites-v1/riscontro.json",
+          "sha256": "f02e19263058eee49af5c95900f345f15e51c3444351b8fd1c6bbe6eac099bd5",
+          "archiveSha256": "eeca10ab111544086c09c5561c8b328a6169cc66f9d2f3983401f694c078ff6d",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-Stream34-verifica-prerequisiti-v11.zip",
+          "copiedReport": "stream34VmPrerequisites-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8DarkRepeatability",
+      "level": "instrumentalRepeatabilityOnDarkFrames",
+      "axes": [
+        "DIFFUSE_BACKGROUND/2"
+      ],
+      "commit": "de418f8d692664440ed91c18b0fe7b945f214cd6",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-dark-anchor-repeatability-v1/riscontro.json",
+          "sha256": "e077e5feb850fb34527f90ef90d9ffd0758120b8c534881de9d92b3581e40869",
+          "archiveSha256": "5fe800221ad9919db6b639da84f831bd380d349645e3f2edb3985d4eb509639d",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-fondo-ripetibilita-dark.zip",
+          "copiedReport": "m8DarkRepeatability-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "cfaV3Token",
+      "level": "technicalPreconditionOnly",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "70147a9ac5ec36ea100df7a097f3b90c96e1f7fe",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-v3-ordinary-token-acl-v1/riscontro.json",
+          "sha256": "9c4c29f71055e9bb722f47e80249d513acc1cfc4de9457f1bea43575c6755425",
+          "archiveSha256": "80cac952ef8b935f0c7f0bdb5462385ba9488a87c51fcbee0c7e48f91417e5ec",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-controllo-posa-v3.zip",
+          "copiedReport": "cfaV3Token-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "cfaV3Staging",
+      "level": "inactiveLaboratoryStaging",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "2d416829e62562b44659238721f3929d8cb1c495",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-v3-inactive-stage-v1/riscontro.json",
+          "sha256": "bf2e7b6da7a3eae2ea898d366dc5905d421abad5c80fa5023464b4dab2a96b16",
+          "archiveSha256": "76ecdf48fdab02f82388894a27ba718250d89eebffd5813fb77b604d7a11cbfe",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-posa-offline-v3.zip",
+          "copiedReport": "cfaV3Staging-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "cfaV3ReviewDossier",
+      "level": "reviewDossierWithoutApproval",
+      "axes": [
+        "CFA_DITHER_DRIZZLE/4"
+      ],
+      "commit": "6ed9e3cf34e50992a6907ac81e91b86ff7ed6f64",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-cfa-origin-v3-independent-review-dossier-v1/riscontro.json",
+          "sha256": "748ad2a5a14efe0ef71f7fd96aa2619cd5d8a572f3f29044d6aa47d9c6a94a8b",
+          "archiveSha256": "14e2d6fb90e8748508039c6e03e4a8d5ed301feb2bb06c268f5025f9e9ca837f",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-CFA-origine-dossier-revisione-v3.zip",
+          "copiedReport": "cfaV3ReviewDossier-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8OrientationReconstructed",
+      "level": "reconstructedHeldOutPixelsSharedExposures",
+      "axes": [
+        "PSF_PIXEL/2",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "ff8914b39db4f590bd4b86c2f5fc58daf45d0686",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-orientation-transfer-v1/riscontro.json",
+          "sha256": "dd5822c4cd7bbe52b739e062a3006d41529d6b672c126e7981f0b9720130f05c",
+          "archiveSha256": "b2ee6323a1e17585ee277ac2aeb578209c7935b90a24e13142c184423c89dad1",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-orientazione-trasferimento.zip",
+          "copiedReport": "m8OrientationReconstructed-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8OrientationDisjoint",
+      "level": "detectorSamplesDisjointExposureHalves",
+      "axes": [
+        "PSF_PIXEL/2",
+        "PSF_PIXEL/3",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "b6d32799b0528941510501d8328ec6f54baed950",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-disjoint-exposures-v1/riscontro.json",
+          "sha256": "b1620be589bcf2e3e2327ca4557839a1b18957219aa12d63a5932191a5fcfced",
+          "archiveSha256": "6439a2d7c77b4118d6f207c5707b654f3fe27ef748ed2e751407c4da35a52321",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-posa-disgiunta.zip",
+          "copiedReport": "m8OrientationDisjoint-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8PsfModelSensitivity",
+      "level": "pairedModelSensitivityOnRealFrames",
+      "axes": [
+        "PSF_PIXEL/2",
+        "PSF_PIXEL/3",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "7d6bdd33aab02090bdeb62ea9494fbee201ef917",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-disjoint-model-sensitivity-v1/riscontro.json",
+          "sha256": "e92af352f4d19b3cd19a909e2167444a1882ae364b6e60bbbe1e0c0103197f65",
+          "archiveSha256": "0d0d2850975eb842a396b908cd2c4eb1881f5fc51a86042fc8c3bfa1d841ced2",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-sensibilita-modello.zip",
+          "copiedReport": "m8PsfModelSensitivity-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8PsfGreenParities",
+      "level": "nominalSameBandParityControl",
+      "axes": [
+        "PSF_PIXEL/2",
+        "FILTER_COLOR/3"
+      ],
+      "commit": "bc13a6625cde5d3a1f22571e970ba11a63e47006",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-cfa-green-parities-v1/riscontro.json",
+          "sha256": "5031404b8c588bb8e349858fed4c39c0f3ed8d5e278f59e052e38749619808b8",
+          "archiveSha256": "cbb457ff20fa991bdffd6158b2f4dd066ce1feab834d6ce811f0fe428a1fc9fb",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-PSF-parita-verdi.zip",
+          "copiedReport": "m8PsfGreenParities-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "axes": [
+    {
+      "id": "CFA_DITHER_DRIZZLE/1",
+      "title": "Four Bayer patterns",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Four-pattern native contracts and later scoped VNG reference/color evidence exist. Continue original scientific method comparisons, controls and uncertainty beyond this finite synthetic scope; do not repeat completed banks or infer universal photometric admission.",
+      "previousCards": [
+        "CFA_FOUR_PATTERNS_NATIVE_TECHNICAL_CONTRACTS",
+        "CFA_VNG_SCALAR_VECTOR_REFERENCE_AND_SIGNED_READER_SCOPE",
+        "CFA_VNG_NATIVE_TWO_AND_THREE_DRIVER_INTERACTIONS",
+        "VNG_NATIVE_COHORTS_AND_APERTURE_COVERAGE",
+        "VNG_NATIVE_COLOR_ERROR_AND_NOISE_CONTEXT_TRANSFER",
+        "VNG_HELDOUT_JOINT_COLOR_LIMIT_PER_FIELD",
+        "CFA_EXISTING_PATTERN_REFERENCE_AND_COLOR_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "CFA_DITHER_DRIZZLE/2",
+      "title": "Subpixel dither diversity versus repeated identical offsets",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Actual registration uncertainty and applicable native matched-scale effects remain to reconcile. Bounded support and coherent stress already exist; do not repeat them merely to create labels.",
+      "previousCards": [
+        "CFA_BOUNDED_SUPPORT",
+        "CFA_COHERENT_STRESS",
+        "CFA_COMMON_SCALE",
+        "LDN1320_RECORDED_HOMOGRAPHY_COARSE_FLUX_APPLICABILITY",
+        "LDN1320_PROJECTIVE_CFA_POSITIVE_DROP_SUPPORT",
+        "CFA_EXISTING_COVERAGE_REGISTRATION_AND_WEIGHT_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "CFA_DITHER_DRIZZLE/3",
+      "title": "Coverage holes and varying weights",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "H126: genuine complete independent stream34 review75322cd7 is APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION, no blockers; STREAM-COMPLETE-01 resolved. Normalized review48312124 and actual incoming-origin/peer bytes installed; exact isolated read-only Scope checks34 sources,8 inputs, installed/runtime/registry/publisher/common approvals without Host/custodian/gate/native creation. Preserve rejected32 and historical unapproved34 snapshots with current correction links. Proceed only when fresh real8GiB physical/12GiB commit reserves, sole common gate admission and all ownership/input/UI/archive controls pass under the exact approved one-shot operatorV3/EntryV2/HostV2. No automatic retry, reserve relaxation or foreign-process stop. Current memory observation may block admission and is not a reservation or continuous bound. Native File/hash/close, original-native sampling, private-engine lifetime and failed File retention remain distinct actual-witness requirements; hash success alone cannot close them.456 scientific cases remain, all25 axes/final knowledge/full remote archive reconstruction open.",
+      "previousCards": [
+        "CFA_BOUNDED_SUPPORT",
+        "CFA_COMMON_SCALE",
+        "LDN1320_PROJECTIVE_CFA_POSITIVE_DROP_SUPPORT",
+        "LDN1320_PROJECTIVE_CFA_AREA_EXPOSURE_CONCENTRATION",
+        "LDN1320_DRIZZLE_HISTORICAL_WEIGHTS_REJECTION_AND_CONSOLE",
+        "LDN1320_CFA_RECORDED_WEIGHT_CONCENTRATION_AND_VARIANCE_SENSITIVITY",
+        "LDN1320_XNML_HISTORICAL_LINEAGE_AND_DECODED_PLANES",
+        "LDN1320_XNML_CONSTANT_SCALE_AND_SPATIALLY_VARIABLE_OFFSET",
+        "CFA_EXISTING_COVERAGE_REGISTRATION_AND_WEIGHT_SCOPE_RECONCILIATION",
+        "WEIGHTED_DRIZZLE_EIGHT_UNIFORM_GROUPS_CONDITIONAL_OPERATOR_AND_ROUNDOFF",
+        "WEIGHTED_THIRTEEN_UNIFORM_FINITE_GROUPS_RELATIVE5_ENDPOINT_RECOUNT",
+        "WEIGHTED_ALL20_UNIFORM_FINITE_GROUPS_COMPLETION_SCOPE",
+        "WEIGHTED_FIRST_NONUNIFORM_PAIRED_VARIANCE_MODEL_SENSITIVITY",
+        "WEIGHTED_FIRST30_FINITE_OPERATOR_RELATIVE5_RECOUNT",
+        "WEIGHTED_NATIVE_RESOURCE_STOP_BOUNDED_RECOVERY_AND36_GROUPS",
+        "WEIGHTED40_GROUPS_UNIFORM_ASCENDING_PAIRED_CONDITIONAL_VARIANCE",
+        "NATIVE_STARTUP_MEMORY_FAULT_TRIAGE_AND_ZERO_CASE_REJECTION",
+        "WEIGHTED42_GROUPS_IDLE_REVIEW_NATIVE512_AND_REJECTED_BOOT008",
+        "WEIGHTED44_GROUPS_CLOSED009_NATIVE512_GRAPHICS_METADATA",
+        "LEGACY_NOISE128_RELATIVE5_LIMITS_AND24_EXACT_WEIGHT_DOMAIN_JOINS",
+        "WEIGHTED48_GROUPS_CLOSED011_TWO_BOUNDED_EPOCHS",
+        "WEIGHTED50_GROUPS_CLOSED012_AND_LOCAL_RECOVERY_SCOPE",
+        "WEIGHTED54_GROUPS_CLOSED013014_NO_DUPLICATE_CASES",
+        "WEIGHTED58_GROUPS_CLOSED016_NO_DUPLICATE_CASES",
+        "WEIGHTED62_GROUPS_CLOSED017018_NO_DUPLICATE_CASES",
+        "WEIGHTED60_THREE_PROFILE_RANKS_AND_COVARIANCE_OMISSION",
+        "WEIGHTED66_GROUPS_CLOSED019020_NO_DUPLICATE_CASES",
+        "WEIGHTED_NOISE128_CERTIFIED_QUANTILES_AND376_ROBUST_DECISIONS",
+        "WEIGHTED69_GROUPS_CLOSED021022_EXACT_PENDING",
+        "WEIGHTED80_GROUPS_ALL20720_FINITE_CASES_COMPLETE",
+        "WEIGHTED_ALL80_STORED_ENDPOINTS_RELATIVE5_AND_UNSUPPORTED_RECOUNT",
+        "DRIZZLE_COUPLED16_WEIGHT_REJECTION_XNML_MATCHED_CONTROLS",
+        "DRIZZLE_SPATIAL_XNML16_NATIVE_REGIONS_APERTURES_AND_ROUNDING",
+        "SPATIAL_XNML_BOUNDARY5PERCENT_DOES_NOT_IDENTIFY_INTERPOLATION",
+        "WEIGHTED_GAUSSIAN384_IDEAL_KNOWN_MEAN_SAMPLING_CERTIFICATE",
+        "WEIGHTED_CENTRAL_APERTURE_TILE_ISOLATION_NOT_NATIVE_QUILT",
+        "WEIGHTED_ROUNDING_BUDGET128_APERTURES_NOT_NATIVE_ERROR_BOUND",
+        "DRIZZLE_TILE64_NATIVE80_CENTRAL_TRANSLATION_SUPPORT_AND_FLOAT32_REFUSAL",
+        "WEIGHTED_EXISTING_GAUSSIAN_COMPONENTS_REUSE_QUANTILE_TERM",
+        "DRIZZLE_TILE2048_RESOURCE2_RAW_PLANES_HEADER_REFUSAL_AND_SELECTED_GEOMETRY",
+        "WEIGHTED_ORIGINAL_FOUR_OBSERVABLE_CLASSES_APERTURE_CERTIFICATE_SCOPE",
+        "WEIGHTED_COMPLETE2632_FOUR_CLASS_NOISE_DESIGN_AND_SIGNED_ALIAS_FIXTURES",
+        "WEIGHTED_COMPLETE2632_CONDITIONAL_WORD_COUPLING_AND_FLOAT64_SOURCE_BUDGETS",
+        "XISF_SIGNED_FLOAT64_DEFAULT_CLIPPING_NO_NORMALIZE_NATIVE_READBACK27",
+        "WEIGHTED_CURRENT_H_GAUSSIAN_DECODER_SOURCE_EXECUTION_AND_FOUR_PENDING_DRIZZLE_HINT_CONTROLS",
+        "DRIZZLE_SIGNED_HINT4_NATIVE_RANGE_AND_ZERO_SUPPORT_POSTHOC_DIAGNOSIS",
+        "BKL046_COMMON_PIXINSIGHT_R4_GATE_OWNED_OPERATION_CLOSED",
+        "DRIZZLE_CONDITIONAL_RANGE_PREIMAGE21_AND_ORIGINAL_IDEAL_SIGN_BOUND",
+        "DRIZZLE_EXPORTED_RANGE_CONTRACT_GAP_AND_POSTHOC_INVERSE480",
+        "DRIZZLE_REVERSIBLE_PEDESTAL_FULL2632_ALGEBRA_AND_SOURCE_READ_BUDGET",
+        "DRIZZLE_REVERSIBLE_PEDESTAL_FOUR_PROSPECTIVE_NATIVE_WITNESSES",
+        "DRIZZLE_PEDESTAL_162_FILE_RECOVERY_AND_COMMON_RELEASE",
+        "DRIZZLE_FULL2632_CONDITIONAL_KNOWN_MEAN_INFERENCE_TRANSFER",
+        "DRIZZLE_FULL2632_HISTORICAL_FLOAT32_ARITHMETIC_AND_GEOMETRY_FRONTIER",
+        "DRIZZLE_DROP_SETTER_AND_AXIS_ALIGNED_POLYGON_CONDITIONAL_ERROR_MODEL",
+        "DRIZZLE_ACTUAL_HALF_PIXEL_ORIGIN_AUDIT_AND_CONDITIONAL_MODEL_EXTENSION",
+        "DRIZZLE_PEDESTAL_SOURCE_CONSTRUCTOR24_AND_FULL2048_4194304_VALUE_QUALIFICATION",
+        "DRIZZLE_ARCHIVED_PREFIX_FIXED_BANKS_FULL260_EXACT_REFERENCE_PREPARATION",
+        "DRIZZLE_ARCHIVED_PREFIX_COMPONENTS_AND_EXACT_ANALYZER_MOCK_QUALIFICATION",
+        "DRIZZLE_ARCHIVED_PREFIX_COMMON_BINDING_PRIVATE_ENGINE_AND_PARENT_RETENTION",
+        "DRIZZLE_ARCHIVED_PREFIX_FINITE_NATIVE_TYPED_READS_AND_CONFIGURATION_WITNESS",
+        "DRIZZLE_FULL131072_FIXED_GAUSSIAN_WORD_SOURCE_AND_QUANTILE_REPLAY",
+        "DRIZZLE_FULL131072_SOURCE512_WORKING_COPIES_AND_BOUNDED_PHYSICAL_PARTITION",
+        "DRIZZLE_PAIRED_FINITE_MOMENT_SENSITIVITY_RELATIVE_FAILURE_RETAINED",
+        "DRIZZLE_PRIMARY2048_ACTIVE_SCALE_CORRECTION_AND_FALLBACK_HISTORY",
+        "DRIZZLE_PRIMARY2048_EXACT_BIT_REBLOCK_AND_REQUEST_IDENTITIES",
+        "DRIZZLE_EXACT_BATCH_ANALYSIS_ALL_FIELD_STATES_AND_FINITE_REPLAY",
+        "DRIZZLE_PRIMARY2048_ORIGINAL_PARENT_CUSTODY_AND_PRIVATE_IO_RETENTION",
+        "DRIZZLE_PRIMARY2048_NATIVE_TYPED_READS_PARTIAL_OBSERVATION_SNAPSHOT",
+        "DRIZZLE_PRIMARY2048_LOCAL_RECOVERY_CAPSULE_AND_REMOTE_TRANSFER_LIMITS",
+        "DRIZZLE_TWO_BANK_EXACT_DISJOINT_FINITE_MOMENT_CONSERVATION",
+        "DRIZZLE_TWO_BANK_FULL_MODEL_SAVED_ARTIFACT_MERGE",
+        "DRIZZLE_TWO_BANK_EXCLUSIVE_H_FILESYSTEM_AND_FINALIZED_OPERATION_ENTRY",
+        "DRIZZLE_PRIMARY2048_SAVED_PREFIX35_H93_RECOVERY_AND_REMOTE_DOCUMENT_SNAPSHOT",
+        "DRIZZLE_PRIMARY2048_STOP64_NORMAL_EXIT_AND_NEVER_CLAIMED196_SUFFIX",
+        "DRIZZLE_PRIMARY2048_FIRST33_NATIVE_RELATIVE_FAILURES_AND_ONE_RAW_REPLAY",
+        "DRIZZLE_SUFFIX196_EXPLICIT_HISTORICAL_IO_AND_SELECTED_ENDPOINT_ANALYSIS",
+        "DRIZZLE_COMPOSITE_BANK_SCOPE_AND_NEGATIVE_FINDING_RECOVERY_LIMITS",
+        "DRIZZLE_PRIMARY2048_FINAL64_580_RELATIVE_FAILURES_AND_VERIFIED_RECOVERY",
+        "DRIZZLE_SUFFIX196_NATIVE_PREWORKER_DATATYPE_HEADER_FAILURE",
+        "DRIZZLE_PRIVATE_ENGINE_RETAINER_UNAVAILABLE_AND_ORIGINAL_PARENT_RECOVERY_HOLD",
+        "DRIZZLE_PRIMARY2048_ALL64_FAILURE_DECOMPOSITION_AND_WORST_RAW_REPLAY",
+        "DRIZZLE_ONE_POINT_FLOAT32_PAIR_DIFFERENCE_CONDITIONAL_REPRESENTABILITY_LIMIT",
+        "DRIZZLE_ALL580_SOURCE_NATIVE_BYTE_REPLAY_AND_173_CONDITIONAL_GRID_LIMITS",
+        "DRIZZLE_STREAM_HASH_EXPLICIT_INSTALLED_DATATYPE_HEADER_CORRECTION_MOCK_ONLY",
+        "DRIZZLE_POST_OUTPUT_FLOAT64_EMBEDDING_PRESERVES_ALL580_RELATIVE_FAILURES",
+        "BKL046_CONCRETE_RECOVERY_PACKAGE_QUALIFIED_FULL_REVIEW_PENDING",
+        "BKL046_REVIEW_PACKAGE_LOCAL_RECOVERY77_AND_REMOTE_DOCUMENT_CI_ONLY",
+        "BKL046_FULL001_FULL002_REVIEW_CORRECTIONS_SUPERSEDE_H100_RECOVERY_QUALIFICATION",
+        "BKL046_ALREADY_EXITED_V4_EXACT004_AUTHOR_TESTS_NOT_OPERATIONAL_AUTHORITY",
+        "BKL046_EXACT004_SELECTED53_RECOVERY_AND_REMOTE_TEXT_ONLY",
+        "DRIZZLE_HISTORICAL64_PARAMETERS_DO_NOT_TRANSFER_IMAGEINTEGRATION_PRECISION_OPTION",
+        "BKL046_EXACT004_GENUINE_OWNER_STOP_COMPLETE_FINAL_REFUSED_BEFORE_WITNESS",
+        "BKL046_FINAL_ONLY005_EXACT19_MODULES_FULL_AUTHOR_PIPELINE_REVIEW_PENDING",
+        "BKL046_FINAL_ONLY005_SELECTED495_RECOVERY_GITHUB_TEXT_BF664D83_ONLY",
+        "BKL046_R005_GENUINE_WHOLE_REVIEW_AND_ACTUAL_CERTIFIED_RELEASE_NO_REPLAY",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION",
+        "BKL046_FRESH_HEADER_SOURCE_FACTORY_AND_NODE_MOCKS_NOT_PARENT_OR_NATIVE_ADMISSION",
+        "BKL046_COMPLETE_HEADER_PARENT21_FROZEN_CONNECTED6_STORE35_COLD2_REVIEW_NOT_APPROVED",
+        "BKL046_HEADER_RECEIPT68_WINDOWS17_CUSTODY13_CONTEXT25_CLI18_HANDLE12_FIXTURES_NOT_NATIVE_OR_R4",
+        "BKL046_580_PAIR_FLOAT32_COUNTERFACTUAL_407_EXISTS_173_IMPOSSIBLE_ALL_NATIVE_FAILURES_UNCHANGED",
+        "BKL046_GEOMETRY8320_WEIGHTED25344_VARIANCES76032_RAW580_REFERENCE_ENCODING_DOES_NOT_RESOLVE_FAILURES",
+        "BKL046_3159_INPUT_CONVERSIONS_2320_FINAL_ROUNDINGS_PAIR_MATCH_CAN_HIDE_SCALAR_ERROR",
+        "BKL046_2320_NATIVE_ROUNDING_CELLS_992_UNIQUE_ADDRESSES_584_ENCODED_OUTSIDE_NO_CAUSAL_CLAIM",
+        "BKL046_COMPLETE_HEADER_V1_HOLD_ESCAPE_THREE_REPRODUCTIONS_INVALIDATE_RETENTION_PROPOSAL",
+        "BKL046_COMPLETE_HEADER_V2_22_SOURCES_COMPONENT3_FLOW16_COLD2_FROZEN_NOT_REVIEWED",
+        "BKL046_PEER_DERIVED_NAMESPACE_REPORTS_STATIC_ONLY_NO_HISTORICAL_TAMPERING_OR_TXF_PROMOTION",
+        "BKL046_HEADER_V2_GENUINE_REVIEW_REJECTS_PRIMARY_MASKING_IN_READER_CLEANUP",
+        "BKL046_HEADER_V3_23_SOURCES_PRIMARY_CLEANUP_EXPLICIT_QUALIFIED_OFFLINE_REVIEW_SENT",
+        "BKL046_HEADER_V3_GENUINE_REJECTION_STORE_CLEANUP_READER_CLOSED_V4_DRAFT_NOT_REVIEWED",
+        "BKL046_IA_DEVELOPMENT_NATIVE64_RECOUNT_63_CASES_RELATIVE_FAILURE_NO_CONFIRMATORY_UNITS",
+        "BKL046_HEADER_V4_24_SOURCES_COMPLETE_FROZEN_EXTENDED_IO_OPERATOR_FIXTURES_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER_V4_GENUINE_IMPLEMENTATION_APPROVED_ORDINARY_HOST_BUSY_TERMINAL_NO_NATIVE",
+        "BKL046_ACTUAL_HEADER001_ABORT_MACRO_KEY15_OWN_NORMAL_EXIT_ARCHIVED_ORDINARY_RELEASE",
+        "BKL046_HEADER002_ISOLATED24_MACRO_KEY_FIXED_OFFLINE75_VM6_CONSUMER10_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER002_GENUINE_WHOLE24_IMPLEMENTATION_APPROVED_WITH_LIMITS",
+        "BKL046_HEADER002_ACTUAL_MACRO15_RECEIPT_PASS_UI_CLOSE_EXTRA_FIELD_REJECTED_PARENT_RETAINED",
+        "BKL046_UI_CLOSE_PREPUBLICATION_READONLY14_DATA_CHECKS_NOT_EXIT_OR_RECOVERY",
+        "BKL046_HEADER002_PRIVATE_EXACT_CONTROL_CHAINS_NONZERO_RETENTION_NOT_REAL_RECOVERY",
+        "BKL046_HEADER002_REVIEW_SEND_CONSENT_RESOLVED_CURRENT_ACTION_CORRECTION",
+        "BKL046_HEADER002_GENUINE_DIAGNOSIS_REVIEW_AND_FROZEN_COMPLETE_RECOVERY21_NOT_APPROVED",
+        "BKL046_HEADER002_ACTUAL_OWNER_AUTHORIZED_RECOVERY_COMPLETE",
+        "BKL046_STREAM_WITNESS_COMPLETE32_FROZEN_NOT_REVIEWED",
+        "BKL046_STREAM32_GENUINE_REVIEW_CHANGES_REQUIRED_MEMORY_PREFLIGHT",
+        "BKL046_STREAM34_CORRECTED_PREFLIGHT_FROZEN_REVIEW_SENT_UNAPPROVED",
+        "BKL046_STREAM34_GENUINE_COMPLETE_APPROVAL_INSTALLED_RUNTIME_PREREQUISITES_REMAIN"
+      ],
+      "newEvidence": [
+        "stream34VmPrerequisites"
+      ],
+      "open": true
+    },
+    {
+      "id": "CFA_DITHER_DRIZZLE/4",
+      "title": "Debayer/registration/drizzle alternatives at matched angular scale",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "CompletedVariable15finite native controls do not cover all patterns, registration geometries or noise/weight domains. Review existing comparable-scale science before any new campaign.",
+      "previousCards": [
+        "CFA_COHERENT_STRESS",
+        "CFA_COMMON_SCALE",
+        "CFA_VNG_SCALAR_VECTOR_REFERENCE_AND_SIGNED_READER_SCOPE",
+        "DRIZZLE_VARIABLE15_FINITE_NATIVE_GRID_AND_LUT_CONTRAST",
+        "CFA_EXISTING_PATTERN_REFERENCE_AND_COLOR_SCOPE_RECONCILIATION",
+        "CFA_EXISTING_COVERAGE_REGISTRATION_AND_WEIGHT_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [
+        "cfaV4",
+        "archiveAudit",
+        "originPredictions",
+        "originClassifier",
+        "originDispatcher",
+        "originPreflightV3",
+        "cfaV3Token",
+        "cfaV3Staging",
+        "cfaV3ReviewDossier"
+      ],
+      "open": true
+    },
+    {
+      "id": "DIFFUSE_BACKGROUND/1",
+      "title": "Analytic low-contrast filaments and broad diffuse components",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Preserve17nativecontrols and all false/undefined/over5percent outcomes. Use four evidenceboundprecautions, not universal degree/mask choice: absenceofgradient does not protectdiffusesignal; flux andL2 can disagree; nativeYnormalization andX-M differ; causalmodelresponse requiresactualbaseline. Complete original acceptedmembership, stochastic/physical/morphology/uncertainty domain without tuning on these alreadyseenprofiles.",
+      "previousCards": [
+        "DIFFUSE_CONTAMINATION_LEVERAGE",
+        "ABE_HELDOUT",
+        "DBE_LDN1320_PAIRED_INJECTION_AFFINE_TRANSFER",
+        "DIFFUSE_EXISTING_CONDITIONAL_FLUX_IDENTIFIABILITY_EXACT_RECONCILIATION",
+        "ABE_EXISTING3304_HELDOUT_FIELDS_RETROSPECTIVE_RELATIVE5_RECOUNT",
+        "ABE24_EXACT_PIXEL_FIVE_MEASURE_THREE_CONTROL_RECONCILIATION",
+        "ABE_EXISTING_BACKGROUND_ONLY_CONTROL_AND_EXACT_PARAMETER_JOIN",
+        "ABE_ORIGINAL17_NATIVE_EXACT_CONTROLS_AND_RETAINED_FALSE_RETURNS",
+        "ABE_ORIGINAL17_EVIDENCE_BOUND_WORKFLOW_PRECAUTIONS",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [
+        "ic1805Masks",
+        "ic1805Paired",
+        "diffuseKnowledge",
+        "m8FullGridInjection",
+        "m8KnownMask",
+        "m8BlindMask"
+      ],
+      "open": true
+    },
+    {
+      "id": "DIFFUSE_BACKGROUND/2",
+      "title": "Additive gradients and multiplicative sensitivity variation separately",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Preserve completed constant16andspatial16mono identitySquare controls and all80weightedgroups without repeats. Distinguish supplied normalization/masks from their real-data estimation; retain fixed support, original raw-versus-corrected controls, boundary semantics, deterministic rounding and aperture failures. Next reconcile CFA/Variable15/nonidentity/spatial-model uncertainty and empirical noise in original domains. No full workflow or physical calibration admission.",
+      "previousCards": [
+        "DBE_CALIBRATION_BUDGET",
+        "STRUCTURED_AND_BLEND",
+        "DIFFUSE_FLUX_CALIBRATION_AMBIGUITY_AND_COUPLED_BOUNDS",
+        "DIFFUSE_DITHER_GRAPH_ABSOLUTE_FLUX_IDENTIFIABILITY",
+        "DIFFUSE_DITHER_EXACT_MINIMAX_FLUX_AND_REFERENCE_GEOMETRY",
+        "DIFFUSE_FRACTIONAL_DITHER_ALGEBRAIC_RANK_VERSUS_FLUX_UNCERTAINTY",
+        "LDN1320_RECORDED_HOMOGRAPHY_COARSE_FLUX_APPLICABILITY",
+        "LDN1320_FLAT_REPEATABILITY_BY_SCALE_AND_COMBINATION",
+        "DIFFUSE_TWO_LEVEL_SHARED_OPTICAL_DOSE_UNCERTAINTY",
+        "LDN1320_XNML_HISTORICAL_LINEAGE_AND_DECODED_PLANES",
+        "LDN1320_XNML_CONSTANT_SCALE_AND_SPATIALLY_VARIABLE_OFFSET",
+        "XNML_NATIVE_BSPLINE_CONTROL_AND_LDN1320_MEAN_CONTRAST_SEPARATION",
+        "LDN1320_XNML_REPEATABILITY_BETWEEN_REFERENCE_NONMEMBERS",
+        "LDN1320_XNML_CONTRAST_OFFSET_DECISION_MARGIN",
+        "DIFFUSE_EXISTING_CONDITIONAL_FLUX_IDENTIFIABILITY_EXACT_RECONCILIATION",
+        "DIFFUSE_AXIS2_ADDITIVE_MULTIPLICATIVE_SCOPED_ROUTING",
+        "IMAGECALIBRATION_PEDESTAL24_SIGNED_SUBSET_AND_METADATA_LIMITS",
+        "DIFFUSE_EXISTING_CONTROLS_AND_IMAGECALIBRATION_SCOPE_RECONCILED",
+        "DRIZZLE_SPATIAL_XNML16_NATIVE_REGIONS_APERTURES_AND_ROUNDING",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [
+        "ic1805Paired",
+        "diffuseKnowledge",
+        "ic1805Reference",
+        "m8m20Reference",
+        "scaleSensitivity",
+        "stellarScale",
+        "heldOutEdges",
+        "m8ScaleAndEdges",
+        "m8ReferenceBudget",
+        "m8DarkRepeatability"
+      ],
+      "open": true
+    },
+    {
+      "id": "DIFFUSE_BACKGROUND/3",
+      "title": "Contaminated background samples and field edges",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Preserve17nativecontrols and all false/undefined/over5percent outcomes. Use four evidenceboundprecautions, not universal degree/mask choice: absenceofgradient does not protectdiffusesignal; flux andL2 can disagree; nativeYnormalization andX-M differ; causalmodelresponse requiresactualbaseline. Complete original acceptedmembership, stochastic/physical/morphology/uncertainty domain without tuning on these alreadyseenprofiles.",
+      "previousCards": [
+        "DIFFUSE_CONTAMINATION_LEVERAGE",
+        "DIFFUSE_FEASIBLE_ROBUST_WEIGHTS",
+        "DIFFUSE_WEIGHT_LIMIT_WITNESSES",
+        "DBE_UI_SUPPORT_CANDIDATES",
+        "DBE_MEDIAN_DISCRIMINATOR_DESIGN",
+        "DBE_NATIVE_SQUARE_DISK_MEDIANS_COUNTEREXAMPLE",
+        "DBE_POSTHOC_MEAN_AND_FROZEN_SPARSE_INFLUENCE",
+        "DBE_SPARSE_NATIVE_SIGN_ASYMMETRY_COUNTEREXAMPLE",
+        "DBE_NATIVE_SIGNED_LADDER_AND_HISTOGRAM_RELOCATIONS",
+        "DBE_NATIVE_CONTEXT_AND_EQUAL_BUDGET",
+        "ABE_HELDOUT",
+        "DBE_LDN1320_PAIRED_INJECTION_AFFINE_TRANSFER",
+        "DBE_NATIVE_MINMAX_INSIDE_UNIT_RANGE_AND_REMOTE_PIXEL",
+        "DBE_LDN1320_PERSISTED_MODEL_RESPONSE_OFF_SOURCE",
+        "DBE_SINGLE_IMAGE_ANCHOR_SCREEN_RETROSPECTIVE_LIMITS",
+        "PIXELMATH_NATIVE_SIGNED_DBE_SUBTRACTION_LDN1320",
+        "XNML_NATIVE_BSPLINE_CONTROL_AND_LDN1320_MEAN_CONTRAST_SEPARATION",
+        "LDN1320_XNML_REPEATABILITY_BETWEEN_REFERENCE_NONMEMBERS",
+        "LDN1320_XNML_CONTRAST_OFFSET_DECISION_MARGIN",
+        "DIFFUSE_EXISTING_CONDITIONAL_FLUX_IDENTIFIABILITY_EXACT_RECONCILIATION",
+        "ABE_EXISTING3304_HELDOUT_FIELDS_RETROSPECTIVE_RELATIVE5_RECOUNT",
+        "ABE24_EXACT_PIXEL_FIVE_MEASURE_THREE_CONTROL_RECONCILIATION",
+        "ABE_EXISTING_BACKGROUND_ONLY_CONTROL_AND_EXACT_PARAMETER_JOIN",
+        "ABE_ORIGINAL17_NATIVE_EXACT_CONTROLS_AND_RETAINED_FALSE_RETURNS",
+        "ABE_ORIGINAL17_EVIDENCE_BOUND_WORKFLOW_PRECAUTIONS",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [
+        "ic1805Masks",
+        "diffuseKnowledge",
+        "heldOutEdges",
+        "m8ScaleAndEdges",
+        "m8FullGridInjection",
+        "m8KnownMask",
+        "m8BlindMask",
+        "m8ReferenceBudget"
+      ],
+      "open": true
+    },
+    {
+      "id": "FILTER_COLOR/1",
+      "title": "Broadband response and narrowband channel mappings",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Use existing observed nominal comparisons, retaining mismatches and support restrictions; verify original mapping/domain controls and reference-role independence before admission.",
+      "previousCards": [
+        "CALSPEC_COMMON_SUPPORT",
+        "CALSPEC_DETERMINISTIC_BOX",
+        "NGSL_NOMINAL_RESPONSE",
+        "NGSL_XP_OBSERVED_PAIRS",
+        "NGSL_XP_MARGINAL_BOXES",
+        "GAIA_XP_FORMAL_COVARIANCE",
+        "GAIA_XP_CROSS_BAND_BOUNDS",
+        "NGSL_XP_COMBINED_BOUNDS",
+        "NGSL_XP_OUTLIER_SYSTEMATIC_MARGIN",
+        "LOWLIB_SAME_VISIT_SLIT_SENSITIVITY",
+        "LOWLIB_GAIA_REFERENCE_SUBSTITUTION",
+        "LOWLIB_FULL_COHORT_REFERENCE_SUBSTITUTION",
+        "LOWLIB_GREY_SCALE_VS_CHANNEL_SHAPE",
+        "CRATER_PUBLISHED_DOLPHOT_AST_PHOTOMETRY",
+        "NOMINAL_COLOR",
+        "NOMINAL_FIVE_LINE_RELATIVE_AMBIGUITY_AND_RATIO_BRACKET",
+        "FIVE_LINE_RATIO_KNOWN_AND_UNKNOWN_RESPONSE_GRID",
+        "FILTER_NOMINAL_STACK_RGB_CONDITIONING_AND_SULFUR_AMBIGUITY",
+        "FILTER_SULFUR_HYPOTHETICAL_SELECTIVITY_AND_LEAKAGE_BUDGET",
+        "FILTER_LATER_OBSERVED_SPECTRA_AND_CHROMATIC_PSF_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "FILTER_COLOR/2",
+      "title": "Nominal versus perturbed filter/QE curves",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Measured effective filter/QE bounds and applicable compiled/native comparisons remain distinct from nominal scenarios; observed spectra do not supply hardware response calibration.",
+      "previousCards": [
+        "CALSPEC_COMMON_SUPPORT",
+        "CALSPEC_DETERMINISTIC_BOX",
+        "NGSL_NOMINAL_RESPONSE",
+        "NGSL_XP_OBSERVED_PAIRS",
+        "NGSL_XP_MARGINAL_BOXES",
+        "GAIA_XP_FORMAL_COVARIANCE",
+        "GAIA_XP_CROSS_BAND_BOUNDS",
+        "NGSL_XP_COMBINED_BOUNDS",
+        "NOMINAL_COLOR",
+        "FIVE_LINE_RATIO_KNOWN_AND_UNKNOWN_RESPONSE_GRID",
+        "FILTER_LATER_OBSERVED_SPECTRA_AND_CHROMATIC_PSF_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "FILTER_COLOR/3",
+      "title": "PSF mismatch between bands",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Use existing256field paired aperture PSF drift results and later real comparisons. Complete original profile/background/registration/response controls and uncertainty without treating oracle correction as operational recovery.",
+      "previousCards": [
+        "CRATER_F606W_F814W_APERTURE_DEPENDENCE",
+        "CRATER_CIRCULAR_GAUSSIAN_PSF_MATCHING_COUNTEREXAMPLE",
+        "CRATER_OBSERVED_EMPIRICAL_APERTURE_CORRECTION",
+        "CRATER_DOLPHOT_SHARED_EXPOSURE_COLOR_CONTRAST",
+        "CRATER_GAIA_XP_REFERENCE_ADMISSION_INCOMPLETE",
+        "CRATER_OBSERVED_COLOR_WORKFLOW_TRADEOFFS",
+        "ACS_CALSPEC_COMBINED_CORE_SUPPORT_STILL_INSUFFICIENT",
+        "ACS_CALSPEC_EPOCH_SYNTHETIC_REFERENCE",
+        "ACS_CALSPEC_ALTERNATIVE_MASKED_COLOR_APERTURES",
+        "ACS_DRZ_FULL_APERTURES_AND_CTE_MODEL_DOMAIN",
+        "STATIONARY_VARIANCE_LIMIT",
+        "PSF_ARCHIVED_COLOR",
+        "NATIVE_LOCAL",
+        "NATIVE_FULL_FIELD",
+        "STRUCTURED_AND_BLEND",
+        "RAW_DEBLEND",
+        "FILTER_CHROMATIC_APERTURE_ESTIMATED_REFERENCE_AND_DRIFT",
+        "FILTER_CHROMATIC_LOCAL_WIDTH_AND_CENTER_PAIRED_ABLATION",
+        "FILTER_CHROMATIC_WIDTH_GATE_FRESH_SIGNAL_DEPENDENCE",
+        "FILTER_CRATER_OBSERVED_LOCAL_WIDTH_APERTURE_TRANSFER",
+        "FILTER_LATER_OBSERVED_SPECTRA_AND_CHROMATIC_PSF_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [
+        "m8OrientationReconstructed",
+        "m8OrientationDisjoint",
+        "m8PsfModelSensitivity",
+        "m8PsfGreenParities"
+      ],
+      "open": true
+    },
+    {
+      "id": "FILTER_COLOR/4",
+      "title": "Background and stellar spectral variation",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Reconcile actual source identity, covariance/systematics, shared visits/calibration and spectral conventions in existing cohorts; do not declare all observed-reference evidence absent or independent.",
+      "previousCards": [
+        "CALSPEC_COMMON_SUPPORT",
+        "CALSPEC_DETERMINISTIC_BOX",
+        "NGSL_NOMINAL_RESPONSE",
+        "NGSL_XP_OBSERVED_PAIRS",
+        "NGSL_XP_MARGINAL_BOXES",
+        "GAIA_XP_FORMAL_COVARIANCE",
+        "GAIA_XP_CROSS_BAND_BOUNDS",
+        "NGSL_XP_COMBINED_BOUNDS",
+        "NGSL_XP_COORDINATE_EPOCH",
+        "NGSL_XP_PARALLAX_SENSITIVITY",
+        "NGSL_XP_CATALOGUE_NEIGHBOURS",
+        "NGSL_XP_OUTLIER_SYSTEMATIC_MARGIN",
+        "LOWLIB_SAME_VISIT_SLIT_SENSITIVITY",
+        "LOWLIB_GAIA_REFERENCE_SUBSTITUTION",
+        "LOWLIB_COHORT_VISIT_ADMISSION",
+        "LOWLIB_FULL_COHORT_REFERENCE_SUBSTITUTION",
+        "LOWLIB_GREY_SCALE_VS_CHANNEL_SHAPE",
+        "CRATER_GAIA_XP_REFERENCE_ADMISSION_INCOMPLETE",
+        "FILTER_LATER_OBSERVED_SPECTRA_AND_CHROMATIC_PSF_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "NOISE_FLUX/1",
+      "title": "Poisson-dominated, read-noise-dominated and mixed regimes",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "La campagna sintetica24 è riconciliata. Verificare separatamente applicabilità alla risposta fisica delle camere e ai processi nativi nel dominio finale, con riferimenti e incertezza.",
+      "previousCards": [
+        "SPATIAL_FIRST_FIVE",
+        "SPATIAL_SIXTH_FIRST_PARTITION",
+        "SPATIAL_SIXTH_STRATUM_REPLAYED",
+        "SPATIAL_SEVENTH_STRATUM_REPLAYED",
+        "SPATIAL_PAIRED_COVARIANCE_COVERAGE_FIRST_SEVEN_STRATA",
+        "SPATIAL_FIRST_STRATUM",
+        "VNG_NATIVE_COHORTS_AND_APERTURE_COVERAGE",
+        "VNG_NATIVE_COLOR_ERROR_AND_NOISE_CONTEXT_TRANSFER",
+        "VNG_HELDOUT_JOINT_COLOR_LIMIT_PER_FIELD",
+        "SPATIAL_PRIMARY_RULE_HEADROOM_FIRST_THIRTEEN_STRATA",
+        "SPATIAL_FIFTEEN_STRATA_REPLAY_AND_COVARIANCE_CONTRAST",
+        "QHY695A_DARK_AND_BIAS_TEMPORAL_SPATIAL_STORED_DN",
+        "QHY695A_DARK_HELDOUT_EQUAL_FRAME_BUDGET_SENSITIVITY",
+        "SPATIAL_COVARIANCE_FIRST21_OPERATOR_BOUND_DECISION",
+        "SPATIAL_ALL24_FROZEN_OUTCOMES_AND_SOURCE_EPOCH_BINDINGS",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "NOISE_FLUX/2",
+      "title": "Spatially varying exposure/noise",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Usare i risultati completi degli strati sintetici di esposizione variabile entro il loro modello; completare la calibrazione locale e l’incertezza delle acquisizioni fisiche.",
+      "previousCards": [
+        "OWNER_SENSOR_RECORD",
+        "SENSOR_COMPARATOR",
+        "QHY294C_EXPOSURE_DIAGNOSTIC",
+        "SENSOR_PHYSICAL_LINEARITY_QUALIFIED_GATE",
+        "SENSOR_LINEARITY_BOE_ASI294MM_PRIMARY_COMPARATOR",
+        "ATR294C_SINGLE_ILLUMINATED_LEVEL_LINEARITY_NONIDENTIFIABILITY",
+        "SPATIAL_EIGHT_STRATA_FULL_DIAGONAL_COVARIANCE_CONTRAST",
+        "SPATIAL_NINE_STRATA_FULL_DIAGONAL_COVARIANCE_CONTRAST",
+        "SPATIAL_TEN_STRATA_FULL_DIAGONAL_COVARIANCE_CONTRAST",
+        "SPATIAL_THIRTEEN_STRATA_AND_INDEPENDENT_PARTNER_WORD_REBUILD",
+        "LDN1320_FLAT_REPEATABILITY_BY_SCALE_AND_COMBINATION",
+        "SPATIAL_PRIMARY_RULE_HEADROOM_FIRST_THIRTEEN_STRATA",
+        "SENSOR_BETWEEN_DOSE_MONOTONE_AND_CURVATURE_CONDITIONAL_BOUNDS",
+        "LDN1320_CFA_RECORDED_WEIGHT_CONCENTRATION_AND_VARIANCE_SENSITIVITY",
+        "SPATIAL_FIFTEEN_STRATA_REPLAY_AND_COVARIANCE_CONTRAST",
+        "QHY695A_DARK_AND_BIAS_TEMPORAL_SPATIAL_STORED_DN",
+        "QHY695A_DARK_HELDOUT_EQUAL_FRAME_BUDGET_SENSITIVITY",
+        "SPATIAL_COVARIANCE_FIRST21_OPERATOR_BOUND_DECISION",
+        "SPATIAL_ALL24_FROZEN_OUTCOMES_AND_SOURCE_EPOCH_BINDINGS",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "NOISE_FLUX/3",
+      "title": "Independent and resampled correlated noise",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "H126: genuine complete independent stream34 review75322cd7 is APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION, no blockers; STREAM-COMPLETE-01 resolved. Normalized review48312124 and actual incoming-origin/peer bytes installed; exact isolated read-only Scope checks34 sources,8 inputs, installed/runtime/registry/publisher/common approvals without Host/custodian/gate/native creation. Preserve rejected32 and historical unapproved34 snapshots with current correction links. Proceed only when fresh real8GiB physical/12GiB commit reserves, sole common gate admission and all ownership/input/UI/archive controls pass under the exact approved one-shot operatorV3/EntryV2/HostV2. No automatic retry, reserve relaxation or foreign-process stop. Current memory observation may block admission and is not a reservation or continuous bound. Native File/hash/close, original-native sampling, private-engine lifetime and failed File retention remain distinct actual-witness requirements; hash success alone cannot close them.456 scientific cases remain, all25 axes/final knowledge/full remote archive reconstruction open.",
+      "previousCards": [
+        "SPATIAL_FIRST_FIVE",
+        "SPATIAL_SIXTH_FIRST_PARTITION",
+        "SPATIAL_SIXTH_STRATUM_REPLAYED",
+        "SPATIAL_SEVENTH_STRATUM_REPLAYED",
+        "SPATIAL_PAIRED_COVARIANCE_COVERAGE_FIRST_SEVEN_STRATA",
+        "SPATIAL_FIRST_STRATUM",
+        "CFA_VNG_NATIVE_TWO_AND_THREE_DRIVER_INTERACTIONS",
+        "VNG_NATIVE_COHORTS_AND_APERTURE_COVERAGE",
+        "SPATIAL_EIGHT_STRATA_FULL_DIAGONAL_COVARIANCE_CONTRAST",
+        "VNG_NATIVE_COLOR_ERROR_AND_NOISE_CONTEXT_TRANSFER",
+        "SPATIAL_NINE_STRATA_FULL_DIAGONAL_COVARIANCE_CONTRAST",
+        "VNG_HELDOUT_JOINT_COLOR_LIMIT_PER_FIELD",
+        "SPATIAL_TEN_STRATA_FULL_DIAGONAL_COVARIANCE_CONTRAST",
+        "SPATIAL_THIRTEEN_STRATA_AND_INDEPENDENT_PARTNER_WORD_REBUILD",
+        "SPATIAL_PRIMARY_RULE_HEADROOM_FIRST_THIRTEEN_STRATA",
+        "SPATIAL_FIFTEEN_STRATA_REPLAY_AND_COVARIANCE_CONTRAST",
+        "SPATIAL_COVARIANCE_FIRST21_OPERATOR_BOUND_DECISION",
+        "SPATIAL_ALL24_FROZEN_OUTCOMES_AND_SOURCE_EPOCH_BINDINGS",
+        "DRIZZLE_FULL131072_FIXED_GAUSSIAN_WORD_SOURCE_AND_QUANTILE_REPLAY",
+        "DRIZZLE_FULL131072_SOURCE512_WORKING_COPIES_AND_BOUNDED_PHYSICAL_PARTITION",
+        "DRIZZLE_PAIRED_FINITE_MOMENT_SENSITIVITY_RELATIVE_FAILURE_RETAINED",
+        "DRIZZLE_PRIMARY2048_ACTIVE_SCALE_CORRECTION_AND_FALLBACK_HISTORY",
+        "DRIZZLE_PRIMARY2048_EXACT_BIT_REBLOCK_AND_REQUEST_IDENTITIES",
+        "DRIZZLE_EXACT_BATCH_ANALYSIS_ALL_FIELD_STATES_AND_FINITE_REPLAY",
+        "DRIZZLE_PRIMARY2048_ORIGINAL_PARENT_CUSTODY_AND_PRIVATE_IO_RETENTION",
+        "DRIZZLE_PRIMARY2048_NATIVE_TYPED_READS_PARTIAL_OBSERVATION_SNAPSHOT",
+        "DRIZZLE_PRIMARY2048_LOCAL_RECOVERY_CAPSULE_AND_REMOTE_TRANSFER_LIMITS",
+        "DRIZZLE_TWO_BANK_EXACT_DISJOINT_FINITE_MOMENT_CONSERVATION",
+        "DRIZZLE_TWO_BANK_FULL_MODEL_SAVED_ARTIFACT_MERGE",
+        "DRIZZLE_TWO_BANK_EXCLUSIVE_H_FILESYSTEM_AND_FINALIZED_OPERATION_ENTRY",
+        "DRIZZLE_PRIMARY2048_SAVED_PREFIX35_H93_RECOVERY_AND_REMOTE_DOCUMENT_SNAPSHOT",
+        "DRIZZLE_PRIMARY2048_STOP64_NORMAL_EXIT_AND_NEVER_CLAIMED196_SUFFIX",
+        "DRIZZLE_PRIMARY2048_FIRST33_NATIVE_RELATIVE_FAILURES_AND_ONE_RAW_REPLAY",
+        "DRIZZLE_SUFFIX196_EXPLICIT_HISTORICAL_IO_AND_SELECTED_ENDPOINT_ANALYSIS",
+        "DRIZZLE_COMPOSITE_BANK_SCOPE_AND_NEGATIVE_FINDING_RECOVERY_LIMITS",
+        "DRIZZLE_PRIMARY2048_FINAL64_580_RELATIVE_FAILURES_AND_VERIFIED_RECOVERY",
+        "DRIZZLE_SUFFIX196_NATIVE_PREWORKER_DATATYPE_HEADER_FAILURE",
+        "DRIZZLE_PRIVATE_ENGINE_RETAINER_UNAVAILABLE_AND_ORIGINAL_PARENT_RECOVERY_HOLD",
+        "DRIZZLE_PRIMARY2048_ALL64_FAILURE_DECOMPOSITION_AND_WORST_RAW_REPLAY",
+        "DRIZZLE_ONE_POINT_FLOAT32_PAIR_DIFFERENCE_CONDITIONAL_REPRESENTABILITY_LIMIT",
+        "DRIZZLE_ALL580_SOURCE_NATIVE_BYTE_REPLAY_AND_173_CONDITIONAL_GRID_LIMITS",
+        "DRIZZLE_STREAM_HASH_EXPLICIT_INSTALLED_DATATYPE_HEADER_CORRECTION_MOCK_ONLY",
+        "DRIZZLE_POST_OUTPUT_FLOAT64_EMBEDDING_PRESERVES_ALL580_RELATIVE_FAILURES",
+        "BKL046_CONCRETE_RECOVERY_PACKAGE_QUALIFIED_FULL_REVIEW_PENDING",
+        "BKL046_REVIEW_PACKAGE_LOCAL_RECOVERY77_AND_REMOTE_DOCUMENT_CI_ONLY",
+        "BKL046_FULL001_FULL002_REVIEW_CORRECTIONS_SUPERSEDE_H100_RECOVERY_QUALIFICATION",
+        "BKL046_ALREADY_EXITED_V4_EXACT004_AUTHOR_TESTS_NOT_OPERATIONAL_AUTHORITY",
+        "BKL046_EXACT004_SELECTED53_RECOVERY_AND_REMOTE_TEXT_ONLY",
+        "DRIZZLE_HISTORICAL64_PARAMETERS_DO_NOT_TRANSFER_IMAGEINTEGRATION_PRECISION_OPTION",
+        "BKL046_EXACT004_GENUINE_OWNER_STOP_COMPLETE_FINAL_REFUSED_BEFORE_WITNESS",
+        "BKL046_FINAL_ONLY005_EXACT19_MODULES_FULL_AUTHOR_PIPELINE_REVIEW_PENDING",
+        "BKL046_FINAL_ONLY005_SELECTED495_RECOVERY_GITHUB_TEXT_BF664D83_ONLY",
+        "BKL046_R005_GENUINE_WHOLE_REVIEW_AND_ACTUAL_CERTIFIED_RELEASE_NO_REPLAY",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION",
+        "BKL046_FRESH_HEADER_SOURCE_FACTORY_AND_NODE_MOCKS_NOT_PARENT_OR_NATIVE_ADMISSION",
+        "BKL046_COMPLETE_HEADER_PARENT21_FROZEN_CONNECTED6_STORE35_COLD2_REVIEW_NOT_APPROVED",
+        "BKL046_HEADER_RECEIPT68_WINDOWS17_CUSTODY13_CONTEXT25_CLI18_HANDLE12_FIXTURES_NOT_NATIVE_OR_R4",
+        "BKL046_580_PAIR_FLOAT32_COUNTERFACTUAL_407_EXISTS_173_IMPOSSIBLE_ALL_NATIVE_FAILURES_UNCHANGED",
+        "BKL046_GEOMETRY8320_WEIGHTED25344_VARIANCES76032_RAW580_REFERENCE_ENCODING_DOES_NOT_RESOLVE_FAILURES",
+        "BKL046_3159_INPUT_CONVERSIONS_2320_FINAL_ROUNDINGS_PAIR_MATCH_CAN_HIDE_SCALAR_ERROR",
+        "BKL046_2320_NATIVE_ROUNDING_CELLS_992_UNIQUE_ADDRESSES_584_ENCODED_OUTSIDE_NO_CAUSAL_CLAIM",
+        "BKL046_COMPLETE_HEADER_V1_HOLD_ESCAPE_THREE_REPRODUCTIONS_INVALIDATE_RETENTION_PROPOSAL",
+        "BKL046_COMPLETE_HEADER_V2_22_SOURCES_COMPONENT3_FLOW16_COLD2_FROZEN_NOT_REVIEWED",
+        "BKL046_PEER_DERIVED_NAMESPACE_REPORTS_STATIC_ONLY_NO_HISTORICAL_TAMPERING_OR_TXF_PROMOTION",
+        "BKL046_HEADER_V2_GENUINE_REVIEW_REJECTS_PRIMARY_MASKING_IN_READER_CLEANUP",
+        "BKL046_HEADER_V3_23_SOURCES_PRIMARY_CLEANUP_EXPLICIT_QUALIFIED_OFFLINE_REVIEW_SENT",
+        "BKL046_HEADER_V3_GENUINE_REJECTION_STORE_CLEANUP_READER_CLOSED_V4_DRAFT_NOT_REVIEWED",
+        "BKL046_IA_DEVELOPMENT_NATIVE64_RECOUNT_63_CASES_RELATIVE_FAILURE_NO_CONFIRMATORY_UNITS",
+        "BKL046_HEADER_V4_24_SOURCES_COMPLETE_FROZEN_EXTENDED_IO_OPERATOR_FIXTURES_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER_V4_GENUINE_IMPLEMENTATION_APPROVED_ORDINARY_HOST_BUSY_TERMINAL_NO_NATIVE",
+        "BKL046_ACTUAL_HEADER001_ABORT_MACRO_KEY15_OWN_NORMAL_EXIT_ARCHIVED_ORDINARY_RELEASE",
+        "BKL046_HEADER002_ISOLATED24_MACRO_KEY_FIXED_OFFLINE75_VM6_CONSUMER10_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER002_GENUINE_WHOLE24_IMPLEMENTATION_APPROVED_WITH_LIMITS",
+        "BKL046_HEADER002_ACTUAL_MACRO15_RECEIPT_PASS_UI_CLOSE_EXTRA_FIELD_REJECTED_PARENT_RETAINED",
+        "BKL046_UI_CLOSE_PREPUBLICATION_READONLY14_DATA_CHECKS_NOT_EXIT_OR_RECOVERY",
+        "BKL046_HEADER002_PRIVATE_EXACT_CONTROL_CHAINS_NONZERO_RETENTION_NOT_REAL_RECOVERY",
+        "BKL046_HEADER002_REVIEW_SEND_CONSENT_RESOLVED_CURRENT_ACTION_CORRECTION",
+        "BKL046_HEADER002_GENUINE_DIAGNOSIS_REVIEW_AND_FROZEN_COMPLETE_RECOVERY21_NOT_APPROVED",
+        "BKL046_HEADER002_ACTUAL_OWNER_AUTHORIZED_RECOVERY_COMPLETE",
+        "BKL046_STREAM_WITNESS_COMPLETE32_FROZEN_NOT_REVIEWED",
+        "BKL046_STREAM32_GENUINE_REVIEW_CHANGES_REQUIRED_MEMORY_PREFLIGHT",
+        "BKL046_STREAM34_CORRECTED_PREFLIGHT_FROZEN_REVIEW_SENT_UNAPPROVED",
+        "BKL046_STREAM34_GENUINE_COMPLETE_APPROVAL_INSTALLED_RUNTIME_PREREQUISITES_REMAIN"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "PSF_PIXEL/1",
+      "title": "Well sampled through undersampled Gaussian and Moffat profiles",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Use completed full native Gaussian model-volume recount and retained configuration-specific failures; do not rerun. Continue original sampling/profile/spatial-chromatic measures, applicable controls and reference uncertainty without inferring aperture or physical validity from stored model volume.",
+      "previousCards": [
+        "PSF_CROSSED_THRESHOLDS",
+        "PSF_NATIVE_CIRCULAR_SAME216_TWO_EPOCHS_SCOPED_MEASUREMENTS",
+        "PSF_ORIGINAL_AXIS_LATER_EVIDENCE_RECONCILIATION",
+        "PSF_EXISTING5000_FIXED_APERTURE_ENCIRCLED_ENERGY",
+        "PSF_SELECTED_CROP_MULTIPLICITY_FAILURE_DENOMINATORS",
+        "PSF_ALL28874_FIELDS_NATIVE_GAUSSIAN_MODEL_FLUX_RELATIVE5",
+        "PSF_NATIVE_FLUX_ABSOLUTE_LOG_AMBIGUITY_RESOLVED_ALL15621",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "PSF_PIXEL/2",
+      "title": "Ellipticity, orientation and subpixel phase",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Use all24existing noiseless crossed structural scenes,96nativefit slots and768independently integer-adjudicated saved aperture endpoints plus explicit six-measure scope. Do not rerun or count variants as independent. Resolve original heldout sampling/orientation/domain uncertainty, operational reference widths, blind/missed-source and aperture/profile scope before admission.",
+      "previousCards": [
+        "PSF_CROSSED_THRESHOLDS",
+        "PSF_ORIGINAL_AXIS_LATER_EVIDENCE_RECONCILIATION",
+        "CROSSED_PSF768_SAVED_APERTURES_INTEGER5_SIX_MEASURE_SCOPE",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [
+        "m8OrientationReconstructed",
+        "m8OrientationDisjoint",
+        "m8PsfModelSensitivity",
+        "m8PsfGreenParities"
+      ],
+      "open": true
+    },
+    {
+      "id": "PSF_PIXEL/3",
+      "title": "Spatially variable PSF and chromatic widths",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Use completed full native Gaussian model-volume recount and retained configuration-specific failures; do not rerun. Continue original sampling/profile/spatial-chromatic measures, applicable controls and reference uncertainty without inferring aperture or physical validity from stored model volume.",
+      "previousCards": [
+        "CRATER_OBSERVED_INDEPENDENT_EXPOSURE_F814W",
+        "CRATER_PIXINSIGHT_NATIVE_GAUSSIAN_REPEATABILITY",
+        "CRATER_OBSERVED_COLOR_WORKFLOW_TRADEOFFS",
+        "STATIONARY_VARIANCE_LIMIT",
+        "NATIVE_LOCAL",
+        "NATIVE_FULL_FIELD",
+        "PSF_ORIGINAL_AXIS_LATER_EVIDENCE_RECONCILIATION",
+        "PSF_SPATIAL_FROZEN_ENDPOINT_CONTRACTS",
+        "PSF_ALL28874_FIELDS_NATIVE_GAUSSIAN_MODEL_FLUX_RELATIVE5",
+        "PSF_NATIVE_FLUX_ABSOLUTE_LOG_AMBIGUITY_RESOLVED_ALL15621",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [
+        "m8OrientationDisjoint",
+        "m8PsfModelSensitivity"
+      ],
+      "open": true
+    },
+    {
+      "id": "PSF_PIXEL/4",
+      "title": "Isolated versus confused point sources",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "H124: use exact common-center certificates and independent saved-source verification as a necessary finite-candidate compatibility diagnostic only. Common bias remains:23/35/21 defined compatible sets are not all accurate under their synthetic truth reference. Do not use geometric compatibility as scientific admission or operational measured-reference evidence. No new independent cases. Use existing80heldoutpoint+extendedtargets with8separatecalibrationfields and coarsepointingprior; retain13of64jointwithin outcomes and allcontrols/failures. Resolve full originalmorphology/misses/prior/uncertainty domain before scientificadmission. Exact finite-start supplement:13 passing overlap fits remain jointly within5percent at every recorded near start for fixed PSF; of8 point-only controls the single model has8 selected/all-near passes, while complex model has6 selected but3 all-near joint passes. Preserve counterexamples0080/0081/0084 and distinguish finite-start ambiguity from confidence coverage, global optimality, hidden-truth operational model choice and physical-domain validity. H114 current qualification: Combining all three saved PSF widths with recorded converged near starts reduces overlap stable joint passes from13 nominal to12 and point-only complex controls from3 nominal-all-near to2. Field0073 is an interaction counterexample: nominal-all-near and all-width-selected each pass, while their conjunction fails. This qualifies, without changing, the prior fixed-PSF result. H115 necessary truth-free flux diagnostic flags22/80 combined finite candidate sets; nonempty reference intervals do not imply accuracy or replace H114 joint flux/position truth checks. Preserve0073 false-negative and common-bias counterexample.",
+      "previousCards": [
+        "POINT_EXTENDED_GAUSSIAN_INFORMATION_BOUND",
+        "POINT_EXTENDED_POISSON_INFORMATION_BOUND",
+        "POINT_EXTENDED_NATIVE_DESIGN",
+        "POINT_EXTENDED_KNOWN_GEOMETRY_BENCHMARK",
+        "POINT_EXTENDED_NATIVE_SINGLE_GAUSSIAN",
+        "POINT_EXTENDED_PAIRED_NATIVE_BENCHMARK",
+        "POINT_EXTENDED_HELDOUT_TWO_COMPONENT",
+        "POINT_EXTENDED_HELDOUT_PSF_SENSITIVITY",
+        "CRATER_OBSERVED_INDEPENDENT_EXPOSURE_F814W",
+        "CRATER_PIXINSIGHT_NATIVE_GAUSSIAN_REPEATABILITY",
+        "CRATER_CONTEXT_AND_DISJOINT_REVERSE_DIAGNOSTIC",
+        "CRATER_REGISTERED_DOLPHOT_CATALOGUE_ASSOCIATION",
+        "STRUCTURED_AND_BLEND",
+        "RAW_DEBLEND",
+        "DBE_LDN1320_PAIRED_INJECTION_AFFINE_TRANSFER",
+        "PSF_CONFUSION_FIXED_IDENTITY_JOINT_APERTURE_WIDTH_CONDITIONAL",
+        "PSF_SYNTHETIC_MULTIPLICITY_AND_PAIRED_CENTER_BOUNDS",
+        "PSF_FRESH_GAUSSIAN_CENTER_BOUNDS_AND_MOFFAT_MISMATCH",
+        "PSF_MOFFAT_MATCHED_PROFILE_AND_RETROSPECTIVE_BIC",
+        "PSF_REFERENCE_PROFILE_ESTIMATION_HELDOUT_SYNTHETIC_CROPS",
+        "PSF_NATIVE_CIRCULAR_SAME216_TWO_EPOCHS_SCOPED_MEASUREMENTS",
+        "PSF_ORIGINAL_AXIS_LATER_EVIDENCE_RECONCILIATION",
+        "PSF_EXISTING5000_FIXED_APERTURE_ENCIRCLED_ENERGY",
+        "PSF_SELECTED_CROP_MULTIPLICITY_FAILURE_DENOMINATORS",
+        "SATURATION_EXISTING_HELDOUT_OVERLAP_MASK_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION",
+        "POINT_EXTENDED_RECORDED_NEAR_STARTS_13_OVERLAP_STABLE_THREE_POINT_CONTROL_FLUX_COUNTEREXAMPLES",
+        "POINT_EXTENDED_JOINT_THREE_SAVED_PSF_WIDTHS_AND_NEAR_STARTS_12_OVERLAP_TWO_POINT_CONTROLS",
+        "POINT_EXTENDED_TRUTH_FREE_COMMON_FLUX_COMPATIBILITY_22_INCOMPATIBLE_NOT_ACCURACY_ADMISSION",
+        "BKL046_SAVED_POSITION_EXACT_COMMON_CENTER_NECESSARY_NOT_ACCURACY"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "SATURATION_BLEND/1",
+      "title": "Unsaturated, detector-saturated and near-limit cores",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Keep acquired clipping/charge and detector/calibrator assumptions explicit. Full near-limit intended-domain response and applicable recovery uncertainty remain open.",
+      "previousCards": [
+        "OWNER_SENSOR_RECORD",
+        "SENSOR_COMPARATOR",
+        "SENSOR_PHYSICAL_LINEARITY_QUALIFIED_GATE",
+        "CRATER_ACS_DETECTOR_DQ_AND_SHORT_EXPOSURE_GEOMETRY",
+        "CRATER_SATURATION_ANNULAR_COMMON_SUPPORT_AND_CONTROLS",
+        "SENSOR_LINEARITY_BOE_ASI294MM_PRIMARY_COMPARATOR",
+        "ATR294C_SINGLE_ILLUMINATED_LEVEL_LINEARITY_NONIDENTIFIABILITY",
+        "SATURATION_EXPOSURES",
+        "CRATER_SATURATION_WING_BRIGHTNESS_AND_SCALAR_TRANSFER_LIMITS",
+        "SENSOR_BETWEEN_DOSE_MONOTONE_AND_CURVATURE_CONDITIONAL_BOUNDS",
+        "MASK_APERTURE_WIDTH_AND_SIMULATED_CLIPPING_ATTRIBUTION",
+        "SATURATION_EXISTING_HELDOUT_OVERLAP_MASK_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "SATURATION_BLEND/2",
+      "title": "Close pairs and extended-plus-point overlap",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "H124: use exact common-center certificates and independent saved-source verification as a necessary finite-candidate compatibility diagnostic only. Common bias remains:23/35/21 defined compatible sets are not all accurate under their synthetic truth reference. Do not use geometric compatibility as scientific admission or operational measured-reference evidence. No new independent cases. Use existing heldout point+extended and close-pair evidence, retaining misses and priors. Resolve morphology/model-class, false structure, full original controls and uncertainty rather than declaring overlap evidence absent. Exact finite-start supplement:13 passing overlap fits remain jointly within5percent at every recorded near start for fixed PSF; of8 point-only controls the single model has8 selected/all-near passes, while complex model has6 selected but3 all-near joint passes. Preserve counterexamples0080/0081/0084 and distinguish finite-start ambiguity from confidence coverage, global optimality, hidden-truth operational model choice and physical-domain validity. H114 current qualification: Combining all three saved PSF widths with recorded converged near starts reduces overlap stable joint passes from13 nominal to12 and point-only complex controls from3 nominal-all-near to2. Field0073 is an interaction counterexample: nominal-all-near and all-width-selected each pass, while their conjunction fails. This qualifies, without changing, the prior fixed-PSF result. H115 necessary truth-free flux diagnostic flags22/80 combined finite candidate sets; nonempty reference intervals do not imply accuracy or replace H114 joint flux/position truth checks. Preserve0073 false-negative and common-bias counterexample.",
+      "previousCards": [
+        "POINT_EXTENDED_GAUSSIAN_INFORMATION_BOUND",
+        "POINT_EXTENDED_POISSON_INFORMATION_BOUND",
+        "POINT_EXTENDED_NATIVE_DESIGN",
+        "POINT_EXTENDED_KNOWN_GEOMETRY_BENCHMARK",
+        "POINT_EXTENDED_NATIVE_SINGLE_GAUSSIAN",
+        "POINT_EXTENDED_PAIRED_NATIVE_BENCHMARK",
+        "POINT_EXTENDED_HELDOUT_TWO_COMPONENT",
+        "POINT_EXTENDED_HELDOUT_PSF_SENSITIVITY",
+        "STRUCTURED_AND_BLEND",
+        "RAW_DEBLEND",
+        "SATURATION_EXISTING_HELDOUT_OVERLAP_MASK_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION",
+        "POINT_EXTENDED_RECORDED_NEAR_STARTS_13_OVERLAP_STABLE_THREE_POINT_CONTROL_FLUX_COUNTEREXAMPLES",
+        "POINT_EXTENDED_JOINT_THREE_SAVED_PSF_WIDTHS_AND_NEAR_STARTS_12_OVERLAP_TWO_POINT_CONTROLS",
+        "POINT_EXTENDED_TRUTH_FREE_COMMON_FLUX_COMPATIBILITY_22_INCOMPATIBLE_NOT_ACCURACY_ADMISSION",
+        "BKL046_SAVED_POSITION_EXACT_COMMON_CENTER_NECESSARY_NOT_ACCURACY"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "SATURATION_BLEND/3",
+      "title": "Channel-dependent saturation",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Use existing RGB channel clipping lineage controls; values below1 in normalized products do not prove unsaturated acquisition. Physical response and applicable recovery remain separately scoped.",
+      "previousCards": [
+        "ABE_POSTHOC_CLIPPING_STAGE_LOCALIZATION",
+        "SATURATION_EXPOSURES",
+        "SATURATION_EXISTING_HELDOUT_OVERLAP_MASK_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "SATURATION_BLEND/4",
+      "title": "Mask transition and recomposition cases",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "Use384paired flux comparisons and boundary decomposition without repeating fields. Adaptive masks, ringing, false/merged structures and representative independent-domain uncertainty remain open.",
+      "previousCards": [
+        "MASK_NATIVE_PHOTOMETRY",
+        "MASK_LOCAL_PEAKS",
+        "MASK_FIXED_SMOOTHING_APERTURE_BOUNDARY_FLUX",
+        "MASK_APERTURE_WIDTH_AND_SIMULATED_CLIPPING_ATTRIBUTION",
+        "SATURATION_EXISTING_HELDOUT_OVERLAP_MASK_SCOPE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "VERSION_BACKEND/1",
+      "title": "Knowledge versions on one exact input",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "H126: genuine complete independent stream34 review75322cd7 is APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION, no blockers; STREAM-COMPLETE-01 resolved. Normalized review48312124 and actual incoming-origin/peer bytes installed; exact isolated read-only Scope checks34 sources,8 inputs, installed/runtime/registry/publisher/common approvals without Host/custodian/gate/native creation. Preserve rejected32 and historical unapproved34 snapshots with current correction links. Proceed only when fresh real8GiB physical/12GiB commit reserves, sole common gate admission and all ownership/input/UI/archive controls pass under the exact approved one-shot operatorV3/EntryV2/HostV2. No automatic retry, reserve relaxation or foreign-process stop. Current memory observation may block admission and is not a reservation or continuous bound. Native File/hash/close, original-native sampling, private-engine lifetime and failed File retention remain distinct actual-witness requirements; hash success alone cannot close them.456 scientific cases remain, all25 axes/final knowledge/full remote archive reconstruction open.",
+      "previousCards": [
+        "RESEARCH_GUIDANCE_REQUEST_ISOLATION",
+        "VERSION_PREREQUISITES",
+        "V18_V20_DETERMINISTIC_SAME_INPUT_KNOWLEDGE_DECISION_CONTRACT",
+        "LIVE_OPENAI_PAID_ROUTE_28_EVIDENCE_WITHHOLDING_DECISIONS",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION",
+        "BKL046_FRESH_HEADER_SOURCE_FACTORY_AND_NODE_MOCKS_NOT_PARENT_OR_NATIVE_ADMISSION",
+        "BKL046_COMPLETE_HEADER_PARENT21_FROZEN_CONNECTED6_STORE35_COLD2_REVIEW_NOT_APPROVED",
+        "BKL046_HEADER_RECEIPT68_WINDOWS17_CUSTODY13_CONTEXT25_CLI18_HANDLE12_FIXTURES_NOT_NATIVE_OR_R4",
+        "BKL046_COMPLETE_HEADER_V1_HOLD_ESCAPE_THREE_REPRODUCTIONS_INVALIDATE_RETENTION_PROPOSAL",
+        "BKL046_COMPLETE_HEADER_V2_22_SOURCES_COMPONENT3_FLOW16_COLD2_FROZEN_NOT_REVIEWED",
+        "BKL046_PEER_DERIVED_NAMESPACE_REPORTS_STATIC_ONLY_NO_HISTORICAL_TAMPERING_OR_TXF_PROMOTION",
+        "BKL046_HEADER_V2_GENUINE_REVIEW_REJECTS_PRIMARY_MASKING_IN_READER_CLEANUP",
+        "BKL046_HEADER_V3_23_SOURCES_PRIMARY_CLEANUP_EXPLICIT_QUALIFIED_OFFLINE_REVIEW_SENT",
+        "BKL046_HEADER_V3_GENUINE_REJECTION_STORE_CLEANUP_READER_CLOSED_V4_DRAFT_NOT_REVIEWED",
+        "BKL046_IA_DEVELOPMENT_NATIVE64_RECOUNT_63_CASES_RELATIVE_FAILURE_NO_CONFIRMATORY_UNITS",
+        "BKL046_HEADER_V4_24_SOURCES_COMPLETE_FROZEN_EXTENDED_IO_OPERATOR_FIXTURES_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER_V4_GENUINE_IMPLEMENTATION_APPROVED_ORDINARY_HOST_BUSY_TERMINAL_NO_NATIVE",
+        "BKL046_ACTUAL_HEADER001_ABORT_MACRO_KEY15_OWN_NORMAL_EXIT_ARCHIVED_ORDINARY_RELEASE",
+        "BKL046_HEADER002_ISOLATED24_MACRO_KEY_FIXED_OFFLINE75_VM6_CONSUMER10_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER002_GENUINE_WHOLE24_IMPLEMENTATION_APPROVED_WITH_LIMITS",
+        "BKL046_HEADER002_ACTUAL_MACRO15_RECEIPT_PASS_UI_CLOSE_EXTRA_FIELD_REJECTED_PARENT_RETAINED",
+        "BKL046_UI_CLOSE_PREPUBLICATION_READONLY14_DATA_CHECKS_NOT_EXIT_OR_RECOVERY",
+        "BKL046_HEADER002_PRIVATE_EXACT_CONTROL_CHAINS_NONZERO_RETENTION_NOT_REAL_RECOVERY",
+        "BKL046_HEADER002_REVIEW_SEND_CONSENT_RESOLVED_CURRENT_ACTION_CORRECTION",
+        "BKL046_HEADER002_GENUINE_DIAGNOSIS_REVIEW_AND_FROZEN_COMPLETE_RECOVERY21_NOT_APPROVED",
+        "BKL046_HEADER002_ACTUAL_OWNER_AUTHORIZED_RECOVERY_COMPLETE",
+        "BKL046_STREAM_WITNESS_COMPLETE32_FROZEN_NOT_REVIEWED",
+        "BKL046_STREAM32_GENUINE_REVIEW_CHANGES_REQUIRED_MEMORY_PREFLIGHT",
+        "BKL046_STREAM34_CORRECTED_PREFLIGHT_FROZEN_REVIEW_SENT_UNAPPROVED",
+        "BKL046_STREAM34_GENUINE_COMPLETE_APPROVAL_INSTALLED_RUNTIME_PREREQUISITES_REMAIN"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "VERSION_BACKEND/2",
+      "title": "Model or adapter changes as separate experiments",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "H126: genuine complete independent stream34 review75322cd7 is APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION, no blockers; STREAM-COMPLETE-01 resolved. Normalized review48312124 and actual incoming-origin/peer bytes installed; exact isolated read-only Scope checks34 sources,8 inputs, installed/runtime/registry/publisher/common approvals without Host/custodian/gate/native creation. Preserve rejected32 and historical unapproved34 snapshots with current correction links. Proceed only when fresh real8GiB physical/12GiB commit reserves, sole common gate admission and all ownership/input/UI/archive controls pass under the exact approved one-shot operatorV3/EntryV2/HostV2. No automatic retry, reserve relaxation or foreign-process stop. Current memory observation may block admission and is not a reservation or continuous bound. Native File/hash/close, original-native sampling, private-engine lifetime and failed File retention remain distinct actual-witness requirements; hash success alone cannot close them.456 scientific cases remain, all25 axes/final knowledge/full remote archive reconstruction open.",
+      "previousCards": [
+        "RESEARCH_ADAPTER_SCHEMA_CONTRAST",
+        "VERSION_PREREQUISITES",
+        "LIVE_OPENAI_PAID_ROUTE_28_EVIDENCE_WITHHOLDING_DECISIONS",
+        "NATIVE_IDEAL_NOISELESS_RGBL_PARENT_EXACT_ROLE_PRESERVATION",
+        "FOUR_ACTUAL_NATIVE_PARENT_OPENAI_ACTIONS_AND_ARCHIVED_CONTRACT",
+        "NATIVE_PARENT_FOUR_REAL_API_ANSWERS_AND_PARENT_BITS_OFFLINE_CAPSULE",
+        "BACKEND_HISTORICAL_OPERATIONAL_GATE_RECONCILIATION",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION",
+        "BKL046_FRESH_HEADER_SOURCE_FACTORY_AND_NODE_MOCKS_NOT_PARENT_OR_NATIVE_ADMISSION",
+        "BKL046_COMPLETE_HEADER_PARENT21_FROZEN_CONNECTED6_STORE35_COLD2_REVIEW_NOT_APPROVED",
+        "BKL046_HEADER_RECEIPT68_WINDOWS17_CUSTODY13_CONTEXT25_CLI18_HANDLE12_FIXTURES_NOT_NATIVE_OR_R4",
+        "BKL046_COMPLETE_HEADER_V1_HOLD_ESCAPE_THREE_REPRODUCTIONS_INVALIDATE_RETENTION_PROPOSAL",
+        "BKL046_COMPLETE_HEADER_V2_22_SOURCES_COMPONENT3_FLOW16_COLD2_FROZEN_NOT_REVIEWED",
+        "BKL046_PEER_DERIVED_NAMESPACE_REPORTS_STATIC_ONLY_NO_HISTORICAL_TAMPERING_OR_TXF_PROMOTION",
+        "BKL046_HEADER_V2_GENUINE_REVIEW_REJECTS_PRIMARY_MASKING_IN_READER_CLEANUP",
+        "BKL046_HEADER_V3_23_SOURCES_PRIMARY_CLEANUP_EXPLICIT_QUALIFIED_OFFLINE_REVIEW_SENT",
+        "BKL046_HEADER_V3_GENUINE_REJECTION_STORE_CLEANUP_READER_CLOSED_V4_DRAFT_NOT_REVIEWED",
+        "BKL046_IA_DEVELOPMENT_NATIVE64_RECOUNT_63_CASES_RELATIVE_FAILURE_NO_CONFIRMATORY_UNITS",
+        "BKL046_HEADER_V4_24_SOURCES_COMPLETE_FROZEN_EXTENDED_IO_OPERATOR_FIXTURES_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER_V4_GENUINE_IMPLEMENTATION_APPROVED_ORDINARY_HOST_BUSY_TERMINAL_NO_NATIVE",
+        "BKL046_ACTUAL_HEADER001_ABORT_MACRO_KEY15_OWN_NORMAL_EXIT_ARCHIVED_ORDINARY_RELEASE",
+        "BKL046_HEADER002_ISOLATED24_MACRO_KEY_FIXED_OFFLINE75_VM6_CONSUMER10_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER002_GENUINE_WHOLE24_IMPLEMENTATION_APPROVED_WITH_LIMITS",
+        "BKL046_HEADER002_ACTUAL_MACRO15_RECEIPT_PASS_UI_CLOSE_EXTRA_FIELD_REJECTED_PARENT_RETAINED",
+        "BKL046_UI_CLOSE_PREPUBLICATION_READONLY14_DATA_CHECKS_NOT_EXIT_OR_RECOVERY",
+        "BKL046_HEADER002_PRIVATE_EXACT_CONTROL_CHAINS_NONZERO_RETENTION_NOT_REAL_RECOVERY",
+        "BKL046_HEADER002_REVIEW_SEND_CONSENT_RESOLVED_CURRENT_ACTION_CORRECTION",
+        "BKL046_HEADER002_GENUINE_DIAGNOSIS_REVIEW_AND_FROZEN_COMPLETE_RECOVERY21_NOT_APPROVED",
+        "BKL046_HEADER002_ACTUAL_OWNER_AUTHORIZED_RECOVERY_COMPLETE",
+        "BKL046_STREAM_WITNESS_COMPLETE32_FROZEN_NOT_REVIEWED",
+        "BKL046_STREAM32_GENUINE_REVIEW_CHANGES_REQUIRED_MEMORY_PREFLIGHT",
+        "BKL046_STREAM34_CORRECTED_PREFLIGHT_FROZEN_REVIEW_SENT_UNAPPROVED",
+        "BKL046_STREAM34_GENUINE_COMPLETE_APPROVAL_INSTALLED_RUNTIME_PREREQUISITES_REMAIN"
+      ],
+      "newEvidence": [],
+      "open": true
+    },
+    {
+      "id": "VERSION_BACKEND/3",
+      "title": "Repeated stochastic decision outcomes",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+      "nextActionInherited": "H126: genuine complete independent stream34 review75322cd7 is APPROVED_COMPLETE_IMPLEMENTATION_NOT_EXECUTION, no blockers; STREAM-COMPLETE-01 resolved. Normalized review48312124 and actual incoming-origin/peer bytes installed; exact isolated read-only Scope checks34 sources,8 inputs, installed/runtime/registry/publisher/common approvals without Host/custodian/gate/native creation. Preserve rejected32 and historical unapproved34 snapshots with current correction links. Proceed only when fresh real8GiB physical/12GiB commit reserves, sole common gate admission and all ownership/input/UI/archive controls pass under the exact approved one-shot operatorV3/EntryV2/HostV2. No automatic retry, reserve relaxation or foreign-process stop. Current memory observation may block admission and is not a reservation or continuous bound. Native File/hash/close, original-native sampling, private-engine lifetime and failed File retention remain distinct actual-witness requirements; hash success alone cannot close them.456 scientific cases remain, all25 axes/final knowledge/full remote archive reconstruction open. Independent IA confirmation population,estimands,blinded labels,configuration,multiplicity,budget and stopping still require a frozen protocol.",
+      "previousCards": [
+        "VERSION_BACKEND_FIXED_QUOTA_STOCHASTIC_REPEAT_DESIGN",
+        "VERSION_BACKEND_SYNTHETIC_ADJUDICATION_EVALUATOR",
+        "VERSION_PREREQUISITES",
+        "VERSION_BACKEND_DIRECT_UNSAFE_OR_UNRESOLVED_EVALUATOR_SYNTHETIC",
+        "VERSION_BACKEND_CLUSTER_DEPENDENCE_INVALIDATES_TICKET_CONFIDENCE",
+        "LIVE_OPENAI_PAID_ROUTE_28_EVIDENCE_WITHHOLDING_DECISIONS",
+        "FOUR_ACTUAL_NATIVE_PARENT_OPENAI_ACTIONS_AND_ARCHIVED_CONTRACT",
+        "NATIVE_PARENT_FOUR_REAL_API_ANSWERS_AND_PARENT_BITS_OFFLINE_CAPSULE",
+        "BACKEND_HISTORICAL_OPERATIONAL_GATE_RECONCILIATION",
+        "BACKEND_CURRENT_OWNER_DEFINED_ONE_PERCENT_95_CONFIDENCE_SUPERSEDES_PENDING_CONTEXT",
+        "BKL046_CURRENT_SIX_REPOSITORY_SOURCES_OWNER80_TABLES_RAW20_SCOPE_NO_LINEARITY_PROMOTION",
+        "BKL046_FRESH_HEADER_SOURCE_FACTORY_AND_NODE_MOCKS_NOT_PARENT_OR_NATIVE_ADMISSION",
+        "BKL046_COMPLETE_HEADER_PARENT21_FROZEN_CONNECTED6_STORE35_COLD2_REVIEW_NOT_APPROVED",
+        "BKL046_HEADER_RECEIPT68_WINDOWS17_CUSTODY13_CONTEXT25_CLI18_HANDLE12_FIXTURES_NOT_NATIVE_OR_R4",
+        "BKL046_CURRENT_OWNER_ONE_PERCENT_EXISTING_COMBINED_PLAN_721_957_1159_NOT_REAL_CASE_ADMISSION",
+        "BKL046_EXACT_ADAPTIVE_QUOTA_COUNTEREXAMPLE_FIXED_SAMPLE_SIZE_RESTRICTION_NOT_EMPIRICAL_RISK",
+        "BKL046_COMPLETE_HEADER_V1_HOLD_ESCAPE_THREE_REPRODUCTIONS_INVALIDATE_RETENTION_PROPOSAL",
+        "BKL046_COMPLETE_HEADER_V2_22_SOURCES_COMPONENT3_FLOW16_COLD2_FROZEN_NOT_REVIEWED",
+        "BKL046_PEER_DERIVED_NAMESPACE_REPORTS_STATIC_ONLY_NO_HISTORICAL_TAMPERING_OR_TXF_PROMOTION",
+        "BKL046_HEADER_V2_GENUINE_REVIEW_REJECTS_PRIMARY_MASKING_IN_READER_CLEANUP",
+        "BKL046_HEADER_V3_23_SOURCES_PRIMARY_CLEANUP_EXPLICIT_QUALIFIED_OFFLINE_REVIEW_SENT",
+        "BKL046_HEADER_V3_GENUINE_REJECTION_STORE_CLEANUP_READER_CLOSED_V4_DRAFT_NOT_REVIEWED",
+        "BKL046_IA_DEVELOPMENT_NATIVE64_RECOUNT_63_CASES_RELATIVE_FAILURE_NO_CONFIRMATORY_UNITS",
+        "BKL046_HEADER_V4_24_SOURCES_COMPLETE_FROZEN_EXTENDED_IO_OPERATOR_FIXTURES_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER_V4_GENUINE_IMPLEMENTATION_APPROVED_ORDINARY_HOST_BUSY_TERMINAL_NO_NATIVE",
+        "BKL046_ACTUAL_HEADER001_ABORT_MACRO_KEY15_OWN_NORMAL_EXIT_ARCHIVED_ORDINARY_RELEASE",
+        "BKL046_HEADER002_ISOLATED24_MACRO_KEY_FIXED_OFFLINE75_VM6_CONSUMER10_REVIEW_SENT_NOT_APPROVED",
+        "BKL046_HEADER002_GENUINE_WHOLE24_IMPLEMENTATION_APPROVED_WITH_LIMITS",
+        "BKL046_HEADER002_ACTUAL_MACRO15_RECEIPT_PASS_UI_CLOSE_EXTRA_FIELD_REJECTED_PARENT_RETAINED",
+        "BKL046_IA_ANYTIME_MIXTURE_EXACT_CANDIDATE_AND_UPPER_BOUND_NOT_CONFIRMATION",
+        "BKL046_UI_CLOSE_PREPUBLICATION_READONLY14_DATA_CHECKS_NOT_EXIT_OR_RECOVERY",
+        "BKL046_HEADER002_PRIVATE_EXACT_CONTROL_CHAINS_NONZERO_RETENTION_NOT_REAL_RECOVERY",
+        "BKL046_HEADER002_REVIEW_SEND_CONSENT_RESOLVED_CURRENT_ACTION_CORRECTION",
+        "BKL046_HEADER002_GENUINE_DIAGNOSIS_REVIEW_AND_FROZEN_COMPLETE_RECOVERY21_NOT_APPROVED",
+        "BKL046_HEADER002_ACTUAL_OWNER_AUTHORIZED_RECOVERY_COMPLETE",
+        "BKL046_STREAM_WITNESS_COMPLETE32_FROZEN_NOT_REVIEWED",
+        "BKL046_STREAM32_GENUINE_REVIEW_CHANGES_REQUIRED_MEMORY_PREFLIGHT",
+        "BKL046_STREAM34_CORRECTED_PREFLIGHT_FROZEN_REVIEW_SENT_UNAPPROVED",
+        "BKL046_STREAM34_GENUINE_COMPLETE_APPROVAL_INSTALLED_RUNTIME_PREREQUISITES_REMAIN"
+      ],
+      "newEvidence": [],
+      "open": true
+    }
+  ],
+  "ownerCriteria": [
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_01",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_02",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_03",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_04",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_05",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_06",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_07",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_08",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_09",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_10",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_01",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_02",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_03",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_04",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_05",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_06",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_07",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_08",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_09",
+      "status": "NOT_YET_SATISFIED"
+    }
+  ],
+  "scientificClosuresAdded": 0,
+  "nativeExecutionsAdded": 0,
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}

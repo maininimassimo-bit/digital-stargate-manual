@@ -1,0 +1,26 @@
+{
+  "protocol": "BKL046_ACS_EXTENDED_TRAIL_SUPPORT_SCREEN_V1",
+  "pointings": {
+    "second": {
+      "folder": "BKL046-GO14949-nuovo-puntamento-v1",
+      "protocolSha256": "1271eaa79ea206c1da5f23fc2ddb3f5f5d53636c41a710f47e8e58a72a8ff7db"
+    },
+    "third": {
+      "folder": "BKL046-GO14949-terzo-puntamento-v1",
+      "protocolSha256": "85cce81a4cf7b5530fb0465555ea4faa0136d0c37c9636773f848f2c326c5b82"
+    }
+  },
+  "roles": [
+    "A40",
+    "B40",
+    "L400"
+  ],
+  "longBit": 256,
+  "baseRadiusPx": 10,
+  "minVerticalSpanPx": 21,
+  "shortLocalSearchPx": 4,
+  "shortMaxPeakShiftPx": 3.5,
+  "shortMinPeakAboveBackgroundElectrons": 200,
+  "shortRequireDqZeroInsideRadius": true,
+  "scope": "Feasibility screen before photometry. Candidates selected from the long DQ alone; short peak geometry is diagnostic."
+}

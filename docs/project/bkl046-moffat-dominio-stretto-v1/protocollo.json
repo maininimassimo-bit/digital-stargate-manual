@@ -1,0 +1,85 @@
+{
+  "schema": "BKL046_MOFFAT_NARROW_DOMAIN_DEVELOPMENT_PLAN_V1",
+  "parentProtocolSha256": "c68ae1bf0727e888e507710c2e10ecb194ffdbbfa8349223e011c3839e3e5a92",
+  "priorEdgeSourceSha256": "d52c7a2f87b8a636cd35b4b5ca48ec27d909452e9435639225f805fde7d7d409",
+  "partition": "DEVELOPMENT_ONLY",
+  "geometry": [
+    25,
+    25
+  ],
+  "totalElectronsInfinitePlane": 10000,
+  "alpha": [
+    0.06,
+    0.12,
+    0.24
+  ],
+  "beta": [
+    1.5,
+    4.5
+  ],
+  "shapes": [
+    {
+      "ratio": 1,
+      "angle": 0
+    },
+    {
+      "ratio": 0.35,
+      "angle": 0
+    },
+    {
+      "ratio": 0.35,
+      "angle": 37
+    }
+  ],
+  "phases": [
+    [
+      0,
+      0
+    ],
+    [
+      0.25,
+      0.25
+    ],
+    [
+      0.499,
+      0
+    ],
+    [
+      0.499,
+      0.499
+    ]
+  ],
+  "edgeOrders": [
+    32,
+    64,
+    128,
+    256
+  ],
+  "selectedAreaPixels": [
+    [
+      12,
+      12
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      13,
+      12
+    ],
+    [
+      13,
+      13
+    ]
+  ],
+  "areaSubdivisions": 4,
+  "areaOrders": [
+    48,
+    96
+  ],
+  "absolutePixelToleranceElectrons": 0.000001,
+  "absoluteFiniteFieldSumToleranceElectrons": 0.00001,
+  "nativeExecutions": 0,
+  "calibrationSeedsConsumed": false
+}

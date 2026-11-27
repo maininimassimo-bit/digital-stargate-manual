@@ -1,0 +1,11 @@
+# BKL-046 · Codici prossimi al limite in mosaici Bayer acquisiti
+
+Sono state misurate tre pose Canon EOS 6D M51 da 45,3 s e tre pose luce più tre dark della Canon EOS 40D IC 1805 da 60 s, tutte a ISO 800. Per ciascun gruppo sono state prese la prima, la mediana e l'ultima posa in ordine lessicografico. Sono state lette le quattro fasi R, G1, G2 e B nel mosaico visibile RGGB. [Dati originali di Santiago Rodriguez](https://amor.cms.hu-berlin.de/~rodrigus/datasets.html) · [Interfaccia rawpy](https://letmaik.github.io/rawpy/api/rawpy.RawPy.html)
+
+Nei tre CR2 EOS 6D il decoder fornisce un limite per canale di 12.507 DN e un limite globale di 15.490 DN. Usando i limiti per canale, le tre pose hanno 120, 130 e 147 celle con alcune fasi sopra o al limite e 44, 49 e 45 celle con tutte le fasi sopra o al limite. I verdi superano più spesso il limite del rosso nelle immagini campionate. L'istogramma ha anche un accumulo distinto a 14.042–14.043 DN. In due file compare un singolo codice superiore all'accumulo, rispettivamente 14.100 e 15.757 DN nella fase G2. Venticinque celle ricorrono alla stessa fase alle coordinate del sensore nelle tre pose. Non è disponibile un dark EOS 6D abbinato in questo campione per valutare l'origine della ricorrenza.
+
+Nei sei CR2 EOS 40D manca un limite per canale, quindi il confronto diagnostico usa il valore globale di 16.224 DN. I massimi nei tre light e nei tre dark sono fra 16.001 e 16.004 DN. Nessuna fase supera il limite globale o cade entro l'1% dell'intervallo nero-bianco da quel limite. L'esito vale per le soglie dichiarate e non esclude un accumulo a un codice inferiore.
+
+Il confronto distingue il limite del decoder dai codici osservati. Senza una sequenza a dosi crescenti e dark abbinati per entrambe le camere, non misura la capacità di full well, l'andamento della non linearità o il recupero del flusso per canale. Il criterio scientifico resta aperto.
+
+Per ripetere, eseguire `verifica.py` con la directory estratta di questo archivio, il wheel rawpy 0.25.1 incluso, la directory dei pacchetti estratti da quel wheel, la directory DLL VCLibs e un nuovo file di uscita. Il codice verifica i nove CR2, il wheel e la funzione EXIF riusata dal dossier IC 1805.

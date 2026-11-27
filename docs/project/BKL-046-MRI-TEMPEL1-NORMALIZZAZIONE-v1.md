@@ -1,0 +1,8 @@
+# BKL-046 — Tempel 1 MRI, effetto della normalizzazione
+
+L’analisi usa le misure RADREV v3 congelate e la fotometria PDS ricavata da RADREV v2. Per ciascuna esposizione e per sei diametri non superiori a 25 pixel, sono state ricalcolate le quattro combinazioni di flusso di apertura e normalizzatore a 30 pixel, con e senza correzione della giunzione. La variazione dell’errore assoluto è decomposta per posa, mediando gli effetti marginali nei due ordini possibili. Le due componenti sommano al totale per singola posa. Le mediane riportate separatamente possono avere una somma diversa dalla mediana del totale. [Fotometria PDS pubblicata](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-MRI-5-TEMPEL1-PHOTOMETRY-V1.0)
+
+Per le 13 aperture da 7 pixel che attraversano la giunzione, la variazione mediana è +1,355 punti percentuali. Le mediane delle componenti sono −0,027 punti per il flusso di apertura e +1,418 per il normalizzatore. Per tutte le 40 pose confrontabili in cui l’apertura da 7 pixel non attraversa la giunzione, il contributo del flusso di apertura è zero e la variazione deriva dal normalizzatore, con mediana +1,294 punti. Per il diametro 15 con attraversamento, la mediana totale è +0,198 punti su 34 pose. Le componenti hanno mediane di segno opposto, −0,776 e +0,631 punti.
+
+Il confronto chiarisce da dove deriva il peggioramento apparente nel rapporto a 7 pixel. Il risultato non misura l’accuratezza radiometrica assoluta o l’effetto della sola pipeline v2. Restano necessari i FITS v2 verificabili delle stesse pose e un confronto a parità di versione. Due ripetizioni offline identiche. Nessuna esecuzione nativa o chiusura scientifica.
+SHA-256 archivio H: b3441acc76f1851d4f7e2f370e113a70ac45b30fe2ddd328f1d473e553eba2fb.

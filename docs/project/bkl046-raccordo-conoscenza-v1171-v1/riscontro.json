@@ -1,0 +1,165 @@
+{
+  "schema": "BKL046_KNOWLEDGE_EVIDENCE_ADDENDUM_V1",
+  "knowledgeVersion": "1.171",
+  "baselineKnowledgeSha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d",
+  "previousLocatorSha256": "af0faa5f1be4928800df63f1c00fe4eb63e2788bd752c74c08baa6c204890280",
+  "evidenceReadAtGitHubHead": "a8f281fcbfd5fa968c40a54d7b08aee3eceba212",
+  "ledgerSha256": "8262abbf38e1c68cedf124e9fced85520b450fc3c859d93629a756000ea7d494",
+  "requirements": 4920,
+  "criteria": 14521,
+  "ownerCriteria": [
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_01",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_02",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_03",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_04",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_05",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_06",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_07",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_08",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_09",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_10",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_01",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_02",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_03",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_04",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_05",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_06",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_07",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_08",
+      "status": "NOT_YET_SATISFIED"
+    },
+    {
+      "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_09",
+      "status": "NOT_YET_SATISFIED"
+    }
+  ],
+  "scientificFamilies": [
+    {
+      "id": "PSF_PIXEL",
+      "status": "INCOMPLETE_AS_RECORDED_IN_CURRENT_KNOWLEDGE",
+      "axes": 4
+    },
+    {
+      "id": "NOISE_FLUX",
+      "status": "INCOMPLETE_AS_RECORDED_IN_CURRENT_KNOWLEDGE",
+      "axes": 3
+    },
+    {
+      "id": "DIFFUSE_BACKGROUND",
+      "status": "INCOMPLETE_AS_RECORDED_IN_CURRENT_KNOWLEDGE",
+      "axes": 3
+    },
+    {
+      "id": "CFA_DITHER_DRIZZLE",
+      "status": "INCOMPLETE_AS_RECORDED_IN_CURRENT_KNOWLEDGE",
+      "axes": 4
+    },
+    {
+      "id": "FILTER_COLOR",
+      "status": "INCOMPLETE_AS_RECORDED_IN_CURRENT_KNOWLEDGE",
+      "axes": 4
+    },
+    {
+      "id": "SATURATION_BLEND",
+      "status": "INCOMPLETE_AS_RECORDED_IN_CURRENT_KNOWLEDGE",
+      "axes": 4
+    },
+    {
+      "id": "VERSION_BACKEND",
+      "status": "INCOMPLETE_AS_RECORDED_IN_CURRENT_KNOWLEDGE",
+      "axes": 3
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/project/bkl046-riscontro-semantico-v602/riscontro.json",
+      "sha256": "00f3951f58f49776c0813358f14fa27018c0e47b803f871753c2a473cbd74247",
+      "scope": "PROPOSED_LEDGER_REPLAY"
+    },
+    {
+      "path": "docs/project/bkl046-perimetro-candidati-v602/riscontro.json",
+      "sha256": "8a53d8ca8d5bd566e627097e7560acf6dcf83cb8eb6af485c30d0af4bef6df50",
+      "scope": "STATIC_SCOPE"
+    },
+    {
+      "path": "docs/project/bkl046-blindsolver-provenienza-v1/riscontro.json",
+      "sha256": "911371dc40450df79b8796e93228ca7b62b9048edb1135a694027fa43f88a179",
+      "scope": "SOURCE_PROVENANCE"
+    },
+    {
+      "path": "docs/project/bkl046-blindsolver-indice-v1/riscontro.json",
+      "sha256": "15ab2869577121e2fc44cb2c1caa79e1e8e9ac503c91b71a51404f7a91ce33dc",
+      "scope": "SIMULATED_INDEX_SELECTION"
+    },
+    {
+      "path": "docs/project/bkl046-blindsolver-wcs-affine-v1/riscontro.json",
+      "sha256": "e7487343e02a38b3fe9c4cb3991455769b9b5b53ffcd78f75c8e10809edd7898",
+      "scope": "INSTRUMENTAL_GRID_AFFINE_LIMIT"
+    },
+    {
+      "path": "docs/project/bkl046-ngc6341-distorsione-gaia-v1/riscontro.json",
+      "sha256": "4b8f71ac4d5e4c3e0f8bf5573ba98536b90bfd10fabeae16c814a4286cd8232b",
+      "scope": "EMPIRICAL_CONDITIONAL_CENTROID_COMPARISON"
+    }
+  ],
+  "scientificClosures": 0,
+  "canonicalKnowledgeUpdated": false,
+  "remaining": {
+    "blindSolverHistoricalBytes": "UNVERIFIED",
+    "controlCompletenessAndFalsePositives": "UNMEASURED",
+    "nativeStream34V11": "REVIEW_AND_ADMISSION_REQUIRED",
+    "finalGitHubReadback": "OPEN"
+  }
+}

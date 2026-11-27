@@ -1,0 +1,9 @@
+# BKL-046 · Rendiconto v83 e supplemento alla conoscenza v1.171
+
+Il rendiconto aggiunge nove studi e undici rapporti agli assi SATURATION_BLEND/1 e /3. Ogni rapporto coincide con i byte archiviati su H: e K: e con il documento al commit GitHub d'origine.
+
+- **Clipping delle pose M8/M20.** Un solo fotosito al limite nelle pose raggiunge lo stesso limite nei dark esaminati. Escluso quel sito, l'accordo entro 1,5 pixel passa dal 46,32% sul sensore a circa l'86% dopo la proiezione al cielo. Per il 61,63% degli eventi esiste un campione alternativo sotto 62.000 entro un pixel, concorde fra due geometrie. Nella prova con valore grezzo nascosto, con almeno tre pose alternative solo 1.980 stime su 38.529 rientrano nel 5%.
+- **Riferimenti indipendenti DECam.** La verifica sulle immagini complete distingue sezione scientifica e area di lettura. Per 158.183 delle 163.944 posizioni M8 al livello nominale o sopra nella posa da 100 s, il ritaglio da 30 s offre quattro campioni sotto soglia secondo il WCS. La posa da 30 s di M20 inizialmente considerata proviene invece dal sensore di messa a fuoco FN1.
+- **Controlli M20.** Su due pose scientifiche da 180 s, solo la ricerca esplorativa più ampia ha permesso di verificare l'offset relativo su sei sorgenti. Le tre pose brevi scientifiche acquisite dopo provengono da altre notti rispetto alle pose da 180 s. Il trasferimento fra durate e l'allineamento assoluto su Gaia non raggiungono i criteri fissati. I rifiuti sono archiviati insieme ai risultati.
+
+Restano aperti la linearità fisica, il riferimento fotometrico per gli oggetti realmente saturi, la verifica nativa e l'incertezza sul dominio indipendente. Il supplemento conserva 4.920 requisiti e 14.521 criteri. Restano aperti sette famiglie, 25 assi e 19 criteri Owner. Nessuna nuova chiusura scientifica o esecuzione nativa. Il file di conoscenza v1.171 resta la baseline intermedia.

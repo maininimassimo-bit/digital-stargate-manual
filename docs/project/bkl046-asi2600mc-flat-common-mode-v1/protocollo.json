@@ -1,0 +1,8 @@
+{
+  "schema": "BKL046_ASI2600MC_FLAT_COMMON_MODE_PROTOCOL_V1",
+  "priorArchiveSha256": "dec8591cbc89f2ae747b51d3239628069d5fdbe5fe22336fb3dd78f87c82f9d5",
+  "priorReportSha256": "1b418ca777cbb2a2f03634457853ebfa8ca5bdec5d6ec32b2510c64d61cfdb3c",
+  "priorFullSha256": "b146eb849d2055d490730860f5bce1d60664680c9bd8c54525e711999d13fff7",
+  "flatArchiveSha256": "a01bb46b1b0e82658f41f783e0f45da9b1a202b818cb1bccb4e7ff2eba1ba8ca",
+  "design": "Retest all 7x9x4 flat pairs, tiles and parities. For each held-out tile estimate a single illumination ratio from the opposite checkerboard tile stratum using a matched-duration dark offset inferred per tile and parity from the prior report. Normalize pair difference by sqrt(1+ratio^2). Then test removal of a plane fitted only on complementary 2x2 blocks within the tile; score raw, scaled, and scaled+detrended on the same blocks, pooled via two alternating folds and reported descriptively. Reproduce the previous all-block uncorrected ratios. This diagnoses a specific common-mode model and does not establish the physical cause of residual covariance, gain or dose linearity."
+}

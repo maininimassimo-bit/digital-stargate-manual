@@ -1,0 +1,41 @@
+{
+  "schema": "BKL046_CFA_PJSR_COMPARATOR_BOUNDARY_V1",
+  "subjectSHA": "3ad86ab652dbe80b08fc6b939dd2b10fb3038563784598f08c10ada3a545b072",
+  "batchSHA": "0b91c52cc63eb0196f1e9ba5ac6774ebb7a9d28478392358976ae8f7138a87ec",
+  "comparatorSHA": "f84d6e73218707f18e3480dde8442baefbe8bc8502c52fc7e1dc067b6fb31790",
+  "cases": [
+    {
+      "mode": "detector",
+      "marker": true,
+      "accepted": true,
+      "mask": "detector",
+      "shear": "shear-center0"
+    },
+    {
+      "mode": "reference",
+      "marker": true,
+      "accepted": true,
+      "mask": "reference",
+      "shear": "shear-edge05"
+    },
+    {
+      "mode": "incorrect-frame",
+      "marker": true,
+      "accepted": false
+    },
+    {
+      "mode": "ambiguous",
+      "marker": true,
+      "accepted": false
+    },
+    {
+      "mode": "incomplete",
+      "marker": false,
+      "accepted": false
+    }
+  ],
+  "simulatedPjsrRuntime": true,
+  "nativeExecutions": 0,
+  "scientificClosures": 0,
+  "admissionRequested": false
+}

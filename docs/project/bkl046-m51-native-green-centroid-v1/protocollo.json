@@ -1,0 +1,27 @@
+{
+  "schema": "BKL046_M51_NATIVE_GREEN_CENTROID_PROTOCOL_V1",
+  "gaiaProgramSha256": "fc7ecc8d228b148f87d17da6e51b321b09918cb3eb00f78db3acd0a2c8ba07b7",
+  "gaiaReportSha256": "0a6f366bb95b9d83526d2a45e63408ca8b286553249a26079adaf7e6259f1aad",
+  "radiusPx": 11,
+  "fitRadiusPx": 6,
+  "minimumSameParitySamples": 6,
+  "maxMovePx": 2.5,
+  "minimumNoiseMultiple": 3,
+  "minimumPeakFraction": 0.06,
+  "adcGuardBelowWhite": 200,
+  "minimumSigmaPx": 0.55,
+  "maximumSigmaPx": 8,
+  "minimumCommonTrain": 20,
+  "minimumCommonHoldout": 20,
+  "diagnosticP90Px": 0.3,
+  "methods": [
+    "pairedPreview",
+    "G1",
+    "G2",
+    "jointGreen"
+  ],
+  "relativeModels": [
+    "similarity",
+    "affine"
+  ]
+}

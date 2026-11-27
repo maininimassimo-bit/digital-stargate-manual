@@ -1,0 +1,85 @@
+{
+  "protocol": "BKL046_NGC6341_ACS_REPEATABILITY_STRATIFIED_BY_GAIA_SELECTION_V1",
+  "originalAcsAndGaiaReportsReplayed": true,
+  "pinnedReplays": {
+    "acs/paired_acs.py": "bf10145a6195a0e4e3773a326b42f248131e73cefe9ccbfe9b593e44bc27f915",
+    "acs/riscontro.json": "fd0f4ca1cacd3a31299eb94d21145c9300bc7fc06eaa5c927b7ff8e5c32b6fe7",
+    "gaia/paired_gaia.py": "87e0ee1eda3fad64c0a30e948b1602f3fdbabab4d5398a186f1d03ed289a6ddf",
+    "gaia/riscontro-definitivo.json": "967776bea29bc659008d39b1821e668a1057043131023ec8b2bc908f7db31c78"
+  },
+  "cohortSha256": "7f094328aee738a929a1c208eb90eeab37fbe78c6b46ed6204bcd7f393ac8c7b",
+  "repeatabilityCutPx": 0.3,
+  "chips": [
+    {
+      "chip": 2,
+      "groups": {
+        "SAME_GAIA_BOTH_2002": {
+          "cohort": 71,
+          "paired2006": 14,
+          "stableWithin0_3Px": 14,
+          "stableFractionOfCohort": 0.19718309859154928,
+          "stableEpochDisplacementP90Px": 0.3224417648171112
+        },
+        "DIFFERENT_GAIA_BOTH_2002": {
+          "cohort": 0,
+          "paired2006": 0,
+          "stableWithin0_3Px": 0,
+          "stableFractionOfCohort": null,
+          "stableEpochDisplacementP90Px": null
+        },
+        "GAIA_ONLY_ONE_2002": {
+          "cohort": 0,
+          "paired2006": 0,
+          "stableWithin0_3Px": 0,
+          "stableFractionOfCohort": null,
+          "stableEpochDisplacementP90Px": null
+        },
+        "GAIA_NEITHER_2002": {
+          "cohort": 324,
+          "paired2006": 71,
+          "stableWithin0_3Px": 71,
+          "stableFractionOfCohort": 0.2191358024691358,
+          "stableEpochDisplacementP90Px": 0.275101245820803
+        }
+      }
+    },
+    {
+      "chip": 1,
+      "groups": {
+        "SAME_GAIA_BOTH_2002": {
+          "cohort": 44,
+          "paired2006": 12,
+          "stableWithin0_3Px": 12,
+          "stableFractionOfCohort": 0.2727272727272727,
+          "stableEpochDisplacementP90Px": 0.27409494188790984
+        },
+        "DIFFERENT_GAIA_BOTH_2002": {
+          "cohort": 0,
+          "paired2006": 0,
+          "stableWithin0_3Px": 0,
+          "stableFractionOfCohort": null,
+          "stableEpochDisplacementP90Px": null
+        },
+        "GAIA_ONLY_ONE_2002": {
+          "cohort": 0,
+          "paired2006": 0,
+          "stableWithin0_3Px": 0,
+          "stableFractionOfCohort": null,
+          "stableEpochDisplacementP90Px": null
+        },
+        "GAIA_NEITHER_2002": {
+          "cohort": 297,
+          "paired2006": 95,
+          "stableWithin0_3Px": 94,
+          "stableFractionOfCohort": 0.3164983164983165,
+          "stableEpochDisplacementP90Px": 0.314030634526293
+        }
+      }
+    }
+  ],
+  "absoluteIdentityTruthEstablished": false,
+  "falsePositiveRateEstimated": false,
+  "completenessEstimated": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

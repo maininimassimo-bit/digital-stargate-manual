@@ -1,0 +1,26 @@
+{
+  "schema": "BKL046_ROMAN_NOIW_MCT_DARK_COMPARISON_V1",
+  "base": "https://archive.stsci.edu/dcl/triplet-tests/fr03/20210907230637_noiw/",
+  "exposureCount": 39,
+  "parentAcquisitionProgramSha256": "1bdcf3c212ec512b4b77967b375707098e2fb33205f0ae05fe6dae73d901d855",
+  "gainReportSha256": "8c8da550bfee309329cddea555921489075030c311084f99e30ea1646c0b97e5",
+  "labProtocolFields": [
+    "MJD",
+    "FPA_A",
+    "FPA_B",
+    "SCE_A",
+    "SCE_B",
+    "MCT_Diode",
+    "Si_Diode"
+  ],
+  "units": [
+    "d",
+    "K",
+    "K",
+    "K",
+    "K",
+    "V",
+    "A"
+  ],
+  "design": "Capture metadata and LABHK for every listed NOIW FITS. Bind all requests within a file by ETag, exact byte intervals, FITS extent and file length. Deduplicate identical monitor samples by MJD, refusing conflicting values. Compare signed MCT samples with the GAIN monitor series; evaluate paired science dispersion when subtracting the minimum, median and maximum of the NOIW MCT readings as hypothetical constant offsets. Separate days and different illumination commands prohibit claiming a validated dark transfer or photon calibration; do not infer a matched optical monitor zero."
+}

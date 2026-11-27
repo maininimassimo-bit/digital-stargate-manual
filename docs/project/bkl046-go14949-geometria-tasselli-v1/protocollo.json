@@ -1,0 +1,20 @@
+{
+  "schema": "BKL046_GO14949_GEOMETRY_TILE_SENSITIVITY_PLAN_V1",
+  "exposures": [
+    {
+      "id": "first",
+      "script": "check_primary_geometry.py",
+      "sourceSha256": "db90220cc4a6d66366db5cae9399065751e891820d591d555c82c153f9119c3e",
+      "receiptSha256": "9bbec741ccec34d49733035ead3e719aa655abd826066a0d254425b15ead1ddb"
+    },
+    {
+      "id": "second",
+      "script": "check_replicate_geometry.py",
+      "sourceSha256": "c600f5f1534619a5dda2696e6d8622c5831597638a2bb0a5fb825f9e2af80b8f",
+      "receiptSha256": "faa34f97a0b216b442504aa7574fe03e3ce4dbf87292b6856d9a43caf66f949b"
+    }
+  ],
+  "scope": "Full frozen fit and holdout plus sensitivity to excluding exactly one held tile from scoring. No model refit, no selection and no admission change.",
+  "centerErrorLimitPx": 0.1,
+  "scientificClosures": 0
+}

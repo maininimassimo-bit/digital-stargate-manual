@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_M8M20_SCALE_EDGE_KNOWN_PROFILE_MASK_PROTOCOL_V1",
+  "previousReportSha256": "d22407710a2e569ab43a61c8d2decf02c8e47d457ed62db3e2ceadd0ca496e8c",
+  "previousProgramSha256": "454d3b6cd79e18b89b1f593d6b83c689885c5e9d87597fee7ed837983d34c7c8",
+  "maskRuleSourceSha256": "8c2e7f67856f177044058b3190d614e51750be7c1736a85749f3283deea53657",
+  "peakFractions": [
+    0.01,
+    0.02,
+    0.05
+  ],
+  "standardPeakFraction": 0.02,
+  "design": "Repeat the frozen full-grid differential injection cohorts. Reject any training cell whose maximum signal on the common support reaches the chosen fraction of the known peak. Use the same mask before and after the injection. Require 12 clean cells per checkerboard split, full affine rank and condition at most 1000 for each split and all clean cells. When eligible, refit each model on all clean cells and score flux and shape on the original support. The peak fractions are fixed sensitivity controls. This mask uses injection truth and does not establish an operational rule."
+}

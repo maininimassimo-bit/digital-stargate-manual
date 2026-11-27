@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_IC1805_SIGNAL_WEIGHTED_REGISTRATION_TRANSFER_V1",
+  "sourceCode": "2b6cebd517fc367ae899390d5333c18d214b02b41dd1522f8da1d6a3c0d48326",
+  "sourceReport": "1670e598211ff0a4a87c217422a8f84905c62eab180f2c38cb7a7f40fcaf65aa",
+  "expectedComparisons": 38,
+  "expectedHeldoutPairs": 1123,
+  "peakProxy": "Use the minimum across frames and green parities of the peak above the background divided by the robust annular background scale from the exact source fit.",
+  "weightRatioCap": 16,
+  "diagnosticP90Px": 0.3,
+  "models": [
+    "similarity",
+    "affine"
+  ],
+  "centroid": "Average of the two green centers from the frozen IC1805 report.",
+  "comparison": "Fit all models on identical training points for each exposure, with identical evaluation points. Clip squared proxy divided by squared training median to [0.25,4]. Retain all 38 exposures and report marginal pooled and per-frame P90. Reused stars and common reference prevent independent exposure-level inference."
+}

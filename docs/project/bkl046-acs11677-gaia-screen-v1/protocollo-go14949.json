@@ -1,0 +1,21 @@
+{
+  "protocol": "BKL046_ACS11677_GO14949_FROZEN_WCS_COMPARISON_V1",
+  "source": "jb6v01e0q",
+  "sourceSha256": "e6011691a50b2608a3cb91e5f9ceb0957aa4a17e46aa04f8e00bee30df5fdd4d",
+  "geometryPlanSha256": "a1f8b27def11c23066708f09aea13af80fe079772d91281a75a94df1d5abaedd",
+  "sourceCohortSha256": "c7ab445f872054b6c4261c1250a733443c8b0d2316a8f0126e102f976235e43d",
+  "archiveSelectionProtocolSha256": "1271eaa79ea206c1da5f23fc2ddb3f5f5d53636c41a710f47e8e58a72a8ff7db",
+  "targets": {
+    "jdg302ctq": {
+      "wcs": "IDC_4bb1536mj-FIT_IMG_GAIAeDR3",
+      "archiveRole": "A40"
+    },
+    "jdg302cvq": {
+      "wcs": "IDC_4bb1536mj-FIT_IMG_GSC242",
+      "archiveRole": "B40"
+    }
+  },
+  "edgeMarginPixels": 20,
+  "scope": "Measure each available independent 40 second exposure under the unchanged WCS and tile-holdout qualification. Exposures are not the same observation, so this is an observational comparison of two solutions, not an isolated catalogue intervention.",
+  "scientificClosure": false
+}

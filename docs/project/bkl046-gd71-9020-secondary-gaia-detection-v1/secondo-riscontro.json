@@ -1,0 +1,132 @@
+{
+  "candidateGaiaMagnitude": 20.29367,
+  "earlierRejectionsPreserved": 8,
+  "epochAstrometryIndependentlyCalibrated": false,
+  "nativeExecutions": 0,
+  "protocolSha256": "b9603b6ae8396f32a9f89a0276a950452de3900163b8c1af71c8cd4a02572218",
+  "repeatedCandidateDetectionEveryVisit": true,
+  "schema": "BKL046_GD71_9020_SECOND_REFERENCE_RESULT_V1",
+  "scientificClosures": 0,
+  "visits": {
+    "j8c103": {
+      "repeatDetectionByBand": {
+        "F658N": 0,
+        "F660N": 2
+      },
+      "results": [
+        {
+          "band": "F658N",
+          "expectedPositionPx": [
+            495.41626117640925,
+            454.17905280360947
+          ],
+          "obsId": "j8c103v2q",
+          "state": "DQ_OR_SKY_INCOMPLETE"
+        },
+        {
+          "band": "F658N",
+          "expectedPositionPx": [
+            495.41708620628606,
+            454.16686759903536
+          ],
+          "obsId": "j8c103v3q",
+          "state": "DQ_OR_SKY_INCOMPLETE"
+        },
+        {
+          "band": "F660N",
+          "diagnosticNoiseElectrons": 28.58665228350165,
+          "diagnosticSnr": 14.111433244676784,
+          "exceedsIndividualThreshold": true,
+          "expectedPositionPx": [
+            495.4997497901587,
+            451.93490174963085
+          ],
+          "obsId": "j8c103xcq",
+          "pixels": 18,
+          "signalElectrons": 403.39863538742065,
+          "state": "MEASURED_DIAGNOSTIC"
+        },
+        {
+          "band": "F660N",
+          "diagnosticNoiseElectrons": 28.4188169732375,
+          "diagnosticSnr": 15.090962740780808,
+          "exceedsIndividualThreshold": true,
+          "expectedPositionPx": [
+            495.484374353838,
+            451.9535234580942
+          ],
+          "obsId": "j8c103xdq",
+          "pixels": 19,
+          "signalElectrons": 428.8673080801964,
+          "state": "MEASURED_DIAGNOSTIC"
+        }
+      ],
+      "satisfiesRepeatRule": true
+    },
+    "j8c104": {
+      "repeatDetectionByBand": {
+        "F658N": 2,
+        "F660N": 2
+      },
+      "results": [
+        {
+          "band": "F658N",
+          "diagnosticNoiseElectrons": 31.065759317823773,
+          "diagnosticSnr": 14.03589887505749,
+          "exceedsIndividualThreshold": true,
+          "expectedPositionPx": [
+            499.20300636378465,
+            443.2412686469594
+          ],
+          "obsId": "j8c104izq",
+          "pixels": 19,
+          "signalElectrons": 436.0358562618494,
+          "state": "MEASURED_DIAGNOSTIC"
+        },
+        {
+          "band": "F658N",
+          "diagnosticNoiseElectrons": 32.896414596203044,
+          "diagnosticSnr": 14.708746030486173,
+          "exceedsIndividualThreshold": true,
+          "expectedPositionPx": [
+            499.2268412619362,
+            443.23813885132256
+          ],
+          "obsId": "j8c104j0q",
+          "pixels": 20,
+          "signalElectrons": 483.86500760912895,
+          "state": "MEASURED_DIAGNOSTIC"
+        },
+        {
+          "band": "F660N",
+          "diagnosticNoiseElectrons": 30.333172507823477,
+          "diagnosticSnr": 13.222336827856457,
+          "exceedsIndividualThreshold": true,
+          "expectedPositionPx": [
+            499.1674797251138,
+            442.322480484602
+          ],
+          "obsId": "j8c104j7q",
+          "pixels": 20,
+          "signalElectrons": 401.07542395591736,
+          "state": "MEASURED_DIAGNOSTIC"
+        },
+        {
+          "band": "F660N",
+          "diagnosticNoiseElectrons": 29.549690335359205,
+          "diagnosticSnr": 12.804358143425544,
+          "exceedsIndividualThreshold": true,
+          "expectedPositionPx": [
+            499.17565410952426,
+            442.5102680017454
+          ],
+          "obsId": "j8c104j8q",
+          "pixels": 19,
+          "signalElectrons": 378.3648180812597,
+          "state": "MEASURED_DIAGNOSTIC"
+        }
+      ],
+      "satisfiesRepeatRule": true
+    }
+  }
+}

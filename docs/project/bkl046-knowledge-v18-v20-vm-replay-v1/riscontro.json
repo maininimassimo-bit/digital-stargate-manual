@@ -1,0 +1,100 @@
+{
+  "auditedVersions": 3,
+  "comparisons": [
+    {
+      "after": 19,
+      "before": 18,
+      "changedDecisions": 0,
+      "changedEvidenceRows": [
+        "process:DrizzleIntegration"
+      ],
+      "rows": 4920
+    },
+    {
+      "after": 20,
+      "before": 19,
+      "changedDecisions": 0,
+      "changedEvidenceRows": [],
+      "rows": 4920
+    }
+  ],
+  "historicalProtocolSha256": "9a89900759100897854a2d2a58159c6d09dbb6f6b3043d4f931051af286c33c4",
+  "invalidCaseVariantRejected": true,
+  "knowledgePins": {
+    "18": "41a1c102498eea78600b7d2e573098442371b30244fae97ca3135c3c2e6da191",
+    "19": "d4f81ee2ab83fcdc8977bcae552addb813f342bdd238ceaed28bb2896fc620b0",
+    "20": "f828c44e07aded1fe6f686d44201baa7b0b353e9043de84a5195ba6d238a795a"
+  },
+  "modelTrials": 0,
+  "nativeExecutions": 0,
+  "programSha256": "c82c78e44bea7afc3a336691af2447704937629323bf3bbb2878df84692b08e7",
+  "protocolSha256": "1b00bfef6f5b5331ad7b6faaf589ab521aa4ac6cb050be5f6cba99bd2325dcee",
+  "providerCalls": 0,
+  "queries": 24,
+  "queryFingerprints": [
+    {
+      "request": "process:DrizzleIntegration",
+      "sha256": "f5dbcf71d17882668ec7704702e50804bc90a58c69870495752fddad130423cc",
+      "version": 18
+    },
+    {
+      "request": "process:ImageCalibration",
+      "sha256": "8c50fd91fe8d2940920ec41cda7340a26e893e0f246b2cef9974d22d0fb9932c",
+      "version": 18
+    },
+    {
+      "request": "process:SpectrophotometricColorCalibration",
+      "sha256": "b0758c7d357b5de89a0eae7a0af22d3a6bb1451f571c1f12bbb1f4820b963ff0",
+      "version": 18
+    },
+    {
+      "request": "process:StarAlignment",
+      "sha256": "bf4be8fd7b08ddffdd264dc6bb324a79f45248f3b12d78a037c05842c3b8c7af",
+      "version": 18
+    },
+    {
+      "request": "process:DrizzleIntegration",
+      "sha256": "58873c49377ac10c66282d7c311a17086562c1c469b7f429c4f6536c3960b9e7",
+      "version": 19
+    },
+    {
+      "request": "process:ImageCalibration",
+      "sha256": "8c50fd91fe8d2940920ec41cda7340a26e893e0f246b2cef9974d22d0fb9932c",
+      "version": 19
+    },
+    {
+      "request": "process:SpectrophotometricColorCalibration",
+      "sha256": "b0758c7d357b5de89a0eae7a0af22d3a6bb1451f571c1f12bbb1f4820b963ff0",
+      "version": 19
+    },
+    {
+      "request": "process:StarAlignment",
+      "sha256": "bf4be8fd7b08ddffdd264dc6bb324a79f45248f3b12d78a037c05842c3b8c7af",
+      "version": 19
+    },
+    {
+      "request": "process:DrizzleIntegration",
+      "sha256": "58873c49377ac10c66282d7c311a17086562c1c469b7f429c4f6536c3960b9e7",
+      "version": 20
+    },
+    {
+      "request": "process:ImageCalibration",
+      "sha256": "8c50fd91fe8d2940920ec41cda7340a26e893e0f246b2cef9974d22d0fb9932c",
+      "version": 20
+    },
+    {
+      "request": "process:SpectrophotometricColorCalibration",
+      "sha256": "b0758c7d357b5de89a0eae7a0af22d3a6bb1451f571c1f12bbb1f4820b963ff0",
+      "version": 20
+    },
+    {
+      "request": "process:StarAlignment",
+      "sha256": "bf4be8fd7b08ddffdd264dc6bb324a79f45248f3b12d78a037c05842c3b8c7af",
+      "version": 20
+    }
+  ],
+  "readerSha256": "5ea27f0fde16b840e8c7ffaba95728284ed4e8294cfa5243a44131ebdaa88eea",
+  "repeatOrderChecks": 12,
+  "schema": "BKL046_VERSION_BACKEND_FIXED_READER_VM_REPLAY_V1",
+  "scientificClosures": 0
+}

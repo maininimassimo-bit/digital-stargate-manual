@@ -1,0 +1,548 @@
+{
+  "protocol": "BKL046_KNOWLEDGE_SATURATION_ADDENDUM_V4",
+  "status": "INTERIM",
+  "baselineVersion": "1.171",
+  "previousAddendum": {
+    "commit": "f1854abfa321cf5feaa0c14194369e2303422404",
+    "path": "docs/project/BKL-046-CONOSCENZA-SATURAZIONE-ADDENDUM-v3.json",
+    "sha256": "c16d3b5b7e2f08d0747d7d1ae361bc672c5e439a400f11872afe4822734d50e4",
+    "archiveSha256": "b6b37a592038d253482458d486f57e0e625384dc4e1f833c3518042f5265ea39"
+  },
+  "inheritedResidualLedgerSha256": "a3da1432a46dc69ffb1a16ec3a5fcf13650c99ffbe98f91003b8807af9d7c8f3",
+  "axes": [
+    {
+      "id": "SATURATION_BLEND/1",
+      "title": "Unsaturated, detector-saturated and near-limit cores",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/2",
+      "title": "Close pairs and extended-plus-point overlap",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/3",
+      "title": "Channel-dependent saturation",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/4",
+      "title": "Mask transition and recomposition cases",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "doseResponse",
+      "commit": "7e27bf81d101de702fb546de1239bd1a2c39f730",
+      "files": [
+        {
+          "path": "docs/project/bkl046-cfa-registered-dose-response-v1/protocollo.json",
+          "sha256": "0fa01e48e44db897f7cddc30e8940363ecd1a511a856f9fa2a05c36f8e27289d"
+        },
+        {
+          "path": "docs/project/bkl046-cfa-registered-dose-response-v1/riscontro.json",
+          "sha256": "de1e31b2438dd04cd0a3405bc4016962ff3bd4475b597fdf908f50c75b3d5148"
+        }
+      ],
+      "archiveSha256": "3007c13e6a4b27c55ff8736c9b5bf673df7df1807c4d9e0d49e914d1f6ceba18",
+      "archiveMembers": 4
+    },
+    {
+      "id": "independentExposure",
+      "commit": "ef741453da33f6a9212b1923162cb0cf673697d9",
+      "files": [
+        {
+          "path": "docs/project/bkl046-cfa-heldout-exposure-recovery-v1/protocollo.json",
+          "sha256": "0e8a9185dd04c4e616d7380984011325790bbee017ecf75e315a57090bbc6680"
+        },
+        {
+          "path": "docs/project/bkl046-cfa-heldout-exposure-recovery-v1/riscontro.json",
+          "sha256": "99340c3cff47404694ead0ad571ff84c930b8310122d8bde67d6523f54c7d74a"
+        }
+      ],
+      "archiveSha256": "5eff9f1fea87a7dd717a78d3ea8cd6dd09a857395af6f98818c3de90feef98bc",
+      "archiveMembers": 4
+    },
+    {
+      "id": "cellBoundaries",
+      "commit": "35f745126bc2e6c741028df44fd6e3b7bd1fec8a",
+      "files": [
+        {
+          "path": "docs/project/bkl046-cfa-cell-recovery-boundaries-v1/protocollo.json",
+          "sha256": "10c5b2697e856c52bf6916152f50e37eefa5d580a97ad1b79b772b8e9b4c1550"
+        },
+        {
+          "path": "docs/project/bkl046-cfa-cell-recovery-boundaries-v1/riscontro.json",
+          "sha256": "9e5ef2c058b8ea2fd95e3c99fbbf57b0630d253a02fa83d856c916003142d194"
+        }
+      ],
+      "archiveSha256": "1f658ef8c0b90251a030ee6c9ecc6e38e4c75a8b92da624fb899eb336a569e7a",
+      "archiveMembers": 4
+    },
+    {
+      "id": "afterDemosaic",
+      "commit": "c4b5efeb93e8f93aa5212faefbe616d272306fb9",
+      "files": [
+        {
+          "path": "docs/project/bkl046-cfa-recovery-bilinear-demosaic-v1/protocollo.json",
+          "sha256": "97533f4729634c2db079fb8691e903e974db7c37ceeecc0fb5ca9995469dbe5d"
+        },
+        {
+          "path": "docs/project/bkl046-cfa-recovery-bilinear-demosaic-v1/riscontro.json",
+          "sha256": "d1db57fc19e6d688f2cef39652ccb848c92cf76511b60e32bd3ccac8e99dd69e"
+        }
+      ],
+      "archiveSha256": "bf42ac55d1bf9a5fbf8f9901e930b8e6d600274ccd5938f8d1eaecb21cc7c3ca",
+      "archiveMembers": 4
+    },
+    {
+      "id": "darkControls",
+      "commit": "cc8db8000257286acfd810211fb5dd661075cd6d",
+      "files": [
+        {
+          "path": "docs/project/bkl046-eos6d-dark-fixed-site-control-v1/protocollo.json",
+          "sha256": "803c558d532f7cc8e46e34952e2d93b74b8babb180f9bace3b401fd756df1104"
+        },
+        {
+          "path": "docs/project/bkl046-eos6d-dark-fixed-site-control-v1/riscontro.json",
+          "sha256": "ffdeec2c05f3991bb2e1a4486e8a9a2a4e5cf14d88bbb08a9978a0494046e8b4"
+        }
+      ],
+      "archiveSha256": "31845f7844ce79864306588495403ff7c2bffecbb00a793083abd33cd8938b1e",
+      "archiveMembers": 9
+    }
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0,
+  "completeStudy": false,
+  "findings": {
+    "doseResponse": [
+      {
+        "scene": "1",
+        "seconds": 2,
+        "qualifiedTiles": 11,
+        "aboveFivePercentPredicted": 23352.0,
+        "observedPlateau": 23330.0,
+        "observedAtOrAboveDecoderLimit": 0.0
+      },
+      {
+        "scene": "2",
+        "seconds": 2,
+        "qualifiedTiles": 6,
+        "aboveFivePercentPredicted": 255749.0,
+        "observedPlateau": 255724.0,
+        "observedAtOrAboveDecoderLimit": 255749.0
+      }
+    ],
+    "darkFixedSites": {
+      "matchedDarkFiles": [],
+      "recurrentLightSitesAtWhite": 25.0,
+      "recurrentSitesAlsoAtWhiteInAllDarks": 25.0,
+      "temperatureVerified": false
+    },
+    "recovery": [
+      {
+        "scene": "1",
+        "seconds": 1.0,
+        "registeredRawCells": 1504,
+        "methods": [
+          {
+            "method": "phaseHard",
+            "beforeDemosaic": {
+              "n": 1504,
+              "rOverGP90": 3.6066675212819064,
+              "bOverGP90": 11.188037408158852
+            },
+            "afterBilinear": {
+              "n": 1106,
+              "rOverGP90": 2.6053630784362514,
+              "bOverGP90": 10.824274950441037
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 129,
+              "rOverGP90": 2.426635319929067,
+              "bOverGP90": 9.95816327602121
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 977,
+              "rOverGP90": 2.622904868888405,
+              "bOverGP90": 10.931353723404591
+            },
+            "seamStepLogPercent": {
+              "n": 55,
+              "rOverGP90": 3.1305707065098725,
+              "bOverGP90": 3.1223239961564007
+            }
+          },
+          {
+            "method": "cellHard",
+            "beforeDemosaic": {
+              "n": 1504,
+              "rOverGP90": 2.908049302677187,
+              "bOverGP90": 3.908734550988462
+            },
+            "afterBilinear": {
+              "n": 1106,
+              "rOverGP90": 10.61473514818314,
+              "bOverGP90": 12.795715517635953
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 129,
+              "rOverGP90": 2.76553263691808,
+              "bOverGP90": 3.098578266332803
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 977,
+              "rOverGP90": 11.304009644622857,
+              "bOverGP90": 14.065126107346826
+            },
+            "seamStepLogPercent": {
+              "n": 55,
+              "rOverGP90": 3.8266356424556864,
+              "bOverGP90": 4.827093062231539
+            }
+          },
+          {
+            "method": "cellFade",
+            "beforeDemosaic": {
+              "n": 1504,
+              "rOverGP90": 2.908049302677187,
+              "bOverGP90": 3.908734550988462
+            },
+            "afterBilinear": {
+              "n": 1106,
+              "rOverGP90": 10.61473514818314,
+              "bOverGP90": 12.795715517635953
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 129,
+              "rOverGP90": 2.76553263691808,
+              "bOverGP90": 3.098578266332803
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 977,
+              "rOverGP90": 11.304009644622857,
+              "bOverGP90": 14.065126107346826
+            },
+            "seamStepLogPercent": {
+              "n": 55,
+              "rOverGP90": 3.8266356424556864,
+              "bOverGP90": 5.2051597817831246
+            }
+          }
+        ]
+      },
+      {
+        "scene": "1",
+        "seconds": 2.0,
+        "registeredRawCells": 855,
+        "methods": [
+          {
+            "method": "phaseHard",
+            "beforeDemosaic": {
+              "n": 855,
+              "rOverGP90": 27.301592684945646,
+              "bOverGP90": 20.90493355305586
+            },
+            "afterBilinear": {
+              "n": 342,
+              "rOverGP90": 13.831968490460635,
+              "bOverGP90": 20.340722826358224
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 29,
+              "rOverGP90": 3.644481061842295,
+              "bOverGP90": 20.757876477683105
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 313,
+              "rOverGP90": 16.978349031286978,
+              "bOverGP90": 20.338174199065353
+            },
+            "seamStepLogPercent": {
+              "n": 2,
+              "rOverGP90": 0.9601199899041357,
+              "bOverGP90": 1.1201489444081956
+            }
+          },
+          {
+            "method": "cellHard",
+            "beforeDemosaic": {
+              "n": 855,
+              "rOverGP90": 3.8558079800436817,
+              "bOverGP90": 4.115153101660081
+            },
+            "afterBilinear": {
+              "n": 342,
+              "rOverGP90": 18.135733018483652,
+              "bOverGP90": 24.598225115000744
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 29,
+              "rOverGP90": 3.0539306869399536,
+              "bOverGP90": 3.0915284369440528
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 313,
+              "rOverGP90": 18.63352645745868,
+              "bOverGP90": 25.16543980472425
+            },
+            "seamStepLogPercent": {
+              "n": 2,
+              "rOverGP90": 0.7803540613883275,
+              "bOverGP90": 1.853903588719578
+            }
+          },
+          {
+            "method": "cellFade",
+            "beforeDemosaic": {
+              "n": 855,
+              "rOverGP90": 3.8558079800436817,
+              "bOverGP90": 4.115153101660081
+            },
+            "afterBilinear": {
+              "n": 342,
+              "rOverGP90": 18.135733018483652,
+              "bOverGP90": 24.598225115000744
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 29,
+              "rOverGP90": 3.0539306869399536,
+              "bOverGP90": 3.059028565599357
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 313,
+              "rOverGP90": 18.63352645745868,
+              "bOverGP90": 25.16543980472425
+            },
+            "seamStepLogPercent": {
+              "n": 2,
+              "rOverGP90": 0.825093780514633,
+              "bOverGP90": 1.7071543996770164
+            }
+          }
+        ]
+      },
+      {
+        "scene": "2",
+        "seconds": 1.0,
+        "registeredRawCells": 21964,
+        "methods": [
+          {
+            "method": "phaseHard",
+            "beforeDemosaic": {
+              "n": 21964,
+              "rOverGP90": 9.603041918516302,
+              "bOverGP90": 3.2342831321085463
+            },
+            "afterBilinear": {
+              "n": 38657,
+              "rOverGP90": 9.697899542362098,
+              "bOverGP90": 3.000734758621154
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 12180,
+              "rOverGP90": 9.91659744527529,
+              "bOverGP90": 3.0377181916476084
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 26477,
+              "rOverGP90": 9.566644009245216,
+              "bOverGP90": 2.979184607745336
+            },
+            "seamStepLogPercent": {
+              "n": 238,
+              "rOverGP90": 2.799921487717221,
+              "bOverGP90": 2.0778227241466403
+            }
+          },
+          {
+            "method": "cellHard",
+            "beforeDemosaic": {
+              "n": 21964,
+              "rOverGP90": 3.510427986284356,
+              "bOverGP90": 2.6089604881169657
+            },
+            "afterBilinear": {
+              "n": 38657,
+              "rOverGP90": 8.376210784667842,
+              "bOverGP90": 7.881867502952686
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 12180,
+              "rOverGP90": 3.1606463834108802,
+              "bOverGP90": 2.345596914837027
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 26477,
+              "rOverGP90": 9.707480602615874,
+              "bOverGP90": 8.610375069869164
+            },
+            "seamStepLogPercent": {
+              "n": 238,
+              "rOverGP90": 3.346804683471343,
+              "bOverGP90": 2.8581908527832764
+            }
+          },
+          {
+            "method": "cellFade",
+            "beforeDemosaic": {
+              "n": 21964,
+              "rOverGP90": 3.510427986284356,
+              "bOverGP90": 2.6089604881169657
+            },
+            "afterBilinear": {
+              "n": 38657,
+              "rOverGP90": 8.376210784667842,
+              "bOverGP90": 7.881867502952686
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 12180,
+              "rOverGP90": 3.161300820517286,
+              "bOverGP90": 2.3457676702281742
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 26477,
+              "rOverGP90": 9.707480602615874,
+              "bOverGP90": 8.610375069869164
+            },
+            "seamStepLogPercent": {
+              "n": 238,
+              "rOverGP90": 3.1405727595516035,
+              "bOverGP90": 2.5247513401242503
+            }
+          }
+        ]
+      },
+      {
+        "scene": "2",
+        "seconds": 2.0,
+        "registeredRawCells": 17290,
+        "methods": [
+          {
+            "method": "phaseHard",
+            "beforeDemosaic": {
+              "n": 17290,
+              "rOverGP90": 13.452680110474349,
+              "bOverGP90": 10.045786658174844
+            },
+            "afterBilinear": {
+              "n": 14680,
+              "rOverGP90": 14.251721927829388,
+              "bOverGP90": 9.975074955358554
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 1975,
+              "rOverGP90": 15.632562337036509,
+              "bOverGP90": 9.67171594608392
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 12705,
+              "rOverGP90": 13.977413118779491,
+              "bOverGP90": 10.009875520581195
+            },
+            "seamStepLogPercent": {
+              "n": 21,
+              "rOverGP90": 2.28585177212417,
+              "bOverGP90": 3.8386142006319512
+            }
+          },
+          {
+            "method": "cellHard",
+            "beforeDemosaic": {
+              "n": 17290,
+              "rOverGP90": 3.7751838354555103,
+              "bOverGP90": 3.496312210697198
+            },
+            "afterBilinear": {
+              "n": 14680,
+              "rOverGP90": 17.067842978568674,
+              "bOverGP90": 15.22027232861469
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 1975,
+              "rOverGP90": 3.1465053013075717,
+              "bOverGP90": 2.697567848778027
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 12705,
+              "rOverGP90": 18.684998154717032,
+              "bOverGP90": 16.182435931285646
+            },
+            "seamStepLogPercent": {
+              "n": 21,
+              "rOverGP90": 2.5097787851282027,
+              "bOverGP90": 3.583608741127986
+            }
+          },
+          {
+            "method": "cellFade",
+            "beforeDemosaic": {
+              "n": 17290,
+              "rOverGP90": 3.7751838354555103,
+              "bOverGP90": 3.496312210697198
+            },
+            "afterBilinear": {
+              "n": 14680,
+              "rOverGP90": 17.067842978568674,
+              "bOverGP90": 15.22027232861469
+            },
+            "allCellsInStencilHaveEligibleAnchors": {
+              "n": 1975,
+              "rOverGP90": 3.1465053013075717,
+              "bOverGP90": 2.697567848778027
+            },
+            "someCellsInStencilLackEligibleAnchors": {
+              "n": 12705,
+              "rOverGP90": 18.684998154717032,
+              "bOverGP90": 16.182435931285646
+            },
+            "seamStepLogPercent": {
+              "n": 21,
+              "rOverGP90": 2.4468262042514732,
+              "bOverGP90": 4.052917172708614
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "axis": "SATURATION_BLEND/1",
+      "use": [
+        "doseResponse",
+        "darkControls"
+      ],
+      "decision": "Track decoder threshold, empirical plateau and detector-fixed dark controls as distinct inputs. Reusing a threshold across cameras or across decoder metadata conventions requires fresh verification."
+    },
+    {
+      "axis": "SATURATION_BLEND/3",
+      "use": [
+        "independentExposure",
+        "cellBoundaries",
+        "afterDemosaic"
+      ],
+      "decision": "Evaluate ratios against an exposure withheld from all predictors and do not select a recomposition from CFA ratios alone. Carry short-anchor validity through the demosaic stencil and require a comparison on the same support."
+    },
+    {
+      "axis": "SATURATION_BLEND/4",
+      "use": [
+        "cellBoundaries",
+        "afterDemosaic"
+      ],
+      "decision": "Separate the ratio error inside recovered regions from the error in color steps across their seams. Retain separate results for incomplete neighborhood coverage, adverse outcomes and small denominators."
+    }
+  ],
+  "remaining": [
+    "Independent astronomical brackets with same-field unsaturated references, detector control frames, verified registration and uncertainty.",
+    "Close-pair and point-plus-extended cases with independent references for both components.",
+    "A preregistered rule for masks and neighborhoods and an independent comparison against the actual PixInsight demosaic and recomposition path.",
+    "Native exact-subject review, authentication and admission before any PixInsight launch."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "BKL046_NGC6341_PSF_ZONE_RESAMPLING_V1",
+  "parentReport": "afd102626da62ae986d9d58c5c3f1764b50b2e7111e53b531d6d821d77aaaa82",
+  "seed": 6341046,
+  "replicates": 9999,
+  "quantiles": [
+    0.025,
+    0.5,
+    0.975
+  ],
+  "metrics": [
+    "ownMinusZone",
+    "ownGain",
+    "zoneGain"
+  ],
+  "design": "Keep only stars measured in both directions, retaining exclusion counts. Resample complete 512-pixel zones within each physical detector chip with replacement, using the same draws for the two directions and three metrics. Evaluate descriptive percentile intervals and sensitivity on deletion of each complete zone. These quantify only the archived accepted sample. No independent field sampling, center uncertainty, absolute PSF truth or native validation."
+}

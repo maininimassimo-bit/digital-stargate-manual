@@ -1,0 +1,25 @@
+{
+  "schema": "BKL046_ROMAN_LIN0_CROSS_SESSION_COVARIANCE_V1",
+  "base": "https://archive.stsci.edu/dcl/triplet-tests/fr03/20210831131207_lin0/",
+  "gainCapture": "8948884b38d16ed2f8ba1ed092f4151999542a86d5cf4ef483d63ff9108ad9d0",
+  "gainHelper": "1bdcf3c212ec512b4b77967b375707098e2fb33205f0ae05fe6dae73d901d855",
+  "channelKernel": "23207e128119ee2d45259b9b05197638838f971541cf71166e6c9ec3b6e03988",
+  "bands": {
+    "lower": [
+      512,
+      576
+    ],
+    "upper": [
+      3520,
+      3584
+    ]
+  },
+  "frames": [
+    0,
+    1,
+    5,
+    10
+  ],
+  "minimumSupportBlocks": 769,
+  "design": "Use all 30 LIN0 exposures and the ten existing disjoint GAIN pairs. Pair adjacent LIN0 exposures in published chronological order. Keep the same two row bands, 32 channels, 3x3 masks and half-pixel shift in both axes. Use one rail mask union of both sessions and all tested reads per band and channel. Compare the independent-input baseline, a GAIN-only 10-pair covariance shape, and the LIN0 14-other-pair shape on every held LIN0 pair. Keep nominal GAIN and LIN0 read indices fixed; record timing differences and measured signal. No matching by exact photon dose, no in-flight or native claim."
+}

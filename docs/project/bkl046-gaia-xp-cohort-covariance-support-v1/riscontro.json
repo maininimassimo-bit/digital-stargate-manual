@@ -1,0 +1,215 @@
+{
+  "cases": [
+    {
+      "case": 1,
+      "fixedFormalWindowMinimumEigenvalue": 4.558656213502379e-06,
+      "fixedHistoricalWindowFails": true,
+      "fixedHistoricalWindowMinimumEigenvalue": -0.029396134301423855,
+      "formal": {
+        "allPairCount": 58653,
+        "allPairMinimumEigenvalue": 0.018844233935172205,
+        "case": "formal-conditional",
+        "fullMinimumEigenvalue": -3.72964780312787e-15,
+        "shortestContiguousWindow": null,
+        "triples": {
+          "belowDeterminantScreen": 0,
+          "checked": 6666891,
+          "minimumDeterminant": 1.1754297332799979e-05,
+          "smallestDeterminantWitness": [
+            147,
+            148,
+            149
+          ],
+          "witnessBelowEigenvalueTolerance": false,
+          "witnessMinimumEigenvalue": 5.367827683051276e-05
+        }
+      },
+      "observed": {
+        "allPairCount": 58653,
+        "allPairMinimumEigenvalue": 0.018844233935172094,
+        "case": "historical-lower-triangle",
+        "fullMinimumEigenvalue": -0.1638911163389107,
+        "shortestContiguousWindow": {
+          "minimumEigenvalue": -0.0076608059511745815,
+          "minimumEigenvalueAtWidthBelow": 1.1028733161694714e-09,
+          "startIndex": 150,
+          "width": 6,
+          "widthBelow": 5,
+          "widthsExhaustivelyChecked": [
+            3,
+            4,
+            5,
+            6,
+            11,
+            22,
+            43,
+            86,
+            172
+          ]
+        },
+        "triples": {
+          "belowDeterminantScreen": 0,
+          "checked": 6666891,
+          "minimumDeterminant": 1.175429733235589e-05,
+          "smallestDeterminantWitness": [
+            147,
+            148,
+            149
+          ],
+          "witnessBelowEigenvalueTolerance": false,
+          "witnessMinimumEigenvalue": 5.367827683049498e-05
+        }
+      },
+      "shortestWindowNm": [
+        636.0,
+        646.0
+      ],
+      "shortestWindowOverlapWithHistoricalSamples": 6
+    },
+    {
+      "case": 2,
+      "fixedFormalWindowMinimumEigenvalue": 5.9953167803502815e-06,
+      "fixedHistoricalWindowFails": true,
+      "fixedHistoricalWindowMinimumEigenvalue": -0.02515255675214936,
+      "formal": {
+        "allPairCount": 58653,
+        "allPairMinimumEigenvalue": 0.01847129070656739,
+        "case": "formal-conditional",
+        "fullMinimumEigenvalue": -4.313771426554931e-15,
+        "shortestContiguousWindow": null,
+        "triples": {
+          "belowDeterminantScreen": 0,
+          "checked": 6666891,
+          "minimumDeterminant": 1.2157329072004508e-05,
+          "smallestDeterminantWitness": [
+            147,
+            148,
+            149
+          ],
+          "witnessBelowEigenvalueTolerance": false,
+          "witnessMinimumEigenvalue": 5.652177169846972e-05
+        }
+      },
+      "observed": {
+        "allPairCount": 58653,
+        "allPairMinimumEigenvalue": 0.018471290706567167,
+        "case": "historical-lower-triangle",
+        "fullMinimumEigenvalue": -0.1441522818677454,
+        "shortestContiguousWindow": {
+          "minimumEigenvalue": -0.0020330143225749673,
+          "minimumEigenvalueAtWidthBelow": 1.2511451681569582e-09,
+          "startIndex": 150,
+          "width": 6,
+          "widthBelow": 5,
+          "widthsExhaustivelyChecked": [
+            3,
+            4,
+            5,
+            6,
+            11,
+            22,
+            43,
+            86,
+            172
+          ]
+        },
+        "triples": {
+          "belowDeterminantScreen": 0,
+          "checked": 6666891,
+          "minimumDeterminant": 1.2157329071782463e-05,
+          "smallestDeterminantWitness": [
+            147,
+            148,
+            149
+          ],
+          "witnessBelowEigenvalueTolerance": false,
+          "witnessMinimumEigenvalue": 5.652177169790637e-05
+        }
+      },
+      "shortestWindowNm": [
+        636.0,
+        646.0
+      ],
+      "shortestWindowOverlapWithHistoricalSamples": 6
+    },
+    {
+      "case": 3,
+      "fixedFormalWindowMinimumEigenvalue": 6.156192188828083e-06,
+      "fixedHistoricalWindowFails": true,
+      "fixedHistoricalWindowMinimumEigenvalue": -0.0460628856366246,
+      "formal": {
+        "allPairCount": 58653,
+        "allPairMinimumEigenvalue": 0.01959911658659441,
+        "case": "formal-conditional",
+        "fullMinimumEigenvalue": -4.3666039920373994e-15,
+        "shortestContiguousWindow": null,
+        "triples": {
+          "belowDeterminantScreen": 0,
+          "checked": 6666891,
+          "minimumDeterminant": 1.275489584395828e-05,
+          "smallestDeterminantWitness": [
+            147,
+            148,
+            149
+          ],
+          "witnessBelowEigenvalueTolerance": false,
+          "witnessMinimumEigenvalue": 5.5220674286152185e-05
+        }
+      },
+      "observed": {
+        "allPairCount": 58653,
+        "allPairMinimumEigenvalue": 0.019599116586594856,
+        "case": "historical-lower-triangle",
+        "fullMinimumEigenvalue": -0.2577052406590866,
+        "shortestContiguousWindow": {
+          "minimumEigenvalue": -0.005204789101662132,
+          "minimumEigenvalueAtWidthBelow": 2.8535227575807304e-07,
+          "startIndex": 151,
+          "width": 5,
+          "widthBelow": 4,
+          "widthsExhaustivelyChecked": [
+            3,
+            4,
+            5,
+            6,
+            11,
+            22,
+            43,
+            86,
+            172
+          ]
+        },
+        "triples": {
+          "belowDeterminantScreen": 0,
+          "checked": 6666891,
+          "minimumDeterminant": 1.2754895843403169e-05,
+          "smallestDeterminantWitness": [
+            147,
+            148,
+            149
+          ],
+          "witnessBelowEigenvalueTolerance": false,
+          "witnessMinimumEigenvalue": 5.5220674286665664e-05
+        }
+      },
+      "shortestWindowNm": [
+        638.0,
+        646.0
+      ],
+      "shortestWindowOverlapWithHistoricalSamples": 5
+    }
+  ],
+  "externalCalibrationIndependenceEstablished": false,
+  "fixedFormalWindowFailures": 0,
+  "fixedWindowFailures": 3,
+  "historicalWindowNm": [
+    632.0,
+    646.0
+  ],
+  "nativeExecutions": 0,
+  "newAstrophysicalSources": 0,
+  "protocolSha256": "5689907d721d4ee9b0b2a9bcb19969ef155711a24ac8baa1d227739ffe782754",
+  "sample": "three archived sources distinct from v571, shared catalogue and model",
+  "schema": "BKL046_GAIA_XP_COHORT_SUPPORT_RESULT_V1",
+  "scientificClosures": 0
+}

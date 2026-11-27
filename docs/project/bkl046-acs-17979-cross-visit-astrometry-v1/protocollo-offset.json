@@ -1,0 +1,45 @@
+{
+  "schema": "BKL046_ACS17979_05_02_CROSS_VISIT_OFFSET_SEARCH_V2",
+  "tilePx": 128,
+  "peaksPerTile": 12,
+  "minPeakAboveSkyE": 300,
+  "maxRecordedPeakE": 50000,
+  "neighborIsolationPx": 5,
+  "centroidHalfWidthPx": 2,
+  "edgePx": 24,
+  "mutualDistancePx": 6,
+  "mutualSeparationRatio": 1.6,
+  "fitResidualFloorPx": 0.25,
+  "fitClipMultiplier": 4,
+  "fitIterations": 5,
+  "holdoutPattern": "(2*long_tile_x+long_tile_y) % 4 == 0",
+  "minimumFitPairs": 18,
+  "minimumHoldoutPairs": 12,
+  "minimumHoldoutTiles": 6,
+  "maximumHoldoutP90Px": 0.35,
+  "maximumHoldoutPx": 1.5,
+  "inputs": [
+    {
+      "id": "jfln02qtq",
+      "sha256": "c0784b3257b920ab740fbf94f30602f38285c268d974dd90b3fd6af54ef9e70a"
+    },
+    {
+      "id": "jfln02qzq",
+      "sha256": "fce45ac9f1b8f3b10ae9fa54845c13904e580d59e66614658b3e226557dd63a1"
+    },
+    {
+      "id": "jfln05ykq",
+      "sha256": "dafd5aa1532d05e94e1478cccd50a977c4ee8bffbafe4d4e58d8315aa6e5d22d"
+    },
+    {
+      "id": "jfln05ymq",
+      "sha256": "33ba266eec60c5e091678fc5b855776f4510402f0e2b70a82da9961aeccdbe74"
+    }
+  ],
+  "offsetSearch": {
+    "radiusPx": 80,
+    "binPx": 1,
+    "minimumVotes": 6,
+    "minimumDominance": 1.7
+  }
+}

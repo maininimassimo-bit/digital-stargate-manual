@@ -1,0 +1,140 @@
+{
+  "gainEvents": [],
+  "gainSummary": {
+    "lower": {
+      "channelExposureGroups": 0,
+      "earlyPixels": 110,
+      "persistentPixels": 0,
+      "testedPixelExposures": 2621280
+    },
+    "upper": {
+      "channelExposureGroups": 0,
+      "earlyPixels": 114,
+      "persistentPixels": 0,
+      "testedPixelExposures": 2621160
+    }
+  },
+  "lin0DetectedLocationsEvaluated": [
+    {
+      "band": "upper",
+      "channel": 4,
+      "eligibleInGain": true,
+      "firstReadGainExcessRangeAdu": [
+        -16.0,
+        30.0
+      ],
+      "gainEarly": 0,
+      "gainPersistent": 0,
+      "lin0Detections": 1,
+      "railHitsByRead": {
+        "0": {
+          "full": 0,
+          "zero": 0
+        },
+        "1": {
+          "full": 0,
+          "zero": 0
+        },
+        "10": {
+          "full": 0,
+          "zero": 0
+        },
+        "5": {
+          "full": 0,
+          "zero": 0
+        }
+      },
+      "x": 24,
+      "y": 21
+    },
+    {
+      "band": "upper",
+      "channel": 4,
+      "eligibleInGain": true,
+      "firstReadGainExcessRangeAdu": [
+        -16.0,
+        24.0
+      ],
+      "gainEarly": 0,
+      "gainPersistent": 0,
+      "lin0Detections": 1,
+      "railHitsByRead": {
+        "0": {
+          "full": 0,
+          "zero": 0
+        },
+        "1": {
+          "full": 0,
+          "zero": 0
+        },
+        "10": {
+          "full": 0,
+          "zero": 0
+        },
+        "5": {
+          "full": 0,
+          "zero": 0
+        }
+      },
+      "x": 24,
+      "y": 22
+    },
+    {
+      "band": "upper",
+      "channel": 15,
+      "eligibleInGain": false,
+      "firstReadGainExcessRangeAdu": null,
+      "gainEarly": 0,
+      "gainPersistent": 0,
+      "lin0Detections": 10,
+      "railHitsByRead": {
+        "0": {
+          "full": 20,
+          "zero": 0
+        },
+        "1": {
+          "full": 20,
+          "zero": 0
+        },
+        "10": {
+          "full": 20,
+          "zero": 0
+        },
+        "5": {
+          "full": 20,
+          "zero": 0
+        }
+      },
+      "x": 30,
+      "y": 8
+    }
+  ],
+  "lin0ReferenceExposures": 29,
+  "lin0Summary": {
+    "lower": {
+      "channelExposureGroups": 0,
+      "earlyPixels": 11,
+      "persistentPixels": 0,
+      "testedPixelExposures": 3931950
+    },
+    "upper": {
+      "channelExposureGroups": 11,
+      "earlyPixels": 68,
+      "persistentPixels": 12,
+      "testedPixelExposures": 3931890
+    }
+  },
+  "nativeExecutions": 0,
+  "physicalCauseVerified": false,
+  "protocolSha256": "78883377e3707079c0729ce1c03950fedc097115df89769e4b95596751da9cd0",
+  "referenceExposures": 19,
+  "schema": "BKL046_ROMAN_GAIN_PERSISTENT_STEP_TRANSFER_V1",
+  "scientificClosures": 0,
+  "sourceExposures": 20,
+  "sourceReadIndices": [
+    0,
+    1,
+    5,
+    10
+  ]
+}

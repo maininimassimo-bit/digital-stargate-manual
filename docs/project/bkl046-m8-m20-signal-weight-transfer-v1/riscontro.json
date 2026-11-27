@@ -1,0 +1,164 @@
+{
+  "schema": "BKL046_M8_M20_SIGNAL_WEIGHTED_TRANSFER_V1",
+  "protocolSha256": "7629e457d2a6222e2a8e785361cc04442f0175db905d298e8aa4bc0ec4f058e5",
+  "sourceReportReplayedExactly": true,
+  "trainingTracks": 49,
+  "heldoutTracks": 54,
+  "heldoutPairs": 756,
+  "frames": [
+    {
+      "ordinal": 1,
+      "p90Px": {
+        "unit": 0.30468221808246665,
+        "huber": 0.2968548049040592,
+        "signal": 0.32043925473470186,
+        "signalHuber": 0.31943078131605745
+      }
+    },
+    {
+      "ordinal": 2,
+      "p90Px": {
+        "unit": 0.47499034863859335,
+        "huber": 0.4261942209672673,
+        "signal": 0.42567381608434446,
+        "signalHuber": 0.37479911435676255
+      }
+    },
+    {
+      "ordinal": 3,
+      "p90Px": {
+        "unit": 0.42596454583665844,
+        "huber": 0.42839326168778935,
+        "signal": 0.4419481752426234,
+        "signalHuber": 0.4454235050409742
+      }
+    },
+    {
+      "ordinal": 4,
+      "p90Px": {
+        "unit": 0.34844205376515425,
+        "huber": 0.29557771476722633,
+        "signal": 0.30759023535258795,
+        "signalHuber": 0.31251973057018073
+      }
+    },
+    {
+      "ordinal": 5,
+      "p90Px": {
+        "unit": 0.4034735570932504,
+        "huber": 0.4082022374726376,
+        "signal": 0.419074380479762,
+        "signalHuber": 0.41986388294165183
+      }
+    },
+    {
+      "ordinal": 6,
+      "p90Px": {
+        "unit": 0.44350693279754505,
+        "huber": 0.3328958763438877,
+        "signal": 0.34237539115297483,
+        "signalHuber": 0.33494661058668945
+      }
+    },
+    {
+      "ordinal": 7,
+      "p90Px": {
+        "unit": 0.3987218207824943,
+        "huber": 0.32523005290218826,
+        "signal": 0.32491623615285314,
+        "signalHuber": 0.3293941209391168
+      }
+    },
+    {
+      "ordinal": 8,
+      "p90Px": {
+        "unit": 0.5126914530904,
+        "huber": 0.5054190481197712,
+        "signal": 0.5118365262569969,
+        "signalHuber": 0.5135644432443038
+      }
+    },
+    {
+      "ordinal": 9,
+      "p90Px": {
+        "unit": 0.4330727177932547,
+        "huber": 0.4188468462621058,
+        "signal": 0.4253684912784458,
+        "signalHuber": 0.43196754603786564
+      }
+    },
+    {
+      "ordinal": 10,
+      "p90Px": {
+        "unit": 0.3717843868655449,
+        "huber": 0.3715400064934503,
+        "signal": 0.3670562585587024,
+        "signalHuber": 0.3694647156199366
+      }
+    },
+    {
+      "ordinal": 11,
+      "p90Px": {
+        "unit": 0.37676075923574387,
+        "huber": 0.3748998382685373,
+        "signal": 0.38030540928665757,
+        "signalHuber": 0.3795726734622863
+      }
+    },
+    {
+      "ordinal": 12,
+      "p90Px": {
+        "unit": 0.2536476997525005,
+        "huber": 0.26892829163612164,
+        "signal": 0.2568150129058298,
+        "signalHuber": 0.25961646194961097
+      }
+    },
+    {
+      "ordinal": 13,
+      "p90Px": {
+        "unit": 0.42412124992812006,
+        "huber": 0.41514584714426883,
+        "signal": 0.4272723835092866,
+        "signalHuber": 0.4227191645832066
+      }
+    },
+    {
+      "ordinal": 14,
+      "p90Px": {
+        "unit": 0.3626956248977312,
+        "huber": 0.38136159550711196,
+        "signal": 0.3700183716721103,
+        "signalHuber": 0.37285750733524936
+      }
+    }
+  ],
+  "summary": {
+    "unit": {
+      "pooledP90Px": 0.4140367912316367,
+      "framesAtThreshold": 1,
+      "comparison": "unit",
+      "framesImproved": 0
+    },
+    "huber": {
+      "pooledP90Px": 0.39427314931147206,
+      "framesAtThreshold": 3,
+      "comparison": "unit",
+      "framesImproved": 10
+    },
+    "signal": {
+      "pooledP90Px": 0.38953794191025004,
+      "framesAtThreshold": 1,
+      "comparison": "unit",
+      "framesImproved": 7
+    },
+    "signalHuber": {
+      "pooledP90Px": 0.38637135591309,
+      "framesAtThreshold": 1,
+      "comparison": "huber",
+      "framesImproved": 4
+    }
+  },
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_GD153_HELDOUT_MASK_FLUX_STRESS_PROTOCOL_V1",
+  "cleanArchive": "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+  "cleanReport": "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab",
+  "referenceProtocol": "7636924bce5cb8ab6f2832052565d335bdcc083f90e2597bb40e28316e9ecfaa",
+  "referenceArchive": "53651924f27b876d590395077ea7242f828ab38a72c337d9e680254059d4c19c",
+  "geometryProgram": "3f4bee56aabe287e0bf244602eef23dcc94e554ccfcf875a775583de6863e26f",
+  "geometryReport": "95e85ce200a8e5ae026101a804fe5534d22a6f4cdfd517181eff9990ee0c8306",
+  "geometryArchive": "d1b7ab5ab8e7b421a93c048ace808bda2bf1665ba688c93138e34a8cfd0cbc8c",
+  "referenceRadius": 10,
+  "annulusWidthPx": 1,
+  "replayFluxRelativeTolerance": 1E-10,
+  "maskPolicies": [
+    "nearest",
+    "four"
+  ],
+  "scope": "Apply same filter DQ union from other visits to clean GD153 apertures before fitting any missing values. Compare partial sum, uniform area scaling and annular median using only retained samples. Preserve unsupported rings. Same target and repeated reuse, no native validation.",
+  "maskSources": [
+    {
+      "archive": "448eeeb966d4bda28aa6973f82620c2eeb639799b8beb04b2e86d6366d8e572a",
+      "report": "374cc3f29dd46a55bfe87a4af8e838429b332d91ae6025303a2dd349d3b8c51d",
+      "capture": "d6aa59766915bb5c9534fe9084368f656be80fc804376f8900d7c6bc9c62a5c1"
+    },
+    {
+      "archive": "f719995944bc6a7a8f9438a3b12540c02e5fe3e4abf143dec585f8c2949c973c",
+      "report": "243415bb017ed8540f2250587427f5d48a72a389427a3f40e1497d918a75c7b2",
+      "capture": "e5e51871dcd329d3e2b534fe9019840777e87915ded695379ef10efa4e7487dd"
+    }
+  ]
+}

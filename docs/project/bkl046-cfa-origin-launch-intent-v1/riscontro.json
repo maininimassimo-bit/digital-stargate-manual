@@ -1,0 +1,83 @@
+{
+  "canonicalStateRead": false,
+  "intent": {
+    "batchSha256": "4aa98f614ab6e53c520662659ce91ce1a352b6d78291a20f2dd6cd9e0f0d9b3e",
+    "command": [
+      "C:/Program Files/PixInsight/bin/PixInsight.exe",
+      "-n",
+      "--automation-mode",
+      "--no-startup-scripts",
+      "--no-startup-check-updates",
+      "-r=O:/BKL046-CFA-origine-nativa-v1/348eaf20-c65c-438c-b808-eb1c163f9a31/batch-entry.js"
+    ],
+    "entryPath": "O:/BKL046-CFA-origine-nativa-v1/348eaf20-c65c-438c-b808-eb1c163f9a31/batch-entry.js",
+    "entrySha256": "94767b7da5f7a1ed590ef93131285c276d60feef3e21977e2d14f19f7e41747f",
+    "imageSha256": "76d2339130b58be3d112b66cafc578d9f859d80c96842b2ba2dfbbdcdc8b2943",
+    "nativeExecutionStarted": false,
+    "operation": "BKL046_CFA_XDRZ_ORIGIN_FACTORIAL_001",
+    "outputDirectory": "O:/BKL046-CFA-origine-nativa-v1/348eaf20-c65c-438c-b808-eb1c163f9a31/outputs",
+    "planSha256": "ab70f00fae2063a3693280036b6bfe166afabdc0a24abec43f761192a31d167a",
+    "requirementsBeforeLaunch": [
+      "authenticated ARB and RQ",
+      "protected activation",
+      "live original parent binding",
+      "coordinator admission",
+      "input custody for entire execution"
+    ],
+    "reservation": "348eaf20-c65c-438c-b808-eb1c163f9a31",
+    "runDirectory": "O:/BKL046-CFA-origine-nativa-v1/348eaf20-c65c-438c-b808-eb1c163f9a31",
+    "schema": "BKL046_CFA_ORIGIN_LAUNCH_INTENT_V1",
+    "scope": "PREPARED_COMMAND_NOT_ADMISSION",
+    "selectorSha256": "da446f4272522fd192f6de3dab61fb63b22a0f4f8491772ae4475ca0cb2518dd",
+    "verifiedInputs": {
+      "fits": 6,
+      "xdrz": 12
+    },
+    "verifiedRuntimeFiles": 3
+  },
+  "nativeExecutions": 0,
+  "rejected": [
+    {
+      "accepted": false,
+      "case": "other-operation",
+      "reason": "INTENT_CONTEXT_DIFFERS"
+    },
+    {
+      "accepted": false,
+      "case": "other-batch",
+      "reason": "INTENT_CONTEXT_DIFFERS"
+    },
+    {
+      "accepted": false,
+      "case": "invalid-reservation",
+      "reason": "INVALID_RESERVATION"
+    },
+    {
+      "accepted": false,
+      "case": "CURRENT.json-changed",
+      "reason": "UNEXPECTED_BYTES:CURRENT.json"
+    },
+    {
+      "accepted": false,
+      "case": "batch-origine.js-changed",
+      "reason": "UNEXPECTED_BYTES:batch-origine.js"
+    },
+    {
+      "accepted": false,
+      "case": "ImageIntegration-pxm.dll-changed",
+      "reason": "UNEXPECTED_BYTES:ImageIntegration-pxm.dll"
+    },
+    {
+      "accepted": false,
+      "case": "shear-a-edge05-origin0.5.xdrz-changed",
+      "reason": "UNEXPECTED_BYTES:shear-a-edge05-origin0.5.xdrz"
+    },
+    {
+      "accepted": false,
+      "case": "shear-a-cfa.fits-changed",
+      "reason": "UNEXPECTED_BYTES:shear-a-cfa.fits"
+    }
+  ],
+  "repeatedByteForByte": true,
+  "schema": "BKL046_CFA_ORIGIN_INTENT_OFFLINE_TEST_V1"
+}

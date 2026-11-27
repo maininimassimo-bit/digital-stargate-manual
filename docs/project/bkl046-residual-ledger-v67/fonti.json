@@ -1,0 +1,163 @@
+[
+  {
+    "id": "isolated-worker",
+    "folder": "BKL046-IA-appcontainer-worker-v1",
+    "h": "DSG-Shared-BKL046-IA-appcontainer-worker-ce2a4b04fe51",
+    "commit": "ea267b00d4a8faf28e463bd3d72cb4c84136940a",
+    "path": "docs/project/bkl046-ia-appcontainer-evidence-worker-v1/riscontro.json",
+    "axes": [
+      "VERSION_BACKEND/3"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "historical-queue",
+    "folder": "BKL046-v1146-registro-revisione-v1",
+    "h": "DSG-Shared-BKL046-v1146-registro-revisione-6a6742c4e74a",
+    "commit": "f3650441fe2a3f6a4a16b23a6a6f02b405d9c93a",
+    "path": "docs/project/bkl046-v1146-rights-review-queue-v1/riscontro.json",
+    "axes": [],
+    "kind": "zip"
+  },
+  {
+    "id": "historical-rights-reconciliation",
+    "folder": "BKL046-v1146-riconciliazione-diritti-v1",
+    "h": "DSG-Shared-BKL046-v1146-riconciliazione-diritti-6e9870c87401",
+    "commit": "ac68280b11d7cb76515339ccb69ba4a4c3a464be",
+    "path": "docs/project/bkl046-v1146-prior-rights-reconciliation-v1/riscontro.json",
+    "axes": [],
+    "kind": "zip"
+  },
+  {
+    "id": "gaia-semantics",
+    "folder": "BKL046-v1146-gaia-semantica-v1",
+    "h": "DSG-Shared-BKL046-v1146-gaia-semantica-b0b39cbeff1a",
+    "commit": "a4171f67cce28f0c6eccf1245abe1233d2085255",
+    "path": "docs/project/bkl046-v1146-gaia-semantic-review-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/1",
+      "FILTER_COLOR/2",
+      "FILTER_COLOR/4",
+      "VERSION_BACKEND/3"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "gaia-local-failure",
+    "folder": "BKL046-v571-covarianza-supporto-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-supporto-b8cb01c4a9fb",
+    "commit": "0a4aed81d58d6967880911e3733e6bd57576b877",
+    "path": "docs/project/bkl046-gaia-xp-covariance-support-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/4"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "gaia-cohort-failure",
+    "folder": "BKL046-GaiaXP-supporto-coorte-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-supporto-coorte-4a91399c039f",
+    "commit": "f2d924f87ac54b3616432ad082fc1b6b1d2b23c5",
+    "path": "docs/project/bkl046-gaia-xp-cohort-covariance-support-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/4"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "gaia-mask",
+    "folder": "BKL046-GaiaXP-esclusione-banda-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-esclusione-banda-40307b051630",
+    "commit": "1462cb6740cfb877b404336fb7d641e59497ae63",
+    "path": "docs/project/bkl046-gaia-xp-covariance-window-deletion-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/4"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "acs-masked-flux",
+    "folder": "BKL046-GaiaXP-maschera-flussi-ACS-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-maschera-flussi-ACS-b98c687f482d",
+    "commit": "4e561d14a490d644c024e1f71e8d2e82b169c37d",
+    "path": "docs/project/bkl046-gaia-xp-acs-mask-flux-impact-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/1",
+      "FILTER_COLOR/4"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "acs-sampled-ingress",
+    "folder": "BKL046-GaiaXP-standard-ACS-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-standard-ACS-72309df5ebc9",
+    "commit": "7e5ff127259a37366ba0f5bb218f6edb9a7248c7",
+    "path": "docs/project/bkl046-gaia-xp-calspec-sample-ingress-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/4"
+    ],
+    "kind": "sampled"
+  },
+  {
+    "id": "acs-observed",
+    "folder": "BKL046-GaiaXP-ACS-fotometria-standard-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-ACS-fotometria-standard-66079bd90d9b",
+    "commit": "d0cdb282f93084cdee0835b47d9253e4405df32a",
+    "path": "docs/project/bkl046-gaia-xp-acs-calspec-observed-ratios-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/2",
+      "FILTER_COLOR/3",
+      "FILTER_COLOR/4"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "acs-continuous-ingress",
+    "folder": "BKL046-GaiaXP-continui-standard-ACS-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-continui-standard-ACS-v1",
+    "commit": "336fb7e0932a82873d51a966ea0c7c89ba501976",
+    "path": "docs/project/bkl046-gaia-xp-calspec-continuous-ingress-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/4"
+    ],
+    "kind": "continuous"
+  },
+  {
+    "id": "acs-covariance",
+    "folder": "BKL046-GaiaXP-ACS-covarianza-standard-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-ACS-covarianza-standard-e052587c376f",
+    "commit": "128eb10e87717ed95f69a113a3d1a0ae62ecb272",
+    "path": "docs/project/bkl046-gaia-xp-acs-calspec-ratio-covariance-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/4"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "acs-aperture",
+    "folder": "BKL046-GaiaXP-ACS-apertura-standard-v1",
+    "h": "DSG-Shared-BKL046-GaiaXP-ACS-apertura-standard-5d5a530da843",
+    "commit": "a99616a1ee47121c0bd3b034534ec52bae8401f8",
+    "path": "docs/project/bkl046-gaia-acs-standard-aperture-sensitivity-v1/riscontro.json",
+    "axes": [
+      "FILTER_COLOR/3",
+      "FILTER_COLOR/4"
+    ],
+    "kind": "zip"
+  },
+  {
+    "id": "native-prerequisites",
+    "folder": "BKL046-prerequisiti-nativi-20261126",
+    "h": "DSG-Shared-BKL046-prerequisiti-nativi-87c341909a59",
+    "commit": null,
+    "path": null,
+    "axes": [
+      "NOISE_FLUX/3",
+      "VERSION_BACKEND/1",
+      "VERSION_BACKEND/2",
+      "VERSION_BACKEND/3",
+      "CFA_DITHER_DRIZZLE/4"
+    ],
+    "kind": "native"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "schema": "BKL046_GRW70_COMPLETE_11907_VISIT_DISJOINT_V1",
+  "primaryProtocol": "dc50e15a65edb68b78356a6c85ab818ec689387d81cdb449ce08f4eb12ab963f",
+  "donorHalfBoxPx": 20,
+  "minimumDonorPeakElectrons": 1000,
+  "exclusionAroundPeakPx": 4,
+  "minimumProminenceRatio": 3,
+  "maximumDonorAgreementPx": 1.5,
+  "scope": "Apply unchanged donor rules to all 42 remaining visits. Join with the separate frozen 20-visit batch. Estimate aperture differences only from at least two other visits on the same chip, with the evaluated visit and all 12 exploratory visits excluded from its training. Compare the result with zero correction on exactly the same visits. Report earlier exploratory measurements separately.",
+  "transfer": {
+    "trainingMinimumOtherVisits": 2,
+    "requireSameChip": true,
+    "reportAllIndependentVisits": true,
+    "allowTargetInTraining": false,
+    "priorExploratoryVisit": "ibbsz1",
+    "priorExploratoryReportSha256": "afa982258831b8a0b060581062ff0a28071e9d889a096df715535068dc27f3f6",
+    "firstBatchReportSha256": "9557d5bb438df263f624a95a2bdabac8822dc195080992005cf8812e7e0879d9",
+    "reservedValidation": "Fit only on the first frozen 20-visit batch when the same chip has at least two available visits, then score all eligible reserved visits independently of those fit data."
+  }
+}

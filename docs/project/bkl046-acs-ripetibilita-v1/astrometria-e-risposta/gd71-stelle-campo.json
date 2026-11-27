@@ -1,0 +1,303 @@
+{
+  "schema": "BKL046_GD71_HSC_FIELD_STAR_SUPPORT_V1",
+  "apertureVetoPixels": 20,
+  "thresholdsSigma": [
+    5,
+    8,
+    12
+  ],
+  "positionalRepeatTolerancePixels": 1.5,
+  "visits": [
+    {
+      "visit": "j8c103",
+      "absolutelyCorrectedFlagsZeroFieldReferences": 1,
+      "referencesInBothWcsFootprints": [
+        "40833402"
+      ],
+      "matchedPeaksAcrossExposures": {
+        "5": 2,
+        "8": 1,
+        "12": 1
+      },
+      "exposures": [
+        {
+          "obs": "j8c103uyq",
+          "refs": [
+            {
+              "matchId": "40833402",
+              "pixel": [
+                341.6096839407685,
+                64.15762850460906
+              ]
+            }
+          ],
+          "peaks": {
+            "5": [
+              [
+                6,
+                4
+              ],
+              [
+                206,
+                14
+              ],
+              [
+                356,
+                60
+              ],
+              [
+                162,
+                61
+              ],
+              [
+                387,
+                69
+              ],
+              [
+                493,
+                93
+              ],
+              [
+                105,
+                136
+              ],
+              [
+                338,
+                148
+              ],
+              [
+                40,
+                173
+              ],
+              [
+                369,
+                283
+              ],
+              [
+                372,
+                284
+              ],
+              [
+                155,
+                365
+              ],
+              [
+                105,
+                367
+              ],
+              [
+                237,
+                379
+              ],
+              [
+                495,
+                453
+              ],
+              [
+                394,
+                454
+              ],
+              [
+                468,
+                481
+              ]
+            ],
+            "8": [
+              [
+                387,
+                69
+              ],
+              [
+                40,
+                173
+              ],
+              [
+                495,
+                453
+              ]
+            ],
+            "12": [
+              [
+                387,
+                69
+              ]
+            ]
+          }
+        },
+        {
+          "obs": "j8c103uzq",
+          "refs": [
+            {
+              "matchId": "40833402",
+              "pixel": [
+                341.6097981667323,
+                64.15737140672806
+              ]
+            }
+          ],
+          "peaks": {
+            "5": [
+              [
+                387,
+                69
+              ],
+              [
+                369,
+                109
+              ],
+              [
+                338,
+                148
+              ],
+              [
+                122,
+                154
+              ],
+              [
+                97,
+                155
+              ],
+              [
+                26,
+                178
+              ],
+              [
+                254,
+                231
+              ],
+              [
+                494,
+                234
+              ],
+              [
+                60,
+                295
+              ],
+              [
+                333,
+                302
+              ],
+              [
+                332,
+                305
+              ],
+              [
+                91,
+                438
+              ],
+              [
+                225,
+                452
+              ],
+              [
+                252,
+                494
+              ]
+            ],
+            "8": [
+              [
+                387,
+                69
+              ]
+            ],
+            "12": [
+              [
+                387,
+                69
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "visit": "j8c104",
+      "absolutelyCorrectedFlagsZeroFieldReferences": 0,
+      "referencesInBothWcsFootprints": [],
+      "matchedPeaksAcrossExposures": {
+        "5": 1,
+        "8": 1,
+        "12": 0
+      },
+      "exposures": [
+        {
+          "obs": "j8c104ivq",
+          "refs": [],
+          "peaks": {
+            "5": [
+              [
+                365,
+                199
+              ],
+              [
+                3,
+                288
+              ],
+              [
+                132,
+                288
+              ],
+              [
+                332,
+                372
+              ],
+              [
+                3,
+                415
+              ],
+              [
+                499,
+                443
+              ]
+            ],
+            "8": [
+              [
+                499,
+                443
+              ]
+            ],
+            "12": []
+          }
+        },
+        {
+          "obs": "j8c104iwq",
+          "refs": [],
+          "peaks": {
+            "5": [
+              [
+                216,
+                12
+              ],
+              [
+                359,
+                215
+              ],
+              [
+                362,
+                217
+              ],
+              [
+                142,
+                353
+              ],
+              [
+                499,
+                442
+              ]
+            ],
+            "8": [
+              [
+                499,
+                442
+              ]
+            ],
+            "12": []
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Candidate screen using nominal footprints and repeatability; no astrometric fit",
+  "sourceIdentityPromoted": false,
+  "scientificClosures": 0
+}

@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "case": "valid",
+      "ready": true,
+      "reason": null
+    },
+    {
+      "case": "foreign-marker",
+      "ready": false,
+      "reason": "BATCH_MARKER_CONTEXT_DIFFERS"
+    },
+    {
+      "case": "missing-marker",
+      "ready": false,
+      "reason": "ORIGIN_BATCH_OR_WINDOW_NOT_READY"
+    },
+    {
+      "case": "original-exited",
+      "ready": false,
+      "reason": "ORIGINAL_EXITED_BEFORE_READY"
+    },
+    {
+      "case": "inputs-lost",
+      "ready": false,
+      "reason": "INPUT_CUSTODY_LOST"
+    }
+  ],
+  "coordinatorStateAccessed": false,
+  "inputLossSimulated": true,
+  "originalProcessHandleUsed": true,
+  "originalWindowObserved": true,
+  "pixInsightLaunched": false,
+  "schema": "BKL046_CFA_ORIGIN_READY_WITNESS_OFFLINE_V1",
+  "scientificClosures": 0
+}

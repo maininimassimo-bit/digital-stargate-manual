@@ -1,0 +1,23 @@
+{
+  "schema": "BKL046_ASI2600MC_CALIBRATOR_COVARIANCE_PROTOCOL_V1",
+  "calibrationReceiptSha256": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+  "archivePins": {
+    "dark": "672cbb8862eea071310e92a49744f4058c6af1fc4313464ec1a141b09bdb1483",
+    "flat": "a01bb46b1b0e82658f41f783e0f45da9b1a202b818cb1bccb4e7ff2eba1ba8ca",
+    "shortDark": "66b9e0db9eb4491425ab6d97eb7d25af2041b5c7f621a33e313a84b06206c0ce"
+  },
+  "positionsX": [
+    768,
+    3124,
+    5480
+  ],
+  "positionsY": [
+    608,
+    2088,
+    3552
+  ],
+  "tilePixels": 128,
+  "rejectAtOrAbove": 62000,
+  "minimumCompleteBlockFraction": 0.9,
+  "design": "Use seven adjacent disjoint chronological pairs per series, leaving exposure 15 unobserved. Read the nine exact raw tiles from the prior calibrator design. Separate R/G1/G2/B before taking (B-A)/sqrt(2), retain complete disjoint 2x2 blocks on each parity lattice. For the same centered block variables compare actual variance of sum with the diagonal sum of variances; also retain physical lag checks at two native pixels. Compare one-level flat-minus-Bias variance excess per mean ADU as conditional descriptor only. Use the 3-second Bias only as matched-duration dark. Do not infer detector gain, dose linearity, independence of paired spatial tiles, or native processing behavior."
+}

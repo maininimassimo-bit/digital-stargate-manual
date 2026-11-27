@@ -1,0 +1,43 @@
+--- a/tools/pixinsight/local_pilot/research_provider.py
++++ b/tools/pixinsight/local_pilot/research_provider.py
+@@ -7,6 +7,9 @@
+ from .image_previews import provider_image
+ from .research_knowledge import instructions
+ from . import research_contract as contract
++
++
++MAX_DECISION_TEXT_CHARACTERS = 300
+ 
+ 
+ def failure_evidence(error, response):
+@@ -70,7 +73,7 @@
+                'For TEST set parentId to selectedId and checkpointId to null; the server assigns the new checkpoint ID. '
+                'For SELECT use an admitted verified checkpointId and step null. '
+                'For STOP and FINISH use checkpointId null and step null. '
+-               'Keep rationale and limitations each within 300 Unicode characters. '
++               f'Keep rationale and limitations each within {MAX_DECISION_TEXT_CHARACTERS} Unicode characters. '
+                'SELECT advances the stage and may omit only optional stages. '
+                'Use supplied native evidence and common-display previews; do not assert missing '
+                'paired fits, photometric validity or scientific acceptance. '
+@@ -101,7 +104,12 @@
+                         'RESEARCH_PROVIDER_TOOL')
+                 calls.append(item)
+         require(len(calls) == 1, 'RESEARCH_PROVIDER_SINGLE_TOOL')
++        call_id = calls[0].get('call_id')
++        require(isinstance(call_id, str) and re.fullmatch('[A-Za-z0-9_-]{1,64}', call_id),
++                'RESEARCH_PROVIDER_TOOL')
+         decision = contract.decide(decode(calls[0]['arguments']), state)
++        require(all(len(decision[key]) <= MAX_DECISION_TEXT_CHARACTERS
++                    for key in ('rationale', 'limitations')), 'RESEARCH_DECISION_TEXT_LIMIT')
+         usage = response.get('usage')
+         require(isinstance(usage, dict) and all(type(usage.get(k)) is int and usage[k] >= 0 for k in
+                 ('input_tokens', 'output_tokens', 'total_tokens')) and
+@@ -110,7 +118,7 @@
+         require(isinstance(actual_model, str) and re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]{1,119}', actual_model),
+                 'RESEARCH_PROVIDER_MODEL')
+         return {'decision': decision, 'provider': {'responseId': response['id'], 'model': actual_model,
+-                'requestedModel': provider.model, 'knowledgeSha256': digest,
++                'requestedModel': provider.model, 'knowledgeSha256': digest, 'callIdSha256': sha(call_id),
+                 'usage': {k: usage[k] for k in ('input_tokens', 'output_tokens', 'total_tokens')}}}
+     except Exception as error:
+         if record_failure is not None:

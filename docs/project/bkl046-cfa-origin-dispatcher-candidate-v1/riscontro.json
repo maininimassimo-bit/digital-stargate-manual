@@ -1,0 +1,26 @@
+{
+  "schema": "BKL046_CFA_ORIGIN_DISPATCHER_R4_SCRATCH_V1",
+  "tests": [
+    {
+      "mode": "valid",
+      "releases": 1,
+      "retained": false
+    },
+    {
+      "mode": "bad-log",
+      "releases": 0,
+      "retained": true
+    },
+    {
+      "mode": "archive-collision",
+      "releases": 0,
+      "retained": true
+    }
+  ],
+  "witnessWindows": true,
+  "actualComparator": true,
+  "installedR4Code": true,
+  "isolatedRegistry": true,
+  "fixturesNotNative": true,
+  "nativeExecutions": 0
+}

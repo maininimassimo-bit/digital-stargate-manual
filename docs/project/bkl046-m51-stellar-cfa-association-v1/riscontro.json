@@ -1,0 +1,77 @@
+{
+  "schema": "BKL046_M51_RAW_STAR_ASSOCIATION_PROTOCOL_V1",
+  "protocolSha256": "58b7f521ad2a77f7a1c63968fbc85dc2da44cc043a34d4f239920724c2cb1489",
+  "records": [
+    {
+      "sha256": "33057a51122668ad3b3cbb5f1714046e95b5151b3c2f44904d4b45804b2b6a52",
+      "priorOutcome": "INSUFFICIENT_LOCAL_EVIDENCE",
+      "stellar": {
+        "status": "CONDITIONAL_HELDOUT_COMPARISON",
+        "detectedReference": 562,
+        "detectedTarget": 590,
+        "trainingMatches": 132,
+        "heldoutMatches": 122,
+        "heldoutZones": 14,
+        "similarityAngleDegrees": 0.15970712901754064,
+        "similarityScale": 0.9999343369694859,
+        "centralShiftNativeXY": [
+          414.96625891853654,
+          -153.56996170847117
+        ],
+        "metrics": {
+          "translation": {
+            "medianNativePx": 4.4871587421272325,
+            "p90NativePx": 6.700764197138058
+          },
+          "similarity": {
+            "medianNativePx": 0.3002766257968804,
+            "p90NativePx": 0.5936637065018552
+          },
+          "affine": {
+            "medianNativePx": 0.30309049448563485,
+            "p90NativePx": 0.6089420369362462
+          }
+        },
+        "globalTranslationWithinTolerance": false
+      }
+    },
+    {
+      "sha256": "cbbe4f2816fbcd26acb1d45bbff0d91a3c0d08e96197cd267acb37d93649d7c3",
+      "priorOutcome": "ORIENTATION_OR_COARSE_SHIFT_UNRESOLVED",
+      "stellar": {
+        "status": "CONDITIONAL_HELDOUT_COMPARISON",
+        "detectedReference": 562,
+        "detectedTarget": 580,
+        "trainingMatches": 121,
+        "heldoutMatches": 114,
+        "heldoutZones": 13,
+        "similarityAngleDegrees": 0.34601057143722247,
+        "similarityScale": 0.9999619454280918,
+        "centralShiftNativeXY": [
+          766.6347549673018,
+          -159.5863349134083
+        ],
+        "metrics": {
+          "translation": {
+            "medianNativePx": 9.080182078903846,
+            "p90NativePx": 13.765177550396471
+          },
+          "similarity": {
+            "medianNativePx": 0.3691876628259084,
+            "p90NativePx": 0.7814879004146219
+          },
+          "affine": {
+            "medianNativePx": 0.3739252617600185,
+            "p90NativePx": 0.8262361901099855
+          }
+        },
+        "globalTranslationWithinTolerance": false
+      }
+    }
+  ],
+  "syntheticRotationRecovered": true,
+  "independentAstrometricCatalogUsed": false,
+  "deliberateDitherProven": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

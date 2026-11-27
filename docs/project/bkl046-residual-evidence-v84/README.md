@@ -1,0 +1,11 @@
+# BKL-046 · Rendiconto v84 e supplemento alla conoscenza v1.171
+
+Il rendiconto aggiunge nove studi GD153 agli assi FILTER_COLOR/3 e FILTER_COLOR/4 e rende verificabili tre riscontri operativi. Per ciascuno dei dodici rapporti, i byte pubblicati al commit d'origine coincidono con le copie archiviate su H: e sul volume O: ospitato da K:.
+
+- **Correzione fra aperture.** Le quattro terne valide provengono da due visite. Lasciandone fuori una, il supporto è insufficiente per una correzione empirica trasferibile. Le ulteriori 48 pose FLC esaminate non aggiungono una visita ammessa. La verifica conserva tutti i rifiuti.
+- **Copertura e colore.** Con quattro pixel di supporto nessuna visita copre l'intera apertura nelle tre bande a tutte le fasi. Nella prova con maschere indotte, il nucleo integro conserva 16 casi su 28 con quella regola. La mediana per anello resta entro 10 millimagnitudini in tutti e tre i colori dei 16 casi. I risultati riusano pose e maschere della stessa stella.
+- **Lacune osservate.** Delle quattro pose respinte per DQ al nucleo, due hanno un confronto integro nella stessa visita. In F438W differiscono di 43,82 millimagnitudini al centro nominale. La stessa maschera proiettata sulla posa integra della stessa visita produce 15,06–24,01 millimagnitudini con quattro pixel di supporto, secondo la fase. Su altre visite l'effetto è più variabile. Rimangono aperti il contributo causale dei pixel mancanti, il colore delle terne realmente danneggiate e l'incertezza su stelle indipendenti.
+
+I cinque percorsi nativi conservano i prerequisiti verificati nel riscontro operativo. Il collaudo della rilettura di release copre 81 asset attesi. La ricostruzione offline del corpus v600 verifica 10.180 oggetti e 11.839 alias. Entrambe le verifiche precedono il trasferimento integrale. Il supplemento non modifica la baseline intermedia v1.171.
+
+Il rendiconto conserva 4.920 requisiti e 14.521 criteri, con sette famiglie, 25 assi e 19 criteri Owner aperti. Nessuna nuova chiusura scientifica, ammissione o esecuzione nativa.

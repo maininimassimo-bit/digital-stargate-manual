@@ -1,0 +1,7 @@
+# ACS GO-11677. Geometria del run AstroDrizzle
+
+La verifica usa i sei FLC in F606W del manifest precedente. Per ogni FLC e per entrambi i chip ACS/WFC verifica SIP di ordine cinque e i puntatori agli array incorporati. Le 24 tabelle D2IMARR coincidono byte per byte con il D2IMFILE per asse e chip. Le 24 WCSDVARR coincidono byte per byte con il NPOLFILE dopo la trasformazione in coordinate SIP di STWCS 1.7.7, ricostruita con i coefficienti di primo ordine e IDCSCALE di ciascuna testata SCI. I nomi CRDS nei FLC sono stati confrontati con i cinque riferimenti archiviati. DGEOFILE è conservato come riferimento di testata e non è stato usato nella verifica delle due famiglie di tabelle.
+
+Nel trailer MAST, il run FLC di AstroDrizzle 3.11.0 inizia alla riga 8156 e alla riga 8187 registra `updatewcs=False`. Per la replica si conserva il WCS in ciascuna copia di lavoro e si lascia `updatewcs=False`, con `wcskey` vuoto come nel trailer. Il controllo verifica il legame fra riferimenti, testate e tabelle incorporate. Non rigenera l'intera soluzione WCS, non misura l'accuratezza astrometrica e non esegue AstroDrizzle.
+
+[Documentazione STScI sul riuso dei riferimenti CRDS](https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-3-calibration-reference-data) · [Trasformazione NPOL di STWCS](https://stwcs.readthedocs.io/en/latest/fits_convention_tsr/source/updating.html) · [STWCS 1.7.7](https://pypi.org/project/stwcs/1.7.7/)

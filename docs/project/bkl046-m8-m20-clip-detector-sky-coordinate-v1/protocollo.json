@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_M8M20_CLIP_COORDINATE_COMPARISON_PROTOCOL_V1",
+  "lightArchive": "daa8ba4ee748f7616f3db0371b60d95752ff98d00ceaef280fe8f6e8ab937c76",
+  "lightReceipt": "28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59",
+  "darkArchive": "672cbb8862eea071310e92a49744f4058c6af1fc4313464ec1a141b09bdb1483",
+  "darkReceipt": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+  "geometry": "27c44847806551fc00e65331d8b05d14f5221dbd5aed0fee6c6cdfcc244178e3",
+  "prior": "d5fb7af1474542732ff422eb5e2f39902a539eb7906ba0796a47c851b2d5f5a3",
+  "radii": [
+    1,
+    1.5,
+    2
+  ],
+  "margin": 12,
+  "scope": "All 105 unordered pairs among the 15 exposures. Match only clipped sites of the same CFA parity, in both directions. Euclidean nearest-neighbor coverage compares raw detector centers to centers projected with the inverse of two pinned reference-to-input affine estimates. Both denominators are carried together and only sites inside the common interior across models are used. The previously confirmed dark-ceiling site is removed. Match reuse is allowed; same field, overlapping footprints, no inference of event independence or cause."
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "BKL046_CAMPAIGN_KNOWLEDGE_METHODS_ADDENDUM_V1",
+  "baselineKnowledgeSha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d",
+  "previousLocatorSha256": "a82d2073c7055d3ebe90aa4122a9073b23a435a3e8a510a8f9cf223d234e6ba0",
+  "evidenceIndexSha256": "854ad5e68d3474e9682ae400193b530de5e0da8fdd34b12ccafb470367d7a2c9",
+  "decisionNotesSha256": "ef0bfd714c131d70532e88a7a51118b0061e36776017153503a9ab5e8913798e",
+  "methods": [
+    {
+      "topic": "pixel_integral",
+      "axes": [
+        "PSF_PIXEL/1",
+        "PSF_PIXEL/2"
+      ],
+      "evidence": [
+        "moffat-storico",
+        "moffat-stretto"
+      ],
+      "decision": "Audit peak-pixel and field-sum convergence independently",
+      "limitations": [
+        "analytic profiles",
+        "no bound for arbitrary instrumental PSFs"
+      ]
+    },
+    {
+      "topic": "centering_and_flux",
+      "axes": [
+        "PSF_PIXEL/2"
+      ],
+      "evidence": [
+        "moffat-fisher",
+        "moffat-discriminazione"
+      ],
+      "decision": "Report both directional uncertainties and do not infer centering precision from photometry",
+      "limitations": [
+        "ideal Poisson detector",
+        "known model shape",
+        "fixed binary hypotheses in displacement test"
+      ]
+    },
+    {
+      "topic": "interval_and_sample_size",
+      "axes": [],
+      "evidence": [
+        "intervalli-per-campo",
+        "bootstrap-per-campo"
+      ],
+      "decision": "Use the independent field as the inference unit when there is a shared field effect",
+      "limits": [
+        "development partition only",
+        "no calibration or verification thresholds chosen"
+      ]
+    },
+    {
+      "topic": "resampling_and_detector_covariance",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "evidence": [
+        "covarianza-flat",
+        "covarianza-dark-bias"
+      ],
+      "decision": "Keep interpolation covariance and evaluate detector covariance transfer on its target acquisition",
+      "limitations": [
+        "single illuminated dose",
+        "one detector",
+        "no native operator test"
+      ]
+    }
+  ],
+  "scientificClosures": 0,
+  "canonicalKnowledgeUpdated": false,
+  "completeStudy": false
+}

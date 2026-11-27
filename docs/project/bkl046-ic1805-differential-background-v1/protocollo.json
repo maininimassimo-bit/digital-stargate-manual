@@ -1,0 +1,39 @@
+{
+  "schema": "BKL046_IC1805_DIFFERENTIAL_PROTOCOL_V1",
+  "captureZip": "4a0c4142d8d0e7b056ec9b46046eec78fe6fc149aabf3c028923f81d6851f0a0",
+  "captureReceipt": "582a3adcdeb5509b4c4e9434b252726cf0473c86fdd6da272a69aa4358bc705f",
+  "stellarReceipt": "eb36f255976fbef04ea8dd3acc20201153f20bec4dff1b3fe80c723e8d7768ae",
+  "indices": [
+    0,
+    1,
+    9,
+    19,
+    29,
+    38
+  ],
+  "maximumRegistrationP90NativePx": 1,
+  "origin": [
+    256,
+    240
+  ],
+  "shape": [
+    1024,
+    768
+  ],
+  "cell": 64,
+  "rawRejectAtOrAbove": 15700,
+  "photoScale": 1,
+  "models": [
+    1,
+    3,
+    6
+  ],
+  "maeImprovementMinimumPercent": 10,
+  "p90MustNotIncrease": true,
+  "injectADU": [
+    1,
+    4
+  ],
+  "signalTolerance": 0.05,
+  "design": "Reference grid in binned x,y. Mean of the two CFA greens; use interpolation only where all four binned donors are valid. Cell medians require 90% valid common support. Train on even spatial checkerboard; measure median and P90 absolute errors of the odd cell medians. Paired common and target-only broad Gaussian injections are added after alignment, on the comparison grid. No multiplicative fit or calibration. Equal injection measures method invariance, while absolute sky and upstream response are outside scope."
+}

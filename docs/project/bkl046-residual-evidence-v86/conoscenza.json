@@ -1,0 +1,911 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_V86",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "a7749273a2c38f5a40033811be173f997fdbe14fb45cdc52ac4399075de6ea57",
+    "commit": "b802d5bbd2c326f53832e5a10c52971b3dddb6c7"
+  },
+  "sourceIndex": {
+    "sha256": "4c123b394c29ac869c24440077614949e0624ce87b7a5b70bf930acd581f92ef",
+    "commit": "019db5457acc35d2cc6448a91ff744a80cd57354"
+  },
+  "evidence": [
+    {
+      "id": "grw70Epoch",
+      "level": "temporalMatching",
+      "axes": [
+        "FILTER_COLOR/3"
+      ],
+      "commit": "b1d7bd9a85026e8b6ac0fe43cb4e7039f19e8fa7",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-grw70-temporal-cross-chip-matching-v1/riscontro.json",
+          "sha256": "ead637b7670dc9ecfe2c5bdef26971c044917174e70ca0f8346febcc3d6b9ae7",
+          "archiveSha256": "bda5525d51802268e51225f0066b068fcf4ecbe5e3c07bcaa05b0817e064c884",
+          "archiveName": "BKL046-WFC3-GRW70-chip-epoche-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "grw70Epoch-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "officialEE",
+      "level": "tabulatedApertureCorrection",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "ead27f76a1e415e1f680c45ce5a7896853267fdb",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-wfc3-official-ee-aperture-transfer-v1/riscontro.json",
+          "sha256": "df7aa881ad2f417fa95630b5779fe9d4747bf028d576b5cf815b89498ecf9f8b",
+          "archiveSha256": "65b6d5253cb9f0a5fb3e0e80ff18b34a8b568ad70e23d97c685d276f96baff90",
+          "archiveName": "BKL046-WFC3-EE-ufficiale-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "officialEE-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "clusterEE",
+      "level": "independentFieldComparison",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "6fae806f89ddcc42e3af4878666e0526facc7740",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-wfc3-external-field-ee-v1/riscontro.json",
+          "sha256": "7b0ff956b68368f400cc3452208a7944edbf9d6ba101c71fb3783579057d4afe",
+          "archiveSha256": "e53e4b2c715f81eaf5a865f6ae9e263461ab610cd3c554efad2d3949ce2e6847",
+          "archiveName": "BKL046-WFC3-EE-ammassi-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "clusterEE-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "clusterRegistration",
+      "level": "relativeRegistrationSensitivity",
+      "axes": [
+        "FILTER_COLOR/4"
+      ],
+      "commit": "2bd802ccd3285b40970bd67f46ade1dccfea9ab7",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-wfc3-47tuc-registration-control-v1/riscontro.json",
+          "sha256": "50ed7f161f8f4b837fe8e8b04f7596d5a978630432efa24ee932ddc4dddc98dc",
+          "archiveSha256": "6bcdfc3bddd61e3bff303326725ab42b0388475fa3189d5ee557df1d58e17378",
+          "archiveName": "BKL046-WFC3-47Tuc-registrazione-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "clusterRegistration-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "clusterSky",
+      "level": "skyEstimatorSensitivity",
+      "axes": [
+        "FILTER_COLOR/4"
+      ],
+      "commit": "b2eed111d25b2e69f8ac4a1dd6702c8cb0001a08",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-wfc3-47tuc-background-sensitivity-v1/riscontro.json",
+          "sha256": "2b5d3617d970a9b70d950e218ebcb95541b7235e5910b4e7d584f3782133981a",
+          "archiveSha256": "37ff956f21014e511bedfbf8b5b139f51ee284d655f47e17236fc3c5f9d74308",
+          "archiveName": "BKL046-WFC3-47Tuc-fondo-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "clusterSky-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "p177p041Availability",
+      "level": "publicProductAvailability",
+      "axes": [
+        "FILTER_COLOR/3"
+      ],
+      "commit": "019db5457acc35d2cc6448a91ff744a80cd57354",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-wfc3-p177d-p041c-flc-screen-v1/riscontro.json",
+          "sha256": "f46ab65bab0ef94c129d5c871e4c8dd1a2bf8c4ebff17af1e9dc67a4f3ff62a1",
+          "archiveSha256": "c6f25d31b3fb40fa86b3b6401f116ba91064b8257b206962a4cf566f89ceaae1",
+          "archiveName": "BKL046-WFC3-P177D-P041C-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "p177p041Availability-riscontro.json"
+        },
+        {
+          "path": "docs/project/bkl046-wfc3-p177d-p041c-flc-screen-v1/riscontro-endpoint.json",
+          "sha256": "c8e1156de22038b71042eca0a01dae3e2492f8fe9e70aba4d76206faf9eb759e",
+          "archiveSha256": "c6f25d31b3fb40fa86b3b6401f116ba91064b8257b206962a4cf566f89ceaae1",
+          "archiveName": "BKL046-WFC3-P177D-P041C-v1.zip",
+          "archiveMember": "riscontro-endpoint.json",
+          "copiedReport": "p177p041Availability-riscontro-endpoint.json"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "findings": {
+    "temporalMatching": [
+      {
+        "coverage": "metadata",
+        "windowDays": 0.05,
+        "pairs": 14,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "metadata",
+        "windowDays": 1,
+        "pairs": 21,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "metadata",
+        "windowDays": 7,
+        "pairs": 24,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "r5",
+        "windowDays": 0.05,
+        "pairs": 2,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "r5",
+        "windowDays": 1,
+        "pairs": 4,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "r5",
+        "windowDays": 7,
+        "pairs": 8,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "both",
+        "windowDays": 0.05,
+        "pairs": 0,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "both",
+        "windowDays": 1,
+        "pairs": 0,
+        "apertureGrowthSummary": {}
+      },
+      {
+        "coverage": "both",
+        "windowDays": 7,
+        "pairs": 1,
+        "apertureGrowthSummary": {
+          "F438W-F606W": {
+            "maximum": 5.39551407086924,
+            "median": 5.39551407086924,
+            "minimum": 5.39551407086924
+          },
+          "F438W-F814W": {
+            "maximum": 15.624788367545989,
+            "median": 15.624788367545989,
+            "minimum": 15.624788367545989
+          },
+          "F606W-F814W": {
+            "maximum": 10.229274296676522,
+            "median": 10.229274296676522,
+            "minimum": 10.229274296676522
+          }
+        }
+      }
+    ],
+    "officialTableComparison": [
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 1.5266964280854154,
+            "medianAbsolute": 1.313608809541165
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 10.11104995273945,
+            "medianAbsolute": 5.741831769326382
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 11.63774638082532,
+            "medianAbsolute": 7.05544057886766
+          }
+        },
+        "method": "zero",
+        "star": "GD153",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 0.7451261832488519,
+            "medianAbsolute": 0.5320385647046016
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 8.869621253131694,
+            "medianAbsolute": 4.500403069718626
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 9.61474743638114,
+            "medianAbsolute": 5.032441634423481
+          }
+        },
+        "method": "physicalChip",
+        "star": "GD153",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 4.940784194821677,
+            "medianAbsolute": 4.727696576277427
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 42.472172627304744,
+            "medianAbsolute": 38.102954443891676
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 37.957563669572195,
+            "medianAbsolute": 33.375257867614536
+          }
+        },
+        "method": "allUVIS2",
+        "star": "GD153",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 1.7482171392842896,
+            "medianAbsolute": 1.5351295207400393
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 4.954720496980854,
+            "medianAbsolute": 4.369218183413068
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 6.702937636265984,
+            "medianAbsolute": 4.582305801957659
+          }
+        },
+        "method": "perRadiusSTScI",
+        "star": "GD153",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 0.7451261832488519,
+            "medianAbsolute": 0.5320385647046016
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 8.869621253131694,
+            "medianAbsolute": 4.500403069718626
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 9.61474743638114,
+            "medianAbsolute": 5.032441634423481
+          }
+        },
+        "method": "consistentCornerTable",
+        "star": "GD153",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 4.600703612979032,
+            "medianAbsolute": 3.2149135477947652
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 7.735339366052358,
+            "medianAbsolute": 4.770858896309164
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 5.906215883441746,
+            "medianAbsolute": 4.35027053492729
+          }
+        },
+        "method": "zero",
+        "star": "GRW70",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 3.819133368142469,
+            "medianAbsolute": 3.2149135477947652
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 6.493910666444601,
+            "medianAbsolute": 4.770858896309164
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 3.8832169389975664,
+            "medianAbsolute": 2.3272715904831105
+          }
+        },
+        "method": "physicalChip",
+        "star": "GRW70",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 7.87042886842909,
+            "medianAbsolute": 4.655515320634325
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 40.09646204061765,
+            "medianAbsolute": 35.32560314430849
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 32.22603317218862,
+            "medianAbsolute": 30.670087823674166
+          }
+        },
+        "method": "allUVIS2",
+        "star": "GRW70",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 1.607602771411624,
+            "medianAbsolute": 1.524102272125592
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 30.554744247999324,
+            "medianAbsolute": 16.566877079146543
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 29.11414247515971,
+            "medianAbsolute": 15.042774807021061
+          }
+        },
+        "method": "perRadiusSTScI",
+        "star": "GRW70",
+        "visits": 2
+      },
+      {
+        "chip": 1,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 2.6106937274470616,
+            "medianAbsolute": 2.0256477501433103
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 30.554744247999324,
+            "medianAbsolute": 18.52432745722196
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 1,
+            "maximumAbsolute": 29.11414247515971,
+            "medianAbsolute": 16.498679707078637
+          }
+        },
+        "method": "consistentCornerTable",
+        "star": "GRW70",
+        "visits": 2
+      },
+      {
+        "chip": 2,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 15.73724713087472,
+            "medianAbsolute": 9.996217683848272
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 29.486419195553026,
+            "medianAbsolute": 27.009637391557135
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 0,
+            "maximumAbsolute": 17.43789272846402,
+            "medianAbsolute": 12.833021776145642
+          }
+        },
+        "method": "zero",
+        "star": "GRW70",
+        "visits": 5
+      },
+      {
+        "chip": 2,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 5,
+            "maximumAbsolute": 9.695941745056128,
+            "medianAbsolute": 3.9549122980296803
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 4,
+            "maximumAbsolute": 23.667649967500992,
+            "medianAbsolute": 5.351485283008159
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 27.066288127499305,
+            "medianAbsolute": 13.486795512601233
+          }
+        },
+        "method": "physicalChip",
+        "star": "GRW70",
+        "visits": 5
+      },
+      {
+        "chip": 2,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 5,
+            "maximumAbsolute": 9.695941745056128,
+            "medianAbsolute": 3.9549122980296803
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 4,
+            "maximumAbsolute": 23.667649967500992,
+            "medianAbsolute": 5.351485283008159
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 27.066288127499305,
+            "medianAbsolute": 13.486795512601233
+          }
+        },
+        "method": "allUVIS2",
+        "star": "GRW70",
+        "visits": 5
+      },
+      {
+        "chip": 2,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 5,
+            "maximumAbsolute": 9.695941745056128,
+            "medianAbsolute": 3.9549122980296803
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 4,
+            "maximumAbsolute": 23.667649967500992,
+            "medianAbsolute": 5.351485283008159
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 27.066288127499305,
+            "medianAbsolute": 13.486795512601233
+          }
+        },
+        "method": "perRadiusSTScI",
+        "star": "GRW70",
+        "visits": 5
+      },
+      {
+        "chip": 2,
+        "errors": {
+          "F438W-F606W": {
+            "improvedVsZero": 5,
+            "maximumAbsolute": 9.695941745056128,
+            "medianAbsolute": 3.9549122980296803
+          },
+          "F438W-F814W": {
+            "improvedVsZero": 4,
+            "maximumAbsolute": 23.667649967500992,
+            "medianAbsolute": 5.351485283008159
+          },
+          "F606W-F814W": {
+            "improvedVsZero": 2,
+            "maximumAbsolute": 27.066288127499305,
+            "medianAbsolute": 13.486795512601233
+          }
+        },
+        "method": "consistentCornerTable",
+        "star": "GRW70",
+        "visits": 5
+      }
+    ],
+    "externalFields": [
+      {
+        "target": "NGC104",
+        "visit": "iaby01",
+        "state": "EVALUATED"
+      },
+      {
+        "target": "NGC5139",
+        "visit": "iaby02",
+        "state": "EVALUATED"
+      }
+    ],
+    "registration": [
+      {
+        "chip": 1,
+        "summary": {
+          "affineResidual": {
+            "maxColorChangeMillimag": 0.0,
+            "predictedPeakErrorPx": {
+              "F438W": {
+                "count": 11,
+                "maximum": 1.1867384280843656,
+                "median": 0.6664787704585573
+              },
+              "F814W": {
+                "count": 11,
+                "maximum": 1.224859307491579,
+                "median": 0.6588932455064683
+              }
+            },
+            "reproducedApertures": 11,
+            "samePeaks": 11,
+            "stateCount": {
+              "ACCEPTED": 33
+            }
+          },
+          "medianShift": {
+            "maxColorChangeMillimag": 0.0,
+            "predictedPeakErrorPx": {
+              "F438W": {
+                "count": 11,
+                "maximum": 1.3324681150986144,
+                "median": 0.1176269508560637
+              },
+              "F814W": {
+                "count": 11,
+                "maximum": 1.3791563986021291,
+                "median": 0.19639724169381748
+              }
+            },
+            "reproducedApertures": 11,
+            "samePeaks": 11,
+            "stateCount": {
+              "ACCEPTED": 33
+            }
+          },
+          "originalWCS": {
+            "maxColorChangeMillimag": 0.0,
+            "predictedPeakErrorPx": {
+              "F438W": {
+                "count": 11,
+                "maximum": 1.0616160606417908,
+                "median": 0.3732551295149312
+              },
+              "F814W": {
+                "count": 11,
+                "maximum": 1.101720796916528,
+                "median": 0.4302789823218443
+              }
+            },
+            "reproducedApertures": 11,
+            "samePeaks": 11,
+            "stateCount": {
+              "ACCEPTED": 33
+            }
+          }
+        }
+      },
+      {
+        "chip": 2,
+        "summary": {
+          "affineResidual": {
+            "maxColorChangeMillimag": 0.0,
+            "predictedPeakErrorPx": {
+              "F438W": {
+                "count": 12,
+                "maximum": 1.1224779249604817,
+                "median": 0.46818631970180585
+              },
+              "F814W": {
+                "count": 12,
+                "maximum": 0.7894003166207506,
+                "median": 0.4296796097376939
+              }
+            },
+            "reproducedApertures": 12,
+            "samePeaks": 12,
+            "stateCount": {
+              "ACCEPTED": 36
+            }
+          },
+          "medianShift": {
+            "maxColorChangeMillimag": 0.0,
+            "predictedPeakErrorPx": {
+              "F438W": {
+                "count": 12,
+                "maximum": 1.021980476226501,
+                "median": 0.08448792475689584
+              },
+              "F814W": {
+                "count": 12,
+                "maximum": 1.0306952464545627,
+                "median": 0.1391982977605934
+              }
+            },
+            "reproducedApertures": 12,
+            "samePeaks": 12,
+            "stateCount": {
+              "ACCEPTED": 36
+            }
+          },
+          "originalWCS": {
+            "maxColorChangeMillimag": 0.0,
+            "predictedPeakErrorPx": {
+              "F438W": {
+                "count": 12,
+                "maximum": 1.0519946651660246,
+                "median": 0.5434964070724928
+              },
+              "F814W": {
+                "count": 12,
+                "maximum": 0.6554213549300999,
+                "median": 0.4522938871745011
+              }
+            },
+            "reproducedApertures": 12,
+            "samePeaks": 12,
+            "stateCount": {
+              "ACCEPTED": 36
+            }
+          }
+        }
+      }
+    ],
+    "sky": [
+      {
+        "chip": 1,
+        "summary": {
+          "local": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 0.0,
+                "medianAbsoluteSkyChange": 0.0,
+                "medianAbsoluteWithEE": 8.34109804871595,
+                "medianAbsoluteWithoutEE": 7.559527803879506
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 0.0,
+                "medianAbsoluteSkyChange": 0.0,
+                "medianAbsoluteWithEE": 12.020120287923158,
+                "medianAbsoluteWithoutEE": 12.863159290028012
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 0.0,
+                "medianAbsoluteSkyChange": 0.0,
+                "medianAbsoluteWithEE": 4.744564390720846,
+                "medianAbsoluteWithoutEE": 6.767563335164785
+              }
+            },
+            "count": 11
+          },
+          "outside": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 12.785314120666342,
+                "medianAbsoluteSkyChange": 2.167320177812865,
+                "medianAbsoluteWithEE": 5.1501606927492265,
+                "medianAbsoluteWithoutEE": 4.3685904479127835
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 10.508645600925462,
+                "medianAbsoluteSkyChange": 1.5348750277343584,
+                "medianAbsoluteWithEE": 12.865409832585085,
+                "medianAbsoluteWithoutEE": 14.1068385321926
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 14.596229062241385,
+                "medianAbsoluteSkyChange": 1.7086178605875346,
+                "medianAbsoluteWithEE": 5.83032845700571,
+                "medianAbsoluteWithoutEE": 7.284514856052057
+              }
+            },
+            "count": 11
+          },
+          "plane": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 23.949912484423706,
+                "medianAbsoluteSkyChange": 4.505708120243096,
+                "medianAbsoluteWithEE": 9.36679854332268,
+                "medianAbsoluteWithoutEE": 8.585228298486237
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 23.487671376481686,
+                "medianAbsoluteSkyChange": 5.909614310852045,
+                "medianAbsoluteWithEE": 13.54361894235403,
+                "medianAbsoluteWithoutEE": 13.179029331894828
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 12.086335861242352,
+                "medianAbsoluteSkyChange": 4.1330838779831565,
+                "medianAbsoluteWithEE": 3.6488876554384215,
+                "medianAbsoluteWithoutEE": 3.1004441314199167
+              }
+            },
+            "count": 11
+          },
+          "wide": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 4.572644717051626,
+                "medianAbsoluteSkyChange": 2.180650451982638,
+                "medianAbsoluteWithEE": 6.847815419630283,
+                "medianAbsoluteWithoutEE": 6.06624517479384
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 6.574121694852693,
+                "medianAbsoluteSkyChange": 1.8896334624636846,
+                "medianAbsoluteWithEE": 12.642160217171797,
+                "medianAbsoluteWithoutEE": 13.883588916779313
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 3.0499053735551325,
+                "medianAbsoluteSkyChange": 0.8984843189308229,
+                "medianAbsoluteWithEE": 4.505527327928958,
+                "medianAbsoluteWithoutEE": 6.439673033834095
+              }
+            },
+            "count": 11
+          }
+        }
+      },
+      {
+        "chip": 2,
+        "summary": {
+          "local": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 0.0,
+                "medianAbsoluteSkyChange": 0.0,
+                "medianAbsoluteWithEE": 17.143492914037658,
+                "medianAbsoluteWithoutEE": 18.059275355606516
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 0.0,
+                "medianAbsoluteSkyChange": 0.0,
+                "medianAbsoluteWithEE": 21.13211814321496,
+                "medianAbsoluteWithoutEE": 18.023054743281442
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 0.0,
+                "medianAbsoluteSkyChange": 0.0,
+                "medianAbsoluteWithEE": 27.43196007746611,
+                "medianAbsoluteWithoutEE": 4.93087855282573
+              }
+            },
+            "count": 12
+          },
+          "outside": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 9.9286918377279,
+                "medianAbsoluteSkyChange": 1.608553976270752,
+                "medianAbsoluteWithEE": 17.566852971441495,
+                "medianAbsoluteWithoutEE": 19.62818585891308
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 8.93194314872537,
+                "medianAbsoluteSkyChange": 1.6393724098338787,
+                "medianAbsoluteWithEE": 19.49274573338108,
+                "medianAbsoluteWithoutEE": 19.491349878031098
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 10.559355433885537,
+                "medianAbsoluteSkyChange": 2.0230628325705453,
+                "medianAbsoluteWithEE": 28.36141035560604,
+                "medianAbsoluteWithoutEE": 4.448822858310932
+              }
+            },
+            "count": 12
+          },
+          "plane": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 64.99948355645495,
+                "medianAbsoluteSkyChange": 12.41784720368605,
+                "medianAbsoluteWithEE": 6.190854178450791,
+                "medianAbsoluteWithoutEE": 12.23215956426926
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 104.30858934496239,
+                "medianAbsoluteSkyChange": 11.372024888287466,
+                "medianAbsoluteWithEE": 20.3212166154736,
+                "medianAbsoluteWithoutEE": 15.451245119440081
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 39.3091057885073,
+                "medianAbsoluteSkyChange": 2.3027827831001333,
+                "medianAbsoluteWithEE": 24.190969462695676,
+                "medianAbsoluteWithoutEE": 3.5746407595449448
+              }
+            },
+            "count": 12
+          },
+          "wide": {
+            "colors": {
+              "F438W-F606W": {
+                "maxAbsoluteSkyChange": 31.873976066140703,
+                "medianAbsoluteSkyChange": 4.85887617958535,
+                "medianAbsoluteWithEE": 14.54151789291477,
+                "medianAbsoluteWithoutEE": 17.58882345047561
+              },
+              "F438W-F814W": {
+                "maxAbsoluteSkyChange": 31.84085109295995,
+                "medianAbsoluteSkyChange": 4.769730038815566,
+                "medianAbsoluteWithEE": 19.617318691100476,
+                "medianAbsoluteWithoutEE": 20.16735379871229
+              },
+              "F606W-F814W": {
+                "maxAbsoluteSkyChange": 10.94669761257856,
+                "medianAbsoluteSkyChange": 2.1987404438186573,
+                "medianAbsoluteWithEE": 27.886836923871098,
+                "medianAbsoluteWithoutEE": 4.5057590246111445
+              }
+            },
+            "count": 12
+          }
+        }
+      }
+    ],
+    "calibratorAvailability": {
+      "associations": {
+        "NO_PUBLIC_FLC": 9
+      },
+      "directHttp404": 21,
+      "qualifiedVisits": []
+    }
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}

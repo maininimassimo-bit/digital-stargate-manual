@@ -1,0 +1,103 @@
+{
+  "coordinateFrames": {
+    "source": {
+      "1": "<ICRS Frame>",
+      "2": "<ICRS Frame>"
+    },
+    "target": {
+      "1": "<FK5 Frame (equinox=2000.0)>",
+      "2": "<FK5 Frame (equinox=2000.0)>"
+    }
+  },
+  "fitsSha256": "8686a9d8bb8a4f53ef06e506fcacbeb3f369c7a7b72de4276562f2d6163d753e",
+  "fluxMeasured": false,
+  "geometricallyQualified": 0,
+  "geometry": {
+    "1->1": {
+      "belongs": 124,
+      "fitStars": 2,
+      "fitTiles": 2,
+      "heldoutStars": 4,
+      "heldoutTiles": 4,
+      "matched": 6,
+      "models": {},
+      "passed": false,
+      "rejected": {
+        "OFF_CENTER_PEAK": 1,
+        "QUALITY": 24,
+        "SIGNAL": 93
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "INSUFFICIENT_STARS",
+      "usableSourceSeeds": 226
+    },
+    "1->2": {
+      "belongs": 45,
+      "fitStars": 0,
+      "fitTiles": 0,
+      "heldoutStars": 2,
+      "heldoutTiles": 1,
+      "matched": 2,
+      "models": {},
+      "passed": false,
+      "rejected": {
+        "OFF_CENTER_PEAK": 2,
+        "QUALITY": 12,
+        "SIGNAL": 29
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "INSUFFICIENT_STARS",
+      "usableSourceSeeds": 226
+    },
+    "2->1": {
+      "belongs": 22,
+      "matched": 0,
+      "passed": false,
+      "rejected": {
+        "QUALITY": 4,
+        "SIGNAL": 18
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "NO_MATCHED_ANCHORS",
+      "usableSourceSeeds": 243
+    },
+    "2->2": {
+      "belongs": 173,
+      "fitStars": 1,
+      "fitTiles": 1,
+      "heldoutStars": 1,
+      "heldoutTiles": 1,
+      "matched": 2,
+      "models": {},
+      "passed": false,
+      "rejected": {
+        "QUALITY": 24,
+        "SIGNAL": 147
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "INSUFFICIENT_STARS",
+      "usableSourceSeeds": 243
+    }
+  },
+  "qualificationDiagnosticSha256": "59f9afdb2c0e6f69f66fa09625634ac9c12cf000bbe733e8042920e8676202d3",
+  "qualificationPlanSha256": "a1f8b27def11c23066708f09aea13af80fe079772d91281a75a94df1d5abaedd",
+  "referenceCandidates": 0,
+  "scientificClosure": false,
+  "states": {
+    "CANDIDATE_UNSATURATED_REFERENCE": 33,
+    "PEAK_SUPPORT_OR_RELOCATION": 100,
+    "SHORT_OTHER_DQ": 131,
+    "no_unique_footprint": 76
+  },
+  "supportedProjection": 264,
+  "target": {
+    "candidateCenters": 95,
+    "deltaDays": -2593.8008792647233,
+    "obsid": 23964057,
+    "proposal": "9433",
+    "root": "j6mfa8v8q",
+    "seconds": 1,
+    "sourceChip1": 15,
+    "sourceChip2": 80
+  }
+}

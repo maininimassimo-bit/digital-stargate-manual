@@ -1,0 +1,120 @@
+{
+  "source": "https://archive.stsci.edu/prepds/deep47tuc/",
+  "acquisitionSha256": {
+    "readme.txt": "f13cf79a3652ad9f4131307827e0b92b79a232f8a01b76a9bb184e1baaea5b87",
+    "catalog.txt": "bcedbc057f9fc1a1dd0fb6d7c02a80a48c04ece8be041ef2ef90748f78d7a943",
+    "drz-prefix.fits": "40f8d6a6ab72ea0925789761a1a967bf0fd833d5a2eecd842cd8827ec9c4ba29"
+  },
+  "primaryHeaderBytes": 570240,
+  "primaryProposalId": 11677,
+  "hasCelestialWcs": true,
+  "primaryAxes": [
+    10510,
+    10403
+  ],
+  "drizzleInputChipEntries": 234,
+  "drizzleInputExposureRoots": 117,
+  "checkedAssociationRoots": [
+    "jb6v01dfq",
+    "jb6v01diq",
+    "jb6v01dkq",
+    "jb6v01e0q",
+    "jb6v01e5q",
+    "jb6v01ekq"
+  ],
+  "sharedRawExposureRoots": [
+    "jb6v01diq",
+    "jb6v01dkq",
+    "jb6v01e0q",
+    "jb6v01e5q",
+    "jb6v01ekq"
+  ],
+  "sharedContext": [
+    {
+      "keyword": "D001DATA",
+      "root": "jb6v01diq",
+      "scienceExtension": 1
+    },
+    {
+      "keyword": "D002DATA",
+      "root": "jb6v01diq",
+      "scienceExtension": 2
+    },
+    {
+      "keyword": "D003DATA",
+      "root": "jb6v01dkq",
+      "scienceExtension": 1
+    },
+    {
+      "keyword": "D004DATA",
+      "root": "jb6v01dkq",
+      "scienceExtension": 2
+    },
+    {
+      "keyword": "D005DATA",
+      "root": "jb6v01e0q",
+      "scienceExtension": 1
+    },
+    {
+      "keyword": "D006DATA",
+      "root": "jb6v01e0q",
+      "scienceExtension": 2
+    },
+    {
+      "keyword": "D007DATA",
+      "root": "jb6v01e5q",
+      "scienceExtension": 1
+    },
+    {
+      "keyword": "D008DATA",
+      "root": "jb6v01e5q",
+      "scienceExtension": 2
+    },
+    {
+      "keyword": "D009DATA",
+      "root": "jb6v01ekq",
+      "scienceExtension": 1
+    },
+    {
+      "keyword": "D010DATA",
+      "root": "jb6v01ekq",
+      "scienceExtension": 2
+    }
+  ],
+  "sameObservingProgram": true,
+  "exactHeaderSha256": "098cdd4cb10134690dd3f180012536dde71b02b2f501cf9bd4bc43818563f784",
+  "completeContextVerified": true,
+  "catalog": {
+    "rows": 51480,
+    "columns": [
+      "ID",
+      "X",
+      "Y",
+      "F606W",
+      "error",
+      "F814W",
+      "error",
+      "Chi",
+      "Sharp"
+    ],
+    "xExtent": [
+      447.016,
+      10378.79
+    ],
+    "yExtent": [
+      140.859,
+      10399.72
+    ],
+    "f606wMagnitudeRange": [
+      13.77,
+      31.907
+    ],
+    "f606wErrorRange": [
+      0.0049,
+      0.5429
+    ]
+  },
+  "crossmatchPerformed": false,
+  "independentFluxReferenceEstablished": false,
+  "scientificClosure": false
+}

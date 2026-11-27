@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_IC1805_CFA_SINGLE_EXPOSURE_LOSS_PLAN_V1",
+  "baselineWeightedReceiptSha256": "7a727ce4de53601ba19f63096179207fcda55cecef3651a33aee4cab334e8248",
+  "priorGeometrySha256": "e3d06b80ec65272d117e251c43d212c8eae01740c121d98472edd3cbba208c5b",
+  "dropWidths": [
+    1,
+    0.7
+  ],
+  "scenarios": [
+    "nominal",
+    "each single contributor removed in each half"
+  ],
+  "maskScope": "independently for each source, half and local matched exposure; no exposure identity inferred across sources",
+  "thresholdForDiagnosticComparison": 2,
+  "scienceThresholdSet": false
+}

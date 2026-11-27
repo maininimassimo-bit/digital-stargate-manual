@@ -1,0 +1,24 @@
+{
+  "protocol": "BKL046_ACS11677_FRESH_STDPSF_HOLDOUT_V1",
+  "sourceRoot": "jb6v01e0q",
+  "sourceSha256": "e6011691a50b2608a3cb91e5f9ceb0957aa4a17e46aa04f8e00bee30df5fdd4d",
+  "targetRoot": "jbb502igq",
+  "targetExposureSeconds": 40,
+  "targetProposalId": 11880,
+  "targetObjectVersion": "1xZh68Bi5zhj960HGNRbT8rlOIIGZecU",
+  "publicProductMetadataSha256": "4db0cdef7fce0a74d1c3fd74bd226a3efa6f5f1f30fb2040739c0c1c72355eec",
+  "targetHeaderletSha256": "a405484b56cf84a7d0a0a802cee144e431d3c44a74ed89032337cca48c8d0503",
+  "geometryProtocolSha256": "a1f8b27def11c23066708f09aea13af80fe079772d91281a75a94df1d5abaedd",
+  "standardPsfSha256": "6f0438f15faa7d6abe3924cc3b43073d8e46047a27abe96fbce6d2553c70a1d4",
+  "psfFunctionsSha256": "1e3c0ce1d9bc89800f4f249c49d34a1b8852e34fad9f377804eb9b26d4ec978c",
+  "psfDefinition": "STScI standard SM4 empirical F606W PSF, bilinear detector-grid interpolation, no fitted focus",
+  "sources": "Same frozen source peaks and quality estimator as baseline. Compare both techniques on a common intersection and report each gate rejection.",
+  "partitions": "Even 512-pixel source tiles for fitting, odd tiles for final spatial holdout. Tile assignment fixed from the source peak coordinates.",
+  "qualification": {
+    "minStarsInEachPartition": 24,
+    "minTilesInEachPartition": 8,
+    "heldoutRadialP90Px": 0.1
+  },
+  "precondition": "No measurement of this target used to choose the PSF, centroid or threshold.",
+  "scienceClosure": false
+}

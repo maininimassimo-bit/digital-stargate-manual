@@ -1,0 +1,41 @@
+{
+  "actualRestrictedThreadTokenObserved": true,
+  "independentConfirmationUnits": 0,
+  "nativeExecutions": 0,
+  "normalOwnerOracleReadVerified": true,
+  "ownerResponseReadbackVerified": true,
+  "productionAclChanged": false,
+  "providerCalls": 0,
+  "restrictedNtfsAccessCodes": {
+    "oracle": {
+      "delete": 5,
+      "readData": 5,
+      "writeDacl": 5,
+      "writeData": 5,
+      "writeOwner": 5
+    },
+    "request": {
+      "delete": 5,
+      "readData": 0,
+      "writeDacl": 5,
+      "writeData": 5,
+      "writeOwner": 5
+    },
+    "response": {
+      "delete": 5,
+      "readData": 0,
+      "writeDacl": 5,
+      "writeData": 0,
+      "writeOwner": 5
+    }
+  },
+  "restrictedParentAccessCodes": {
+    "addFile": 5,
+    "deleteChild": 5,
+    "writeDacl": 5
+  },
+  "schema": "BKL046_IA_RESTRICTED_NTFS_FIXTURE_V1",
+  "scientificClosures": 0,
+  "separateProcessIsolationVerified": false,
+  "sourceSha256": "8b58e6182ba1444236d3fc22ea21a509319512e6ae1c2c78193a45a774a4507a"
+}

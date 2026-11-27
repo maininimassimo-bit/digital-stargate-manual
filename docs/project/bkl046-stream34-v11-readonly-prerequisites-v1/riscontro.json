@@ -1,0 +1,87 @@
+{
+  "admissionRequested": false,
+  "approvalLanesInspected": {
+    "adjacentFiles": [],
+    "authenticatedApprovalsVerified": false
+  },
+  "archiveMembersVerified": 70,
+  "archiveSha256": "e23818ac9858c00a6fd113764e22e1db203a2fd5c4b12c5cacc2b677a0bdf367",
+  "checks": {
+    "coordinator": {
+      "status": "OK",
+      "value": {
+        "activePresentAtRead": false,
+        "files": {
+          "ARB-R4.md": "2b606209643ceba56301bdbab9b6c259108a4eaa7d746355b59a6e936a148917",
+          "CURRENT.json": "da446f4272522fd192f6de3dab61fb63b22a0f4f8491772ae4475ca0cb2518dd",
+          "MANIFEST-R4.json": "61d38f0160ba2650cea167e7e1a5fbe5af1d4b448ddc085f2f8845f36e7a4150",
+          "RQ-R4.md": "d22a9eae87e9ed19284b2dc867c5b5012b428f2457c71478c3c94da5ea818abb",
+          "coordinator.py": "d09aab4e9e1d20841503dbd6f4a520b7a2d4b738eeb06adecd339f7cf59b2335",
+          "original-parent-adapter.cjs": "2fe08ef35c126f97b9fce3e382070acf21070ebe8c76fcf5519dc393024464a2"
+        }
+      }
+    },
+    "hostMemory": {
+      "status": "OK",
+      "value": {
+        "availableCommitBytes": 13466742784,
+        "availablePhysicalBytes": 12369235968,
+        "budgetReasons": [],
+        "continuousMemoryBoundAttested": false,
+        "minimumAvailableCommitBytes": 12884901888,
+        "minimumAvailablePhysicalBytes": 8589934592,
+        "nativeAdmissionGranted": false,
+        "observedAtUtc": "2026-11-26T00:13:57.034575+00:00",
+        "processHandlesOpened": 0,
+        "schema": "BKL046_STREAM_HOST_MEMORY_PREFLIGHT_V1",
+        "stage": "OPERATOR_BEFORE_CUSTODIAN"
+      }
+    },
+    "inputs": {
+      "status": "OK",
+      "value": {
+        "bytes": 139469422,
+        "files": 8,
+        "oneShotPresentAtRead": false
+      }
+    },
+    "pixInsightInventory": {
+      "status": "OK",
+      "value": {
+        "count": 0
+      }
+    },
+    "publisherObservation": {
+      "status": "OK",
+      "value": {
+        "authorityToLaunch": false,
+        "exclusiveLockHeld": false,
+        "interpreterRowsCorroborated": 1,
+        "knownTerminalSha256": "785718750ba1eb5952e86a1f690e6ce87984dd8b618c43846bcaaa1268ce3a91",
+        "observedAtUtc": "2026-11-26T00:13:58.002309+00:00",
+        "scope": "DSG-Shared only, observation interval, Python publisher family",
+        "status": "LOCAL_PUBLISHER_OBSERVATION_CLEAR"
+      }
+    },
+    "runtime": {
+      "status": "OK",
+      "value": {
+        "CryptographicHash.jsh": "6ae45066101ac8480ee90bc405e46157837ee4882b3ddd99ed741f79939d5ee9",
+        "DataType.jsh": "b18ba868eb69b40081049d8f1deb5e6ee10f932eefdb64921a4c7356b5f5a619",
+        "PixInsight.exe": "76d2339130b58be3d112b66cafc578d9f859d80c96842b2ba2dfbbdcdc8b2943",
+        "python.exe": "11d41654aaae8f8de156cd3a6b04326713d28419a267bb84581d8f7166e1b4c1"
+      }
+    },
+    "studyRegistry": {
+      "status": "OK",
+      "value": {
+        "completeStudy": false,
+        "sha256": "e63e0bf660c8729ec2b968d17d1a88bfcc8ca23bd0ad86aff7c1a16ff24500b4"
+      }
+    }
+  },
+  "nativeExecutions": 0,
+  "schema": "BKL046_STREAM34_V11_READONLY_CHECKPOINT_V1",
+  "scientificClosures": 0,
+  "subjectSha256": "0b029846da0412875e26595e2ead8361bc35fcef2c882ec2be95303b9582bdd1"
+}

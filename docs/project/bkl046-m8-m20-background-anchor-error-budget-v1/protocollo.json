@@ -1,0 +1,90 @@
+{
+  "schema": "BKL046_M8M20_BACKGROUND_ANCHOR_ERROR_PROTOCOL_V1",
+  "injectionProgramSha256": "454d3b6cd79e18b89b1f593d6b83c689885c5e9d87597fee7ed837983d34c7c8",
+  "injectionReportSha256": "d22407710a2e569ab43a61c8d2decf02c8e47d457ed62db3e2ceadd0ca496e8c",
+  "anchorLayouts": {
+    "distributed": [
+      [
+        -0.85,
+        -0.8
+      ],
+      [
+        0,
+        -0.8
+      ],
+      [
+        0.85,
+        -0.8
+      ],
+      [
+        -0.85,
+        0.8
+      ],
+      [
+        0,
+        0.8
+      ],
+      [
+        0.85,
+        0.8
+      ]
+    ],
+    "compactCorner": [
+      [
+        0.56,
+        0.6
+      ],
+      [
+        0.7,
+        0.6
+      ],
+      [
+        0.84,
+        0.6
+      ],
+      [
+        0.56,
+        0.84
+      ],
+      [
+        0.7,
+        0.84
+      ],
+      [
+        0.84,
+        0.84
+      ]
+    ],
+    "collinear": [
+      [
+        -0.85,
+        0
+      ],
+      [
+        -0.51,
+        0
+      ],
+      [
+        -0.17,
+        0
+      ],
+      [
+        0.17,
+        0
+      ],
+      [
+        0.51,
+        0
+      ],
+      [
+        0.85,
+        0
+      ]
+    ]
+  },
+  "candidateBoundsAdu": [
+    0.02,
+    0.05
+  ],
+  "model": "Six hypothetical independent sky-free measurements of a known affine background at fixed normalized coordinates. Each may have a bounded error in either direction, including shared bias. Fit equal-weight offset or affine plane. Propagate worst-case errors onto the original common support for each positive 2 ADU profile. Offset is assessed only on an exactly constant true background. The result neglects model inadequacy, science image noise, and spatial registration uncertainty."
+}

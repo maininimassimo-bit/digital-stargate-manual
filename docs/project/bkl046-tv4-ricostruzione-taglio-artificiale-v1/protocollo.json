@@ -1,0 +1,18 @@
+{
+  "schema": "BKL046_TV4_ARTIFICIAL_CENSORING_RECOVERY_DEVELOPMENT_PLAN_V1",
+  "priorProtocolSha256": "b3aa59c378f7ee391181b45153b3f63f1e85956b1993a55685e7c6a13c3140ce",
+  "priorReportSha256": "8b08fa4c9fa2ce80f94692d23c56d07ef939fa75ed8592ebe2f18b8d87fbceed",
+  "priorSourceSha256": "66181d463fb8cc6b11f3eb3679811d45422ec64d237c6c80c6633f94956e842e",
+  "target": "Frozen held TV4 poses whose original target region contains no clipped pixels",
+  "artificialCeilingFractions": [
+    0.7,
+    0.75,
+    0.8
+  ],
+  "comparison": [
+    "leave clipped values unchanged",
+    "replace only observed clipped pixels with the frozen forecast bounded below by the artificial ceiling"
+  ],
+  "thresholdSelected": false,
+  "nativeExecutions": 0
+}

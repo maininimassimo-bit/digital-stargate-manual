@@ -1,0 +1,17 @@
+{
+  "schema":"BKL046_ACS_STANDARD_OUTER_APERTURE_DIAGNOSTIC_PROTOCOL_V1",
+  "gd71Inputs":"550faf0ea7aa01808d37ac678a3dd1e4fe56f08923eafc2e60d004024f9bcacf",
+  "gd153Inputs":"4f5a23fc0c5ea68f392f8f53aea70bce555bdfc50571c93a4f3c1411c5308f39",
+  "gd71Growth":"59586e89f0908688381cf8b834e9dbd399c0570861384ea989538a8c1a18d6ce",
+  "gd153Growth":"2291991470d6f0eb9c2df0d17cfb1bb128b045826f7faa13378525ce544503e0",
+  "apertureComparison":"27c292f2c57956cdb6d9d818fa3aa50ce5a7671ff9e3d315bac576c3224740de",
+  "pam":"025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c",
+  "radii":[3,5,10,15,20],
+  "backgroundRing":[25,40],
+  "acceptedDq":[0,64],
+  "radialPeerHalfWidthPx":0.75,
+  "minimumPeerCount":12,
+  "pseudoMaskQuarterTurns":[1,2,3],
+  "maximumMissingFraction":0.02,
+  "method":"Preserve recorded centers, PAM and background. Use same-radius valid pixels to form an empirical range for each missing pixel and test it against healthy pixels held out at rotated positions. This is sensitivity analysis, not calibrated error or a permit to accept originally excluded apertures."
+}

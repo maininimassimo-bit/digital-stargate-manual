@@ -1,0 +1,177 @@
+{
+  "schema": "bkl046-acs-ripetibilita-intra-visita-v1",
+  "pinSha256": {
+    "fotometria-CALSPEC-v2.json": "8a6394cdc9d700f66ba3e44b86390b451b2b343b36f162e65db78e1ec9781d6c",
+    "sensibilita-apertura-frazionaria-v1.json": "9d2910cdfc91af3fc912e34410df7b874e36895ed7794a76321c314f073880d8"
+  },
+  "formula": "200 * (seconda - prima) / (seconda + prima)",
+  "ordine": "identificatore esposizione",
+  "coppie": [
+    {
+      "raggioPixel": 3,
+      "visita": "j8jq03",
+      "filtro": "F606W",
+      "pose": [
+        "j8jq03cbq",
+        "j8jq03ccq"
+      ],
+      "deltaInteraPct": -0.5898617829933608,
+      "deltaFrazionariaPct": -0.23900302027291825,
+      "absRidotto": true
+    },
+    {
+      "raggioPixel": 3,
+      "visita": "j8jq03",
+      "filtro": "F658N",
+      "pose": [
+        "j8jq03cfq",
+        "j8jq03cgq"
+      ],
+      "deltaInteraPct": 0.7429850783440061,
+      "deltaFrazionariaPct": 0.44920873227064273,
+      "absRidotto": true
+    },
+    {
+      "raggioPixel": 3,
+      "visita": "j8jq03",
+      "filtro": "F660N",
+      "pose": [
+        "j8jq03chq",
+        "j8jq03ciq"
+      ],
+      "deltaInteraPct": 0.13942579477193567,
+      "deltaFrazionariaPct": 0.07979120226190752,
+      "absRidotto": true
+    },
+    {
+      "raggioPixel": 3,
+      "visita": "j8jq06",
+      "filtro": "F606W",
+      "pose": [
+        "j8jq06wwq",
+        "j8jq06wxq"
+      ],
+      "deltaInteraPct": -0.24034180013293366,
+      "deltaFrazionariaPct": -0.2079681281757518,
+      "absRidotto": true
+    },
+    {
+      "raggioPixel": 3,
+      "visita": "j8jq06",
+      "filtro": "F658N",
+      "pose": [
+        "j8jq06x0q",
+        "j8jq06x1q"
+      ],
+      "deltaInteraPct": 0.0509059671293239,
+      "deltaFrazionariaPct": 0.10141076084917382,
+      "absRidotto": false
+    },
+    {
+      "raggioPixel": 3,
+      "visita": "j8jq06",
+      "filtro": "F660N",
+      "pose": [
+        "j8jq06x2q",
+        "j8jq06x3q"
+      ],
+      "deltaInteraPct": -0.05167327840861265,
+      "deltaFrazionariaPct": -0.07777084719862266,
+      "absRidotto": false
+    },
+    {
+      "raggioPixel": 5,
+      "visita": "j8jq03",
+      "filtro": "F606W",
+      "pose": [
+        "j8jq03cbq",
+        "j8jq03ccq"
+      ],
+      "deltaInteraPct": -0.288470089529853,
+      "deltaFrazionariaPct": -0.2921695857131768,
+      "absRidotto": false
+    },
+    {
+      "raggioPixel": 5,
+      "visita": "j8jq03",
+      "filtro": "F658N",
+      "pose": [
+        "j8jq03cfq",
+        "j8jq03cgq"
+      ],
+      "deltaInteraPct": 0.45823055126972273,
+      "deltaFrazionariaPct": 0.46713087147901017,
+      "absRidotto": false
+    },
+    {
+      "raggioPixel": 5,
+      "visita": "j8jq03",
+      "filtro": "F660N",
+      "pose": [
+        "j8jq03chq",
+        "j8jq03ciq"
+      ],
+      "deltaInteraPct": 0.008119457514840564,
+      "deltaFrazionariaPct": -0.007502620881004173,
+      "absRidotto": true
+    },
+    {
+      "raggioPixel": 5,
+      "visita": "j8jq06",
+      "filtro": "F606W",
+      "pose": [
+        "j8jq06wwq",
+        "j8jq06wxq"
+      ],
+      "deltaInteraPct": -0.258462159531307,
+      "deltaFrazionariaPct": -0.19590848208178843,
+      "absRidotto": true
+    },
+    {
+      "raggioPixel": 5,
+      "visita": "j8jq06",
+      "filtro": "F658N",
+      "pose": [
+        "j8jq06x0q",
+        "j8jq06x1q"
+      ],
+      "deltaInteraPct": 0.12581640476952927,
+      "deltaFrazionariaPct": -0.08825750475206347,
+      "absRidotto": true
+    },
+    {
+      "raggioPixel": 5,
+      "visita": "j8jq06",
+      "filtro": "F660N",
+      "pose": [
+        "j8jq06x2q",
+        "j8jq06x3q"
+      ],
+      "deltaInteraPct": -0.0028934838486448376,
+      "deltaFrazionariaPct": -0.04012644116922192,
+      "absRidotto": false
+    }
+  ],
+  "riepilogo": [
+    {
+      "raggioPixel": 3,
+      "coppieScartoRidotto": 4,
+      "coppieTotali": 6,
+      "scartoMedioAssolutoInteraPct": 0.30253228363002876,
+      "scartoMedioAssolutoFrazionariaPct": 0.19252544850483613,
+      "scartoMassimoAssolutoInteraPct": 0.7429850783440061,
+      "scartoMassimoAssolutoFrazionariaPct": 0.44920873227064273
+    },
+    {
+      "raggioPixel": 5,
+      "coppieScartoRidotto": 3,
+      "coppieTotali": 6,
+      "scartoMedioAssolutoInteraPct": 0.19033202441064956,
+      "scartoMedioAssolutoFrazionariaPct": 0.18184925101271085,
+      "scartoMassimoAssolutoInteraPct": 0.45823055126972273,
+      "scartoMassimoAssolutoFrazionariaPct": 0.46713087147901017
+    }
+  ],
+  "controlliQualificati": 0,
+  "chiusureScientifiche": 0
+}

@@ -1,0 +1,521 @@
+{
+  "protocol": "BKL046_FIELD_BOOTSTRAP_DEVELOPMENT_V1",
+  "priorReportSha256": "1b4edb8724a7bd79b021e65fd528f0ff05a6e744c4abc75d9e07a62bd2ecfb4d",
+  "scientificPlanSha256": "4392df161ab0c8f4075a6f83ce6e65160b5caf970b41b84898a33c16ba42433b",
+  "numpy": "2.3.5",
+  "trialsPerRepeat": 2048,
+  "resamplesPerTrial": 511,
+  "effectsInFieldStandardDeviation": [
+    0,
+    0.2,
+    0.4,
+    0.8
+  ],
+  "partition": "DEVELOPMENT_ONLY",
+  "dataRows": [
+    {
+      "mode": "clustered_normal",
+      "rho": 0.25,
+      "fields": 61,
+      "repeat": "A",
+      "sampleSeed": "860812801609586602",
+      "resamplingSeed": "3145321458188405509",
+      "methods": {
+        "field_t": {
+          "covered": 1946,
+          "belowTruth": 52,
+          "aboveTruth": 50,
+          "rejectionCounts": [
+            102,
+            685,
+            1786,
+            2048
+          ],
+          "medianWidthFieldSd": 0.5084093404929679
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1920,
+          "belowTruth": 62,
+          "aboveTruth": 66,
+          "rejectionCounts": [
+            128,
+            751,
+            1815,
+            2048
+          ],
+          "medianWidthFieldSd": 0.48968435188007514
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1937,
+          "belowTruth": 54,
+          "aboveTruth": 57,
+          "rejectionCounts": [
+            111,
+            702,
+            1787,
+            2048
+          ],
+          "medianWidthFieldSd": 0.5043016493825127
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 10,
+        "fieldTOnly": 19
+      }
+    },
+    {
+      "mode": "clustered_normal",
+      "rho": 0.25,
+      "fields": 61,
+      "repeat": "B",
+      "sampleSeed": "7520142694450613330",
+      "resamplingSeed": "5966562559411741938",
+      "methods": {
+        "field_t": {
+          "covered": 1948,
+          "belowTruth": 55,
+          "aboveTruth": 45,
+          "rejectionCounts": [
+            100,
+            661,
+            1744,
+            2048
+          ],
+          "medianWidthFieldSd": 0.5096611131729336
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1931,
+          "belowTruth": 65,
+          "aboveTruth": 52,
+          "rejectionCounts": [
+            117,
+            707,
+            1777,
+            2048
+          ],
+          "medianWidthFieldSd": 0.49101652020404546
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1940,
+          "belowTruth": 61,
+          "aboveTruth": 47,
+          "rejectionCounts": [
+            108,
+            652,
+            1736,
+            2048
+          ],
+          "medianWidthFieldSd": 0.5053624823221654
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 5,
+        "fieldTOnly": 13
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 16,
+      "repeat": "A",
+      "sampleSeed": "4622960206575744768",
+      "resamplingSeed": "13730919111781967736",
+      "methods": {
+        "field_t": {
+          "covered": 1865,
+          "belowTruth": 166,
+          "aboveTruth": 17,
+          "rejectionCounts": [
+            183,
+            126,
+            508,
+            1984
+          ],
+          "medianWidthFieldSd": 0.9720547782841239
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1814,
+          "belowTruth": 190,
+          "aboveTruth": 44,
+          "rejectionCounts": [
+            234,
+            284,
+            912,
+            2036
+          ],
+          "medianWidthFieldSd": 0.8513611077409394
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1904,
+          "belowTruth": 103,
+          "aboveTruth": 41,
+          "rejectionCounts": [
+            144,
+            238,
+            899,
+            2034
+          ],
+          "medianWidthFieldSd": 1.0670931842534734
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 64,
+        "fieldTOnly": 25
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 16,
+      "repeat": "B",
+      "sampleSeed": "14666201784112027835",
+      "resamplingSeed": "7823336906054184363",
+      "methods": {
+        "field_t": {
+          "covered": 1889,
+          "belowTruth": 145,
+          "aboveTruth": 14,
+          "rejectionCounts": [
+            159,
+            150,
+            532,
+            1973
+          ],
+          "medianWidthFieldSd": 0.9712715643151995
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1833,
+          "belowTruth": 172,
+          "aboveTruth": 43,
+          "rejectionCounts": [
+            215,
+            307,
+            938,
+            2034
+          ],
+          "medianWidthFieldSd": 0.8507724106881401
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1922,
+          "belowTruth": 88,
+          "aboveTruth": 38,
+          "rejectionCounts": [
+            126,
+            284,
+            920,
+            2035
+          ],
+          "medianWidthFieldSd": 1.0703722095063988
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 60,
+        "fieldTOnly": 27
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 31,
+      "repeat": "A",
+      "sampleSeed": "2870963158793656619",
+      "resamplingSeed": "8028279379027470786",
+      "methods": {
+        "field_t": {
+          "covered": 1915,
+          "belowTruth": 117,
+          "aboveTruth": 16,
+          "rejectionCounts": [
+            133,
+            258,
+            1256,
+            2048
+          ],
+          "medianWidthFieldSd": 0.7010710048546356
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1894,
+          "belowTruth": 125,
+          "aboveTruth": 29,
+          "rejectionCounts": [
+            154,
+            428,
+            1488,
+            2048
+          ],
+          "medianWidthFieldSd": 0.651867367980151
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1934,
+          "belowTruth": 73,
+          "aboveTruth": 41,
+          "rejectionCounts": [
+            114,
+            462,
+            1551,
+            2048
+          ],
+          "medianWidthFieldSd": 0.7405227963877573
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 44,
+        "fieldTOnly": 25
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 31,
+      "repeat": "B",
+      "sampleSeed": "16343031088070164283",
+      "resamplingSeed": "5704938840535796651",
+      "methods": {
+        "field_t": {
+          "covered": 1893,
+          "belowTruth": 140,
+          "aboveTruth": 15,
+          "rejectionCounts": [
+            155,
+            246,
+            1219,
+            2048
+          ],
+          "medianWidthFieldSd": 0.6949301420750953
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1867,
+          "belowTruth": 148,
+          "aboveTruth": 33,
+          "rejectionCounts": [
+            181,
+            417,
+            1466,
+            2048
+          ],
+          "medianWidthFieldSd": 0.6492570446973753
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1930,
+          "belowTruth": 80,
+          "aboveTruth": 38,
+          "rejectionCounts": [
+            118,
+            450,
+            1526,
+            2048
+          ],
+          "medianWidthFieldSd": 0.7330050446903493
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 61,
+        "fieldTOnly": 24
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 61,
+      "repeat": "A",
+      "sampleSeed": "9190245135694177930",
+      "resamplingSeed": "16518243260906643732",
+      "methods": {
+        "field_t": {
+          "covered": 1919,
+          "belowTruth": 111,
+          "aboveTruth": 18,
+          "rejectionCounts": [
+            129,
+            644,
+            1878,
+            2048
+          ],
+          "medianWidthFieldSd": 0.4972472139783199
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1906,
+          "belowTruth": 111,
+          "aboveTruth": 31,
+          "rejectionCounts": [
+            142,
+            792,
+            1930,
+            2048
+          ],
+          "medianWidthFieldSd": 0.478908027142215
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1929,
+          "belowTruth": 74,
+          "aboveTruth": 45,
+          "rejectionCounts": [
+            119,
+            878,
+            1961,
+            2048
+          ],
+          "medianWidthFieldSd": 0.5126494957626825
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 37,
+        "fieldTOnly": 27
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 61,
+      "repeat": "B",
+      "sampleSeed": "4963156760391977441",
+      "resamplingSeed": "1634154625721850368",
+      "methods": {
+        "field_t": {
+          "covered": 1920,
+          "belowTruth": 108,
+          "aboveTruth": 20,
+          "rejectionCounts": [
+            128,
+            560,
+            1899,
+            2048
+          ],
+          "medianWidthFieldSd": 0.4998545593746944
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1911,
+          "belowTruth": 105,
+          "aboveTruth": 32,
+          "rejectionCounts": [
+            137,
+            724,
+            1942,
+            2048
+          ],
+          "medianWidthFieldSd": 0.4808097246851454
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1946,
+          "belowTruth": 62,
+          "aboveTruth": 40,
+          "rejectionCounts": [
+            102,
+            814,
+            1967,
+            2048
+          ],
+          "medianWidthFieldSd": 0.5111613838585365
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 46,
+        "fieldTOnly": 20
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 101,
+      "repeat": "A",
+      "sampleSeed": "11019859345216301713",
+      "resamplingSeed": "14974094539841186000",
+      "methods": {
+        "field_t": {
+          "covered": 1898,
+          "belowTruth": 111,
+          "aboveTruth": 39,
+          "rejectionCounts": [
+            150,
+            1037,
+            2024,
+            2048
+          ],
+          "medianWidthFieldSd": 0.3868182694974593
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1895,
+          "belowTruth": 104,
+          "aboveTruth": 49,
+          "rejectionCounts": [
+            153,
+            1160,
+            2036,
+            2048
+          ],
+          "medianWidthFieldSd": 0.3755798902408616
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1908,
+          "belowTruth": 81,
+          "aboveTruth": 59,
+          "rejectionCounts": [
+            140,
+            1241,
+            2039,
+            2048
+          ],
+          "medianWidthFieldSd": 0.39103593868629166
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 31,
+        "fieldTOnly": 21
+      }
+    },
+    {
+      "mode": "clustered_strong_skew",
+      "rho": 0.5,
+      "fields": 101,
+      "repeat": "B",
+      "sampleSeed": "15353005260221702646",
+      "resamplingSeed": "8426136377918481331",
+      "methods": {
+        "field_t": {
+          "covered": 1935,
+          "belowTruth": 92,
+          "aboveTruth": 21,
+          "rejectionCounts": [
+            113,
+            1040,
+            2042,
+            2048
+          ],
+          "medianWidthFieldSd": 0.3888799089318556
+        },
+        "field_bootstrap_percentile": {
+          "covered": 1923,
+          "belowTruth": 90,
+          "aboveTruth": 35,
+          "rejectionCounts": [
+            125,
+            1141,
+            2043,
+            2048
+          ],
+          "medianWidthFieldSd": 0.3787891151032409
+        },
+        "field_bootstrap_studentized": {
+          "covered": 1944,
+          "belowTruth": 57,
+          "aboveTruth": 47,
+          "rejectionCounts": [
+            104,
+            1219,
+            2046,
+            2048
+          ],
+          "medianWidthFieldSd": 0.3957101166278115
+        }
+      },
+      "pairedCoverageDiscordance": {
+        "studentizedOnly": 36,
+        "fieldTOnly": 27
+      }
+    }
+  ],
+  "calibrationGatesFrozen": false,
+  "independentVerificationSeedsConsumed": false,
+  "scientificClosures": 0,
+  "nativeExecutions": 0
+}

@@ -1,0 +1,11 @@
+# BKL-046 – Misure e pesi in WBPP 3.2.2
+
+Il sorgente installato su DSG-Shared chiama ImageAnalysis in modalità Measure. Conservare nome e versione del misuratore insieme ai valori di FWHM in pixel, eccentricità, SNR, numero di stelle, PSFSignalWeight e PSFSNR. La scheda riguarda questo wrapper e il requisito di integrazione delle metriche. L'implementazione nativa di SubframeSelector rimane da verificare.
+
+1. Prima di pesare i frame, congelare l'elenco e conservare i frame esclusi e la motivazione. Il calcolo personalizzato usa gli estremi del gruppo per FWHM, eccentricità, SNR e numero di stelle. I termini min-max con intervallo zero contribuiscono zero. I termini PSF Signal e PSF SNR sono rapportati al massimo del rispettivo valore. Conservare minimi, massimi, pesi, pedestal e fattore di normalizzazione insieme all'output.
+2. Il wrapper registra un errore e ignora i frame con descrittore fallito. Il controllo di finitezza rifiuta campi assenti o non numerici senza rappresentazione numerica, e il supporto stellare deve essere positivo. Nel collaudo su dati inventati, un valore FWHM null passa per coercizione JavaScript. All'ingresso di un adattatore che consuma descrittori esterni occorre quindi distinguere un numero finito da un valore mancante.
+3. Per la scelta del riferimento di registrazione, il wrapper restringe ai frame a binning numericamente minimo. Preferisce, fra questi, frame senza segnalazione di peso anomalo se disponibili. All'interno del sottoinsieme usa il numero di stelle. Se nessun frame dello stesso binning è privo della segnalazione, il wrapper mantiene i candidati segnalati. Registrare la scelta del riferimento separatamente dai pesi di integrazione.
+
+Nel test con FWHM e SNR, i pesi dei frame A e B passano da 2,0 e 2,5 a 2,0 e 1,6 dopo l'aggiunta di un quarto frame. Le misure di A e B sono identiche e l'ordine cambia per la diversa normalizzazione del gruppo. Il test prova le funzioni di decisione con descrittori inventati. Il rilevamento e le misure native sui pixel restano da verificare.
+
+Riferimento locale BPP-SubframeAnalyzer.js, SHA-256 2e238f66ec3e0aa31cb791b1be9190ce55e8321f6d8023694b289f10c33d4620, righe 35–139, 160–215, 405–468 e 507–591. [Riscontro](riscontro.json)

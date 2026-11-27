@@ -1,0 +1,28 @@
+{
+  "schema": "BKL046_M8M20_HELDOUT_ARTIFICIAL_CENSORING_V1",
+  "alternativeArchive": "b096c5dd055bff3b12d502ff4d65c9e638929daea687db03fe38c1f8ce7d71a6",
+  "alternativeReport": "0d27e7e8da28fd349a0c4df1de7034f11101f47cc27a8fb6626b84ff2e4faab6",
+  "alternativeProgram": "290fbc0aa0e8971d8c76ca054b938baabef3d850758bc2018f6f11eaf23a82f2",
+  "censorCode": 40000,
+  "targetRanges": [
+    [
+      40000,
+      50000
+    ],
+    [
+      50000,
+      62000
+    ]
+  ],
+  "candidateCodeExclusive": 62000,
+  "radii": [
+    1,
+    1.5
+  ],
+  "minimumOtherFrames": [
+    1,
+    3
+  ],
+  "descriptiveRelativeErrorLimit": 0.05,
+  "scope": "In each fixed raw exposure artificially censor the held-out reference samples whose original code is 40000–61999. Evaluate original raw sample code only after computing median from candidates in other exposures. No source neighboring values, adjustment of models, intensity rescaling or interpolation. Use same Bayer parity and either fixed detector coordinate or exact agreement of both pinned affine models. Report coverage and descriptive absolute and signed relative error by original code range and parity. Real samples below true digital ceiling are the hidden reference, acquired from the same set of exposure times. No claim about real clipped samples or independent astronomical flux."
+}

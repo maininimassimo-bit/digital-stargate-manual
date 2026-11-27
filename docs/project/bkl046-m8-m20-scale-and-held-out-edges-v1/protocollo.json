@@ -1,0 +1,14 @@
+{
+  "schema": "BKL046_M8M20_SCALE_AND_EDGE_PROTOCOL_V1",
+  "sourcePins": {
+    "reference": "a84d66047802b999c61cce84b80e2cf79dc85032532fc9b30cf6c015684a9564",
+    "empirical": "8a04ef27b0fe20aed7125c4eab3cebb668baaec753af645b6f0cdd5251eb4dd0",
+    "edges": "7dc0b874e6451505897744dad79a9e8381398d241de1b8312320a9f7dcd64e42",
+    "bands": "8be0957616e436d54caabe61d51690e2d5624063832eb088a022213db1fc355c"
+  },
+  "pairs": 27,
+  "scalesPerPair": 72,
+  "threshold": 0.1,
+  "estimand": "Relative held-out background residual on one common support. Apply each archived positive stellar scale to target contrast about the common-support median. Independently fit offset and plane on the complement of each edge band. Score only that band. A joint pass requires both checkerboard folds and all four edge bands for the same scale. Replicate archived unit and checkerboard metrics before accepting the new scores.",
+  "limitations": "Correlated finite trials on one field; no continuous or confidence bounds, no absolute sky, no preservation of diffuse flux, no PixInsight qualification."
+}

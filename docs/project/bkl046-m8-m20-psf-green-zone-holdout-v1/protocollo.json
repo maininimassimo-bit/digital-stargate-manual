@@ -1,0 +1,7 @@
+{
+  "schema": "BKL046_M8M20_PSF_GREEN_ZONE_HELDOUT_V1",
+  "parityProgram": "eb8f7ee1f22d275e22878f5f8bd620957bb63ea8a80c98e32c56b46486a8a700",
+  "parityProtocol": "ebc47473d3b49a005b751b89e3ff9900c24b08eb57da58498e35c0096e77d567",
+  "parityDetail": "930948422d7050c06afb0c875233b0dcc1a05dd436e1ae78ae241e8299f04eec",
+  "decision": "Use all 19 stars and both green parities, independently per calibration and direction of the 7+7 exposure split. Select a zone angle only from the other stars in the same zone using aggregate training-half minimum loss over nuisance shape parameters. Then choose the target width, wings and axis ratio at that angle on the training half. Compare regional and own-star angle against circular reference on the untouched held-out half. The parent model bank, supports, nuisance fitting and centers are frozen. No target-dependent angle or validation-half selection for the regional model."
+}

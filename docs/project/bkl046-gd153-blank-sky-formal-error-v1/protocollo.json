@@ -1,0 +1,35 @@
+{
+  "schema": "BKL046_GD153_FLC_BLANK_SKY_ERR_CONTROL_V1",
+  "poseProtocol": "7636924bce5cb8ab6f2832052565d335bdcc083f90e2597bb40e28316e9ecfaa",
+  "natural": [
+    "bd1e086475564efa36f04a57c1d52ff57934f983e43b3beae77bdb5a14ccfe5e",
+    "riscontro.json",
+    "8a77ba6a41a8835332a134cda0a8520d73367576289efbb1f6d6ea76b733ea83"
+  ],
+  "clean": [
+    "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+    "riscontro-verificato.json",
+    "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab"
+  ],
+  "err": [
+    "d97635bc956bd3e396fad79aaaf5a3a7aed39e85b4efa0c3b2c35a174a58a859",
+    "riscontro.json",
+    "21f66575a24435d649a553165a41a40cdbba763febf5f2a414a9514a555e1327"
+  ],
+  "centers": {
+    "spacing": 46,
+    "margin": 23,
+    "excludeWithinTarget": 60
+  },
+  "apertureRadius": 10,
+  "skyAnnulus": [
+    16,
+    22
+  ],
+  "minimumApertureFraction": 0.95,
+  "minimumSkyFraction": 0.7,
+  "screenAbsSigma": 10,
+  "draws": 512,
+  "rngSeed": 342571,
+  "scope": "Use only the verified FLC targets and distinct siblings of the formal error study. Fixed disjoint background apertures avoid GD153. Use same PAM, DQ-zero support, radii and local-median sky. For each aperture compare observed summed residual to a diagonal Gaussian null with the measured ERR per retained pixel and a flat expectation. Report all supported patches plus a fixed limit on largest absolute normalized residual in the aperture or annulus, retaining rejections. The resulting dispersion is an empirical background diagnostic, not a calibration of signal-dependent or missing-pixel covariance."
+}

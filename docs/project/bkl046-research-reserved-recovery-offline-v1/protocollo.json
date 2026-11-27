@@ -1,0 +1,7 @@
+{
+  "schema": "BKL046_RESEARCH_RESERVED_RECOVERY_OFFLINE_PROTOCOL_V1",
+  "sourceCommit": "69484ec05cb502590be9904fcce1c2034cbafe47",
+  "flowSha256": "a3b68a2e27057962719cb92e7766e7aad71d5e5a8092cabf6befe1b71aee5cc3",
+  "extractorSha256": "a72f69607a2e4a223e9f83afd6a17b0134464a0217bd78d904a854adda906a10",
+  "scope": "Extract the archived research_decision and _research_complete methods and test the reserved recovery path with an isolated SQLite fixture. SQLite emulates get and atomic state mutation in the lab only. No GCS, provider, network, deployment or PixInsight in the execution runs."
+}

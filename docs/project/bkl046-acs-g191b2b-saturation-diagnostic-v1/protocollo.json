@@ -1,0 +1,74 @@
+{
+  "schema": "BKL046_ACS_SATURATION_DIAGNOSTIC_V1",
+  "program": 10054,
+  "filter": "F606W",
+  "aperture": "WFC1-1K",
+  "amp": "B",
+  "chip": 1,
+  "apertureRadii": [
+    3,
+    5,
+    10
+  ],
+  "skyAnnulus": [
+    15,
+    22
+  ],
+  "wingAnnulus": [
+    4,
+    8
+  ],
+  "stripeHalfWidths": [
+    1,
+    2,
+    3
+  ],
+  "registrationHalfSize": 8,
+  "registrationSearch": 3,
+  "allowedDQ": [
+    0,
+    64
+  ],
+  "fullWellBit": 256,
+  "adcBit": 2048,
+  "nominalAdcMaxDN": 65535,
+  "method": "Use the brightest FLT pixel for integer centering. Register RAW to FLT by Pearson correlation of unsaturated samples and require a unique maximum matching the RAW peak. Subtract the median PAM-weighted background in the pinned annulus. Compare aperture sums with and without the center while keeping the same other accepted pixels. Compare detector x and y stripe sums relative to an unflagged wing annulus. The included core is a recorded value only. No reconstruction, ground-truth flux or scientific closure.",
+  "pam": {
+    "filename": "wfc1_newpam.fits",
+    "sha256": "025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c"
+  },
+  "exposures": [
+    {
+      "star": "G191B2B",
+      "id": "j8v604xdq",
+      "flt": "353210bd8df64d31ad0d925e7a601c57c6b0dc15827092a4ebb7e52bb00f4d3e",
+      "raw": "e3c836105c5f426b8556a7d916240a4da93e27a1e482876d49160b106e5ed407"
+    },
+    {
+      "star": "G191B2B",
+      "id": "j8v604xeq",
+      "flt": "63f3f5495eea0bf28e5f2f422736a91023a17840f2def9671339abee8075d185",
+      "raw": "ddc23b29e9de778046c6d1986c73883b95ee5da54243f571cb1ebdfe49a37ea0"
+    },
+    {
+      "star": "GD71",
+      "id": "j8v602msq",
+      "flt": "b9eea79ee7887f4e264be468ddd72e05720c0192ff00dab00f88b8a86b0890c1"
+    },
+    {
+      "star": "GD71",
+      "id": "j8v602mtq",
+      "flt": "325f1c2aed761983351cfa77e04f39dda8ffc5630edb3a2f4583f4c0d4ea5cda"
+    },
+    {
+      "star": "GD153",
+      "id": "j8v606zrq",
+      "flt": "1b7a73ccd9c22cecec7ce797addc87ae9f24412e64a12245bc8d6a8ab93a24fe"
+    },
+    {
+      "star": "GD153",
+      "id": "j8v606zsq",
+      "flt": "15cf61b5b2b0de4be29e30c1809d89303658e297a2cc5418f796072677adbd8d"
+    }
+  ]
+}

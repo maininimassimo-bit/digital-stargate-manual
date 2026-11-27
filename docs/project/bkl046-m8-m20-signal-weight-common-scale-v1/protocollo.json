@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_M8_M20_SIGNAL_WEIGHT_CFA_COMMON_SCALE_V1",
+  "weightsCode": "0fa501575d9437fae9c0557928013742f7a0e28892be3b65b387b8eac038912b",
+  "weightsReport": "9235b981e44087c573916c91211a3bc35f01709e836b231a184be4fa5561c7ae",
+  "commonScaleCode": "5b10c3b383d78de2bfdec87d674ec9dd3f98cf0a61c21c5eb21176b6375a8e09",
+  "commonScalePlan": "ac9086dea77a40f8713db57a45f329ec7ab33dfb0e807aef46639b4fcf119ed0",
+  "commonScaleReport": "99509d242e5d7fc22e0626946d5a302aeed5a4acec31196b0dc45ba460569c8c",
+  "matrixPrior": "27c44847806551fc00e65331d8b05d14f5221dbd5aed0fee6c6cdfcc244178e3",
+  "frames": 14,
+  "targets": 53,
+  "arms": [
+    "unitAffine",
+    "signalAffine"
+  ],
+  "comparison": "Only change the two global geometry arms. Reuse the frozen calibrated inputs, masks, equal deposit weights, reference plane, widths, 90 percent support, two alternating halves and two calibrations. Per-star flux and difference-stack sky MAD are diagnostics."
+}

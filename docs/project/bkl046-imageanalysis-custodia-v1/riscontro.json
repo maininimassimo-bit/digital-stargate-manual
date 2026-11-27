@@ -1,0 +1,29 @@
+{
+  "protocol": "BKL046_IMAGEANALYSIS_CUSTODY_OFFLINE_V1",
+  "host": "DSG-SHARED",
+  "testsPassed": 5,
+  "realWindowsFileAndDirectoryHandles": true,
+  "syntheticInputsVerified": 4,
+  "coordinatorAndProcessExitSimulated": true,
+  "canonicalR4Touched": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0,
+  "dependencies": [
+    {
+      "file": "tools/pixinsight/local_pilot/broker.py",
+      "sha256": "704e65f75ff65049046c31cbd99073ece665aa4bf529d47cf507c9615abeced4"
+    },
+    {
+      "file": "tools/scientific_transients/f06_staging_directories.py",
+      "sha256": "3c0bdb89561d7dc46d90716794e23e869433f691616872b0a88f633f175206db"
+    },
+    {
+      "file": "tools/scientific_transients/local_registry.py",
+      "sha256": "ca73d90a4039edac4f60fed12d08bd361baefbc3efe45e2520cccaf2fcc674f6"
+    },
+    {
+      "file": "tools/scientific_transients/native_read_locks.py",
+      "sha256": "e87c2880ef4f089da9da8709c23080fc7a495746be3f429840193c6dfc393bca"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema":"BKL046_GAIAXP_ACS_STANDARD_PHOTOMETRY_PROTOCOL_V1",
+  "gaiaSpectraSha256":"b17057e1a0fefe4ee560ba602a0eddc7ab5bed6990be6e950d636ad3dfb777a6",
+  "acsProtocolSha256":"8b1c974405aa5ee4c4714354ff105c65c0c5ff0eb25eb827807764950449f974",
+  "targets":{
+    "GD71":{"exposures":"59586e89f0908688381cf8b834e9dbd399c0570861384ea989538a8c1a18d6ce","historicalComparison":"b3c95c8a2f31c6d79b34a7d720afa262f7439b08b13b5d5574740e8c1d981e91","stis":"cd343c71be682cf4af45c6a7be1ef49ff5f65eeccae9ad94d7b3825df382748b"},
+    "GD153":{"exposures":"33cb2f2d475afc121493a8b55a8aaeadcf92e05d2866d7be3e4933fdc8da4bfb","historicalComparison":"5024dc65f62d172c120a4618466ef8a3d5a2b500c63b37e712b1630ff43c018c","stis":"008391418ce4ed0d3b37b7993d7fe5cbdd3dcbd422295b62e52bb19215dbf6b4"}
+  },
+  "bands":["F606W","F658N","F660N"],
+  "ratios":["F658N/F660N","F658N/F606W","F660N/F606W"],
+  "maskNm":[632,646],
+  "gaiaToFlamFactor":100,
+  "quadratureOrders":[4,8],
+  "fixedAperturePixels":3,
+  "scope":"Two stars with verified six-exposure ACS archive reports. Compare raw finite aperture ratios with synthetic infinite-aperture values. Also compute CALSPEC on the Gaia grid, without pretending to reproduce the Gaia line spread function. No statistical acceptance with marginal errors only."
+}

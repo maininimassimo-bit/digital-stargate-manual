@@ -1,0 +1,1108 @@
+{
+  "protocol": "BKL046_MOFFAT_PIXEL_EDGE_QUADRATURE_V1",
+  "sourcePins": {
+    "archive": "6b2ae3dcffe752300c35786b45dc3e1d7eb2751913e731d91868634cd27969bd",
+    "protocol": "c68ae1bf0727e888e507710c2e10ecb194ffdbbfa8349223e011c3839e3e5a92",
+    "failed": "a7d2913094b47cfdda4132b8d006ecdefd3419c4bd432f9bcf449037cb197a86",
+    "refinement": "9d548de943e17811d30b803e5d08ae1a556375e7a1ffbb851c86fdc7209595aa"
+  },
+  "previousFailedChecksPreserved": [
+    {
+      "caseID": "moffat_04",
+      "check": "selectedSimpsonRefinementTolerance"
+    },
+    {
+      "caseID": "moffat_05",
+      "check": "selectedSimpsonRefinementTolerance"
+    },
+    {
+      "caseID": "moffat_07",
+      "check": "selectedSimpsonRefinementTolerance"
+    },
+    {
+      "caseID": "moffat_08",
+      "check": "selectedSimpsonRefinementTolerance"
+    },
+    {
+      "caseID": "moffat_09",
+      "check": "selectedSimpsonRefinementTolerance"
+    },
+    {
+      "caseID": "moffat_10",
+      "check": "selectedSimpsonRefinementTolerance"
+    },
+    {
+      "caseID": "moffat_11",
+      "check": "selectedSimpsonRefinementTolerance"
+    },
+    {
+      "caseID": "moffat_21",
+      "check": "selectedSimpsonRefinementTolerance"
+    }
+  ],
+  "evaluatedPixels": 22500,
+  "edgeQuadratureOrders": [
+    32,
+    64,
+    128
+  ],
+  "archivedGaussComparisonOrder": 128,
+  "checks": [
+    {
+      "id": "moffat_00",
+      "parameters": {
+        "id": "moffat_00",
+        "alpha": 0.35,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 9.094947017729282e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 2.4556356947869062e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_01",
+      "parameters": {
+        "id": "moffat_01",
+        "alpha": 0.35,
+        "beta": 1.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 8.185452315956354e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 3.456079866737127e-11,
+          "finiteFieldElectrons": 3.092281986027956e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_02",
+      "parameters": {
+        "id": "moffat_02",
+        "alpha": 0.35,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 6.252776074688882e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 7.958078640513122e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 5.115907697472721e-12,
+          "finiteFieldElectrons": 1.2732925824820995e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_03",
+      "parameters": {
+        "id": "moffat_03",
+        "alpha": 0.35,
+        "beta": 1.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.4779288903810084e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.9326762412674725e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 8.185452315956354e-12,
+          "finiteFieldElectrons": 2.000888343900442e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_04",
+      "parameters": {
+        "id": "moffat_04",
+        "alpha": 0.35,
+        "beta": 2.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.2732925824820995e-11,
+          "finiteFieldElectrons": 7.275957614183426e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.1827872842550278e-11,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 5.820766091346741e-11,
+          "finiteFieldElectrons": 6.730260793119669e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_05",
+      "parameters": {
+        "id": "moffat_05",
+        "alpha": 0.35,
+        "beta": 2.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.2732925824820995e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.000888343900442e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 7.457856554538012e-11,
+          "finiteFieldElectrons": 7.821654435247183e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_06",
+      "parameters": {
+        "id": "moffat_06",
+        "alpha": 0.35,
+        "beta": 2.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.9558577807620168e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.2278178473934531e-11,
+          "finiteFieldElectrons": 4.729372449219227e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_07",
+      "parameters": {
+        "id": "moffat_07",
+        "alpha": 0.35,
+        "beta": 2.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 3.495870259939693e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 5.087485988042317e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 2.5920599000528455e-11,
+          "finiteFieldElectrons": 5.4569682106375694e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_08",
+      "parameters": {
+        "id": "moffat_08",
+        "alpha": 0.35,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.6370904631912708e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.9103830456733704e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 8.549250196665525e-11,
+          "finiteFieldElectrons": 1.0368239600211382e-10
+        }
+      }
+    },
+    {
+      "id": "moffat_09",
+      "parameters": {
+        "id": "moffat_09",
+        "alpha": 0.35,
+        "beta": 4.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.0913936421275139e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.000888343900442e-11,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 9.276845958083868e-11,
+          "finiteFieldElectrons": 1.0732037480920553e-10
+        }
+      }
+    },
+    {
+      "id": "moffat_10",
+      "parameters": {
+        "id": "moffat_10",
+        "alpha": 0.35,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 4.035882739117369e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 3.092281986027956e-11,
+          "finiteFieldElectrons": 8.731149137020111e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_11",
+      "parameters": {
+        "id": "moffat_11",
+        "alpha": 0.35,
+        "beta": 4.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 6.217248937900877e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 9.00968188943807e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 5.547917680814862e-11,
+          "finiteFieldElectrons": 1.1823431123048067e-10
+        }
+      }
+    },
+    {
+      "id": "moffat_12",
+      "parameters": {
+        "id": "moffat_12",
+        "alpha": 0.8,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 4.547473508864641e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 4.547473508864641e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_13",
+      "parameters": {
+        "id": "moffat_13",
+        "alpha": 0.8,
+        "beta": 1.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.7284841053187847e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 9.094947017729282e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_14",
+      "parameters": {
+        "id": "moffat_14",
+        "alpha": 0.8,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 3.410605131648481e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 6.821210263296962e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_15",
+      "parameters": {
+        "id": "moffat_15",
+        "alpha": 0.8,
+        "beta": 1.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 6.821210263296962e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.5916157281026244e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 2.5011104298755527e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      }
+    },
+    {
+      "id": "moffat_16",
+      "parameters": {
+        "id": "moffat_16",
+        "alpha": 0.8,
+        "beta": 2.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 3.637978807091713e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 6.366462912410498e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.6370904631912708e-11,
+          "finiteFieldElectrons": 1.0913936421275139e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_17",
+      "parameters": {
+        "id": "moffat_17",
+        "alpha": 0.8,
+        "beta": 2.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 9.094947017729282e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 2.9103830456733704e-11,
+          "finiteFieldElectrons": 2.000888343900442e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_18",
+      "parameters": {
+        "id": "moffat_18",
+        "alpha": 0.8,
+        "beta": 2.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 7.958078640513122e-13,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 2.9558577807620168e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_19",
+      "parameters": {
+        "id": "moffat_19",
+        "alpha": 0.8,
+        "beta": 2.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 2.2737367544323206e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.7284841053187847e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 6.59383658785373e-12,
+          "finiteFieldElectrons": 9.094947017729282e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_20",
+      "parameters": {
+        "id": "moffat_20",
+        "alpha": 0.8,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 8.185452315956354e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.3642420526593924e-11,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 4.274625098332763e-11,
+          "finiteFieldElectrons": 3.637978807091713e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_21",
+      "parameters": {
+        "id": "moffat_21",
+        "alpha": 0.8,
+        "beta": 4.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.0913936421275139e-11,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.4551915228366852e-11,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 6.366462912410498e-11,
+          "finiteFieldElectrons": 5.638867150992155e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_22",
+      "parameters": {
+        "id": "moffat_22",
+        "alpha": 0.8,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.2079226507921703e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.7621459846850485e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 8.86757334228605e-12,
+          "finiteFieldElectrons": 1.4551915228366852e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_23",
+      "parameters": {
+        "id": "moffat_23",
+        "alpha": 0.8,
+        "beta": 4.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 2.3732127374387346e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 3.197442310920451e-12,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.318767317570746e-11,
+          "finiteFieldElectrons": 3.2741809263825417e-11
+        }
+      }
+    },
+    {
+      "id": "moffat_24",
+      "parameters": {
+        "id": "moffat_24",
+        "alpha": 1.6,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 9.947598300641403e-14,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.2737367544323206e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 5.684341886080801e-13,
+          "finiteFieldElectrons": 0.0
+        }
+      }
+    },
+    {
+      "id": "moffat_25",
+      "parameters": {
+        "id": "moffat_25",
+        "alpha": 1.6,
+        "beta": 1.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.7053025658242404e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.2737367544323206e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      }
+    },
+    {
+      "id": "moffat_26",
+      "parameters": {
+        "id": "moffat_26",
+        "alpha": 1.6,
+        "beta": 1.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.1368683772161603e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.4210854715202004e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 4.547473508864641e-13,
+          "finiteFieldElectrons": 0.0
+        }
+      }
+    },
+    {
+      "id": "moffat_27",
+      "parameters": {
+        "id": "moffat_27",
+        "alpha": 1.6,
+        "beta": 1.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 2.2737367544323206e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.2737367544323206e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 7.958078640513122e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_28",
+      "parameters": {
+        "id": "moffat_28",
+        "alpha": 1.6,
+        "beta": 2.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 6.821210263296962e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 6.821210263296962e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_29",
+      "parameters": {
+        "id": "moffat_29",
+        "alpha": 1.6,
+        "beta": 2.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_30",
+      "parameters": {
+        "id": "moffat_30",
+        "alpha": 1.6,
+        "beta": 2.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 2.2737367544323206e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 4.547473508864641e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.1368683772161603e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      }
+    },
+    {
+      "id": "moffat_31",
+      "parameters": {
+        "id": "moffat_31",
+        "alpha": 1.6,
+        "beta": 2.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 4.547473508864641e-13,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.1368683772161603e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 2.9558577807620168e-12,
+          "finiteFieldElectrons": 0.0
+        }
+      }
+    },
+    {
+      "id": "moffat_32",
+      "parameters": {
+        "id": "moffat_32",
+        "alpha": 1.6,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.1368683772161603e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.2737367544323206e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 8.185452315956354e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_33",
+      "parameters": {
+        "id": "moffat_33",
+        "alpha": 1.6,
+        "beta": 4.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0,
+          0
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 2.7284841053187847e-12,
+          "finiteFieldElectrons": 0.0
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 5.4569682106375694e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.6370904631912708e-11,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_34",
+      "parameters": {
+        "id": "moffat_34",
+        "alpha": 1.6,
+        "beta": 4.5,
+        "axisRatio": 1,
+        "angleDegrees": 0,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 9.094947017729282e-13,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 1.8189894035458565e-12,
+          "finiteFieldElectrons": 1.8189894035458565e-12
+        }
+      }
+    },
+    {
+      "id": "moffat_35",
+      "parameters": {
+        "id": "moffat_35",
+        "alpha": 1.6,
+        "beta": 4.5,
+        "axisRatio": 0.6,
+        "angleDegrees": 45,
+        "phase": [
+          0.25,
+          0.5
+        ]
+      },
+      "comparisons": {
+        "edge32To128": {
+          "maxPixelElectrons": 1.3642420526593924e-12,
+          "finiteFieldElectrons": 5.4569682106375694e-12
+        },
+        "edge64To128": {
+          "maxPixelElectrons": 2.2737367544323206e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        },
+        "edge128ToArchivedGauss128": {
+          "maxPixelElectrons": 6.821210263296962e-12,
+          "finiteFieldElectrons": 3.637978807091713e-12
+        }
+      }
+    }
+  ],
+  "independentAnalyticControls": [
+    {
+      "id": "moffat_00",
+      "edge128ToSolidAngle": {
+        "maxPixelElectrons": 6.366462912410498e-12,
+        "finiteFieldElectrons": 1.8189894035458565e-12
+      }
+    },
+    {
+      "id": "moffat_02",
+      "edge128ToSolidAngle": {
+        "maxPixelElectrons": 7.958078640513122e-13,
+        "finiteFieldElectrons": 0.0
+      }
+    },
+    {
+      "id": "moffat_12",
+      "edge128ToSolidAngle": {
+        "maxPixelElectrons": 1.3642420526593924e-12,
+        "finiteFieldElectrons": 0.0
+      }
+    },
+    {
+      "id": "moffat_14",
+      "edge128ToSolidAngle": {
+        "maxPixelElectrons": 6.821210263296962e-13,
+        "finiteFieldElectrons": 0.0
+      }
+    },
+    {
+      "id": "moffat_24",
+      "edge128ToSolidAngle": {
+        "maxPixelElectrons": 4.969358258222201e-13,
+        "finiteFieldElectrons": 0.0
+      }
+    },
+    {
+      "id": "moffat_26",
+      "edge128ToSolidAngle": {
+        "maxPixelElectrons": 5.850875339774575e-13,
+        "finiteFieldElectrons": 1.8189894035458565e-12
+      }
+    }
+  ],
+  "fluxRenormalized": false,
+  "numericalAgreementOnly": true,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

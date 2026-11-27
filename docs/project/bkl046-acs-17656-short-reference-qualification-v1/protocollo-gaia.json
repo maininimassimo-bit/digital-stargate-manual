@@ -1,0 +1,44 @@
+{
+  "schema": "BKL046_ACS17656_17979_COMMON_SHORT_REFERENCES_V1",
+  "catalogSha256": "175ffa239bddca4a5e53a9146b4099674c3126339714b8a0970f6c7639672ff9",
+  "parentCodeSha256": "ba60b2b73e6bf657c282940bda85d62b509e15c08fdd6ad34a8ec590e3b2539c",
+  "parentProtocolSha256": "5503a9d04938e26d3ccc76c85bb4926dc3798db81fd559b9655c4e83ec39cf7c",
+  "gaiaMagRange": [
+    13,
+    19
+  ],
+  "maxRUWE": 1.4,
+  "maxMotionErrorMasPerYear": 1,
+  "maxGaiaNeighborArcsec": 0.45,
+  "searchHalfWidthPx": 3,
+  "maximumCentroidDisplacementPx": 3,
+  "backgroundOuterPx": 9,
+  "minimumPeakAboveSkyE": 120,
+  "maximumFullWellSafePeakE": 50000,
+  "centroidHalfWidthPx": 2,
+  "minimumCompanionSeparationPx": 2,
+  "companionPeakRatio": 0.7,
+  "skyTileArcsec": 16,
+  "skyOrigin": [
+    5.635,
+    -72.038
+  ],
+  "scope": "Compare the two public 40-second references of program 17656 with the successfully guided short control of 17979. Keep the previously frozen Gaia and holdout parameters, and report unique catalogue overlap by detector pair. No photometric flux or long-to-short transfer qualified.",
+  "inputs": [
+    {
+      "id": "jfdp02vwq",
+      "sha256": "4a31fade53ba4ab37c39afbc86bcdf63bfe30f0a125a9d0dda3c1e00b538ba50",
+      "program": 17656
+    },
+    {
+      "id": "jfdp02w3q",
+      "sha256": "048c6e5cd3e42e201c0e27af1ba09b26fac918447266a1029e2f68ce6ba37e62",
+      "program": 17656
+    },
+    {
+      "id": "jfln02qzq",
+      "sha256": "fce45ac9f1b8f3b10ae9fa54845c13904e580d59e66614658b3e226557dd63a1",
+      "program": 17979
+    }
+  ]
+}

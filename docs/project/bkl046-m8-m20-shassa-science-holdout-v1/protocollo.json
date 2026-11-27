@@ -1,0 +1,11 @@
+{
+  "schema": "BKL046_M8M20_SHASSA_SCIENCE_HOLDOUT_PROTOCOL_V1",
+  "layoutPin": "9586a8444b2643f2cb85c70e054c6a2c7f4b501b610df0f290451547227847eb",
+  "injectionReportPin": "d22407710a2e569ab43a61c8d2decf02c8e47d457ed62db3e2ceadd0ca496e8c",
+  "injectionProgramPin": "454d3b6cd79e18b89b1f593d6b83c689885c5e9d87597fee7ed837983d34c7c8",
+  "jointPin": "b2b5d50339ccc6bff9718c0c6587427f0492e456b21795d1a403e44abef44a6b",
+  "pairCount": 27,
+  "relativeMedianGainMinimum": 0.1,
+  "profileTolerance": 0.05,
+  "description": "Fit offset and plane to the six fixed anchors for each of the three previously frozen H-alpha layouts on 27 unit-scale differences of real registered Bayer-green exposures. Use exactly the same held-out common cells for every layout, removing the union of all 15 fitting cells. Record plane passes with absolute residual median improvement at least 10 percent and P90 no greater than offset. Compare with the previous criterion on its own earlier spatial split; here score only the common holdout. Inject the three frozen synthetic 2 ADU profiles independently in the target after registration at unit scale, refit using the same anchor procedure, and score recovered flux and shape. Record every pair and model. Reused targets and reference frames imply correlated comparisons; no independent optical truth or validated H-alpha to ADU conversion."
+}

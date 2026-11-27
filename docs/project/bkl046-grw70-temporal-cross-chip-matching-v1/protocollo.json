@@ -1,0 +1,33 @@
+{
+  "schema": "BKL046_GRW70_EPOCH_MATCHED_UVIS_V1",
+  "windowsDays": [
+    0.05,
+    1,
+    7
+  ],
+  "rules": "Match visits of different chips within each window. Maximize distinct pairs, then minimize total absolute separation. Use median FLC start MJD as visit time; tie break by visit IDs. Repeat independently for all metadata, all 3-band r5 colors, and all 3-band r5+r10 terms. Include 70 visits that underwent same relative-center workflow. Distinct windows and endpoint sets can reuse observations, so they are sensitivity checks rather than independent replicates.",
+  "inputs": [
+    [
+      "exploratory",
+      "81c01dd64515fc5b4b12aa3f73577b8d19f27ae7d903a24bf61bba4df1094345",
+      "b7a44a65ce3fa2e122084b3daf920324228813cddf5a0a29a8cb1ff5996b1357",
+      "afa982258831b8a0b060581062ff0a28071e9d889a096df715535068dc27f3f6",
+      8
+    ],
+    [
+      "first",
+      "b87a0af5d4333201d3c02e69b8b0f3482159cddc26cb0b1d938cf14e3dbd4d1a",
+      "be9a72f3babbc956f59dc060a166561275c38136e5dc2e7572e099cd5e2e77e1",
+      "9557d5bb438df263f624a95a2bdabac8822dc195080992005cf8812e7e0879d9",
+      20
+    ],
+    [
+      "reserve",
+      "fd33baa1618fa4875427a83f96e2eca5d6539293d70d077edf5afeb24b3b1c7f",
+      "dc50a0ed1ca637f00ccb7ef214b476e891c20616748bac8c66aa7511cc747360",
+      "0b16f9a4700b03733e172bd6ccbc8b3e4de301404a772a223cd8a4ace06e72fe",
+      42
+    ]
+  ],
+  "scope": "Color offsets at radius 5 are descriptive. Only pairs with both radii support an aperture term difference. Temporal matching reduces time separation but does not isolate the sensor from position, PSF, observer geometry or calibration."
+}

@@ -1,0 +1,11 @@
+# BKL-046 · Attribuzione Gaia per i prodotti XP di v571
+
+La capsula v571 conserva due prodotti DataLink ESA per Gaia DR3 4458990005388621952. Il riscontro associa gli SHA-256 dei due ZIP e dei due XML interni ai metadati dei corrispondenti prodotti XP. Verifica che il protocollo storico dichiari entrambi i ZIP come ingressi. La matrice NPZ derivata compare con la stessa impronta in tre posizioni della capsula. [XP_CONTINUOUS](https://gaia.aip.de/metadata/gaiadr3/xp_continuous_mean_spectrum/) · [XP_SAMPLED](https://gaia.aip.de/metadata/gaiadr3/xp_sampled_mean_spectrum/)
+
+Il centro Gaia@AIP indica **CC BY-NC 3.0 IGO** per entrambe le tabelle. Un record ESA distingue la stessa licenza per i dati ospitati negli archivi scientifici ESA. Per il materiale coperto, la licenza prevede attribuzione, indicazione degli adattamenti e uso non commerciale. Il riscontro applica queste fonti ai due prodotti identificati e conserva separatamente l’informazione sulla licenza BSD 3-Clause dei file di GaiaXPy. [Licenza dati](https://creativecommons.org/licenses/by-nc/3.0/igo/) · [Indicazione ESA sugli archivi](https://esdcdoi.esac.esa.int/doi/html/data/astronomy/gaia/FPR_LPV.html) · [Licenza GaiaXPy](https://github.com/gaia-dpci/GaiaXPy/blob/349e9a435d81de50b4c09bc4afb14548acc2c9ac/LICENSE)
+
+## Crediti per il materiale identificato
+
+Dati della missione Gaia dell’ESA, elaborati dal Gaia Data Processing and Analysis Consortium. Credito **ESA/Gaia/DPAC**. Il DPAC è finanziato dalle istituzioni nazionali e, in particolare, da quelle che partecipano all’accordo multilaterale Gaia. Il progetto ha conservato i due prodotti ESA nei contenitori originali e ha derivato matrici tramite campionamento e propagazione della covarianza. [Istruzioni ESA](https://gea.esac.esa.int/archive/documentation/GDR3/Miscellaneous/sec_credit_and_citation_instructions/) · [Missione Gaia](https://doi.org/10.1051/0004-6361/201629272) · [Rilascio DR3](https://doi.org/10.1051/0004-6361/202243940) · [Calibrazione spettroscopica BP/RP](https://doi.org/10.1051/0004-6361/202243880)
+
+La conoscenza v1.146 incorpora 708 rapporti. L’inventario storico ne collegava 14 al precedente controllo dei diritti. La verifica attuale circoscrive i due prodotti Gaia e la loro derivazione. Il perimetro di distribuzione della capsula mista e la consegna integrale restano aperti.

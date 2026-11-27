@@ -1,0 +1,7 @@
+# BKL-046 / BKL-051 — Rilettura della conferma di pubblicazione R4
+
+La revisione v9 aveva riprodotto un difetto di ordinamento. Il file rinominato diventava visibile prima della conferma del custode e il padre poteva avanzare in quella finestra. I rapporti successivi sulla v12 documentano cinque esiti di prova su K: con padre simulato. Soltanto il caso valido accetta la pubblicazione.
+
+Ho riletto i sorgenti con le impronte del descrittore del probe storico eseguito. Il replay carica il modulo JavaScript di pubblicazione effettivo, usa file NTFS isolati e simula il custode e il padre. Finché la conferma è trattenuta, il file rinominato è visibile, la pubblicazione non restituisce un esito e una seconda pubblicazione viene respinta. Una conferma valida e una rilettura concordante producono un esito. La conferma respinta e la rilettura con byte alterati non lo producono. I due rapporti sono identici.
+
+La lettura del sorgente del root verifica anche la guardia sui comandi durante la pubblicazione e il vincolo della conferma alla stessa richiesta pendente. Il test dinamico qui copre il modulo di pubblicazione. Il contratto API sintetico della prova storica e le approvazioni restano legati al loro descrittore. Nessuna ammissione, esecuzione PixInsight o modifica al registro.

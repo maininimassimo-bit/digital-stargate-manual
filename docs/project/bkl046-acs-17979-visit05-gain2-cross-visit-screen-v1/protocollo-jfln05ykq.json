@@ -1,0 +1,44 @@
+{
+  "schema": "BKL046_ACS17979_05_GAIN2_CROSS_VISIT_SCREEN_V1",
+  "minimumVerticalSpanPx": 5,
+  "shortSearchPx": 7,
+  "maximumPeakOffsetPx": 8,
+  "maximumShortDisagreementPx": 1.5,
+  "maximumTrailDistancePx": 2,
+  "radiiPx": [
+    10
+  ],
+  "skyPx": [
+    35,
+    48
+  ],
+  "paddingPx": 2,
+  "referenceCleanRadiusPx": 5,
+  "isolationRadiusPx": 4,
+  "neighborLimitFraction": 0.08,
+  "minimumSkyPixels": 400,
+  "minCoverageFraction": 0.97,
+  "maxShortRepeatPercent": 2,
+  "pam": {
+    "1": "025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c",
+    "2": "e372a9f1e4409531422b3679b58073967584244de46fcfc27b1a190bf6b005a3"
+  },
+  "inputs": [
+    {
+      "file": "jfln05ykq_flt.fits",
+      "role": "long",
+      "sha256": "dafd5aa1532d05e94e1478cccd50a977c4ee8bffbafe4d4e58d8315aa6e5d22d"
+    },
+    {
+      "file": "jfln02qtq_flt.fits",
+      "role": "short",
+      "sha256": "c0784b3257b920ab740fbf94f30602f38285c268d974dd90b3fd6af54ef9e70a"
+    },
+    {
+      "file": "jfln02qzq_flt.fits",
+      "role": "short",
+      "sha256": "fce45ac9f1b8f3b10ae9fa54845c13904e580d59e66614658b3e226557dd63a1"
+    }
+  ],
+  "selection": "The two individuals of ACS/WFC gain 2 F606W association JFLN05040 are screened separately against two 40-second exposures of the same pointing from visit 02. Inherited thresholds frozen. Across-visit WCS is used for preselection. The method is not a registration certificate."
+}

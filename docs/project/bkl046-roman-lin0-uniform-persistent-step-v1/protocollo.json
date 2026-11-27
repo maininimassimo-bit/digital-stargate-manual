@@ -1,0 +1,11 @@
+{
+  "schema": "BKL046_ROMAN_LIN0_UNIFORM_PERSISTENT_STEP_V1",
+  "previous": "26477f8cfe07d3a757c6e0c5c37c671849e371faffe518158c73327060f556f7",
+  "decoder": "fe00f2555cf369f52fe88bbc685092414139d341a9d24e02f497ffbaac7d36a3",
+  "capture": "edfce4e4134528b790f3fd2e972527495b75bd59e8b0d9876d2d7f1b2bc1bc2e",
+  "robustZ": 8,
+  "minNoiseAdu": 5,
+  "minPersistentFraction": 0.5,
+  "sameSign": true,
+  "rule": "Exploratory detector fixed before the full-grid scan and after isolated-window diagnosis. Per band, channel and exposure, subtract channel median per cumulative read difference. Estimate pixel-level center and robust scale using the other 29 exposures. Require a positive excursion at read 1 and persistence at reads 5 and 10 of half the first excess, also exceeding the independent scale threshold at each read. Exclude any sample at the representation rails; use identical rule throughout."
+}

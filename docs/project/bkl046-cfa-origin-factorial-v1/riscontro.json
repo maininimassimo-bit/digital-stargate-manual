@@ -1,0 +1,112 @@
+{
+  "fixtureSha256": {
+    "oracoli/baseline-rgb.fits": "4045fd17c979ccba03ac0bc78b9bcdd3ec14a9bacbe0f6552db766c3c94354f2",
+    "oracoli/baseline-weight.fits": "f50e984cde9b9e0d29f530250e9f138a84c96a761656368359ecbea07e266bd0",
+    "oracoli/half-matrix-as-zero-rgb.fits": "aab5ffa0e93363a7993d59db36485a982beb2e6c16ca354651aceff9d7d1af2d",
+    "oracoli/half-matrix-as-zero-weight.fits": "1234b5c21b574846e9cce5ea04528b739b6e8114c73a30f2f4fea39e059ff1ee",
+    "oracoli/zero-matrix-as-half-rgb.fits": "981a696f40a005dadd7992ea54ff26943683e6ed552551f62181926cf188bdb4",
+    "oracoli/zero-matrix-as-half-weight.fits": "0bf88615c9766f8ed24485e4bfacc49b0d83b27932932a7866d0dbf251f69d38",
+    "xdrz/shear-a-center0-origin0.0.xdrz": "329c3b870db87596d67aed977ba748ee99f8b5d61519549823bd931e61855b0c",
+    "xdrz/shear-a-center0-origin0.5.xdrz": "de82b5372cf7d45796300c9f2f97b7067d66b9bccd60ec940ffdee7935811b3f",
+    "xdrz/shear-a-edge05-origin0.0.xdrz": "bd3aac3a1301e840360a4b409fa50c8ef733872d9acc76e3bc6846f480771828",
+    "xdrz/shear-a-edge05-origin0.5.xdrz": "8c3fb08fd88571d833c2c9bd4145113987a9e8a1149dcba550f3c8d652b0daf1",
+    "xdrz/shear-b-center0-origin0.0.xdrz": "737721bf6eccc5c568b1894b6dd5c1ab85407902795af60b7ff922b13bed619f",
+    "xdrz/shear-b-center0-origin0.5.xdrz": "d34ca6e0bf1fae3fce5ed40bc133acd81929b88cf09fb66f4d59944b90641ce5",
+    "xdrz/shear-b-edge05-origin0.0.xdrz": "1b675ba0ff9d80037f1fc827620eb860bf2105fdd792c9a020a61eed43db4589",
+    "xdrz/shear-b-edge05-origin0.5.xdrz": "cc2b60da3142ed35b0791339a712357ecd429810362d3b78ac40023258fcee87",
+    "xdrz/shear-c-center0-origin0.0.xdrz": "8eff8b19ac9507a7d81cf11310454de7863c339dac3f731ab801df378c0a8b26",
+    "xdrz/shear-c-center0-origin0.5.xdrz": "f31c33b355e92229799f77c2da39b0b3f014f9e40b697bfcd311eab3df03e143",
+    "xdrz/shear-c-edge05-origin0.0.xdrz": "6d8fe27b7bf6eb2a762d61906543840fc0aacf7cc7a0bcf88910947c87ee75ac",
+    "xdrz/shear-c-edge05-origin0.5.xdrz": "e9906a74a1856708314bee388df49d035da5d6bc3e5cec42342d33cd776dcd47"
+  },
+  "frozenV4PlanModified": false,
+  "mapClassSeparation": [
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 52,
+      "left": "baseline",
+      "maxAbsIntensityOnCommonSupport": 0.206982595922168,
+      "maxAbsWeight": 0.5588810524209675,
+      "right": "half-matrix-as-zero"
+    },
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 44,
+      "left": "baseline",
+      "maxAbsIntensityOnCommonSupport": 0.16840982810458538,
+      "maxAbsWeight": 0.30244047619047687,
+      "right": "zero-matrix-as-half"
+    },
+    {
+      "acceptedByExactComparator": false,
+      "differentSupportSamples": 82,
+      "left": "half-matrix-as-zero",
+      "maxAbsIntensityOnCommonSupport": 0.3272152674437257,
+      "maxAbsWeight": 0.7088087234893936,
+      "right": "zero-matrix-as-half"
+    }
+  ],
+  "nativeExecutions": 0,
+  "predictedSignatures": {
+    "fixed-half": [
+      "zero-matrix-as-half",
+      "zero-matrix-as-half",
+      "baseline",
+      "baseline"
+    ],
+    "fixed-zero": [
+      "baseline",
+      "baseline",
+      "half-matrix-as-zero",
+      "half-matrix-as-zero"
+    ],
+    "use-declared": [
+      "baseline",
+      "zero-matrix-as-half",
+      "half-matrix-as-zero",
+      "baseline"
+    ]
+  },
+  "programSha256": "7569817eda96a020a2d29860747fd91598a47b63172d699e346cbece8ca13142",
+  "protocolSha256": "74a872c4d06b8447557519bde7c4064fb24d029a9f1fe38540c337e40f8ced5a",
+  "rows": [
+    {
+      "declaredOrigin": 0,
+      "matrix": "center0",
+      "predictedMapClass": {
+        "fixed-half": "zero-matrix-as-half",
+        "fixed-zero": "baseline",
+        "use-declared": "baseline"
+      }
+    },
+    {
+      "declaredOrigin": 0.5,
+      "matrix": "center0",
+      "predictedMapClass": {
+        "fixed-half": "zero-matrix-as-half",
+        "fixed-zero": "baseline",
+        "use-declared": "zero-matrix-as-half"
+      }
+    },
+    {
+      "declaredOrigin": 0,
+      "matrix": "edge05",
+      "predictedMapClass": {
+        "fixed-half": "baseline",
+        "fixed-zero": "half-matrix-as-zero",
+        "use-declared": "half-matrix-as-zero"
+      }
+    },
+    {
+      "declaredOrigin": 0.5,
+      "matrix": "edge05",
+      "predictedMapClass": {
+        "fixed-half": "baseline",
+        "fixed-zero": "half-matrix-as-zero",
+        "use-declared": "baseline"
+      }
+    }
+  ],
+  "schema": "BKL046_CFA_ORIGIN_FACTORIAL_V1",
+  "scientificClosures": 0
+}

@@ -1,0 +1,738 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_V89",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "2d91c2aba2a359271ec2c8a4e958f874aee1d7a8517800d4ad962e5c6994b115",
+    "commit": "5c188d61a0ed4fcc62c8d5f283607e95646f8a32"
+  },
+  "sourceIndex": {
+    "sha256": "ddfe335801ed5559a778674eaa61c8f32597cafbc9f463789dbc71a256adc5db",
+    "commit": "9bc191f5483c9730d15a8b1489467018df5ea18a"
+  },
+  "evidence": [
+    {
+      "id": "romanLin0Cross",
+      "level": "crossSessionCovariance",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "22bd4f767cddc1770671ed7afe76fc73d2f75c94",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-roman-lin0-cross-session-covariance-v1/riscontro.json",
+          "sha256": "b27c98eb5e48eac0747e30e61045f9662c1a6bbb7e5e0e4e310a25982d600322",
+          "archiveSha256": "bf16605638dd3c7d9833b33d970f82e7f93ea61872e07c98aaff50ceafc96fef",
+          "archiveName": "BKL046-ROMAN-LIN0-covarianza-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "romanLin0Cross-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "romanLin0Signal",
+      "level": "crossSessionMeasuredSignalOverlap",
+      "axes": [
+        "NOISE_FLUX/1",
+        "NOISE_FLUX/3"
+      ],
+      "commit": "cf55cd87e50110d09cd3e9eae454d74b9594683b",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-roman-lin0-signal-matched-covariance-v1/riscontro.json",
+          "sha256": "f264d691ee7cb2b88d6128152a962cdc4da6a05107d2498618fa27fd80137063",
+          "archiveSha256": "fb7c0c0d2fca1f17368c49ee4cb5b57f9878492510289ddd8dcf9d1234b80517",
+          "archiveName": "BKL046-ROMAN-LIN0-segnale-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "romanLin0Signal-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "ownerCriteriaV3",
+      "level": "ownerCriterionAudit",
+      "axes": [],
+      "commit": "0a149548db7412b651fa04e2f0088b86f35524ca",
+      "reports": [
+        {
+          "path": "docs/project/BKL-046-MATRICE-CRITERI-v3.json",
+          "sha256": "cea3e97fdff8e3518e72d98d1b714e01581185b75b03faece9c2d1efb513c7bf",
+          "archiveSha256": "bd7aa859a8501a68485dbfb3155d5218762699dd94d624dc32a16209ba95ae5e",
+          "archiveName": "BKL046-criteri-matrice-v3.zip",
+          "archiveMember": "BKL-046-MATRICE-CRITERI-v3.json",
+          "copiedReport": "ownerCriteriaV3-BKL-046-MATRICE-CRITERI-v3.json"
+        }
+      ]
+    },
+    {
+      "id": "m8GreenPermutation",
+      "level": "conditionalZoneAgreement",
+      "axes": [
+        "PSF_PIXEL/2"
+      ],
+      "commit": "d44bf09c02435c415e8b0837e17a60cbf56876de",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-green-zone-permutation-v1/riscontro.json",
+          "sha256": "cc3f0f2847e3f8f54f596b1e2a5ed791f35535acc5f74a8fa1a52210d4fded70",
+          "archiveSha256": "cc2373ce9096d80c1d6c982f655b9a3c1077ad81f0b7c456ac3e55da36cf1060",
+          "archiveName": "BKL046-M8-M20-PSF-verdi-permutazioni-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "m8GreenPermutation-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8GreenZone",
+      "level": "zoneAndStarHoldout",
+      "axes": [
+        "PSF_PIXEL/2",
+        "PSF_PIXEL/3"
+      ],
+      "commit": "d7a7dac890b4178935b87a4c648a11cd6bfdb963",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-psf-green-zone-holdout-v1/riscontro.json",
+          "sha256": "e7c1e917e89793e78afd564634faa533f616011bd2f6e2a082ff4f6b41581ee8",
+          "archiveSha256": "b1941c0efdd40b276b8b898eda35d3ade40104af92db1e584ae1376ffaf7ff91",
+          "archiveName": "BKL046-M8-M20-PSF-verdi-zona-heldout-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "m8GreenZone-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "ngc6341Zone",
+      "level": "independentFieldStarAndZoneHoldout",
+      "axes": [
+        "PSF_PIXEL/2",
+        "PSF_PIXEL/3"
+      ],
+      "commit": "baa0d468abbc89988b08158098fb1de9e5bd034c",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-ngc6341-psf-zone-holdout-v1/riscontro.json",
+          "sha256": "afd102626da62ae986d9d58c5c3f1764b50b2e7111e53b531d6d821d77aaaa82",
+          "archiveSha256": "afbce3d4101e06a59ec61e9fb5df765a4fdac525925ec956349f91368bd9e01d",
+          "archiveName": "BKL046-NGC6341-PSF-zona-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "ngc6341Zone-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "ngc6341ZoneBootstrap",
+      "level": "withinFieldZoneResampling",
+      "axes": [
+        "PSF_PIXEL/2",
+        "PSF_PIXEL/3"
+      ],
+      "commit": "9bc191f5483c9730d15a8b1489467018df5ea18a",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-ngc6341-psf-zone-uncertainty-v1/riscontro.json",
+          "sha256": "d49d03a135e571d12442a4e8e71ce706d3b38274805be11031d840c9169e7732",
+          "archiveSha256": "8100311a1e5ce9dc0ea5af96ae08604f2e52eb9e939e9a875a9c608d2daff9eb",
+          "archiveName": "BKL046-NGC6341-PSF-zona-incertezza-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "ngc6341ZoneBootstrap-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "findings": {
+    "romanLin0CrossSession": [
+      {
+        "band": "lower",
+        "excluded": 0,
+        "frame": 1,
+        "gainErrorMedian": 0.11635004125074644,
+        "independentErrorMedian": 0.13630968391640386,
+        "lin0ErrorMedian": 0.042989973167960605,
+        "measured": 480,
+        "signalMedian": 1619.0407533383723
+      },
+      {
+        "band": "lower",
+        "excluded": 0,
+        "frame": 5,
+        "gainErrorMedian": 0.04875841581278351,
+        "independentErrorMedian": 0.09981727564006354,
+        "lin0ErrorMedian": 0.03142002988619136,
+        "measured": 480,
+        "signalMedian": 7943.8380574452
+      },
+      {
+        "band": "lower",
+        "excluded": 0,
+        "frame": 10,
+        "gainErrorMedian": 0.03417525755917106,
+        "independentErrorMedian": 0.1071140321699528,
+        "lin0ErrorMedian": 0.03128222194807723,
+        "measured": 480,
+        "signalMedian": 15764.74659090909
+      },
+      {
+        "band": "upper",
+        "excluded": 0,
+        "frame": 1,
+        "gainErrorMedian": 0.20469640534700306,
+        "independentErrorMedian": 0.13784961581951122,
+        "lin0ErrorMedian": 0.03847627064184289,
+        "measured": 480,
+        "signalMedian": 1606.3864923234858
+      },
+      {
+        "band": "upper",
+        "excluded": 0,
+        "frame": 5,
+        "gainErrorMedian": 0.04897009423661147,
+        "independentErrorMedian": 0.10231665101720822,
+        "lin0ErrorMedian": 0.029930331610939942,
+        "measured": 480,
+        "signalMedian": 7912.427626606198
+      },
+      {
+        "band": "upper",
+        "excluded": 0,
+        "frame": 10,
+        "gainErrorMedian": 0.0374181685367323,
+        "independentErrorMedian": 0.10765517693813575,
+        "lin0ErrorMedian": 0.034477844710963546,
+        "measured": 480,
+        "signalMedian": 15718.142605190224
+      }
+    ],
+    "romanSignalOverlap": [
+      {
+        "band": "lower",
+        "combinations": 480,
+        "frame": 1,
+        "improvedVsSameIndex": 392,
+        "independentMedian": 0.13630968391640386,
+        "matchedGainMedian": 0.041889987911723825,
+        "otherLin0Median": 0.042989973167960605,
+        "outsideGainRange": 0,
+        "sameIndexGainMedian": 0.11635004125074644,
+        "signalMatched": 480,
+        "targetSignalMedian": 1619.0407533383723
+      },
+      {
+        "band": "lower",
+        "combinations": 480,
+        "frame": 5,
+        "outsideGainRange": 480,
+        "signalMatched": 0
+      },
+      {
+        "band": "lower",
+        "combinations": 480,
+        "frame": 10,
+        "outsideGainRange": 480,
+        "signalMatched": 0
+      },
+      {
+        "band": "upper",
+        "combinations": 480,
+        "frame": 1,
+        "improvedVsSameIndex": 465,
+        "independentMedian": 0.13784961581951122,
+        "matchedGainMedian": 0.04095611735942911,
+        "otherLin0Median": 0.03847627064184289,
+        "outsideGainRange": 0,
+        "sameIndexGainMedian": 0.20469640534700306,
+        "signalMatched": 480,
+        "targetSignalMedian": 1606.3864923234858
+      },
+      {
+        "band": "upper",
+        "combinations": 480,
+        "frame": 5,
+        "outsideGainRange": 480,
+        "signalMatched": 0
+      },
+      {
+        "band": "upper",
+        "combinations": 480,
+        "frame": 10,
+        "outsideGainRange": 480,
+        "signalMatched": 0
+      }
+    ],
+    "greenZoneAssignment": {
+      "agreementHistogram": {
+        "8": 48
+      },
+      "angleSumHistogramTicks": {
+        "6": 16,
+        "8": 16,
+        "10": 16
+      },
+      "assignments": 48,
+      "atLeastObservedAgreements": 48,
+      "atMostObservedAngleSum": 16,
+      "jointAtLeastAsClose": 16,
+      "observedAgreements": 8,
+      "observedAngleSumTicks": 6
+    },
+    "greenHeldExposure": {
+      "A": {
+        "green1": {
+          "ownGainMedian": 0.12038679217093548,
+          "ownMinusZoneGainMedian": 0.0,
+          "ownStrictlyBetter": 11,
+          "ownStrictlyWorse": 10,
+          "states": {
+            "MEASURED": 38
+          },
+          "zoneGainMedian": 0.11765080976248907
+        },
+        "green2": {
+          "ownGainMedian": 0.1300914536808691,
+          "ownMinusZoneGainMedian": 0.0,
+          "ownStrictlyBetter": 13,
+          "ownStrictlyWorse": 8,
+          "states": {
+            "MEASURED": 38
+          },
+          "zoneGainMedian": 0.12241761184184977
+        }
+      },
+      "B": {
+        "green1": {
+          "ownGainMedian": 0.11543526383762409,
+          "ownMinusZoneGainMedian": 0.0,
+          "ownStrictlyBetter": 11,
+          "ownStrictlyWorse": 10,
+          "states": {
+            "MEASURED": 38
+          },
+          "zoneGainMedian": 0.11543526383762409
+        },
+        "green2": {
+          "ownGainMedian": 0.12998813557445227,
+          "ownMinusZoneGainMedian": 0.0,
+          "ownStrictlyBetter": 16,
+          "ownStrictlyWorse": 5,
+          "states": {
+            "MEASURED": 38
+          },
+          "zoneGainMedian": 0.12625463780800356
+        }
+      }
+    },
+    "ngc6341HeldExposure": [
+      {
+        "chip": 1,
+        "ownGainMedian": -0.04053898311980422,
+        "ownMinusZoneMedian": 0.025200668680931876,
+        "ownStrictlyBetter": 200,
+        "ownStrictlyWorse": 63,
+        "states": {
+          "MEASURED": 339,
+          "NO_ZONE_PEERS": 2
+        },
+        "trainingExposure": 5,
+        "zoneGainMedian": -0.1082989613493572
+      },
+      {
+        "chip": 1,
+        "ownGainMedian": 0.012673357930984723,
+        "ownMinusZoneMedian": 0.035225085807383205,
+        "ownStrictlyBetter": 209,
+        "ownStrictlyWorse": 58,
+        "states": {
+          "MEASURED": 339,
+          "NO_ZONE_PEERS": 2
+        },
+        "trainingExposure": 90,
+        "zoneGainMedian": -0.06295525912667922
+      },
+      {
+        "chip": 2,
+        "ownGainMedian": -0.12866991697629127,
+        "ownMinusZoneMedian": 0.02363841271085073,
+        "ownStrictlyBetter": 222,
+        "ownStrictlyWorse": 111,
+        "states": {
+          "MEASURED": 394,
+          "NO_ZONE_PEERS": 1
+        },
+        "trainingExposure": 5,
+        "zoneGainMedian": -0.1980883831677363
+      },
+      {
+        "chip": 2,
+        "ownGainMedian": -0.06865317850512957,
+        "ownMinusZoneMedian": 0.03376814751922893,
+        "ownStrictlyBetter": 230,
+        "ownStrictlyWorse": 79,
+        "states": {
+          "MEASURED": 394,
+          "NO_ZONE_PEERS": 1
+        },
+        "trainingExposure": 90,
+        "zoneGainMedian": -0.1575014070152954
+      }
+    ],
+    "ngc6341Resampling": [
+      {
+        "chip": 1,
+        "stars": 339,
+        "zones": 27,
+        "stats": [
+          {
+            "leaveOneZoneOutMinMax": [
+              [
+                0.02013994500817684,
+                0.029803603916385993
+              ],
+              [
+                -0.0432312675543726,
+                -0.03715382740690209
+              ],
+              [
+                -0.12215596768630511,
+                -0.09266672549736477
+              ]
+            ],
+            "median": [
+              0.025200668680931876,
+              -0.04053898311980422,
+              -0.1082989613493572
+            ],
+            "resamplesNonpositiveOwnMinusZone": 11,
+            "trainingExposure": 5,
+            "zoneBootstrapPercentiles": [
+              [
+                0.00792830662016807,
+                0.025200668680931876,
+                0.049968846865962216
+              ],
+              [
+                -0.0723642559224271,
+                -0.04019843224297888,
+                -0.021138559501389414
+              ],
+              [
+                -0.164715370960448,
+                -0.10820306122043641,
+                -0.07284044633500857
+              ]
+            ]
+          },
+          {
+            "leaveOneZoneOutMinMax": [
+              [
+                0.02876570275382504,
+                0.036472407750990164
+              ],
+              [
+                0.008973836872480326,
+                0.015614404215745416
+              ],
+              [
+                -0.07595241154043929,
+                -0.04973094939693083
+              ]
+            ],
+            "median": [
+              0.035225085807383205,
+              0.012673357930984723,
+              -0.06295525912667922
+            ],
+            "resamplesNonpositiveOwnMinusZone": 0,
+            "trainingExposure": 90,
+            "zoneBootstrapPercentiles": [
+              [
+                0.019388955075137604,
+                0.035225085807383205,
+                0.059139707371378025
+              ],
+              [
+                -0.030499471136825572,
+                0.012750724625981666,
+                0.036675720583921045
+              ],
+              [
+                -0.11866265006252817,
+                -0.06295525912667922,
+                -0.020143916107802036
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "chip": 2,
+        "stars": 394,
+        "zones": 30,
+        "stats": [
+          {
+            "leaveOneZoneOutMinMax": [
+              [
+                0.019618928382947303,
+                0.027070742420352338
+              ],
+              [
+                -0.13838779422291098,
+                -0.12353660305253758
+              ],
+              [
+                -0.2032695994893646,
+                -0.18889269695520053
+              ]
+            ],
+            "median": [
+              0.02363841271085073,
+              -0.12866991697629127,
+              -0.1980883831677363
+            ],
+            "resamplesNonpositiveOwnMinusZone": 89,
+            "trainingExposure": 5,
+            "zoneBootstrapPercentiles": [
+              [
+                0.002165000157985988,
+                0.02391933294771156,
+                0.04197987345147734
+              ],
+              [
+                -0.16236375683397314,
+                -0.12907248100457938,
+                -0.10569729400297372
+              ],
+              [
+                -0.2226400359087075,
+                -0.1980883831677363,
+                -0.17145306880933617
+              ]
+            ]
+          },
+          {
+            "leaveOneZoneOutMinMax": [
+              [
+                0.02855961140940176,
+                0.036776040897075625
+              ],
+              [
+                -0.07217860113691806,
+                -0.06583283422879227
+              ],
+              [
+                -0.16058335420300973,
+                -0.13809688318869692
+              ]
+            ],
+            "median": [
+              0.03376814751922893,
+              -0.06865317850512957,
+              -0.1575014070152954
+            ],
+            "resamplesNonpositiveOwnMinusZone": 61,
+            "trainingExposure": 90,
+            "zoneBootstrapPercentiles": [
+              [
+                0.010093075363538904,
+                0.03401934011362309,
+                0.0516223284605927
+              ],
+              [
+                -0.10247177568499226,
+                -0.06885588378488676,
+                -0.04516288235722062
+              ],
+              [
+                -0.19049819087473907,
+                -0.1575014070152954,
+                -0.10690849947553195
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "ownerCriteria": [
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_01",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "coperturaSemantica",
+          "responsibility": "studio",
+          "evidenceNeeded": "Verificare la copertura del dominio riaperto sui requisiti autorevoli, includendo i casi privi di risultati."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_02",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "coperturaSemantica",
+          "responsibility": "studio",
+          "evidenceNeeded": "Collegare prerequisiti, parametri, maschere e decisioni dei workflow alle prove comportamentali per processo."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_03",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "validazioneScientifica",
+          "responsibility": "studio",
+          "evidenceNeeded": "Verificare evidenze e limiti a livello di criterio, senza trasferire le misure Roman ad altri domini."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_04",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "validazioneScientifica",
+          "responsibility": "studio e revisori indipendenti",
+          "evidenceNeeded": "Completare verifiche di versione, equivalenza dei domini e prove native con ricevute ammesse."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_05",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "validazioneScientifica",
+          "responsibility": "studio",
+          "evidenceNeeded": "Riconciliare successi, rifiuti e correzioni per criterio. Conservare anche i 1.920 confronti fuori gamma."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_06",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Verificare dipendenze e impronte a partire dalla destinazione effettiva approvata."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_07",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "baselineFinale",
+          "responsibility": "studio e Owner",
+          "evidenceNeeded": "Accettare il file finale dopo il riscontro integrale dei criteri applicabili."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_08",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "coperturaSemantica",
+          "responsibility": "studio",
+          "evidenceNeeded": "Rileggere la logica utilizzabile nella conoscenza consolidata e valutarla sull’intero dominio."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_09",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "baselineFinale",
+          "responsibility": "studio e Owner",
+          "evidenceNeeded": "Conservare le decisioni aperte fino alle rispettive evidenze di accettazione."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_CONSOLIDATED_KNOWLEDGE_FILE_10",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Verificare storico e vincoli operativi nel file finale e nella copia di destinazione."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_01",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Ricostruire il file finale e tutte le versioni storiche a partire dagli asset effettivi."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_02",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Verificare copertura di documenti, protocolli, script e logica per byte e dipendenze sulla destinazione."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_03",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Verificare disponibilità remota di tutti gli esiti originali, inclusi rifiuti e correzioni."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_04",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Riconciliare l’insieme effettivo degli artefatti consegnati e le dipendenze."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_05",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Verificare ID, dimensione, impronta e legami di ruolo, versione e dipendenze degli oggetti consegnati."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_06",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "decisioneDistribuzione",
+          "responsibility": "Owner per decisione, VM per verifica",
+          "evidenceNeeded": "Identificare destinazione privata e perimetro approvato per il corpus, poi verificare la presenza dei byte remoti."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_07",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Riscaricare gli 81 asset dell’inventario intermedio autorizzato e ricostruire le parti usando gli stessi byte."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_08",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "riletturaGitHub",
+          "responsibility": "verifica VM dopo decisione di distribuzione",
+          "evidenceNeeded": "Riprodurre dalla destinazione effettiva i percorsi richiesti dai protocolli e recuperare lo storico."
+        }
+      },
+      {
+        "id": "OWNER_FINAL_COMPLETE_GITHUB_TRANSFER_09",
+        "status": "NOT_YET_SATISFIED",
+        "nextVerification": {
+          "stage": "coperturaSemantica",
+          "responsibility": "studio e verifica VM",
+          "evidenceNeeded": "Verificare la catena requisito, protocollo, prova, esito e decisione nell’intera baseline consegnata."
+        }
+      }
+    ]
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}

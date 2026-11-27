@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_DECAM_HDR_SUPPORT_WCS_PROTOCOL_V1",
+  "sourceArchiveSha256": "91536c7dfc7b35103b8208b48e802396d9c7d28a05b24ea336c48a92be46fdaf",
+  "sourceReportSha256": "a0b1c6dc5840db14e87def9de306a0e53db4b8fc90f6465565befc5faa8970de",
+  "m20TopRational": [
+    1,
+    1000
+  ],
+  "guardLevels": [
+    1,
+    0.9,
+    0.8
+  ],
+  "roundTripMaxPixels": 0.0001,
+  "scope": "Map source detector centers via the frozen TPV headers into companion frames. For M8, compare the above-both and zero groups in the 100 s exposure against 30 s and 45 s, and the above-both group in the 45 s exposure against 30 s. For M20, compare each 180 s top 0.1 percent (ties included) against 30 s as a geometric control. Report nonzero samples below conservative thresholds under nearest, all four enclosing pixel centers, and the 4 by 4 neighborhood that extends that footprint by one pixel on each side. No measured registration, linearity, PSF agreement, or flux reference."
+}

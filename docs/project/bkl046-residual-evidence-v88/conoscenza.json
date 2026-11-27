@@ -1,0 +1,1385 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_V88",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "eedceadaffb617d0ce402dcb75fc4504dc2673b83c88ad3738f8d5c8adc5983e",
+    "commit": "8369fa4a3ea86dcf9f07fa3794045d84d82c70a8"
+  },
+  "sourceIndex": {
+    "sha256": "0274d7fb2a2550f652b3d3e7d4c2912672b92dc77ef0a97ce3271e66adda605f",
+    "commit": "85a44fb74b8b975678f3e9485cf7280ffa25fce3"
+  },
+  "evidence": [
+    {
+      "id": "streamV11DeploymentPeer",
+      "level": "simulatedDeploymentPeer",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "2a6de8ed92095792e8f79d0a614fa19132cb4aee",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-stream34-v11-deployment-peer-offline/riscontro.json",
+          "sha256": "f6fedb089c99650a7dedc914e5807de0c638144e90d67968ba1763e7919cb3b6",
+          "archiveSha256": "9beafd8b90076c1f32e540fe46fefb5a429b94c28ecaba014d7f333f81812a3a",
+          "archiveName": "BKL046-Stream34-deployment-peer-v11.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "streamV11DeploymentPeer-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "romanSpatialBands",
+      "level": "pairedSpatialNoiseComparison",
+      "axes": [
+        "NOISE_FLUX/2",
+        "NOISE_FLUX/3"
+      ],
+      "commit": "71c82c73f0badd1eab72af0b88907d49bd972053",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-roman-gain-spatial-band-covariance-v1/riscontro.json",
+          "sha256": "174d01a1b2d53be23c49b3e3915a9151d7ec9dd5290557c69e16f1739acb3a55",
+          "archiveSha256": "582ef5e76ddd0bc42ca65f8ebaa2fa9604e42dcea1eb34ab444170e04ad2811d",
+          "archiveName": "BKL046-ROMAN-GAIN-fasce-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "romanSpatialBands-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "romanGainPhotodiode",
+      "level": "relativeIndependentOpticalMonitor",
+      "axes": [
+        "NOISE_FLUX/1"
+      ],
+      "commit": "2e11b85f39858cf42e8d0954aca12e0ec81d5c9e",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-roman-gain-lab-photodiode-v1/riscontro.json",
+          "sha256": "8c8da550bfee309329cddea555921489075030c311084f99e30ea1646c0b97e5",
+          "archiveSha256": "bdfc951da22507236727b10f6254620190f5332211d6e67f041769358dd76973",
+          "archiveName": "BKL046-ROMAN-GAIN-LABHK-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "romanGainPhotodiode-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "romanNoiwMct",
+      "level": "separateDarkOpticalMonitorSensitivity",
+      "axes": [
+        "NOISE_FLUX/1"
+      ],
+      "commit": "ea57baa732396f5c3039bf87f6393ce6a5829b87",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-roman-noiw-mct-dark-offset-v1/riscontro.json",
+          "sha256": "ed2780f87000095a612b1758207df84643fe67051c843d7e787c7e75f9812605",
+          "archiveSha256": "5b5bf30e24a24435c75bcd97ce77e9f10c076983abf2937e0a23efa04284cfd3",
+          "archiveName": "BKL046-ROMAN-NOIW-MCT-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "romanNoiwMct-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "romanDirectional",
+      "level": "pairedInterpolationAxisSensitivity",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "c72c2adaa75be09563e68294026f3158addf4c99",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-roman-gain-directional-covariance-v1/riscontro.json",
+          "sha256": "73754b8039f89bd670a905ad5c960494787fa73c9e9429b03c643e1b64b09c72",
+          "archiveSha256": "02a268dec2306600e554f4679a9ca319154235adeb1dc15276f6358618e0f2e0",
+          "archiveName": "BKL046-ROMAN-GAIN-orientamenti-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "romanDirectional-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "romanHeldPairs",
+      "level": "heldPairCovarianceShape",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "85a44fb74b8b975678f3e9485cf7280ffa25fce3",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-roman-gain-held-pair-covariance-v1/riscontro.json",
+          "sha256": "5a9c9debf4b6a233cc03df2d24847452dc83f8ed6bd7b42a6de24110d29f64e2",
+          "archiveSha256": "062407ab051f1dee839899021cb83ff95fda39ce7b381aa762750978bd6f482b",
+          "archiveName": "BKL046-ROMAN-GAIN-covarianza-esclusa-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "romanHeldPairs-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "findings": {
+    "romanSpatialBands": [
+      {
+        "band": "center",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6685780002305973,
+        "frame": 1,
+        "fullErrorMedian": 0.25430050051884395,
+        "medianPairedFullErrorChangeVsCenter": 0.0,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "center",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6243885666310572,
+        "frame": 5,
+        "fullErrorMedian": 0.1548742749198787,
+        "medianPairedFullErrorChangeVsCenter": 0.0,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "center",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6169768277139158,
+        "frame": 10,
+        "fullErrorMedian": 0.13819786235631054,
+        "medianPairedFullErrorChangeVsCenter": 0.0,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "lower",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6529567427089376,
+        "frame": 1,
+        "fullErrorMedian": 0.2191526710951095,
+        "medianPairedFullErrorChangeVsCenter": -0.037545848551693406,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "lower",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6151992403724672,
+        "frame": 5,
+        "fullErrorMedian": 0.13419829083805124,
+        "medianPairedFullErrorChangeVsCenter": -0.022591527677799483,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "lower",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6087915084471588,
+        "frame": 10,
+        "fullErrorMedian": 0.11978089400610747,
+        "medianPairedFullErrorChangeVsCenter": -0.01516334459636115,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "upper",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6793528406788132,
+        "frame": 1,
+        "fullErrorMedian": 0.27854389152732983,
+        "medianPairedFullErrorChangeVsCenter": 0.003482464651157313,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "upper",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6189362996724563,
+        "frame": 5,
+        "fullErrorMedian": 0.14260667426302676,
+        "medianPairedFullErrorChangeVsCenter": -0.01346174197445743,
+        "pairedWithCenter": 320
+      },
+      {
+        "band": "upper",
+        "channels": 32,
+        "channelsWithLowerFullError": 32,
+        "comparisons": 320,
+        "diagonalErrorMedian": 0.6117961768383557,
+        "frame": 10,
+        "fullErrorMedian": 0.12654139788630037,
+        "medianPairedFullErrorChangeVsCenter": -0.0067764915303140105,
+        "pairedWithCenter": 320
+      }
+    ],
+    "romanPhotodiode": {
+      "distinctTimestamps": 65,
+      "exposures": 21,
+      "extension": "LABHK",
+      "mctVoltsMax": 0.8087,
+      "mctVoltsMin": 0.8002,
+      "nominalTiming": [
+        {
+          "frame": 1,
+          "offsetGroups": 0,
+          "pairs": [
+            {
+              "firstExposure": 1,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 73.04677402466518,
+              "signalPerVoltSecond": 90.76663028766583,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4787090066352455
+            },
+            {
+              "firstExposure": 3,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.46250556091988,
+              "signalPerVoltSecond": 88.43999720776782,
+              "state": "MEASURED",
+              "voltsSeconds": 2.488744053333158
+            },
+            {
+              "firstExposure": 5,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.19854520882107,
+              "signalPerVoltSecond": 88.76957955255489,
+              "state": "MEASURED",
+              "voltsSeconds": 2.470345363225926
+            },
+            {
+              "firstExposure": 7,
+              "meanNominalSeconds": 3.125,
+              "signalPerSecond": 70.5159224902082,
+              "signalPerVoltSecond": 88.02035082874318,
+              "state": "MEASURED",
+              "voltsSeconds": 2.5035375990564788
+            },
+            {
+              "firstExposure": 9,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.82858713470958,
+              "signalPerVoltSecond": 89.33669675637645,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4763849169195407
+            },
+            {
+              "firstExposure": 11,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.45959514156793,
+              "signalPerVoltSecond": 88.49932283695546,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4869744307706947
+            },
+            {
+              "firstExposure": 13,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 72.89116464286532,
+              "signalPerVoltSecond": 90.72814310049182,
+              "state": "MEASURED",
+              "voltsSeconds": 2.474477923033875
+            },
+            {
+              "firstExposure": 15,
+              "state": "NOT_BRACKETED"
+            },
+            {
+              "firstExposure": 17,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 72.16468425308618,
+              "signalPerVoltSecond": 89.80200533576087,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4750808923305234
+            },
+            {
+              "firstExposure": 19,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 70.7316319986388,
+              "signalPerVoltSecond": 87.63264613943117,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4859848030742304
+            }
+          ],
+          "signalPerSecondCv": 0.01224895146364258,
+          "signalPerVoltSecondCv": 0.012671866023457224,
+          "validPairs": 9
+        },
+        {
+          "frame": 5,
+          "offsetGroups": 0,
+          "pairs": [
+            {
+              "firstExposure": 1,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.61719805767426,
+              "signalPerVoltSecond": 87.7167307833435,
+              "state": "MEASURED",
+              "voltsSeconds": 12.397918166538528
+            },
+            {
+              "firstExposure": 3,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.56376859414893,
+              "signalPerVoltSecond": 87.33754298906258,
+              "state": "MEASURED",
+              "voltsSeconds": 12.442324333373797
+            },
+            {
+              "firstExposure": 5,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.48112318520482,
+              "signalPerVoltSecond": 87.92965270290638,
+              "state": "MEASURED",
+              "voltsSeconds": 12.344064416124752
+            },
+            {
+              "firstExposure": 7,
+              "meanNominalSeconds": 15.625,
+              "signalPerSecond": 69.25751905449049,
+              "signalPerVoltSecond": 86.42377811210787,
+              "state": "MEASURED",
+              "voltsSeconds": 12.521423604307877
+            },
+            {
+              "firstExposure": 9,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.63642200452264,
+              "signalPerVoltSecond": 87.8229799946152,
+              "state": "MEASURED",
+              "voltsSeconds": 12.386289999910575
+            },
+            {
+              "firstExposure": 11,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.39927539077199,
+              "signalPerVoltSecond": 87.16136877746325,
+              "state": "MEASURED",
+              "voltsSeconds": 12.438410000029851
+            },
+            {
+              "firstExposure": 13,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.49975889554365,
+              "signalPerVoltSecond": 87.81593863577497,
+              "state": "MEASURED",
+              "voltsSeconds": 12.363316999826214
+            },
+            {
+              "firstExposure": 15,
+              "state": "NOT_BRACKETED"
+            },
+            {
+              "firstExposure": 17,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.5149813653215,
+              "signalPerVoltSecond": 87.72294362811562,
+              "state": "MEASURED",
+              "voltsSeconds": 12.379095685953537
+            },
+            {
+              "firstExposure": 19,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.59389243913053,
+              "signalPerVoltSecond": 87.43894670513525,
+              "state": "MEASURED",
+              "voltsSeconds": 12.433200358974162
+            }
+          ],
+          "signalPerSecondCv": 0.006155929634300549,
+          "signalPerVoltSecondCv": 0.005401684747076159,
+          "validPairs": 9
+        },
+        {
+          "frame": 10,
+          "offsetGroups": 0,
+          "pairs": [
+            {
+              "firstExposure": 1,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 70.08987519179038,
+              "signalPerVoltSecond": 87.02126628392033,
+              "state": "MEASURED",
+              "voltsSeconds": 24.807363166422206
+            },
+            {
+              "firstExposure": 3,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 70.12000036761371,
+              "signalPerVoltSecond": 86.81890906839924,
+              "state": "MEASURED",
+              "voltsSeconds": 24.87587133375532
+            },
+            {
+              "firstExposure": 5,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 69.9349529773006,
+              "signalPerVoltSecond": 87.29202184451096,
+              "state": "MEASURED",
+              "voltsSeconds": 24.675755082608447
+            },
+            {
+              "firstExposure": 7,
+              "meanNominalSeconds": 31.25,
+              "signalPerSecond": 69.01906963970774,
+              "signalPerVoltSecond": 86.09658871014061,
+              "state": "MEASURED",
+              "voltsSeconds": 25.051467875251948
+            },
+            {
+              "firstExposure": 9,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 70.10736822386481,
+              "signalPerVoltSecond": 87.1288666846121,
+              "state": "MEASURED",
+              "voltsSeconds": 24.782910916439054
+            },
+            {
+              "firstExposure": 11,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 70.15141289801153,
+              "signalPerVoltSecond": 86.84608020773734,
+              "state": "MEASURED",
+              "voltsSeconds": 24.879229000208305
+            },
+            {
+              "firstExposure": 13,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 70.16553453911409,
+              "signalPerVoltSecond": 87.47062117814495,
+              "state": "MEASURED",
+              "voltsSeconds": 24.706563583255733
+            },
+            {
+              "firstExposure": 15,
+              "state": "NOT_BRACKETED"
+            },
+            {
+              "firstExposure": 17,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 70.051342917466,
+              "signalPerVoltSecond": 87.10876864497074,
+              "state": "MEASURED",
+              "voltsSeconds": 24.768819435981335
+            },
+            {
+              "firstExposure": 19,
+              "meanNominalSeconds": 30.8,
+              "signalPerSecond": 70.11879595923158,
+              "signalPerVoltSecond": 86.82317962213077,
+              "state": "MEASURED",
+              "voltsSeconds": 24.874220512811615
+            }
+          ],
+          "signalPerSecondCv": 0.005204647314991013,
+          "signalPerVoltSecondCv": 0.004495195884394209,
+          "validPairs": 9
+        },
+        {
+          "frame": 1,
+          "offsetGroups": 1,
+          "pairs": [
+            {
+              "firstExposure": 1,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 73.04677402466518,
+              "signalPerVoltSecond": 90.75068242402746,
+              "state": "MEASURED",
+              "voltsSeconds": 2.479144596893976
+            },
+            {
+              "firstExposure": 3,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.46250556091988,
+              "signalPerVoltSecond": 88.444318085289,
+              "state": "MEASURED",
+              "voltsSeconds": 2.488622467702008
+            },
+            {
+              "firstExposure": 5,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.19854520882107,
+              "signalPerVoltSecond": 88.79754176157161,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4695674552791553
+            },
+            {
+              "firstExposure": 7,
+              "meanNominalSeconds": 3.125,
+              "signalPerSecond": 70.5159224902082,
+              "signalPerVoltSecond": 88.00744871181791,
+              "state": "MEASURED",
+              "voltsSeconds": 2.5039046240674594
+            },
+            {
+              "firstExposure": 9,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.82858713470958,
+              "signalPerVoltSecond": 89.32090449635317,
+              "state": "MEASURED",
+              "voltsSeconds": 2.476822750758621
+            },
+            {
+              "firstExposure": 11,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 71.45959514156793,
+              "signalPerVoltSecond": 88.48634109399745,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4873392923120834
+            },
+            {
+              "firstExposure": 13,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 72.89116464286532,
+              "signalPerVoltSecond": 90.76160007399052,
+              "state": "MEASURED",
+              "voltsSeconds": 2.473565769190988
+            },
+            {
+              "firstExposure": 15,
+              "meanNominalSeconds": 3.125,
+              "signalPerSecond": 70.550641380454,
+              "signalPerVoltSecond": 88.09646696025023,
+              "state": "MEASURED",
+              "voltsSeconds": 2.5026060853654526
+            },
+            {
+              "firstExposure": 17,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 72.16468425308618,
+              "signalPerVoltSecond": 89.78876921566278,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4754457538630907
+            },
+            {
+              "firstExposure": 19,
+              "meanNominalSeconds": 3.08,
+              "signalPerSecond": 70.7316319986388,
+              "signalPerVoltSecond": 87.62107221368397,
+              "state": "MEASURED",
+              "voltsSeconds": 2.4863131784614807
+            }
+          ],
+          "signalPerSecondCv": 0.012632131741480982,
+          "signalPerVoltSecondCv": 0.012538368277147969,
+          "validPairs": 10
+        },
+        {
+          "frame": 5,
+          "offsetGroups": 1,
+          "pairs": [
+            {
+              "firstExposure": 1,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.61719805767426,
+              "signalPerVoltSecond": 87.7010144332857,
+              "state": "MEASURED",
+              "voltsSeconds": 12.400139919880289
+            },
+            {
+              "firstExposure": 3,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.56376859414893,
+              "signalPerVoltSecond": 87.34469502382326,
+              "state": "MEASURED",
+              "voltsSeconds": 12.4413055200834
+            },
+            {
+              "firstExposure": 5,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.48112318520482,
+              "signalPerVoltSecond": 87.95397247133306,
+              "state": "MEASURED",
+              "voltsSeconds": 12.340651212836612
+            },
+            {
+              "firstExposure": 7,
+              "meanNominalSeconds": 15.625,
+              "signalPerSecond": 69.25751905449049,
+              "signalPerVoltSecond": 86.4112057210756,
+              "state": "MEASURED",
+              "voltsSeconds": 12.523245407770984
+            },
+            {
+              "firstExposure": 9,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.63642200452264,
+              "signalPerVoltSecond": 87.80784674253182,
+              "state": "MEASURED",
+              "voltsSeconds": 12.388424716292997
+            },
+            {
+              "firstExposure": 11,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.39927539077199,
+              "signalPerVoltSecond": 87.15185673529987,
+              "state": "MEASURED",
+              "voltsSeconds": 12.439767569275048
+            },
+            {
+              "firstExposure": 13,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.49975889554365,
+              "signalPerVoltSecond": 87.84688019789643,
+              "state": "MEASURED",
+              "voltsSeconds": 12.358962373456835
+            },
+            {
+              "firstExposure": 15,
+              "meanNominalSeconds": 15.625,
+              "signalPerSecond": 69.47621264802217,
+              "signalPerVoltSecond": 86.73574170502253,
+              "state": "MEASURED",
+              "voltsSeconds": 12.515784165623678
+            },
+            {
+              "firstExposure": 17,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.5149813653215,
+              "signalPerVoltSecond": 87.7092232100866,
+              "state": "MEASURED",
+              "voltsSeconds": 12.381032156958707
+            },
+            {
+              "firstExposure": 19,
+              "meanNominalSeconds": 15.4,
+              "signalPerSecond": 70.59389243913053,
+              "signalPerVoltSecond": 87.42753855323822,
+              "state": "MEASURED",
+              "voltsSeconds": 12.43482272923196
+            }
+          ],
+          "signalPerSecondCv": 0.007133673135282,
+          "signalPerVoltSecondCv": 0.005836870974896954,
+          "validPairs": 10
+        },
+        {
+          "frame": 10,
+          "offsetGroups": 1,
+          "pairs": [
+            {
+              "firstExposure": 1,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 70.08987519179037,
+              "signalPerVoltSecond": 87.00487102586887,
+              "state": "MEASURED",
+              "voltsSeconds": 24.81203788308915
+            },
+            {
+              "firstExposure": 3,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 70.1200003676137,
+              "signalPerVoltSecond": 86.8327318545703,
+              "state": "MEASURED",
+              "voltsSeconds": 24.871911377147697
+            },
+            {
+              "firstExposure": 5,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 69.9349529773006,
+              "signalPerVoltSecond": 87.30854119980661,
+              "state": "MEASURED",
+              "voltsSeconds": 24.671086266020783
+            },
+            {
+              "firstExposure": 7,
+              "meanNominalSeconds": 31.25,
+              "signalPerSecond": 69.01906963970774,
+              "signalPerVoltSecond": 86.08491174221656,
+              "state": "MEASURED",
+              "voltsSeconds": 25.054865975812305
+            },
+            {
+              "firstExposure": 9,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 70.10736822386481,
+              "signalPerVoltSecond": 87.11408487823216,
+              "state": "MEASURED",
+              "voltsSeconds": 24.787116162826134
+            },
+            {
+              "firstExposure": 11,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 70.15141289801153,
+              "signalPerVoltSecond": 86.84528709425963,
+              "state": "MEASURED",
+              "voltsSeconds": 24.87945620945011
+            },
+            {
+              "firstExposure": 13,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 70.16553453911408,
+              "signalPerVoltSecond": 87.49867446468431,
+              "state": "MEASURED",
+              "voltsSeconds": 24.69864231688405
+            },
+            {
+              "firstExposure": 15,
+              "meanNominalSeconds": 31.25,
+              "signalPerSecond": 69.09815130742913,
+              "signalPerVoltSecond": 86.23532212112904,
+              "state": "MEASURED",
+              "voltsSeconds": 25.039823302615027
+            },
+            {
+              "firstExposure": 17,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 70.05134291746599,
+              "signalPerVoltSecond": 87.09318631709688,
+              "state": "MEASURED",
+              "voltsSeconds": 24.7732509636567
+            },
+            {
+              "firstExposure": 19,
+              "meanNominalSeconds": 30.800000000000004,
+              "signalPerSecond": 70.11879595923156,
+              "signalPerVoltSecond": 86.81268902931821,
+              "state": "MEASURED",
+              "voltsSeconds": 24.877226355872665
+            }
+          ],
+          "signalPerSecondCv": 0.006309913419312081,
+          "signalPerVoltSecondCv": 0.0050577299863203,
+          "validPairs": 10
+        }
+      ],
+      "samples": 96,
+      "siNegativeSamples": 46,
+      "siNonnegativeSamples": 50
+    },
+    "romanDarkMonitor": {
+      "conditionalOffsetSensitivity": [
+        {
+          "frame": 1,
+          "offsetGroups": 0,
+          "pairs": 9,
+          "scenarios": [
+            {
+              "offsetVolts": 0,
+              "signalToCorrectedIntegralCv": 0.012671866023457243
+            },
+            {
+              "offsetVolts": 0.006943,
+              "signalToCorrectedIntegralCv": 0.012678570362391726
+            },
+            {
+              "offsetVolts": 0.0082675,
+              "signalToCorrectedIntegralCv": 0.012679868317711642
+            },
+            {
+              "offsetVolts": 0.0109,
+              "signalToCorrectedIntegralCv": 0.012682466436365697
+            }
+          ]
+        },
+        {
+          "frame": 5,
+          "offsetGroups": 0,
+          "pairs": 9,
+          "scenarios": [
+            {
+              "offsetVolts": 0,
+              "signalToCorrectedIntegralCv": 0.005401684747076159
+            },
+            {
+              "offsetVolts": 0.006943,
+              "signalToCorrectedIntegralCv": 0.005402739797362586
+            },
+            {
+              "offsetVolts": 0.0082675,
+              "signalToCorrectedIntegralCv": 0.005402959145265208
+            },
+            {
+              "offsetVolts": 0.0109,
+              "signalToCorrectedIntegralCv": 0.005403412746732468
+            }
+          ]
+        },
+        {
+          "frame": 10,
+          "offsetGroups": 0,
+          "pairs": 9,
+          "scenarios": [
+            {
+              "offsetVolts": 0,
+              "signalToCorrectedIntegralCv": 0.004495195884394209
+            },
+            {
+              "offsetVolts": 0.006943,
+              "signalToCorrectedIntegralCv": 0.004498999024012681
+            },
+            {
+              "offsetVolts": 0.0082675,
+              "signalToCorrectedIntegralCv": 0.004499752451402534
+            },
+            {
+              "offsetVolts": 0.0109,
+              "signalToCorrectedIntegralCv": 0.004501277076743889
+            }
+          ]
+        },
+        {
+          "frame": 1,
+          "offsetGroups": 1,
+          "pairs": 10,
+          "scenarios": [
+            {
+              "offsetVolts": 0,
+              "signalToCorrectedIntegralCv": 0.012538368277147986
+            },
+            {
+              "offsetVolts": 0.006943,
+              "signalToCorrectedIntegralCv": 0.012541205741106507
+            },
+            {
+              "offsetVolts": 0.0082675,
+              "signalToCorrectedIntegralCv": 0.012541759833396797
+            },
+            {
+              "offsetVolts": 0.0109,
+              "signalToCorrectedIntegralCv": 0.012542873546499807
+            }
+          ]
+        },
+        {
+          "frame": 5,
+          "offsetGroups": 1,
+          "pairs": 10,
+          "scenarios": [
+            {
+              "offsetVolts": 0,
+              "signalToCorrectedIntegralCv": 0.005836870974896954
+            },
+            {
+              "offsetVolts": 0.006943,
+              "signalToCorrectedIntegralCv": 0.005832832249524545
+            },
+            {
+              "offsetVolts": 0.0082675,
+              "signalToCorrectedIntegralCv": 0.005832070350237763
+            },
+            {
+              "offsetVolts": 0.0109,
+              "signalToCorrectedIntegralCv": 0.005830564531040873
+            }
+          ]
+        },
+        {
+          "frame": 10,
+          "offsetGroups": 1,
+          "pairs": 10,
+          "scenarios": [
+            {
+              "offsetVolts": 0,
+              "signalToCorrectedIntegralCv": 0.0050577299863203
+            },
+            {
+              "offsetVolts": 0.006943,
+              "signalToCorrectedIntegralCv": 0.0050556022764277906
+            },
+            {
+              "offsetVolts": 0.0082675,
+              "signalToCorrectedIntegralCv": 0.005055212155019093
+            },
+            {
+              "offsetVolts": 0.0109,
+              "signalToCorrectedIntegralCv": 0.005054452260956939
+            }
+          ]
+        }
+      ],
+      "darkMctVoltsMinMedianMax": [
+        0.006943,
+        0.0082675,
+        0.0109
+      ],
+      "daysFromFirstGainExposure": 5.997592592592593,
+      "distinctTimestamps": 212,
+      "gainMctVoltsMinMax": [
+        0.8002,
+        0.8087
+      ],
+      "noiwExposures": 39,
+      "samples": 287
+    },
+    "romanDirectionSensitivity": [
+      {
+        "band": "lower",
+        "frame": 1,
+        "phases": [
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.14402467635705074,
+            "empiricalRatioMedian": 1.1703024859343194,
+            "fullErrorMedian": 0.14402467635705074,
+            "phase": [
+              0,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4623271575682271,
+            "empiricalRatioMedian": 1.6882626553006472,
+            "fullErrorMedian": 0.19349073635234065,
+            "phase": [
+              0.5,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4445289331152511,
+            "empiricalRatioMedian": 1.7425765563001043,
+            "fullErrorMedian": 0.16679339967287665,
+            "phase": [
+              0,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.6529567427089376,
+            "empiricalRatioMedian": 2.4712929858757704,
+            "fullErrorMedian": 0.2191526710951095,
+            "phase": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.5230118087559946,
+            "empiricalRatioMedian": 1.9218876475936382,
+            "fullErrorMedian": 0.19388995679763094,
+            "phase": [
+              0.25,
+              0.75
+            ]
+          }
+        ],
+        "xMinusYHalfShiftFullErrorQuantiles": [
+          -0.02981881719616476,
+          0.023401535813147467,
+          0.0680156657826512
+        ]
+      },
+      {
+        "band": "lower",
+        "frame": 5,
+        "phases": [
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.09083414289456537,
+            "empiricalRatioMedian": 1.1021033582926003,
+            "fullErrorMedian": 0.09083414289456537,
+            "phase": [
+              0,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4125901966301759,
+            "empiricalRatioMedian": 1.612877125436953,
+            "fullErrorMedian": 0.11888529494526384,
+            "phase": [
+              0.5,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.40474914807576007,
+            "empiricalRatioMedian": 1.6249563818986061,
+            "fullErrorMedian": 0.10712372211364002,
+            "phase": [
+              0,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.6151992403724672,
+            "empiricalRatioMedian": 2.361303496286258,
+            "fullErrorMedian": 0.13419829083805124,
+            "phase": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4783129646466829,
+            "empiricalRatioMedian": 1.8166602609870246,
+            "fullErrorMedian": 0.11834891025289418,
+            "phase": [
+              0.25,
+              0.75
+            ]
+          }
+        ],
+        "xMinusYHalfShiftFullErrorQuantiles": [
+          -0.04065420618059654,
+          0.011947191392570167,
+          0.06581902241446752
+        ]
+      },
+      {
+        "band": "lower",
+        "frame": 10,
+        "phases": [
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.08167075706590127,
+            "empiricalRatioMedian": 1.0904739806480657,
+            "fullErrorMedian": 0.08167075706590127,
+            "phase": [
+              0,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4031728740702418,
+            "empiricalRatioMedian": 1.5943843493089465,
+            "fullErrorMedian": 0.10475931110536274,
+            "phase": [
+              0.5,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.39897862020896085,
+            "empiricalRatioMedian": 1.610814868932696,
+            "fullErrorMedian": 0.09846793031344131,
+            "phase": [
+              0,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.6087915084471588,
+            "empiricalRatioMedian": 2.3456829812411133,
+            "fullErrorMedian": 0.11978089400610747,
+            "phase": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4713408545740363,
+            "empiricalRatioMedian": 1.8000683179016304,
+            "fullErrorMedian": 0.10656604423012134,
+            "phase": [
+              0.25,
+              0.75
+            ]
+          }
+        ],
+        "xMinusYHalfShiftFullErrorQuantiles": [
+          -0.045832082594801773,
+          0.009779421062578064,
+          0.06418547166329924
+        ]
+      },
+      {
+        "band": "upper",
+        "frame": 1,
+        "phases": [
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.17941358710679978,
+            "empiricalRatioMedian": 1.221904696114279,
+            "fullErrorMedian": 0.17941358710679978,
+            "phase": [
+              0,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.49315725205160343,
+            "empiricalRatioMedian": 1.7584240928365786,
+            "fullErrorMedian": 0.23973587807740515,
+            "phase": [
+              0.5,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.47766300905524245,
+            "empiricalRatioMedian": 1.815341012951945,
+            "fullErrorMedian": 0.21649451358286365,
+            "phase": [
+              0,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.6793528406788132,
+            "empiricalRatioMedian": 2.5566141394579596,
+            "fullErrorMedian": 0.27854389152732983,
+            "phase": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.5546425441476946,
+            "empiricalRatioMedian": 2.003504784329956,
+            "fullErrorMedian": 0.24734589960960407,
+            "phase": [
+              0.25,
+              0.75
+            ]
+          }
+        ],
+        "xMinusYHalfShiftFullErrorQuantiles": [
+          -0.013092344643356662,
+          0.023561710197434527,
+          0.06860271566754375
+        ]
+      },
+      {
+        "band": "upper",
+        "frame": 5,
+        "phases": [
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.10137294582083423,
+            "empiricalRatioMedian": 1.1117507475431117,
+            "fullErrorMedian": 0.10137294582083423,
+            "phase": [
+              0,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4177220752844453,
+            "empiricalRatioMedian": 1.618117784630204,
+            "fullErrorMedian": 0.1265831129266679,
+            "phase": [
+              0.5,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4094616306263449,
+            "empiricalRatioMedian": 1.6353422312935906,
+            "fullErrorMedian": 0.11419244593951727,
+            "phase": [
+              0,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.6189362996724563,
+            "empiricalRatioMedian": 2.364599856347167,
+            "fullErrorMedian": 0.14260667426302676,
+            "phase": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.48413015344072924,
+            "empiricalRatioMedian": 1.8267120173652311,
+            "fullErrorMedian": 0.12817995931483234,
+            "phase": [
+              0.25,
+              0.75
+            ]
+          }
+        ],
+        "xMinusYHalfShiftFullErrorQuantiles": [
+          -0.03571189944227464,
+          0.011700852545829254,
+          0.06240516125002505
+        ]
+      },
+      {
+        "band": "upper",
+        "frame": 10,
+        "phases": [
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.0922592164935665,
+            "empiricalRatioMedian": 1.1017238477432856,
+            "fullErrorMedian": 0.0922592164935665,
+            "phase": [
+              0,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4121270610620428,
+            "empiricalRatioMedian": 1.6153603920655861,
+            "fullErrorMedian": 0.11819059159306411,
+            "phase": [
+              0.5,
+              0
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4039585283130531,
+            "empiricalRatioMedian": 1.621785395241052,
+            "fullErrorMedian": 0.10593779246957968,
+            "phase": [
+              0,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.6117961768383557,
+            "empiricalRatioMedian": 2.3499028921295695,
+            "fullErrorMedian": 0.12654139788630037,
+            "phase": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "comparisons": 320,
+            "diagonalErrorMedian": 0.4770192950678346,
+            "empiricalRatioMedian": 1.8107710196766273,
+            "fullErrorMedian": 0.11616260866464045,
+            "phase": [
+              0.25,
+              0.75
+            ]
+          }
+        ],
+        "xMinusYHalfShiftFullErrorQuantiles": [
+          -0.043799527950568226,
+          0.008901508751278098,
+          0.05922814041608392
+        ]
+      }
+    ],
+    "romanHeldPairCovariance": [
+      {
+        "band": "lower",
+        "channelsImproved": 32,
+        "comparisons": 320,
+        "frame": 1,
+        "heldPairsImproved": 10,
+        "independentMedian": 0.2191526710951095,
+        "independentP95": 0.3106830673530652,
+        "learnedMedian": 0.05626490742811063,
+        "learnedP95": 0.16394903019357016
+      },
+      {
+        "band": "lower",
+        "channelsImproved": 32,
+        "comparisons": 320,
+        "frame": 5,
+        "heldPairsImproved": 10,
+        "independentMedian": 0.13419829083805124,
+        "independentP95": 0.21015202966974572,
+        "learnedMedian": 0.04050873244057063,
+        "learnedP95": 0.12061969948812429
+      },
+      {
+        "band": "lower",
+        "channelsImproved": 32,
+        "comparisons": 320,
+        "frame": 10,
+        "heldPairsImproved": 10,
+        "independentMedian": 0.11978089400610747,
+        "independentP95": 0.17976918190313415,
+        "learnedMedian": 0.03663540411939581,
+        "learnedP95": 0.10454333036028017
+      },
+      {
+        "band": "upper",
+        "channelsImproved": 32,
+        "comparisons": 320,
+        "frame": 1,
+        "heldPairsImproved": 9,
+        "independentMedian": 0.27854389152732983,
+        "independentP95": 0.38924606850984567,
+        "learnedMedian": 0.07485507658750201,
+        "learnedP95": 0.21424705183868337
+      },
+      {
+        "band": "upper",
+        "channelsImproved": 32,
+        "comparisons": 320,
+        "frame": 5,
+        "heldPairsImproved": 10,
+        "independentMedian": 0.14260667426302676,
+        "independentP95": 0.2085589121797818,
+        "learnedMedian": 0.040810057203632955,
+        "learnedP95": 0.11697893191131144
+      },
+      {
+        "band": "upper",
+        "channelsImproved": 32,
+        "comparisons": 320,
+        "frame": 10,
+        "heldPairsImproved": 10,
+        "independentMedian": 0.12654139788630037,
+        "independentP95": 0.1968590094969532,
+        "learnedMedian": 0.036074255421750134,
+        "learnedP95": 0.0971647228687938
+      }
+    ],
+    "stream34V11DeploymentPeer": {
+      "schema": "BKL046_STREAM34_V11_DEPLOYMENT_PEER_OFFLINE_V1",
+      "subjectSha256": "0b029846da0412875e26595e2ead8361bc35fcef2c882ec2be95303b9582bdd1",
+      "entrySha256": "abe23377b3195893f555132b4fb66bb9fe6e2ac438b2be4a32e66c7749fe57a6",
+      "verifiedSubjectMembers": 64,
+      "simulatedHeartbeatThroughDeployment": true,
+      "fixtureWindowEnumerations": 1,
+      "rejections": [
+        "wrong_approval_pin",
+        "other_host",
+        "relative_peer_path",
+        "wrong_subject",
+        "wrong_peer_key",
+        "expired_session",
+        "nonmatching_python",
+        "signed_completion_without_observed_close"
+      ],
+      "independentApprovalsReceived": false,
+      "productionEnrollment": false,
+      "nativeAdmissionRequested": false,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    }
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}

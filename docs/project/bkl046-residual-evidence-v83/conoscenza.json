@@ -1,0 +1,533 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_V83",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "10b811e706b731eedb7fe7047d8568b8f44f796ffe047a2753079a7a81d5ab27",
+    "commit": "d6eab37edf71794d2c9a18e0d6d8e2332e7e7fd5"
+  },
+  "sourceIndex": {
+    "sha256": "e2d5e0166fb1ccfefa22ffd79a27b1052fd66e540db75d6f892801a3fdad629f",
+    "commit": "9c26486f18ea9080ba5ee43cc3db5a795ef2cfc0"
+  },
+  "evidence": [
+    {
+      "id": "m8DetectorDarkOverlap",
+      "level": "nonCoevalDarkDetectorCoordinateControl",
+      "axes": [
+        "SATURATION_BLEND/1",
+        "SATURATION_BLEND/3"
+      ],
+      "commit": "6b8f82d3bf60c2befafd6652bf18888196106b02",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-detector-clip-dark-overlap-v1/riscontro.json",
+          "sha256": "d5fb7af1474542732ff422eb5e2f39902a539eb7906ba0796a47c851b2d5f5a3",
+          "archiveSha256": "b8156ef407c5f8a013f3253ff183db30d05956fd25fdde6b949c697eb371b49c",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-clipping-ripetizione-v1.zip",
+          "copiedReport": "m8DetectorDarkOverlap-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8SkyCoordinateOverlap",
+      "level": "offlineAffineOverlapSameExposures",
+      "axes": [
+        "SATURATION_BLEND/1",
+        "SATURATION_BLEND/3"
+      ],
+      "commit": "6a4d06d21ac5fd585bc5e972523399f787cbea37",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-clip-detector-sky-coordinate-v1/riscontro.json",
+          "sha256": "fd5f92ef0a556f10a2e5714851dc3b7b1c0bd249e4093db8d6778ed40317d8df",
+          "archiveSha256": "b9d9420f62939629ccace44fe7791a2a52910bfbf7c5e733b2a5676126897ff3",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-clipping-coordinate-v1.zip",
+          "copiedReport": "m8SkyCoordinateOverlap-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8UnclippedAlternativeSupport",
+      "level": "sameParityAlternativeSamplesOnly",
+      "axes": [
+        "SATURATION_BLEND/1",
+        "SATURATION_BLEND/3"
+      ],
+      "commit": "4fdce55e4ea3556fd22c8ac87aba12d7b3054ea4",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-unclipped-alternative-support-v1/riscontro.json",
+          "sha256": "0d27e7e8da28fd349a0c4df1de7034f11101f47cc27a8fb6626b84ff2e4faab6",
+          "archiveSha256": "b096c5dd055bff3b12d502ff4d65c9e638929daea687db03fe38c1f8ce7d71a6",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-clipping-alternative-v1.zip",
+          "copiedReport": "m8UnclippedAlternativeSupport-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "m8HeldOutArtificialCensoring",
+      "level": "heldOutRawCodeArtificialCensoring",
+      "axes": [
+        "SATURATION_BLEND/1",
+        "SATURATION_BLEND/3"
+      ],
+      "commit": "65ce67b5a7dcddf89a87072635506f26e48ced19",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-heldout-artificial-censoring-v1/riscontro.json",
+          "sha256": "09d9c836f0e57161ebd3c16facef30e9e4aa2b9fb4ceca1e5a010a0ce88c2157",
+          "archiveSha256": "57ab83b59744d20c7de228411875d380fe6e1f58b5aad74993fff3a5c41df431",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-clipping-controllo-trattenuto-v1.zip",
+          "copiedReport": "m8HeldOutArtificialCensoring-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "decamHdrReferenceScreen",
+      "level": "independentMonochromeArchiveScreen",
+      "axes": [
+        "SATURATION_BLEND/1"
+      ],
+      "commit": "424d2988cec344265f3a84de5da32fe774637e5b",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m8-m20-decam-hdr-reference-screen-v1/riscontro.json",
+          "sha256": "a0b1c6dc5840db14e87def9de306a0e53db4b8fc90f6465565befc5faa8970de",
+          "archiveSha256": "91536c7dfc7b35103b8208b48e802396d9c7d28a05b24ea336c48a92be46fdaf",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-riferimenti-HDR-v1.zip",
+          "copiedReport": "decamHdrReferenceScreen-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "decamHdrSupportDataSec",
+      "level": "headerProjectionAndConfirmedScienceSections",
+      "axes": [
+        "SATURATION_BLEND/1"
+      ],
+      "commit": "4e949b7cf43eb1ad40f67b87d6f8e01b53baf4ac",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-decam-hdr-support-datasec-v1/riscontro.json",
+          "sha256": "a9d460bdccddb8a1cbdb3d1b218230428c193c81e08ebb56494392071824aff5",
+          "archiveSha256": "805db3eed707d98f717524bf79dbdb5eaa15d19b5f8850f0b0e975a158d00c12",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M8-M20-DECam-supporto-HDR-v1.zip",
+          "copiedReport": "decamHdrSupportDataSec-riscontro.json"
+        },
+        {
+          "path": "docs/project/bkl046-decam-hdr-support-datasec-v1/riscontro-sezioni.json",
+          "sha256": "00110d9b98c5b70a9c214b9ecb2d279cdfc7e629654276e8366062db46a21d70",
+          "archiveSha256": "805db3eed707d98f717524bf79dbdb5eaa15d19b5f8850f0b0e975a158d00c12",
+          "archiveMember": "riscontro-sezioni.json",
+          "archiveName": "BKL046-M8-M20-DECam-supporto-HDR-v1.zip",
+          "copiedReport": "decamHdrSupportDataSec-riscontro-sezioni.json"
+        }
+      ]
+    },
+    {
+      "id": "decamM20ScienceRepeatability",
+      "level": "sameDurationScienceRepeatabilityAndRefusal",
+      "axes": [
+        "SATURATION_BLEND/1"
+      ],
+      "commit": "cad2b5c030d29cecee5e283e4795ce7930d549d6",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m20-decam-science-frame-repeatability-v1/riscontro.json",
+          "sha256": "2b4a0e93b0a4e4c848d7f8c6075d451ae9a29781d29c6802951c718f23278891",
+          "archiveSha256": "c33f5100e51994749034f9176749f29a6e977c65f3caf3a84e7cca49c0de9f68",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M20-DECam-trasferimento-r-v1.zip",
+          "copiedReport": "decamM20ScienceRepeatability-riscontro.json"
+        },
+        {
+          "path": "docs/project/bkl046-m20-decam-science-frame-repeatability-v1/riscontro-sensibilita-16px.json",
+          "sha256": "165e048457ca2038cd3acfb34e092d27c339f9c8eb16885a525e7b00839f40d5",
+          "archiveSha256": "c33f5100e51994749034f9176749f29a6e977c65f3caf3a84e7cca49c0de9f68",
+          "archiveMember": "riscontro-sensibilita-16px.json",
+          "archiveName": "BKL046-M20-DECam-trasferimento-r-v1.zip",
+          "copiedReport": "decamM20ScienceRepeatability-riscontro-sensibilita-16px.json"
+        }
+      ]
+    },
+    {
+      "id": "decamM20ShortScienceCandidates",
+      "level": "scienceCcdCoverageWithoutTransfer",
+      "axes": [
+        "SATURATION_BLEND/1"
+      ],
+      "commit": "8aefdad52a550aef4f1c11fe2064632a41d1382e",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m20-decam-short-science-candidates-v1/riscontro.json",
+          "sha256": "a92c10237bb1d1607088260391d5205160b8134ae67aadc05121e70b13a78ddb",
+          "archiveSha256": "16fae6b59e5b2be9f1b6aa3ad3aa6106ddf7fa776aaa1871a8b2e584eeece435",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M20-DECam-posa-breve-scientifica-v1.zip",
+          "copiedReport": "decamM20ShortScienceCandidates-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "decamM20GaiaTranslation",
+      "level": "absoluteRegistrationRefusal",
+      "axes": [
+        "SATURATION_BLEND/1"
+      ],
+      "commit": "9c26486f18ea9080ba5ee43cc3db5a795ef2cfc0",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-m20-decam-gaia-translation-v1/riscontro.json",
+          "sha256": "4ae2fd88b7bc880d28567ec9876471233c8b21fb58f5c6bc5b4919d81e2019c2",
+          "archiveSha256": "d5965b4af272cfd04d9cffc1c79ce0eed26dacbd377bfba203ceefd99d3192dd",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-M20-DECam-Gaia-registro-v1.zip",
+          "copiedReport": "decamM20GaiaTranslation-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "findings": {
+    "rawClipping": {
+      "allSites": 13414,
+      "darkCeiling": 15,
+      "darkNearCeiling": 15,
+      "darkUpperTail": 17
+    },
+    "skyOverlap": {
+      "radii": [
+        1,
+        1.5,
+        2
+      ],
+      "hits": {
+        "binned": [
+          473514,
+          713097,
+          776922
+        ],
+        "detector": [
+          385116,
+          385116,
+          661507
+        ],
+        "mosaic": [
+          476420,
+          713233,
+          777034
+        ]
+      },
+      "events": 831404
+    },
+    "alternativeSamples": {
+      "atLeastOne": 36601,
+      "atLeastThree": 24016,
+      "eventsByNumberOfAlternatives": [
+        22785,
+        6531,
+        6054,
+        5948,
+        5432,
+        4557,
+        3358,
+        2261,
+        1276,
+        727,
+        339,
+        95,
+        22,
+        1,
+        0
+      ],
+      "model": "affineConsensus",
+      "radius": 1,
+      "upperCodeExclusive": 62000
+    },
+    "heldOutCensoring": [
+      {
+        "eventsEstimated": 21842,
+        "frameMedianAbsoluteErrorRange": [
+          0.2037547508666416,
+          0.3511008111239861
+        ],
+        "framesWithEstimates": 15,
+        "improvedOverCensoredCode": 3143,
+        "medianAbsoluteRelativeError": 0.274819946683576,
+        "medianSignedRelativeError": -0.2743152987291677,
+        "minimumOtherFrames": 3,
+        "model": "affineConsensus",
+        "p90AbsoluteRelativeError": 0.48311587002220946,
+        "parity": "all",
+        "radius": 1,
+        "range": [
+          40000,
+          50000
+        ],
+        "referenceEvents": 21906,
+        "withinFivePercent": 1599
+      },
+      {
+        "eventsEstimated": 16687,
+        "frameMedianAbsoluteErrorRange": [
+          0.2925424489490613,
+          0.39930602409638555
+        ],
+        "framesWithEstimates": 15,
+        "improvedOverCensoredCode": 5882,
+        "medianAbsoluteRelativeError": 0.3412144804963838,
+        "medianSignedRelativeError": -0.3412144804963838,
+        "minimumOtherFrames": 3,
+        "model": "affineConsensus",
+        "p90AbsoluteRelativeError": 0.5338933720143434,
+        "parity": "all",
+        "radius": 1,
+        "range": [
+          50000,
+          62000
+        ],
+        "referenceEvents": 16926,
+        "withinFivePercent": 381
+      }
+    ],
+    "decamDataSections": [
+      {
+        "amplifiers": {
+          "A": {
+            "atOrAboveLevel": 3624,
+            "headerLevelADU": 44487.0,
+            "scienceSamples": 386262
+          },
+          "B": {
+            "atOrAboveLevel": 0,
+            "headerLevelADU": 43649.0,
+            "scienceSamples": 0
+          }
+        },
+        "archiveFullCcdCutout": "wide-M8-dec050437.fits",
+        "centerInDataSection": true,
+        "nonScienceSamples": 0,
+        "rawSubarrayOriginXY": [
+          448,
+          1808
+        ],
+        "samplesAtOrAboveAmplifierLevel": 3624,
+        "scienceSamples": 386262,
+        "seconds": 30.0,
+        "source": "dec050437.fits.fz",
+        "zerosInScience": 0,
+        "zerosOutsideScience": 0
+      },
+      {
+        "amplifiers": {
+          "A": {
+            "atOrAboveLevel": 0,
+            "headerLevelADU": 47271.0,
+            "scienceSamples": 0
+          },
+          "B": {
+            "atOrAboveLevel": 164565,
+            "headerLevelADU": 43600.0,
+            "scienceSamples": 165186
+          }
+        },
+        "archiveFullCcdCutout": "wide-M8-tentativo2-45s.fits",
+        "centerInDataSection": false,
+        "nonScienceSamples": 34776,
+        "rawSubarrayOriginXY": [
+          0,
+          1731
+        ],
+        "samplesAtOrAboveAmplifierLevel": 164565,
+        "scienceSamples": 165186,
+        "seconds": 45.0,
+        "source": "dec088331.fits.fz",
+        "zerosInScience": 0,
+        "zerosOutsideScience": 0
+      },
+      {
+        "amplifiers": {
+          "A": {
+            "atOrAboveLevel": 0,
+            "headerLevelADU": 47271.0,
+            "scienceSamples": 0
+          },
+          "B": {
+            "atOrAboveLevel": 163944,
+            "headerLevelADU": 43600.0,
+            "scienceSamples": 164565
+          }
+        },
+        "archiveFullCcdCutout": "wide-M8-dec088332.fits",
+        "centerInDataSection": false,
+        "nonScienceSamples": 34776,
+        "rawSubarrayOriginXY": [
+          0,
+          1729
+        ],
+        "samplesAtOrAboveAmplifierLevel": 163944,
+        "scienceSamples": 164565,
+        "seconds": 100.0,
+        "source": "dec088332.fits.fz",
+        "zerosInScience": 621,
+        "zerosOutsideScience": 34776
+      }
+    ],
+    "decamDataSectionSupport": [
+      {
+        "extendedCovered": 161916,
+        "fourCovered": 163060,
+        "guards": [
+          {
+            "allFour": 0,
+            "allSixteen": 0,
+            "factor": 1,
+            "nearest": 0,
+            "upperCodeExclusive": 43600.0
+          },
+          {
+            "allFour": 0,
+            "allSixteen": 0,
+            "factor": 0.9,
+            "nearest": 0,
+            "upperCodeExclusive": 39240.0
+          },
+          {
+            "allFour": 0,
+            "allSixteen": 0,
+            "factor": 0.8,
+            "nearest": 0,
+            "upperCodeExclusive": 34880.0
+          }
+        ],
+        "longSeconds": 100,
+        "nearestCodeZero": 0,
+        "nearestCovered": 163944,
+        "shortSeconds": 45,
+        "sourceScienceSamplesAtOrAboveAmplifierLevel": 163944
+      },
+      {
+        "extendedCovered": 161418,
+        "fourCovered": 162555,
+        "guards": [
+          {
+            "allFour": 158183,
+            "allSixteen": 155539,
+            "factor": 1,
+            "nearest": 159519,
+            "upperCodeExclusive": 43649.0
+          },
+          {
+            "allFour": 158171,
+            "allSixteen": 155524,
+            "factor": 0.9,
+            "nearest": 159507,
+            "upperCodeExclusive": 39284.1
+          },
+          {
+            "allFour": 158164,
+            "allSixteen": 155514,
+            "factor": 0.8,
+            "nearest": 159499,
+            "upperCodeExclusive": 34919.200000000004
+          }
+        ],
+        "longSeconds": 100,
+        "nearestCodeZero": 0,
+        "nearestCovered": 163138,
+        "shortSeconds": 30,
+        "sourceScienceSamplesAtOrAboveAmplifierLevel": 163944
+      },
+      {
+        "extendedCovered": 162000,
+        "fourCovered": 163140,
+        "guards": [
+          {
+            "allFour": 158748,
+            "allSixteen": 156052,
+            "factor": 1,
+            "nearest": 160325,
+            "upperCodeExclusive": 43649.0
+          },
+          {
+            "allFour": 158735,
+            "allSixteen": 156037,
+            "factor": 0.9,
+            "nearest": 160313,
+            "upperCodeExclusive": 39284.1
+          },
+          {
+            "allFour": 158726,
+            "allSixteen": 156026,
+            "factor": 0.8,
+            "nearest": 160305,
+            "upperCodeExclusive": 34919.200000000004
+          }
+        ],
+        "longSeconds": 45,
+        "nearestCodeZero": 0,
+        "nearestCovered": 163944,
+        "shortSeconds": 30,
+        "sourceScienceSamplesAtOrAboveAmplifierLevel": 164565
+      }
+    ],
+    "decamM20InitialStatus": "INSUFFICIENT_MATCHES",
+    "decamM20Sensitivity": {
+      "apertures": [
+        {
+          "heldOutMedianAbsoluteRelativeError": 0.0342699949407238,
+          "heldOutP90AbsoluteRelativeError": 0.043417116684331236,
+          "heldOutWithinFivePercent": 6,
+          "medianTargetToReferenceFit": 2.5046580679346757,
+          "medianTargetToReferenceHeldOut": 2.5380508074205173,
+          "radius": 3
+        },
+        {
+          "heldOutMedianAbsoluteRelativeError": 0.0017340790931125727,
+          "heldOutP90AbsoluteRelativeError": 0.014124281437241204,
+          "heldOutWithinFivePercent": 6,
+          "medianTargetToReferenceFit": 2.533292192291396,
+          "medianTargetToReferenceHeldOut": 2.529473661275632,
+          "radius": 5
+        },
+        {
+          "heldOutMedianAbsoluteRelativeError": 0.009094439791541287,
+          "heldOutP90AbsoluteRelativeError": 0.012949118673624915,
+          "heldOutWithinFivePercent": 6,
+          "medianTargetToReferenceFit": 2.551887503560579,
+          "medianTargetToReferenceHeldOut": 2.5441574056170575,
+          "radius": 7
+        }
+      ],
+      "heldOut": 6
+    },
+    "decamM20ShortStatus": [
+      "INSUFFICIENT_MATCHES",
+      "INSUFFICIENT_MATCHES",
+      "INSUFFICIENT_MATCHES"
+    ],
+    "decamM20GaiaStatus": [
+      "UNCONFIRMED",
+      "UNCONFIRMED",
+      "UNCONFIRMED",
+      "UNCONFIRMED",
+      "UNCONFIRMED"
+    ]
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}

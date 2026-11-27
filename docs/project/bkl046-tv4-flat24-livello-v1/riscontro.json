@@ -1,0 +1,856 @@
+{
+  "designSha256": "9a6dd4d70cc02b1969e47e8dcb3d0a0249bf48ed7cfc3d4da4a660f126177743",
+  "distinctSession": true,
+  "envelopesDescriptiveOnly": true,
+  "gainEstimated": false,
+  "independentFramesBetweenPairingSchemes": false,
+  "nativeExecutions": 0,
+  "protocol": "BKL046_TV4_HOLDOUT_FLAT24_LEVEL_RESULT_V1",
+  "runs": {
+    "BB": {
+      "frames": [
+        {
+          "catalogMaximumDn": 9695.0,
+          "catalogMedianDn": 8228.0,
+          "ccdTemperatureK": 256.009,
+          "correctedMedianDn": 7436.0,
+          "integrationMs": 503.5,
+          "name": "i030227_104600_782_a.fit",
+          "rawMaxDn": 9303,
+          "rawMinDn": 6582,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T10:46:00.782"
+        },
+        {
+          "catalogMaximumDn": 9689.0,
+          "catalogMedianDn": 8227.0,
+          "ccdTemperatureK": 256.009,
+          "correctedMedianDn": 7434.0,
+          "integrationMs": 503.5,
+          "name": "i030227_104604_332_a.fit",
+          "rawMaxDn": 9303,
+          "rawMinDn": 6559,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T10:46:04.332"
+        },
+        {
+          "catalogMaximumDn": 9689.0,
+          "catalogMedianDn": 8228.0,
+          "ccdTemperatureK": 255.806,
+          "correctedMedianDn": 7434.5,
+          "integrationMs": 503.5,
+          "name": "i030227_104607_966_a.fit",
+          "rawMaxDn": 9327,
+          "rawMinDn": 6558,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T10:46:07.966"
+        },
+        {
+          "catalogMaximumDn": 9675.0,
+          "catalogMedianDn": 8227.0,
+          "ccdTemperatureK": 255.806,
+          "correctedMedianDn": 7434.0,
+          "integrationMs": 503.5,
+          "name": "i030227_104611_599_a.fit",
+          "rawMaxDn": 9333,
+          "rawMinDn": 6555,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T10:46:11.599"
+        },
+        {
+          "catalogMaximumDn": 9675.0,
+          "catalogMedianDn": 8228.0,
+          "ccdTemperatureK": 255.785,
+          "correctedMedianDn": 7435.5,
+          "integrationMs": 503.5,
+          "name": "i030227_104615_182_a.fit",
+          "rawMaxDn": 9317,
+          "rawMinDn": 6579,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T10:46:15.182"
+        },
+        {
+          "catalogMaximumDn": 9697.0,
+          "catalogMedianDn": 8226.0,
+          "ccdTemperatureK": 255.806,
+          "correctedMedianDn": 7433.0,
+          "integrationMs": 503.5,
+          "name": "i030227_104622_032_a.fit",
+          "rawMaxDn": 9304,
+          "rawMinDn": 6569,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T10:46:22.032"
+        }
+      ],
+      "pairs": [
+        {
+          "indices": [
+            0,
+            1
+          ],
+          "mode": "adjacent",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9867054518040925,
+                1.01706839639096
+              ],
+              "observed": 1.0327262177046725,
+              "permutedMedian": 1.0029018696932952,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.96952346612682,
+                1.0402476137982986
+              ],
+              "observed": 1.0829951859769367,
+              "permutedMedian": 1.002254318464121,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9296737279405421,
+                1.1034500044855609
+              ],
+              "observed": 1.3314096704553844,
+              "permutedMedian": 1.004281847885299,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8498983339788351,
+                1.155721356391142
+              ],
+              "observed": 2.2345740568906076,
+              "permutedMedian": 0.9967530891735041,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            2,
+            3
+          ],
+          "mode": "adjacent",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.9832750884247701,
+                1.0168315898384854
+              ],
+              "observed": 1.001307407996663,
+              "permutedMedian": 0.9997620914608308,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.9604296799773624,
+                1.043723276525568
+              ],
+              "observed": 1.0125245071044597,
+              "permutedMedian": 1.004047231673803,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.9189061696754491,
+                1.08534188415469
+              ],
+              "observed": 1.0827010327735627,
+              "permutedMedian": 1.0010350350770656,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.855673757653193,
+                1.141617642214214
+              ],
+              "observed": 1.1348916655397079,
+              "permutedMedian": 0.9982327956795224,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            4,
+            5
+          ],
+          "mode": "adjacent",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9839600330993978,
+                1.0181932871534694
+              ],
+              "observed": 1.0334194210122614,
+              "permutedMedian": 1.0011083439404995,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9651501446380146,
+                1.043694552741708
+              ],
+              "observed": 1.0830378966500411,
+              "permutedMedian": 1.0016523569730351,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.922303235934684,
+                1.0689707739152594
+              ],
+              "observed": 1.2908930956799616,
+              "permutedMedian": 1.0054256000014465,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8720200970634391,
+                1.1652405933193493
+              ],
+              "observed": 2.001486068520638,
+              "permutedMedian": 0.9952415470316895,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            0,
+            3
+          ],
+          "mode": "separated",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.9863886544684082,
+                1.0239787210457572
+              ],
+              "observed": 1.0052331638545988,
+              "permutedMedian": 0.9998343366299045,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.9602894438120577,
+                1.043226212805551
+              ],
+              "observed": 1.0074724477023251,
+              "permutedMedian": 1.0035446700316375,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9157900141735349,
+                1.0971965428853516
+              ],
+              "observed": 1.1000813560605156,
+              "permutedMedian": 1.0051739286530423,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.823228782672685,
+                1.2173490394058302
+              ],
+              "observed": 1.1278201867420241,
+              "permutedMedian": 1.000137430348105,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            1,
+            4
+          ],
+          "mode": "separated",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": false,
+              "central95": [
+                0.9775435753368802,
+                1.0183874490261193
+              ],
+              "observed": 1.0108348983883215,
+              "permutedMedian": 1.0018828395411337,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9569841291218435,
+                1.0372687731838066
+              ],
+              "observed": 1.0418727004490214,
+              "permutedMedian": 0.9998907795625589,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9191693942543457,
+                1.0747791319538098
+              ],
+              "observed": 1.1071322061835103,
+              "permutedMedian": 0.9938327964706862,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8262243639548879,
+                1.1678576839002426
+              ],
+              "observed": 1.3318604625582067,
+              "permutedMedian": 0.987501732234707,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            2,
+            5
+          ],
+          "mode": "separated",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9818132330597273,
+                1.024338156481379
+              ],
+              "observed": 1.0384520143841633,
+              "permutedMedian": 0.9996622601502179,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.95715920795794,
+                1.0449710249386164
+              ],
+              "observed": 1.1187326063937664,
+              "permutedMedian": 0.9985706135540566,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9049025167175516,
+                1.099325601930176
+              ],
+              "observed": 1.5080610246702455,
+              "permutedMedian": 1.0054486918705738,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8371628705894213,
+                1.1856410523628966
+              ],
+              "observed": 3.056396882949334,
+              "permutedMedian": 1.0014813874307333,
+              "width": 16
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "adjacent": {
+          "pairs": 3,
+          "summaries": {
+            "16": {
+              "aboveEnvelope": 2,
+              "medianRatio": 2.001486068520638
+            },
+            "2": {
+              "aboveEnvelope": 2,
+              "medianRatio": 1.0327262177046725
+            },
+            "4": {
+              "aboveEnvelope": 2,
+              "medianRatio": 1.0829951859769367
+            },
+            "8": {
+              "aboveEnvelope": 2,
+              "medianRatio": 1.2908930956799616
+            }
+          }
+        },
+        "separated": {
+          "pairs": 3,
+          "summaries": {
+            "16": {
+              "aboveEnvelope": 2,
+              "medianRatio": 1.3318604625582067
+            },
+            "2": {
+              "aboveEnvelope": 1,
+              "medianRatio": 1.0108348983883215
+            },
+            "4": {
+              "aboveEnvelope": 2,
+              "medianRatio": 1.0418727004490214
+            },
+            "8": {
+              "aboveEnvelope": 3,
+              "medianRatio": 1.1071322061835103
+            }
+          }
+        }
+      }
+    },
+    "FS": {
+      "frames": [
+        {
+          "catalogMaximumDn": 9519.0,
+          "catalogMedianDn": 8031.0,
+          "ccdTemperatureK": 241.583,
+          "correctedMedianDn": 6927.0,
+          "integrationMs": 1003.5,
+          "name": "i030227_195704_632_a.fit",
+          "rawMaxDn": 9126,
+          "rawMinDn": 6385,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T19:57:04.632"
+        },
+        {
+          "catalogMaximumDn": 9507.0,
+          "catalogMedianDn": 8030.0,
+          "ccdTemperatureK": 241.583,
+          "correctedMedianDn": 6763.0,
+          "integrationMs": 1003.5,
+          "name": "i030227_195708_266_a.fit",
+          "rawMaxDn": 9136,
+          "rawMinDn": 6385,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T19:57:08.266"
+        },
+        {
+          "catalogMaximumDn": 9520.0,
+          "catalogMedianDn": 8032.0,
+          "ccdTemperatureK": 239.925,
+          "correctedMedianDn": 7438.0,
+          "integrationMs": 1003.5,
+          "name": "i030227_195711_782_a.fit",
+          "rawMaxDn": 9123,
+          "rawMinDn": 6391,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T19:57:11.782"
+        },
+        {
+          "catalogMaximumDn": 9529.0,
+          "catalogMedianDn": 8033.0,
+          "ccdTemperatureK": 241.425,
+          "correctedMedianDn": 3673.0,
+          "integrationMs": 1003.5,
+          "name": "i030227_195715_282_a.fit",
+          "rawMaxDn": 9107,
+          "rawMinDn": 6398,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T19:57:15.282"
+        },
+        {
+          "catalogMaximumDn": 9524.0,
+          "catalogMedianDn": 8034.0,
+          "ccdTemperatureK": 241.603,
+          "correctedMedianDn": 7434.0,
+          "integrationMs": 1003.5,
+          "name": "i030227_195718_832_a.fit",
+          "rawMaxDn": 9124,
+          "rawMinDn": 6377,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T19:57:18.832"
+        },
+        {
+          "catalogMaximumDn": 9508.0,
+          "catalogMedianDn": 8035.0,
+          "ccdTemperatureK": 241.583,
+          "correctedMedianDn": 7031.0,
+          "integrationMs": 1003.5,
+          "name": "i030227_195722_366_a.fit",
+          "rawMaxDn": 9140,
+          "rawMinDn": 6383,
+          "rejectedPixelCount": 0,
+          "utc": "2003-02-27T19:57:22.366"
+        }
+      ],
+      "pairs": [
+        {
+          "indices": [
+            0,
+            1
+          ],
+          "mode": "adjacent",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9833338294681719,
+                1.018134348811343
+              ],
+              "observed": 3.999583400525442,
+              "permutedMedian": 1.0002129744798234,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9604903864111312,
+                1.0453817463759443
+              ],
+              "observed": 16.000654698106022,
+              "permutedMedian": 0.9958363189690853,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9286009437631204,
+                1.0776302629630141
+              ],
+              "observed": 64.04891489865395,
+              "permutedMedian": 0.9971211153790613,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8116284525926626,
+                1.198805846079344
+              ],
+              "observed": 256.9485278929444,
+              "permutedMedian": 0.9972070922179237,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            2,
+            3
+          ],
+          "mode": "adjacent",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9839236245479338,
+                1.018786110159463
+              ],
+              "observed": 3.999691900867808,
+              "permutedMedian": 1.0013023531833514,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9521814553618951,
+                1.0460861358290707
+              ],
+              "observed": 16.001205534026425,
+              "permutedMedian": 1.0001182775238677,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9331852222144729,
+                1.114046293710831
+              ],
+              "observed": 64.05124311056677,
+              "permutedMedian": 1.0010512902269075,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8440671008496149,
+                1.2103279580673307
+              ],
+              "observed": 256.95803384176304,
+              "permutedMedian": 0.9973103723847838,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            4,
+            5
+          ],
+          "mode": "adjacent",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.981638721797338,
+                1.019163090195927
+              ],
+              "observed": 3.991270251122406,
+              "permutedMedian": 1.0009255377784132,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9631989912143152,
+                1.0390520479845724
+              ],
+              "observed": 15.959112899701566,
+              "permutedMedian": 0.9976158968038988,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.90775991729638,
+                1.0871822279208367
+              ],
+              "observed": 63.874222715101304,
+              "permutedMedian": 0.9997055390956515,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8428833836085555,
+                1.1582969410274384
+              ],
+              "observed": 256.2394514717824,
+              "permutedMedian": 1.0047176117961536,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            0,
+            3
+          ],
+          "mode": "separated",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9801518375551636,
+                1.0160687300334834
+              ],
+              "observed": 3.9998372994138007,
+              "permutedMedian": 1.001010099975546,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9641621979843636,
+                1.0443417077334087
+              ],
+              "observed": 16.001932293182627,
+              "permutedMedian": 0.995965328576621,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9044830157757253,
+                1.0956479871020353
+              ],
+              "observed": 64.05430328743228,
+              "permutedMedian": 0.9931512892669785,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8597211826698178,
+                1.1614832077404822
+              ],
+              "observed": 256.9704329309246,
+              "permutedMedian": 1.0001887201557182,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            1,
+            4
+          ],
+          "mode": "separated",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9844853654618332,
+                1.0197496896666487
+              ],
+              "observed": 3.99926298611656,
+              "permutedMedian": 0.9995240366456541,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9559229944118981,
+                1.0316114058704975
+              ],
+              "observed": 15.999036751543613,
+              "permutedMedian": 0.9984463759490636,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9078969391349291,
+                1.080636758910855
+              ],
+              "observed": 64.04209233208637,
+              "permutedMedian": 0.9952342099716907,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8334268478564347,
+                1.164812108186688
+              ],
+              "observed": 256.9209021998247,
+              "permutedMedian": 0.991916337758417,
+              "width": 16
+            }
+          ]
+        },
+        {
+          "indices": [
+            2,
+            5
+          ],
+          "mode": "separated",
+          "status": "MEASURED",
+          "variances": [
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9841614731218341,
+                1.0196905782394878
+              ],
+              "observed": 3.9910791604077036,
+              "permutedMedian": 1.0012812185818143,
+              "width": 2
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9655935003710244,
+                1.0428626456320382
+              ],
+              "observed": 15.958113962716487,
+              "permutedMedian": 1.0042371461485025,
+              "width": 4
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.9184624461215597,
+                1.0934212054975327
+              ],
+              "observed": 63.86973350453774,
+              "permutedMedian": 1.001440566093533,
+              "width": 8
+            },
+            {
+              "aboveEnvelope": true,
+              "central95": [
+                0.8381788264112121,
+                1.211463672940427
+              ],
+              "observed": 256.2206412604988,
+              "permutedMedian": 1.0186356881163405,
+              "width": 16
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "adjacent": {
+          "pairs": 3,
+          "summaries": {
+            "16": {
+              "aboveEnvelope": 3,
+              "medianRatio": 256.9485278929444
+            },
+            "2": {
+              "aboveEnvelope": 3,
+              "medianRatio": 3.999583400525442
+            },
+            "4": {
+              "aboveEnvelope": 3,
+              "medianRatio": 16.000654698106022
+            },
+            "8": {
+              "aboveEnvelope": 3,
+              "medianRatio": 64.04891489865395
+            }
+          }
+        },
+        "separated": {
+          "pairs": 3,
+          "summaries": {
+            "16": {
+              "aboveEnvelope": 3,
+              "medianRatio": 256.9209021998247
+            },
+            "2": {
+              "aboveEnvelope": 3,
+              "medianRatio": 3.99926298611656
+            },
+            "4": {
+              "aboveEnvelope": 3,
+              "medianRatio": 15.999036751543613
+            },
+            "8": {
+              "aboveEnvelope": 3,
+              "medianRatio": 64.04209233208637
+            }
+          }
+        }
+      }
+    }
+  },
+  "scientificClosures": 0
+}

@@ -1,0 +1,260 @@
+{
+  "commonHoldout": 51,
+  "commonTraining": 54,
+  "holdoutIds": [
+    1551626003051637248,
+    1551726917602582016,
+    1551756295178911104,
+    1551761208621481856,
+    1551761346060435712,
+    1551761414779898368,
+    1551786359950261632,
+    1551789108729334528,
+    1551798695096337280,
+    1551799313571625984,
+    1551806082440553600,
+    1551818280147231744,
+    1551818520665400832,
+    1551820650969160960,
+    1551822540754771840,
+    1551855835341191040,
+    1551858957780417024,
+    1551876485543918464,
+    1551910982721235968,
+    1551912112296179072,
+    1551913422262927488,
+    1551914006378480000,
+    1551914109457695872,
+    1551921771679355520,
+    1551935751795702912,
+    1551943315235273088,
+    1551950118463515392,
+    1551966782936585344,
+    1551974891834824832,
+    1551982932013589632,
+    1551983791007049216,
+    1551987845456158848,
+    1551991487588448512,
+    1552001417552726400,
+    1552004750447329536,
+    1552007671025094144,
+    1552025881686455424,
+    1552026255346628096,
+    1552039007107250176,
+    1552044332866699520,
+    1552045672895721600,
+    1552632051894238464,
+    1552645147250945792,
+    1552660128097401216,
+    1552663117394120704,
+    1552681843451491840,
+    1552682942963118464,
+    1552695376891521408,
+    1552773927550039680,
+    1552794990069680128,
+    1552797017294242432
+  ],
+  "nativeExecutions": 0,
+  "parentReceiptSha256": "56028aa533f8b07e9effb694709366ab868fd7453c6069b8d7be966c4a6aabcb",
+  "protocolSha256": "60846baa42d271d8dafb9dbf4e36815d0b36c5a189aad05fd55fdf0b803ca733",
+  "results": {
+    "jointGreen": {
+      "signal": {
+        "0-1": {
+          "countWithinThreshold": 34,
+          "p50Px": 0.2563189932361234,
+          "p90Px": 0.4573899438422018,
+          "p90WithinThreshold": false
+        },
+        "0-1-2": {
+          "countWithinThreshold": 18,
+          "p50Px": 0.36225445826156316,
+          "p90Px": 0.7405404711509384,
+          "p90WithinThreshold": false
+        },
+        "0-2": {
+          "countWithinThreshold": 18,
+          "p50Px": 0.3559807819750016,
+          "p90Px": 0.7326646902469188,
+          "p90WithinThreshold": false
+        },
+        "1-2": {
+          "countWithinThreshold": 41,
+          "p50Px": 0.19914705529452936,
+          "p90Px": 0.3625583939304612,
+          "p90WithinThreshold": false
+        },
+        "directVersusChained": {
+          "countWithinThreshold": 51,
+          "p50Px": 0.006015106662588252,
+          "p90Px": 0.007539799446768282,
+          "p90WithinThreshold": true
+        }
+      },
+      "signalRobust": {
+        "0-1": {
+          "countWithinThreshold": 32,
+          "p50Px": 0.24319085957207273,
+          "p90Px": 0.45120631034476816,
+          "p90WithinThreshold": false
+        },
+        "0-1-2": {
+          "countWithinThreshold": 18,
+          "p50Px": 0.3337237686554575,
+          "p90Px": 0.6278013815984058,
+          "p90WithinThreshold": false
+        },
+        "0-2": {
+          "countWithinThreshold": 19,
+          "p50Px": 0.3502141989251214,
+          "p90Px": 0.6402348307207856,
+          "p90WithinThreshold": false
+        },
+        "1-2": {
+          "countWithinThreshold": 39,
+          "p50Px": 0.21534253161770298,
+          "p90Px": 0.3895979260716376,
+          "p90WithinThreshold": false
+        },
+        "directVersusChained": {
+          "countWithinThreshold": 51,
+          "p50Px": 0.019944495157455486,
+          "p90Px": 0.02529067209065851,
+          "p90WithinThreshold": true
+        }
+      },
+      "unit": {
+        "0-1": {
+          "countWithinThreshold": 23,
+          "p50Px": 0.3114409989528418,
+          "p90Px": 0.5388187018591353,
+          "p90WithinThreshold": false
+        },
+        "0-1-2": {
+          "countWithinThreshold": 15,
+          "p50Px": 0.4375050894140652,
+          "p90Px": 0.8466468663203484,
+          "p90WithinThreshold": false
+        },
+        "0-2": {
+          "countWithinThreshold": 15,
+          "p50Px": 0.43750576762896043,
+          "p90Px": 0.8466730161564137,
+          "p90WithinThreshold": false
+        },
+        "1-2": {
+          "countWithinThreshold": 41,
+          "p50Px": 0.1959085329174251,
+          "p90Px": 0.4161909595709365,
+          "p90WithinThreshold": false
+        },
+        "directVersusChained": {
+          "countWithinThreshold": 51,
+          "p50Px": 2.6936265781862716e-05,
+          "p90Px": 4.561940873406422e-05,
+          "p90WithinThreshold": true
+        }
+      }
+    },
+    "pairedPreview": {
+      "signal": {
+        "0-1": {
+          "countWithinThreshold": 33,
+          "p50Px": 0.24341816191221832,
+          "p90Px": 0.3970477534026992,
+          "p90WithinThreshold": false
+        },
+        "0-1-2": {
+          "countWithinThreshold": 20,
+          "p50Px": 0.36491984489932183,
+          "p90Px": 0.5915349543229174,
+          "p90WithinThreshold": false
+        },
+        "0-2": {
+          "countWithinThreshold": 21,
+          "p50Px": 0.3650703300351836,
+          "p90Px": 0.5781245828255844,
+          "p90WithinThreshold": false
+        },
+        "1-2": {
+          "countWithinThreshold": 40,
+          "p50Px": 0.19753841364358057,
+          "p90Px": 0.3734613197570958,
+          "p90WithinThreshold": false
+        },
+        "directVersusChained": {
+          "countWithinThreshold": 51,
+          "p50Px": 0.006491496457490365,
+          "p90Px": 0.012994105926773771,
+          "p90WithinThreshold": true
+        }
+      },
+      "signalRobust": {
+        "0-1": {
+          "countWithinThreshold": 40,
+          "p50Px": 0.22018026033392005,
+          "p90Px": 0.37710206676563734,
+          "p90WithinThreshold": false
+        },
+        "0-1-2": {
+          "countWithinThreshold": 20,
+          "p50Px": 0.3359786828194674,
+          "p90Px": 0.675964904504929,
+          "p90WithinThreshold": false
+        },
+        "0-2": {
+          "countWithinThreshold": 18,
+          "p50Px": 0.32870389702556246,
+          "p90Px": 0.7085783988841035,
+          "p90WithinThreshold": false
+        },
+        "1-2": {
+          "countWithinThreshold": 40,
+          "p50Px": 0.2034765390964988,
+          "p90Px": 0.39157180146973775,
+          "p90WithinThreshold": false
+        },
+        "directVersusChained": {
+          "countWithinThreshold": 51,
+          "p50Px": 0.028883668205117643,
+          "p90Px": 0.044795858790325306,
+          "p90WithinThreshold": true
+        }
+      },
+      "unit": {
+        "0-1": {
+          "countWithinThreshold": 23,
+          "p50Px": 0.33189127786555583,
+          "p90Px": 0.5665418464899711,
+          "p90WithinThreshold": false
+        },
+        "0-1-2": {
+          "countWithinThreshold": 16,
+          "p50Px": 0.39883899717748555,
+          "p90Px": 0.7904649843972623,
+          "p90WithinThreshold": false
+        },
+        "0-2": {
+          "countWithinThreshold": 16,
+          "p50Px": 0.3988398548312018,
+          "p90Px": 0.7904944433969731,
+          "p90WithinThreshold": false
+        },
+        "1-2": {
+          "countWithinThreshold": 41,
+          "p50Px": 0.1753810319714774,
+          "p90Px": 0.40611037843236203,
+          "p90WithinThreshold": false
+        },
+        "directVersusChained": {
+          "countWithinThreshold": 51,
+          "p50Px": 2.323920374433839e-05,
+          "p90Px": 3.9351782981756745e-05,
+          "p90WithinThreshold": true
+        }
+      }
+    }
+  },
+  "schema": "BKL046_M51_THREE_POSE_REGISTRATION_V1",
+  "scientificClosures": 0
+}

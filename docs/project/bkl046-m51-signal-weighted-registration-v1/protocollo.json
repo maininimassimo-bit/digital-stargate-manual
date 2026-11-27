@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_M51_SIGNAL_WEIGHTED_REGISTRATION_V1",
+  "parentCode": "1c664df2d1c5335a250d00e2e716032799c5f6ec0ed53eec5b65290cebfa3b3c",
+  "parentReport": "61f1a5dd0842ff43f4594adc26beac4e2c0176fffc6cb28ec8950f30e7239e8e",
+  "methods": [
+    "pairedPreview",
+    "jointGreen"
+  ],
+  "minimumTrain": 20,
+  "minimumTest": 20,
+  "maximumWeightRatio": 16,
+  "diagnosticP90Px": 0.3,
+  "brightnessProxy": "Minimum across the two frames and the two greens of the background-subtracted peak divided by the robust annular background scale. This is a peak-to-background-noise proxy, without a source shot noise model.",
+  "weightedFit": "Use the squared proxy ratio relative to the median proxy of training stars, clipped to [1/4,4]. Compare to unit weights on exactly the same stars.",
+  "diagnostic": "Split held-out stars at the median proxy of the training stars and report P90 for each group with at least ten held-out stars. Use all held-out stars for threshold decisions."
+}

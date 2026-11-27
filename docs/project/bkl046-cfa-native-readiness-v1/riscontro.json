@@ -1,0 +1,105 @@
+{
+  "schema": "BKL046_CFA_NATIVE_READINESS_READBACK_V1",
+  "host": "DSG-SHARED",
+  "checkedAtUtc": "2026-11-25T21:55:21.8859468+00:00",
+  "launcherSubjectSha256": "3ad86ab652dbe80b08fc6b939dd2b10fb3038563784598f08c10ada3a545b072",
+  "candidateMembersVerified": 21,
+  "managedEnrollmentModule": "NULL_STAGING_MODULE",
+  "coordinatorFilePinsVerified": [
+    {
+      "name": "CURRENT.json",
+      "sha256": "da446f4272522fd192f6de3dab61fb63b22a0f4f8491772ae4475ca0cb2518dd"
+    },
+    {
+      "name": "MANIFEST-R4.json",
+      "sha256": "61d38f0160ba2650cea167e7e1a5fbe5af1d4b448ddc085f2f8845f36e7a4150"
+    },
+    {
+      "name": "coordinator.py",
+      "sha256": "d09aab4e9e1d20841503dbd6f4a520b7a2d4b738eeb06adecd339f7cf59b2335"
+    },
+    {
+      "name": "original-parent-adapter.cjs",
+      "sha256": "2fe08ef35c126f97b9fce3e382070acf21070ebe8c76fcf5519dc393024464a2"
+    },
+    {
+      "name": "ARB-R4.md",
+      "sha256": "2b606209643ceba56301bdbab9b6c259108a4eaa7d746355b59a6e936a148917"
+    },
+    {
+      "name": "RQ-R4.md",
+      "sha256": "d22a9eae87e9ed19284b2dc867c5b5012b428f2457c71478c3c94da5ea818abb"
+    }
+  ],
+  "ordinaryCallerAccess": {
+    "stageParent": {
+      "accessOpenWin32": {
+        "readControl": 0,
+        "addFile": 0,
+        "addSubdirectory": 0,
+        "deleteChild": 5,
+        "delete": 0,
+        "writeDacl": 5,
+        "writeOwner": 5
+      }
+    },
+    "stageDirectory": {
+      "accessOpenWin32": {
+        "readControl": 0,
+        "addFile": 0,
+        "addSubdirectory": 0,
+        "deleteChild": 5,
+        "delete": 0,
+        "writeDacl": 0,
+        "writeOwner": 5
+      }
+    },
+    "stagedLauncher": {
+      "accessOpenWin32": {
+        "readControl": 0,
+        "writeData": 0,
+        "appendData": 0,
+        "delete": 0,
+        "writeDacl": 0,
+        "writeOwner": 5
+      }
+    },
+    "stagedEnrollment": {
+      "accessOpenWin32": {
+        "readControl": 0,
+        "writeData": 0,
+        "appendData": 0,
+        "delete": 0,
+        "writeDacl": 0,
+        "writeOwner": 5
+      }
+    },
+    "protectedParent": {
+      "accessOpenWin32": {
+        "readControl": 0,
+        "addFile": 5,
+        "addSubdirectory": 5,
+        "deleteChild": 5,
+        "delete": 5,
+        "writeDacl": 5,
+        "writeOwner": 5
+      }
+    }
+  },
+  "github": {
+    "pullRequest": 627,
+    "head": "121e8a2333a73ba396732ee45b526dbb92f502f2",
+    "reviewsObserved": 0
+  },
+  "independentlySignedSubjectReceiptsVerified": false,
+  "productionActivationVerified": false,
+  "requirementsRemaining": [
+    "Approved independent ARB receipt for the exact subject",
+    "Approved independent RQ receipt bound to that ARB receipt",
+    "Managed enrollment in a Windows-protected operational installation with actual role keys",
+    "Runtime admission from the canonical coordinator"
+  ],
+  "coordinatorStateMutationRequested": false,
+  "admissionRequested": false,
+  "pixInsightRunning": false
+}

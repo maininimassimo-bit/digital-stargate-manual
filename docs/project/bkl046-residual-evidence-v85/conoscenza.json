@@ -1,0 +1,619 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_V85",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "sha256": "269d93d01e9329ecf58c62ba270426cdf5c1616d4187d13f3dcdc9c6faeed0ca",
+    "commit": "89fba7976712a7cab2f466321a012de7e536a2db"
+  },
+  "sourceIndex": {
+    "sha256": "c3add255a0550346ef1b0ee53812dfc0e308c2d5a5443e55a0194f2a2e35a2dd",
+    "commit": "5aad48cac2e3b946d60d9d0d4635a40c4deed901"
+  },
+  "evidence": [
+    {
+      "id": "gd153FormalErr",
+      "level": "diagonalErrMonteCarlo",
+      "axes": [
+        "FILTER_COLOR/4"
+      ],
+      "commit": "35ac3e1ea358ca896b2d51eb5865cac2ba72619e",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-formal-flc-error-v1/riscontro.json",
+          "sha256": "21f66575a24435d649a553165a41a40cdbba763febf5f2a414a9514a555e1327",
+          "archiveSha256": "d97635bc956bd3e396fad79aaaf5a3a7aed39e85b4efa0c3b2c35a174a58a859",
+          "archiveName": "BKL046-WFC3-GD153-ERR-DQ-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "gd153FormalErr-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "gd153BlankSky",
+      "level": "empiricalBlankSkyVsDiagonalModel",
+      "axes": [
+        "FILTER_COLOR/4"
+      ],
+      "commit": "41b54ef090719c7e7e153a959f6fb576f36669b9",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-blank-sky-formal-error-v1/riscontro.json",
+          "sha256": "4055eeac3a8df182526e8bda141067854c620adff385aee85684dbdc810d85aa",
+          "archiveSha256": "3dc43a5574bae5f857d39f653bebe942ae63c7fec0c6ea89048bcc2bab86839d",
+          "archiveName": "BKL046-WFC3-GD153-ERR-cielo-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "gd153BlankSky-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "p330eScanScreen",
+      "level": "independentTargetMetadataExclusions",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "5162222ac1ac97c6ce4846870590c921366836b7",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-p330e-independent-wfc3-cohort-v1/riscontro.json",
+          "sha256": "8443b2fe8e7a806d3e20529c41edc84c6c5086905557d60f1e4ee9d93ddabeef",
+          "archiveSha256": "bd3a9965950db7d8a6ce6b8efb6c6dc061e82d5bdd82963864714dbc08ccc314",
+          "archiveName": "BKL046-WFC3-P330E-controllo-indipendente-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "p330eScanScreen-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "otherCalibratorScreen",
+      "level": "staringIndependentTargetsApertureVetoes",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "ae0cabcb35900f8abf0cb7adb5ee3568ba391802",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-three-independent-wfc3-calibrators-v1/riscontro.json",
+          "sha256": "2fe1d00e4f0e8df7bf0b426580541f3f49feafbcd8eb8b8ec38c2b97caa1fddf",
+          "archiveSha256": "e4499dcc63170da7cf829f4499a1e637c561707e219987cb6d744a8ceed8f9f1",
+          "archiveName": "BKL046-WFC3-calibratori-indipendenti-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "otherCalibratorScreen-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "grw70GaiaAperture",
+      "level": "gaiaIndependentPositionRecheck",
+      "axes": [
+        "FILTER_COLOR/3"
+      ],
+      "commit": "0fff8e3764e9b84ce5a9a713b3ceee8b46c5cdc1",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-grw70-gaia-aperture-identity-v1/riscontro.json",
+          "sha256": "d0bd81b37bdd91d26612842d6289528163753e7ede764f86d3ead0348d6eedd2",
+          "archiveSha256": "1f47c2d395b1ecb4dd9b5255109333a2f1803d8b4987b56864832f9d566b4aab",
+          "archiveName": "BKL046-WFC3-GRW70-Gaia-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "grw70GaiaAperture-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "grw70AlternativeCenter",
+      "level": "sameVisitOtherBandCenterExploratory",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "202ba13b9c8022ab2050a86f340f0a985960ea5b",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-grw70-held-out-band-apertures-v1/riscontro.json",
+          "sha256": "b7a44a65ce3fa2e122084b3daf920324228813cddf5a0a29a8cb1ff5996b1357",
+          "archiveSha256": "81c01dd64515fc5b4b12aa3f73577b8d19f27ae7d903a24bf61bba4df1094345",
+          "archiveName": "BKL046-WFC3-GRW70-visite-11907-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "grw70AlternativeCenter-riscontro.json"
+        },
+        {
+          "path": "docs/project/bkl046-grw70-held-out-band-apertures-v1/riscontro-centro.json",
+          "sha256": "afa982258831b8a0b060581062ff0a28071e9d889a096df715535068dc27f3f6",
+          "archiveSha256": "81c01dd64515fc5b4b12aa3f73577b8d19f27ae7d903a24bf61bba4df1094345",
+          "archiveName": "BKL046-WFC3-GRW70-visite-11907-v1.zip",
+          "archiveMember": "riscontro-centro.json",
+          "copiedReport": "grw70AlternativeCenter-riscontro-centro.json"
+        }
+      ]
+    },
+    {
+      "id": "gd153RelativeCenter",
+      "level": "centerMethodControlOnExistingApertures",
+      "axes": [
+        "FILTER_COLOR/3"
+      ],
+      "commit": "c9e8be1633ff1c43dbf1508d7c487b10081f94ab",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-gd153-relative-center-control-v1/riscontro.json",
+          "sha256": "84c97ba7275bc103b09abd64042c0d7a9efaa3a6ef74287150a7592ceb6cd456",
+          "archiveSha256": "824efc802063acfe85cd9e9b9c2f6a75b21260389c612b0798e5390a09a1fab5",
+          "archiveName": "BKL046-WFC3-GD153-controllo-centro-bande-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "gd153RelativeCenter-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "grw70FirstVisitBatch",
+      "level": "heldOutVisitsFirstFrozenBatch",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "a7c1c2536807da11a644998689369e7dad783cae",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-grw70-aperture-visit-replication-v1/riscontro.json",
+          "sha256": "be9a72f3babbc956f59dc060a166561275c38136e5dc2e7572e099cd5e2e77e1",
+          "archiveSha256": "b87a0af5d4333201d3c02e69b8b0f3482159cddc26cb0b1d938cf14e3dbd4d1a",
+          "archiveName": "BKL046-WFC3-GRW70-replica-epoche-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "grw70FirstVisitBatch-riscontro.json"
+        },
+        {
+          "path": "docs/project/bkl046-grw70-aperture-visit-replication-v1/riscontro-centro.json",
+          "sha256": "9557d5bb438df263f624a95a2bdabac8822dc195080992005cf8812e7e0879d9",
+          "archiveSha256": "b87a0af5d4333201d3c02e69b8b0f3482159cddc26cb0b1d938cf14e3dbd4d1a",
+          "archiveName": "BKL046-WFC3-GRW70-replica-epoche-v1.zip",
+          "archiveMember": "riscontro-centro.json",
+          "copiedReport": "grw70FirstVisitBatch-riscontro-centro.json"
+        }
+      ]
+    },
+    {
+      "id": "grw70Reserve",
+      "level": "sameChipDisjointReservedVisits",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "df0694adb020731584c12f3b60c3981b1f58e277",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-grw70-11907-held-out-color-transfer-v1/riscontro.json",
+          "sha256": "dc50a0ed1ca637f00ccb7ef214b476e891c20616748bac8c66aa7511cc747360",
+          "archiveSha256": "fd33baa1618fa4875427a83f96e2eca5d6539293d70d077edf5afeb24b3b1c7f",
+          "archiveName": "BKL046-WFC3-GRW70-11907-censimento-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "grw70Reserve-riscontro.json"
+        },
+        {
+          "path": "docs/project/bkl046-grw70-11907-held-out-color-transfer-v1/riscontro-centro.json",
+          "sha256": "0b16f9a4700b03733e172bd6ccbc8b3e4de301404a772a223cd8a4ace06e72fe",
+          "archiveSha256": "fd33baa1618fa4875427a83f96e2eca5d6539293d70d077edf5afeb24b3b1c7f",
+          "archiveName": "BKL046-WFC3-GRW70-11907-censimento-v1.zip",
+          "archiveMember": "riscontro-centro.json",
+          "copiedReport": "grw70Reserve-riscontro-centro.json"
+        }
+      ]
+    },
+    {
+      "id": "uvis1CrossStar",
+      "level": "twoDisjointCalibratorStarsSameChip",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "b5f42d96ef3960d5d282c5689a97b0e0b8362164",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-uvis1-cross-star-aperture-transfer-v1/riscontro.json",
+          "sha256": "298cd9b0b93f519adba19e8ba877f1702a0034c0bb8e272bf15f87af8864d407",
+          "archiveSha256": "e5c7d42b324100ab088dba7206129e15a576f40c4762b131304df3ec62e3fc9f",
+          "archiveName": "BKL046-WFC3-trasferimento-stelle-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "uvis1CrossStar-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "grw70CrossChip",
+      "level": "sameTargetDisjointVisitsCrossChip",
+      "axes": [
+        "FILTER_COLOR/3",
+        "FILTER_COLOR/4"
+      ],
+      "commit": "5aad48cac2e3b946d60d9d0d4635a40c4deed901",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-grw70-cross-chip-aperture-transfer-v1/riscontro.json",
+          "sha256": "829774e9abb9f53ddc39bceec80d64a377615b44466c68c47f41fd0745f21012",
+          "archiveSha256": "7f2301f43fd3fab150cb3168fa01fe5299c1fe60653e1a59747767f75faf9394",
+          "archiveName": "BKL046-WFC3-GRW70-trasferimento-chip-v1.zip",
+          "archiveMember": "riscontro.json",
+          "copiedReport": "grw70CrossChip-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "findings": {
+    "gd153FormalUncertainty": [
+      {
+        "band": "F606W",
+        "target": "iaah11daq_flc.fits",
+        "metrics": {
+          "formalStdMillimag": 5.031470315458147,
+          "observedDifferenceMillimag": 2.0100771750755246,
+          "observedToFormalStd": 0.3995009508254436,
+          "perturbationCentral95Millimag": [
+            -9.589969446135392,
+            10.038231595734732
+          ]
+        }
+      },
+      {
+        "band": "F438W",
+        "target": "iaah13ewq_flc.fits",
+        "metrics": {
+          "formalStdMillimag": 7.163074951336457,
+          "observedDifferenceMillimag": 43.821863551140915,
+          "observedToFormalStd": 6.1177446625718765,
+          "perturbationCentral95Millimag": [
+            31.417533834387395,
+            59.46003128022582
+          ]
+        }
+      }
+    ],
+    "gd153BlankSky": {
+      "exposures": 14,
+      "raw": {
+        "absoluteAbove1p96": 427,
+        "count": 1618,
+        "interval90": [
+          -2.9886924794117986,
+          2.117462321887035
+        ],
+        "median": -0.5343839676993034,
+        "normalizedMad": 1.8480175877578628,
+        "rms": 1.6810423225147024
+      },
+      "centered": {
+        "absoluteAbove1p96": 116,
+        "count": 1618,
+        "interval90": [
+          -1.5181115654930615,
+          1.843614607992806
+        ],
+        "median": 0.0,
+        "normalizedMad": 0.8443637694482126,
+        "rms": 1.2714133556252771
+      }
+    },
+    "independentCandidateScreens": {
+      "P330E": {
+        "EXPOSURE_METADATA": 30
+      },
+      "threeCalibrators": {
+        "APERTURE_SUPPORT": 4,
+        "CORE_DQ": 37,
+        "PEAK_OFFSET": 7
+      },
+      "p330Qualified": [],
+      "threeQualified": []
+    },
+    "grw70Gaia": [
+      {
+        "visit": "ibbs05",
+        "qualifiedRadii": {
+          "10": 0,
+          "5": 0
+        },
+        "allAperturesQualified": false
+      },
+      {
+        "visit": "ibbsd1",
+        "qualifiedRadii": {
+          "10": 0,
+          "5": 0
+        },
+        "allAperturesQualified": false
+      },
+      {
+        "visit": "ibbsp1",
+        "qualifiedRadii": {
+          "10": 0,
+          "5": 0
+        },
+        "allAperturesQualified": false
+      },
+      {
+        "visit": "ibbszj",
+        "qualifiedRadii": {
+          "10": 0,
+          "5": 3
+        },
+        "allAperturesQualified": false
+      }
+    ],
+    "grw70ExploratoryCenterVisits": [
+      "ibbsz1"
+    ],
+    "gd153TwoBandCenterControl": {
+      "detectorMidpoint": {
+        "APERTURE_SUPPORT": 24,
+        "CORE_DQ": 4,
+        "MEASURED_BOTH_RADII": 20
+      },
+      "wcsMidpoint": {
+        "APERTURE_SUPPORT": 24,
+        "CORE_DQ": 4,
+        "MEASURED_BOTH_RADII": 20
+      }
+    },
+    "grw70FirstBatchQualified": 2,
+    "grw70ReservedAbsoluteQualified": [
+      "ibbsc0"
+    ],
+    "grw70ReservedSameChip": {
+      "F438W-F606W": {
+        "cases": 3,
+        "improved": 3,
+        "maximumAbsoluteError": 3.016850675252556,
+        "medianAbsoluteError": 2.5923776544975112,
+        "medianAbsoluteUncorrected": 9.996217683848272
+      },
+      "F438W-F814W": {
+        "cases": 3,
+        "improved": 3,
+        "maximumAbsoluteError": 8.015368445682952,
+        "medianAbsoluteError": 7.919691440248471,
+        "medianAbsoluteUncorrected": 27.009637391557135
+      },
+      "F606W-F814W": {
+        "cases": 3,
+        "improved": 3,
+        "maximumAbsoluteError": 10.93654211550097,
+        "medianAbsoluteError": 6.331671163182591,
+        "medianAbsoluteUncorrected": 12.833021776145642
+      }
+    },
+    "grw70CombinedSameChip": {
+      "F438W-F606W": {
+        "cases": 5,
+        "improved": 5,
+        "maximumAbsoluteError": 5.953265957403971,
+        "medianAbsoluteError": 2.6943116065302775,
+        "medianAbsoluteUncorrected": 9.996217683848272
+      },
+      "F438W-F814W": {
+        "cases": 5,
+        "improved": 4,
+        "maximumAbsoluteError": 18.364003187210074,
+        "medianAbsoluteError": 7.266017102718479,
+        "medianAbsoluteUncorrected": 27.009637391557135
+      },
+      "F606W-F814W": {
+        "cases": 5,
+        "improved": 4,
+        "maximumAbsoluteError": 14.037567759164517,
+        "medianAbsoluteError": 5.8561478101484,
+        "medianAbsoluteUncorrected": 12.833021776145642
+      }
+    },
+    "uvis1CrossStar": [
+      {
+        "color": "F438W-F606W",
+        "errors": {
+          "nominalEE": {
+            "maxAbsolute": 7.455758347827552,
+            "medianAbsolute": 4.240844800032787
+          },
+          "otherStar": {
+            "maxAbsolute": 3.287094803437867,
+            "medianAbsolute": 3.2149135477947652
+          },
+          "zero": {
+            "maxAbsolute": 4.600703612979032,
+            "medianAbsolute": 3.2149135477947652
+          }
+        },
+        "improvedOverZero": 1,
+        "testStar": "GRW70",
+        "trainingStar": "GD153",
+        "visits": 2
+      },
+      {
+        "color": "F438W-F814W",
+        "errors": {
+          "nominalEE": {
+            "maxAbsolute": 9.24073722839066,
+            "medianAbsolute": 4.770858896309164
+          },
+          "otherStar": {
+            "maxAbsolute": 7.548210195892352,
+            "medianAbsolute": 4.770858896309164
+          },
+          "zero": {
+            "maxAbsolute": 7.735339366052358,
+            "medianAbsolute": 4.770858896309164
+          }
+        },
+        "improvedOverZero": 1,
+        "testStar": "GRW70",
+        "trainingStar": "GD153",
+        "visits": 2
+      },
+      {
+        "color": "F606W-F814W",
+        "errors": {
+          "nominalEE": {
+            "maxAbsolute": 1.784978880563699,
+            "medianAbsolute": 1.5559453485144559
+          },
+          "otherStar": {
+            "maxAbsolute": 4.261115392454826,
+            "medianAbsolute": 2.7051700439403703
+          },
+          "zero": {
+            "maxAbsolute": 5.906215883441746,
+            "medianAbsolute": 4.35027053492729
+          }
+        },
+        "improvedOverZero": 1,
+        "testStar": "GRW70",
+        "trainingStar": "GD153",
+        "visits": 2
+      },
+      {
+        "color": "F438W-F606W",
+        "errors": {
+          "nominalEE": {
+            "maxAbsolute": 4.381751162933935,
+            "medianAbsolute": 4.168663544389685
+          },
+          "otherStar": {
+            "maxAbsolute": 0.28526887418735214,
+            "medianAbsolute": 0.2130876185442503
+          },
+          "zero": {
+            "maxAbsolute": 1.5266964280854154,
+            "medianAbsolute": 1.313608809541165
+          }
+        },
+        "improvedOverZero": 2,
+        "testStar": "GD153",
+        "trainingStar": "GRW70",
+        "visits": 2
+      },
+      {
+        "color": "F438W-F814W",
+        "errors": {
+          "nominalEE": {
+            "maxAbsolute": 6.061745215911377,
+            "medianAbsolute": 4.369218183413068
+          },
+          "otherStar": {
+            "maxAbsolute": 7.146569482996256,
+            "medianAbsolute": 4.369218183413068
+          },
+          "zero": {
+            "maxAbsolute": 10.11104995273945,
+            "medianAbsolute": 5.741831769326382
+          }
+        },
+        "improvedOverZero": 1,
+        "testStar": "GD153",
+        "trainingStar": "GRW70",
+        "visits": 2
+      },
+      {
+        "color": "F606W-F814W",
+        "errors": {
+          "nominalEE": {
+            "maxAbsolute": 7.058442313848786,
+            "medianAbsolute": 4.582305801957659
+          },
+          "otherStar": {
+            "maxAbsolute": 7.2874758458980295,
+            "medianAbsolute": 4.582305801957659
+          },
+          "zero": {
+            "maxAbsolute": 11.63774638082532,
+            "medianAbsolute": 7.05544057886766
+          }
+        },
+        "improvedOverZero": 2,
+        "testStar": "GD153",
+        "trainingStar": "GRW70",
+        "visits": 2
+      }
+    ],
+    "grw70CrossChip": {
+      "reverseSensitivity": {
+        "F438W-F606W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 12.886502555661707,
+          "medianWith": 8.610427618664005,
+          "medianWithout": 9.996217683848272
+        },
+        "F438W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 30.06979486673481,
+          "medianWith": 29.97411786130033,
+          "medianWithout": 27.009637391557135
+        },
+        "F606W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 21.78816326339131,
+          "medianWith": 17.183292311072933,
+          "medianWithout": 12.833021776145642
+        }
+      },
+      "sameChipReference": {
+        "F438W-F606W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 3,
+          "maximumWith": 3.016850675252556,
+          "medianWith": 2.5923776544975112,
+          "medianWithout": 9.996217683848272
+        },
+        "F438W-F814W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 3,
+          "maximumWith": 8.015368445682952,
+          "medianWith": 7.919691440248471,
+          "medianWithout": 27.009637391557135
+        },
+        "F606W-F814W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 2,
+          "maximumWith": 10.93654211550097,
+          "medianWith": 6.331671163182591,
+          "medianWithout": 12.833021776145642
+        }
+      },
+      "transferUVIS2ToUVIS1": {
+        "F438W-F606W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 14.417718820956281,
+          "medianWith": 11.202805273161516,
+          "medianWithout": 3.2149135477947652
+        },
+        "F438W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 26.825285317361022,
+          "medianWith": 22.054426421051858,
+          "medianWithout": 4.770858896309164
+        },
+        "F606W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 12.407566496404797,
+          "medianWith": 10.851621147890341,
+          "medianWithout": 4.35027053492729
+        }
+      }
+    }
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}

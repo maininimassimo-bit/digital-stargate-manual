@@ -1,0 +1,77 @@
+{
+  "schema": "BKL046_CFA_POSITIVE_RESPONSE_V1",
+  "parentFixtureSha256": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "mode": "FITS_COMPARISON",
+  "cases": {
+    "baseline": [
+      "integer-a.xdrz",
+      "integer-b-baseline.xdrz",
+      "integer-c.xdrz"
+    ],
+    "first": [
+      "integer-a.xdrz",
+      "integer-b-first.xdrz",
+      "integer-c.xdrz"
+    ],
+    "second": [
+      "integer-a.xdrz",
+      "integer-b-second.xdrz",
+      "integer-c.xdrz"
+    ]
+  },
+  "result": {
+    "status": "COMPATIBLE_LOCAL_LINEAR_RESPONSE",
+    "probes": [
+      {
+        "referenceXY": [
+          13,
+          8
+        ],
+        "input": [
+          0.75,
+          0.25,
+          0.5
+        ],
+        "output": [
+          0.5,
+          0.25,
+          0.375
+        ],
+        "secantSlopesFromBaseline": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "referenceXY": [
+          14,
+          7
+        ],
+        "input": [
+          0.800000011920929,
+          0.30000001192092896,
+          0.550000011920929
+        ],
+        "output": [
+          0.49000000953674316,
+          0.24000000953674316,
+          0.36500000953674316
+        ],
+        "secantSlopesFromBaseline": [
+          0.5,
+          0.5
+        ]
+      }
+    ],
+    "maxChangeOutsideProbesOnModeledSupport": 0.0,
+    "modeledHalfShareMatched": true,
+    "absoluteWeightEstablished": false
+  },
+  "sha256": {
+    "baseline-rgb.fits": "549e1847a6c527420db6ef51eb508dc80703ae0ec1ca77ffea5d77477aaa2e88",
+    "first-rgb.fits": "6dc03bed4ebeba71a0ab865b7a5929b78a0f25947cb0b7604e99e3a040dd3f7b",
+    "second-rgb.fits": "eb087d948da6b3823e9b97c9edbe72d9338b53340688198a9d480b7ce806ee3b"
+  },
+  "nativeProvenanceVerified": false,
+  "scientificClosures": 0
+}

@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "accepted": true,
+      "case": "fixed-half",
+      "log": "c0f5a046c15d1701a607b0a570e68d9dc62e8f3f5bd46e1c416f790ddec8e58b",
+      "marker": "9a5e907a2d934e0a7a2c51ede5040e99a5636a1b99697ce3fe376dc323068da1"
+    },
+    {
+      "accepted": true,
+      "case": "fixed-zero",
+      "log": "c0f5a046c15d1701a607b0a570e68d9dc62e8f3f5bd46e1c416f790ddec8e58b",
+      "marker": "9a5e907a2d934e0a7a2c51ede5040e99a5636a1b99697ce3fe376dc323068da1"
+    },
+    {
+      "accepted": true,
+      "case": "use-declared",
+      "log": "c0f5a046c15d1701a607b0a570e68d9dc62e8f3f5bd46e1c416f790ddec8e58b",
+      "marker": "9a5e907a2d934e0a7a2c51ede5040e99a5636a1b99697ce3fe376dc323068da1"
+    },
+    {
+      "accepted": false,
+      "case": "foreign-reservation",
+      "reason": "MARKER_CONTEXT_DIFFERS"
+    },
+    {
+      "accepted": false,
+      "case": "wrong-declared-input",
+      "reason": "INPUT_DECLARATION_DIFFERS"
+    },
+    {
+      "accepted": false,
+      "case": "wrong-output-event",
+      "reason": "EXPORT_DECLARATION_DIFFERS"
+    },
+    {
+      "accepted": false,
+      "case": "changed-drop-shrink",
+      "reason": "SETTINGS_DIFFERS"
+    },
+    {
+      "accepted": false,
+      "case": "blank-source",
+      "reason": "SOURCE_READBACK_MISSING"
+    },
+    {
+      "accepted": false,
+      "case": "enum-drift",
+      "reason": "ENUMERATORS_INCONSISTENT"
+    },
+    {
+      "accepted": false,
+      "case": "incomplete-log",
+      "reason": "TRANSCRIPT_COUNT_DIFFERS"
+    }
+  ],
+  "coordinatorRegistryAccessed": false,
+  "nativeExecutions": 0,
+  "schema": "BKL046_CFA_ORIGIN_BOUND_BATCH_OFFLINE_TEST_V1"
+}

@@ -1,0 +1,18 @@
+{
+  "schema":"BKL046_ACS_HISTORICAL_NARROWBAND_MEASUREMENT_PROTOCOL_V1",
+  "files9020Sha256":"899ff9bd6a5d6dc2414fb5d35383bcc73758203b79d5edb2e99c76dfbc971c40",
+  "filesG191Sha256":"aba1f4959a5ab4bc0e04dcc5d027fc4eb21ca9e8aaa004ca29e0a6b8c58502ae",
+  "gd71ReferenceSha256":"59586e89f0908688381cf8b834e9dbd399c0570861384ea989538a8c1a18d6ce",
+  "pamByChip":{"1":"025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c","2":"e372a9f1e4409531422b3679b58073967584244de46fcfc27b1a190bf6b005a3"},
+  "astrometricJ2000":{
+    "GD71":[88.115083333333,15.887008333333,76.73,-172.96],
+    "G191B2B":[76.377575,52.831088888889,12.70,-93.42]
+  },
+  "astrometrySource":"https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+  "radiiPx":[3,5,10,15,20],
+  "skyRingPx":[25,40],
+  "referenceDq":[0,64],
+  "centroidSearchRadiusPx":30,
+  "maxDistanceFromHeaderTargetPx":35,
+  "calibrationDomainNote":"Record raw three pixel signal and sky. No CTE adjustment or pooling across chip amplifier or epoch."
+}

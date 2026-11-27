@@ -1,0 +1,10 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_ALL_CHANNELS_V1",
+  "parentProtocolSha256": "74a8af6134984acfbcaffc5e4470a98fb174a46bbb5c98edd1620cd6e468bcb4",
+  "parentReportSha256": "27469a973d409e7468b79a5fd5b2f2d10556bafd0a7ebf11768a692f4044c459",
+  "captureSha256": "6bf59ebdb660cbd1cd7a6b9d175fc849e61589fd8e47c6e3faf74633fa95bb07",
+  "parentArchiveSha256": "e9da7238075250b17b45119353680ad23f1811d601e93f75c8897b0b7df52eb1",
+  "scienceChannels": 32,
+  "minRetainedBlocks": 769,
+  "scheme": "Use the fixed center 64-column window in each of 32 science channels. Freeze one mask per channel from the union of storage rails 0 and 65535 across all 20 exposures and four reads; exclude every 2x2 output block that touches a masked input in its 3x3 support after half-pixel shift. Estimate input variance on the exact union of surviving supports. Require at least 769 of 961 output blocks. Compare both weighted predictions per original pair and frame; verify original measurements on the two unaffected prior channels. Preserve channel 15 results separately and all ineligible cells. No dose or native claims."
+}

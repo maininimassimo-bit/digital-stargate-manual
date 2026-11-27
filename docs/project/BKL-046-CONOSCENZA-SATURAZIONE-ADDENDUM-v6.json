@@ -1,0 +1,149 @@
+{
+  "protocol": "BKL046_KNOWLEDGE_SATURATION_ADDENDUM_V6",
+  "status": "PROVISIONAL_EVIDENCE_APPEND_ONLY",
+  "baselineVersion": "1.171",
+  "previousAddendum": {
+    "commit": "c58f1976a1de2bf8efc57037ac9adc2de807fa16",
+    "path": "docs/project/BKL-046-CONOSCENZA-SATURAZIONE-ADDENDUM-v5.json",
+    "sha256": "e016f3469fa58c1f9b2c163c4174272ac7828677c5aef452a731f1f92388b886",
+    "archiveSha256": "a98dc2ddaaee9ed6a21b07fd8e53488ca8c87943a98f82918bcbf757c7720264"
+  },
+  "inheritedResidualLedgerSha256": "a3da1432a46dc69ffb1a16ec3a5fcf13650c99ffbe98f91003b8807af9d7c8f3",
+  "axes": [
+    {
+      "id": "SATURATION_BLEND/1",
+      "title": "Unsaturated, detector-saturated and near-limit cores",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/2",
+      "title": "Close pairs and extended-plus-point overlap",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/3",
+      "title": "Channel-dependent saturation",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/4",
+      "title": "Mask transition and recomposition cases",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "publishedPair",
+      "commit": "100daf1b1e1d0d4397870483c73f3a5da6b2ba81",
+      "path": "docs/project/bkl046-orion-f555w-published-pair-controls-v1/riscontro-fit.json",
+      "reportSha256": "608868f5901e77ee8ea20c3336ed0790ac7524e1d938c923392895fe64697042",
+      "archiveSha256": "de1d88c03411d06bc814f76871c4aea5246a4bd32fdbc87b312c6bf5f3394979"
+    },
+    {
+      "id": "syntheticNull",
+      "commit": "b9fa43c5c7968fa4e931694395fe71208d1a1bc9",
+      "path": "docs/project/bkl046-orion-f555w-single-null-focus-v1/riscontro.json",
+      "reportSha256": "f1a5efbf555d506cf0044de5f55b49b3d0eb95b09b1c75343c3f838abb730441",
+      "archiveSha256": "5312b963627565b42860728c7d1ce71ecbad6614e97f03da40909945a86b5675"
+    },
+    {
+      "id": "nacoRoster",
+      "commit": "bd376608b7623e5c7e8c4e3dc1d8c29181b5e50e",
+      "path": "docs/project/bkl046-orion-naco-nondetection-roster-v1/riscontro.json",
+      "reportSha256": "6a1e4f232385639f83f60707603eacd593e85645f592a777d536cc513cbf5e53",
+      "archiveSha256": "7860cc09f828b6d84e743f9d2b951a7a3a17b3589aaa0e2ea7bdb4ffae7ac118"
+    },
+    {
+      "id": "nacoPixels",
+      "commit": "ad6f2c14cb54d84c8a0faa6ee147e628937abfec",
+      "path": "docs/project/bkl046-orion-naco-candidate-pixels-v1/riscontro.json",
+      "reportSha256": "475160de7b4f5251f25e68bb4d353eee6a10b0ec8edf62f3f56d40a33197b221",
+      "archiveSha256": "8da42d7bf62b52ee9b743c08dbfb5f3bb64c0490dc7aa6377d575a35aa9de436"
+    },
+    {
+      "id": "calspecPixels",
+      "commit": "5be45b7d03a04eb99c65ebafb9b0f1e27dbb05c7",
+      "path": "docs/project/bkl046-calspec-f555w-paired-detector-centers-v1/riscontro-split.json",
+      "reportSha256": "315f075e0747a0ad1e8d68d765f41447aeeba2ceb86822fc0b3f46bcd628996e",
+      "archiveSha256": "1ca87f5e78d19730c0263cf5bd744d540e57f8f6f7f581d0db94618b90e50eab"
+    },
+    {
+      "id": "calspecFits",
+      "commit": "92d97b1a1198a0969a73037b4472d50bf7270b6b",
+      "path": "docs/project/bkl046-calspec-f555w-observed-fit-v1/riscontro.json",
+      "reportSha256": "f9e812caa37f151f50788c78e640cf52a6a837ad212a4a039c3a08398ef66892",
+      "archiveSha256": "3af729851be47410e7fce5f57d0833dca50c47912160d43f0343bb3f627a566b"
+    },
+    {
+      "id": "celestial",
+      "commit": "b711433530afb685c5f051a4501c40922cb94c40",
+      "path": "docs/project/bkl046-orion-f555w-celestial-split-concordance-v1/riscontro.json",
+      "reportSha256": "8921d4a37d8f61c96152ef53c059c5397bb0bbd7c286a59083f3b8e079cae774",
+      "archiveSha256": "c222a7ed9a26aa889454035ef7675d713c6131c5311a95ef74eaf6aeae8e8697"
+    }
+  ],
+  "findings": {
+    "priorF555wFitExposuresMatchingCatalog": 5,
+    "syntheticNullAndInjection": [
+      {
+        "nominalPeakSnr": 150,
+        "pairedGeometry": 9,
+        "nullWithBothGains": 1,
+        "injectedPairRecovered": 8
+      },
+      {
+        "nominalPeakSnr": 500,
+        "pairedGeometry": 9,
+        "nullWithBothGains": 1,
+        "injectedPairRecovered": 8
+      }
+    ],
+    "naco": {
+      "roster": 46,
+      "candidates": 10,
+      "candidateExposures": 20,
+      "recorded": 18,
+      "saturatedCore": 18,
+      "eligible": 0
+    },
+    "calspec": {
+      "standards": 4,
+      "associationsWithBothCenters": 19,
+      "frames": 38,
+      "framesWithBothGains": 8,
+      "associationsWithAllGains": 2,
+      "associationsFullyConcordant": 0
+    },
+    "celestial": {
+      "catalogPairs": 5,
+      "comparable": 4,
+      "concordantCatalogRows": [
+        2,
+        8
+      ],
+      "concordantAndBothOriginalCatalogMatchedRows": [
+        8
+      ]
+    }
+  },
+  "decisions": [
+    "Retain both catalog-centered and paired-calibration WCS reports, including the false centering outcome.",
+    "A positive held-out gain alone does not support a two-component astrophysical assignment.",
+    "Use celestial coordinates across orientations. Keep nominal detector scale and exact sky estimates distinct.",
+    "The CALSPEC repeats and shared HST Orion exposures provide scoped results. NACO non-detections do not establish optical negatives."
+  ],
+  "remaining": [
+    "Independent matched-band positive and negative observations with quantified contrast and recovery uncertainty.",
+    "Extended-plus-point overlap, filter transfer, mask transition, recomposition and other inherited requirements remain open.",
+    "Native measurements require the approved package, exact authenticated receipts and common coordinator admission."
+  ],
+  "completeStudy": false,
+  "finalKnowledge": false,
+  "completeGitHubTransfer": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

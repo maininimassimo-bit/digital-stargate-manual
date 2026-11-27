@@ -1,0 +1,49 @@
+{
+  "solverRevision": "Starts anchored at the refined single-component optimum, nonnegative two-component boundary included",
+  "protocolSha256": "c07a66293e1abdd644eb94df59bfb304e792ec50756e30dc43e01af3013635a9",
+  "sourceId": 208,
+  "pixelsUsed": 225,
+  "onePsf": {
+    "positionsPx": [
+      [
+        315.35281792081923,
+        1215.2971678829476
+      ]
+    ],
+    "conditionalAmplitudeSnr": [
+      203.34516294134582
+    ],
+    "chiSquare": 99646.34132699356,
+    "reducedChiSquare": 455.0061247807925,
+    "bic": 99678.83792940679
+  },
+  "twoPsf": {
+    "positionsPx": [
+      [
+        315.35281792081923,
+        1215.2971678829476
+      ],
+      [
+        313.57281792081915,
+        1206.477167882948
+      ]
+    ],
+    "conditionalAmplitudeSnr": [
+      203.35343596611764,
+      6.9332638555897725
+    ],
+    "chiSquare": 99598.27117930233,
+    "reducedChiSquare": 461.1031073115849,
+    "bic": 99647.01608292217,
+    "secondComponentAtZeroBoundary": false
+  },
+  "deltaBicForTwo": 31.82184648461407,
+  "plausibleByFrozenDiagnostic": {
+    "one": false,
+    "two": false
+  },
+  "twoPreferredByBic": true,
+  "stellarFluxMeasured": false,
+  "qualifiedReference": false,
+  "scientificClosure": false
+}

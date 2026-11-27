@@ -1,0 +1,29 @@
+{
+  "schema": "BKL046_M8M20_SHASSA_ANCHOR_PROTOCOL_V1",
+  "axis": [
+    "DIFFUSE_BACKGROUND/2",
+    "DIFFUSE_BACKGROUND/3"
+  ],
+  "inputs": {
+    "153.sm.fits.gz": "8441f1c58a9b5fef062a6475a2a0b4b420e44df521ca0c3a46e78d75651c019f",
+    "119.sm.fits.gz": "eab13658077e233337c4ddb2f973a124503ec460205fc7cb49d2df7dbd01114a",
+    "plate.json": "b4d9d1ee43b8c707383b0884dbb2b577abb145696c1c05c447c98d337819c254",
+    "geometry.json": "782be6cadd3963ad0c9a9d7257c4fa88222106b4f5ed369c6354d43b6edbc63b",
+    "cells.json": "e077e5feb850fb34527f90ef90d9ffd0758120b8c534881de9d92b3581e40869"
+  },
+  "radiusArcmin": [
+    2,
+    4
+  ],
+  "minimumCoverage": 0.9,
+  "tangentCenterIcrs": [
+    271.294995,
+    -23.496667
+  ],
+  "plateCenterNative": [
+    3123.5,
+    2087.5
+  ],
+  "fitScaleNative": 2500,
+  "method": "Use the six actual detector cells from the pinned dark receipt. Map common-grid cell centers to native stereo-green centroids with explicit half-pixel offset, then use the frozen quadratic tangent solution. Use the official smoothed continuum-subtracted FITS for tiles 153 and 119. Compute median and range inside fixed angular apertures and retain signed signal; reject incomplete supports below 90 percent. Compare signed and centered differences for the same covered cells when both tiles pass. This measures independent H-alpha sky structure, not contemporaneous broadband optical background or conversion to M8/M20 ADU."
+}

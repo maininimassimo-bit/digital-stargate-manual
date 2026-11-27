@@ -1,0 +1,27 @@
+{
+  "schema": "BKL046_POISSON_MOFFAT_PHASE_INFORMATION_PLAN_V1",
+  "scope": "DEVELOPMENT_ONLY",
+  "parentNumericalReportSha256": "03156b539338cc61e80e4c0cad19ea2f394b65596a94185053ff4017aeb3559e",
+  "parentEdgeSourceSha256": "d52c7a2f87b8a636cd35b4b5ca48ec27d909452e9435639225f805fde7d7d409",
+  "shapeKnown": true,
+  "detector": "Independent ideal Poisson counts per pixel",
+  "geometry": [
+    25,
+    25
+  ],
+  "fluxElectronsInfinitePlane": 10000,
+  "backgroundElectronsPerPixel": [
+    1,
+    20
+  ],
+  "phaseDerivativeCheckStepPixel": 0.00002,
+  "quadratureDivisions": 8,
+  "quadratureOrderPerDivision": 32,
+  "parameters": [
+    "horizontalCenter",
+    "verticalCenter",
+    "logFlux",
+    "skyPerPixel"
+  ],
+  "scientificThresholdsSet": false
+}

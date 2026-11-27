@@ -1,0 +1,611 @@
+{
+  "schema": "BKL046_IC1805_SIGNAL_WEIGHTED_REGISTRATION_TRANSFER_V1",
+  "protocolSha256": "4202c6564379060ee373c658ce74f987083007344244247e2b1851c61c821a92",
+  "frozenFieldBaselineReplayedExactly": true,
+  "frameComparisons": 38,
+  "heldoutPairs": 1123,
+  "summary": {
+    "similarity": {
+      "pooledP90Px": {
+        "unit": 0.43882892320604844,
+        "weighted": 0.42812266416102707
+      },
+      "framesImproved": 23,
+      "framesWorse": 15,
+      "framesTied": 0,
+      "medianPairedP90ChangePx": -0.010558286936949907,
+      "framesAtThreshold": {
+        "unit": 1,
+        "weighted": 4
+      }
+    },
+    "affine": {
+      "pooledP90Px": {
+        "unit": 0.3778478280484991,
+        "weighted": 0.36647325792873103
+      },
+      "framesImproved": 26,
+      "framesWorse": 12,
+      "framesTied": 0,
+      "medianPairedP90ChangePx": -0.01829352043833926,
+      "framesAtThreshold": {
+        "unit": 7,
+        "weighted": 14
+      }
+    }
+  },
+  "frames": [
+    {
+      "sequenceOrdinal": 1,
+      "training": 46,
+      "heldout": 38,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.44474395242350645,
+          "weighted": 0.42938004555918896
+        },
+        "affine": {
+          "unit": 0.44431527444846947,
+          "weighted": 0.432273331347505
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 2,
+      "training": 45,
+      "heldout": 34,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.40669955651318873,
+          "weighted": 0.3854504480551449
+        },
+        "affine": {
+          "unit": 0.4262841359358776,
+          "weighted": 0.406400152325361
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 3,
+      "training": 45,
+      "heldout": 31,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.37399363879524666,
+          "weighted": 0.39595927451596097
+        },
+        "affine": {
+          "unit": 0.36655380976939,
+          "weighted": 0.4043902853615799
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 4,
+      "training": 45,
+      "heldout": 30,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.30693738573716967,
+          "weighted": 0.2971865993655078
+        },
+        "affine": {
+          "unit": 0.290814119447981,
+          "weighted": 0.2799773803299732
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 5,
+      "training": 45,
+      "heldout": 29,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.3374814091298457,
+          "weighted": 0.3371788033831754
+        },
+        "affine": {
+          "unit": 0.2898498464045983,
+          "weighted": 0.29787325519438956
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 6,
+      "training": 46,
+      "heldout": 29,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.38618570614417536,
+          "weighted": 0.37158920993823197
+        },
+        "affine": {
+          "unit": 0.3407096255132798,
+          "weighted": 0.32803544961369685
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 7,
+      "training": 45,
+      "heldout": 29,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.321027568761284,
+          "weighted": 0.28276860873044496
+        },
+        "affine": {
+          "unit": 0.3173217640605974,
+          "weighted": 0.28210477617672103
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 8,
+      "training": 45,
+      "heldout": 32,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4368879379556321,
+          "weighted": 0.3794419427593727
+        },
+        "affine": {
+          "unit": 0.4252673972438607,
+          "weighted": 0.3322227299553482
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 9,
+      "training": 45,
+      "heldout": 31,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.42741943581268654,
+          "weighted": 0.3769231460447825
+        },
+        "affine": {
+          "unit": 0.3967112854156948,
+          "weighted": 0.31763717994400903
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 10,
+      "training": 45,
+      "heldout": 33,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.35851166668925194,
+          "weighted": 0.32109763254746104
+        },
+        "affine": {
+          "unit": 0.38423272318373375,
+          "weighted": 0.2918658233089428
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 11,
+      "training": 44,
+      "heldout": 35,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.35419237684352406,
+          "weighted": 0.34114425886911254
+        },
+        "affine": {
+          "unit": 0.3025241714797919,
+          "weighted": 0.29083785320906685
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 12,
+      "training": 43,
+      "heldout": 32,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.34467055507147304,
+          "weighted": 0.344860282300496
+        },
+        "affine": {
+          "unit": 0.3660703938683012,
+          "weighted": 0.30110413149917886
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 13,
+      "training": 46,
+      "heldout": 32,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.3228809334799997,
+          "weighted": 0.2965567067013684
+        },
+        "affine": {
+          "unit": 0.35925474476397407,
+          "weighted": 0.29791571864901967
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 14,
+      "training": 44,
+      "heldout": 30,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.38605706052499505,
+          "weighted": 0.40706495853442026
+        },
+        "affine": {
+          "unit": 0.4239294058225234,
+          "weighted": 0.35618824513975655
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 15,
+      "training": 44,
+      "heldout": 35,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.45805266992561294,
+          "weighted": 0.4645186519268509
+        },
+        "affine": {
+          "unit": 0.30528123264824136,
+          "weighted": 0.31720288361222704
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 16,
+      "training": 43,
+      "heldout": 32,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4654180214176522,
+          "weighted": 0.4546295827365883
+        },
+        "affine": {
+          "unit": 0.36060366209346617,
+          "weighted": 0.38295152405803856
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 17,
+      "training": 44,
+      "heldout": 31,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.40673045412628694,
+          "weighted": 0.396402318933451
+        },
+        "affine": {
+          "unit": 0.3809429379862578,
+          "weighted": 0.3642398807200959
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 18,
+      "training": 45,
+      "heldout": 34,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.44064585256668004,
+          "weighted": 0.42674768854191664
+        },
+        "affine": {
+          "unit": 0.46290638512079213,
+          "weighted": 0.38015501748985514
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 19,
+      "training": 46,
+      "heldout": 29,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.27653104802918194,
+          "weighted": 0.2657168252284204
+        },
+        "affine": {
+          "unit": 0.28877655974602273,
+          "weighted": 0.26161845078941975
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 20,
+      "training": 42,
+      "heldout": 31,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4485405057877253,
+          "weighted": 0.4551185596337653
+        },
+        "affine": {
+          "unit": 0.48495922894655985,
+          "weighted": 0.41613938497988384
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 21,
+      "training": 44,
+      "heldout": 30,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.306986942575108,
+          "weighted": 0.33225846834191247
+        },
+        "affine": {
+          "unit": 0.2821396538194342,
+          "weighted": 0.29249102375823965
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 22,
+      "training": 44,
+      "heldout": 28,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.43056671954211495,
+          "weighted": 0.4362305208066827
+        },
+        "affine": {
+          "unit": 0.3187637637781062,
+          "weighted": 0.3525050739538011
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 23,
+      "training": 43,
+      "heldout": 28,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4374884791206582,
+          "weighted": 0.44781933238717375
+        },
+        "affine": {
+          "unit": 0.3304564934949615,
+          "weighted": 0.3814461963561327
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 24,
+      "training": 44,
+      "heldout": 27,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.49398649483297913,
+          "weighted": 0.5200183723922873
+        },
+        "affine": {
+          "unit": 0.41551799331341216,
+          "weighted": 0.45937506043795007
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 25,
+      "training": 42,
+      "heldout": 29,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.39833352270116085,
+          "weighted": 0.3689306758932166
+        },
+        "affine": {
+          "unit": 0.3605068584915061,
+          "weighted": 0.28455368388011903
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 26,
+      "training": 42,
+      "heldout": 27,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.37959399459198107,
+          "weighted": 0.32499210070557516
+        },
+        "affine": {
+          "unit": 0.28506410934246024,
+          "weighted": 0.2994628775196682
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 27,
+      "training": 45,
+      "heldout": 27,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4985060833707987,
+          "weighted": 0.5127159572962895
+        },
+        "affine": {
+          "unit": 0.37865789711975956,
+          "weighted": 0.3502292145559619
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 28,
+      "training": 43,
+      "heldout": 26,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.5178097071317166,
+          "weighted": 0.4703431084372538
+        },
+        "affine": {
+          "unit": 0.35408552886310596,
+          "weighted": 0.25623103706610617
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 29,
+      "training": 44,
+      "heldout": 28,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4455952827994809,
+          "weighted": 0.4594675690580208
+        },
+        "affine": {
+          "unit": 0.3490049864682306,
+          "weighted": 0.3486341132222455
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 30,
+      "training": 44,
+      "heldout": 26,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.47699255561964626,
+          "weighted": 0.3450647834382914
+        },
+        "affine": {
+          "unit": 0.33663471229070857,
+          "weighted": 0.3391491459028817
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 31,
+      "training": 42,
+      "heldout": 28,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4596721700688525,
+          "weighted": 0.4531012843299236
+        },
+        "affine": {
+          "unit": 0.43884531964007106,
+          "weighted": 0.3768044321571514
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 32,
+      "training": 44,
+      "heldout": 26,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.44807494515109614,
+          "weighted": 0.4518552044752428
+        },
+        "affine": {
+          "unit": 0.43690500777554553,
+          "weighted": 0.3932414466580735
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 33,
+      "training": 44,
+      "heldout": 29,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.6091126487544632,
+          "weighted": 0.555670334167542
+        },
+        "affine": {
+          "unit": 0.3543906163166623,
+          "weighted": 0.3200380045993489
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 34,
+      "training": 41,
+      "heldout": 26,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4035002101379474,
+          "weighted": 0.41469138410484274
+        },
+        "affine": {
+          "unit": 0.3306596996415223,
+          "weighted": 0.29724198646297917
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 35,
+      "training": 40,
+      "heldout": 25,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4690459899874017,
+          "weighted": 0.5019593607556535
+        },
+        "affine": {
+          "unit": 0.4168534468678548,
+          "weighted": 0.441032325385283
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 36,
+      "training": 41,
+      "heldout": 25,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.41374769562183156,
+          "weighted": 0.4748642473364571
+        },
+        "affine": {
+          "unit": 0.26340630448201874,
+          "weighted": 0.24741036024989707
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 37,
+      "training": 41,
+      "heldout": 27,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.536746776294306,
+          "weighted": 0.5042310740747005
+        },
+        "affine": {
+          "unit": 0.43416220654031146,
+          "weighted": 0.40903446756388445
+        }
+      }
+    },
+    {
+      "sequenceOrdinal": 38,
+      "training": 41,
+      "heldout": 24,
+      "p90Px": {
+        "similarity": {
+          "unit": 0.4063055790649215,
+          "weighted": 0.3930905433948859
+        },
+        "affine": {
+          "unit": 0.2709511876383237,
+          "weighted": 0.27763779891275614
+        }
+      }
+    }
+  ],
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

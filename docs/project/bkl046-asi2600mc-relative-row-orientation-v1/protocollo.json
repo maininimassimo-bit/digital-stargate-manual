@@ -1,0 +1,46 @@
+{
+  "schema": "BKL046_ASI2600MC_STORED_COORDINATE_FINGERPRINT_V1",
+  "captureReceiptSha256": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+  "archives": {
+    "dark": {
+      "file": "Darks_180s.zip",
+      "sha256": "672cbb8862eea071310e92a49744f4058c6af1fc4313464ec1a141b09bdb1483"
+    },
+    "flat": {
+      "file": "Flats_3s.zip",
+      "sha256": "a01bb46b1b0e82658f41f783e0f45da9b1a202b818cb1bccb4e7ff2eba1ba8ca"
+    },
+    "light": {
+      "file": "Brutes_180s.zip",
+      "sha256": "daa8ba4ee748f7616f3db0371b60d95752ff98d00ceaef280fe8f6e8ab937c76"
+    }
+  },
+  "shapeYX": [
+    4176,
+    6248
+  ],
+  "tileOriginsX": [
+    768,
+    3124,
+    5480
+  ],
+  "tileOriginsY": [
+    608,
+    2088,
+    3552
+  ],
+  "tileSize": 128,
+  "trainingDarkCount": 7,
+  "minTrainingMedianAdu": 100,
+  "maxAnchorsPerTile": 32,
+  "minSeparationPx": 6,
+  "validationFractionOfTraining": 0.25,
+  "validationFloorAdu": 100,
+  "transforms": [
+    "identity",
+    "flip-x",
+    "flip-y",
+    "rotate-180"
+  ],
+  "scope": "Relative addressing across these archived captures using persistent detector residuals. No inference about physical sensor row order."
+}

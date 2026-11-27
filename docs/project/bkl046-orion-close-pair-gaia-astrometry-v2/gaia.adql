@@ -1,0 +1,6 @@
+SELECT source_id, ref_epoch, ra, dec, pmra, pmdec, ra_error, dec_error, pmra_error, pmdec_error, parallax, ruwe, phot_g_mean_mag, astrometric_params_solved, duplicated_source
+FROM gaiadr3.gaia_source
+WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',83.762125,-5.5002555555555555,0.052))
+   OR 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',83.79333333333334,-5.3792277777777775,0.052))
+   OR 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',83.81541666666666,-5.38945,0.052))
+ORDER BY source_id

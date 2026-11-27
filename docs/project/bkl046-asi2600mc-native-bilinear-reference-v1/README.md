@@ -1,0 +1,11 @@
+# BKL-046 · Fascicolo numerico per la verifica bilineare nativa
+
+Il kit fissa 17 FITS Float32 da 64 × 64 pixel. Sedici sono differenze codificate di coppie ASI2600MC e uno è un controllo sintetico asimmetrico. Cinque spostamenti prefissati producono 85 confronti. La matrice di riferimento calcola il bilineare in Float64 su un supporto interno fisso. Il confronto richiede FITS Float32 senza riscalatura e un'impronta esatta del manifest degli ingressi.
+
+Il collaudo offline accetta gli 85 risultati di controllo generati in Python. Rifiuta fasi alterate, assi scambiati, assenza di spostamento o assenza di un risultato. Il controllo al momento confronta i valori numerici. La provenienza nativa richiede ricevute reali della catena di esecuzione.
+
+PixInsight 1.9.6 e il modulo ImageRegistration sono stati letti per impronta dalle installazioni di DSG-Shared. Il candidato operativo è una traslazione pura con interpolazione bilineare. Il modulo espone DynamicAlignment e l'include PJSR documenta l'interpolazione bilineare. La corrispondenza dell'istanza esportata con le cinque trasformazioni, il formato in uscita e il segno degli assi restano da verificare sulla build fissata. [Interpolazione PJSR](https://gitlab.com/pixinsight/PJSR/-/blob/master/include/pjsr/Interpolation.jsh)
+
+Il fascicolo congela input, riferimento e controllo numerico. Per una prova nativa servono ancora l'istanza di processo fissata, il launcher supervisionato e le revisioni sul pacchetto eseguibile. PixInsight si avvia solo dopo l'ammissione del coordinatore. Zero esecuzioni native e zero chiusure scientifiche. [Riscontro di rumore bilineare](../bkl046-asi2600mc-dark-bilinear-noise-v1/README.md)
+
+Il comando `confronta.py check` richiede protocollo, dipendenze, directory ingressi estratta, una directory di prova ancora assente con `--candidate` e un nuovo rapporto con `--receipt`. La modalità `compare` legge una directory con i FITS candidati e richiede anche `--manifest-sha256` dal pacchetto sottoposto a revisione. Per rigenerare gli ingressi, la modalità `freeze` richiede `--prior` per il kit dei calibratori, `--offline` per il rapporto bilineare offline e `--archives` per la directory con i due ZIP dei dark. Usare Python 3.12, NumPy 2.3.5 e Astropy 7.2.0.

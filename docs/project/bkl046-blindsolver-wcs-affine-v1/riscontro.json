@@ -1,0 +1,147 @@
+{
+  "protocol": "BKL046_INSTRUMENTAL_WCS_AFFINE_HOLDOUT_V1",
+  "versions": {
+    "astropy": "7.2.0",
+    "numpy": "2.3.5"
+  },
+  "independentAffineOnlyModel": true,
+  "idealAffineControl": {
+    "n": 64,
+    "median": 8.055873411204737e-13,
+    "p90": 1.4277996724123695e-12,
+    "maximum": 1.4540856806316214e-12
+  },
+  "trainingGrid": "9x9 with 32 px edge inset",
+  "holdoutGrid": "8x8 cell midpoints",
+  "wcsSource": "Instrumental WCS A; no stellar measurements or identity matching",
+  "rows": [
+    {
+      "fits": "j8f866kdq_flc.fits",
+      "fitsSha256": "63f72aebcbfbbda4aff3f19542478354f6ffc6cf6449701f54cb9e5dd4e620b7",
+      "scienceExtension": 1,
+      "chip": 2,
+      "wcs": "IDC_4bb1536oj",
+      "rank": 3,
+      "determinant": -1.924907808129178e-10,
+      "trainingErrorsPx": {
+        "n": 81,
+        "median": 12.530654995563951,
+        "p90": 20.539900818583583,
+        "maximum": 40.60459021960556
+      },
+      "holdoutErrorsPx": {
+        "n": 64,
+        "median": 11.745224174595231,
+        "p90": 16.154970635601906,
+        "maximum": 26.285229589553047
+      }
+    },
+    {
+      "fits": "j8f866kdq_flc.fits",
+      "fitsSha256": "63f72aebcbfbbda4aff3f19542478354f6ffc6cf6449701f54cb9e5dd4e620b7",
+      "scienceExtension": 2,
+      "chip": 1,
+      "wcs": "IDC_4bb1536oj",
+      "rank": 3,
+      "determinant": -1.8361392363198568e-10,
+      "trainingErrorsPx": {
+        "n": 81,
+        "median": 13.025815480831813,
+        "p90": 24.651432170638063,
+        "maximum": 47.09035912074185
+      },
+      "holdoutErrorsPx": {
+        "n": 64,
+        "median": 12.501614705694404,
+        "p90": 17.488991696803254,
+        "maximum": 30.761932487042724
+      }
+    },
+    {
+      "fits": "j8f866kfq_flc.fits",
+      "fitsSha256": "884be6b89a9b843302ca1862609f5aceaf8d2ae2dd7ffe53bdfc9eb0478e6b9a",
+      "scienceExtension": 1,
+      "chip": 2,
+      "wcs": "IDC_4bb1536oj",
+      "rank": 3,
+      "determinant": -1.924881718611594e-10,
+      "trainingErrorsPx": {
+        "n": 81,
+        "median": 12.530654994976123,
+        "p90": 20.539900817917474,
+        "maximum": 40.60459021989588
+      },
+      "holdoutErrorsPx": {
+        "n": 64,
+        "median": 11.745224174089016,
+        "p90": 16.15497063564505,
+        "maximum": 26.28522958943933
+      }
+    },
+    {
+      "fits": "j8f866kfq_flc.fits",
+      "fitsSha256": "884be6b89a9b843302ca1862609f5aceaf8d2ae2dd7ffe53bdfc9eb0478e6b9a",
+      "scienceExtension": 2,
+      "chip": 1,
+      "wcs": "IDC_4bb1536oj",
+      "rank": 3,
+      "determinant": -1.836114349940403e-10,
+      "trainingErrorsPx": {
+        "n": 81,
+        "median": 13.025815480416702,
+        "p90": 24.651432168556138,
+        "maximum": 47.09035912111
+      },
+      "holdoutErrorsPx": {
+        "n": 64,
+        "median": 12.50161470550907,
+        "p90": 17.48899169681236,
+        "maximum": 30.76193248933577
+      }
+    },
+    {
+      "fits": "j8f866khq_flc.fits",
+      "fitsSha256": "dab5801808c25eee20b1579a3d1932db6858e9761c72b1d95f1fd87a1d7719f7",
+      "scienceExtension": 1,
+      "chip": 2,
+      "wcs": "IDC_4bb1536oj",
+      "rank": 3,
+      "determinant": -1.924836962688705e-10,
+      "trainingErrorsPx": {
+        "n": 81,
+        "median": 12.530654996311611,
+        "p90": 20.539900818735365,
+        "maximum": 40.60459022015487
+      },
+      "holdoutErrorsPx": {
+        "n": 64,
+        "median": 11.745224174191582,
+        "p90": 16.154970635490884,
+        "maximum": 26.285229591605958
+      }
+    },
+    {
+      "fits": "j8f866khq_flc.fits",
+      "fitsSha256": "dab5801808c25eee20b1579a3d1932db6858e9761c72b1d95f1fd87a1d7719f7",
+      "scienceExtension": 2,
+      "chip": 1,
+      "wcs": "IDC_4bb1536oj",
+      "rank": 3,
+      "determinant": -1.836071657970936e-10,
+      "trainingErrorsPx": {
+        "n": 81,
+        "median": 13.025815481014744,
+        "p90": 24.651432171221607,
+        "maximum": 47.09035912308761
+      },
+      "holdoutErrorsPx": {
+        "n": 64,
+        "median": 12.501614705212976,
+        "p90": 17.48899169714417,
+        "maximum": 30.761932488255866
+      }
+    }
+  ],
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

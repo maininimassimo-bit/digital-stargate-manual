@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_ASI2600MC_FLAT_HELD_OUT_COVARIANCE_V1",
+  "parentProgramSha256": "2c53da12512edec8841968c711e19a355c0cbe2d31b8fcb007a64b727aee2de5",
+  "parentProtocolSha256": "e7e6ad37832d13c68ceea1e61747daa70318d4db30694b135b81ad621052105c",
+  "parentReportSha256": "9a6ab559bd531e90b1f3d15411a45ac7a3100500d1cf77b0ac1df792b7126f82",
+  "parentArchiveSha256": "085ca830a9eb9c8f51fd4b94d878803f2918f8ec0129f3d1f7b644b8c093086c",
+  "design": [
+    "Use the fixed five phases and seven disjoint frame pairs from the parent study.",
+    "Fit one dimensionless symmetric positive semidefinite 9×9 shape per held-out pair, tile, parity, fold and preprocessing mode from exactly six other pairs. Estimate each source-pair matrix with non-overlapping 3×3 blocks in parent interior support. Normalize separately by mean diagonal and average equally over pairs.",
+    "Use the same held-out image's measured scalar input variance in the learned-shape model and the independent-input baseline. The held-out pair contributes zero covariance-shape samples. No tuning from held-out results.",
+    "Evaluate both against the parent empirical variance of 2×2 output sums. Compare median and P95 relative errors, number within 10%, and the count of pair-level medians that improve. Do not claim independent samples across tiles, folds, parities or phases, and do not infer native behavior or detector physics."
+  ]
+}

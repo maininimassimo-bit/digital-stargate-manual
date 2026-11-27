@@ -1,0 +1,111 @@
+{
+  "centralRoi": [
+    384,
+    384,
+    640,
+    640
+  ],
+  "checksumSha256": "3bd62d9c9ec3e20d4fc2e51e1a5a8886ce16faa3c0380eaee296217dfd5d34ff",
+  "codeCeilingDn": 16383,
+  "indexSha256": "20b904e7845615791b4c660399ea6a4870a951ac7ac1c32bd7ed8b16396c4799",
+  "logSha256": "2e58186c623d3727a82a880812e0ca551e83b229f7e7934f4b3c7f6b4fcc1d79",
+  "opticalSetup": "FLCL24 DC after sphere adjustment",
+  "protocol": "BKL046_TV4_CENSORING_RECOVERY_DESIGN_V1",
+  "regions": {
+    "q00": [
+      64,
+      64,
+      320,
+      320
+    ],
+    "q01": [
+      704,
+      64,
+      960,
+      320
+    ],
+    "q10": [
+      64,
+      704,
+      320,
+      960
+    ],
+    "q11": [
+      704,
+      704,
+      960,
+      960
+    ]
+  },
+  "sameOpticalDoseClaimed": false,
+  "sameSession": true,
+  "selected": {
+    "DC": [
+      {
+        "catalogMaximumDn": 7104.0,
+        "catalogMedianDn": 5839.0,
+        "ccdTemperatureK": 179.496,
+        "integrationMs": 10003.5,
+        "name": "i030302_220047_714_a.fit",
+        "utc": "2003-03-02T22:00:47.714"
+      },
+      {
+        "catalogMaximumDn": 7074.0,
+        "catalogMedianDn": 5841.0,
+        "ccdTemperatureK": 179.462,
+        "integrationMs": 10003.5,
+        "name": "i030302_220059_347_a.fit",
+        "utc": "2003-03-02T22:00:59.347"
+      },
+      {
+        "catalogMaximumDn": 7104.0,
+        "catalogMedianDn": 5843.0,
+        "ccdTemperatureK": 179.479,
+        "integrationMs": 10003.5,
+        "name": "i030302_220110_981_a.fit",
+        "utc": "2003-03-02T22:01:10.981"
+      },
+      {
+        "catalogMaximumDn": 7109.0,
+        "catalogMedianDn": 5845.0,
+        "ccdTemperatureK": 179.513,
+        "integrationMs": 10003.5,
+        "name": "i030302_220122_614_a.fit",
+        "utc": "2003-03-02T22:01:22.614"
+      },
+      {
+        "catalogMaximumDn": 7087.0,
+        "catalogMedianDn": 5844.0,
+        "ccdTemperatureK": 179.479,
+        "integrationMs": 10003.5,
+        "name": "i030302_220134_247_a.fit",
+        "utc": "2003-03-02T22:01:34.247"
+      },
+      {
+        "catalogMaximumDn": 7123.0,
+        "catalogMedianDn": 5843.0,
+        "ccdTemperatureK": 179.479,
+        "integrationMs": 10003.5,
+        "name": "i030302_220145_897_a.fit",
+        "utc": "2003-03-02T22:01:45.897"
+      }
+    ]
+  },
+  "selection": "First six chronological indexed DC CLEAR1 mode 1 frames at 10003.5 ms. Raw codes are then censored at fixed thresholds on internal regions.",
+  "session": "2003-03-02",
+  "sourceURL": "https://pds-smallbodies.astro.umd.edu/holdings/dif-cal-hrii_hriv_mri-2-ground-tv4-v1.0/",
+  "syntheticCapsDn": [
+    5500,
+    6200
+  ],
+  "training": {
+    "postAlignment": [
+      13,
+      12
+    ],
+    "preAlignment": [
+      6,
+      8
+    ]
+  }
+}

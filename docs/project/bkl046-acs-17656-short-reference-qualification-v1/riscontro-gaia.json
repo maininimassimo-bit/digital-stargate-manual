@@ -1,0 +1,503 @@
+{
+  "eligibleGaiaSources": 3184,
+  "fits": {
+    "jfdp02vwq": {
+      "1": {
+        "candidates": 234,
+        "epochJyearTCB": 2025.3148356861063,
+        "fitBeforeClipping": 184,
+        "holdout": 50,
+        "holdoutTiles": 19,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.18114993175841196,
+                -0.11018137676736076
+              ],
+              [
+                0.049768006592028236,
+                0.13452073312096605
+              ],
+              [
+                0.09711450693410914,
+                0.06788765315241152
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.2644549084345237,
+              "medianPx": 0.07997436680354414,
+              "p90Px": 0.15902739181559822,
+              "pairs": 50
+            },
+            "trainRetained": 177,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                0.14084919654237227,
+                -0.12432184802604446
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.29800446848095635,
+              "medianPx": 0.12137276787894334,
+              "p90Px": 0.20644950843428192,
+              "pairs": 50
+            },
+            "trainRetained": 180,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.42331265241971233,
+          "medianPx": 0.2204301340083729,
+          "p90Px": 0.35231989108275263,
+          "pairs": 50
+        },
+        "statusCounts": {
+          "CORE_DQ": 263,
+          "MATCH": 234,
+          "OUTSIDE": 2658,
+          "PEAK_ABOVE_LIMIT": 29
+        }
+      },
+      "2": {
+        "candidates": 261,
+        "epochJyearTCB": 2025.3148356861063,
+        "fitBeforeClipping": 197,
+        "holdout": 64,
+        "holdoutTiles": 20,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.07574915723467701,
+                0.15134690913338927
+              ],
+              [
+                0.04002795845869429,
+                0.11280437642889343
+              ],
+              [
+                0.16276358318198952,
+                0.11616548697809806
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.3629879001232318,
+              "medianPx": 0.07971746177175147,
+              "p90Px": 0.15587704444192524,
+              "pairs": 64
+            },
+            "trainRetained": 189,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                0.0025360530779324044,
+                0.11448038634448632
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.4039014164432401,
+              "medianPx": 0.1040720055917231,
+              "p90Px": 0.2452710186463346,
+              "pairs": 64
+            },
+            "trainRetained": 193,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.3597304554254699,
+          "medianPx": 0.13575443212520913,
+          "p90Px": 0.28678048100880293,
+          "pairs": 64
+        },
+        "statusCounts": {
+          "CORE_DQ": 247,
+          "MATCH": 261,
+          "OUTSIDE": 2640,
+          "PEAK_ABOVE_LIMIT": 36
+        }
+      }
+    },
+    "jfdp02w3q": {
+      "1": {
+        "candidates": 240,
+        "epochJyearTCB": 2025.3149795185795,
+        "fitBeforeClipping": 191,
+        "holdout": 49,
+        "holdoutTiles": 19,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.1950909929383788,
+                -0.10814852688684237
+              ],
+              [
+                0.03585480446263452,
+                0.1565073006431316
+              ],
+              [
+                0.10726118819195768,
+                0.07252263614884372
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.33012426412636153,
+              "medianPx": 0.07681514628720583,
+              "p90Px": 0.15022609606723347,
+              "pairs": 49
+            },
+            "trainRetained": 185,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                0.1468859939142861,
+                -0.12488216698624889
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.29597100174605157,
+              "medianPx": 0.12016493069665216,
+              "p90Px": 0.23717477428282555,
+              "pairs": 49
+            },
+            "trainRetained": 189,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.4739392240340109,
+          "medianPx": 0.2329750471852217,
+          "p90Px": 0.3612697375073731,
+          "pairs": 49
+        },
+        "statusCounts": {
+          "CORE_DQ": 257,
+          "MATCH": 240,
+          "OUTSIDE": 2658,
+          "PEAK_ABOVE_LIMIT": 29
+        }
+      },
+      "2": {
+        "candidates": 263,
+        "epochJyearTCB": 2025.3149795185795,
+        "fitBeforeClipping": 196,
+        "holdout": 67,
+        "holdoutTiles": 20,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.051984165465007226,
+                0.17199191249805232
+              ],
+              [
+                0.02505444663248073,
+                0.1312067920736847
+              ],
+              [
+                0.11085646702714375,
+                0.13905496743460988
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.37861369944135287,
+              "medianPx": 0.072404654496759,
+              "p90Px": 0.1696965450933856,
+              "pairs": 67
+            },
+            "trainRetained": 184,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                0.0036766042715862856,
+                0.13053629317195814
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.41500435350848786,
+              "medianPx": 0.09699049812384843,
+              "p90Px": 0.23513893655424534,
+              "pairs": 67
+            },
+            "trainRetained": 191,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.374833767445258,
+          "medianPx": 0.15656863041352753,
+          "p90Px": 0.27055195566720475,
+          "pairs": 67
+        },
+        "statusCounts": {
+          "CORE_DQ": 244,
+          "MATCH": 263,
+          "OUTSIDE": 2640,
+          "PEAK_ABOVE_LIMIT": 37
+        }
+      }
+    },
+    "jfln02qzq": {
+      "1": {
+        "candidates": 266,
+        "epochJyearTCB": 2026.3282864116197,
+        "fitBeforeClipping": 200,
+        "holdout": 66,
+        "holdoutTiles": 21,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.1977148985221896,
+                -0.11978160329711196
+              ],
+              [
+                0.05240219231372008,
+                0.1686490386474941
+              ],
+              [
+                0.130440022679225,
+                0.02691988626759323
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.3569751711416669,
+              "medianPx": 0.08451623474739633,
+              "p90Px": 0.18527650095860965,
+              "pairs": 66
+            },
+            "trainRetained": 194,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                0.137107476046819,
+                -0.11574729737518452
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.33913028825129793,
+              "medianPx": 0.11129088833033945,
+              "p90Px": 0.2486988754848813,
+              "pairs": 66
+            },
+            "trainRetained": 198,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.46380078967347976,
+          "medianPx": 0.19782146895820044,
+          "p90Px": 0.31386065646275313,
+          "pairs": 66
+        },
+        "statusCounts": {
+          "CORE_DQ": 216,
+          "MATCH": 266,
+          "OUTSIDE": 2673,
+          "PEAK_ABOVE_LIMIT": 29
+        }
+      },
+      "2": {
+        "candidates": 266,
+        "epochJyearTCB": 2026.3282864116197,
+        "fitBeforeClipping": 202,
+        "holdout": 64,
+        "holdoutTiles": 23,
+        "models": {
+          "affine": {
+            "coefficientXY": [
+              [
+                0.03423711843581011,
+                0.19053035466476337
+              ],
+              [
+                0.04919641784225002,
+                0.14360008855399614
+              ],
+              [
+                0.10753256143346145,
+                0.15186782261522686
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.2517889636935899,
+              "medianPx": 0.08071924661448066,
+              "p90Px": 0.1607807609316295,
+              "pairs": 64
+            },
+            "trainRetained": 189,
+            "withinDiagnosticThresholds": true
+          },
+          "translation": {
+            "coefficientXY": [
+              [
+                -0.015097745676715646,
+                0.12620758379062916
+              ]
+            ],
+            "holdoutResidual": {
+              "maxPx": 0.4546358111282917,
+              "medianPx": 0.11944814815939195,
+              "p90Px": 0.25215854019389417,
+              "pairs": 64
+            },
+            "trainRetained": 197,
+            "withinDiagnosticThresholds": true
+          }
+        },
+        "originalHoldout": {
+          "maxPx": 0.4290212777578066,
+          "medianPx": 0.17387799745372698,
+          "p90Px": 0.29986965761463535,
+          "pairs": 64
+        },
+        "statusCounts": {
+          "CORE_DQ": 271,
+          "MATCH": 266,
+          "OUTSIDE": 2602,
+          "PEAK_ABOVE_LIMIT": 45
+        }
+      }
+    }
+  },
+  "photometryPerformed": false,
+  "protocolSha256": "e3b4ebf14e293d56fa867836968c1d8c015c1984068228b03bbb5e5add1d83d9",
+  "schema": "BKL046_ACS17656_17979_COMMON_SHORT_REFERENCES_V1",
+  "scientificClosures": 0,
+  "sharedIds": [
+    {
+      "chips": [
+        1,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 45,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 224,
+      "right": "jfdp02w3q"
+    },
+    {
+      "chips": [
+        1,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 0,
+      "right": "jfdp02w3q"
+    },
+    {
+      "chips": [
+        2,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 0,
+      "right": "jfdp02w3q"
+    },
+    {
+      "chips": [
+        2,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 61,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 251,
+      "right": "jfdp02w3q"
+    },
+    {
+      "chips": [
+        1,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 26,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 116,
+      "right": "jfln02qzq"
+    },
+    {
+      "chips": [
+        1,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 0,
+      "right": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 2,
+      "right": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 25,
+      "left": "jfdp02vwq",
+      "matchedGaiaIdsInBoth": 126,
+      "right": "jfln02qzq"
+    },
+    {
+      "chips": [
+        1,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 28,
+      "left": "jfdp02w3q",
+      "matchedGaiaIdsInBoth": 124,
+      "right": "jfln02qzq"
+    },
+    {
+      "chips": [
+        1,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "left": "jfdp02w3q",
+      "matchedGaiaIdsInBoth": 0,
+      "right": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        1
+      ],
+      "heldOutGaiaIdsInBoth": 0,
+      "left": "jfdp02w3q",
+      "matchedGaiaIdsInBoth": 2,
+      "right": "jfln02qzq"
+    },
+    {
+      "chips": [
+        2,
+        2
+      ],
+      "heldOutGaiaIdsInBoth": 27,
+      "left": "jfdp02w3q",
+      "matchedGaiaIdsInBoth": 123,
+      "right": "jfln02qzq"
+    }
+  ]
+}

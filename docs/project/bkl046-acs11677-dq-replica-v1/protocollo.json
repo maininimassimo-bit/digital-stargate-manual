@@ -1,0 +1,29 @@
+{
+  "association": "jb6v01010",
+  "catalogueSha256": "f767afda06343a0594c5c02189e712298bee355c4bc8829db0587b6edb5cf236",
+  "cosmicRayRejectionBit": 4096,
+  "exposures": [
+    {
+      "archivedFltHeaderSha256": "78ef6c7c27462838807d4a78056fb642641b3c90279ba4388f39dce24cdab0cf",
+      "bytes": 168451200,
+      "file": "jb6v01e0q_flc.fits",
+      "root": "jb6v01e0q",
+      "seconds": 1457.0,
+      "uri": "mast:HST/product/jb6v01e0q_flc.fits"
+    },
+    {
+      "archivedFltHeaderSha256": "96bb2861f11816828f966cc70c27bed0e29478b515a8fec26e872a54337792ec",
+      "bytes": 168451200,
+      "file": "jb6v01e5q_flc.fits",
+      "root": "jb6v01e5q",
+      "seconds": 1456.0,
+      "uri": "mast:HST/product/jb6v01e5q_flc.fits"
+    }
+  ],
+  "filter": "F606W",
+  "fullWellBit": 256,
+  "matchPolicy": "Same physical chip. Project source pixels via primary WCS and compare nearest and 3x3 support in the repeat.",
+  "minimumTrailSpan": 21,
+  "protocol": "BKL046_ACS11677_INDEPENDENT_LONG_DQ_SUPPORT_PLAN_V1",
+  "scientificClosure": false
+}

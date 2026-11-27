@@ -1,0 +1,31 @@
+{
+  "schema": "BKL046_CFA_ORIGIN_BATCH_CLASSIFIER_FIXTURE_V1",
+  "batchSha256": "4aa98f614ab6e53c520662659ce91ce1a352b6d78291a20f2dd6cd9e0f0d9b3e",
+  "planSha256": "ab70f00fae2063a3693280036b6bfe166afabdc0a24abec43f761192a31d167a",
+  "results": [
+    {
+      "case": "fixed-half",
+      "outputCount": 8,
+      "matched": "fixed-half",
+      "marker": true
+    },
+    {
+      "case": "fixed-zero",
+      "outputCount": 8,
+      "matched": "fixed-zero",
+      "marker": true
+    },
+    {
+      "case": "use-declared",
+      "outputCount": 8,
+      "matched": "use-declared",
+      "marker": true
+    },
+    {
+      "case": "third-case-failed",
+      "marker": false
+    }
+  ],
+  "nativeExecutions": 0,
+  "admissionRequested": false
+}

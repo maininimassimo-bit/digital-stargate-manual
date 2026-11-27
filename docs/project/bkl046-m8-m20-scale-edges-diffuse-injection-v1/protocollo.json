@@ -1,0 +1,28 @@
+{
+  "schema": "BKL046_M8M20_SCALE_EDGE_DIFFUSE_INJECTION_PROTOCOL_V1",
+  "priorJointSha256": "b2b5d50339ccc6bff9718c0c6587427f0492e456b21795d1a403e44abef44a6b",
+  "referenceSha256": "a84d66047802b999c61cce84b80e2cf79dc85032532fc9b30cf6c015684a9564",
+  "expectedJointTrials": 148,
+  "expectedUnitControls": 27,
+  "peakAdu": 2,
+  "apertureRadius": 0.65,
+  "relativeTolerance": 0.05,
+  "profiles": [
+    {
+      "name": "shortFilament",
+      "sigmaX": 0.38,
+      "sigmaY": 0.045
+    },
+    {
+      "name": "longFilament",
+      "sigmaX": 1.1,
+      "sigmaY": 0.045
+    },
+    {
+      "name": "broadDiffuse",
+      "sigmaX": 0.58,
+      "sigmaY": 0.39
+    }
+  ],
+  "design": "Apply each eligible stellar scale exactly as in the prior relative background experiment. Use only trials from its frozen joint-pass set plus all unit-scale controls. Inject after scaling and alignment. Refit offset and plane over all cells independently before and after each injection. Subtract the fitted-model increment and compare recovered flux in the central aperture and L2 on the entire common support. No fitting access to injected truth. Three fixed positive profiles and one fixed digital contrast. Conditional diagnostic, no independent astrophysical ground truth."
+}

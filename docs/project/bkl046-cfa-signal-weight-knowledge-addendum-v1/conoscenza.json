@@ -1,0 +1,171 @@
+{
+  "axis": "CFA_DITHER_DRIZZLE/2",
+  "baselineCapsuleSha256": "25be4e999a09fecf4f883c7896714161e6c87ad177d30642abe160f58f9332f3",
+  "baselineKnowledgeSha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d",
+  "completeStudy": false,
+  "decision": {
+    "apertureSensitivityDiagnosticPercent": 1,
+    "geometricDiagnosticPx": 0.3,
+    "remaining": [
+      "Native matched-scale registration and reconstruction",
+      "Independent absolute photometric reference",
+      "Review and coordinator admission for the exact native launcher"
+    ],
+    "signalWeighting": "Candidate comparator only"
+  },
+  "finalKnowledge": false,
+  "findings": {
+    "IC1805": {
+      "camera": "Canon EOS 40D",
+      "frameComparisons": 38,
+      "geometry": {
+        "affine": {
+          "framesAtThreshold": {
+            "unit": 7,
+            "weighted": 14
+          },
+          "framesImproved": 26,
+          "framesTied": 0,
+          "framesWorse": 12,
+          "medianPairedP90ChangePx": -0.01829352043833926,
+          "pooledP90Px": {
+            "unit": 0.3778478280484991,
+            "weighted": 0.36647325792873103
+          }
+        },
+        "similarity": {
+          "framesAtThreshold": {
+            "unit": 1,
+            "weighted": 4
+          },
+          "framesImproved": 23,
+          "framesTied": 0,
+          "framesWorse": 15,
+          "medianPairedP90ChangePx": -0.010558286936949907,
+          "pooledP90Px": {
+            "unit": 0.43882892320604844,
+            "weighted": 0.42812266416102707
+          }
+        }
+      }
+    },
+    "M51": {
+      "camera": "Canon EOS 6D",
+      "comparator": "similarity, preview",
+      "comparisons": [
+        {
+          "blocks": 12,
+          "deltaPercentilesPx": [
+            -0.2228141729323646,
+            -0.06077370593919607
+          ],
+          "p90UnitPx": 0.6139849105047,
+          "p90WeightedPx": 0.450868966742668,
+          "stars": 57
+        },
+        {
+          "blocks": 12,
+          "deltaPercentilesPx": [
+            -0.3919024971810825,
+            -0.04568846686877733
+          ],
+          "p90UnitPx": 0.7904944433969731,
+          "p90WeightedPx": 0.5781245828255844,
+          "stars": 51
+        }
+      ]
+    },
+    "M8M20": {
+      "camera": "ZWO ASI2600MC Pro",
+      "geometry": {
+        "huber": {
+          "comparison": "unit",
+          "framesAtThreshold": 3,
+          "framesImproved": 10,
+          "pooledP90Px": 0.39427314931147206
+        },
+        "signal": {
+          "comparison": "unit",
+          "framesAtThreshold": 1,
+          "framesImproved": 7,
+          "pooledP90Px": 0.38953794191025004
+        },
+        "signalHuber": {
+          "comparison": "huber",
+          "framesAtThreshold": 1,
+          "framesImproved": 4,
+          "pooledP90Px": 0.38637135591309
+        },
+        "unit": {
+          "comparison": "unit",
+          "framesAtThreshold": 1,
+          "framesImproved": 0,
+          "pooledP90Px": 0.4140367912316367
+        }
+      },
+      "heldoutPairs": 756,
+      "sensitivity": {
+        "associations": 742,
+        "centerShiftP90Px": 0.14968295394982972,
+        "fluxChangeAbsP90Pct": {
+          "B": [
+            0.505952582,
+            0.503937929
+          ],
+          "G1": [
+            0.370722191,
+            0.368388317
+          ],
+          "G2": [
+            0.441837881,
+            0.438332864
+          ],
+          "R": [
+            0.475029264,
+            0.499414831
+          ]
+        }
+      }
+    }
+  },
+  "literalClosureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits.",
+  "nativeExecutions": 0,
+  "parentResidualLedgerSha256": "0a52d11cc2b0aa3ec7409d1b5aff62c6cddb0bafd335f29f39c500ab0876e434",
+  "schema": "BKL046_CFA_SIGNAL_WEIGHT_KNOWLEDGE_ADDENDUM_V1",
+  "scientificClosures": 0,
+  "sourceReceipts": {
+    "ic1805-transfer": {
+      "archiveBytes": 6843,
+      "archiveSha256": "946532dbf92c94a17426d2942e4856ed210c9536f1fe7c046898de344246c31b",
+      "commit": "ffc88912609a0661ec4749050a0c885cffd29c72",
+      "gitBlob": "653ba9f76d8cf51d56f76009b28a365bddaac0ca",
+      "path": "docs/project/bkl046-ic1805-signal-weight-transfer-v1/riscontro.json",
+      "sha256": "47905dc302de5fd5091748d8314762165966fc5be699f3fb6d40075854bf91bb"
+    },
+    "m51-spatial": {
+      "archiveBytes": 6509,
+      "archiveSha256": "9963d12dc24cac36e840c60fbba80b8a48a32175739a0a2e924bdbd43a983a03",
+      "commit": "719c468c63955372ca97584a5f75f4943c6bfaf5",
+      "gitBlob": "61d68dbbc3773dd5c4168b15bcde433b72d6a03f",
+      "path": "docs/project/bkl046-m51-weighted-spatial-uncertainty-v1/riscontro.json",
+      "sha256": "b8aecc7ea8bf42875370a422b08a43c34f4a49aea3aaea9cf4369c65c0f8e38d"
+    },
+    "m8m20-apertures": {
+      "archiveBytes": 4256,
+      "archiveSha256": "6257014182cc0940e367a296c9317a6858abfffb84e76ff9916498e6b95fe20a",
+      "commit": "6813c4f4bafd0ec9f6e53809c3af1d66049b4291",
+      "gitBlob": "32d6873ea9c3694563fe8f93b174150a29f2ad8a",
+      "path": "docs/project/bkl046-m8-m20-weighted-aperture-sensitivity-v1/riscontro.json",
+      "sha256": "44c114aa9983dc6c1a8dc846af385cdc61b3fe3ce3e635f77017ceb5f0a0dafe"
+    },
+    "m8m20-transfer": {
+      "archiveBytes": 5152,
+      "archiveSha256": "655dd3c27fa2859f1f7b402568c92260b758f49ae6c47d6d985fc4264199746e",
+      "commit": "b727a716c27c0bb71ae6f241dd717cdaa10b01e4",
+      "gitBlob": "516e3b763e169b6d95024937d07c9dfe3423410f",
+      "path": "docs/project/bkl046-m8-m20-signal-weight-transfer-v1/riscontro.json",
+      "sha256": "9235b981e44087c573916c91211a3bc35f01709e836b231a184be4fa5561c7ae"
+    }
+  },
+  "status": "OPEN"
+}

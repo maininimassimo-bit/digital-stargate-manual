@@ -1,0 +1,7 @@
+# BKL-046 · Controllo XDRZ per geometria e canali CFA
+
+Il pacchetto prepara tre mosaici FITS RGGB da 32 × 28 pixel, i corrispondenti file di riferimento RGB con un valore sentinella e quattro XDRZ candidati. La serializzazione XML è stata confrontata con la struttura del sorgente PCL installato e riletta con un parser indipendente. Il supporto effettivo del modulo e l'interpretazione dei campi da parte di PixInsight restano da misurare.
+
+Il primo caso usa due traslazioni intere. Le due fasi verdi convergono sul pixel di riferimento (13, 8) con peso atteso 2 e intensità attesa 0,5. Marcatori distinti identificano rosso e blu. Il secondo caso include shear e traslazione. Le due codifiche candidate dell'origine danno posizioni serializzate che differiscono di 0,185809 pixel sul punto di controllo. Il riferimento offline è calcolato nel sistema con centri dei pixel a coordinate intere. L'esportazione nativa dovrà dichiarare orientamento e normalizzazione dei pesi. Il comparatore è vincolato a pesi non normalizzati nel formato previsto e rifiuta esportazioni con supporto, canale, intensità o peso discordanti.
+
+Due generazioni dei 17 file di controllo coincidono byte per byte. I checksum FITS usano un timestamp fisso per consentire la replica. Due casi positivi e otto negativi hanno collaudato il comparatore offline. Manifest SHA-256 `162181d91ad6e6d887693b9dc72973cbb6b9af781c7fa5ed12493513403e36c2`. Il controllo è un candidato da revisionare e ammettere prima dell'importazione in PixInsight. Zero esecuzioni native.

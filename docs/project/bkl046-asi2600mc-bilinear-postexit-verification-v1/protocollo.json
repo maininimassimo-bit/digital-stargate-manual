@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_BILINEAR_POST_EXIT_OFFLINE_PROTOCOL_V1",
+  "operation": "BKL046_ASI2600MC_DYNAMIC_ALIGNMENT_WITNESS_V1",
+  "inputManifestSha256": "f331f21bfe7d2d291b07b2a3bfc5cdf63f3485a83a2efd67982c27501e683617",
+  "numericProtocolSha256": "8d77bd164e4edde422014ef4febf2cf39f6ce7eb27f737059c81ad4b11184c0d",
+  "numericComparatorSha256": "b88b180c6d4c1a081c75f113c3b9ba690564e0bc0214040b27deda604b274b8e",
+  "pixInsightExeSha256": "76d2339130b58be3d112b66cafc578d9f859d80c96842b2ba2dfbbdcdc8b2943",
+  "processModuleSha256": "82316c87e4beac928324a19531ff071b73df7ea05cb917a8065a977fea4e459d",
+  "maximumArchiveBytes": 4194304,
+  "maximumExpandedArchiveBytes": 4194304,
+  "priorArchiveSha256": "8a84589b22ca6d1910bdea5ebd35cc765f21ddf895107b603fc363ec6d25499c",
+  "purpose": "Require outputs and held original exit to match independently supplied byte pins and expected context before comparing numerically. The offline fixture does not authenticate the pins or attest native origin. Never release from this verifier."
+}

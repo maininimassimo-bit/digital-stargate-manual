@@ -1,0 +1,29 @@
+{
+  "schema": "BKL046_M51_THREE_POSE_REGISTRATION_V1",
+  "codeSha256": "3e8f985807ced63d269a808f944f3d26e705b39ee899ea903c40681cd5d0349c",
+  "reportSha256": "56028aa533f8b07e9effb694709366ab868fd7453c6069b8d7be966c4a6aabcb",
+  "methods": [
+    "pairedPreview",
+    "jointGreen"
+  ],
+  "pairs": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "minimumCommon": 20,
+  "thresholdPx": 0.3,
+  "maxIterations": 20,
+  "tuning": 1.345,
+  "scaleFloorPx": 0.05,
+  "criterion": "Evaluate all methods on the same Gaia sources present in all three frames, using only upstream training identities to fit transforms and to derive all weights. Score the direct and chained 0-to-2 predictions against the same held-out measurements, and report direct-to-chained disagreement separately."
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "BKL046_M8M20_DARK_REFERENCE_REPEATABILITY_PROTOCOL_V1",
+  "darkArchiveSha256": "672cbb8862eea071310e92a49744f4058c6af1fc4313464ec1a141b09bdb1483",
+  "calibrationReceiptSha256": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+  "budgetProtocolSha256": "6a48bb1c4d19c56c12593e1dac62942ef4245b64f40d9431e59956f855cd6336",
+  "budgetReportSha256": "ed1c0284d7cdd7b96ed1aa182acd5020ddbf392be938dbaad2b8467aa14d6cbf",
+  "injectionProgramSha256": "454d3b6cd79e18b89b1f593d6b83c689885c5e9d87597fee7ed837983d34c7c8",
+  "injectionReportSha256": "d22407710a2e569ab43a61c8d2decf02c8e47d457ed62db3e2ceadd0ca496e8c",
+  "layout": "distributed",
+  "design": "Use the six detector cells nearest the predefined distributed anchor coordinates. In each chronological dark exposure compute mean and median after averaging the two RGGB greens on the registered comparison common support. Compare two independent interleaved sets of seven using the mean of each regional summary; leave the fifteenth untouched. Fit a plane to the vector of split differences on the six actual cell centers and propagate its absolute change to aperture flux and image shape relative to the frozen 2 ADU profiles. This is dark repeatability only, neither individual split error nor optical background truth."
+}

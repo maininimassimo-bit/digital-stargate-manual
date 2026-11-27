@@ -1,0 +1,24 @@
+{
+  "schema": "BKL046_CFA_CELL_SYNCHRONIZED_RECOVERY_BOUNDARY_V1",
+  "registeredReport": "de1e31b2438dd04cd0a3405bc4016962ff3bd4475b597fdf908f50c75b3d5148",
+  "registeredProtocol": "0fa01e48e44db897f7cddc30e8940363ecd1a511a856f9fa2a05c36f8e27289d",
+  "holdoutExposureSeconds": 0.5,
+  "anchorExposureSeconds": [
+    0.125,
+    0.25
+  ],
+  "targetExposureSeconds": [
+    1,
+    2
+  ],
+  "minimumSignalAnchorDN": 70,
+  "minimumSignalHoldoutDN": 200,
+  "minimumMarginDN": 32,
+  "maximumShortDisagreementPercent": 3,
+  "ceilingDN": 3651,
+  "transitionFraction": 0.05,
+  "scope": "RGGB without demosaic. Compare raw, phase hard at plateau, all-phase hard at plateau and all-phase fade from maximum phase weight. Use only long target and the two short anchors in the predictions and masks. Independently withheld mid-exposure supplies the assessment reference. Edge steps are oriented from untriggered to triggered cells within each qualified tile.",
+  "edgeReferenceMaxFraction": 0.02,
+  "edgeEstimateMinFraction": 0.1,
+  "previousReport": "99340c3cff47404694ead0ad571ff84c930b8310122d8bde67d6523f54c7d74a"
+}

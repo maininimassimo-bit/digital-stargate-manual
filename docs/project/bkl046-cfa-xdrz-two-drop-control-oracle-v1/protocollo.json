@@ -1,0 +1,25 @@
+{
+  "schema": "BKL046_CFA_XDRZ_TWO_DROP_SYNTHETIC_REFERENCE_V1",
+  "fixture": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "classifier": "54615e810d86dc95ea3ad2ca9a2b94520b557c313cede84b80cf672524304be6",
+  "widths": [
+    0.7,
+    1
+  ],
+  "scales": [
+    "RAW",
+    "GLOBAL_MAX",
+    "CHANNEL_MAX"
+  ],
+  "placements": [
+    "detector",
+    "reference"
+  ],
+  "zeroModes": [
+    "retain",
+    "exclude"
+  ],
+  "weightTolerance": 1e-12,
+  "intensityTolerance": 2e-8,
+  "design": "Independently derive the whole-field predictions by square overlap at each frozen integer XDRZ placement. Compare 0.70 against the archived oracles. Require discriminating controls under both widths. This is the numerical reference for an additional native control, separate from the frozen v6 launcher."
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "BKL046_M8_M20_MATCHED_RADIUS_PAIRED_UNCERTAINTY_V1",
+  "parentProgramSha256": "8f0bb81b73bcd8fa6125c402cee7255c964c2066389836f6a58d3e40c6f77719",
+  "parentReceiptSha256": "6b0af19c12ba9719eb0fb9fc5320b66fac1bbad790593559e7e49b40d96a87f3",
+  "heldoutTiles": [
+    4,
+    6,
+    12,
+    14
+  ],
+  "seed": 46051,
+  "starReplicates": 10000,
+  "quantiles": [
+    0.025,
+    0.975
+  ],
+  "endpoint": "100*(sample SD bilinear/sample SD matched drop - 1), all paired valid windows, fixed trained Gaussian widths",
+  "starResampling": "With replacement within each tile. Each draw of a star includes all its valid windows and every method, aperture and calibration. Same base star draws across parities, with zero contribution for ineligible stars.",
+  "regionResampling": "Enumerate all 4^4 ordered draws of tiles with replacement. Also omit each tile once. Windows retain original weights.",
+  "decision": "Stable direction requires both percentile intervals and every leave-one-tile estimate strictly on the same side of zero. Per contrast descriptive, no multiplicity or independent-field inference.",
+  "scope": "Same Bayer field and poses, radius match only; no PixInsight admission or scientific closure."
+}

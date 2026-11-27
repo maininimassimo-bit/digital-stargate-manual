@@ -1,0 +1,184 @@
+{
+  "admissionRequested": false,
+  "archivedPredictionsReproduced": true,
+  "axes": [
+    "width",
+    "model",
+    "intensity_or_weight",
+    "channel",
+    "y",
+    "x"
+  ],
+  "cases": [
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "RAW",
+      "width": 0.7,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "GLOBAL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "CHANNEL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "RAW",
+      "width": 0.7,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "GLOBAL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "CHANNEL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "RAW",
+      "width": 0.7,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "GLOBAL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "CHANNEL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "RAW",
+      "width": 0.7,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "GLOBAL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "CHANNEL_MAX",
+      "width": 0.7,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "RAW",
+      "width": 1,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "GLOBAL_MAX",
+      "width": 1,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "CHANNEL_MAX",
+      "width": 1,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "RAW",
+      "width": 1,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "GLOBAL_MAX",
+      "width": 1,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "detector",
+      "scale": "CHANNEL_MAX",
+      "width": 1,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "RAW",
+      "width": 1,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "GLOBAL_MAX",
+      "width": 1,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "CHANNEL_MAX",
+      "width": 1,
+      "zeroBehavior": "retain"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "RAW",
+      "width": 1,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "GLOBAL_MAX",
+      "width": 1,
+      "zeroBehavior": "exclude"
+    },
+    {
+      "rejectionCoordinates": "reference",
+      "scale": "CHANNEL_MAX",
+      "width": 1,
+      "zeroBehavior": "exclude"
+    }
+  ],
+  "channels": [
+    "R",
+    "G",
+    "B"
+  ],
+  "fixtureSha256": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "launcherModified": false,
+  "maximumDifferenceBetweenWidths": 0.0,
+  "models": [
+    "unmasked",
+    "detector",
+    "reference",
+    "zero-detector-retained",
+    "zero-reference-retained"
+  ],
+  "nativeExecutions": 0,
+  "nativeProvenanceVerified": false,
+  "numericalCases": 24,
+  "oracleSha256": "ebb31193447c6b20f2efef004dee3a2784d3c86628d6dfd40c2dfc41bd276523",
+  "protocolSha256": "8a051f79801e562a1e804b60e5bb684cf436c195499ebfef1d8664264a9a059f",
+  "schema": "BKL046_CFA_XDRZ_TWO_DROP_SYNTHETIC_REFERENCE_V1",
+  "scientificClosures": 0,
+  "widths": [
+    0.7,
+    1
+  ]
+}

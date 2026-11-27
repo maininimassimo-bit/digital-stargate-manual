@@ -1,0 +1,9 @@
+# BKL-046 · Offset dei pixel mascherati nei CR2 di IC 1805
+
+I CR2 originali della Nebulosa Cuore conservano un mosaico di 3944 × 2622 pixel con regione visibile di 3908 × 2602. Il controllo confronta due strisce sinistre separate e una destra, esterne alla regione visibile, sulle stesse righe e per ciascuna parità RGGB. Si usano mediane, con verifica dell'assenza di zeri nei campioni. I margini laterali si basano sulla geometria decodificata e sul trattamento dei mascheramenti nel decoder. [LibRaw 0.21.4](https://github.com/LibRaw/LibRaw/blob/0.21.4/src/utils/utils_dcraw.cpp) · [Serie originale](https://amor.cms.hu-berlin.de/~rodrigus/datasets.html)
+
+Nei dieci bias a ISO 800 e 1 s, la differenza al P90 fra le due strisce sinistre è 0–1 ADU. Nei 17 dark a ISO 800 e 60 s è 0–0,4 ADU. Usando la media delle due mediane sinistre, lo scarto assoluto al P90 dalla mediana dei nove riquadri visibili è 2 ADU per ogni parità in entrambi i gruppi. La striscia destra differisce dalla stima sinistra di 26–28,5 ADU al P90 a ISO 800 nei due gruppi. Le strisce laterali hanno quindi comportamenti diversi.
+
+Sui 17 flat a ISO 100 e 2,5 s, il P90 fra le due strisce sinistre è 0–1 ADU. Tra destra e sinistra è 2–3 ADU. Nei nove riquadri, si sottrae ciascuna stima alternativa e si normalizza il flat sulla mediana del riquadro centrale della stessa parità. Il P90 fra frame dei P90 di variazione relativa rimane sotto lo 0,0028% rispetto alla stima media delle strisce sinistre. Il confronto riguarda flat ad alto segnale e il solo offset scalare. Non vincola il dark current, i difetti localizzati o la struttura additiva nell'area attiva a ISO 100. La mancanza di dark-flat abbinati resta aperta e la soluzione con pixel mascherati rimane esplorativa. Zero master salvati, zero chiusure scientifiche e zero avvii PixInsight.
+
+SHA-256 della ricevuta `ca08cc5d050431c856d229a71f954ac0e805663a323ce69b8e0c750e5b6dd4f3`.

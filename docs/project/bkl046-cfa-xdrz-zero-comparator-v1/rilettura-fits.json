@@ -1,0 +1,67 @@
+{
+  "schema": "BKL046_CFA_XDRZ_ZERO_COMPARISON_V1",
+  "fixtureSha256": "a64038a4901d93bf6973e55f1fc888afbb5cd221ec9c8c5a0a94a2359eaaaf8d",
+  "absoluteTolerance": 1e-06,
+  "supportThreshold": 1e-08,
+  "nativeProvenanceVerified": false,
+  "scientificClosures": 0,
+  "mode": "FITS_COMPARISON",
+  "inputHashes": {
+    "unmasked": {
+      "unmasked-rgb.fits": "1ace67524e53d6c00ed127ab2162c203fcde2c9b713fa459131628f922177b6f",
+      "unmasked-weight.fits": "318139885b3637bbcd43fdf0d1927c8611f843de79175173949ebe366854e6ab"
+    },
+    "mask-green": {
+      "mask-green-rgb.fits": "c3c464b089b28ac68eb7b51cf87a3d45b80aaa6563ba1ad4a16986459ed7af22",
+      "mask-green-weight.fits": "eefed46e004978688766d721c9b95d7049de5d0cbad9621f4848a8100073f490"
+    },
+    "mask-wrong-channel": {
+      "mask-wrong-channel-rgb.fits": "1ace67524e53d6c00ed127ab2162c203fcde2c9b713fa459131628f922177b6f",
+      "mask-wrong-channel-weight.fits": "318139885b3637bbcd43fdf0d1927c8611f843de79175173949ebe366854e6ab"
+    },
+    "zero-detector": {
+      "zero-detector-rgb.fits": "a6923ad350ed36c6fa0d70dcf83b7e5e92d5555405bb47f9b2409b69044326ba",
+      "zero-detector-weight.fits": "318139885b3637bbcd43fdf0d1927c8611f843de79175173949ebe366854e6ab"
+    },
+    "zero-reference": {
+      "zero-reference-rgb.fits": "dba10898fc85b38e31f58c4eb61e76b53f916415e9fde0cd728d1a65761d511b",
+      "zero-reference-weight.fits": "318139885b3637bbcd43fdf0d1927c8611f843de79175173949ebe366854e6ab"
+    }
+  },
+  "comparison": {
+    "status": "ZERO_WEIGHT_RETAINED",
+    "greenMaskCoordinateModel": "detector",
+    "arms": {
+      "unmasked": {
+        "status": "UNIQUE_MODEL",
+        "matches": [
+          "unmasked"
+        ]
+      },
+      "mask-green": {
+        "status": "UNIQUE_MODEL",
+        "matches": [
+          "detector"
+        ]
+      },
+      "mask-wrong-channel": {
+        "status": "UNIQUE_MODEL",
+        "matches": [
+          "unmasked"
+        ]
+      },
+      "zero-detector": {
+        "status": "UNIQUE_MODEL",
+        "matches": [
+          "zero-detector-retained"
+        ]
+      },
+      "zero-reference": {
+        "status": "UNIQUE_MODEL",
+        "matches": [
+          "zero-reference-retained"
+        ]
+      }
+    }
+  }
+}

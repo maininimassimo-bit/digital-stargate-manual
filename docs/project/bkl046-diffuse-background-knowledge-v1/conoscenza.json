@@ -1,0 +1,108 @@
+{
+  "axis": "DIFFUSE_BACKGROUND",
+  "baseline": "1.171",
+  "coverage": {
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "requirements": 4920,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0,
+    "scientificFamiliesOpen": 7
+  },
+  "distribution": {
+    "completeTransferVerified": false,
+    "ownerDecisionNeeded": "Approved destination and distribution perimeter for mixed-distribution full knowledge bundle"
+  },
+  "finalKnowledgeAccepted": false,
+  "inputSHA256": {
+    "conoscenza-v1171": "926fbbf18b1c9ea49c3a1dd3d80f8ae80a31a978b74889fdec9d7ee0b8197da8",
+    "differenziale": "03814858228663afd612862f92931cfffa94c2b4303f0b9b39ecab2118bd99c9",
+    "identificabilita": "3e802109cb197c89470ee7f7ed2577a17a9a543abe559eec3c0906ca6d085804",
+    "maschere": "df638614160189a166732bbfa0b51be2059cd3a2ef067b835eb401f38f0efe7d",
+    "precondizioni-native": "9ac17afe021ff17ae037f40d7b61b53bea0a40adf775a7815474e706a8604958",
+    "rendiconto-v74": "4eb7a3c8ca22cd8fea89fb5c736ad99dced5ea08a6497c374f1d50ccc79fd1ad",
+    "riferimenti-simulati": "dc8082b08d3b09d53f87e5dbd363e2350d5e44af6db73a75b2e35ff71a94c115"
+  },
+  "milestone": "BKL-046",
+  "nativeExecutionsAdded": 0,
+  "nativeReadback": {
+    "observationUtc": "2026-11-25T21:55:21.8859468+00:00",
+    "openAtObservation": [
+      "Approved independent ARB receipt for the exact subject",
+      "Approved independent RQ receipt bound to that ARB receipt",
+      "Managed enrollment in a Windows-protected operational installation with actual role keys",
+      "Runtime admission from the canonical coordinator"
+    ],
+    "subjectSHA256": "3ad86ab652dbe80b08fc6b939dd2b10fb3038563784598f08c10ada3a545b072"
+  },
+  "results": {
+    "broadMask": {
+      "blindEvaluated": 78,
+      "blindPassing": 0,
+      "cases": 81,
+      "truthMaskEvaluated": 0
+    },
+    "freeQuadraticWithoutAnchors": {
+      "observablePolynomialModes": 0
+    },
+    "idealEqualPrecisionReferences": {
+      "distributedWorstGain": 24.0894748,
+      "lineWorstGain": 731.7078155,
+      "simulated": true
+    },
+    "matchedCommonInjectionAfterAlignment": {
+      "cases": 30,
+      "maximumRelativeL2": 1.5852512365107584e-13
+    },
+    "relativeCorrection": {
+      "pairs": 5,
+      "passingIndices": {
+        "3": [
+          9,
+          19,
+          29,
+          38
+        ],
+        "6": [
+          19,
+          29,
+          38
+        ]
+      },
+      "reference": "HeartNebula/lights/IMG_8491.CR2"
+    },
+    "targetOnly": {
+      "apertureFluxLossFractionRange": [
+        0.5018040448535441,
+        0.9035827510908899
+      ],
+      "cases": 30,
+      "passing": 0
+    }
+  },
+  "schema": "BKL046_DIFFUSE_KNOWLEDGE_ADDENDUM_V1",
+  "scientificClosuresAdded": 0,
+  "status": "PARTIAL_EVIDENCE_AXIS_OPEN",
+  "workflowRules": [
+    {
+      "condition": "Freeze the affine method before testing independent acquisitions. Validate overlap, registration, photometric scale and held-out residuals.",
+      "disposition": "DIAGNOSTIC_ONLY",
+      "intent": "match_additive_level_relative_to_reference"
+    },
+    {
+      "condition": "Require an independent signal extent or independently measured background with enough spatial support and a verified photometric error bound.",
+      "disposition": "REJECT_TESTED_MODELS_FOR_THIS_INTENT",
+      "intent": "preserve_extended_target_only_signal"
+    },
+    {
+      "condition": "Validate real background-only measurements, their spatial coverage and propagated uncertainty on disjoint acquisitions.",
+      "disposition": "ABSTAIN_WITHOUT_INDEPENDENT_ANCHORS",
+      "intent": "estimate_absolute_sky"
+    },
+    {
+      "condition": "Use approved exact native process versions, parameters, independent references and quantitative acceptance tests.",
+      "disposition": "PENDING_NATIVE_AND_SCIENTIFIC_VALIDATION",
+      "intent": "apply_native_PIXINSIGHT_ABE_OR_DBE_semantics"
+    }
+  ]
+}

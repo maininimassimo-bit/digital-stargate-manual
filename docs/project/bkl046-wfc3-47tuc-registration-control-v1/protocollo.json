@@ -1,0 +1,16 @@
+{
+  "schema": "BKL046_47TUC_LEAVE_STAR_OUT_REGISTRATION_V1",
+  "sourceArchive": "e53e4b2c715f81eaf5a865f6ae9e263461ab610cd3c554efad2d3949ce2e6847",
+  "sourceReport": "7b0ff956b68368f400cc3452208a7944edbf9d6ba101c71fb3783579057d4afe",
+  "sourceProgram": "28edbe42674e436266e3927324fdebcd4e069491e255d10fea3a2587d63d709c",
+  "sourceProtocol": "3e7df34612344d0c3b851191724b6d258c1c99c319b635c1c5e50af9477175e9",
+  "sourceAcquisition": "3d6bf1d72f4966fbcdf8620b44294cca7815c9ce764158719cd82c9bbf2dbea7",
+  "methods": [
+    "originalWCS",
+    "medianShift",
+    "affineResidual"
+  ],
+  "maxAffineCondition": 100,
+  "minFitStars": 6,
+  "scope": "Use only 23 stars already admitted in 47 Tuc. For each target omit its own centroid from both shift and affine fits. Fit separate models for each non-reference band and chip and reapply the original isolation, DQ, centering, sky, and radial photometry. Report residual to the archived integer peak before local recentering and repeat changes and EE comparison. No new stars are introduced; geometry evidence is confined to the same field and exposures."
+}

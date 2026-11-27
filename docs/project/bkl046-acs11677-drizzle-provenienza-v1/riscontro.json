@@ -1,0 +1,96 @@
+{
+  "downloadReceiptSha256": "4c8c225391e9ff8fe879eea34d42dc35e4c207779e65fbaa2fa86f1e5d5dfbb8",
+  "downloadedSha256": {
+    "jb6v01010_drc.fits.prefix": "156866aaa417b20cda5263a8a2806aba6d784e0222a71e538c9b94c67ab76c72",
+    "jb6v01010_drz.fits.prefix": "10fcfe85a52b7e6b3f0913c2c9a433d909db64c84e5d4e57016b59101a8ddc66",
+    "jb6v01010_trl.fits": "b39d93ff19af1b6de4e9cc37e2759400d44fee37dcde66f85413faeceef97c6d"
+  },
+  "finalRunPair": [
+    {
+      "drizCrFinished": true,
+      "input": "jb6v01010_pipeline_flt_asn.fits",
+      "line": 7767,
+      "parameters": {
+        "driz_cr": "True",
+        "driz_cr_corr": "False",
+        "driz_cr_grow": "1",
+        "driz_cr_scale": "1.2 0.7",
+        "driz_cr_snr": "3.5 3.0",
+        "mdriztab": "True",
+        "resetbits": "4096"
+      },
+      "referenceRow": 4,
+      "version": "3.11.0"
+    },
+    {
+      "drizCrFinished": true,
+      "input": "jb6v01010_pipeline_flc_asn.fits",
+      "line": 8156,
+      "parameters": {
+        "driz_cr": "True",
+        "driz_cr_corr": "False",
+        "driz_cr_grow": "1",
+        "driz_cr_scale": "1.2 0.7",
+        "driz_cr_snr": "3.5 3.0",
+        "mdriztab": "True",
+        "resetbits": "4096"
+      },
+      "referenceRow": 4,
+      "version": "3.11.0"
+    }
+  ],
+  "individualCosmicRejectionVerified": false,
+  "mdriztabFitsRow4": {
+    "drizCr": true,
+    "filter": "ANY",
+    "numberOfImages": 6,
+    "scale": "1.2 0.7",
+    "snr": "3.5 3.0"
+  },
+  "nativeExecutions": 0,
+  "pipelineReproductionPerformed": false,
+  "productPrimaryHeaderPrefixes": {
+    "flc": {
+      "completeFitsHeaderRead": false,
+      "inputs": [
+        "jb6v01dfq_flc.fits[sci,1]",
+        "jb6v01dfq_flc.fits[sci,2]",
+        "jb6v01diq_flc.fits[sci,1]",
+        "jb6v01diq_flc.fits[sci,2]",
+        "jb6v01dkq_flc.fits[sci,1]",
+        "jb6v01dkq_flc.fits[sci,2]",
+        "jb6v01e0q_flc.fits[sci,1]",
+        "jb6v01e0q_flc.fits[sci,2]",
+        "jb6v01e5q_flc.fits[sci,1]",
+        "jb6v01e5q_flc.fits[sci,2]",
+        "jb6v01ekq_flc.fits[sci,1]",
+        "jb6v01ekq_flc.fits[sci,2]"
+      ],
+      "mdriztab": "jref$37g1550cj_mdz.fits",
+      "parametersLog": "jb6v01010.tra"
+    },
+    "flt": {
+      "completeFitsHeaderRead": false,
+      "inputs": [
+        "jb6v01dfq_flt.fits[sci,1]",
+        "jb6v01dfq_flt.fits[sci,2]",
+        "jb6v01diq_flt.fits[sci,1]",
+        "jb6v01diq_flt.fits[sci,2]",
+        "jb6v01dkq_flt.fits[sci,1]",
+        "jb6v01dkq_flt.fits[sci,2]",
+        "jb6v01e0q_flt.fits[sci,1]",
+        "jb6v01e0q_flt.fits[sci,2]",
+        "jb6v01e5q_flt.fits[sci,1]",
+        "jb6v01e5q_flt.fits[sci,2]",
+        "jb6v01ekq_flt.fits[sci,1]",
+        "jb6v01ekq_flt.fits[sci,2]"
+      ],
+      "mdriztab": "jref$37g1550cj_mdz.fits",
+      "parametersLog": "jb6v01010.tra"
+    }
+  },
+  "protocol": "BKL046_ACS11677_DRIZZLE_PROVENANCE_V1",
+  "scientificClosures": 0,
+  "tableSha256": "f77cd17cc3101edb30755611df6604a99eee4dc55fed61112815e7c91606072b",
+  "trackedRuns": 10
+}

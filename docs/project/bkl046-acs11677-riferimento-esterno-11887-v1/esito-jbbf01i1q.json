@@ -1,0 +1,84 @@
+{
+  "coordinateFrames": {
+    "source": {
+      "1": "<ICRS Frame>",
+      "2": "<ICRS Frame>"
+    },
+    "target": {
+      "1": "<ICRS Frame>",
+      "2": "<ICRS Frame>"
+    }
+  },
+  "fitsSha256": "8cfbd751b14fcdc7ef4752cb11f6b76ba3d09725ea53abfcc1063403e2307975",
+  "fluxMeasured": false,
+  "geometricallyQualified": 0,
+  "geometry": {
+    "1->1": {
+      "belongs": 0,
+      "matched": 0,
+      "passed": false,
+      "rejected": {},
+      "selectedSourceSeeds": 4096,
+      "status": "NO_MATCHED_ANCHORS",
+      "usableSourceSeeds": 226
+    },
+    "1->2": {
+      "belongs": 219,
+      "matched": 0,
+      "passed": false,
+      "rejected": {
+        "OFF_CENTER_PEAK": 1,
+        "QUALITY": 148,
+        "SIGNAL": 70
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "NO_MATCHED_ANCHORS",
+      "usableSourceSeeds": 226
+    },
+    "2->1": {
+      "belongs": 228,
+      "matched": 0,
+      "passed": false,
+      "rejected": {
+        "OFF_CENTER_PEAK": 2,
+        "QUALITY": 136,
+        "SIGNAL": 90
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "NO_MATCHED_ANCHORS",
+      "usableSourceSeeds": 243
+    },
+    "2->2": {
+      "belongs": 1,
+      "matched": 0,
+      "passed": false,
+      "rejected": {
+        "SIGNAL": 1
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "NO_MATCHED_ANCHORS",
+      "usableSourceSeeds": 243
+    }
+  },
+  "qualificationDiagnosticSha256": "125b5acff550576014c169f461828c06f6527fd7320f10d394738a0f5c04461d",
+  "qualificationPlanSha256": "a1f8b27def11c23066708f09aea13af80fe079772d91281a75a94df1d5abaedd",
+  "referenceCandidates": 0,
+  "scientificClosure": false,
+  "states": {
+    "PEAK_SUPPORT_OR_RELOCATION": 284,
+    "SHORT_FULL_WELL": 6,
+    "SHORT_OTHER_DQ": 26,
+    "no_unique_footprint": 24
+  },
+  "supportedProjection": 316,
+  "target": {
+    "candidateCenters": 335,
+    "deltaDays": -176.92133432259288,
+    "obsid": 24091369,
+    "proposal": "11887",
+    "root": "jbbf01i1q",
+    "seconds": 30,
+    "sourceChip1": 208,
+    "sourceChip2": 127
+  }
+}

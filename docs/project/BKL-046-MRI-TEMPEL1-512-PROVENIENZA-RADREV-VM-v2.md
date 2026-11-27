@@ -1,0 +1,8 @@
+# BKL-046 · Tempel 1 MRI, provenienza RADREV e sensibilità alla giunzione
+
+Per tutte le 60 pose MRI da 512 × 512 della tabella scientifica, l'indice cumulativo RADREV v2 contiene una sola corrispondenza per esposizione e immagine, con filtro e istante iniziale coincidenti. Tutti gli identificativi appartengono al volume DIMV9P_3101. Il PDS indica RADREV v2 come origine della fotometria pubblicata e cataloga v2 come sostituita. I controlli di accesso da DSG-Shared non hanno restituito byte FITS, compreso il controllo v3 sullo stesso archivio. La verifica riguarda quindi l'indice. [Profilo PDS RADREV v2](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-MRI-3%2F4-9P-ENCOUNTER-V2.0) · [Profilo PDS della fotometria](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=DIF-C-MRI-5-TEMPEL1-PHOTOMETRY-V1.0)
+
+Sulle misure già acquisite v3, con lo stesso fondo a due lati, la correzione della giunzione aumenta di 1,355 punti percentuali la mediana dello scostamento assoluto appaiato per le 13 aperture da 7 pixel che attraversano la giunzione. Per le aperture da 15 pixel il risultato è misto, con 16 miglioramenti e 18 peggioramenti. Gli scostamenti si riferiscono ai rapporti normalizzati usando il diametro 30. La normalizzazione può cambiare anche quando l'apertura più piccola non attraversa la giunzione.
+
+Le due riletture dell'incrocio e dell'analisi appaiata coincidono. Per separare pipeline, giunzione e metodo fotometrico servono i FITS RADREV v2 verificabili delle stesse pose. Validazione assoluta, prova nativa e chiusure scientifiche restano aperte.
+SHA-256 archivio H: 3122ce42db0073cf2966d771c0f333f7a81f202d8433b00d278ddf5d35564656.

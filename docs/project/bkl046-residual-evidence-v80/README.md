@@ -1,0 +1,9 @@
+# BKL-046 · Rendiconto v80 e supplemento alla conoscenza v1.171
+
+Questo incremento riconcilia sei riscontri collegati a quattro assi aperti. Le copie coincidono con i rapporti ai rispettivi commit GitHub e con i membri degli archivi su H:. La replica conserva i 25 assi e i 19 criteri Owner della v79.
+
+- **CFA_DITHER_DRIZZLE/3.** Sul soggetto Stream34 v11, il collaudo Node rilegge gli otto input fissati e riproduce 13 guasti e cinque rifiuti preliminari. Il codice conserva l'oggetto dopo il guasto e rifiuta il riuso del contenitore. Le semantiche PJSR e la memoria nativa restano da osservare. Nessuna ammissione è stata richiesta.
+- **DIFFUSE_BACKGROUND/2 e /3.** Le misure SHASSA su 192 celle mostrano il compromesso fra bassa emissione Hα e geometria del piano. La scelta per settore ha un fattore geometrico di 1,069 contro 0,873 dell'originale. Sui dark, con la media per cella, il P95 dell'errore di forma del profilo diffuso sintetico è 7,60% con la scelta per settore e 7,42% con l'originale. Il controllo nei quattro archivi originali verifica 60 FITS e identifica zero pose di cielo ottico separate e coeve.
+- **DIFFUSE_BACKGROUND/1, /2 e /3.** Su 27 confronti reali con 177 celle comuni di verifica, il piano per settore ha residui non superiori all'originale su entrambi gli indicatori in 18 confronti. L'errore mediano di forma sul profilo diffuso iniettato sale dal 22,4% al 59,6%. Nessuna disposizione rispetta la tolleranza congiunta per quel profilo. Il confronto usa pose e riferimenti riutilizzati.
+
+Restano aperte sette famiglie scientifiche, 25 assi e 19 criteri Owner. Servono ancora riferimenti ottici coevi o una nuova acquisizione indipendente, le revisioni e l'ammissione prima delle prove native, e una decisione sul perimetro di distribuzione per la consegna integrale della conoscenza.

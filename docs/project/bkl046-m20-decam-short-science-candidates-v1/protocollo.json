@@ -1,0 +1,96 @@
+{
+  "schema": "BKL046_M20_SHORT_SCIENCE_TRANSFER_PROTOCOL_V1",
+  "catalogSha256": "20fe69955300f927b5a0de524759ba30bf13abcbbbce4b7e6f69edd2952ac042",
+  "sourceArchiveSha256": "91536c7dfc7b35103b8208b48e802396d9c7d28a05b24ea336c48a92be46fdaf",
+  "repeatabilityArchiveSha256": "c33f5100e51994749034f9176749f29a6e977c65f3caf3a84e7cca49c0de9f68",
+  "repeatabilityProgram": "1dd249d6f927de61abe97fa3820c0771a582b405734b17938685806ff3e94dcc",
+  "targetRa": 270.675,
+  "targetDec": -22.971666667,
+  "inputs": [
+    {
+      "image": "dec050439.fits.fz",
+      "cropRoot": "new",
+      "crop": "dec050439.fits",
+      "cropSha256": "9b3985a855aa173adb85b49b4db9cc2c7d7af6277cc85aa98aa65474e3aee999",
+      "fullRoot": "new",
+      "full": "wide-dec050439.fits",
+      "fullSha256": "93ad8d1cce5529d3ed9e4d04441502c1f49e86dfce4ef77a10934b5990762cc6",
+      "wideUrl": "https://datalab.noirlab.edu/svc/cutout?col=&siaRef=dec050439.fits.fz&extn=28&POS=270.675,-22.971666667&SIZE=0.5,0.5"
+    },
+    {
+      "image": "c4d_140606_052442_ori.fits.fz",
+      "cropRoot": "new",
+      "crop": "c4d_140606_052442_ori.fits",
+      "cropSha256": "b33c2c6a6b0f3e0bbcaa173f4994c5b4e7d4108693c577cea960b6807035afbf",
+      "fullRoot": "new",
+      "full": "wide-c4d_140606_052442_ori.fits",
+      "fullSha256": "a85526d57fce11d4f2b76fe8620d0ceada979a61c96d9d4e5f7227d73bacbbea",
+      "wideUrl": "https://datalab.noirlab.edu/svc/cutout?col=&siaRef=c4d_140606_052442_ori.fits.fz&extn=16&POS=270.675,-22.971666667&SIZE=0.5,0.5"
+    },
+    {
+      "image": "c4d_140606_083605_ori.fits.fz",
+      "cropRoot": "new",
+      "crop": "c4d_140606_083605_ori.fits",
+      "cropSha256": "84888afb0209546ceb8aee2b04bd69dc222d65042a6444045bbceecc7f7f2ea1",
+      "fullRoot": "new",
+      "full": "wide-c4d_140606_083605_ori.fits",
+      "fullSha256": "e0a5e687b6f88cb83144eba6b55cb0352b98d94498c87518ecaa8c6511028d36",
+      "wideUrl": "https://datalab.noirlab.edu/svc/cutout?col=&siaRef=c4d_140606_083605_ori.fits.fz&extn=16&POS=270.675,-22.971666667&SIZE=0.5,0.5"
+    },
+    {
+      "image": "c4d_140731_001457_ori.fits.fz",
+      "cropRoot": "original",
+      "crop": "M20-c4d_140731_001457_ori.fits",
+      "cropSha256": "d660d3e2c98c969809f92867811c7622804b8c5c0cffb6ecc68fb5c2e0c5135a",
+      "fullRoot": "prior",
+      "full": "wide-M20-c4d_140731_001457_ori.fits",
+      "fullSha256": "1a283a295e386550dccd9ce42b2fe1a67e54dadb4e1c57753e83281b890070cd"
+    },
+    {
+      "image": "c4d_140731_002553_ori.fits.fz",
+      "cropRoot": "original",
+      "crop": "M20-c4d_140731_002553_ori.fits",
+      "cropSha256": "c9f4446c82357fb3c9eb134d75d94cf974237be451333aae1160d085abb5ae5f",
+      "fullRoot": "prior",
+      "full": "wide-M20-c4d_140731_002553_ori.fits",
+      "fullSha256": "2689e330b31e1f526b59a0ada6e3fab23a1fa4bfa21b55dfdee13202bc5af7b7"
+    }
+  ],
+  "photometry": {
+    "schema": "BKL046_M20_DECAM_R_REPEATABILITY_PROTOCOL_V1",
+    "detectorRequired": "S16",
+    "controlFocusDetector": "FN1",
+    "peakBackgroundSnr": 12,
+    "peakStep": 5,
+    "margin": 30,
+    "searchPx": 16,
+    "centroidPx": 4,
+    "skyAnnulusPx": [
+      9,
+      13
+    ],
+    "aperturesPx": [
+      3,
+      5,
+      7
+    ],
+    "splitTilePx": 96,
+    "maxHoldoutOffsetPx": 1.25,
+    "minCenterSeparationPx": 18
+  },
+  "pairs": [
+    [
+      "dec050439.fits.fz",
+      "c4d_140731_001457_ori.fits.fz"
+    ],
+    [
+      "dec050439.fits.fz",
+      "c4d_140731_002553_ori.fits.fz"
+    ],
+    [
+      "c4d_140606_052442_ori.fits.fz",
+      "c4d_140606_083605_ori.fits.fz"
+    ]
+  ],
+  "scope": "Use science-chip acquisition data only. Compare the 30 s candidate against two 180 s data from a different epoch, plus the same-night 50 s pair. Transfer the existing 16 pixel search and checkerboard controls before reading fit results. No flat/bias correction, external flux, or saturation recovery validation."
+}

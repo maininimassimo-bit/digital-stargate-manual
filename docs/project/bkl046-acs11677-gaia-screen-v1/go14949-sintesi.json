@@ -1,0 +1,148 @@
+{
+  "planSha256": "76ffdf7138f75461886105ff0cde07ac76899c98500dbc627c85f6289f912a3d",
+  "scientificClosure": false,
+  "targets": [
+    {
+      "coverage": 287,
+      "eligibleUnsaturated": 0,
+      "fitsSha256": "0dd6c5f7da9e8ace4b989d513a196e85458f4195394127b50ffc43a79aebc9eb",
+      "fluxMeasured": false,
+      "geometry": {
+        "1->1": {
+          "belongs": 110,
+          "fitStars": 16,
+          "fitTiles": 7,
+          "heldoutStars": 3,
+          "heldoutTiles": 3,
+          "matched": 19,
+          "models": {},
+          "passed": false,
+          "rejected": {
+            "LARGE_SHIFT": 3,
+            "QUALITY": 88
+          },
+          "status": "INSUFFICIENT_STARS"
+        },
+        "1->2": {
+          "belongs": 87,
+          "fitStars": 4,
+          "fitTiles": 4,
+          "heldoutStars": 9,
+          "heldoutTiles": 7,
+          "matched": 13,
+          "models": {},
+          "passed": false,
+          "rejected": {
+            "QUALITY": 74
+          },
+          "status": "INSUFFICIENT_STARS"
+        },
+        "2->1": {
+          "belongs": 137,
+          "fitStars": 10,
+          "fitTiles": 6,
+          "heldoutStars": 13,
+          "heldoutTiles": 8,
+          "matched": 23,
+          "models": {},
+          "passed": false,
+          "rejected": {
+            "LARGE_SHIFT": 7,
+            "QUALITY": 107
+          },
+          "status": "INSUFFICIENT_STARS"
+        },
+        "2->2": {
+          "belongs": 57,
+          "fitStars": 7,
+          "fitTiles": 4,
+          "heldoutStars": 5,
+          "heldoutTiles": 2,
+          "matched": 12,
+          "models": {},
+          "passed": false,
+          "rejected": {
+            "LARGE_SHIFT": 2,
+            "QUALITY": 43
+          },
+          "status": "INSUFFICIENT_STARS"
+        }
+      },
+      "planSha256": "76ffdf7138f75461886105ff0cde07ac76899c98500dbc627c85f6289f912a3d",
+      "root": "jdg302ctq",
+      "scientificClosure": false,
+      "screening": {
+        "PEAK_SUPPORT_OR_RELOCATION": 96,
+        "SHORT_FULL_WELL": 10,
+        "SHORT_OTHER_DQ": 181,
+        "no_unique_footprint": 53
+      },
+      "wcs": "IDC_4bb1536mj-FIT_IMG_GAIAeDR3"
+    },
+    {
+      "coverage": 286,
+      "eligibleUnsaturated": 0,
+      "fitsSha256": "d5cf84619bd408c2df1bf034ca8f2d82e6f9321095e9f377413086837076bfdd",
+      "fluxMeasured": false,
+      "geometry": {
+        "1->1": {
+          "belongs": 110,
+          "fitStars": 1,
+          "fitTiles": 1,
+          "heldoutStars": 0,
+          "heldoutTiles": 0,
+          "matched": 1,
+          "models": {},
+          "passed": false,
+          "rejected": {
+            "QUALITY": 88,
+            "SIGNAL": 21
+          },
+          "status": "INSUFFICIENT_STARS"
+        },
+        "1->2": {
+          "belongs": 88,
+          "matched": 0,
+          "passed": false,
+          "rejected": {
+            "LARGE_SHIFT": 1,
+            "OFF_CENTER_PEAK": 1,
+            "QUALITY": 66,
+            "SIGNAL": 20
+          },
+          "status": "NO_MATCHED_ANCHORS"
+        },
+        "2->1": {
+          "belongs": 136,
+          "matched": 0,
+          "passed": false,
+          "rejected": {
+            "OFF_CENTER_PEAK": 2,
+            "QUALITY": 104,
+            "SIGNAL": 30
+          },
+          "status": "NO_MATCHED_ANCHORS"
+        },
+        "2->2": {
+          "belongs": 57,
+          "matched": 0,
+          "passed": false,
+          "rejected": {
+            "QUALITY": 39,
+            "SIGNAL": 18
+          },
+          "status": "NO_MATCHED_ANCHORS"
+        }
+      },
+      "planSha256": "76ffdf7138f75461886105ff0cde07ac76899c98500dbc627c85f6289f912a3d",
+      "root": "jdg302cvq",
+      "scientificClosure": false,
+      "screening": {
+        "PEAK_SUPPORT_OR_RELOCATION": 278,
+        "SHORT_OTHER_DQ": 8,
+        "no_unique_footprint": 54
+      },
+      "wcs": "IDC_4bb1536mj-FIT_IMG_GSC242"
+    }
+  ]
+}

@@ -1,0 +1,857 @@
+{
+  "association": "jb6v01010",
+  "astropyVersion": "7.2.0",
+  "drizzleExecuted": false,
+  "exposures": [
+    {
+      "context": "hst_1328.pmap",
+      "file": "jb6v01dfq_flc.fits",
+      "science": [
+        {
+          "chip": 2,
+          "lookups": [
+            {
+              "arraySha256": "bdc2abb3d7eeaf3b4889a4b0b21c8a60b7a777a2444a127177962d573c960f27",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "2595d89dca361008362f39fb36890d2cb5f42276589c2311a9ad1e2802b12e1e",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            },
+            {
+              "arraySha256": "4c2b802d379352d0aa92ed81c108f6536dba3c2145c35335f39e98bb7901aece",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "643449bcedd1ba35ec47597563281481dff23b8c58f9a86d90e15b151d44f656",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            }
+          ],
+          "sipOrder": 5,
+          "version": 1,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        },
+        {
+          "chip": 1,
+          "lookups": [
+            {
+              "arraySha256": "52102d571eaa2452e6dc016db871791f1fa89f2b3f915c6ef76fc7a2ab16caba",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "c86ad7d8e9c9784c61dee7ac374ef19d702d797ce38995d4aba4b5c6f77b909d",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            },
+            {
+              "arraySha256": "ddb3bace44d3fa7bf030e4aaa6bb1b070cf8bb5e4914f0ad6e4a8dd0d6f3a73f",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "2db006147e94af0e0d5fa496061862ce4d3d45bab0fff00bbce93194de7e5eb8",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            }
+          ],
+          "sipOrder": 5,
+          "version": 2,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        }
+      ],
+      "sha256": "a330f28eca9e64cba6c8f47e6607d67fbaeb82f2c6165d254b74b82f6be7d938",
+      "updateWcsVersion": "1.7.7"
+    },
+    {
+      "context": "hst_1328.pmap",
+      "file": "jb6v01diq_flc.fits",
+      "science": [
+        {
+          "chip": 2,
+          "lookups": [
+            {
+              "arraySha256": "bdc2abb3d7eeaf3b4889a4b0b21c8a60b7a777a2444a127177962d573c960f27",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "2595d89dca361008362f39fb36890d2cb5f42276589c2311a9ad1e2802b12e1e",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            },
+            {
+              "arraySha256": "4c2b802d379352d0aa92ed81c108f6536dba3c2145c35335f39e98bb7901aece",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "643449bcedd1ba35ec47597563281481dff23b8c58f9a86d90e15b151d44f656",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            }
+          ],
+          "sipOrder": 5,
+          "version": 1,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        },
+        {
+          "chip": 1,
+          "lookups": [
+            {
+              "arraySha256": "52102d571eaa2452e6dc016db871791f1fa89f2b3f915c6ef76fc7a2ab16caba",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "c86ad7d8e9c9784c61dee7ac374ef19d702d797ce38995d4aba4b5c6f77b909d",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            },
+            {
+              "arraySha256": "ddb3bace44d3fa7bf030e4aaa6bb1b070cf8bb5e4914f0ad6e4a8dd0d6f3a73f",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "2db006147e94af0e0d5fa496061862ce4d3d45bab0fff00bbce93194de7e5eb8",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            }
+          ],
+          "sipOrder": 5,
+          "version": 2,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        }
+      ],
+      "sha256": "0a50bd77843bc586fa47d3459400bfdf4fda1db2920ab55fa78bbd8bfe64c606",
+      "updateWcsVersion": "1.7.7"
+    },
+    {
+      "context": "hst_1328.pmap",
+      "file": "jb6v01dkq_flc.fits",
+      "science": [
+        {
+          "chip": 2,
+          "lookups": [
+            {
+              "arraySha256": "bdc2abb3d7eeaf3b4889a4b0b21c8a60b7a777a2444a127177962d573c960f27",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "2595d89dca361008362f39fb36890d2cb5f42276589c2311a9ad1e2802b12e1e",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            },
+            {
+              "arraySha256": "4c2b802d379352d0aa92ed81c108f6536dba3c2145c35335f39e98bb7901aece",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "643449bcedd1ba35ec47597563281481dff23b8c58f9a86d90e15b151d44f656",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            }
+          ],
+          "sipOrder": 5,
+          "version": 1,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        },
+        {
+          "chip": 1,
+          "lookups": [
+            {
+              "arraySha256": "52102d571eaa2452e6dc016db871791f1fa89f2b3f915c6ef76fc7a2ab16caba",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "c86ad7d8e9c9784c61dee7ac374ef19d702d797ce38995d4aba4b5c6f77b909d",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            },
+            {
+              "arraySha256": "ddb3bace44d3fa7bf030e4aaa6bb1b070cf8bb5e4914f0ad6e4a8dd0d6f3a73f",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "2db006147e94af0e0d5fa496061862ce4d3d45bab0fff00bbce93194de7e5eb8",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            }
+          ],
+          "sipOrder": 5,
+          "version": 2,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        }
+      ],
+      "sha256": "1b940c92d6e4a55c78594126b8879a529a36c381132c9438888c48eb50a19068",
+      "updateWcsVersion": "1.7.7"
+    },
+    {
+      "context": "hst_1328.pmap",
+      "file": "jb6v01e0q_flc.fits",
+      "science": [
+        {
+          "chip": 2,
+          "lookups": [
+            {
+              "arraySha256": "bdc2abb3d7eeaf3b4889a4b0b21c8a60b7a777a2444a127177962d573c960f27",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "2595d89dca361008362f39fb36890d2cb5f42276589c2311a9ad1e2802b12e1e",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            },
+            {
+              "arraySha256": "4c2b802d379352d0aa92ed81c108f6536dba3c2145c35335f39e98bb7901aece",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "643449bcedd1ba35ec47597563281481dff23b8c58f9a86d90e15b151d44f656",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            }
+          ],
+          "sipOrder": 5,
+          "version": 1,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        },
+        {
+          "chip": 1,
+          "lookups": [
+            {
+              "arraySha256": "52102d571eaa2452e6dc016db871791f1fa89f2b3f915c6ef76fc7a2ab16caba",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "c86ad7d8e9c9784c61dee7ac374ef19d702d797ce38995d4aba4b5c6f77b909d",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            },
+            {
+              "arraySha256": "ddb3bace44d3fa7bf030e4aaa6bb1b070cf8bb5e4914f0ad6e4a8dd0d6f3a73f",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "2db006147e94af0e0d5fa496061862ce4d3d45bab0fff00bbce93194de7e5eb8",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            }
+          ],
+          "sipOrder": 5,
+          "version": 2,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        }
+      ],
+      "sha256": "e6011691a50b2608a3cb91e5f9ceb0957aa4a17e46aa04f8e00bee30df5fdd4d",
+      "updateWcsVersion": "1.7.7"
+    },
+    {
+      "context": "hst_1328.pmap",
+      "file": "jb6v01e5q_flc.fits",
+      "science": [
+        {
+          "chip": 2,
+          "lookups": [
+            {
+              "arraySha256": "bdc2abb3d7eeaf3b4889a4b0b21c8a60b7a777a2444a127177962d573c960f27",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "2595d89dca361008362f39fb36890d2cb5f42276589c2311a9ad1e2802b12e1e",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            },
+            {
+              "arraySha256": "4c2b802d379352d0aa92ed81c108f6536dba3c2145c35335f39e98bb7901aece",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "643449bcedd1ba35ec47597563281481dff23b8c58f9a86d90e15b151d44f656",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            }
+          ],
+          "sipOrder": 5,
+          "version": 1,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        },
+        {
+          "chip": 1,
+          "lookups": [
+            {
+              "arraySha256": "52102d571eaa2452e6dc016db871791f1fa89f2b3f915c6ef76fc7a2ab16caba",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "c86ad7d8e9c9784c61dee7ac374ef19d702d797ce38995d4aba4b5c6f77b909d",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            },
+            {
+              "arraySha256": "ddb3bace44d3fa7bf030e4aaa6bb1b070cf8bb5e4914f0ad6e4a8dd0d6f3a73f",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "2db006147e94af0e0d5fa496061862ce4d3d45bab0fff00bbce93194de7e5eb8",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            }
+          ],
+          "sipOrder": 5,
+          "version": 2,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        }
+      ],
+      "sha256": "de2f1da705be9509d222f98cd68f9e6453b7ff439393b0c1da3b7002584743d1",
+      "updateWcsVersion": "1.7.7"
+    },
+    {
+      "context": "hst_1328.pmap",
+      "file": "jb6v01ekq_flc.fits",
+      "science": [
+        {
+          "chip": 2,
+          "lookups": [
+            {
+              "arraySha256": "bdc2abb3d7eeaf3b4889a4b0b21c8a60b7a777a2444a127177962d573c960f27",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "2595d89dca361008362f39fb36890d2cb5f42276589c2311a9ad1e2802b12e1e",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            },
+            {
+              "arraySha256": "4c2b802d379352d0aa92ed81c108f6536dba3c2145c35335f39e98bb7901aece",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 1,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 1
+            },
+            {
+              "arraySha256": "643449bcedd1ba35ec47597563281481dff23b8c58f9a86d90e15b151d44f656",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 2,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 2
+            }
+          ],
+          "sipOrder": 5,
+          "version": 1,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        },
+        {
+          "chip": 1,
+          "lookups": [
+            {
+              "arraySha256": "52102d571eaa2452e6dc016db871791f1fa89f2b3f915c6ef76fc7a2ab16caba",
+              "axis": 1,
+              "name": "D2IMARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "c86ad7d8e9c9784c61dee7ac374ef19d702d797ce38995d4aba4b5c6f77b909d",
+              "axis": 2,
+              "name": "D2IMARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            },
+            {
+              "arraySha256": "ddb3bace44d3fa7bf030e4aaa6bb1b070cf8bb5e4914f0ad6e4a8dd0d6f3a73f",
+              "axis": 1,
+              "name": "WCSDVARR",
+              "referenceHdu": 3,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 3
+            },
+            {
+              "arraySha256": "2db006147e94af0e0d5fa496061862ce4d3d45bab0fff00bbce93194de7e5eb8",
+              "axis": 2,
+              "name": "WCSDVARR",
+              "referenceHdu": 4,
+              "shape": [
+                32,
+                64
+              ],
+              "version": 4
+            }
+          ],
+          "sipOrder": 5,
+          "version": 2,
+          "wcs": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+        }
+      ],
+      "sha256": "1624ff222fd98cc6fadbef75dcbfe07a3d90c88e9e4526348d098a3a8f9221f5",
+      "updateWcsVersion": "1.7.7"
+    }
+  ],
+  "geometryQualifiedScope": "Header and lookup payload binding, without WCS regeneration or drizzle execution.",
+  "inputsManifestSha256": "cf50443b5e475e0337da90334176ed97e61f603dc27a5397ab24e74a3ad7c5cb",
+  "npolSourceSha256": "209b9cd52b76560c58c02a50797c07a804b5a75f306258c31c6ae6c33c3b0ce5",
+  "numpyVersion": "2.3.5",
+  "pixInsightStarted": false,
+  "previousMdriztabSha256": "f77cd17cc3101edb30755611df6604a99eee4dc55fed61112815e7c91606072b",
+  "references": {
+    "D2IMFILE": {
+      "filetype": "WFC D2I FILE",
+      "hdus": [
+        {
+          "axis": null,
+          "chip": null,
+          "name": "PRIMARY",
+          "version": 1
+        },
+        {
+          "axis": "DX",
+          "chip": 2,
+          "name": "DX",
+          "version": 1
+        },
+        {
+          "axis": "DY",
+          "chip": 2,
+          "name": "DY",
+          "version": 1
+        },
+        {
+          "axis": "DX",
+          "chip": 1,
+          "name": "DX",
+          "version": 2
+        },
+        {
+          "axis": "DY",
+          "chip": 1,
+          "name": "DY",
+          "version": 2
+        }
+      ],
+      "instrument": "ACS",
+      "name": "4bb15371j_d2i.fits",
+      "sha256": "bf1fabb9dc8027c81be0b0f164947cfef4404427f51a24691815a52703ec6240",
+      "size": 51840,
+      "url": "https://hst-crds.stsci.edu/unchecked_get/references/hst/4bb15371j_d2i.fits"
+    },
+    "DGEOFILE": {
+      "filetype": "DISTORTION CORRECTION",
+      "hdus": [
+        {
+          "axis": null,
+          "chip": null,
+          "name": "PRIMARY",
+          "version": 1
+        },
+        {
+          "axis": "DX",
+          "chip": 2,
+          "name": "DX",
+          "version": 1
+        },
+        {
+          "axis": "DY",
+          "chip": 2,
+          "name": "DY",
+          "version": 1
+        },
+        {
+          "axis": "DX",
+          "chip": 1,
+          "name": "DX",
+          "version": 2
+        },
+        {
+          "axis": "DY",
+          "chip": 1,
+          "name": "DY",
+          "version": 2
+        }
+      ],
+      "instrument": "ACS",
+      "name": "qbu16424j_dxy.fits",
+      "sha256": "1da5059fb1607fb83cbd676e88bc9bdbb948ebc5c399697e957ee914912b9397",
+      "size": 134308800,
+      "url": "https://hst-crds.stsci.edu/unchecked_get/references/hst/qbu16424j_dxy.fits"
+    },
+    "IDCTAB": {
+      "filetype": "DISTORTION COEFFICIENTS",
+      "hdus": [
+        {
+          "axis": null,
+          "chip": null,
+          "name": "PRIMARY",
+          "version": 1
+        },
+        {
+          "axis": null,
+          "chip": null,
+          "name": "",
+          "version": 1
+        }
+      ],
+      "instrument": "ACS",
+      "name": "4bb1536cj_idc.fits",
+      "sha256": "9bef1901fdecff5c797e8b277870e16800a79b8f7703a06d23835dcdfbcf6ccf",
+      "size": 285120,
+      "url": "https://hst-crds.stsci.edu/unchecked_get/references/hst/4bb1536cj_idc.fits"
+    },
+    "MDRIZTAB": {
+      "filetype": "MULTIDRIZZLE PARAMETERS",
+      "hdus": [
+        {
+          "axis": null,
+          "chip": null,
+          "name": "PRIMARY",
+          "version": 1
+        },
+        {
+          "axis": null,
+          "chip": null,
+          "name": "",
+          "version": 1
+        }
+      ],
+      "instrument": "ACS",
+      "name": "37g1550cj_mdz.fits",
+      "sha256": "f77cd17cc3101edb30755611df6604a99eee4dc55fed61112815e7c91606072b",
+      "size": 247680,
+      "url": "https://hst-crds.stsci.edu/unchecked_get/references/hst/37g1550cj_mdz.fits"
+    },
+    "NPOLFILE": {
+      "filetype": "DXY GRID",
+      "hdus": [
+        {
+          "axis": null,
+          "chip": null,
+          "name": "PRIMARY",
+          "version": 1
+        },
+        {
+          "axis": "DX",
+          "chip": 2,
+          "name": "DX",
+          "version": 1
+        },
+        {
+          "axis": "DY",
+          "chip": 2,
+          "name": "DY",
+          "version": 1
+        },
+        {
+          "axis": "DX",
+          "chip": 1,
+          "name": "DX",
+          "version": 2
+        },
+        {
+          "axis": "DY",
+          "chip": 1,
+          "name": "DY",
+          "version": 2
+        }
+      ],
+      "instrument": "ACS",
+      "name": "4bb1536ej_npl.fits",
+      "sha256": "0f31527fe3092a6c59abdfd8ef415c1181cdb7c9b4ff3f06b41399de4639a538",
+      "size": 51840,
+      "url": "https://hst-crds.stsci.edu/unchecked_get/references/hst/4bb1536ej_npl.fits"
+    }
+  },
+  "stwcsVersion": "1.7.7",
+  "trailerFinalFlcStartLine": 8156,
+  "trailerSha256": "b39d93ff19af1b6de4e9cc37e2759400d44fee37dcde66f85413faeceef97c6d",
+  "trailerUpdateWcs": false,
+  "trailerUpdateWcsLine": 8187,
+  "wheelSha256": "ba14d35cd581ca614a9e07d6c34d6958181ed96f118dfea8d361098b93deb90c"
+}

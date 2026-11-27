@@ -1,0 +1,107 @@
+{
+  "protocol": "BKL046_TV4_CLEAR1_APERTURE_TRANSFER_SUMMARY_V1",
+  "axis": "DIFFUSE_BACKGROUND/2",
+  "march02": {
+    "uniqueFits": 40,
+    "comparisons": 40,
+    "permutationsPerPair": 128,
+    "aperture16Adjacent": {
+      "aboveEnvelope": 11,
+      "belowEnvelope": 0,
+      "observedMedian": 1.1814537577132687,
+      "observedRange": [
+        0.9552370239407216,
+        1.9275851428826591
+      ],
+      "pairs": 20
+    },
+    "aperture16Separated": {
+      "aboveEnvelope": 11,
+      "belowEnvelope": 0,
+      "observedMedian": 1.1873030959114947,
+      "observedRange": [
+        1.0201875761269783,
+        1.8875313975383543
+      ],
+      "pairs": 20
+    }
+  },
+  "february27": {
+    "holdout23p5": {
+      "verifiedFits": 16,
+      "analyzedPairs": 0,
+      "excludedFrames": 15,
+      "designSha256": "8b3a88333b70c83123e181d57bf3bb8b50bac8f0f2a55f9ca16de8ff5c4f8edb"
+    },
+    "holdout4p5": {
+      "verifiedFits": 12,
+      "excludedAU": 6,
+      "excludedCZ": 0,
+      "CZAdjacent": {
+        "pairs": 3,
+        "summaries": {
+          "16": {
+            "aboveEnvelope": 3,
+            "medianRatio": 256.9879452702016
+          },
+          "2": {
+            "aboveEnvelope": 3,
+            "medianRatio": 4.00004404154052
+          },
+          "4": {
+            "aboveEnvelope": 3,
+            "medianRatio": 16.002965363758904
+          },
+          "8": {
+            "aboveEnvelope": 3,
+            "medianRatio": 64.05862773238846
+          }
+        }
+      },
+      "CZSeparated": {
+        "pairs": 3,
+        "summaries": {
+          "16": {
+            "aboveEnvelope": 3,
+            "medianRatio": 256.98792809407456
+          },
+          "2": {
+            "aboveEnvelope": 3,
+            "medianRatio": 4.000045564256478
+          },
+          "4": {
+            "aboveEnvelope": 3,
+            "medianRatio": 16.002972870258564
+          },
+          "8": {
+            "aboveEnvelope": 3,
+            "medianRatio": 64.05867309202472
+          }
+        }
+      },
+      "quadrantCenteredRange16": [
+        3.283162087919583,
+        11.738850364753315
+      ],
+      "designSha256": "872defac5a85669d48252a158b7589503dbbc235edc5d62e7d09e9965101040f"
+    }
+  },
+  "archives": {
+    "BKL046-TV4-CLEAR1-permutazioni-tutte-coppie-v1.zip": {
+      "archiveSha256": "34a5e3c14d4c5255a2766bf4c5c00f04fc8071f0574bee75cc2960b1307ed52d",
+      "reportSha256": "223b92cee647413e4e182e0bd570c2438423579a8435b279a65d7d1139365c33"
+    },
+    "BKL046-TV4-CLEAR1-replica-23ms-v1.zip": {
+      "archiveSha256": "0506199b67d8ece9fd16d43b22b19ec02c17883e5961899fe658d6f520f9880e",
+      "reportSha256": "7843ec6b40304097e3cd11acb0f9d8915e92b51d777f7226df5f63b9b8e896b6"
+    },
+    "BKL046-TV4-CLEAR1-replica-4p5ms-v1.zip": {
+      "archiveSha256": "ee6c0b76d527e4b23fe7c9efeb63b322940b101b16f45d8fb949f53be63dfaa1",
+      "reportSha256": "eda04b21f470db2338a9f00762ebcd9aa6c5f4c8d9cb7cd0743726844d41055e"
+    }
+  },
+  "sameFramesReusedAcrossPairingSchemes": true,
+  "instrumentGainQualified": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

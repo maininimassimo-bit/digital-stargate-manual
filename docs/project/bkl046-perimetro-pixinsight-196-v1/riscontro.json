@@ -1,0 +1,77 @@
+{
+  "schema": "BKL046_INSTALLED_SCRIPT_REQUIREMENT_DELTA_V1",
+  "requirementIndexSha256": "fd0f6ab787d776b7bfa9863ae613e6dae9a274c3f1da2ccd70a1fadb6d39fc12",
+  "indexedProcessIds": 125,
+  "scriptFilesScanned": 286,
+  "moduleStemsAbsentFromProcessIds": 35,
+  "constructorGlobalCalls": [
+    {
+      "processCandidate": "ExtendedSources",
+      "path": "src/scripts/PhotometricAnalysis/PhotometricAnalysisData.js",
+      "line": 1461,
+      "scriptSha256": "b9b710d28267d9a60258406c44893faacc81c557a7f149b0b5642c7d1e9dec47",
+      "scriptInIndex": false,
+      "module": "ExtendedSources-pxm.dll",
+      "moduleSha256": "f62e2004f0bfd4e034214305d480c21aec4ee7ad8a2cfbba85fdad1e1e483ee6"
+    },
+    {
+      "processCandidate": "ExtendedSources",
+      "path": "src/scripts/SkyChartGenerator/ChartLayers.js",
+      "line": 1544,
+      "scriptSha256": "3a2ba7387f96bbb6cb17e7e8143ded1cf81cf38981f408f6005dd829d36c3d6d",
+      "scriptInIndex": false,
+      "module": "ExtendedSources-pxm.dll",
+      "moduleSha256": "f62e2004f0bfd4e034214305d480c21aec4ee7ad8a2cfbba85fdad1e1e483ee6"
+    },
+    {
+      "processCandidate": "ImageAnalysis",
+      "path": "src/scripts/BatchPreprocessing/BPP-SubframeAnalyzer.js",
+      "line": 409,
+      "scriptSha256": "2e238f66ec3e0aa31cb791b1be9190ce55e8321f6d8023694b289f10c33d4620",
+      "scriptInIndex": true,
+      "module": "ImageAnalysis-pxm.dll",
+      "moduleSha256": "fd421a2d4abe392a72ca9fd02c365716c202aaf3df8a61eabc7a8214893d16bc"
+    }
+  ],
+  "unindexedEntrypoints": [
+    {
+      "path": "src/scripts/AstrometricRegistration/AstrometricRegistration.js",
+      "sha256": "02128a8ec755cbac515ef09e7b19c5badd368cf102d12357a38953335587dbcf",
+      "feature": "AstrometricRegistration : Image Registration > AstrometricRegistration"
+    },
+    {
+      "path": "src/scripts/BlindSolver/BlindSolver.js",
+      "sha256": "cf117244161f18cfb2694486238bbddcd793d630d5114436f11fc645c0a1bd4e",
+      "feature": "BlindSolver : Astrometry > BlindSolver"
+    },
+    {
+      "path": "src/scripts/FeatureRegistration/FeatureRegistration.js",
+      "sha256": "e915be8c5bde32dbd533900e784ff4a35b2f3794b645c5fb20f7919eaefe8aed",
+      "feature": "FeatureRegistration : Image Registration > FeatureRegistration"
+    },
+    {
+      "path": "src/scripts/FilterGenerator/FilterGenerator.js",
+      "sha256": "3ac8db7645824e7eb55d027f6c1051f0fa70e077bec2d91e3ff366dec93ba748",
+      "feature": "FilterGenerator : Utilities > FilterGenerator"
+    },
+    {
+      "path": "src/scripts/PhotometricAnalysis/PhotometricAnalysis.js",
+      "sha256": "cc1ab4d8cb29b5373ea7e659cd12ea4d1858b46c36e270d8a373a73d46b5f282",
+      "feature": "PhotometricAnalysis : Photometry > PhotometricAnalysis"
+    },
+    {
+      "path": "src/scripts/SkyChartGenerator/SkyChartGenerator.js",
+      "sha256": "529db8144fb3ed27398abdcd3bedf1bf8dcb77661e5450ce1aac047757a70724",
+      "feature": "SkyChartGenerator : Astrometry > SkyChartGenerator | Render > SkyChartGenerator"
+    },
+    {
+      "path": "src/scripts/WBPPLogAnalysis/WBPPLogAnalysis.js",
+      "sha256": "dfc4fa33bb8b977a4bfe37f4c64b65f8dbabb0709f0bc1b64396a26844a54c34",
+      "feature": "WBPPLogAnalysis : Batch Processing > WBPPLogAnalysis \\"
+    }
+  ],
+  "candidateEntrypoints": 7,
+  "canonicalRequirementsChanged": false,
+  "caveat": "Matching installed DLL stems plus a constructor and global execution is a source-level cross-check. Inventory does not prove all dynamic/native processes.",
+  "scientificClosures": 0
+}

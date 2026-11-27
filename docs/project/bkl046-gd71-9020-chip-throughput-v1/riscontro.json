@@ -1,0 +1,234 @@
+{
+  "chipAndEpochPredictedRatioDifference": {
+    "calspecFull": {
+      "bothWfc1": 3.092372193869153e-07,
+      "ownChip": 3.092372193869153e-07
+    },
+    "calspecSameGrid": {
+      "bothWfc1": 3.0941663853312207e-07,
+      "ownChip": 3.0941663853312207e-07
+    },
+    "gaia": {
+      "bothWfc1": 3.1064953831538844e-07,
+      "ownChip": 3.1064953831538844e-07
+    }
+  },
+  "nativeExecutions": 0,
+  "observedVisitRatioDifference": {
+    "3": 0.016985384074251986,
+    "5": 0.015035029506766717
+  },
+  "program10054Reference": {
+    "calspec": 2.5223504809793362,
+    "gaia": 2.638385974250815,
+    "observed3px": 2.537887309742338
+  },
+  "protocolSha256": "02760d221e0e4d995082bf8c046c522f151b4e2f84f2c3732b65b5083aa33d80",
+  "schema": "BKL046_GD71_9020_CHIP_THROUGHPUT_RESULT_V1",
+  "scientificClosures": 0,
+  "separateReadoutApertureCteEffectEstablished": false,
+  "visits": {
+    "j8c103": {
+      "apertures": {
+        "3": {
+          "measured": 2.6139861846330996,
+          "measuredVsCalspec": 0.036331289505304065,
+          "measuredVsGaia": -0.009246183029067878
+        },
+        "5": {
+          "measured": 2.5920991291958475,
+          "measuredVsCalspec": 0.02765402850136134,
+          "measuredVsGaia": -0.017541821255539825
+        }
+      },
+      "chip": 1,
+      "predictions": {
+        "calspecFull": {
+          "asObservedChip": 2.5223460983030765,
+          "ifWfc1": 2.5223460983030765
+        },
+        "calspecSameGrid": {
+          "asObservedChip": 2.5373315048405227,
+          "ifWfc1": 2.5373315048405227
+        },
+        "gaia": {
+          "asObservedChip": 2.638381139549818,
+          "ifWfc1": 2.638381139549818
+        }
+      },
+      "rows": [
+        {
+          "band": "F658N",
+          "chip": 1,
+          "exposure": "j8c103v2q",
+          "responses": {
+            "1": {
+              "calspecFull": 2.1962403909458018e-09,
+              "calspecSameGrid": 2.2047488638187853e-09,
+              "gaia": 2.210998074371018e-09,
+              "gaiaOutOfGrid": 2.3800068234416726e-06,
+              "relativeModelVsHeaderPhotflam": -2.336656118040459e-06
+            }
+          }
+        },
+        {
+          "band": "F658N",
+          "chip": 1,
+          "exposure": "j8c103v3q",
+          "responses": {
+            "1": {
+              "calspecFull": 2.1962403733225385e-09,
+              "calspecSameGrid": 2.2047488461273214e-09,
+              "gaia": 2.210998056630116e-09,
+              "gaiaOutOfGrid": 2.3800068334834383e-06,
+              "relativeModelVsHeaderPhotflam": -2.3286323552751398e-06
+            }
+          }
+        },
+        {
+          "band": "F660N",
+          "chip": 1,
+          "exposure": "j8c103xcq",
+          "responses": {
+            "1": {
+              "calspecFull": 8.707133404994959e-10,
+              "calspecSameGrid": 8.689242481088283e-10,
+              "gaia": 8.38013146574304e-10,
+              "gaiaOutOfGrid": 1.4086327817304101e-05,
+              "relativeModelVsHeaderPhotflam": -2.437087757822809e-06
+            }
+          }
+        },
+        {
+          "band": "F660N",
+          "chip": 1,
+          "exposure": "j8c103xdq",
+          "responses": {
+            "1": {
+              "calspecFull": 8.707133285937774e-10,
+              "calspecSameGrid": 8.689242362275749e-10,
+              "gaia": 8.380131351158585e-10,
+              "gaiaOutOfGrid": 1.408632792643185e-05,
+              "relativeModelVsHeaderPhotflam": -2.4234151146940164e-06
+            }
+          }
+        }
+      ]
+    },
+    "j8c104": {
+      "apertures": {
+        "3": {
+          "measured": 2.570328173410846,
+          "measuredVsCalspec": 0.019023111055690434,
+          "measuredVsGaia": -0.02579315272065763
+        },
+        "5": {
+          "measured": 2.553704112512668,
+          "measuredVsCalspec": 0.012432395352504289,
+          "measuredVsGaia": -0.03209401115738508
+        }
+      },
+      "chip": 2,
+      "predictions": {
+        "calspecFull": {
+          "asObservedChip": 2.5223453183000237,
+          "ifWfc1": 2.5223453183000237
+        },
+        "calspecSameGrid": {
+          "asObservedChip": 2.5373307197481805,
+          "ifWfc1": 2.5373307197481805
+        },
+        "gaia": {
+          "asObservedChip": 2.6383803199381894,
+          "ifWfc1": 2.6383803199381894
+        }
+      },
+      "rows": [
+        {
+          "band": "F658N",
+          "chip": 2,
+          "exposure": "j8c104izq",
+          "responses": {
+            "1": {
+              "calspecFull": 2.1963398027735116e-09,
+              "calspecSameGrid": 2.2048486603652872e-09,
+              "gaia": 2.2110981497902805e-09,
+              "gaiaOutOfGrid": 2.3799501809744112e-06,
+              "relativeModelVsHeaderPhotflam": -1.9210637944855335e-06
+            },
+            "2": {
+              "calspecFull": 2.1963398027735116e-09,
+              "calspecSameGrid": 2.2048486603652872e-09,
+              "gaia": 2.2110981497902805e-09,
+              "gaiaOutOfGrid": 2.3799501809744112e-06,
+              "relativeModelVsHeaderPhotflam": -1.9210637944855335e-06
+            }
+          }
+        },
+        {
+          "band": "F658N",
+          "chip": 2,
+          "exposure": "j8c104j0q",
+          "responses": {
+            "1": {
+              "calspecFull": 2.196339785150248e-09,
+              "calspecSameGrid": 2.2048486426738233e-09,
+              "gaia": 2.211098132049378e-09,
+              "gaiaOutOfGrid": 2.379950191015269e-06,
+              "relativeModelVsHeaderPhotflam": -2.0147713817308954e-06
+            },
+            "2": {
+              "calspecFull": 2.196339785150248e-09,
+              "calspecSameGrid": 2.2048486426738233e-09,
+              "gaia": 2.211098132049378e-09,
+              "gaiaOutOfGrid": 2.379950191015269e-06,
+              "relativeModelVsHeaderPhotflam": -2.0147713817308954e-06
+            }
+          }
+        },
+        {
+          "band": "F660N",
+          "chip": 2,
+          "exposure": "j8c104j7q",
+          "responses": {
+            "1": {
+              "calspecFull": 8.707530222148834e-10,
+              "calspecSameGrid": 8.689638482814655e-10,
+              "gaia": 8.380513375303583e-10,
+              "gaiaOutOfGrid": 1.4085964111496416e-05,
+              "relativeModelVsHeaderPhotflam": -2.049583759600182e-06
+            },
+            "2": {
+              "calspecFull": 8.707530222148834e-10,
+              "calspecSameGrid": 8.689638482814655e-10,
+              "gaia": 8.380513375303583e-10,
+              "gaiaOutOfGrid": 1.4085964111496416e-05,
+              "relativeModelVsHeaderPhotflam": -2.049583759600182e-06
+            }
+          }
+        },
+        {
+          "band": "F660N",
+          "chip": 2,
+          "exposure": "j8c104j8q",
+          "responses": {
+            "1": {
+              "calspecFull": 8.707530103073717e-10,
+              "calspecSameGrid": 8.689638363984227e-10,
+              "gaia": 8.380513260701871e-10,
+              "gaiaOutOfGrid": 1.4085964220630656e-05,
+              "relativeModelVsHeaderPhotflam": -2.0359096749578143e-06
+            },
+            "2": {
+              "calspecFull": 8.707530103073717e-10,
+              "calspecSameGrid": 8.689638363984227e-10,
+              "gaia": 8.380513260701871e-10,
+              "gaiaOutOfGrid": 1.4085964220630656e-05,
+              "relativeModelVsHeaderPhotflam": -2.0359096749578143e-06
+            }
+          }
+        }
+      ]
+    }
+  }
+}

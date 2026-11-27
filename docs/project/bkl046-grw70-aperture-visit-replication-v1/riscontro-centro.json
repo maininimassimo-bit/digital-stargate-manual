@@ -1,0 +1,3266 @@
+{
+  "acquisitionSha256": "cd532c4f14609939a53c36ed4763ca28d684d745d408e5d627ef5f2a55bba090",
+  "astrometricFieldTieVerified": false,
+  "completeAlternateCenterVisits": 2,
+  "earlierExploratoryComparison": [
+    {
+      "chip": 2,
+      "difference": {
+        "F438W-F606W": 12.45227303993147,
+        "F438W-F814W": 19.831622473844618,
+        "F606W-F814W": 7.379349433913376
+      },
+      "visit": "ibbsb0"
+    },
+    {
+      "chip": 2,
+      "difference": {
+        "F438W-F606W": 6.154969454873594,
+        "F438W-F814W": -0.9613240146441058,
+        "F606W-F814W": -7.116293469517586
+      },
+      "visit": "ibbsd5"
+    }
+  ],
+  "nativeExecutions": 0,
+  "primaryReportSha256": "be9a72f3babbc956f59dc060a166561275c38136e5dc2e7572e099cd5e2e77e1",
+  "programSha256": "d5cd62eb5db0a847c3a31237138e02b51b9ce6c3b281a970f227dd48f00a7420",
+  "protocolSha256": "37c3c98ad5ced00d119b6d4620f90efb0d8151bd989cae2d011c37d1d73fda52",
+  "rows": [
+    {
+      "band": "F438W",
+      "centerXY": [
+        292.83727638321926,
+        276.92597459056134
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0004174130228805,
+      "donors": {
+        "F606W": {
+          "secondary": 199.83743286132812,
+          "signal": 10852.244338989258,
+          "xy": [
+            293,
+            276
+          ]
+        },
+        "F814W": {
+          "secondary": 321.0413875579834,
+          "signal": 13350.539464950562,
+          "xy": [
+            293,
+            277
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbs15laq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 6.70094203388549,
+      "peakOffsetPx": 0.5065053026413336,
+      "peakXY": [
+        293,
+        277
+      ],
+      "predictedXY": [
+        292.9964896193726,
+        276.4935068620093
+      ],
+      "startMjd": 55072.60757781,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbs15"
+    },
+    {
+      "band": "F606W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 1,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.007370093714972719,
+      "donors": {
+        "F438W": {
+          "secondary": 221.43161416053772,
+          "signal": 13175.002735376358,
+          "xy": [
+            293,
+            277
+          ]
+        },
+        "F814W": {
+          "secondary": 321.0413875579834,
+          "signal": 13350.539464950562,
+          "xy": [
+            293,
+            277
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbs15ldq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 7.193338745547868,
+      "peakOffsetPx": 1.0034169663013386,
+      "peakXY": [
+        293,
+        276
+      ],
+      "predictedXY": [
+        293.00125777285075,
+        277.00341617799836
+      ],
+      "startMjd": 55072.61021669,
+      "state": "CORE_DQ",
+      "visit": "ibbs15"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        292.8744081903426,
+        276.908086772586
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0067142366913913,
+      "donors": {
+        "F438W": {
+          "secondary": 221.43161416053772,
+          "signal": 13175.002735376358,
+          "xy": [
+            293,
+            277
+          ]
+        },
+        "F606W": {
+          "secondary": 199.83743286132812,
+          "signal": 10852.244338989258,
+          "xy": [
+            293,
+            276
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbs15leq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 6.703603249584559,
+      "peakOffsetPx": 0.4970750715335883,
+      "peakXY": [
+        293,
+        277
+      ],
+      "predictedXY": [
+        293.00225515575806,
+        276.50293004414607
+      ],
+      "startMjd": 55072.61111966,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbs15"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        282.9045054810676,
+        285.28205272479937
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.0014786076430149467,
+      "donors": {
+        "F606W": {
+          "secondary": 218.974769115448,
+          "signal": 12302.360663890839,
+          "xy": [
+            283,
+            285
+          ]
+        },
+        "F814W": {
+          "secondary": 455.80990743637085,
+          "signal": 12644.559510707855,
+          "xy": [
+            283,
+            285
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbs30soq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.792449428430593e-14
+      },
+      "gaiaToPredictionPx": 5.416204426350225,
+      "peakOffsetPx": 0.0070183824357717825,
+      "peakXY": [
+        283,
+        285
+      ],
+      "predictedXY": [
+        282.99575578447764,
+        284.9944103375223
+      ],
+      "startMjd": 55090.41904833,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbs30"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        282.9162628495793,
+        284.6263684787651
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.00745600027936125,
+      "donors": {
+        "F438W": {
+          "secondary": 250.93102025985718,
+          "signal": 10966.609578609467,
+          "xy": [
+            283,
+            285
+          ]
+        },
+        "F814W": {
+          "secondary": 455.80990743637085,
+          "signal": 12644.559510707855,
+          "xy": [
+            283,
+            285
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbs30srq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 5.415215784641333,
+      "peakOffsetPx": 0.0030320492332201418,
+      "peakXY": [
+        283,
+        285
+      ],
+      "predictedXY": [
+        283.00247955240906,
+        285.0017450336396
+      ],
+      "startMjd": 55090.42168722,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbs30"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        282.8807132877053,
+        285.2551504037614
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.006633830216805273,
+      "donors": {
+        "F438W": {
+          "secondary": 250.93102025985718,
+          "signal": 10966.609578609467,
+          "xy": [
+            283,
+            285
+          ]
+        },
+        "F606W": {
+          "secondary": 218.974769115448,
+          "signal": 12302.360663890839,
+          "xy": [
+            283,
+            285
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbs30ssq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.233539225988537e-15
+      },
+      "gaiaToPredictionPx": 5.416676280514941,
+      "peakOffsetPx": 0.004230161938735026,
+      "peakXY": [
+        283,
+        285
+      ],
+      "predictedXY": [
+        283.0017645353763,
+        285.00384456563654
+      ],
+      "startMjd": 55090.42258981,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbs30"
+    },
+    {
+      "band": "F438W",
+      "chip": 1,
+      "coreDqOr": 1024,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.006401692954859228,
+      "donors": {
+        "F606W": {
+          "secondary": 304.1654336452484,
+          "signal": 9275.036161184311,
+          "xy": [
+            258,
+            305
+          ]
+        },
+        "F814W": {
+          "secondary": 860.6975413560867,
+          "signal": 10799.804474949837,
+          "xy": [
+            258,
+            305
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbs55giq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 12.266023879742484,
+      "peakOffsetPx": 1.0017157826398841,
+      "peakXY": [
+        258,
+        306
+      ],
+      "predictedXY": [
+        257.9935669158041,
+        304.9983048744166
+      ],
+      "startMjd": 55126.03521789,
+      "state": "CORE_DQ",
+      "visit": "ibbs55"
+    },
+    {
+      "band": "F606W",
+      "chip": 1,
+      "coreDqOr": 1024,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0042857637175946,
+      "donors": {
+        "F438W": {
+          "secondary": 1138.0365252494812,
+          "signal": 10858.543971538544,
+          "xy": [
+            258,
+            306
+          ]
+        },
+        "F814W": {
+          "secondary": 860.6975413560867,
+          "signal": 10799.804474949837,
+          "xy": [
+            258,
+            305
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbs55hnq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 12.649702133954575,
+      "peakOffsetPx": 0.4966660662213377,
+      "peakXY": [
+        258,
+        305
+      ],
+      "predictedXY": [
+        258.00567495611756,
+        305.49663364385515
+      ],
+      "startMjd": 55126.06347011,
+      "state": "CORE_DQ",
+      "visit": "ibbs55"
+    },
+    {
+      "band": "F814W",
+      "chip": 1,
+      "coreDqOr": 1024,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9989549761149835,
+      "donors": {
+        "F438W": {
+          "secondary": 1138.0365252494812,
+          "signal": 10858.543971538544,
+          "xy": [
+            258,
+            306
+          ]
+        },
+        "F606W": {
+          "secondary": 304.1654336452484,
+          "signal": 9275.036161184311,
+          "xy": [
+            258,
+            305
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbs55hoq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 12.654819388695223,
+      "peakOffsetPx": 0.5049661393380155,
+      "peakXY": [
+        258,
+        305
+      ],
+      "predictedXY": [
+        258.00077923289956,
+        305.50496553810535
+      ],
+      "startMjd": 55126.06437308,
+      "state": "CORE_DQ",
+      "visit": "ibbs55"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        299.46204037147066,
+        270.632505918478
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0056857147659775,
+      "donors": {
+        "F606W": {
+          "secondary": 193.3808741569519,
+          "signal": 12532.911147594452,
+          "xy": [
+            299,
+            270
+          ]
+        },
+        "F814W": {
+          "secondary": 619.5845637321472,
+          "signal": 9283.058501720428,
+          "xy": [
+            300,
+            270
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsa5j5q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 11.370810571772916,
+      "peakOffsetPx": 1.1168236157443021,
+      "peakXY": [
+        300,
+        271
+      ],
+      "predictedXY": [
+        299.4999411673591,
+        270.0013828798874
+      ],
+      "startMjd": 55057.40094464,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsa5"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        299.1960447295839,
+        270.1229003961282
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0050356043110575,
+      "donors": {
+        "F438W": {
+          "secondary": 222.30428218841553,
+          "signal": 7840.486807823181,
+          "xy": [
+            300,
+            271
+          ]
+        },
+        "F814W": {
+          "secondary": 619.5845637321472,
+          "signal": 9283.058501720428,
+          "xy": [
+            300,
+            270
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsa5j8q_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.8882385099221404e-14
+      },
+      "gaiaToPredictionPx": 11.99174142039916,
+      "peakOffsetPx": 1.117174925994118,
+      "peakXY": [
+        299,
+        270
+      ],
+      "predictedXY": [
+        300.0041577388822,
+        270.48963971521204
+      ],
+      "startMjd": 55057.40358353,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsa5"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        299.39587585775274,
+        270.51459101564114
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.4107045275929295,
+      "donors": {
+        "F438W": {
+          "secondary": 222.30428218841553,
+          "signal": 7840.486807823181,
+          "xy": [
+            300,
+            271
+          ]
+        },
+        "F606W": {
+          "secondary": 193.3808741569519,
+          "signal": 12532.911147594452,
+          "xy": [
+            299,
+            270
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsa5j9q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 11.853508838781764,
+      "peakOffsetPx": 0.7163724297330687,
+      "peakXY": [
+        300,
+        270
+      ],
+      "predictedXY": [
+        299.49584206157067,
+        270.50893440756187
+      ],
+      "startMjd": 55057.40448612,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsa5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        287.2119986733704,
+        289.8116138803833
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9876680288512102,
+      "donors": {
+        "F606W": {
+          "secondary": 254.97781085968018,
+          "signal": 12203.194821357727,
+          "xy": [
+            287,
+            289
+          ]
+        },
+        "F814W": {
+          "secondary": 308.22646617889404,
+          "signal": 11122.632014274597,
+          "xy": [
+            287,
+            290
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsb0goq_flc.fits",
+      "fluxCalibratedRadii": {
+        "10": 5.1921427244047e-14,
+        "5": 4.934330053139138e-14
+      },
+      "gaiaToPredictionPx": 14.73505492250561,
+      "peakOffsetPx": 0.4979757216250075,
+      "peakXY": [
+        287,
+        290
+      ],
+      "predictedXY": [
+        286.9994917365292,
+        289.50202453775694
+      ],
+      "startMjd": 55080.57980003,
+      "state": "MEASURED_BOTH_RADII",
+      "visit": "ibbsb0"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        287.0601763491348,
+        289.3793309449781
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.004769050418572578,
+      "donors": {
+        "F438W": {
+          "secondary": 209.7317976951599,
+          "signal": 9077.548600673676,
+          "xy": [
+            287,
+            290
+          ]
+        },
+        "F814W": {
+          "secondary": 308.22646617889404,
+          "signal": 11122.632014274597,
+          "xy": [
+            287,
+            290
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsb0grq_flc.fits",
+      "fluxCalibratedRadii": {
+        "10": 2.0249531431177416e-14,
+        "5": 1.896713140382482e-14
+      },
+      "gaiaToPredictionPx": 15.215757146821105,
+      "peakOffsetPx": 0.9897169546806794,
+      "peakXY": [
+        287,
+        289
+      ],
+      "predictedXY": [
+        287.0045257934737,
+        289.9897066068163
+      ],
+      "startMjd": 55080.58243892,
+      "state": "MEASURED_BOTH_RADII",
+      "visit": "ibbsb0"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        287.2335974818933,
+        289.70046386698596
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.991784689683944,
+      "donors": {
+        "F438W": {
+          "secondary": 209.7317976951599,
+          "signal": 9077.548600673676,
+          "xy": [
+            287,
+            290
+          ]
+        },
+        "F606W": {
+          "secondary": 254.97781085968018,
+          "signal": 12203.194821357727,
+          "xy": [
+            287,
+            289
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsb0gsq_flc.fits",
+      "fluxCalibratedRadii": {
+        "10": 6.694747504923045e-15,
+        "5": 6.191861137478121e-15
+      },
+      "gaiaToPredictionPx": 14.736872251551922,
+      "peakOffsetPx": 0.491756466186966,
+      "peakXY": [
+        287,
+        290
+      ],
+      "predictedXY": [
+        286.9959698554849,
+        289.50826004842816
+      ],
+      "startMjd": 55080.58334188,
+      "state": "MEASURED_BOTH_RADII",
+      "visit": "ibbsb0"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        332.8838040620515,
+        281.71622448033
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9939083518221747,
+      "donors": {
+        "F606W": {
+          "secondary": 144.3984375,
+          "signal": 10235.55583190918,
+          "xy": [
+            333,
+            281
+          ]
+        },
+        "F814W": {
+          "secondary": 433.59506154060364,
+          "signal": 11729.677825212479,
+          "xy": [
+            333,
+            282
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsd5liq_flc.fits",
+      "fluxCalibratedRadii": {
+        "10": 5.155852411421464e-14,
+        "5": 4.87302715041323e-14
+      },
+      "gaiaToPredictionPx": 5.070404412769161,
+      "peakOffsetPx": 0.4960008274988974,
+      "peakXY": [
+        333,
+        282
+      ],
+      "predictedXY": [
+        332.99339903017136,
+        281.5040430985691
+      ],
+      "startMjd": 55100.28274055,
+      "state": "MEASURED_BOTH_RADII",
+      "visit": "ibbsd5"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        332.7724886987145,
+        281.1069759461911
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.009520330376578911,
+      "donors": {
+        "F438W": {
+          "secondary": 182.3931291103363,
+          "signal": 13305.15153670311,
+          "xy": [
+            333,
+            282
+          ]
+        },
+        "F814W": {
+          "secondary": 433.59506154060364,
+          "signal": 11729.677825212479,
+          "xy": [
+            333,
+            282
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsd5llq_flc.fits",
+      "fluxCalibratedRadii": {
+        "10": 2.0359410417631e-14,
+        "5": 1.907601142734232e-14
+      },
+      "gaiaToPredictionPx": 4.597063690143251,
+      "peakOffsetPx": 0.9932906942224861,
+      "peakXY": [
+        333,
+        281
+      ],
+      "predictedXY": [
+        332.9991992342128,
+        281.9932903714439
+      ],
+      "startMjd": 55100.28537944,
+      "state": "MEASURED_BOTH_RADII",
+      "visit": "ibbsd5"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        332.7977473675968,
+        281.5147186045437
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9927331692699098,
+      "donors": {
+        "F438W": {
+          "secondary": 182.3931291103363,
+          "signal": 13305.15153670311,
+          "xy": [
+            333,
+            282
+          ]
+        },
+        "F606W": {
+          "secondary": 144.3984375,
+          "signal": 10235.55583190918,
+          "xy": [
+            333,
+            281
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsd5lmq_flc.fits",
+      "fluxCalibratedRadii": {
+        "10": 6.6592291808185955e-15,
+        "5": 6.243741676875212e-15
+      },
+      "gaiaToPredictionPx": 5.071436324913423,
+      "peakOffsetPx": 0.49741043670581764,
+      "peakXY": [
+        333,
+        282
+      ],
+      "predictedXY": [
+        333.0075451577102,
+        281.50264679237085
+      ],
+      "startMjd": 55100.28628203,
+      "state": "MEASURED_BOTH_RADII",
+      "visit": "ibbsd5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        269.31058496592027,
+        303.87108120217107
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.988352014774933,
+      "donors": {
+        "F606W": {
+          "secondary": 278.9311857223511,
+          "signal": 12354.657717704773,
+          "xy": [
+            269,
+            303
+          ]
+        },
+        "F814W": {
+          "secondary": 324.43277883529663,
+          "signal": 10452.413888454437,
+          "xy": [
+            269,
+            304
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbse5g2q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 12.080108401457933,
+      "peakOffsetPx": 0.4974456914309775,
+      "peakXY": [
+        269,
+        304
+      ],
+      "predictedXY": [
+        268.99873973839624,
+        303.50255590498637
+      ],
+      "startMjd": 55115.58683759,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbse5"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        269.1575816183552,
+        303.39783704633186
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.003739185825707146,
+      "donors": {
+        "F438W": {
+          "secondary": 217.13735961914062,
+          "signal": 8853.768112182617,
+          "xy": [
+            269,
+            304
+          ]
+        },
+        "F814W": {
+          "secondary": 324.43277883529663,
+          "signal": 10452.413888454437,
+          "xy": [
+            269,
+            304
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbse5g5q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 12.555997407824691,
+      "peakOffsetPx": 0.9899676776403817,
+      "peakXY": [
+        269,
+        303
+      ],
+      "predictedXY": [
+        269.00520433457405,
+        303.98995399775663
+      ],
+      "startMjd": 55115.58947648,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbse5"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        269.3966028823174,
+        303.80153607437666
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9915984676865746,
+      "donors": {
+        "F438W": {
+          "secondary": 217.13735961914062,
+          "signal": 8853.768112182617,
+          "xy": [
+            269,
+            304
+          ]
+        },
+        "F606W": {
+          "secondary": 278.9311857223511,
+          "signal": 12354.657717704773,
+          "xy": [
+            269,
+            303
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbse5g6q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 12.081533334339621,
+      "peakOffsetPx": 0.4925329984286377,
+      "peakXY": [
+        269,
+        304
+      ],
+      "predictedXY": [
+        268.9960441599618,
+        303.5074828877382
+      ],
+      "startMjd": 55115.59037944,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbse5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        249.13543816138665,
+        311.9628721806152
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.008834426339607,
+      "donors": {
+        "F606W": {
+          "secondary": 589.9655401706696,
+          "signal": 7035.223596811295,
+          "xy": [
+            249,
+            311
+          ]
+        },
+        "F814W": {
+          "secondary": 299.4865186214447,
+          "signal": 13615.179267644882,
+          "xy": [
+            249,
+            312
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsf0oyq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.818294440269344e-14
+      },
+      "gaiaToPredictionPx": 16.028163114719458,
+      "peakOffsetPx": 0.49754801677343496,
+      "peakXY": [
+        249,
+        312
+      ],
+      "predictedXY": [
+        248.98952712533003,
+        311.50256221706496
+      ],
+      "startMjd": 55136.30447731,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsf0"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        248.99301104326722,
+        311.3494573598809
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.007188443292224643,
+      "donors": {
+        "F438W": {
+          "secondary": 146.95388412475586,
+          "signal": 13779.162532806396,
+          "xy": [
+            249,
+            312
+          ]
+        },
+        "F814W": {
+          "secondary": 299.4865186214447,
+          "signal": 13615.179267644882,
+          "xy": [
+            249,
+            312
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsf0p1q_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.8720941823639554e-14
+      },
+      "gaiaToPredictionPx": 16.476406448263692,
+      "peakOffsetPx": 1.0052453705879325,
+      "peakXY": [
+        249,
+        311
+      ],
+      "predictedXY": [
+        249.02435733504234,
+        312.00495023524456
+      ],
+      "startMjd": 55136.3071162,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsf0"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        249.22724886101983,
+        311.9373594261424
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0018163078075748,
+      "donors": {
+        "F438W": {
+          "secondary": 146.95388412475586,
+          "signal": 13779.162532806396,
+          "xy": [
+            249,
+            312
+          ]
+        },
+        "F606W": {
+          "secondary": 589.9655401706696,
+          "signal": 7035.223596811295,
+          "xy": [
+            249,
+            311
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsf0p2q_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.232268649261982e-15
+      },
+      "gaiaToPredictionPx": 16.023479504756544,
+      "peakOffsetPx": 0.5077808233775098,
+      "peakXY": [
+        249,
+        312
+      ],
+      "predictedXY": [
+        248.98610167520826,
+        311.4924094158104
+      ],
+      "startMjd": 55136.30801916,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsf0"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        246.54334772372655,
+        311.59987770497804
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0088315271681378,
+      "donors": {
+        "F606W": {
+          "secondary": 197.07790958881378,
+          "signal": 11005.341444134712,
+          "xy": [
+            247,
+            311
+          ]
+        },
+        "F814W": {
+          "secondary": 393.8915573358536,
+          "signal": 10259.619035363197,
+          "xy": [
+            247,
+            312
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsh5req_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.84050880834818e-14
+      },
+      "gaiaToPredictionPx": 15.61745563018488,
+      "peakOffsetPx": 0.49767991471242784,
+      "peakXY": [
+        247,
+        312
+      ],
+      "predictedXY": [
+        246.98943044328882,
+        311.5024323342709
+      ],
+      "startMjd": 55146.22285717,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsh5"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        246.49923928006586,
+        310.9168158346978
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.007055812841583929,
+      "donors": {
+        "F438W": {
+          "secondary": 387.68842792510986,
+          "signal": 7228.142773628235,
+          "xy": [
+            247,
+            312
+          ]
+        },
+        "F814W": {
+          "secondary": 393.8915573358536,
+          "signal": 10259.619035363197,
+          "xy": [
+            247,
+            312
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsh5rhq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.888615290012327e-14
+      },
+      "gaiaToPredictionPx": 16.078183173545668,
+      "peakOffsetPx": 1.0053111401846644,
+      "peakXY": [
+        247,
+        311
+      ],
+      "predictedXY": [
+        247.0245210005491,
+        312.0050120442619
+      ],
+      "startMjd": 55146.22549606,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsh5"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        246.65043293984314,
+        311.59973642264384
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0019492898884297,
+      "donors": {
+        "F438W": {
+          "secondary": 387.68842792510986,
+          "signal": 7228.142773628235,
+          "xy": [
+            247,
+            312
+          ]
+        },
+        "F606W": {
+          "secondary": 197.07790958881378,
+          "signal": 11005.341444134712,
+          "xy": [
+            247,
+            311
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsh5riq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.207696777309466e-15
+      },
+      "gaiaToPredictionPx": 15.612703689700243,
+      "peakOffsetPx": 0.5077139303926269,
+      "peakXY": [
+        247,
+        312
+      ],
+      "predictedXY": [
+        246.98603479547413,
+        311.492478169753
+      ],
+      "startMjd": 55146.22639902,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsh5"
+    },
+    {
+      "band": "F438W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 1,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9980563060294617,
+      "donors": {
+        "F606W": {
+          "secondary": 1036.5807222127914,
+          "signal": 9724.878573775291,
+          "xy": [
+            227,
+            294
+          ]
+        },
+        "F814W": {
+          "secondary": 339.6095458269119,
+          "signal": 12614.010821461678,
+          "xy": [
+            227,
+            295
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsi5bwq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 6.981920812256579,
+      "peakOffsetPx": 0.5044018052223259,
+      "peakXY": [
+        227,
+        295
+      ],
+      "predictedXY": [
+        226.9910240609048,
+        294.495678065489
+      ],
+      "startMjd": 55177.67762649,
+      "state": "CORE_DQ",
+      "visit": "ibbsi5"
+    },
+    {
+      "band": "F606W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.00640367235530353,
+      "donors": {
+        "F438W": {
+          "secondary": 265.75623893737793,
+          "signal": 11503.201734542847,
+          "xy": [
+            227,
+            295
+          ]
+        },
+        "F814W": {
+          "secondary": 339.6095458269119,
+          "signal": 12614.010821461678,
+          "xy": [
+            227,
+            295
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsi5bzq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 7.156901460068574,
+      "peakOffsetPx": 1.0005899094132213,
+      "peakXY": [
+        227,
+        294
+      ],
+      "predictedXY": [
+        227.012623124705,
+        295.0005102815775
+      ],
+      "startMjd": 55177.68026538,
+      "state": "CORE_DQ",
+      "visit": "ibbsi5"
+    },
+    {
+      "band": "F814W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 1,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.003426871211741,
+      "donors": {
+        "F438W": {
+          "secondary": 265.75623893737793,
+          "signal": 11503.201734542847,
+          "xy": [
+            227,
+            295
+          ]
+        },
+        "F606W": {
+          "secondary": 1036.5807222127914,
+          "signal": 9724.878573775291,
+          "xy": [
+            227,
+            294
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsi5c0q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 6.981060278501218,
+      "peakOffsetPx": 0.4963517719392335,
+      "peakXY": [
+        227,
+        295
+      ],
+      "predictedXY": [
+        226.99635349562257,
+        294.50366162296973
+      ],
+      "startMjd": 55177.68116834,
+      "state": "CORE_DQ",
+      "visit": "ibbsi5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        219.75378659636058,
+        261.7725638924735
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9899987109005933,
+      "donors": {
+        "F606W": {
+          "secondary": 497.6901857852936,
+          "signal": 7998.637237787247,
+          "xy": [
+            220,
+            261
+          ]
+        },
+        "F814W": {
+          "secondary": 297.34498262405396,
+          "signal": 11091.809948444366,
+          "xy": [
+            220,
+            262
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsk1iqq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.951304134124169e-14
+      },
+      "gaiaToPredictionPx": 5.001026985422465,
+      "peakOffsetPx": 0.498331966673764,
+      "peakXY": [
+        220,
+        262
+      ],
+      "predictedXY": [
+        219.9943560056142,
+        261.5016999956489
+      ],
+      "startMjd": 55229.23737259,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsk1"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        219.79479255655772,
+        261.36114613186965
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.003772524217466306,
+      "donors": {
+        "F438W": {
+          "secondary": 248.1092929840088,
+          "signal": 12032.859827041626,
+          "xy": [
+            220,
+            262
+          ]
+        },
+        "F814W": {
+          "secondary": 297.34498262405396,
+          "signal": 11091.809948444366,
+          "xy": [
+            220,
+            262
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsk1ivq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.8999774171327816e-14
+      },
+      "gaiaToPredictionPx": 5.313083387539545,
+      "peakOffsetPx": 0.9916076892781666,
+      "peakXY": [
+        220,
+        261
+      ],
+      "predictedXY": [
+        220.00856946617316,
+        261.99157065995576
+      ],
+      "startMjd": 55229.27111074,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsk1"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        219.88110697716945,
+        261.6716010803651
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9932774463487727,
+      "donors": {
+        "F438W": {
+          "secondary": 248.1092929840088,
+          "signal": 12032.859827041626,
+          "xy": [
+            220,
+            262
+          ]
+        },
+        "F606W": {
+          "secondary": 497.6901857852936,
+          "signal": 7998.637237787247,
+          "xy": [
+            220,
+            261
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsk1iwq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.1415480735180815e-15
+      },
+      "gaiaToPredictionPx": 5.003274297491513,
+      "peakOffsetPx": 0.4933094268852012,
+      "peakXY": [
+        220,
+        262
+      ],
+      "predictedXY": [
+        219.99706261341152,
+        261.5066993184539
+      ],
+      "startMjd": 55229.2720137,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsk1"
+    },
+    {
+      "band": "F438W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9989493015133285,
+      "donors": {
+        "F606W": {
+          "secondary": 228.72120761871338,
+          "signal": 10234.72451877594,
+          "xy": [
+            217,
+            293
+          ]
+        },
+        "F814W": {
+          "secondary": 281.7205888032913,
+          "signal": 13487.180702328682,
+          "xy": [
+            217,
+            294
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsk5cpq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 11.892270098508073,
+      "peakOffsetPx": 0.5046428365668522,
+      "peakXY": [
+        217,
+        294
+      ],
+      "predictedXY": [
+        216.98998624153785,
+        293.49545652601614
+      ],
+      "startMjd": 55205.19937481,
+      "state": "CORE_DQ",
+      "visit": "ibbsk5"
+    },
+    {
+      "band": "F606W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.006107279125767487,
+      "donors": {
+        "F438W": {
+          "secondary": 236.5847510099411,
+          "signal": 12901.629749178886,
+          "xy": [
+            217,
+            294
+          ]
+        },
+        "F814W": {
+          "secondary": 281.7205888032913,
+          "signal": 13487.180702328682,
+          "xy": [
+            217,
+            294
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsk5csq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 12.30340212806826,
+      "peakOffsetPx": 1.0013816434703142,
+      "peakXY": [
+        217,
+        293
+      ],
+      "predictedXY": [
+        217.01502894375105,
+        294.00126885836374
+      ],
+      "startMjd": 55205.2020137,
+      "state": "CORE_DQ",
+      "visit": "ibbsk5"
+    },
+    {
+      "band": "F814W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0041160536311582,
+      "donors": {
+        "F438W": {
+          "secondary": 236.5847510099411,
+          "signal": 12901.629749178886,
+          "xy": [
+            217,
+            294
+          ]
+        },
+        "F606W": {
+          "secondary": 228.72120761871338,
+          "signal": 10234.72451877594,
+          "xy": [
+            217,
+            293
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsk5ctq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 11.893245654507787,
+      "peakOffsetPx": 0.49690027254699837,
+      "peakXY": [
+        217,
+        294
+      ],
+      "predictedXY": [
+        216.99498522421692,
+        293.5031250329498
+      ],
+      "startMjd": 55205.2029163,
+      "state": "CORE_DQ",
+      "visit": "ibbsk5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        216.40907169226188,
+        242.41178853890975
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.015111345810382395,
+      "donors": {
+        "F606W": {
+          "secondary": 629.9976450204849,
+          "signal": 10665.67220556736,
+          "xy": [
+            217,
+            242
+          ]
+        },
+        "F814W": {
+          "secondary": 655.031121969223,
+          "signal": 9546.858880758286,
+          "xy": [
+            217,
+            242
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsl1flq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.799561396820894e-14
+      },
+      "gaiaToPredictionPx": 3.8368763542952893,
+      "peakOffsetPx": 1.0080923265910968,
+      "peakXY": [
+        217,
+        243
+      ],
+      "predictedXY": [
+        216.99101491344777,
+        241.99194771606255
+      ],
+      "startMjd": 55254.79642395,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsl1"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        216.58112560993348,
+        241.79120226646393
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0047609931732233,
+      "donors": {
+        "F438W": {
+          "secondary": 832.8844381570816,
+          "signal": 6600.017189621925,
+          "xy": [
+            217,
+            243
+          ]
+        },
+        "F814W": {
+          "secondary": 655.031121969223,
+          "signal": 9546.858880758286,
+          "xy": [
+            217,
+            242
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsl1foq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.8852730134114114e-14
+      },
+      "gaiaToPredictionPx": 4.242527422456233,
+      "peakOffsetPx": 0.5089061513555708,
+      "peakXY": [
+        217,
+        242
+      ],
+      "predictedXY": [
+        217.01479423621478,
+        242.5086910668199
+      ],
+      "startMjd": 55254.79906284,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsl1"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        216.51584980864078,
+        242.30106963314532
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0113403465273232,
+      "donors": {
+        "F438W": {
+          "secondary": 832.8844381570816,
+          "signal": 6600.017189621925,
+          "xy": [
+            217,
+            243
+          ]
+        },
+        "F606W": {
+          "secondary": 629.9976450204849,
+          "signal": 10665.67220556736,
+          "xy": [
+            217,
+            242
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsl1fpq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.212018512981739e-15
+      },
+      "gaiaToPredictionPx": 4.244327488980849,
+      "peakOffsetPx": 0.4993279438240551,
+      "peakXY": [
+        217,
+        242
+      ],
+      "predictedXY": [
+        216.99420583713817,
+        242.49929432518334
+      ],
+      "startMjd": 55254.7999658,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsl1"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        230.22864014254245,
+        235.16179789541943
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.013693107713478333,
+      "donors": {
+        "F606W": {
+          "secondary": 194.91141891479492,
+          "signal": 8513.629482269287,
+          "xy": [
+            230,
+            235
+          ]
+        },
+        "F814W": {
+          "secondary": 226.21161794662476,
+          "signal": 13376.727990627289,
+          "xy": [
+            230,
+            235
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsp5nzq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.919702285194221e-14
+      },
+      "gaiaToPredictionPx": 7.343511931060294,
+      "peakOffsetPx": 0.005134089250626108,
+      "peakXY": [
+        230,
+        235
+      ],
+      "predictedXY": [
+        229.995621437365,
+        234.99731913042376
+      ],
+      "startMjd": 55261.00884339,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsp5"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        229.86919850577976,
+        234.67643468359594
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.008836986179717631,
+      "donors": {
+        "F438W": {
+          "secondary": 263.3818302154541,
+          "signal": 12197.142786026001,
+          "xy": [
+            230,
+            235
+          ]
+        },
+        "F814W": {
+          "secondary": 226.21161794662476,
+          "signal": 13376.727990627289,
+          "xy": [
+            230,
+            235
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsp5o6q_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.8943259375968475e-14
+      },
+      "gaiaToPredictionPx": 7.34617293712512,
+      "peakOffsetPx": 0.010410201342344225,
+      "peakXY": [
+        230,
+        235
+      ],
+      "predictedXY": [
+        230.0069302656027,
+        234.99223187856273
+      ],
+      "startMjd": 55261.04613524,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsp5"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        230.00643408485166,
+        235.0171131663033
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.008266950866618713,
+      "donors": {
+        "F438W": {
+          "secondary": 263.3818302154541,
+          "signal": 12197.142786026001,
+          "xy": [
+            230,
+            235
+          ]
+        },
+        "F606W": {
+          "secondary": 194.91141891479492,
+          "signal": 8513.629482269287,
+          "xy": [
+            230,
+            235
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsp5o7q_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.129706380223694e-15
+      },
+      "gaiaToPredictionPx": 7.3432255681217615,
+      "peakOffsetPx": 0.010754980788614343,
+      "peakXY": [
+        230,
+        235
+      ],
+      "predictedXY": [
+        229.99744734091004,
+        235.0104476573132
+      ],
+      "startMjd": 55261.04703783,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsp5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        234.25138585615815,
+        221.82441123606043
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.008129998420204,
+      "donors": {
+        "F606W": {
+          "secondary": 191.252667427063,
+          "signal": 9051.298718452454,
+          "xy": [
+            234,
+            221
+          ]
+        },
+        "F814W": {
+          "secondary": 340.4558672904968,
+          "signal": 12172.64739561081,
+          "xy": [
+            234,
+            222
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsq5ciq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.7972338692815934e-14
+      },
+      "gaiaToPredictionPx": 3.7779605109526826,
+      "peakOffsetPx": 0.5092343261041442,
+      "peakXY": [
+        234,
+        222
+      ],
+      "predictedXY": [
+        233.99328735270575,
+        221.49080991835166
+      ],
+      "startMjd": 55289.18743215,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsq5"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        234.4034675410861,
+        221.10981530733804
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.005494149356265478,
+      "donors": {
+        "F438W": {
+          "secondary": 190.82352924346924,
+          "signal": 12079.335141181946,
+          "xy": [
+            234,
+            222
+          ]
+        },
+        "F814W": {
+          "secondary": 340.4558672904968,
+          "signal": 12172.64739561081,
+          "xy": [
+            234,
+            222
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsq5clq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.8927063074452424e-14
+      },
+      "gaiaToPredictionPx": 4.046168947329074,
+      "peakOffsetPx": 1.01058045208849,
+      "peakXY": [
+        234,
+        221
+      ],
+      "predictedXY": [
+        234.0105546460689,
+        222.01052533347251
+      ],
+      "startMjd": 55289.19007104,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsq5"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        234.24998313467628,
+        221.75181925268987
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0133077323320072,
+      "donors": {
+        "F438W": {
+          "secondary": 190.82352924346924,
+          "signal": 12079.335141181946,
+          "xy": [
+            234,
+            222
+          ]
+        },
+        "F606W": {
+          "secondary": 191.252667427063,
+          "signal": 9051.298718452454,
+          "xy": [
+            234,
+            221
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsq5cmq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.239822639022226e-15
+      },
+      "gaiaToPredictionPx": 3.7785252141293117,
+      "peakOffsetPx": 0.5014878647236531,
+      "peakXY": [
+        234,
+        222
+      ],
+      "predictedXY": [
+        233.99616127747606,
+        221.49852682756256
+      ],
+      "startMjd": 55289.19097363,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsq5"
+    },
+    {
+      "band": "F438W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0070672844170927,
+      "donors": {
+        "F606W": {
+          "secondary": 199.38505387306213,
+          "signal": 8422.989820718765,
+          "xy": [
+            258,
+            218
+          ]
+        },
+        "F814W": {
+          "secondary": 257.21293008327484,
+          "signal": 13426.657601714134,
+          "xy": [
+            258,
+            219
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbst5sqq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 6.2848050590240545,
+      "peakOffsetPx": 0.5107692887993838,
+      "peakXY": [
+        258,
+        219
+      ],
+      "predictedXY": [
+        257.9906166853344,
+        218.4893169086542
+      ],
+      "startMjd": 55314.60179548,
+      "state": "CORE_DQ",
+      "visit": "ibbst5"
+    },
+    {
+      "band": "F606W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.008378407452686046,
+      "donors": {
+        "F438W": {
+          "secondary": 184.61079275608063,
+          "signal": 11579.762617707253,
+          "xy": [
+            258,
+            219
+          ]
+        },
+        "F814W": {
+          "secondary": 257.21293008327484,
+          "signal": 13426.657601714134,
+          "xy": [
+            258,
+            219
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbst5stq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 6.657616372773075,
+      "peakOffsetPx": 1.0105621258611601,
+      "peakXY": [
+        258,
+        218
+      ],
+      "predictedXY": [
+        258.02485223778217,
+        219.01025649045292
+      ],
+      "startMjd": 55314.60443437,
+      "state": "CORE_DQ",
+      "visit": "ibbst5"
+    },
+    {
+      "band": "F814W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 2,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.014141456766455,
+      "donors": {
+        "F438W": {
+          "secondary": 184.61079275608063,
+          "signal": 11579.762617707253,
+          "xy": [
+            258,
+            219
+          ]
+        },
+        "F606W": {
+          "secondary": 199.38505387306213,
+          "signal": 8422.989820718765,
+          "xy": [
+            258,
+            218
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbst5suq_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 6.285297322471192,
+      "peakOffsetPx": 0.4998540638418078,
+      "peakXY": [
+        258,
+        219
+      ],
+      "predictedXY": [
+        257.9845206163867,
+        218.50038567492302
+      ],
+      "startMjd": 55314.63369363,
+      "state": "CORE_DQ",
+      "visit": "ibbst5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        283.264803429866,
+        223.04233687175955
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0081400467291288,
+      "donors": {
+        "F606W": {
+          "secondary": 149.20045673847198,
+          "signal": 13544.222047924995,
+          "xy": [
+            283,
+            222
+          ]
+        },
+        "F814W": {
+          "secondary": 271.40523076057434,
+          "signal": 11949.4591858387,
+          "xy": [
+            283,
+            223
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsu1dbq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.809836472664749e-14
+      },
+      "gaiaToPredictionPx": 1.3324607529645356,
+      "peakOffsetPx": 0.5095016338391843,
+      "peakXY": [
+        283,
+        223
+      ],
+      "predictedXY": [
+        282.9916006877909,
+        222.49056760366148
+      ],
+      "startMjd": 55366.10396112,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsu1"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        283.0261229573562,
+        222.24527258168456
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.006628141441843068,
+      "donors": {
+        "F438W": {
+          "secondary": 151.36200499534607,
+          "signal": 9876.50858092308,
+          "xy": [
+            283,
+            223
+          ]
+        },
+        "F814W": {
+          "secondary": 271.40523076057434,
+          "signal": 11949.4591858387,
+          "xy": [
+            283,
+            223
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsu1deq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.892015557019632e-14
+      },
+      "gaiaToPredictionPx": 1.4336956959485287,
+      "peakOffsetPx": 1.010732405958182,
+      "peakXY": [
+        283,
+        222
+      ],
+      "predictedXY": [
+        283.0223241031639,
+        223.01048583902593
+      ],
+      "startMjd": 55366.1066,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsu1"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        283.23758198749783,
+        222.82211678942372
+      ],
+      "chip": 1,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 1.0134390552473862,
+      "donors": {
+        "F438W": {
+          "secondary": 151.36200499534607,
+          "signal": 9876.50858092308,
+          "xy": [
+            283,
+            223
+          ]
+        },
+        "F606W": {
+          "secondary": 149.20045673847198,
+          "signal": 13544.222047924995,
+          "xy": [
+            283,
+            222
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsu1dfq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.230913011862585e-15
+      },
+      "gaiaToPredictionPx": 1.334528006157529,
+      "peakOffsetPx": 0.5013030271851676,
+      "peakXY": [
+        283,
+        223
+      ],
+      "predictedXY": [
+        282.98606307676255,
+        222.49889074321493
+      ],
+      "startMjd": 55366.1075026,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsu1"
+    },
+    {
+      "band": "F438W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 1,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.00847023163914386,
+      "donors": {
+        "F606W": {
+          "secondary": 1599.5324473381042,
+          "signal": 12122.088233470917,
+          "xy": [
+            269,
+            216
+          ]
+        },
+        "F814W": {
+          "secondary": 1574.3287568092346,
+          "signal": 10763.29872751236,
+          "xy": [
+            269,
+            216
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsu5x4q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 3.9471763621562643,
+      "peakOffsetPx": 0.010191656007506008,
+      "peakXY": [
+        269,
+        216
+      ],
+      "predictedXY": [
+        268.99638549789495,
+        215.9904708223488
+      ],
+      "startMjd": 55344.05144963,
+      "state": "CORE_DQ",
+      "visit": "ibbsu5"
+    },
+    {
+      "band": "F606W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 1,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.005962294279790174,
+      "donors": {
+        "F438W": {
+          "secondary": 188.04463243484497,
+          "signal": 9040.47016954422,
+          "xy": [
+            269,
+            216
+          ]
+        },
+        "F814W": {
+          "secondary": 1574.3287568092346,
+          "signal": 10763.29872751236,
+          "xy": [
+            269,
+            216
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsu5x8q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 3.9455644887987074,
+      "peakOffsetPx": 0.011444829092870677,
+      "peakXY": [
+        269,
+        216
+      ],
+      "predictedXY": [
+        269.0038092302216,
+        216.01079230643023
+      ],
+      "startMjd": 55344.05408815,
+      "state": "CORE_DQ",
+      "visit": "ibbsu5"
+    },
+    {
+      "band": "F814W",
+      "chip": 1,
+      "coreDqOr": 16,
+      "coreDqPixels": 1,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.014424456876381705,
+      "donors": {
+        "F438W": {
+          "secondary": 188.04463243484497,
+          "signal": 9040.47016954422,
+          "xy": [
+            269,
+            216
+          ]
+        },
+        "F606W": {
+          "secondary": 1599.5324473381042,
+          "signal": 12122.088233470917,
+          "xy": [
+            269,
+            216
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsu5x9q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 3.946710478295538,
+      "peakOffsetPx": 0.0012792721749243085,
+      "peakXY": [
+        269,
+        216
+      ],
+      "predictedXY": [
+        268.99980498644436,
+        215.99873567922953
+      ],
+      "startMjd": 55344.05499112,
+      "state": "CORE_DQ",
+      "visit": "ibbsu5"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        303.72743466445996,
+        233.1115631557122
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.015637116918015576,
+      "donors": {
+        "F606W": {
+          "secondary": 182.6371030807495,
+          "signal": 8852.581774711609,
+          "xy": [
+            304,
+            233
+          ]
+        },
+        "F814W": {
+          "secondary": 196.13227367401123,
+          "signal": 14061.66875743866,
+          "xy": [
+            304,
+            233
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsw1n4q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 10.627878695026808,
+      "peakOffsetPx": 0.0024436534320079932,
+      "peakXY": [
+        304,
+        233
+      ],
+      "predictedXY": [
+        304.0000934523207,
+        232.9975581341643
+      ],
+      "startMjd": 55394.10669317,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsw1"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        303.6439772452313,
+        232.62192860595735
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.010204849348658887,
+      "donors": {
+        "F438W": {
+          "secondary": 281.69809126853943,
+          "signal": 13749.093049764633,
+          "xy": [
+            304,
+            233
+          ]
+        },
+        "F814W": {
+          "secondary": 196.13227367401123,
+          "signal": 14061.66875743866,
+          "xy": [
+            304,
+            233
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsw1n7q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 10.629101255745637,
+      "peakOffsetPx": 0.010545861526443056,
+      "peakXY": [
+        304,
+        233
+      ],
+      "predictedXY": [
+        304.00324262721114,
+        232.98996503292958
+      ],
+      "startMjd": 55394.10933206,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsw1"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        303.8597093611441,
+        232.94612639393472
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.005479994055274941,
+      "donors": {
+        "F438W": {
+          "secondary": 281.69809126853943,
+          "signal": 13749.093049764633,
+          "xy": [
+            304,
+            233
+          ]
+        },
+        "F606W": {
+          "secondary": 182.6371030807495,
+          "signal": 8852.581774711609,
+          "xy": [
+            304,
+            233
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsw1n8q_flc.fits",
+      "fluxCalibratedRadii": {},
+      "gaiaToPredictionPx": 10.623251738632495,
+      "peakOffsetPx": 0.01291390595135652,
+      "peakXY": [
+        304,
+        233
+      ],
+      "predictedXY": [
+        303.9966632776005,
+        233.01247538578758
+      ],
+      "startMjd": 55394.11023465,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsw1"
+    },
+    {
+      "band": "F438W",
+      "centerXY": [
+        299.6497706335684,
+        264.9140131987696
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9909894662611114,
+      "donors": {
+        "F606W": {
+          "secondary": 228.41392302513123,
+          "signal": 8674.185529470444,
+          "xy": [
+            300,
+            264
+          ]
+        },
+        "F814W": {
+          "secondary": 325.8241636753082,
+          "signal": 12839.350134134293,
+          "xy": [
+            300,
+            265
+          ]
+        }
+      },
+      "exptimeSeconds": 1.0,
+      "file": "ibbsy4mxq_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 4.8803951931035766e-14
+      },
+      "gaiaToPredictionPx": 5.485219156460216,
+      "peakOffsetPx": 0.5010409634337204,
+      "peakXY": [
+        300,
+        265
+      ],
+      "predictedXY": [
+        299.9991581461585,
+        264.49895974381224
+      ],
+      "startMjd": 55422.64245747,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsy4"
+    },
+    {
+      "band": "F606W",
+      "centerXY": [
+        299.7702480835114,
+        264.38711153015106
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.006211476796544419,
+      "donors": {
+        "F438W": {
+          "secondary": 502.3746486902237,
+          "signal": 12611.618941903114,
+          "xy": [
+            300,
+            265
+          ]
+        },
+        "F814W": {
+          "secondary": 325.8241636753082,
+          "signal": 12839.350134134293,
+          "xy": [
+            300,
+            265
+          ]
+        }
+      },
+      "exptimeSeconds": 0.48,
+      "file": "ibbsy4n0q_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 1.929727730801532e-14
+      },
+      "gaiaToPredictionPx": 5.957811304669269,
+      "peakOffsetPx": 0.9936288462887867,
+      "peakXY": [
+        300,
+        264
+      ],
+      "predictedXY": [
+        299.997723124001,
+        264.99362623758276
+      ],
+      "startMjd": 55422.64509636,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsy4"
+    },
+    {
+      "band": "F814W",
+      "centerXY": [
+        299.67656508240026,
+        264.860754131271
+      ],
+      "chip": 2,
+      "coreDqOr": 0,
+      "coreDqPixels": 0,
+      "dither": [
+        0.0,
+        0.0
+      ],
+      "donorSeparationPx": 0.9963627922309128,
+      "donors": {
+        "F438W": {
+          "secondary": 502.3746486902237,
+          "signal": 12611.618941903114,
+          "xy": [
+            300,
+            265
+          ]
+        },
+        "F606W": {
+          "secondary": 228.41392302513123,
+          "signal": 8674.185529470444,
+          "xy": [
+            300,
+            264
+          ]
+        }
+      },
+      "exptimeSeconds": 2.0,
+      "file": "ibbsy4n1q_flc.fits",
+      "fluxCalibratedRadii": {
+        "5": 6.254957093643704e-15
+      },
+      "gaiaToPredictionPx": 5.487493542049871,
+      "peakOffsetPx": 0.4926438676425518,
+      "peakXY": [
+        300,
+        265
+      ],
+      "predictedXY": [
+        300.0033039674723,
+        264.50736721168323
+      ],
+      "startMjd": 55422.64599932,
+      "state": "APERTURE_SUPPORT",
+      "visit": "ibbsy4"
+    }
+  ],
+  "schema": "BKL046_GRW70_VISIT_DISJOINT_HELDOUT_CENTER_V1_RESULT",
+  "scientificClosures": 0,
+  "stateCounts": {
+    "APERTURE_SUPPORT": 38,
+    "CORE_DQ": 16,
+    "MEASURED_BOTH_RADII": 6
+  },
+  "visitDisjointPredictions": [
+    {
+      "chip": 2,
+      "state": "INSUFFICIENT_OTHER_VISITS",
+      "training": [
+        "ibbsd5"
+      ],
+      "visit": "ibbsb0"
+    },
+    {
+      "chip": 2,
+      "state": "INSUFFICIENT_OTHER_VISITS",
+      "training": [
+        "ibbsb0"
+      ],
+      "visit": "ibbsd5"
+    }
+  ],
+  "visits": [
+    {
+      "chip": 1,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbs15"
+    },
+    {
+      "chip": 1,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 2
+      },
+      "visit": "ibbs30"
+    },
+    {
+      "chip": 1,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbs55"
+    },
+    {
+      "chip": 2,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 1
+      },
+      "visit": "ibbsa5"
+    },
+    {
+      "apertureChangeMillimag": {
+        "F438W-F606W": 15.73724713087472,
+        "F438W-F814W": 29.486419195553026,
+        "F606W-F814W": 13.749172064678532
+      },
+      "chip": 2,
+      "colors": {
+        "10": {
+          "F438W-F606W": -1022.3291096726157,
+          "F438W-F814W": -2224.031050022768,
+          "F606W-F814W": -1201.701940350152
+        },
+        "5": {
+          "F438W-F606W": -1038.0663568034904,
+          "F438W-F814W": -2253.517469218321,
+          "F606W-F814W": -1215.4511124148305
+        }
+      },
+      "coverage": {
+        "10": 3,
+        "5": 3
+      },
+      "visit": "ibbsb0"
+    },
+    {
+      "apertureChangeMillimag": {
+        "F438W-F606W": 9.439943545816845,
+        "F438W-F814W": 8.693472707064302,
+        "F606W-F814W": -0.7464708387524297
+      },
+      "chip": 2,
+      "colors": {
+        "10": {
+          "F438W-F606W": -1008.8381993728972,
+          "F438W-F814W": -2222.1912884166013,
+          "F606W-F814W": -1213.353089043704
+        },
+        "5": {
+          "F438W-F606W": -1018.278142918714,
+          "F438W-F814W": -2230.8847611236656,
+          "F606W-F814W": -1212.6066182049515
+        }
+      },
+      "coverage": {
+        "10": 3,
+        "5": 3
+      },
+      "visit": "ibbsd5"
+    },
+    {
+      "chip": 2,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbse5"
+    },
+    {
+      "chip": 1,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1026.4141050322162,
+          "F438W-F814W": -2220.61792463261,
+          "F606W-F814W": -1194.203819600394
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsf0"
+    },
+    {
+      "chip": 1,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1021.8687834751349,
+          "F438W-F814W": -2229.9012990999663,
+          "F606W-F814W": -1208.0325156248316
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsh5"
+    },
+    {
+      "chip": 1,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbsi5"
+    },
+    {
+      "chip": 2,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1039.9279117328379,
+          "F438W-F814W": -2266.104370091686,
+          "F606W-F814W": -1226.176458358848
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsk1"
+    },
+    {
+      "chip": 1,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbsk5"
+    },
+    {
+      "chip": 1,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1014.5682517947693,
+          "F438W-F814W": -2219.9220256972935,
+          "F606W-F814W": -1205.3537739025244
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsl1"
+    },
+    {
+      "chip": 2,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1036.2102913540148,
+          "F438W-F814W": -2261.2478762299943,
+          "F606W-F814W": -1225.03758487598
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsp5"
+    },
+    {
+      "chip": 1,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1009.769154492911,
+          "F438W-F814W": -2214.5466143961175,
+          "F606W-F814W": -1204.7774599032066
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsq5"
+    },
+    {
+      "chip": 1,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbst5"
+    },
+    {
+      "chip": 1,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1013.0140205127356,
+          "F438W-F814W": -2218.9465575697177,
+          "F606W-F814W": -1205.932537056982
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsu1"
+    },
+    {
+      "chip": 1,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbsu5"
+    },
+    {
+      "chip": 2,
+      "colors": {},
+      "coverage": {
+        "10": 0,
+        "5": 0
+      },
+      "visit": "ibbsw1"
+    },
+    {
+      "chip": 2,
+      "colors": {
+        "5": {
+          "F438W-F606W": -1007.3973821434605,
+          "F438W-F814W": -2230.5766393373906,
+          "F606W-F814W": -1223.1792571939302
+        }
+      },
+      "coverage": {
+        "10": 0,
+        "5": 3
+      },
+      "visit": "ibbsy4"
+    }
+  ]
+}

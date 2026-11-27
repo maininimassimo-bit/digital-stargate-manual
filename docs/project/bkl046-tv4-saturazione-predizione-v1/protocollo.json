@@ -1,0 +1,15 @@
+{
+  "protocol": "BKL046_TV4_SATURATION_FORWARD_PREDICTION_V1",
+  "cohortSha256": "5cc3749b5b4337f62303ca8aba3889d08ecedcffcd1f84cd4f1843043653aea2",
+  "saturationAcquisitionSha256": "62c4184f3b4500c6fa5369576750d02aadb7d587c34e8a07221edb5f47c528ce",
+  "saturationPlanSha256": "0c62e3ad5cfd91e89a296bcbbdcdff915ac6462845bb668044b0f327aa2165f8",
+  "training": {"preAlignment":[6,8],"postAlignment":[13,12]},
+  "trainingFramesPerLevel": 6,
+  "trainingSelection": "First six by catalogue acquisition time for each level",
+  "heldOutGroups": ["CW","CU"],
+  "thresholdDn": 16383,
+  "models": ["raw", "parallelOverscan"],
+  "fit": "At each pixel interpolate the two per-level medians to the observed duration, extrapolating beyond training and adding target overscan back for the corrected model",
+  "labels": "Observed raw code equals 16383 in the five predeclared internal regions. Continuous errors only where observed code is below ceiling.",
+  "physicalRecoveryClaimed": false
+}

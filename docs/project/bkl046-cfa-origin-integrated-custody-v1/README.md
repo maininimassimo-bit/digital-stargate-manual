@@ -1,0 +1,9 @@
+# BKL-046 · Custodia degli ingressi e rilascio R4 isolato
+
+Il driver di prova ottiene HELD per i 18 ingressi prima di avviare l'adattatore R4 e il testimone. Dopo il legame FD3 verifica che una scrittura sul FITS di prova sia ancora respinta. Nel caso valido, l'apertura in scrittura resta negata anche dopo l'uscita del testimone, fino alla chiusura del custode degli ingressi. Il rilascio segue la classificazione e la custodia dei 14 oggetti archiviati su H:.
+
+Un FITS alterato prima del controllo blocca l'avvio del testimone e l'acquisizione. La chiusura anticipata del custode a testimone ancora vivo tiene la prenotazione, anche se poi il testimone esce a zero e i prodotti di prova classificano correttamente. Altri cinque scenari respinti coprono log difforme, sequenza fuori modello, uscita non zero, collisione e alterazione dopo la pubblicazione.
+
+Gli handle Win32, il processo testimone, il custode R4 e le scritture nello spazio di prova su H: sono effettivi. I prodotti del batch e l'inventario PixInsight sono simulati. Il registro canonico resta fuori dal collaudo. Restano l'integrazione del processo e della finestra originali di PixInsight, la revisione e l'ammissione del nuovo pacchetto. [Custodia ingressi](../bkl046-cfa-origin-input-custody-v1/README.md) · [Custodia archivio](../bkl046-cfa-origin-h-custody-v1/README.md)
+
+Il collaudo riusa i kit dei due controlli e l'adattatore R4 installato. Argomenti Node: Python fissato, kit di verifica del batch, cartella fonti del custode ingressi, parent_barrier.py v4, dipendenze, directory nuova del registro, radice H: di prova e nuova ricevuta.

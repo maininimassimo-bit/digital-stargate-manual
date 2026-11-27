@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_M8_M20_RAW_APERTURE_NOISE_TRANSFER_V1",
+  "sourceCode": "07b25ba8c5e21161540857700c6a8e371dfcea78327f6c27493d1f1ac6a4d461",
+  "sourceReport": "cad901998a6ade041a413437b968da050baf1a4e1c7c6b37cd4fcd3a0de103e8",
+  "window": 7,
+  "apertures": [
+    3,
+    5
+  ],
+  "minimumWindows": 60,
+  "design": "Compare compensated aperture standard deviation with diagonal-only noise on flat and short-dark pair differences, separately by Bayer parity. Use nonoverlapping 7x7 windows with the same position and validity masks in both kinds. Fit the median empirical-to-diagonal factor on fixed training pairs and tiles, and check it on the intersection of held-out pairs and tiles.",
+  "comparison": "Held-out P90 relative error of the trained factor versus a factor of one. Keep the original pairing, nuisance illumination adjustment and hot pixel exclusions."
+}

@@ -1,0 +1,806 @@
+{
+  "schema": "BKL046_KNOWLEDGE_V1171_SUPPLEMENT_20261126_V6",
+  "baselineVersion": "1.171",
+  "baselineCapsuleSha256": "b17265193ff750f57572787978f2cadb276c4c9b4f7e530111e061d590f09d19",
+  "parentLedger": {
+    "commit": "cccacdcdc0356788c0c8893184de9f0e793a2efd",
+    "sha256": "c85085d391f924e76c795d749177515af8f3feec4c870b31f5db20f276fc6842"
+  },
+  "sourceIndex": {
+    "commit": "2a1956350bd34aad0429e97eff87ceb412602062",
+    "sha256": "902c123477fd3f604dca1f67531cb9219b65b33ac6978d28b2aa0b73378d064f"
+  },
+  "evidence": [
+    {
+      "id": "asi2600CalibratorCovariance",
+      "level": "rawRealCalibratorFrameDifferences",
+      "axes": [
+        "NOISE_FLUX/1",
+        "NOISE_FLUX/2",
+        "NOISE_FLUX/3"
+      ],
+      "commit": "70ed3c3f741f8aa47301fb518fd1cc7e2843a193",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-asi2600mc-calibrator-covariance-v1/riscontro.json",
+          "sha256": "1b418ca777cbb2a2f03634457853ebfa8ca5bdec5d6ec32b2510c64d61cfdb3c",
+          "archiveSha256": "dec8591cbc89f2ae747b51d3239628069d5fdbe5fe22336fb3dd78f87c82f9d5",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-ASI2600MC-covarianza-calibratori-v1.zip",
+          "copiedReport": "asi2600CalibratorCovariance-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "asi2600FlatCommonMode",
+      "level": "realFlatPairsHeldoutSpatialDetrending",
+      "axes": [
+        "NOISE_FLUX/2",
+        "NOISE_FLUX/3"
+      ],
+      "commit": "fbe0c2d4638c44dee162f7102dc31248419f52c8",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-asi2600mc-flat-common-mode-v1/riscontro.json",
+          "sha256": "f06de61ae746a9c839d9518ca1322393601697eab234fb7c36cab6211546a560",
+          "archiveSha256": "b6212aee120e03d6272a293f9aab74027e22738414950cd732a255adbe6eb86e",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-ASI2600MC-flat-modo-comune-v1.zip",
+          "copiedReport": "asi2600FlatCommonMode-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "asi2600DarkBilinear",
+      "level": "realDarkInputsOfflineBilinearPropagation",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "09618e87e3e193ef81024b5c1e97c76dca1f1497",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-asi2600mc-dark-bilinear-noise-v1/riscontro.json",
+          "sha256": "0ec52bc040a3ac508a7bc5d4d80b08863dce80825f4450ef9b61482ff968bb09",
+          "archiveSha256": "b2533b9f7766c61c574d21ba34d78cca14f8599f748bd10f4b58aadac7e69259",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-ASI2600MC-dark-bilineare-v1.zip",
+          "copiedReport": "asi2600DarkBilinear-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "asi2600NativeBilinearReference",
+      "level": "frozenReferenceAndComparatorOnly",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "97d635b0ca5d87417f4355183722e1f5cc59bf42",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-asi2600mc-native-bilinear-reference-v1/riscontro.json",
+          "sha256": "68912506210feabe8efd053fe1633ed46edd75bf780d8a175d4fb12046a5fbf9",
+          "archiveSha256": "8a84589b22ca6d1910bdea5ebd35cc765f21ddf895107b603fc363ec6d25499c",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-ASI2600MC-bilineare-fascicolo-v1.zip",
+          "copiedReport": "asi2600NativeBilinearReference-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "pjsrBilinearPrimitive",
+      "level": "exactCallableWithNodeShimOnly",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "3dc1ff18e2d122d90d34805a3491f371eebd071c",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-pjsr-bilinear-primitive-control-v1/riscontro.json",
+          "sha256": "bb392d80214f03eadfac70909ba10de1700e57f8d4c49e77c6e0e386cbf31474",
+          "archiveSha256": "0b0b2e8c4693440ff9a7fa4245e63c874ad8a84ea9ef393a16a0202c1387c8d2",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-PJSR-bilineare-primitiva-v1.zip",
+          "copiedReport": "pjsrBilinearPrimitive-riscontro.json"
+        }
+      ]
+    },
+    {
+      "id": "asi2600BilinearPostExit",
+      "level": "syntheticEnvelopeAndBoundNumericalVerification",
+      "axes": [
+        "NOISE_FLUX/3"
+      ],
+      "commit": "2a1956350bd34aad0429e97eff87ceb412602062",
+      "reports": [
+        {
+          "path": "docs/project/bkl046-asi2600mc-bilinear-postexit-verification-v1/riscontro.json",
+          "sha256": "ef7fb15fa0a898fd3fa2f1e1675c40ccccd2db22328418f999b5ed507994240e",
+          "archiveSha256": "9eddd1a589327270ddad8217bd930bc5482df70c87be85ee00c59410d644286d",
+          "archiveMember": "riscontro.json",
+          "archiveName": "BKL046-ASI2600MC-bilineare-postexit-v1.zip",
+          "copiedReport": "asi2600BilinearPostExit-riscontro.json"
+        }
+      ]
+    }
+  ],
+  "findings": {
+    "rawCalibratorCovariance": {
+      "dark": {
+        "B": {
+          "avgPixelVarianceAdu2": {
+            "median": 32.952404988010144,
+            "p05": 27.29997565753299,
+            "p95": 41.31338361961984
+          },
+          "blockVarianceRatio": {
+            "median": 1.009989906244523,
+            "p05": 0.956038221770266,
+            "p95": 1.0632313506391966
+          },
+          "meanAdu": {
+            "median": 501.7628173828125,
+            "p05": 501.6168212890625,
+            "p95": 501.89979248046876
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.009833999212230795,
+            "p05": -0.020255593512652013,
+            "p95": 0.03890398102364821
+          },
+          "rhoVertical": {
+            "median": -0.0038401307290748636,
+            "p05": -0.036924695908778414,
+            "p95": 0.03819700983831031
+          }
+        },
+        "G1": {
+          "avgPixelVarianceAdu2": {
+            "median": 31.50452137459525,
+            "p05": 26.031747576731274,
+            "p95": 38.774777445415594
+          },
+          "blockVarianceRatio": {
+            "median": 1.011076223330799,
+            "p05": 0.957257584173674,
+            "p95": 1.082210861991065
+          },
+          "meanAdu": {
+            "median": 501.248046875,
+            "p05": 501.04273681640626,
+            "p95": 501.4833740234375
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.008209718574744937,
+            "p05": -0.02694910916909408,
+            "p95": 0.037712781020489396
+          },
+          "rhoVertical": {
+            "median": 0.0007470521049681017,
+            "p05": -0.026949674056800387,
+            "p95": 0.032256942295902154
+          }
+        },
+        "G2": {
+          "avgPixelVarianceAdu2": {
+            "median": 35.49246600646077,
+            "p05": 30.07172211976112,
+            "p95": 42.67652143998579
+          },
+          "blockVarianceRatio": {
+            "median": 1.0116270037839177,
+            "p05": 0.951688886951457,
+            "p95": 1.0587952597196901
+          },
+          "meanAdu": {
+            "median": 501.6844482421875,
+            "p05": 501.51146240234374,
+            "p95": 501.9098266601562
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.0029338236519933815,
+            "p05": -0.03049016288574961,
+            "p95": 0.038398833598173567
+          },
+          "rhoVertical": {
+            "median": 0.002510781538754549,
+            "p05": -0.021924191560977475,
+            "p95": 0.03993488510841337
+          }
+        },
+        "R": {
+          "avgPixelVarianceAdu2": {
+            "median": 32.76499913608107,
+            "p05": 27.625223962629065,
+            "p95": 38.3728879449421
+          },
+          "blockVarianceRatio": {
+            "median": 1.0201805202174195,
+            "p05": 0.9271943930937754,
+            "p95": 1.077672153043563
+          },
+          "meanAdu": {
+            "median": 501.3267822265625,
+            "p05": 501.1698364257812,
+            "p95": 501.6328979492188
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.005909874601125485,
+            "p05": -0.024063009940481446,
+            "p95": 0.03813976262233469
+          },
+          "rhoVertical": {
+            "median": -0.003276467935624767,
+            "p05": -0.029669522108712303,
+            "p95": 0.02784658159723
+          }
+        }
+      },
+      "flat": {
+        "B": {
+          "avgPixelVarianceAdu2": {
+            "median": 104398.29078819,
+            "p05": 97654.17092960542,
+            "p95": 121044.70554077506
+          },
+          "blockVarianceRatio": {
+            "median": 1.02289713504514,
+            "p05": 0.9539658408657691,
+            "p95": 1.3220067421887087
+          },
+          "meanAdu": {
+            "median": 26464.999755859375,
+            "p05": 25812.96906738281,
+            "p95": 28005.121667480467
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.01100109654452612,
+            "p05": -0.032743186623254504,
+            "p95": 0.11130690960644113
+          },
+          "rhoVertical": {
+            "median": 0.021459127286916332,
+            "p05": -0.02837168745813514,
+            "p95": 0.10942801103639575
+          }
+        },
+        "G1": {
+          "avgPixelVarianceAdu2": {
+            "median": 115451.5857124515,
+            "p05": 107974.68726591855,
+            "p95": 130880.69873161423
+          },
+          "blockVarianceRatio": {
+            "median": 1.0364435428810865,
+            "p05": 0.9670678138740474,
+            "p95": 1.323738704427521
+          },
+          "meanAdu": {
+            "median": 28893.040771484375,
+            "p05": 27933.197485351564,
+            "p95": 30385.392150878906
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.011572319472709112,
+            "p05": -0.025473276641025187,
+            "p95": 0.12107962584423447
+          },
+          "rhoVertical": {
+            "median": 0.026396043242672806,
+            "p05": -0.02487230620399439,
+            "p95": 0.10771374116508703
+          }
+        },
+        "G2": {
+          "avgPixelVarianceAdu2": {
+            "median": 115881.58017955195,
+            "p05": 109020.66660322112,
+            "p95": 128840.00097776768
+          },
+          "blockVarianceRatio": {
+            "median": 1.0183436593820725,
+            "p05": 0.9477370413448776,
+            "p95": 1.33901645056648
+          },
+          "meanAdu": {
+            "median": 28912.069458007812,
+            "p05": 27946.556311035158,
+            "p95": 30385.438403320313
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.009591710663569385,
+            "p05": -0.04493323965565087,
+            "p95": 0.12597724302370197
+          },
+          "rhoVertical": {
+            "median": 0.008169252521813986,
+            "p05": -0.02399491648263911,
+            "p95": 0.11218951534986282
+          }
+        },
+        "R": {
+          "avgPixelVarianceAdu2": {
+            "median": 24458.38274197844,
+            "p05": 23248.69477176312,
+            "p95": 26225.344408869438
+          },
+          "blockVarianceRatio": {
+            "median": 1.019726901680614,
+            "p05": 0.9542612959086774,
+            "p95": 1.0910165719016518
+          },
+          "meanAdu": {
+            "median": 6671.4317626953125,
+            "p05": 6513.75234375,
+            "p95": 7029.259777832031
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.0036747379513345398,
+            "p05": -0.021358676725236565,
+            "p95": 0.037194417684191496
+          },
+          "rhoVertical": {
+            "median": 0.005956582718645248,
+            "p05": -0.0373876853335504,
+            "p95": 0.04891015971784028
+          }
+        }
+      },
+      "shortDark": {
+        "B": {
+          "avgPixelVarianceAdu2": {
+            "median": 31.99952293537695,
+            "p05": 25.57279889208364,
+            "p95": 38.77937824327576
+          },
+          "blockVarianceRatio": {
+            "median": 0.9974879945392802,
+            "p05": 0.9519820645197301,
+            "p95": 1.053601403932386
+          },
+          "meanAdu": {
+            "median": 501.4755859375,
+            "p05": 501.3635986328125,
+            "p95": 501.59581298828124
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.0029172648803219535,
+            "p05": -0.022049120260002754,
+            "p95": 0.0348252749039109
+          },
+          "rhoVertical": {
+            "median": -0.002956023549825102,
+            "p05": -0.019188859524364672,
+            "p95": 0.023670967168652447
+          }
+        },
+        "G1": {
+          "avgPixelVarianceAdu2": {
+            "median": 29.37917377848546,
+            "p05": 24.995024793518606,
+            "p95": 35.54256244558743
+          },
+          "blockVarianceRatio": {
+            "median": 1.0085026015301857,
+            "p05": 0.9488229449854134,
+            "p95": 1.066016296334882
+          },
+          "meanAdu": {
+            "median": 500.979248046875,
+            "p05": 500.840966796875,
+            "p95": 501.109033203125
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.0008919887861978421,
+            "p05": -0.03099906989956783,
+            "p95": 0.04890544887877262
+          },
+          "rhoVertical": {
+            "median": -2.4546181894180997E-05,
+            "p05": -0.03696677800308508,
+            "p95": 0.025562758093572634
+          }
+        },
+        "G2": {
+          "avgPixelVarianceAdu2": {
+            "median": 31.875674071549668,
+            "p05": 27.476587582287085,
+            "p95": 38.38137671208684
+          },
+          "blockVarianceRatio": {
+            "median": 1.0099262854578956,
+            "p05": 0.9617291433365229,
+            "p95": 1.0824067828301334
+          },
+          "meanAdu": {
+            "median": 501.429443359375,
+            "p05": 501.281201171875,
+            "p95": 501.6344360351562
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.007925291186952654,
+            "p05": -0.03356551120226645,
+            "p95": 0.041038960259259766
+          },
+          "rhoVertical": {
+            "median": 0.002044635716873539,
+            "p05": -0.03725899796920176,
+            "p95": 0.032809847722195626
+          }
+        },
+        "R": {
+          "avgPixelVarianceAdu2": {
+            "median": 31.19744723889601,
+            "p05": 27.053488991477273,
+            "p95": 35.071505173490195
+          },
+          "blockVarianceRatio": {
+            "median": 1.0066127150381128,
+            "p05": 0.9502935098054804,
+            "p95": 1.0589315445327485
+          },
+          "meanAdu": {
+            "median": 501.0498046875,
+            "p05": 500.8917602539062,
+            "p95": 501.19537353515625
+          },
+          "measured": 63,
+          "refused": 0,
+          "rhoHorizontal": {
+            "median": 0.008639976733904167,
+            "p05": -0.024225610005243273,
+            "p95": 0.03543087742004902
+          },
+          "rhoVertical": {
+            "median": -0.002757749887078117,
+            "p05": -0.04593300636585793,
+            "p95": 0.02993338658392323
+          }
+        }
+      }
+    },
+    "flatSpatialEffect": {
+      "B": {
+        "maxAbsTrainingScaleChange": 0.031899742136916154,
+        "measurements": 126,
+        "raw": {
+          "above1p2": 21,
+          "median": 1.0386123223350294,
+          "p95": 1.3323436444549317
+        },
+        "scaled": {
+          "above1p2": 21,
+          "median": 1.0384988495207184,
+          "p95": 1.3288440999968694
+        },
+        "scaledPlaneRemoved": {
+          "above1p2": 4,
+          "median": 1.022751500071195,
+          "p95": 1.1562645007014474
+        }
+      },
+      "G1": {
+        "maxAbsTrainingScaleChange": 0.03004417883103283,
+        "measurements": 126,
+        "raw": {
+          "above1p2": 25,
+          "median": 1.0525739461914403,
+          "p95": 1.3183676736001708
+        },
+        "scaled": {
+          "above1p2": 25,
+          "median": 1.0526954323508837,
+          "p95": 1.3170772601465361
+        },
+        "scaledPlaneRemoved": {
+          "above1p2": 1,
+          "median": 1.029120244344359,
+          "p95": 1.1553510967875544
+        }
+      },
+      "G2": {
+        "maxAbsTrainingScaleChange": 0.030024675989589245,
+        "measurements": 126,
+        "raw": {
+          "above1p2": 21,
+          "median": 1.0319363207525256,
+          "p95": 1.3644291580472874
+        },
+        "scaled": {
+          "above1p2": 21,
+          "median": 1.0323545381667536,
+          "p95": 1.3716951939573636
+        },
+        "scaledPlaneRemoved": {
+          "above1p2": 3,
+          "median": 1.0150797571062093,
+          "p95": 1.1599505266222023
+        }
+      },
+      "R": {
+        "maxAbsTrainingScaleChange": 0.030411822235760444,
+        "measurements": 126,
+        "raw": {
+          "above1p2": 2,
+          "median": 1.0195464963176426,
+          "p95": 1.1275425348767745
+        },
+        "scaled": {
+          "above1p2": 2,
+          "median": 1.0192316585595056,
+          "p95": 1.1273997080809035
+        },
+        "scaledPlaneRemoved": {
+          "above1p2": 0,
+          "median": 1.013451136351398,
+          "p95": 1.118244909449872
+        }
+      }
+    },
+    "darkBilinearOffline": {
+      "dark": [
+        {
+          "diagonalRelativeErrorMedian": 0.03123444100744699,
+          "diagonalWithinTenPercent": 246,
+          "empiricalSumToDiagonalMedian": 1.0136203643340966,
+          "empiricalSumToDiagonalP05P95": [
+            0.9472947471713445,
+            1.0756075767126996
+          ],
+          "fullRelativeErrorMedian": 0.03123444100744699,
+          "fullRelativeErrorP95": 0.09095799841296603,
+          "fullWithinTenPercent": 246,
+          "observations": 252,
+          "phaseXY": [
+            0,
+            0
+          ],
+          "unitInputVarianceDiagonal": 4.0,
+          "unitInputVarianceFull": 4.0
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.3454324814821925,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 1.5314703626977413,
+          "empiricalSumToDiagonalP05P95": [
+            1.4103299945548415,
+            1.672379604324428
+          ],
+          "fullRelativeErrorMedian": 0.043125528754721865,
+          "fullRelativeErrorP95": 0.11646588079019672,
+          "fullWithinTenPercent": 221,
+          "observations": 252,
+          "phaseXY": [
+            0.5,
+            0
+          ],
+          "unitInputVarianceDiagonal": 2.0,
+          "unitInputVarianceFull": 3.0
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.3388521192907075,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 1.5139066818873068,
+          "empiricalSumToDiagonalP05P95": [
+            1.3750766282561104,
+            1.6421789629667447
+          ],
+          "fullRelativeErrorMedian": 0.046628019901413076,
+          "fullRelativeErrorP95": 0.12692488319622997,
+          "fullWithinTenPercent": 225,
+          "observations": 252,
+          "phaseXY": [
+            0,
+            0.5
+          ],
+          "unitInputVarianceDiagonal": 2.0,
+          "unitInputVarianceFull": 3.0
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.5633834263406653,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 2.276897930557414,
+          "empiricalSumToDiagonalP05P95": [
+            2.083382420447573,
+            2.579301321769074
+          ],
+          "fullRelativeErrorMedian": 0.04957378405832741,
+          "fullRelativeErrorP95": 0.1476653322982571,
+          "fullWithinTenPercent": 207,
+          "observations": 252,
+          "phaseXY": [
+            0.5,
+            0.5
+          ],
+          "unitInputVarianceDiagonal": 1.0,
+          "unitInputVarianceFull": 2.25
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.4154954450840143,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 1.70950126999761,
+          "empiricalSumToDiagonalP05P95": [
+            1.5943509724572016,
+            1.857792804486162
+          ],
+          "fullRelativeErrorMedian": 0.042452340734125626,
+          "fullRelativeErrorP95": 0.1288868703861826,
+          "fullWithinTenPercent": 224,
+          "observations": 252,
+          "phaseXY": [
+            0.25,
+            0.75
+          ],
+          "unitInputVarianceDiagonal": 1.5625,
+          "unitInputVarianceFull": 2.640625
+        }
+      ],
+      "shortDark": [
+        {
+          "diagonalRelativeErrorMedian": 0.028508253860093313,
+          "diagonalWithinTenPercent": 246,
+          "empiricalSumToDiagonalMedian": 1.0066115621670007,
+          "empiricalSumToDiagonalP05P95": [
+            0.9485474135581481,
+            1.0669450261289108
+          ],
+          "fullRelativeErrorMedian": 0.028508253860093313,
+          "fullRelativeErrorP95": 0.08348610663758836,
+          "fullWithinTenPercent": 246,
+          "observations": 252,
+          "phaseXY": [
+            0,
+            0
+          ],
+          "unitInputVarianceDiagonal": 4.0,
+          "unitInputVarianceFull": 4.0
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.34421812659807716,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 1.5097801163188211,
+          "empiricalSumToDiagonalP05P95": [
+            1.4034794411060671,
+            1.6385358288344454
+          ],
+          "fullRelativeErrorMedian": 0.03355568088246086,
+          "fullRelativeErrorP95": 0.10905477591162906,
+          "fullWithinTenPercent": 235,
+          "observations": 252,
+          "phaseXY": [
+            0.5,
+            0
+          ],
+          "unitInputVarianceDiagonal": 2.0,
+          "unitInputVarianceFull": 3.0
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.3368599951637381,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 1.5065305916189091,
+          "empiricalSumToDiagonalP05P95": [
+            1.3990410962441582,
+            1.63642368258569
+          ],
+          "fullRelativeErrorMedian": 0.032297070399635475,
+          "fullRelativeErrorP95": 0.11063294755959564,
+          "fullWithinTenPercent": 233,
+          "observations": 252,
+          "phaseXY": [
+            0,
+            0.5
+          ],
+          "unitInputVarianceDiagonal": 2.0,
+          "unitInputVarianceFull": 3.0
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.56071447294608,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 2.272398179591965,
+          "empiricalSumToDiagonalP05P95": [
+            2.066606590975203,
+            2.481287456878344
+          ],
+          "fullRelativeErrorMedian": 0.042360102844084646,
+          "fullRelativeErrorP95": 0.13118360682869876,
+          "fullWithinTenPercent": 219,
+          "observations": 252,
+          "phaseXY": [
+            0.5,
+            0.5
+          ],
+          "unitInputVarianceDiagonal": 1.0,
+          "unitInputVarianceFull": 2.25
+        },
+        {
+          "diagonalRelativeErrorMedian": 0.41697937781256084,
+          "diagonalWithinTenPercent": 0,
+          "empiricalSumToDiagonalMedian": 1.7098901182891424,
+          "empiricalSumToDiagonalP05P95": [
+            1.5886793188870518,
+            1.8322974100970548
+          ],
+          "fullRelativeErrorMedian": 0.03630827465950692,
+          "fullRelativeErrorP95": 0.10152428421711786,
+          "fullWithinTenPercent": 238,
+          "observations": 252,
+          "phaseXY": [
+            0.25,
+            0.75
+          ],
+          "unitInputVarianceDiagonal": 1.5625,
+          "unitInputVarianceFull": 2.640625
+        }
+      ]
+    },
+    "frozenReference": {
+      "manifestSha256": "f331f21bfe7d2d291b07b2a3bfc5cdf63f3485a83a2efd67982c27501e683617",
+      "specimens": 17,
+      "numericControls": 85
+    },
+    "pjsrPrimitive": {
+      "numericCases": 85,
+      "preconditionRefusals": 3,
+      "faults": {
+        "read": {
+          "error": "FIXTURE_READ",
+          "completedWrites": 6,
+          "interpolationRestored": true
+        },
+        "write": {
+          "error": "FIXTURE_WRITE",
+          "completedWrites": 6,
+          "interpolationRestored": true
+        },
+        "nan": {
+          "error": "BKL046_CONTROL_INVALID_SAMPLE",
+          "completedWrites": 6,
+          "interpolationRestored": true
+        },
+        "combined": {
+          "error": "BKL046_CONTROL_RESTORE_FAILED",
+          "primary": "FIXTURE_READ",
+          "restore": "FIXTURE_RESTORE"
+        }
+      },
+      "nativeInterpolationObserved": false
+    },
+    "postExitVerification": {
+      "cases": 85,
+      "refusals": 12,
+      "nativeProvenanceAttested": false,
+      "releaseAuthorized": false
+    }
+  },
+  "coverage": {
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "finalKnowledgeAccepted": false,
+  "completeGithubTransferVerified": false
+}

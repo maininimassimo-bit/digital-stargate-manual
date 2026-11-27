@@ -1,0 +1,30 @@
+{
+  "schema": "BKL046_CFA_XDRZ_BATCH_CANDIDATE_MOCK_TEST_V1",
+  "planSha256": "677460604bd564285b0571a7149f22f7ae6ea7aed27e5badc1d71b42b0474a0f",
+  "scriptSha256": "1eaeefee9c6328fe246799648f1c6c31e69e2daa073cc7e047e4e95804ac3861",
+  "componentContractSha256": "d71f3a4dfc2ae411f4a7da212ef3fb37e4f04149c6b70f426e32f9ed3a20a9a2",
+  "declaredWeightMeaning": "NATIVE_WEIGHT_WINDOW_UNCLASSIFIED",
+  "observedOrder": [
+    "unmasked",
+    "mask-green",
+    "mask-wrong-channel",
+    "zero-detector",
+    "zero-reference"
+  ],
+  "caseEventCount": 10,
+  "ownedWindowsClosed": 10,
+  "rejectedModes": [
+    "no-directory",
+    "prior-transcript",
+    "prior-product",
+    "bad-reservation",
+    "foreign-plan",
+    "foreign-component",
+    "third-case-failed",
+    "leaked-window",
+    "write-failure",
+    "damaged-transcript"
+  ],
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

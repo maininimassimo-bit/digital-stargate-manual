@@ -1,0 +1,352 @@
+{
+  "causalChipEffectVerified": false,
+  "distinctStars": 1,
+  "distinctVisits": 7,
+  "nativeExecutions": 0,
+  "programSha256": "5e055263705cb9a55dd5f0cd571a1e94c7e29a68f683899b8466389186c34f05",
+  "protocolSha256": "9b77a430b55aea1dea07dcc556ccf2d7d7899e4d6ba65fb34963b73d8553643f",
+  "results": {
+    "reverseSensitivity": {
+      "summary": {
+        "F438W-F606W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 12.886502555661707,
+          "medianWith": 8.610427618664005,
+          "medianWithout": 9.996217683848272
+        },
+        "F438W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 30.06979486673481,
+          "medianWith": 29.97411786130033,
+          "medianWithout": 27.009637391557135
+        },
+        "F606W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 21.78816326339131,
+          "medianWith": 17.183292311072933,
+          "medianWithout": 12.833021776145642
+        }
+      },
+      "testChip": 2,
+      "tests": [
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": 8.610427618664005,
+            "F438W-F814W": 20.395647263855153,
+            "F606W-F814W": 11.785219645190978
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": 9.996217683848272,
+            "F438W-F814W": 17.43116679411196,
+            "F606W-F814W": 7.4349491102636875
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": false,
+            "F438W-F814W": false,
+            "F606W-F814W": false
+          },
+          "observed": {
+            "F438W-F606W": 9.996217683848272,
+            "F438W-F814W": 17.43116679411196,
+            "F606W-F814W": 7.4349491102636875
+          },
+          "visit": "ibbsc0"
+        },
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": 12.886502555661707,
+            "F438W-F814W": 30.06979486673481,
+            "F606W-F814W": 17.183292311072933
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": 14.272292620845974,
+            "F438W-F814W": 27.105314396991616,
+            "F606W-F814W": 12.833021776145642
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": false,
+            "F438W-F814W": false,
+            "F606W-F814W": false
+          },
+          "observed": {
+            "F438W-F606W": 14.272292620845974,
+            "F438W-F814W": 27.105314396991616,
+            "F606W-F814W": 12.833021776145642
+          },
+          "visit": "ibbse1"
+        },
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": 8.18595459790896,
+            "F438W-F814W": 29.97411786130033,
+            "F606W-F814W": 21.78816326339131
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": 9.571744663093227,
+            "F438W-F814W": 27.009637391557135,
+            "F606W-F814W": 17.43789272846402
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": false,
+            "F438W-F814W": false,
+            "F606W-F814W": false
+          },
+          "observed": {
+            "F438W-F606W": 9.571744663093227,
+            "F438W-F814W": 27.009637391557135,
+            "F606W-F814W": 17.43789272846402
+          },
+          "visit": "ibbsj5"
+        }
+      ],
+      "trainingChip": 1,
+      "trainingEnvelope": {
+        "F438W-F606W": [
+          -1.8291234826104983,
+          4.600703612979032
+        ],
+        "F438W-F814W": [
+          -7.735339366052358,
+          1.8063784265659706
+        ],
+        "F606W-F814W": [
+          -5.906215883441746,
+          -2.7943251864128342
+        ]
+      },
+      "trainingMedian": {
+        "F438W-F606W": 1.385790065184267,
+        "F438W-F814W": -2.9644804697431937,
+        "F606W-F814W": -4.35027053492729
+      },
+      "trainingVisits": [
+        "ibbsc5",
+        "ibbsy1"
+      ]
+    },
+    "sameChipReference": {
+      "summary": {
+        "F438W-F606W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 3,
+          "maximumWith": 3.016850675252556,
+          "medianWith": 2.5923776544975112,
+          "medianWithout": 9.996217683848272
+        },
+        "F438W-F814W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 3,
+          "maximumWith": 8.015368445682952,
+          "medianWith": 7.919691440248471,
+          "medianWithout": 27.009637391557135
+        },
+        "F606W-F814W": {
+          "improved": 3,
+          "insideTrainingEnvelope": 2,
+          "maximumWith": 10.93654211550097,
+          "medianWith": 6.331671163182591,
+          "medianWithout": 12.833021776145642
+        }
+      },
+      "testChip": 2,
+      "tests": [
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": -2.5923776544975112,
+            "F438W-F814W": -1.6587791571967045,
+            "F606W-F814W": 0.9335984973006362
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": 9.996217683848272,
+            "F438W-F814W": 17.43116679411196,
+            "F606W-F814W": 7.4349491102636875
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": true,
+            "F438W-F814W": true,
+            "F606W-F814W": true
+          },
+          "observed": {
+            "F438W-F606W": 9.996217683848272,
+            "F438W-F814W": 17.43116679411196,
+            "F606W-F814W": 7.4349491102636875
+          },
+          "visit": "ibbsc0"
+        },
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": 1.6836972825001908,
+            "F438W-F814W": 8.015368445682952,
+            "F606W-F814W": 6.331671163182591
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": 14.272292620845974,
+            "F438W-F814W": 27.105314396991616,
+            "F606W-F814W": 12.833021776145642
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": true,
+            "F438W-F814W": true,
+            "F606W-F814W": true
+          },
+          "observed": {
+            "F438W-F606W": 14.272292620845974,
+            "F438W-F814W": 27.105314396991616,
+            "F606W-F814W": 12.833021776145642
+          },
+          "visit": "ibbse1"
+        },
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": -3.016850675252556,
+            "F438W-F814W": 7.919691440248471,
+            "F606W-F814W": 10.93654211550097
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": 9.571744663093227,
+            "F438W-F814W": 27.009637391557135,
+            "F606W-F814W": 17.43789272846402
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": true,
+            "F438W-F814W": true,
+            "F606W-F814W": false
+          },
+          "observed": {
+            "F438W-F606W": 9.571744663093227,
+            "F438W-F814W": 27.009637391557135,
+            "F606W-F814W": 17.43789272846402
+          },
+          "visit": "ibbsj5"
+        }
+      ],
+      "trainingChip": 2,
+      "trainingEnvelope": {
+        "F438W-F606W": [
+          9.439943545816845,
+          15.73724713087472
+        ],
+        "F438W-F814W": [
+          8.693472707064302,
+          29.486419195553026
+        ],
+        "F606W-F814W": [
+          -0.7464708387524297,
+          13.749172064678532
+        ]
+      },
+      "trainingMedian": {
+        "F438W-F606W": 12.588595338345783,
+        "F438W-F814W": 19.089945951308664,
+        "F606W-F814W": 6.501350612963051
+      },
+      "trainingVisits": [
+        "ibbsb0",
+        "ibbsd5"
+      ]
+    },
+    "transferUVIS2ToUVIS1": {
+      "summary": {
+        "F438W-F606W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 14.417718820956281,
+          "medianWith": 11.202805273161516,
+          "medianWithout": 3.2149135477947652
+        },
+        "F438W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 26.825285317361022,
+          "medianWith": 22.054426421051858,
+          "medianWithout": 4.770858896309164
+        },
+        "F606W-F814W": {
+          "improved": 0,
+          "insideTrainingEnvelope": 0,
+          "maximumWith": 12.407566496404797,
+          "medianWith": 10.851621147890341,
+          "medianWithout": 4.35027053492729
+        }
+      },
+      "testChip": 1,
+      "tests": [
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": -7.987891725366751,
+            "F438W-F814W": -17.283567524742693,
+            "F606W-F814W": -9.295675799375886
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": 4.600703612979032,
+            "F438W-F814W": 1.8063784265659706,
+            "F606W-F814W": -2.7943251864128342
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": false,
+            "F438W-F814W": false,
+            "F606W-F814W": false
+          },
+          "observed": {
+            "F438W-F606W": 4.600703612979032,
+            "F438W-F814W": 1.8063784265659706,
+            "F606W-F814W": -2.7943251864128342
+          },
+          "visit": "ibbsc5"
+        },
+        {
+          "errorWithCorrection": {
+            "F438W-F606W": -14.417718820956281,
+            "F438W-F814W": -26.825285317361022,
+            "F606W-F814W": -12.407566496404797
+          },
+          "errorWithoutCorrection": {
+            "F438W-F606W": -1.8291234826104983,
+            "F438W-F814W": -7.735339366052358,
+            "F606W-F814W": -5.906215883441746
+          },
+          "insideTrainingEnvelope": {
+            "F438W-F606W": false,
+            "F438W-F814W": false,
+            "F606W-F814W": false
+          },
+          "observed": {
+            "F438W-F606W": -1.8291234826104983,
+            "F438W-F814W": -7.735339366052358,
+            "F606W-F814W": -5.906215883441746
+          },
+          "visit": "ibbsy1"
+        }
+      ],
+      "trainingChip": 2,
+      "trainingEnvelope": {
+        "F438W-F606W": [
+          9.439943545816845,
+          15.73724713087472
+        ],
+        "F438W-F814W": [
+          8.693472707064302,
+          29.486419195553026
+        ],
+        "F606W-F814W": [
+          -0.7464708387524297,
+          13.749172064678532
+        ]
+      },
+      "trainingMedian": {
+        "F438W-F606W": 12.588595338345783,
+        "F438W-F814W": 19.089945951308664,
+        "F606W-F814W": 6.501350612963051
+      },
+      "trainingVisits": [
+        "ibbsb0",
+        "ibbsd5"
+      ]
+    }
+  },
+  "schema": "BKL046_GRW70_CROSS_CHIP_APERTURE_TRANSFER_V1_RESULT",
+  "scientificClosures": 0
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "BKL046_ROMAN_GAIN_LABHK_V1",
+  "parentCaptureSha256": "6bf59ebdb660cbd1cd7a6b9d175fc849e61589fd8e47c6e3faf74633fa95bb07",
+  "parentAcquisitionSha256": "1bdcf3c212ec512b4b77967b375707098e2fb33205f0ae05fe6dae73d901d855",
+  "centerReportSha256": "8425642df2f72d2870369452ba59365c1c2adab3b055f426273427d577b5d39d",
+  "frames": [
+    1,
+    5,
+    10
+  ],
+  "nominalStartOffsetsGroups": [
+    0,
+    1
+  ],
+  "fields": [
+    "MJD",
+    "FPA_A",
+    "FPA_B",
+    "SCE_A",
+    "SCE_B",
+    "MCT_Diode",
+    "Si_Diode"
+  ],
+  "units": [
+    "d",
+    "K",
+    "K",
+    "K",
+    "K",
+    "V",
+    "A"
+  ],
+  "design": "Read the full post-SCI FITS tail for the 21 original GAIN objects with the pinned ETag, retaining all table samples and duplicate sampling times across exposures. Inspect the actual extension and units. For 20 paired exposures integrate MCT by linear interpolation only on bracketed intervals using the nominal DATE-BEG + j*TGROUP timing and a one-group offset sensitivity. Keep signed Si samples. Compare descriptive interpair coefficient of variation of median center-band science signal divided by duration and by mean pair MCT integral on the same accepted pairs. No dark offset correction, absolute dose, pixel read timing, flux calibration or independence across times is claimed."
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "BKL046_PJSR_BILINEAR_CONTROL_SHIM_PROTOCOL_V1",
+  "inputManifestSha256": "f331f21bfe7d2d291b07b2a3bfc5cdf63f3485a83a2efd67982c27501e683617",
+  "priorArchiveSha256": "8a84589b22ca6d1910bdea5ebd35cc765f21ddf895107b603fc363ec6d25499c",
+  "phaseSixteenths": [
+    [
+      0,
+      0
+    ],
+    [
+      8,
+      0
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      8,
+      8
+    ],
+    [
+      4,
+      12
+    ]
+  ],
+  "absoluteToleranceEncoded": 2.384185791015625e-7,
+  "design": "Exercise the callable body using role-separated source and destination mocks and the same 17 physical and synthetic specimens. Each case compares over the exact 3844-point interior. Test invalid phases, aliasing, wrong mode, invalid sample and injected read/write failures. This isolates the PJSR API contract. There are no calls to native PJSR, no DynamicAlignment metadata, and no coordinator activity."
+}

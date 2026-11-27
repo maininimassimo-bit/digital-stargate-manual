@@ -1,0 +1,38 @@
+{
+  "schema": "BKL046_CFA_ORIGIN_ANALYSIS_PLAN_V1",
+  "originReport": "b163bce49d61e476382715e1b74d8ce781a40df75e9ae97ed65f4b00ee4ee1cf",
+  "comparator": "c04623fb80badca0db83917c237a9d7fef5041d0fd9b6a6a371f86cf8397c54f",
+  "status": "OFFLINE_PROPOSAL_SEPARATE_NATIVE_REVIEW_REQUIRED",
+  "cases": [
+    {
+      "id": "zero-origin0",
+      "matrix": "center0",
+      "origin": 0
+    },
+    {
+      "id": "zero-origin05",
+      "matrix": "center0",
+      "origin": 0.5
+    },
+    {
+      "id": "half-origin0",
+      "matrix": "edge05",
+      "origin": 0
+    },
+    {
+      "id": "half-origin05",
+      "matrix": "edge05",
+      "origin": 0.5
+    }
+  ],
+  "fitsKinds": [
+    "rgb",
+    "weight"
+  ],
+  "outputShapeCHW": [
+    3,
+    28,
+    32
+  ],
+  "decision": "Each output pair must match exactly one of three frozen reference maps using the v4 numeric predicate. Classification requires the exact four-case signature of one tested hypothesis. Missing, ambiguous and unmodeled cases remain unresolved. A recognized signature does not establish native provenance, approval, admission or scientific closure."
+}

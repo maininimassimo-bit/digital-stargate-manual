@@ -1,0 +1,9 @@
+# BKL-046 · Barriera del parent per il controllo dell'origine XDRZ
+
+La barriera del parent riusa il protocollo FD3 e la lettura dei record R4 di CFA v4, con operazione, piano e impronta del batch propri dei quattro casi di origine. Controlla PID, PID del chiamante, istante di creazione, impronte dell'acquisizione e del parent originale e corrispondenza del record attivo. Solo dopo questi controlli procede alla posa dello script. La ricevuta del comparatore arriva su un secondo messaggio, dopo la posa. Il primo messaggio può quindi essere validato prima che esistano risultati.
+
+In un registro R4 isolato, un piano errato, un istante di creazione alterato e un'impronta di acquisizione difforme sono stati respinti prima di posare lo script o acquisire una finestra. I tre esiti precedenti restano riproducibili: un rilascio dopo la chiusura valida e due trattenimenti per finestra estranea o ricevuta alterata. Gli ingressi e l'archivio usano le custodie già collaudate.
+
+Il valore subjectSha256 del messaggio identifica il batch in questo protocollo. La futura approvazione ARB e RQ deve coprire il soggetto completo del launcher, inclusi gli interpreti e tutti i moduli. Nel collaudo le finestre sono testimoni Windows e gli output sono sintetici. Registro canonico e PixInsight restano fuori dal test. [Catena di posa](../bkl046-cfa-origin-bound-entry-v1/README.md) · [Prontezza e finestra](../bkl046-cfa-origin-ready-window-v1/README.md)
+
+La replica usa il kit di verifica, le fonti del custode degli ingressi, l'adattatore R4 installato, le dipendenze, una nuova directory di prova su O:, una radice di archivio di prova su H: e un nuovo percorso per il rapporto. I moduli di finestra figurano nel kit.

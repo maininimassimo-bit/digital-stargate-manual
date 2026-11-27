@@ -1,0 +1,314 @@
+{
+  "protocol": "BKL046_KNOWLEDGE_SATURATION_ADDENDUM_V3",
+  "status": "INTERIM",
+  "baselineVersion": "1.171",
+  "previousAddendum": {
+    "commit": "ab6005363918270f43d296f0bdec3fa234cb14d4",
+    "path": "docs/project/BKL-046-CONOSCENZA-SATURAZIONE-ADDENDUM-v2.json",
+    "sha256": "fcc33d30c778e50311036d927916758f4e16520d2602b306aa8e55855233b12e"
+  },
+  "inheritedResidualLedgerSha256": "a3da1432a46dc69ffb1a16ec3a5fcf13650c99ffbe98f91003b8807af9d7c8f3",
+  "axes": [
+    {
+      "id": "SATURATION_BLEND/1",
+      "title": "Unsaturated, detector-saturated and near-limit cores",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/2",
+      "title": "Close pairs and extended-plus-point overlap",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/3",
+      "title": "Channel-dependent saturation",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    },
+    {
+      "id": "SATURATION_BLEND/4",
+      "title": "Mask transition and recomposition cases",
+      "status": "OPEN",
+      "closureCriterion": "Frozen domain,controls and endpoints;appropriate independent cases and uncertainty;reproducible native measurements with all failures retained;explicit scientific limits."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "guideFailure",
+      "commit": "4df7db1c826012713b58f3821c269840d3709e1e",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-17979-short-guidance-logs-v1/riscontro.json",
+          "sha256": "da62a41482668cd99290ebe46fb6d7842ce844d010a8bcdb6b0eeb9892cde221"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17979-short-guidance-logs-v1/protocollo.json",
+          "sha256": "b8e133873a2141d5b1dffd0cad0a0ed89a9233513bbff53dafc51c07864fc87a"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17979-short-guidance-logs-v1/README.md",
+          "sha256": "ee186f3672ae7e0b9cbbe7748bf727519a3226ddab3083bda415bf08b73687e5"
+        }
+      ],
+      "archiveSha256": "9a227d6b9c340ac91425580e165dadbf593ca992809744f4faf381ae367a0fc1",
+      "archiveMembers": 15
+    },
+    {
+      "id": "shortReferences",
+      "commit": "0247c695c5370b4780ce726bf2eb51f00903981e",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-17656-short-reference-qualification-v1/riscontro-gaia.json",
+          "sha256": "3dedb185d813f057cc52cda573412586fd91e587ae9fd4db9c6c81a0478ca917"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-short-reference-qualification-v1/riscontro-guida.json",
+          "sha256": "cdfae6c86577f9dd1a94276ec5b6cefb0bead1cddb3ac26f7b0e7ee78e134e29"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-short-reference-qualification-v1/protocollo-gaia.json",
+          "sha256": "e3b4ebf14e293d56fa867836968c1d8c015c1984068228b03bbb5e5add1d83d9"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-short-reference-qualification-v1/README.md",
+          "sha256": "31b11c3bba8318ae1b0a66b671cb8bd8f8c900c6260ac682d82955ec548ca08e"
+        }
+      ],
+      "archiveSha256": "6f34e901f08c820c6ca9c04d4ae26e442d3e7808eb05ae504a8f939a95bb6a66",
+      "archiveMembers": 20
+    },
+    {
+      "id": "shortFlux",
+      "commit": "151d68d5f155f1fe05d7d33f26df8d4485786fd0",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-short-exposure-flux-repeatability-v1/riscontro.json",
+          "sha256": "c1b6c7c3001bc336af28a643153c933d64b7b017f0f10172fe72315ea9894465"
+        },
+        {
+          "path": "docs/project/bkl046-acs-short-exposure-flux-repeatability-v1/protocollo.json",
+          "sha256": "9aee6d515ac21fdd68e30aa143152d77a2d818ff2dc3f1b44f8363aa1c6b4ad5"
+        },
+        {
+          "path": "docs/project/bkl046-acs-short-exposure-flux-repeatability-v1/README.md",
+          "sha256": "4eee35850f7f8c69367fed741e963c086c6195aec1473beb8c5db57516db350f"
+        }
+      ],
+      "archiveSha256": "3cf3ab6be02bdbad2396bfbe81d2cea09fc5c1389de0291d9751ebe7c048367c",
+      "archiveMembers": 5
+    },
+    {
+      "id": "gain2Screen",
+      "commit": "83da4269ab90b9c66632d932c523339e1b253405",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-17656-gain2-saturation-trails-v1/riscontro-jfdp01opq.json",
+          "sha256": "9f45453a779b2061048be3d0916f66e7a3ab58093a4693abd6101a81b96faa9a"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-gain2-saturation-trails-v1/riscontro-jfdp01orq.json",
+          "sha256": "14b6712b732c7e5d5d35b4b6de18fba9cb4da9eb7a6550efaf27ebaa8fc61535"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-gain2-saturation-trails-v1/riscontro-jfdp02vdq.json",
+          "sha256": "3a8761dcf15eca885a6242d492896514df0faa3e77293c5909ee8c376dc4a4e2"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-gain2-saturation-trails-v1/riscontro-jfdp02vfq.json",
+          "sha256": "02691d3e3f40c29295bb7d69ae9fa2c3621e7c47e438f05cb3ce2e5d0664c8af"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-gain2-saturation-trails-v1/protocollo-jfdp02vfq.json",
+          "sha256": "82ff2d6cc78f0d7b4e096212e7c6fab3a6b4ffa6d1d59bfe90b0975c6135e91c"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-gain2-saturation-trails-v1/README.md",
+          "sha256": "4351a9d4dc6b046eebb49b82388eae39f9191440280b0fd1f09586cd09aca85c"
+        }
+      ],
+      "archiveSha256": "67dec1055de7cff9ce67ab7f439bcf1b58163d6bd126baf5f1e965b17ade2599",
+      "archiveMembers": 30
+    },
+    {
+      "id": "sensitivity",
+      "commit": "10ecd56e074331d58c59b5965990870fb7470a60",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-sensitivity-v1/riscontro.json",
+          "sha256": "8a1f68cf1e74ea6522b8407314ad3f4be67a6c480e2688eacde907f48d0321f1"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-sensitivity-v1/protocollo.json",
+          "sha256": "0b9c87a5552cf6f40e42449a56a169c2365e0a2e6f2ceb5f6c8f255e78b3fa82"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-sensitivity-v1/README.md",
+          "sha256": "862e0f9e679ecfda65d2682a2c52d55746825082da453ba07265f85ec50eff89"
+        }
+      ],
+      "archiveSha256": "4c6bd2faf29ea4b42f1fe00ba8098b6665773ba52deca1b85f30c6627a30ef76",
+      "archiveMembers": 4
+    },
+    {
+      "id": "dualLong",
+      "commit": "76a51ef60b781c9117c83bd18c6a19675b1c57e2",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-shared-support-v1/riscontro.json",
+          "sha256": "4fd1e1d64ca1a6811e1d0f11ba362b974f28e37594346dac44feea94035e5a9c"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-shared-support-v1/protocollo.json",
+          "sha256": "5a0298975a972ef01774e6ad429e86c87660d09320158f16ead106eb650a861a"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-shared-support-v1/README.md",
+          "sha256": "4f4ce90fb2d756d3a367d02549b7bd0e956609fcf020eca2204193c7cf8dd723"
+        }
+      ],
+      "archiveSha256": "a8eba0e54b9b6b3be5318d91d0da3019498016bba18e4d3d704187801c2b8455",
+      "archiveMembers": 4
+    },
+    {
+      "id": "cteProducts",
+      "commit": "793bd3a8de5e6b7bfa71832b53b48f8c02cd7273",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-flt-flc-v1/riscontro.json",
+          "sha256": "e6d390fe513aa9b66ec0d4189596dd775a0278b68480b82e4d9bf83f4351a569"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-flt-flc-v1/protocollo.json",
+          "sha256": "68a72cb299fe5b3bed210b83415a90c766f0f33e183398c332e1f86031d01b10"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-saturated-core-flt-flc-v1/README.md",
+          "sha256": "11092e9294de4bfc126d83605182f1b92de8f7bf17f40051ceefd1f088c00543"
+        }
+      ],
+      "archiveSha256": "4733b5d065cd5c08798d701b09caa4a03c56f1d7f6f18827da40e072ef0e5ca5",
+      "archiveMembers": 10
+    },
+    {
+      "id": "faintControls",
+      "commit": "dac84d1791d23345929092529bddffb5a3b6222f",
+      "files": [
+        {
+          "path": "docs/project/bkl046-acs-17656-unsaturated-cte-controls-v1/riscontro.json",
+          "sha256": "5ef733b6d06aebe04cd4ff9fcc97747863d27d980ac2760aa937736527eaad04"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-unsaturated-cte-controls-v1/protocollo.json",
+          "sha256": "151750875abf12f1fc26cf144f702bc11bcd7fc24014fb081757ccc01fba6bc0"
+        },
+        {
+          "path": "docs/project/bkl046-acs-17656-unsaturated-cte-controls-v1/README.md",
+          "sha256": "ac3e9321c22da4d9015baf649e833eff51de9de7f0b0d64fa768aa0543a81a37"
+        }
+      ],
+      "archiveSha256": "56a70c0c5d841588340985ffe8a82fe857373b406fcbe486e712d36cadbd7d6b",
+      "archiveMembers": 5
+    }
+  ],
+  "scientificClosures": 0,
+  "nativeExecutions": 0,
+  "completeStudy": false,
+  "findings": {
+    "guideFailure": {
+      "excludedExposure": "jfln02qtq",
+      "actual": "GYRO",
+      "failure": "NOLOCK",
+      "activeSamples": 0,
+      "sampleCount": 14,
+      "separationArcsec": 38.78855291455509
+    },
+    "alternateShorts": {
+      "qualifyingAffines": [
+        0.15902739181559822,
+        0.15587704444192524,
+        0.15022609606723347,
+        0.1696965450933856
+      ],
+      "commonThreeFrameSources": 234,
+      "radius3Used": 106,
+      "radius3WithinTwoPercentBoth": 77
+    },
+    "saturatedGain2": {
+      "perExposureCandidates": 959,
+      "eligible": 1,
+      "shortRepeatPercent": 0.8043860837437501,
+      "originalLongMinusShortPercent": 3.0630435659793953,
+      "flaggedBeyondCircle": 0,
+      "radius10Sensitivity": [
+        2.7361333860332016,
+        3.235830214463209
+      ]
+    },
+    "sameSourceReplica": {
+      "support": 303,
+      "geometric": 317,
+      "passedOriginalCoverage": false,
+      "longPairDifferencePercent": [
+        0.11116673713489772,
+        0.1190882185826309
+      ]
+    },
+    "correctionDiagnostic": {
+      "support": 300,
+      "fltLongMinusShortPercent": [
+        3.0052012413203766,
+        3.116906779765616
+      ],
+      "flcLongMinusShortPercent": [
+        2.0865105462440248,
+        2.091166314639281
+      ]
+    },
+    "unmatchedControlBrightness": {
+      "measured": 27,
+      "heldOut": 7,
+      "fltMedianPercent": 2.0079529827920606,
+      "flcMedianPercent": 0.6805411955720819,
+      "flcHeldoutP90Percent": 1.2552509639955955,
+      "usableMatchedBrightness": false
+    }
+  },
+  "decisions": [
+    {
+      "rule": "VERIFY_REFERENCE_TELEMETRY",
+      "axis": "SATURATION_BLEND/1",
+      "use": [
+        "guideFailure",
+        "shortReferences"
+      ],
+      "decision": "Check exposure-linked JIF/JIT guide status and TakeData even when the science header says NORMAL."
+    },
+    {
+      "rule": "DISTINGUISH_SHARED_SUPPORT_AND_FULL_APERTURE",
+      "axis": "SATURATION_BLEND/4",
+      "use": [
+        "gain2Screen",
+        "sensitivity",
+        "dualLong"
+      ],
+      "decision": "Carry common-support diagnostics separately and preserve the original rejected full-aperture replica."
+    },
+    {
+      "rule": "SEPARATE_PIPELINE_EFFECT_AND_PHYSICAL_CAUSE",
+      "axis": "SATURATION_BLEND/1",
+      "use": [
+        "cteProducts",
+        "faintControls",
+        "shortFlux"
+      ],
+      "decision": "Pair FLT and FLC at fixed support. A pipeline difference and fainter controls cannot account for all physical causes of a bright saturated flux residual."
+    }
+  ],
+  "remaining": [
+    "Replicated physical gain-2 trails beyond the standard aperture with uncontaminated references and frozen representativeness and uncertainty.",
+    "Comparable-brightness unsaturated controls and adjudication of the residual in the physical response.",
+    "Independent overlap and multichannel cases plus validated mask transitions and native PixInsight evidence."
+  ]
+}

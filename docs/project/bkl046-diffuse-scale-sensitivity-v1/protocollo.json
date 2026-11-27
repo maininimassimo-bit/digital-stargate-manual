@@ -1,0 +1,23 @@
+{
+  "schema": "BKL046_DIFFUSE_SCALE_SENSITIVITY_PROTOCOL_V1",
+  "scales": [
+    0.99,
+    0.995,
+    1,
+    1.005,
+    1.01
+  ],
+  "fields": {
+    "IC1805": {
+      "report": "636ed2f17a6a5315a87808afad6f05e6c309fc8bed1f0aa47ca5fc9bcac6c9a8",
+      "protocol": "c927342ac9b9a1755034adb45cd060a4345861bd3683ed6d1ab14f2fd9bfe61a",
+      "pairs": 72
+    },
+    "M8M20": {
+      "report": "a84d66047802b999c61cce84b80e2cf79dc85032532fc9b30cf6c015684a9564",
+      "protocol": "782be6cadd3963ad0c9a9d7257c4fa88222106b4f5ed369c6354d43b6edbc63b",
+      "pairs": 27
+    }
+  },
+  "design": "Retain the previous exposures, common valid samples, checkerboard folds and criterion. Multiply the target contrast around its median on common support and keep the reference fixed. The median-centred multiplication avoids modifying the arbitrary pedestal and the fitted intercept absorbs any constant. This is a sensitivity perturbation of aligned real data, not a gain estimate. Unit scale must exactly reproduce every prior fold metric, and outcomes retain all signs and both folds."
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "BKL046_IC1805_DIFFUSE_MASK_FROZEN_REPLICATION_V1",
+  "captureZip": "4a0c4142d8d0e7b056ec9b46046eec78fe6fc149aabf3c028923f81d6851f0a0",
+  "captureReceipt": "582a3adcdeb5509b4c4e9434b252726cf0473c86fdd6da272a69aa4358bc705f",
+  "frameIndices": [
+    0,
+    19,
+    38
+  ],
+  "tileStartsX": [
+    290,
+    1622,
+    2992
+  ],
+  "tileStartsY": [
+    250,
+    1066,
+    2024
+  ],
+  "sideBinned": 128,
+  "cellBinned": 16,
+  "amplitudeNoise": [
+    0.5,
+    1,
+    2
+  ],
+  "angles": [
+    0,
+    45,
+    90,
+    135
+  ],
+  "relativeTolerance": 0.05,
+  "design": "Repeat the frozen digital injection cohort. Compare unmasked selection to a truth-free mask of positive cell residuals above 3 detached MAD scales with 1-cell Chebyshev dilation. Report a known-profile reference mask that rejects any cell reaching 2 percent of peak, applied identically before and after injection. Abstain below 12 clean cells in either spatial split or if design is ill-conditioned. Use the joint 5 percent flux and shape criterion; retain every abstention.",
+  "blankTruthMaxFraction": 0.02,
+  "maskSigma": 3,
+  "minimumFitCells": 12,
+  "minimumValidationCells": 12,
+  "maxDesignCondition": 1000,
+  "rawVisibleDimensions": [
+    2602,
+    3908
+  ],
+  "parentMaskProgramSha256": "5bd22d4dd331a271898348424da6d93cf617dd855b09439650669c074a0f828f",
+  "unmaskedFieldReplicationSha256": "2aeeea25e67ea5751ecf2495ded4208150327607d06865622891c876586c83ca"
+}

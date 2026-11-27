@@ -1,0 +1,31 @@
+{
+  "schema": "BKL046_ACS11677_208_BRIGHT_NEIGHBOR_DIAGNOSTIC_V1",
+  "sourceId": 208,
+  "target": "jbbf01i3q",
+  "targetExtension": 1,
+  "physicalChip": 2,
+  "halfStampPx": 7,
+  "centerSearchRadiusPx": 4.5,
+  "coarseStepPx": 0.5,
+  "refinementStepsPx": [
+    0.1,
+    0.02
+  ],
+  "pairSeparationMinPx": 1.5,
+  "maxReducedChiSquare": 2.0,
+  "minDeltaBicForSecondPsf": 10.0,
+  "minComponentSnr": 10.0,
+  "dataWeights": "FITS ERR diagonal, finite SCI and strictly DQ zero. Tilted background in both models.",
+  "testScope": "Exploratory extension after discovery of off-center maximum. Fit standard SM4 library only. Do not infer calibrated stellar flux, scene multiplicity, or qualification from this test alone.",
+  "diagnosisSha256": "115a819a80fd296d7a0b40390e74857d3919c5f394a0ac6dc92c3885f1056590",
+  "screenSha256": "def905398e3fd279b8421a7a7cf38e4d57e4b67d91366ad5c07c5f78a5be3384",
+  "targetSha256": "f9d9b58cc291a5e875f7e2563de3199a3d71aa3cc174aed23417a7ff16cd231e",
+  "modelSha256": "6f0438f15faa7d6abe3924cc3b43073d8e46047a27abe96fbce6d2553c70a1d4",
+  "psfCodeSha256": "1e3c0ce1d9bc89800f4f249c49d34a1b8852e34fad9f377804eb9b26d4ec978c",
+  "brightPeak": [
+    315,
+    1216
+  ],
+  "contextSha256": "60d14985673b4c6705c97907b4e589ad1029fbb58f8b4f7e1762ab18c51ecccc",
+  "scope": "Post-discovery model-adequacy diagnosis centered on the brightest valid detector pixel. No photometric or stellar identity claim."
+}

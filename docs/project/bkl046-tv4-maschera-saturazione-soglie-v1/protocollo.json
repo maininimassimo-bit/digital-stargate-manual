@@ -1,0 +1,24 @@
+{
+  "schema": "BKL046_TV4_DIGITAL_CLIP_MASK_OPERATING_POINTS_V1",
+  "parentProtocolSha256": "b3aa59c378f7ee391181b45153b3f63f1e85956b1993a55685e7c6a13c3140ce",
+  "parentReportSha256": "8b08fa4c9fa2ce80f94692d23c56d07ef939fa75ed8592ebe2f18b8d87fbceed",
+  "parentSourceSha256": "66181d463fb8cc6b11f3eb3679811d45422ec64d237c6c80c6633f94956e842e",
+  "score": "predicted raw DN minus digital ceiling",
+  "decisionOffsetsDn": [
+    -256,
+    0,
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "abstentionBandsDn": [
+    64,
+    256,
+    512
+  ],
+  "scope": "Frozen TV4 CLEAR1 training and held frames. No changes to forecast models or held data.",
+  "selectThreshold": false,
+  "scientificClosures": 0
+}

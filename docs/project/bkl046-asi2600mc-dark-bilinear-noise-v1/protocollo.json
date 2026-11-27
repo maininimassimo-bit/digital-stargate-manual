@@ -1,0 +1,28 @@
+{
+  "schema": "BKL046_ASI2600MC_DARK_BILINEAR_PROTOCOL_V1",
+  "priorArchiveSha256": "dec8591cbc89f2ae747b51d3239628069d5fdbe5fe22336fb3dd78f87c82f9d5",
+  "priorReportSha256": "1b418ca777cbb2a2f03634457853ebfa8ca5bdec5d6ec32b2510c64d61cfdb3c",
+  "phaseXY": [
+    [
+      0,
+      0
+    ],
+    [
+      0.5,
+      0
+    ],
+    [
+      0,
+      0.5
+    ],
+    [
+      0.5,
+      0.5
+    ],
+    [
+      0.25,
+      0.75
+    ]
+  ],
+  "description": "Use 180 s darks and 3 s Bias with the prior 7 disjoint pairs, 9 tiles, 4 Bayer parities. Apply a fixed bilinear shift on the parity lattice as an offline operator. Compare variance of sums over disjoint two-by-two output blocks on identical interior support. Analytical propagation uses measured parity-tile input variance and independent homoscedastic input as the working model. Compare full interpolation-weight propagation to output-diagonal propagation, and separately compare to an empirical diagonal estimated from the same outputs. The comparisons reuse the same exposures and adjacent input supports can overlap. No native PixInsight or independent signal-dependent camera qualification."
+}

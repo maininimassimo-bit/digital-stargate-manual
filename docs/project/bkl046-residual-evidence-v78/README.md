@@ -1,0 +1,9 @@
+# BKL-046 · Rendiconto v78 e supplemento alla conoscenza v1.171
+
+Il supplemento aggiunge otto riscontri collegati a cinque assi aperti. Le copie sono state verificate contro i commit GitHub e i membri degli ZIP su H:. Gli archivi H: e O:, ospitato su K: fisico, hanno impronte identiche. Il controllo di continuità conserva integralmente i 25 assi e i 19 criteri Owner del rendiconto precedente.
+
+- **DIFFUSE_BACKGROUND/2.** Su sei celle del rivelatore, i due gruppi di dark differiscono fino a 0,0997 ADU con la media. Propagata attraverso il piano, la differenza vale il 7,34% sulla forma del profilo largo da 2 ADU. La prova qualifica una misura di ripetibilità strumentale fra due gruppi. Resta da misurare il fondo ottico indipendente.
+- **PSF_PIXEL/2, PSF_PIXEL/3 e FILTER_COLOR/3.** Sei angoli rossi sono ripetibili tra pose disgiunte e resistono all'ampliamento della griglia dei modelli. Le due parità verdi concordano entro 15 gradi per tutte le otto stelle confrontabili. Un solo caso ammette un confronto rosso-blu nella griglia ampia. Restano da qualificare la variazione spaziale su altri campi, la ripetibilità cromatica e il comportamento nativo.
+- **CFA_DITHER_DRIZZLE/4.** Il fascicolo v3 lega piano, launcher e 18 input al soggetto esatto. In laboratorio la posa inattiva verifica 56 file. La copia di lavoro non ha le protezioni della destinazione finale. Restano le revisioni autentiche, la qualifica della posa protetta, l'ammissione e le misure native a pari scala angolare.
+
+Sette famiglie, 25 assi e 19 criteri Owner restano aperti. Nessuna nuova chiusura scientifica e nessun nuovo avvio PixInsight nei riscontri qui integrati. La consegna integrale richiede ancora la decisione sul perimetro dei materiali a distribuzione mista e la verifica indipendente della ricostruzione da GitHub.

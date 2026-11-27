@@ -1,0 +1,21 @@
+{
+  "schema": "BKL046_M8M20_PSF_ORIENTATION_TRANSFER_PROTOCOL_V1",
+  "stampsSha256": "1f7c68125e9acd2926138e51d84706afbec6a5306333606d757d85aaa9275337",
+  "priorSha256": "1cf6f1b055a9ad2b45ed80d7cfc0b294f957f3621a2592d39d2bb6608058f2d8",
+  "expectedHeldOut": 19,
+  "axisRatios": [
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95,
+    1
+  ],
+  "angleStepDegrees": 15,
+  "maxAcceptedRatio": 0.85,
+  "maxAngularDifferenceDegrees": 15,
+  "minimumHeldOutImprovement": 0.1,
+  "beta": 2.5,
+  "fitRadius": 8,
+  "design": "Use 19 archived spatial holdouts in red and blue, calibrations A and B. Keep previously learned per-band widths as geometric means of ellipse FWHM. Integrate Moffat with nine subpixel samples and solve amplitude plus affine background. Choose ellipse by training residual on alternate supported pixels, score on opposite pixels, then swap. Report angle only when both folds beat circular by at least 10 percent, q <= 0.85 in both and axial agreement within 15 degrees. This estimates repeatability on the reconstructed stamps, not physical PSF or independent astro truth."
+}

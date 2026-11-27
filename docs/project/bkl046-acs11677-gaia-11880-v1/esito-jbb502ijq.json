@@ -1,0 +1,151 @@
+{
+  "coordinateFrames": {
+    "source": {
+      "1": "<ICRS Frame>",
+      "2": "<ICRS Frame>"
+    },
+    "target": {
+      "1": "<ICRS Frame>",
+      "2": "<ICRS Frame>"
+    }
+  },
+  "fitsSha256": "2ad1299f73ce18b1bee23c3e0b0188535529a1309e20c0ce9e42a10e5c698a4a",
+  "fluxMeasured": false,
+  "geometricallyQualified": 0,
+  "geometry": {
+    "1->1": {
+      "belongs": 9,
+      "fitStars": 3,
+      "fitTiles": 1,
+      "heldoutStars": 2,
+      "heldoutTiles": 2,
+      "matched": 5,
+      "models": {},
+      "passed": false,
+      "rejected": {
+        "QUALITY": 4
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "INSUFFICIENT_STARS",
+      "usableSourceSeeds": 226
+    },
+    "1->2": {
+      "belongs": 199,
+      "fitStars": 59,
+      "fitTiles": 13,
+      "heldoutStars": 50,
+      "heldoutTiles": 14,
+      "matched": 109,
+      "models": {
+        "affine": {
+          "countWithinLimit": 38,
+          "medianPx": 0.07476662766719176,
+          "p90Px": 0.1398917215337067,
+          "passes": false
+        },
+        "primaryWcs": {
+          "countWithinLimit": 2,
+          "medianPx": 0.22893842166785222,
+          "p90Px": 0.35424718151636153,
+          "passes": false
+        },
+        "translation": {
+          "countWithinLimit": 26,
+          "medianPx": 0.09714239177636494,
+          "p90Px": 0.1782245907692671,
+          "passes": false
+        }
+      },
+      "passed": false,
+      "rejected": {
+        "QUALITY": 90
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "MEASURED",
+      "usableSourceSeeds": 226
+    },
+    "2->1": {
+      "belongs": 206,
+      "fitStars": 66,
+      "fitTiles": 15,
+      "heldoutStars": 57,
+      "heldoutTiles": 14,
+      "matched": 123,
+      "models": {
+        "affine": {
+          "countWithinLimit": 43,
+          "medianPx": 0.07772905923710213,
+          "p90Px": 0.129518290209143,
+          "passes": false
+        },
+        "primaryWcs": {
+          "countWithinLimit": 0,
+          "medianPx": 0.33423930494637455,
+          "p90Px": 0.4210048097087133,
+          "passes": false
+        },
+        "translation": {
+          "countWithinLimit": 35,
+          "medianPx": 0.09142192104850953,
+          "p90Px": 0.14576678060198403,
+          "passes": false
+        }
+      },
+      "passed": false,
+      "rejected": {
+        "OFF_CENTER_PEAK": 1,
+        "QUALITY": 82
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "MEASURED",
+      "usableSourceSeeds": 243
+    },
+    "2->2": {
+      "belongs": 4,
+      "fitStars": 0,
+      "fitTiles": 0,
+      "heldoutStars": 3,
+      "heldoutTiles": 1,
+      "matched": 3,
+      "models": {},
+      "passed": false,
+      "rejected": {
+        "QUALITY": 1
+      },
+      "selectedSourceSeeds": 4096,
+      "status": "INSUFFICIENT_STARS",
+      "usableSourceSeeds": 243
+    }
+  },
+  "qualificationDiagnosticSha256": "52eedfad0fa8292dad4e20f65753d119d9ba0b11a6f5a14a9b8748260c2eda59",
+  "qualificationPlanSha256": "a1f8b27def11c23066708f09aea13af80fe079772d91281a75a94df1d5abaedd",
+  "referenceCandidates": 0,
+  "scientificClosure": false,
+  "states": {
+    "PEAK_SUPPORT_OR_RELOCATION": 89,
+    "SHORT_FULL_WELL": 16,
+    "SHORT_OTHER_DQ": 191,
+    "no_unique_footprint": 44
+  },
+  "supportedProjection": 296,
+  "target": {
+    "candidateCenters": 189,
+    "deltaDays": -163.36418339666852,
+    "obsid": 24091223,
+    "proposal": "11880",
+    "root": "jbb502ijq",
+    "seconds": 40,
+    "sourceChip1": 179,
+    "sourceChip2": 10
+  },
+  "wcsNames": {
+    "source": {
+      "1": "IDC_4bb1536cj-FIT_REL_GAIAeDR3",
+      "2": "IDC_4bb1536cj-FIT_REL_GAIAeDR3"
+    },
+    "target": {
+      "1": "IDC_4bb1536cj-FIT_IMG_GAIAeDR3",
+      "2": "IDC_4bb1536cj-FIT_IMG_GAIAeDR3"
+    }
+  }
+}

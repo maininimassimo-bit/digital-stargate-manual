@@ -1,0 +1,129 @@
+{
+  "axes": [
+    2,
+    4,
+    8,
+    16
+  ],
+  "baselineSession": "2003-03-02",
+  "centralRoi": [
+    384,
+    384,
+    640,
+    640
+  ],
+  "checksumSha256": "3bd62d9c9ec3e20d4fc2e51e1a5a8886ce16faa3c0380eaee296217dfd5d34ff",
+  "distinctSession": true,
+  "excludeAtOrAboveDn": 15000,
+  "indexSha256": "20b904e7845615791b4c660399ea6a4870a951ac7ac1c32bd7ed8b16396c4799",
+  "logSha256": "2e58186c623d3727a82a880812e0ca551e83b229f7e7934f4b3c7f6b4fcc1d79",
+  "opticalSetup": "FLAT24 runs with 500 and 1000 ms commanded exposure",
+  "permutationsPerPair": 128,
+  "protocol": "BKL046_TV4_HOLDOUT_FLAT24_LEVEL_DESIGN_V1",
+  "sameOpticalDoseClaimed": false,
+  "selected": {
+    "BB": [
+      {
+        "catalogMaximumDn": 9695.0,
+        "catalogMedianDn": 8228.0,
+        "ccdTemperatureK": 256.009,
+        "integrationMs": 503.5,
+        "name": "i030227_104600_782_a.fit",
+        "utc": "2003-02-27T10:46:00.782"
+      },
+      {
+        "catalogMaximumDn": 9689.0,
+        "catalogMedianDn": 8227.0,
+        "ccdTemperatureK": 256.009,
+        "integrationMs": 503.5,
+        "name": "i030227_104604_332_a.fit",
+        "utc": "2003-02-27T10:46:04.332"
+      },
+      {
+        "catalogMaximumDn": 9689.0,
+        "catalogMedianDn": 8228.0,
+        "ccdTemperatureK": 255.806,
+        "integrationMs": 503.5,
+        "name": "i030227_104607_966_a.fit",
+        "utc": "2003-02-27T10:46:07.966"
+      },
+      {
+        "catalogMaximumDn": 9675.0,
+        "catalogMedianDn": 8227.0,
+        "ccdTemperatureK": 255.806,
+        "integrationMs": 503.5,
+        "name": "i030227_104611_599_a.fit",
+        "utc": "2003-02-27T10:46:11.599"
+      },
+      {
+        "catalogMaximumDn": 9675.0,
+        "catalogMedianDn": 8228.0,
+        "ccdTemperatureK": 255.785,
+        "integrationMs": 503.5,
+        "name": "i030227_104615_182_a.fit",
+        "utc": "2003-02-27T10:46:15.182"
+      },
+      {
+        "catalogMaximumDn": 9697.0,
+        "catalogMedianDn": 8226.0,
+        "ccdTemperatureK": 255.806,
+        "integrationMs": 503.5,
+        "name": "i030227_104622_032_a.fit",
+        "utc": "2003-02-27T10:46:22.032"
+      }
+    ],
+    "FS": [
+      {
+        "catalogMaximumDn": 9519.0,
+        "catalogMedianDn": 8031.0,
+        "ccdTemperatureK": 241.583,
+        "integrationMs": 1003.5,
+        "name": "i030227_195704_632_a.fit",
+        "utc": "2003-02-27T19:57:04.632"
+      },
+      {
+        "catalogMaximumDn": 9507.0,
+        "catalogMedianDn": 8030.0,
+        "ccdTemperatureK": 241.583,
+        "integrationMs": 1003.5,
+        "name": "i030227_195708_266_a.fit",
+        "utc": "2003-02-27T19:57:08.266"
+      },
+      {
+        "catalogMaximumDn": 9520.0,
+        "catalogMedianDn": 8032.0,
+        "ccdTemperatureK": 239.925,
+        "integrationMs": 1003.5,
+        "name": "i030227_195711_782_a.fit",
+        "utc": "2003-02-27T19:57:11.782"
+      },
+      {
+        "catalogMaximumDn": 9529.0,
+        "catalogMedianDn": 8033.0,
+        "ccdTemperatureK": 241.425,
+        "integrationMs": 1003.5,
+        "name": "i030227_195715_282_a.fit",
+        "utc": "2003-02-27T19:57:15.282"
+      },
+      {
+        "catalogMaximumDn": 9524.0,
+        "catalogMedianDn": 8034.0,
+        "ccdTemperatureK": 241.603,
+        "integrationMs": 1003.5,
+        "name": "i030227_195718_832_a.fit",
+        "utc": "2003-02-27T19:57:18.832"
+      },
+      {
+        "catalogMaximumDn": 9508.0,
+        "catalogMedianDn": 8035.0,
+        "ccdTemperatureK": 241.583,
+        "integrationMs": 1003.5,
+        "name": "i030227_195722_366_a.fit",
+        "utc": "2003-02-27T19:57:22.366"
+      }
+    ]
+  },
+  "selection": "First six indexed CLEAR1 mode 1 frames in each of the two FLAT24 runs BB and FS, selected by catalogue signal and maximum before reading pixels",
+  "session": "2003-02-27",
+  "sourceURL": "https://pds-smallbodies.astro.umd.edu/holdings/dif-cal-hrii_hriv_mri-2-ground-tv4-v1.0/"
+}

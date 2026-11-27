@@ -1,0 +1,65 @@
+{
+  "schema": "BKL046_CFA_ORIGIN_R4_ARCHIVE_H_SCRATCH_V1",
+  "cases": [
+    {
+      "mode": "valid",
+      "parentCode": 0,
+      "evidenceStatus": "MATCHED_TESTED_HYPOTHESIS",
+      "releaseCalls": 1,
+      "archiveEntries": 14,
+      "denyWriteObserved": true,
+      "reservationRetained": false
+    },
+    {
+      "mode": "bad-transcript",
+      "parentCode": 0,
+      "evidenceStatus": "REJECTED_TRANSCRIPT",
+      "releaseCalls": 0,
+      "archiveEntries": 0,
+      "denyWriteObserved": false,
+      "reservationRetained": true
+    },
+    {
+      "mode": "unmodeled",
+      "parentCode": 0,
+      "evidenceStatus": "UNMODELED_SEQUENCE",
+      "releaseCalls": 0,
+      "archiveEntries": 0,
+      "denyWriteObserved": false,
+      "reservationRetained": true
+    },
+    {
+      "mode": "parent-failed",
+      "parentCode": 7,
+      "evidenceStatus": "MATCHED_TESTED_HYPOTHESIS",
+      "releaseCalls": 0,
+      "archiveEntries": 0,
+      "denyWriteObserved": false,
+      "reservationRetained": true
+    },
+    {
+      "mode": "archive-collision",
+      "parentCode": 0,
+      "evidenceStatus": "MATCHED_TESTED_HYPOTHESIS",
+      "releaseCalls": 0,
+      "archiveEntries": 0,
+      "denyWriteObserved": false,
+      "reservationRetained": true
+    },
+    {
+      "mode": "archive-changed",
+      "parentCode": 0,
+      "evidenceStatus": "MATCHED_TESTED_HYPOTHESIS",
+      "releaseCalls": 0,
+      "archiveEntries": 14,
+      "denyWriteObserved": false,
+      "reservationRetained": true
+    }
+  ],
+  "adapterSha256": "2fe08ef35c126f97b9fce3e382070acf21070ebe8c76fcf5519dc393024464a2",
+  "isolatedRegistry": true,
+  "nativeOutputsSimulated": true,
+  "processInventorySimulated": true,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

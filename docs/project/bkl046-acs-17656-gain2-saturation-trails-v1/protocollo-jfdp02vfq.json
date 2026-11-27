@@ -1,0 +1,48 @@
+{
+  "schema": "BKL046_ACS17656_SATURATED_TRAIL_SELECTION_V1",
+  "minimumVerticalSpanPx": 5,
+  "shortSearchPx": 7,
+  "maximumPeakOffsetPx": 8,
+  "maximumShortDisagreementPx": 1.5,
+  "maximumTrailDistancePx": 2,
+  "radiiPx": [
+    10
+  ],
+  "skyPx": [
+    35,
+    48
+  ],
+  "paddingPx": 2,
+  "referenceCleanRadiusPx": 5,
+  "isolationRadiusPx": 4,
+  "neighborLimitFraction": 0.08,
+  "minimumSkyPixels": 400,
+  "minCoverageFraction": 0.97,
+  "maxShortRepeatPercent": 2,
+  "pam": {
+    "1": "025d0f14433531e68eb855f478d3728b6ed4a345dbfd2afb71277140baa31f9c",
+    "2": "e372a9f1e4409531422b3679b58073967584244de46fcfc27b1a190bf6b005a3"
+  },
+  "inputs": [
+    {
+      "file": "jfdp02vfq_flt.fits",
+      "role": "long",
+      "exptime": 150,
+      "association": "JFDP02020",
+      "sha256": "5106da9bd6266bf87d7dc5ea6ba2d03bec7f6b96a8dee9bf164b05cacce3e039"
+    },
+    {
+      "file": "jfdp02vwq_flt.fits",
+      "role": "short",
+      "exptime": 40,
+      "sha256": "4a31fade53ba4ab37c39afbc86bcdf63bfe30f0a125a9d0dda3c1e00b538ba50"
+    },
+    {
+      "file": "jfdp02w3q_flt.fits",
+      "role": "short",
+      "exptime": 40,
+      "sha256": "048c6e5cd3e42e201c0e27af1ba09b26fac918447266a1029e2f68ce6ba37e62"
+    }
+  ],
+  "selection": "Reuse frozen trail and short-reference thresholds and both verified 40-second exposures from program 17656. Analyze each long component independently."
+}

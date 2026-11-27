@@ -1,0 +1,16 @@
+{
+  "schema":"BKL046_GD71_9020_CHIP_THROUGHPUT_PROTOCOL_V1",
+  "fit9020Sha256":"5ad606078a1bedf2deeeab69eb46275953b1a01a1b681f265a146c278297a251",
+  "ingress9020Sha256":"899ff9bd6a5d6dc2414fb5d35383bcc73758203b79d5edb2e99c76dfbc971c40",
+  "previousComparisonSha256":"d37b9f5e062e626ac33c550d82f52ce8ed1e4b7c3e65323d15c1e082d1dcd852",
+  "integrationRunnerSha256":"7f429019605c019c24cb8990b708866d7913497ce54505d97daac43b45f58890",
+  "acsProtocolSha256":"8b1c974405aa5ee4c4714354ff105c65c0c5ff0eb25eb827807764950449f974",
+  "gd71CalspecSha256":"cd343c71be682cf4af45c6a7be1ef49ff5f65eeccae9ad94d7b3825df382748b",
+  "gaiaSpectraSha256":"b17057e1a0fefe4ee560ba602a0eddc7ab5bed6990be6e950d636ad3dfb777a6",
+  "chip2ReferenceSha256":"11694e12102e12e4e25c77aee6ef05934d3d2c9f15c06a13c908223e2de8522a",
+  "chip2ReferenceFile":"acs_wfc_ccd2_mjd_031_syn.fits",
+  "quadratureOrders":[4,8],
+  "bands":["F658N","F660N"],
+  "radii":[3,5],
+  "counterfactual":"Recompute WFC1 response at all actual epochs. Only the chip-specific MJD-dependent response component is substituted; common optics and filter tables remain pinned. Chip, amplifier and configuration are confounded in observed data."
+}

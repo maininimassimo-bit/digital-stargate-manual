@@ -1,0 +1,6 @@
+SELECT TOP 5000 source_id,ra,dec,pmra,pmdec,phot_g_mean_mag,ruwe
+FROM gaia.dr3lite
+WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',202.469575,47.1952583,1.8))
+AND phot_g_mean_mag < 13.5 AND ruwe < 1.4
+AND pmra IS NOT NULL AND pmdec IS NOT NULL
+ORDER BY phot_g_mean_mag,source_id

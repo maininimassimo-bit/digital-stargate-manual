@@ -1,0 +1,69 @@
+{
+  "schema": "BKL046_CFA_TWO_DROP_MANAGED_REVIEW_BOUNDARY_V1",
+  "subjectSha": "94db7ebe9d92af0fa16f67da4a45636bea24918b782dcd415f1b8dd5a8bfa423",
+  "cases": [
+    {
+      "name": "signed-fixture-only",
+      "accepted": true
+    },
+    {
+      "name": "expired",
+      "accepted": false
+    },
+    {
+      "name": "wrong-subject",
+      "accepted": false
+    },
+    {
+      "name": "missing-rq",
+      "accepted": false
+    },
+    {
+      "name": "wrong-role-key",
+      "accepted": false
+    },
+    {
+      "name": "rq-blocker",
+      "accepted": false
+    },
+    {
+      "name": "wrong-arb-binding",
+      "accepted": false
+    },
+    {
+      "name": "same-role-key",
+      "accepted": false
+    },
+    {
+      "name": "caller-digest-not-enrolled",
+      "accepted": false
+    },
+    {
+      "name": "valid-signature-unenrolled-key",
+      "accepted": false
+    },
+    {
+      "name": "valid-signature-unenrolled-identity",
+      "accepted": false
+    },
+    {
+      "name": "cli-rejects-caller-approval",
+      "accepted": false
+    },
+    {
+      "name": "cli-rejects-without-enrollment",
+      "accepted": false
+    }
+  ],
+  "preflight": {
+    "inventoryAccepted": true,
+    "pixInsightProcesses": 0,
+    "rootsVerified": true,
+    "comparatorFilesVerified": 3824,
+    "fixtureFilesVerified": 24
+  },
+  "testSigningKeysAreFixtures": true,
+  "admissionRequested": false,
+  "nativeExecutions": 0,
+  "scientificClosures": 0
+}

@@ -1,0 +1,2630 @@
+{
+  "schema": "BKL046_KNOWLEDGE_DELIVERY_PUBLIC_LOCATOR_V1",
+  "milestone": "BKL-046",
+  "reopeningPullRequest": 586,
+  "version": "1.171",
+  "releaseState": "INTERIM_REGISTERED_BASELINE",
+  "knowledge": {
+    "filename": "Conoscenza-PixInsight-v1.171.json",
+    "bytes": 3030957683,
+    "sha256": "65511eaafd15af1ea7c7f07cdd90d7947d622b6d6f88b31f022e9ac2399c4c0d"
+  },
+  "losslessCarrier": {
+    "filename": "BKL046-Conoscenza-PixInsight-v1.171.zip",
+    "bytes": 103445718,
+    "sha256": "25be4e999a09fecf4f883c7896714161e6c87ad177d30642abe160f58f9332f3",
+    "localRecoveryVerified": true,
+    "repositoryAssetId": null,
+    "remoteBytesVerified": false
+  },
+  "basis": {
+    "registerManifestSha256": "0b72cb301dfcad9f55197d61b60137861c57a394b612b12ec73ef4bdc9a29cbb",
+    "registrationReceiptSha256": "e63e0bf660c8729ec2b968d17d1a88bfcc8ca23bd0ad86aff7c1a16ff24500b4",
+    "independentPrepublicationSha256": "5692074a03c4007659e6cef14dbfb4df8e109cb35d078a9e2d645c79e1ad580e"
+  },
+  "coverage": {
+    "requirementRows": 4920,
+    "embeddedReports": 2712,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0
+  },
+  "delivery": {
+    "publicLocatorContainsMetadataOnly": true,
+    "integralTransferVerified": false,
+    "finalKnowledgeAccepted": false,
+    "readbackPreparation": {
+      "note": "docs/project/BKL-046-VERIFICA-CONSEGNA-v1.171.md",
+      "noteCommit": "96cead15c2715f5b9b7257b33ed17e8070def36f",
+      "fixtureCasesPassed": 15,
+      "localExactCapsuleVerified": true,
+      "liveAssetReadbackVerified": false,
+      "archiveName": "BKL046-verifica-consegna-v1171-v2-verificabile.zip",
+      "archiveSha256": "72aecbb0bd3c4eb2a1087c7588b30929ff46369b3313fb713e9af1d4317ad922",
+      "archiveReplayPassed": true
+    },
+    "distributionDecisionCoverage": {
+      "note": "docs/project/BKL-046-CONOSCENZA-COPERTURA-DISTRIBUZIONE-v1.171.md",
+      "noteCommit": "bf6da33b5e743f8ee01da09822349236860f2913",
+      "unitManifestSha256": "bf8c953f16e73edeba21e72b3c8ce076cf126a92d18f40b5e5854a86751a73c1",
+      "archiveSha256": "f807be9a4651d9ebf54d56ff6f724f36c7921d5f6305ba7ac588fb3d0715ac11",
+      "embeddedUnits": 2712,
+      "outerUnits": 241,
+      "fixtureCases": 16,
+      "actualApproved": 0,
+      "actualDecisionVerified": false
+    },
+    "requiredEvidence": [
+      "distribution-scope-approval",
+      "actual-github-object-identity",
+      "independent-download-size-and-sha256",
+      "lossless-knowledge-reconstruction",
+      "recovery-of-required-dependencies"
+    ]
+  },
+  "distributionAudit": {
+    "verifiedRecordMappings": 2712,
+    "distinctSourceHashes": 2526,
+    "recordsWithReviewSignals": 178,
+    "absoluteHeaderLocatorRecords": 4,
+    "recordsCleared": 0,
+    "wholeDocumentReviewPending": true,
+    "localEvidenceSha256": "9d80f5c3f4f4b572be9eb0db0f4bb5735b0ceadd8f5e96070473624bc8be8d9d",
+    "reviewUnits": {
+      "embeddedOccurrences": 2712,
+      "distinctSourceHashes": 2526,
+      "topLevelSections": 241,
+      "profileComponentsMapped": 280706,
+      "embeddedRecordsChangedInLocalCandidate": 123,
+      "topLevelSectionsChangedInLocalCandidate": 7,
+      "originalAndCandidateByteDigestsReconciled": true,
+      "approvedUnits": 0,
+      "localReportSha256": "56dbe7614a91923813de2f301386e5b07a0cc554c0fca773a10490841290423a",
+      "localArchiveSha256": "43225b9cd7621744adf2660af62dcc0d933414f3c0763862687f029a187bb173"
+    }
+  },
+  "requirementFingerprints": {
+    "path": "docs/project/BKL-046-REQUIREMENTS-FINGERPRINTS.tsv",
+    "commit": "c30db964d755d69e42f7a6af19bdd7b7922af30f",
+    "sha256": "fd0f6ab787d776b7bfa9863ae613e6dae9a274c3f1da2ccd70a1fadb6d39fc12",
+    "rows": 4920,
+    "criteria": 14521,
+    "remoteBytesVerified": true,
+    "dispositionCodes": {
+      "U": "completion unproven",
+      "P": "partial documentary and native evidence",
+      "M": "scoped metadata review, projected matrix attestation pending",
+      "E": "justified internal API exclusion, projected matrix attestation pending"
+    }
+  },
+  "historicalVersions": {
+    "firstObservedVersion": "0.1",
+    "lastObservedVersion": "1.171",
+    "localVersions": 181,
+    "localBytes": 71433314659,
+    "fullByteReadbacks": 181,
+    "matchedDirectRecordedFingerprint": 177,
+    "matchedSuccessorParentFingerprintWithoutDirectReceipt": 4,
+    "metadataOnlyReadbacksPending": 0,
+    "localReportSha256": "16d877092132b5bbef228f55f1e569483cfd5d39d65988c25157185990547f46",
+    "localArchiveSha256": "d931e3b7ec8d38ce9b60617fa39bbb69060fd99e9cb0da1de09230235416e1b0",
+    "successorEvidenceSha256": "21299a8b9c5175c517336238c983b01bba1ce1d59711284890bd1c23ebcf0cf4",
+    "publishedReleaseAssetsVerified": 0,
+    "remoteHistoryReconstructed": false,
+    "multipartReadback": {
+      "scope": "181 knowledge files only",
+      "rawPlanningBytes": 71433314659,
+      "plannedRawAssets": 224,
+      "maxPlannedAssetBytes": 1073741824,
+      "localTestParts": 4,
+      "localTestBytes": 103445718,
+      "localTestArchiveSha256": "25be4e999a09fecf4f883c7896714161e6c87ad177d30642abe160f58f9332f3",
+      "metadataDriftRejected": true,
+      "localPlanSha256": "bf6347af895d3a5efd7799f1c749f99c73f8f077c13880c91c044027138420b6",
+      "localReportSha256": "d53b27936781abdf801674173a3a241a92cbe3f74c2a59440ce9bc87f18b46e5",
+      "localArchiveSha256": "3415ec2c2cf4fbb69a5de6a44059a148dce55b25943bb3b372f4d64998ba2353",
+      "remoteReadbackVerified": false
+    },
+    "verifiedParentLinks": 180,
+    "localReadbackComplete": true,
+    "fullLocalReconciliationSha256": "50dd96ea2c5543aa5b29079d8167d77d8c4ac712093f7027457b2132a85ce11b",
+    "carrierReadbackCorroboration": {
+      "note": "docs/project/BKL-046-STORICO-RILETTURA-CONTENITORI.md",
+      "noteCommit": "4e7ee7a502743e478a7ea7132ff1912850e9eeac",
+      "versionsReread": 45,
+      "bytesReread": 63599156359,
+      "historicalInventoryConcordant": 181,
+      "historicalInventorySha256": "e2b5b0abfbe9ab57537a8ffeba91d7614917f7e7a49f3a6679f41a926d0d7e10",
+      "archiveSha256": "1fea5288391b21245f6bdac7cd88a830467fdbc97ba8aa7af0016eced4b5fe41",
+      "remoteReadbackVerified": false
+    },
+    "fullLocalArchiveSha256": "a67755496a863e49d2578b4270f3b216c71f724eac2caf84644960f09754d804",
+    "v571ExternalSourceReadbacks": {
+      "knowledgeVersion": "v1.146",
+      "priorIndexSha256": "ed198270f0b83296e7175990a510b8f98b2808b626aa40cc611302d65d328161",
+      "evidence": [
+        {
+          "path": "docs/project/BKL-046-V571-GAIAXPY-RIPRISTINO-SORGENTI-VM-v1.md",
+          "documentCommitSha": "c803c8bd4a9dc4e34760325338cf1c5f22d81653",
+          "documentSha256": "400de9af431053d0d28f006dda7002f0180a31575e98f3753cd82c294afc5e7c",
+          "archive": "BKL046-v571-ripristino-fonti-remoto-v1.zip",
+          "archiveSha256": "eabb0619e5f9713f3585b54253ea6f4ca15e491d9de2ad04b67af458fd97deab"
+        },
+        {
+          "path": "docs/project/BKL-046-V571-GAIA-DR3-RILETTURA-AIP-VM-v1.md",
+          "documentCommitSha": "5f85ab791588e8057ad1b78d2c2c0dfed69dd02f",
+          "documentSha256": "fc8d590da92cdc6fc70282fb6a11adda6e76cd0c27ba54db1d1d6a2c78105c16",
+          "archive": "BKL046-v571-riscarico-ESA-v1.zip",
+          "archiveSha256": "fa875537a7ce77f8b1dae97d3a27f60ead31389268e9740b7e0537ded0dc6376"
+        },
+        {
+          "path": "docs/project/BKL-046-V571-GAIA-DR3-GRIGLIA-XPMERGE-v1.md",
+          "documentCommitSha": "7d3708b32ebf7047676b3b1e8734db7ceb595919",
+          "documentSha256": "68f584081c8f3f50639cce6cc89e8082155d245492c9010f025aeee7f8a93739",
+          "archive": "BKL046-v571-griglia-XpMerge-v1.zip",
+          "archiveSha256": "dc378b907b3310abc9d93ed158274cc9c1a138983512573d9a22a828a043aa85"
+        }
+      ],
+      "gaiaXPySourceFilesVerified": 13,
+      "continuousFieldsMatched": 26,
+      "sampledFluxValuesMatched": 343,
+      "sampledFluxErrorsMatched": 343,
+      "sampledWavelengthsMatched": 343,
+      "freshSourceSpecificEsaDataLinkByteMatchVerified": false,
+      "fullRemoteCarrierReadbackVerified": false,
+      "scientificClosures": 0,
+      "sourceSpecificEsaByteRecovery": {
+        "sourceId": "4458990005388621952",
+        "products": [
+          "XP_CONTINUOUS",
+          "XP_SAMPLED"
+        ],
+        "archivedReadbackXmlByteMatchVerified": true,
+        "archivedReadbackRawZipByteMatchVerified": false,
+        "historicalZipReconstructionByteMatchVerified": true,
+        "archiveName": "BKL046-v571-riconciliazione-DataLink-v2.zip",
+        "archiveSha256": "979051790a802bcc04d4385f6400566540b557a062e33caa50d047e17c184375",
+        "archiveBytes": 2321644,
+        "archiveVerifiedOnVMAndPhysicalH": true,
+        "evidence": {
+          "README.md": {
+            "path": "docs/project/bkl046-v571-datalink-provenance/README.md",
+            "sha256": "485d3b35cc371f321600494e2c5098324c39b92fa96f4536e459753b82db5f74"
+          },
+          "riscontro-archiviato.json": {
+            "path": "docs/project/bkl046-v571-datalink-provenance/riscontro-archiviato.json",
+            "sha256": "95ab2695bb3b59a20fa11dbebc4f4f69a70b0f061a1661694aeacaff9677ce1a"
+          },
+          "riscontro-http.json": {
+            "path": "docs/project/bkl046-v571-datalink-provenance/riscontro-http.json",
+            "sha256": "617101318468ea9db3cba08a38f8864bea34f5187b80e43d25595e200c8043e4"
+          }
+        }
+      }
+    },
+    "localHistoryCompleteReadback": {
+      "versions": 181,
+      "directRecordedPinMatches": 177,
+      "successorCorroboratedVersions": 4,
+      "githubTransferVerified": false,
+      "candidateCarrierMapSha256": "618f2a167b8669409885fd8b56636c4d7be9261b77cf544b215ec5982605b2b8",
+      "localArchiveSha256": "488a82f5e1c7fb8ecbfb7ab270795657599542697d93a7469cdf60b9861c833f",
+      "readbackReportSha256": "4ad93245956399df0ad2d54a33b714bab6fbfdc0d1360cfac67e0942459b235a",
+      "reportPath": "docs/project/bkl046-local-history-readback-v1/riscontro.json"
+    }
+  },
+  "registeredStudyDependencies": {
+    "boundManifestVersion": 600,
+    "trackedArtifacts": 11217,
+    "directReadbacks": 11058,
+    "knowledgeHistoryReadbacks": 159,
+    "trackedBytes": 103867316226,
+    "distinctContentSha256": 10157,
+    "incrementCatalogRowsReconciled": 802,
+    "observedManifests": 600,
+    "linkedToTipByExactPredecessorDigests": 403,
+    "historicalNameAndDigestPairsAbsentFromTip": 0,
+    "plannedCompactedAssets": 122,
+    "localPlanSha256": "10e028f0c5c4322491aaecd624a630ba75635a0cced99cdd8229c17c29dc09c5",
+    "localSummarySha256": "619d3858302288f3f797f964a6a8081d763d0d61a4fc236705b275ca61ca237b",
+    "localArchiveSha256": "83a9fb923404e301174ea09aeff00e19c4b85b58aa7bdc84b2cdc55d6b4d52af",
+    "remoteAssetsVerified": 0
+  },
+  "localCarrierAssembly": {
+    "fullPlanSha256": "cb30745073d1a69003e41b78da1948ef3093508b9a7ed5f97d3cf01b2827e90a",
+    "scope": "v600 artifacts, earlier knowledge versions and historical manifests",
+    "totalLogicalAliases": 11839,
+    "verifiedLogicalAliases": 11839,
+    "verifiedContentObjects": 10180,
+    "plannedJobs": 71,
+    "verifiedJobs": 71,
+    "verifiedCarrierFiles": 80,
+    "verifiedCarrierBytes": 27478864996,
+    "readbackOnHAndKBackedVmVolume": true,
+    "checkpointSha256": "337de0761a1e104da130c1bdef0300b5855789e32e3e745a240fe9cb0091d090",
+    "remoteBytesUploaded": 0,
+    "checkpointType": "BKL046_DUAL_CARRIER_INDEX_V1",
+    "localCarrierAssemblyComplete": true,
+    "checkpointArchiveSha256": "6b9447b78449c355d5968069c3f202398189f6e5971288f03f308b02523bad69",
+    "terminalReceiptSha256": "8411e1be2294bd1c220d92ad81a6f378ca65d26d59d64758d6c26551a176b664",
+    "releaseAssetInventorySha256": "48262824c9472647d47218c77e0fccc579ce04a9436e8219be42623bbf8b31e6"
+  },
+  "offlineVerification": {
+    "processInstanceDualHostHarness": {
+      "path": "docs/project/BKL-046-PROCESSINSTANCE-COLLAUDO-INTERHOST.md",
+      "documentCommitSha": "6a101bd839cc93a31dc01fd00acf641022712ec6",
+      "documentSha256": "c507575ab9308d3828e007b0b49c0d841c9aa72697ddb8393e15bdaa7dbcbcd5",
+      "receiptSha256": "6e99e707d92faf6024f9f4517075313add01e8e0f8bf3ca92dc5c2d78c0905fa",
+      "rehearsedOnVm": true,
+      "realDualHostTested": false,
+      "canonicalPublicationVerified": false
+    },
+    "processInstanceSnapshotConsumer": {
+      "path": "docs/project/BKL-046-PROCESSINSTANCE-LETTURA-PUNTATORE.md",
+      "documentCommitSha": "5223f50647438c8f6d97118b431bb21ae2f80226",
+      "documentSha256": "20111592392141f905f8f04264d3b991454b5e134f27cb0cf9ce68cd5056b78d",
+      "receiptSha256": "877b9f320722db44fbeff27c9a71b7f98b090650b57eb45f9ac1d95f19c87a5d",
+      "cases": 10,
+      "liveParentReadOnly": true,
+      "fixtureV601Accepted": true,
+      "productionConsumersMigrated": false,
+      "canonicalPublicationVerified": false
+    },
+    "processInstanceCoordinatedCommit": {
+      "path": "docs/project/BKL-046-PROCESSINSTANCE-COMMIT-COORDINATO.md",
+      "documentCommitSha": "f9b0b7080f6a2b014c70f7e1e908a6abc0eb2b55",
+      "documentSha256": "8264e8c73e09ca6ec658897baa782bcae533af406777d43c85747b4750f40191",
+      "receiptSha256": "153f02ce7465b4513af9b6c15c9b89c400285d2a5ff639834a67c31dee7ceb5f",
+      "fixtureVolumes": [
+        "H",
+        "J"
+      ],
+      "faultCases": 5,
+      "permanentRegistryVersion": 600,
+      "remoteWriterContentionVerified": false,
+      "canonicalPublicationVerified": false
+    },
+    "processInstanceSmbByteLock": {
+      "path": "docs/project/BKL-046-PROCESSINSTANCE-BLOCCO-SMB.md",
+      "documentCommitSha": "e454bc1c52db1824255258752ca42985aa81dc4b",
+      "documentSha256": "fa10d5d9d804254e1416aeb03c5ad2bbc1adea530bd0b81163fdab0c316a14c8",
+      "receiptSha256": "f0059bda1ec17e8b7192cbfbb428e8b67988cdac08bbece36ee4c2012c07a1d7",
+      "sameVmTwoProcesses": true,
+      "directionsVerified": 2,
+      "reopenAfterProcessExitVerified": true,
+      "hostToVmContentionVerified": false,
+      "canonicalPublicationVerified": false
+    },
+    "processInstanceFixtureRecovery": {
+      "path": "docs/project/BKL-046-PROCESSINSTANCE-RECUPERO-REPLICA.md",
+      "documentCommitSha": "2312f17a9fe23d49b074726a8a61b836b143640e",
+      "documentSha256": "c18f7d82cbe4dd1615e9ead584cbb2f2fc9ea5cac381f85933ed7ad1bc0b9508",
+      "receiptSha256": "4f3b17bcb63c3667e839f56e8091e35a0253e7ea105ad1adf2210063600afd8f",
+      "fixtureVolume": "O:",
+      "faultCases": 4,
+      "contendedLockRejected": true,
+      "recoveryReceiptsIdempotent": true,
+      "canonicalPublicationVerified": false,
+      "smbProductionLockTested": false
+    },
+    "inheritedArtifactReadiness": {
+      "path": "docs/project/BKL-046-V600-ARTEFATTI-EREDITATI.md",
+      "documentCommitSha": "aef7bc6c29a4977796827b1bec2e5fc1fc2ff57f",
+      "documentSha256": "088523207f427c5e696b29bc300f640b73cf7bd11c1da07b21a6b1739346171f",
+      "receiptSha256": "1ebf7bc5afd3b1b64090fdee55320fc2d697f694afff07f31b7b956a714ee119",
+      "parentManifestVersion": 600,
+      "artifacts": 11217,
+      "locationsPresentAndSizeMatched": 22530,
+      "freshlyHashedCopies": 28,
+      "freshlyHashedArtifacts": 14,
+      "allInheritedCopiesRehashedNow": false,
+      "canonicalPublicationVerified": false
+    },
+    "processInstanceStaging": {
+      "path": "docs/project/BKL-046-PROCESSINSTANCE-STAGING-V601.md",
+      "documentCommitSha": "7de53e1b993682bac495e8a373fb40c9ee5960c8",
+      "documentSha256": "6ea8547fd601a9e6c72e816308edf38c2bccbde59cb58484e9ede34f711fa1d4",
+      "receiptSha256": "4377458cc1508c81d64969650f5d0b70d5237808ae19f747dd0c0d90b2d02b5c",
+      "fixtureArchiveSha256": "5cf38fcb0aefe9188e2d382eaf0bcf2fa0a718094c3cbdd94f543720d85f2c9a",
+      "proposedVersion": 601,
+      "manifestParentVersion": 600,
+      "stagedFiles": 5,
+      "changedRows": 7,
+      "negativeControls": 4,
+      "canonicalPublicationVerified": false
+    },
+    "processInstancePublicationReadback": {
+      "path": "docs/project/BKL-046-PROCESSINSTANCE-RICONCILIAZIONE.md",
+      "documentCommitSha": "4725b7cf9cfc792a527a0e8a684b6a075bfb73ab",
+      "documentSha256": "9f12a49472b5ed7417eb889f16d9c1beda745daef0b677bf4862c4407eb43a30",
+      "receiptSha256": "24a9d541d4bfbbe2f6a67b8ca309702ca6e92ca825ba0136661c9715d7504e82",
+      "canonicalParentManifestVersion": 600,
+      "ledgerParentVersion": 45,
+      "candidateVersion": 46,
+      "changedRows": 7,
+      "canonicalPublicationVerified": false,
+      "scientificClosures": 0
+    },
+    "technicalTraceReadback": {
+      "path": "docs/project/BKL-046-TRACCIABILITA-CONOSCENZA.md",
+      "documentCommitSha": "53e5f0e85cded66d813d1c435c97ff0ad190c1b8",
+      "documentSha256": "2049a4c030e1fd25b372c55ea431a18181fd83d651b2067dd520aeaf302e751a",
+      "receiptSha256": "780efb85c5f7b4a70452966f8fdb91af2545144a6f921fd816dec550d35872b3",
+      "verifiedHead": "eb69e4dd9ef408c39ee6e57529149f41bdb13145",
+      "requirements": 4920,
+      "criteria": 14521,
+      "ownerCriteriaMapped": 19,
+      "ownerCriteriaClosed": 0,
+      "integralTransferVerified": false
+    },
+    "v571PublisherChain": {
+      "path": "docs/project/BKL-046-V571-CATENA-LOCALE.md",
+      "documentCommitSha": "5e3ac3eb319bcfe8de531096210dde363d88d4ea",
+      "documentSha256": "193a7bb43579e179579d880791d9567fb7a0ea3112d1ea1a3012adf86a368600",
+      "receiptSha256": "80c148b016b6e52038629b292a863fd59a4de030645c336b1d0d1682cd38b47d",
+      "knowledgeVersion": "1.146",
+      "manifestVersion": 571,
+      "publisherTerminalExitCode": 0,
+      "localByteReplayVerified": true,
+      "integralTransferVerified": false
+    },
+    "publicDocumentReadback": {
+      "path": "docs/project/BKL-046-RILETTURA-DOCUMENTI-GITHUB.md",
+      "documentCommitSha": "06c5d849c6dca0913762d3bdde7a58146bb1ba96",
+      "documentSha256": "afe3c41e3b399becd918503d240697de7b238b6f0af77cd02d16f3200328b1a3",
+      "archiveSha256": "676653e38b8980676de1bc9cc860154ef6141cf9422e425b90a7dbdccc5080ed",
+      "verifiedHead": "44983614adfa47320735e00e72c8bb223e988645",
+      "documents": 48,
+      "documentBytes": 97332,
+      "sameBlobsAtVerifiedHead": 48,
+      "integralTransferVerified": false
+    },
+    "stream34": {
+      "launcherSubjectSha256": "0b029846da0412875e26595e2ead8361bc35fcef2c882ec2be95303b9582bdd1",
+      "comparisonReportSha256": "6a16ec3a9dfc3354217399ad0fe59d10dd11aeb6b383f24df87f249cf68fc3e6",
+      "parentFactoryFingerprintCorrected": true,
+      "sourceInputsWithPreservedFingerprints": 8,
+      "independentApprovalVerified": false,
+      "nativeAdmissionRequested": false,
+      "scientificClosures": 0,
+      "reviewHandoffSha256": "127ec442dad584f58af505128054e3ad9e9df696564161c92bf8fe803aa5c264",
+      "reviewStatus": "PENDING_INDEPENDENT_REVIEW",
+      "authorityHandoffReplay": {
+        "path": "docs/project/BKL-046-STREAM34-V11-CATENA-AUTORIZZAZIONI.md",
+        "documentCommitSha": "e8be2d03f7041ef9b17d0b7ac522da1cbd5913ff",
+        "documentSha256": "40809e22d38d79a8464f76541bd6e572485a446acea617c8d9c535c793314b09",
+        "receiptSha256": "4670648e0fc32bf271786eceb7d6e3b870aa62761c25ea02efcd54b0e4515513",
+        "rolesAcceptedInFixture": 2,
+        "rejections": 13,
+        "authenticatedReviewsVerified": false,
+        "nativeAdmissionRequested": false
+      }
+    },
+    "restoreSample": {
+      "reportSha256": "792f88a1cf6702b028e86e1bf4964437f09362fd5bace85161da416eb2e5a0b8",
+      "historicalKnowledgeVersion": "1.12",
+      "manifestVersion": 600,
+      "manifestRegistrations": 11217,
+      "unknownAliasRejected": true
+    },
+    "evidenceCopiesVerifiedOnHAndK": true,
+    "indexedRestore": {
+      "reportSha256": "3d7753e3ce6fc98a26e65b670d2ee89ebd701f31c3544c5b85579b1b10502515",
+      "contentSha256": "f4b427ca22b4d22136bddc0c2d97e3cc440397d2ffd6daf816a44edbe36a8811",
+      "verifiedMedia": 2,
+      "unknownAliasRejected": true,
+      "mismatchedIndexRejected": true
+    },
+    "splitRestore": {
+      "reportSha256": "6aac514e2ba99b3bc182a6e0135a7363a6b7e76eaa9a4548d9fc58a4ac46f034",
+      "indexedCheckpointSha256": "960e25ad7c68913abf0c85d2084712660f5b84f5fdc62a9ced8a1fb9b126fd16",
+      "reconstructedBytes": 4255774043,
+      "contentSha256": "43daf766840495f14f9a0e6dab8a106c10e48e9557a8d305c3eab8487b875438",
+      "parts": 4,
+      "verifiedMedia": 2,
+      "independentReadback": true
+    },
+    "releaseAssetReadback": {
+      "fixtureReportSha256": "509c66de4dfc5852fdf279802f8846fbac2fa9e6a681b59a1b842be99c0e4549",
+      "fixtureArchiveSha256": "18e49bbd06bbdabd6412d6157143031b2f60556126efd7ff4188e5c6b31652ff",
+      "finalInventoryFiles": 80,
+      "githubMetadataSimulated": true,
+      "githubTransferVerified": false
+    }
+  },
+  "studySupplements": [
+    {
+      "axis": "FILTER_COLOR/3",
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "empiricalBayerApertureColor": {
+        "path": "docs/project/BKL-046-BAYER-COLORE-APERTURA.md",
+        "documentCommitSha": "03e0c3ab27bdaa79976fae4d4c5fc55aa98f8e88",
+        "documentSha256": "8a86feba0aa6296e5849d0cfeb67c79915f816dec91cbcbba6fa03890e450d40",
+        "receiptSha256": "34881bf55161e630b2b1e1cc9aa230fdf615decdf14f7cd9d044bf417256edbc",
+        "testStars": 61,
+        "scientificClosures": 0,
+        "status": "EMPIRICAL_APERTURE_COLOR_CORRECTION_DOES_NOT_TRANSFER_RELIABLY"
+      },
+      "empiricalBayerAperturePlateau": {
+        "path": "docs/project/BKL-046-BAYER-STABILITA-APERTURA.md",
+        "documentCommitSha": "45a7bb335a18db77987fffae85380295148ff910",
+        "documentSha256": "9d62978964e4122ce9bc073816472bbe427f26a96b25c8f44d0d1dd616acd9ff",
+        "receiptSha256": "90108af854ee1673e9e65130bbeb1df5755f8be680a97a445b95fc46dfae679d",
+        "stars": 126,
+        "fullJointPasses": 10,
+        "scientificClosures": 0,
+        "status": "FINITE_APERTURE_REFERENCE_NOT_STABLE_ACROSS_FIELDS_AND_BACKGROUND_MODELS"
+      },
+      "gaiaDr3IC1805": {
+        "path": "docs/project/BKL-046-IC1805-GAIA-ASSOCIAZIONI.md",
+        "documentCommitSha": "5df8757f5a522725dc5be85cbe417c3ba59fba20",
+        "documentSha256": "6205659559712502da5fc5179aa678136e3c42388dff7a60b00f4b48c77cb7ea",
+        "associationReceiptSha256": "e205be51911ba9d4ea5a8132c0ec2dc2133f5049049e02da0f0531be75912071",
+        "colorReceiptSha256": "57498643d2aa8da59c854e11e613646373a76b53af8eb93a1cc45109a3fd8062",
+        "archiveSha256": "bce57d8c83d698e783b7845f903eb877716206aa22d0858d57981d3861630bea",
+        "holdoutPairs": 66,
+        "colorHeldOutStars": 21,
+        "scientificClosures": 0,
+        "status": "IC1805_GAIA_MATCH_PASSED_APERTURE_COLOR_COVARIATE_FIELD_LIMITED"
+      },
+      "gaiaDr3CrossField": {
+        "path": "docs/project/BKL-046-GAIA-TRASFERIMENTO-COLORE-BAYER.md",
+        "documentCommitSha": "8240ee16c967c31f0a31a3115c6a855818dce1fb",
+        "documentSha256": "55fbabb3caa846ea2fe9524452123dd183822fac8135a49fd52793b96296bfce",
+        "m8PlateSha256": "b4d9d1ee43b8c707383b0884dbb2b577abb145696c1c05c447c98d337819c254",
+        "m8IsolatedPairsSha256": "a2d46c85c9695bf71f7402eafea55434040785e66e3bfe42b7297e931f6db0bb",
+        "transferReceiptSha256": "a1675aa38ee773464e549bff59970cc45c016d35d19669f5e442b9ba2511370a",
+        "archiveSha256": "fe612e6a41ee3659c7765fd67deb3e4978f799e14bd82d6051215f82485f5011",
+        "originalAstrometricControlPassed": false,
+        "isolatedPairs": 42,
+        "scientificClosures": 0,
+        "status": "CROSS_FIELD_GAIA_COLOR_CORRECTION_NOT_QUALIFIED"
+      },
+      "gaiaSpatialSensitivity": {
+        "path": "docs/project/BKL-046-GAIA-BAYER-SENSIBILITA-SPAZIALE.md",
+        "documentCommitSha": "777cd9906660090e5dcdf6e60773bfaea57e77a4",
+        "documentSha256": "c133e3f5065481935dccb7816b19413b557590046a628ed396951d83c1d864cc",
+        "sensitivitySha256": "030d1288d38d63c3dc90cb1b65ef97ed665dc413b06e49c735bf1a201db2eb6b",
+        "xpInventorySha256": "3a0672169b9981b3104c67ab8f64f7211c9b68d727e7374e059c534a23cc05cd",
+        "archiveSha256": "b3eb78521343ddc3fe8a6fdf7d4c83ab97fc09e4d85749f12985209b050d3df2",
+        "sharedColorSupport": 37,
+        "xpContinuousCandidates": 81,
+        "scientificClosures": 0,
+        "status": "APERTURE_COLOR_TAIL_IMPROVEMENT_WITH_PERSISTENT_MEDIAN_BIAS"
+      },
+      "gavoXpBayerLinear": {
+        "path": "docs/project/BKL-046-GAVO-XP-COLORE-BAYER-LINEARE.md",
+        "documentCommitSha": "1c27ee23c01b86714771d4313e82885213a2495c",
+        "documentSha256": "108d2a82308982ec3fe65fd8d9ef90132cfb6d14210af4111bce81c689939da5",
+        "receiptSha256": "a7f6cf854bd974f6eda3f37efbb3908897f1fdae394b52cab12273452aaeca08",
+        "archiveSha256": "46592722196059b2decc2620a119980772d52e91f98caea7fe1a6492479f8e4f",
+        "verifiedSpectra": 81,
+        "heldOutIC1805": 9,
+        "heldOutM8M20": 19,
+        "scientificClosures": 0,
+        "status": "XP_SPECTRA_VERIFIED_BAYER_COLOR_SENSITIVE_TO_SYNTHETIC_BAND_CHOICE"
+      },
+      "documentedOpticalResponse": {
+        "path": "docs/project/BKL-046-BAYER-RISPOSTE-OTTICHE.md",
+        "documentCommitSha": "873225667a9b0b5f04c068a688c42f499576f762",
+        "documentSha256": "0111887b5e9d7f0975a5fcdb81bffff804407a3ec586ef05849bbc57c600dcc3",
+        "receiptSha256": "829812223d0e6076ec419f77c425574ae54436fd4cb76440162845ac15699ab9",
+        "archiveSha256": "651f2c41e7225550c99084ddb75a6db675464e0c9eade6d84c282e08e7640519",
+        "m8Filter": "Optolong L-Pro",
+        "heldOutIC1805": 9,
+        "heldOutM8M20": 19,
+        "scientificClosures": 0,
+        "status": "OPTICAL_COMPONENTS_IDENTIFIED_SYSTEM_RESPONSE_NOT_QUALIFIED"
+      },
+      "atmosphericExtinctionSensitivity": {
+        "path": "docs/project/BKL-046-BAYER-ESTINZIONE-ATMOSFERICA.md",
+        "documentCommitSha": "d2f7f10422af2d9c4dc19cd60d730efcda02647d",
+        "documentSha256": "5221e4a53b2e3969a33406d37f912b85ed4ea3e9dcfa0bc8568eb6ea14b94be7",
+        "receiptSha256": "b00a2152ec5481ab1b381121331c2e664b1c14be0b79c275b7a7cb23a6c8e718",
+        "archiveSha256": "5107045af2b9ebd214084bdbe27eea43173c95ffefe605b25e069456b2b87f82",
+        "m8NativeHeadersAudited": 15,
+        "m8MaxErrorP90ChangeMagnitude": 0.012,
+        "scientificClosures": 0,
+        "status": "ATMOSPHERIC_REFERENCE_SENSITIVITY_MEASURED_ACTUAL_CONDITIONS_UNVERIFIED"
+      },
+      "gaiaApertureBackgroundHeldout": {
+        "path": "docs/project/BKL-046-BAYER-RAGGIO-FONDO-LOCALE.md",
+        "documentCommitSha": "c919b07b767f506204344cbefc646c4757837ab0",
+        "documentSha256": "f8e0c041d6537ecb714dce830f7b03cf141485d8aee1a4883eb0a939482d7c31",
+        "receiptSha256": "e76f51c22e86c71078deafed0a51ee46b90d75c3a3ebbc387d7d695d42ef98fe",
+        "archiveSha256": "af54707b42f7b0ef6cba0b7a2adf09ed840e1dcfe73b7f6ff8875651581f4fae",
+        "heldOutIC1805": 9,
+        "heldOutM8M20": 19,
+        "improvedBothCalibrationsCases": 0,
+        "scientificClosures": 0,
+        "status": "LOCAL_BACKGROUND_SENSITIVITY_LARGE_NO_HELDOUT_IMPROVEMENT_QUALIFIED"
+      },
+      "m8GaiaSkyMaskControls": {
+        "path": "docs/project/BKL-046-M8-FONDO-MASCHERA-GAIA.md",
+        "documentCommitSha": "b59eaa2e7f5df8e67c52b92b30d059a11d512313",
+        "documentSha256": "a0755d31db3ff986af071742537e6bf82aa2c8a78fd87902b3481c35777d4af6",
+        "primaryReceiptSha256": "6c7a0bf10054191ca2a2dc316571ea2612f3b531cb41c78daba5f3751d99ed75",
+        "exploratoryReceiptSha256": "79b9f5799f237451019aba33ca4bd2f59af31c6fd9235447e13b4114f83b0faf",
+        "archiveSha256": "61e14406c0e4c1e4f8851f086c65309243ba4504da30f3264a589beb9ed72f89",
+        "gaiaNeighborsCatalogSize": 9225,
+        "heldOutPrimary": 9,
+        "heldOutExploratory": 19,
+        "scientificClosures": 0,
+        "status": "EXPLORATORY_PLANAR_BACKGROUND_IMPROVEMENT_PRIMARY_APERTURE_NOT_QUALIFIED"
+      },
+      "m8PsfBlendInjection": {
+        "path": "docs/project/BKL-046-M8-SEPARAZIONE-PSF-INIEZIONI.md",
+        "documentCommitSha": "834c09dffd3015067f9f7d26ce832365465bf072",
+        "documentSha256": "7fb5718621844b731ac14a6e6d224028da983f6a0fc314e44f51defdb43bc47d",
+        "receiptSha256": "1cf6f1b055a9ad2b45ed80d7cfc0b294f957f3621a2592d39d2bb6608058f2d8",
+        "archiveSha256": "cf3efefd8c04e357d46bf9704cd7b973f09f65e294b0d7964df5c69c01aa84d6",
+        "heldOutStars": 19,
+        "evaluatedInjections": 170,
+        "scientificClosures": 0,
+        "status": "PSF_BLEND_CONTROL_RECOVERS_INJECTED_SIGNAL_REAL_COLOR_WORSENS"
+      },
+      "m8EmpiricalPsfAndBackground": {
+        "path": "docs/project/BKL-046-M8-PSF-EMPIRICA-FONDO.md",
+        "documentCommitSha": "5156c54d6ff387a5a2973aabd2af02503f099cc1",
+        "documentSha256": "24f25666ce3f62cebc67cdca5a1c228e4430d8b915441be561390911e7ae3a1a",
+        "receiptSha256": "3ecf8e80873f0ddef41693aad987aac7f339db2b6e7abfaa7543a4060b7d86db",
+        "archiveSha256": "aa0c431a49733edae40c702eefa3547c39cd34bcd4c429d9f24c47e820db0e57",
+        "heldOutStars": 19,
+        "empiricalTemplateTrainingStars": 15,
+        "scientificClosures": 0,
+        "status": "EMPIRICAL_PSF_IMPROVES_PARAMETRIC_CONTROL_APERTURE_STILL_LOWER_COLOR_ERROR"
+      }
+    },
+    {
+      "axis": "CFA_DITHER_DRIZZLE/2",
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "empiricalTwoPosePhase": {
+        "path": "docs/project/BKL-046-NGC5986-FASE-DUE-POSE.md",
+        "documentCommitSha": "9bea101b2c0cdf498574c2a6e5c0765c41491ff1",
+        "documentSha256": "a5d27395a3c478b772d4efa192fb2dc9f25678265f8e0f7d795c2a9271ee256a",
+        "receiptSha256": "a1921e693456ae6e24895cf51e26d0c0bfddb8983fad9d2b6f7acd7da1d14771",
+        "candidatePairs": 117,
+        "scientificClosures": 0,
+        "status": "REGISTRATION_ERROR_REDUCES_CONDITIONAL_DETECTOR_PHASE_SEPARATION"
+      },
+      "sameScaleReconstruction": {
+        "path": "docs/project/BKL-046-NGC5986-RICOSTRUZIONE-SCALA-COMUNE.md",
+        "documentCommitSha": "8a99f537b789fc44dca1b5d66772dd660b19b08a",
+        "documentSha256": "e77c8bef154ba2f3dcb408777691712616aade6f9147e7093d8889cb13e5175b",
+        "receiptSha256": "a5d277ad3ae0ea9ef75a00186b5d08671b66fad05ae79135782dfd4a115084e8",
+        "eligiblePairs": 109,
+        "scientificClosures": 0,
+        "status": "SHARED_MASK_SAME_SCALE_P90_EFFECT_DIFFERS_BY_CHIP"
+      },
+      "phaseBasedDropSelection": {
+        "path": "docs/project/BKL-046-NGC5986-FASE-SCELTA-IMPRONTA.md",
+        "documentCommitSha": "94c9286c637a507907efa686801e46d07fea8a73",
+        "documentSha256": "85d2069f3f77de6660ad15b9e288e2d7bea7964aa439f2a3b110dc0dabf8bd30",
+        "receiptSha256": "10c7f2add8e3bda980502b3f4f712bf5c7c295b0cba3edb3bf1bd50b9e6e8a5d",
+        "eligiblePairs": 109,
+        "informativeWithinTilePairs": 27,
+        "scientificClosures": 0,
+        "status": "PHASE_RULE_ADDS_NO_HELDOUT_SELECTION_GAIN"
+      },
+      "empiricalBayerPhase": {
+        "path": "docs/project/BKL-046-M8-M20-FASE-BAYER.md",
+        "documentCommitSha": "54439fe1ff343dc2ff781c70c09ddf3e922cca06",
+        "documentSha256": "aa6507de07eb1474a0c8d6570ce33687b52a1c612ec00acd2c2f34e9aea10ff4",
+        "receiptSha256": "28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59",
+        "rawExposures": 15,
+        "allTilesParityCells": 3,
+        "scientificClosures": 0,
+        "status": "REAL_BAYER_POSES_THREE_PARITY_CELLS_WITH_TILE_AGREEMENT"
+      },
+      "empiricalBayerRegionalGeometry": {
+        "path": "docs/project/BKL-046-M8-M20-REGISTRAZIONE-REGIONALE.md",
+        "documentCommitSha": "9cfc8cae909f427252ce721bbbd738d4b9c8bb17",
+        "documentSha256": "8909582052e4cba615226149090e97a1a0ad5f475a31688ca1ee22e0ab5819d1",
+        "receiptSha256": "ff52f15b3fb8d1475971c8686438d1c0636ee5849da9fc0728bbdce45c9500ec",
+        "testedExposures": 14,
+        "affinePasses": 10,
+        "scientificClosures": 0,
+        "status": "AFFINE_REDUCES_HELDOUT_RESIDUALS_FOUR_EXPOSURES_ABOVE_TARGET"
+      },
+      "empiricalBayerStellarGeometry": {
+        "path": "docs/project/BKL-046-M8-M20-REGISTRAZIONE-STELLARE.md",
+        "documentCommitSha": "ec51f58dd46406878b8cb5fad567cb0516f239e7",
+        "documentSha256": "ad43b1980ec8f4085e216397e2d62f000c7ae54b34267516d26c8f81e38e995d",
+        "receiptSha256": "29aec711f14fc71aae8936575243eec70cdca8271d53e95f7e6a35f3eef151d7",
+        "testedExposures": 14,
+        "completeStars": 54,
+        "affinePasses": 1,
+        "scientificClosures": 0,
+        "status": "HELDOUT_STELLAR_AFFINE_FAILS_TARGET_IN_13_OF_14_EXPOSURES"
+      },
+      "empiricalBayerStellarRefit": {
+        "path": "docs/project/BKL-046-M8-M20-FIT-STELLARE-ROBUSTO.md",
+        "documentCommitSha": "09bf0e276456c0310e2a05bbaa72d23e2a1699e6",
+        "documentSha256": "d62019653b92bb5f10b273e5d91cc747bee6ef196a4ccad809ebbaf8b04232ef",
+        "receiptSha256": "aaadaabe9c31bd79f56b539c1c4d5301b017f87a75b9c193e753404742592e77",
+        "trainingStars": 49,
+        "testStars": 54,
+        "huberPasses": 3,
+        "scientificClosures": 0,
+        "status": "HUBER_STELLAR_AFFINE_REDUCES_RESIDUALS_TARGET_UNMET_IN_11_OF_14"
+      },
+      "empiricalBayerCalibrationSplit": {
+        "path": "docs/project/BKL-046-M8-M20-CALIBRATORI-BAYER.md",
+        "documentCommitSha": "88bf0535d632ec83b872ebfebbf1f5a14d18f239",
+        "documentSha256": "fe5cb8fb3c6351f7abaa997b54cfe1ac3bbdf6e10c7c24e3cd5b152e44a94af9",
+        "receiptSha256": "65f914e2830af1c9152322c80970461c72bba7e9fdd9fe86f44b3069f9e8b5bc",
+        "verifiedFits": 60,
+        "sampledTiles": 9,
+        "scientificClosures": 0,
+        "status": "MATCHED_CAPTURE_METADATA_FLAT_SPLIT_P90_ABOVE_ONE_PERCENT"
+      },
+      "empiricalBayerCalibrationPropagation": {
+        "path": "docs/project/BKL-046-M8-M20-FLUSSO-CALIBRAZIONE.md",
+        "documentCommitSha": "6bbcf0552ac0fc06a1f247081a9560bb1e21173b",
+        "documentSha256": "6f7a8d4613384b937d89a9f1f086764ee3eb8fe3ec83e80c571d0b685aa0d184",
+        "receiptSha256": "82198e82179b377b50d5a6af55bdeb76423583e9d3f8cbf5abd2423b3ade9420",
+        "parityApertures": 3023,
+        "scientificClosures": 0,
+        "status": "BAYER_APERTURE_FLUX_SPLIT_P90_EXCEEDS_ONE_PERCENT_FOR_ALL_PARITIES"
+      },
+      "empiricalBayerReconstruction": {
+        "path": "docs/project/BKL-046-M8-M20-RICOSTRUZIONE-BAYER.md",
+        "documentCommitSha": "1a7aeb0e5804e4b2174e0c2cfcf00971a218fb77",
+        "documentSha256": "99e39d81939b41f4579542ad2dcd5fe1fc1fa193e62c8386c2ce9c30ebe8dfa4",
+        "receiptSha256": "bd9719bbe544a4edeaaa64e881bf6f5871034f839887c614a1b1845521e8e458",
+        "stars": 54,
+        "rawExposures": 14,
+        "scientificClosures": 0,
+        "status": "CALIBRATION_FLUX_P90_ABOVE_ONE_PERCENT_AFTER_MATCHED_SCALE_DROPS"
+      },
+      "empiricalBayerInterpolation": {
+        "path": "docs/project/BKL-046-M8-M20-INTERPOLAZIONE-BAYER.md",
+        "documentCommitSha": "6662d7401351b385fbda7bbb4acc2d8efb2b6620",
+        "documentSha256": "1f5add74674e595be7c2274aa4bf8a24be137358635fd06ca2fdebbc64a7e795",
+        "receiptSha256": "ba65d831ffd5906e9945455689632dbf0994a06a0fcbba26e2d9ec7aa735a979",
+        "stars": 54,
+        "rawExposures": 14,
+        "scientificClosures": 0,
+        "status": "BILINEAR_REDUCES_SPLIT_PIXEL_DISPERSION_AND_BROADENS_PROFILES"
+      },
+      "empiricalBayerApertureCovariance": {
+        "path": "docs/project/BKL-046-M8-M20-COVARIANZA-APERTURA.md",
+        "documentCommitSha": "27bca5d4c65486e0ec72eb6983b7709948f6a94a",
+        "documentSha256": "75a3bbd8c3c807332b9974572739f9d3e1327a8ca02564cc1eb7065ec37c911a",
+        "receiptSha256": "218ffd7a24a87da24798e76ee6165f212b96029394a11cbcb89ff6425690b15b",
+        "parityWindows": 1715,
+        "scientificClosures": 0,
+        "status": "BILINEAR_APERTURE_DISPERSION_REDUCED_DIAGONAL_MODEL_UNDERESTIMATES"
+      },
+      "empiricalBayerMatchedRadius": {
+        "path": "docs/project/BKL-046-M8-M20-RAGGIO-COMUNE.md",
+        "documentCommitSha": "7cfb1ea53226b9b99f64a034b126afbb3495a7f6",
+        "documentSha256": "024f8ea6c7440d1998860d08ff130f4388e9c2db7c28edbff75a5aca9bc2a356",
+        "receiptSha256": "6b0af19c12ba9719eb0fb9fc5320b66fac1bbad790593559e7e49b40d96a87f3",
+        "maxTestRadiusP90Percent": 0.767779793,
+        "scientificClosures": 0,
+        "status": "AT_MATCHED_STELLAR_RADIUS_BILINEAR_ADVANTAGE_DEPENDS_ON_PARITY_AND_APERTURE"
+      },
+      "independentBayerField": {
+        "path": "docs/project/BKL-046-IC1805-CAMPO-BAYER.md",
+        "documentCommitSha": "f5dbd46bca4a8a98c3b9b2ef94385f5e9ee64287",
+        "documentSha256": "0800aeaae3e673564492327bdc317de059bdc806f0566bdc888d9aac1f377b1f",
+        "receiptSha256": "582a3adcdeb5509b4c4e9434b252726cf0473c86fdd6da272a69aa4358bc705f",
+        "verifiedCR2": 84,
+        "rawLights": 39,
+        "nonReferencePassing": 0,
+        "scientificClosures": 0,
+        "status": "SECOND_REAL_BAYER_FIELD_CAPTURE_VERIFIED_REGION_ALIGNMENT_FAILED"
+      },
+      "independentBayerStellarRegistration": {
+        "path": "docs/project/BKL-046-IC1805-REGISTRAZIONE-STELLARE.md",
+        "documentCommitSha": "a409f2972b1e2c41e75319c98cbae332609b9f1e",
+        "documentSha256": "56c0df816fb3d91aa451d4caa77e0b630e8b1b63d0aff8ad7b6c15c2b1c8b1a6",
+        "receiptSha256": "eb36f255976fbef04ea8dd3acc20201153f20bec4dff1b3fe80c723e8d7768ae",
+        "evaluatedRawLights": 38,
+        "passes": 0,
+        "pooledP90NativePx": 0.814194357,
+        "scientificClosures": 0,
+        "status": "INDEPENDENT_BAYER_STELLAR_MATCHES_RECOVERED_TARGET_UNMET_FOR_ALL_POSES"
+      },
+      "independentBayerRawCentroids": {
+        "path": "docs/project/BKL-046-IC1805-CENTROIDI-RAW.md",
+        "documentCommitSha": "3a156e52af86ca5c976816dd48ca077bfa254b88",
+        "documentSha256": "2db7f46fe16812ef7979dedbbb41eb2ab708cbde7d4075cb53c247503034863a",
+        "receiptSha256": "a7d0c4d58cb59d6898aa597e3faf94cbbc40b94871dcb41f8f54028586d812a9",
+        "evaluatedRawLights": 38,
+        "passes": 0,
+        "pooledP90NativePx": 0.462645014,
+        "scientificClosures": 0,
+        "status": "RAW_GREEN_CENTROIDS_REDUCE_RESIDUALS_TARGET_UNMET_ON_SECOND_FIELD"
+      },
+      "independentBayerQuadraticGeometry": {
+        "path": "docs/project/BKL-046-IC1805-GEOMETRIA-QUADRATICA.md",
+        "documentCommitSha": "c37d736fd882a51e3759bcfac286084f9649468c",
+        "documentSha256": "b44d6bbb5f14ed033980dfdfc9511fc67d42e3dd7736dae776cc37d35cb39b5c",
+        "receiptSha256": "0b46f893cf58fd7476a57e03911569f9172285aa7d4c1aef1dd26a85304ddf3a",
+        "evaluatedRawLights": 38,
+        "passes": 0,
+        "pooledP90NativePx": 0.465737306,
+        "scientificClosures": 0,
+        "status": "QUADRATIC_FIT_DOES_NOT_REDUCE_POOLED_HELDOUT_RESIDUAL"
+      },
+      "independentBayerMaskedOffset": {
+        "path": "docs/project/BKL-046-IC1805-OFFSET-MASCHERATO.md",
+        "documentCommitSha": "9f5fc314af02f8f882b04d49408543a273d50ad6",
+        "documentSha256": "46198363b41aa740d63ba1a7f7e22f1769af48838946393967497a08dedb1f30",
+        "receiptSha256": "ca08cc5d050431c856d229a71f954ac0e805663a323ce69b8e0c750e5b6dd4f3",
+        "flatFrames": 17,
+        "matchedDarkFlatMissing": true,
+        "scientificClosures": 0,
+        "status": "FLAT_RESPONSE_INSENSITIVE_TO_SCALAR_OFFSET_MATCHED_DARK_FLAT_STILL_MISSING"
+      },
+      "independentBayerPhaseUnderRegistrationError": {
+        "path": "docs/project/BKL-046-IC1805-COPERTURA-FASE.md",
+        "documentCommitSha": "7bb7e5141742fdf8fadbaad08787effa4f820651",
+        "documentSha256": "9e8d04ddbf2f227c61d0479da074297db1ad833253a9eeac20de7fb53b3c96a0",
+        "receiptSha256": "e3d06b80ec65272d117e251c43d212c8eae01740c121d98472edd3cbba208c5b",
+        "eligibleStars": 72,
+        "passesFullWidthAtObservedRadius": 32,
+        "passesSmallWidthAtObservedRadius": 2,
+        "scientificClosures": 0,
+        "status": "NARROW_DROPS_LOSE_PHASE_SUPPORT_UNDER_MEASURED_SCALE_STRESS"
+      },
+      "independentBayerExploratoryReconstruction": {
+        "path": "docs/project/BKL-046-IC1805-RICOSTRUZIONE-CFA.md",
+        "documentCommitSha": "ff5d1e8932b14bd53d8e7ab52f54d6970d286e68",
+        "documentSha256": "113320212ad1f2b23c8d10df58e5a42ddfe807e91ed6f48b1072f7f21fb30307",
+        "receiptSha256": "4e5ecceb27ae9ac713b9ce8cf1c09316bd6f15634b08faeadcac22eb7a367844",
+        "stars": 72,
+        "rawExposures": 38,
+        "patches": 2021,
+        "scientificClosures": 0,
+        "status": "EXPLORATORY_SECOND_FIELD_RECONSTRUCTION_WITH_UNQUALIFIED_GEOMETRY_AND_FLATS"
+      },
+      "independentBayerMatchedRadius": {
+        "path": "docs/project/BKL-046-IC1805-RAGGIO-COMUNE.md",
+        "documentCommitSha": "92c15b8940e6ff50b5efb52b8aba5b0c1b943deb",
+        "documentSha256": "291941dadd9ab07e0f64337ccf74e24631e32229f0bb249f03d5fc9cde729b49",
+        "receiptSha256": "b0a7b9c3ffdd72d8127c6d741243791275083ccc0d811885a1711c90b96c76e4",
+        "trainingStars": 40,
+        "testStars": 32,
+        "scientificClosures": 0,
+        "status": "SECOND_FIELD_NO_SYSTEMATIC_BILINEAR_GAIN_AT_MATCHED_STELLAR_RADIUS"
+      },
+      "independentRegistrationChecks": {
+        "status": "OPEN_RELATIVE_REGISTRATION_REMAINS_ABOVE_TARGET",
+        "nativeExecutions": 0,
+        "scientificClosures": 0,
+        "notes": [
+          {
+            "key": "modelBound",
+            "path": "docs/project/BKL-046-CFA-IC1805-registration-model-bound.md",
+            "documentCommitSha": "951d36a523cb4136168448f0982254258ca4cd45",
+            "archive": "BKL046-CFA-IC1805-limite-geometrico-v1.zip",
+            "archiveSha256": "f588e00f10b5de20c725a2de7f7e30415c9c1b481e0ccf4cfb5693afdd30c99e",
+            "receiptSha256": "5bc9ee8a095d486d9f0d52c0ae9575706bc05491cb53756465cb821e0d7d5cef",
+            "documentSha256": "a8850d8cea9931624db22848e4bb7dab6aa7dbcce35d0467b813e94873bb9e12"
+          },
+          {
+            "key": "greenParity",
+            "path": "docs/project/BKL-046-CFA-IC1805-green-parity-disagreement.md",
+            "documentCommitSha": "d5f08aa8e9c70749a2581f903308556ff4c3540e",
+            "archive": "BKL046-CFA-IC1805-parita-verdi-v1.zip",
+            "archiveSha256": "3af88709efe19329da206b75741cba3eafbb71dad5a899f969ffaf0e7e91d78e",
+            "receiptSha256": "5aa721557e500f9fcb3ee03cfcb4f8a12c84a90797e9cdd425169cd8481f2588",
+            "addendumFile": "BKL046-CFA-IC1805-parita-verdi-controllo-aggiuntivo-v1.md",
+            "addendumSha256": "123730101fabe77af20bb4c23135ec4073275a608efe085b5d3e1b05a90648b5",
+            "documentSha256": "7e33144a3d892fc894089129222e5ee028fe1cd7c93988ef2006f4d21f6a1331"
+          },
+          {
+            "key": "gaiaReference",
+            "path": "docs/project/BKL-046-CFA-IC1805-gaia-reference.md",
+            "documentCommitSha": "0a89bf7c53912bc1232d30c1037a15dd95769999",
+            "archive": "BKL046-CFA-IC1805-Gaia-registrazione-v1.zip",
+            "archiveSha256": "9333772bbc1fb0e937bbd545bca8459753be87a82d4c3dde25f1e1408254bd14",
+            "receiptSha256": "1670e598211ff0a4a87c217422a8f84905c62eab180f2c38cb7a7f40fcaf65aa",
+            "documentSha256": "644a011b3c3322656b650c978cd5de1d7242776e3419c746226a26a4e01e259d"
+          }
+        ]
+      },
+      "parityDiagnosticTransfer": {
+        "status": "M8_M20_REPLICATION_BELOW_FROZEN_MEASUREMENT_COVERAGE",
+        "path": "docs/project/BKL-046-CFA-M8-M20-green-parity-coverage.md",
+        "documentCommitSha": "393eebb27992d5b1263f984a63c0d91e60ba1d6f",
+        "documentSha256": "3d355e298a68f834a3cd79449e17785bbadfc50e1cbe9066671d5e6e64130290",
+        "archiveSha256": "51158971f5a18e2899d4ad8f175872038e579a43b114ea15a161e2c0b7141dba",
+        "receiptSha256": "8404c46653425996167b7d2037f8825af03d97c71fcbc4fac3fa82fa9a37ebdb",
+        "comparableAssociations": 37,
+        "candidateAssociations": 756,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "fixedWidthParityReplication": {
+        "status": "COVERAGE_RECOVERED_DIAGNOSTIC_DID_NOT_TRANSFER",
+        "path": "docs/project/BKL-046-CFA-M8-M20-fixed-width-centroids.md",
+        "documentCommitSha": "05cddc2c9fc077b028095c7e71d5f252f883fd4c",
+        "documentSha256": "ef2fb2ac9ddaeb467a611fe8db77f2e1aaac75b7e4c756f6173232dc315dcfe1",
+        "archiveSha256": "e5b0e9b5845c767f8dc437877df670996f262ccf929b9a85306d124732a6517a",
+        "receiptSha256": "042afd2e2a780190bb506a7d7e07d3f6e2090ecda16ba92659a0b4a55c4ac055",
+        "paired": 742,
+        "eligible": 756,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "nativeCentroidMatchedRefit": {
+        "status": "POOLED_P90_IMPROVED_PER_FRAME_TARGET_NOT_MET",
+        "path": "docs/project/BKL-046-CFA-M8-M20-native-centroid-refit.md",
+        "documentCommitSha": "4cd89973a88c1f8aebc936ae335f761f3d107066",
+        "documentSha256": "3ebb99911bfaf9dc30783ac3c7cff9840d32fe789ef2645d66b66e80fcfadfbb",
+        "archiveSha256": "1879e3cd5771c73d2396873dc372e7f16c11c36db8d0fdb75646beeb93325827",
+        "receiptSha256": "8b8f89d0249f7fbe739bc3d283cd83be3af79207600714fb224c6934435f3180",
+        "paired": 742,
+        "framesPassing": 7,
+        "framesEvaluated": 14,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "registrationFluxSensitivity": {
+        "status": "ALL_BAYER_PARITIES_ABOVE_ONE_PERCENT_SENSITIVITY_IN_BOTH_CALIBRATIONS",
+        "path": "docs/project/BKL-046-CFA-M8-M20-registration-flux-sensitivity.md",
+        "documentCommitSha": "467e4bfe17a891503d7e31f2e3aa5e1830a37d11",
+        "documentSha256": "03828b314d0957cdec3b2a264886b2d94e2fa6a79d18143f65220cb5d1a07b3b",
+        "archiveSha256": "ca517f1dd4da997a8f6bbc0dbec768f7e24cd6b097a44d89818f4383d7a5440a",
+        "receiptSha256": "64027afb19cf84e32f1626f059a1579edc517e329ad8f7a387ca7973bc7d1b3d",
+        "photometricPairs": 2967,
+        "framesEvaluated": 14,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "fractionalApertureSensitivity": {
+        "status": "FRACTIONAL_APERTURES_REDUCE_BUT_DO_NOT_REMOVE_SENSITIVITY",
+        "path": "docs/project/BKL-046-CFA-M8-M20-fractional-apertures.md",
+        "documentCommitSha": "fd6f4d017699afaafc30aafaad23b09a7b1ae529",
+        "documentSha256": "25b3ae567f448d00f66471ee1096ac5ed2223855d76c106ca15232de9f459ea9",
+        "archiveSha256": "c0200c034d2af09f35fc4ea07f8ed5c0a674b33b37159d64c262d5700d898269",
+        "receiptSha256": "ea9e2f75ee742e7847b9fa0cb7cb9e2f94f50dd02c0858ba94cb64863ab7d66f",
+        "paired": 2967,
+        "comparisonsBelowOnePercent": 3,
+        "comparisons": 8,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "matchedGridRegistrationSensitivity": {
+        "status": "RED_RECONSTRUCTED_FLUX_REMAINS_REGISTRATION_SENSITIVE",
+        "path": "docs/project/BKL-046-CFA-M8-M20-matched-grid-registration.md",
+        "documentCommitSha": "302e89729fcb523510fb429dc37c7031c90268f7",
+        "documentSha256": "de4530c3732c01d8ba891318429b8a5a9ebe10c34b14ecbecba5e54e0a15e75c",
+        "archiveSha256": "61e385e2739f63f28e5da3b5df9e158e8ce011df1632df19dad736cd4aa92b43",
+        "receiptSha256": "daaf63de21c7af58d1eea5676f9fde80f4e4d5aefb84bc7ae745b68a16010817",
+        "stars": 53,
+        "frames": 14,
+        "comparisonsAboveOnePercent": 9,
+        "comparisons": 16,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "nativeGlobalAffinePreparation": {
+        "status": "GLOBAL_MATRICES_EXPORTED_OFFLINE_COMPATIBLE_BASELINE_AND_NATIVE_CONTROL_PENDING",
+        "path": "docs/project/BKL-046-CFA-M8-M20-global-affine-preparation.md",
+        "documentCommitSha": "b57470fcfc6f7eba448d1c7526fad441901ce15d",
+        "documentSha256": "564db9935d8e3c495390fa94cfb993e8dc7117d9b9db87ab9629061b239de68c",
+        "archiveSha256": "eaf89ee40582ec1ff4e2c398e647517eff381e769dabd2d7f7da1667da587cbf",
+        "receiptSha256": "27c44847806551fc00e65331d8b05d14f5221dbd5aed0fee6c6cdfcc244178e3",
+        "frames": 14,
+        "validationAssociations": 742,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "offlineGlobalAffineBaseline": {
+        "status": "OFFLINE_BASELINE_REPLAYED_NATIVE_COORDINATE_AND_RGB_CONTROLS_PENDING",
+        "path": "docs/project/BKL-046-CFA-M8-M20-global-affine-baseline.md",
+        "documentCommitSha": "d5f6e4eb234c6fb0fb23838a0a464402347fd17c",
+        "documentSha256": "f022cfc92e36608bcfe1854f864eefd815c15ef3ee9e68ba2e45d2332ea47e80",
+        "archiveSha256": "dc3b206b2ba74bc69a1ffa27b8d8a80543320fbd75e18fbf66ce47f2a013afe9",
+        "receiptSha256": "99509d242e5d7fc22e0626946d5a302aeed5a4acec31196b0dc45ba460569c8c",
+        "stars": 53,
+        "frames": 14,
+        "worstP90FluxChangePct": 0.352034746,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "xdrzNativeControlFixture": {
+        "status": "OFFLINE_FIXTURE_VERIFIED_NATIVE_IMPORT_AND_WEIGHTS_PENDING",
+        "path": "docs/project/BKL-046-CFA-M8-M20-xdrz-control.md",
+        "documentCommitSha": "c01cb5cb9e5bdcffa5fd68682157440da373a986",
+        "documentSha256": "acf9ff82cd05c64cd7ff18affa23836748766fc803efda3e2be15a24f1093d71",
+        "archiveSha256": "4e12d9469f4676b10b2f991a3652916bf18b2907eb4eb75a0bcebe2acda8010b",
+        "manifestSha256": "162181d91ad6e6d887693b9dc72973cbb6b9af781c7fa5ed12493513403e36c2",
+        "reproducedFixtureFiles": 17,
+        "positiveComparatorCases": 2,
+        "negativeComparatorCases": 8,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "calibratedCfaInputs": {
+        "status": "OFFLINE_INPUTS_PRESERVED_NATIVE_APERTURE_MASK_COORDINATES_PENDING",
+        "path": "docs/project/BKL-046-CFA-M8-M20-calibrated-inputs.md",
+        "documentCommitSha": "28247ef082eb61c195cd144b8b87808e2262726e",
+        "documentSha256": "57be9fcc900fb75e92ba9c261be82eb945e3162347812e77aed6d45b688ceb4d",
+        "archiveSha256": "432c4bc30b2b758edf0c2de90a6d715044ebeb1f8ecede3a581b3eb60f49cb33",
+        "inputPackageSha256": "7285425ff3667612296a78307ab813b6d1d419aa35f73e46dd1b096a6b54b910",
+        "manifestSha256": "e794f06fdd0cbdf735e36acf52a45526711daa7de96c960da3965a058e8e37a1",
+        "crops": 1484,
+        "excludedDetectorSamples": 985,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "xdrzRejectionCoordinateControl": {
+        "status": "OFFLINE_ORACLES_DISTINGUISH_ADDRESS_SPACES_NATIVE_OUTCOME_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-rejection-coordinates.md",
+        "documentCommitSha": "9039ba7c7cb20367e03468a884acf7fc0d93aa84",
+        "documentSha256": "b83bc6d8ea197218ccf804971facb1ca3a82a7e35832ad5b54f58b94cbc45935",
+        "archiveSha256": "2b09baf43e8b773d083f16309a6ea17d81e9333497c901acd3427f43fe1c61d2",
+        "manifestSha256": "d21357169e031363ea3e85943f092594ca470c74988841713df5efdad256dd40",
+        "reproducedFixtureFiles": 17,
+        "offlineClassifications": 4,
+        "rejectedAlterations": 2,
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      "xdrzThreeInputPlan": {
+        "status": "CANDIDATE_CONTROL_PLAN_REPLAYED_NATIVE_RUN_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-three-input-plan.md",
+        "documentCommitSha": "00f75bd7d99f37a8e12d37b977f1b39e12d2b81c",
+        "documentSha256": "32e2b5b7cbd05f2b3e2b725599d0bba543c0333acd825fa50544c24e390e70f7",
+        "archiveSha256": "4ee1cd45539216f1234025f58a9e177a8133588db7cb2c318a38c14888e7e595",
+        "manifestSha256": "6fd2da645650a19f4654276607612c0af5ba193734a0087fc221058aab4fe16b",
+        "planSha256": "377aea9a4decbf470a95c92f7f85852bc59f5e056b76a8c7ae110e842fcfd6e7",
+        "cases": 5,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzPjsrCandidate": {
+        "status": "MOCK_TESTS_REPLAYED_RUNTIME_AND_ADMISSION_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-pjsr-candidate.md",
+        "documentCommitSha": "18c17dfa5e257ee2a3dc79d99a8b4ca8909f574a",
+        "documentSha256": "c1eb483b9e2aea0620d469bb383cb4fcb5afe7c1dc4b3b2be8bf37ac712541e2",
+        "archiveSha256": "3f06d01f1d1b1db7c277aa064b7bac3cf6abba522ee47cb8ee3c5c4baaa8ed66",
+        "scriptSha256": "3a6580614d00d6b5773ccad4c23fac68df358e815383544d3e5f47677d0b609e",
+        "receiptSha256": "73be7de7ad7852b71b71fe13672ef1f1bd9189f6990cbb3152ae94d318c0fcd6",
+        "simulatedCases": 5,
+        "simulatedFailures": 11,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzCombinedVerification": {
+        "status": "OFFLINE_BATCH_COMPARATOR_REPLAYED_NATIVE_EVIDENCE_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-combined-verification.md",
+        "documentCommitSha": "30734a9c8f38f1ec701d5f6857acd35dc8b66515",
+        "documentSha256": "eafa266f72fbb8a4176c9fc03006d3a15d32185731a4fe697f25f7e2fd31ecae",
+        "archiveSha256": "107c8fe34781d0b2fe8230627db89d14760810e156ea23f8529cf7d922775987",
+        "receiptSha256": "9e7db44d6dbc1114ddfb4c21c312edd3a03497b5684324ed0a5d12dd458c6f14",
+        "completeSimulatedResults": 2,
+        "negativeSimulatedResults": 8,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzReviewSubject": {
+        "status": "FROZEN_SYNTHETIC_CANDIDATE_LAUNCHER_BINDING_NOT_APPROVED",
+        "path": "docs/project/BKL-046-CFA-XDRZ-review-subject.md",
+        "documentCommitSha": "89d593f8cc34dffceeefa0e4c8a923f81e666313",
+        "documentSha256": "d3c5348c4954032e7d6569e1e1554ba9ad202a029641798e780fb3d535bfb5c7",
+        "archiveSha256": "499db4adf08a217a9204bb86c1cfa69ae882b8af0405e035aa714230bdd8bedc",
+        "subjectSha256": "e7704c47e1321baca27257e65a2a472065f38762fb65567a6e6352194084b856",
+        "innerArchiveSha256": "9200da885a66359b20422b14f06d0fa4b328fc39cf65e6f477ec5c1736f69b82",
+        "filesReadBack": 49,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzR4ParentContinuation": {
+        "status": "WINDOWS_WITNESS_REPLAYED_FULL_LAUNCHER_BINDING_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-original-parent-binding.md",
+        "documentCommitSha": "531fa47a02d873d852d0cd21f869e8f2fb30ba33",
+        "documentSha256": "915169203b9a99bfc00c4473d27f81c3aa0f710cf1d655d9d596cf1e847800dc",
+        "archiveSha256": "504f6f21acfaf76035125a80cf05d6a53d7369c071ea6151671fbe989ec730ca",
+        "receiptSha256": "90076b291cf44c649656e6f63deff4d1f2e46d240e148dbaf5842f48142978a9",
+        "positiveCases": 1,
+        "negativeCases": 10,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzR4IsolatedLifecycle": {
+        "status": "ISOLATED_REAL_GUARDIAN_LIFECYCLE_REPLAYED_NATIVE_BINDING_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-isolated-guardian.md",
+        "documentCommitSha": "a4151863bccfd9d98ce481b66f92e6623eaaf329",
+        "documentSha256": "c813f8f725490e30c2019518595bd8cb3b336965b7f69464201a0831279d8c30",
+        "archiveSha256": "801acfce81ebaf68e9927da224746bbc69d3125bae87dd6068e9c731ff8401b3",
+        "receiptSha256": "cede53325e05b46824df7cf7fd7212901928a3373bee0102b869a72e0fd04859",
+        "cases": 4,
+        "canonicalRegistryFilesUnchanged": 30,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzR4ComparatorIntegration": {
+        "status": "REAL_COMPARATOR_REPLAYED_IN_ISOLATED_GUARDIAN_TEST_NATIVE_RESULTS_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-comparator-guardian.md",
+        "documentCommitSha": "8973856e93f3a781bcb4b1b3eec4d6580dcd3ad4",
+        "documentSha256": "890233cfa7f0a3e5225509491cb43faf79dddd4481e3f1f8a22b88f9c1ff167f",
+        "archiveSha256": "96b846a03a6377f8741cad55120017dbbe119d1a5c03776f5c97cc4b00a035b7",
+        "receiptSha256": "4649af04104dd1847a2a26a3d4fe80f25b6ae67f98c7e194e2a74dc3dd94761c",
+        "cases": 5,
+        "canonicalRegistryFilesUnchanged": 30,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzCfaBatchCandidate": {
+        "status": "FIVE_CASE_BATCH_REPLAYED_IN_MOCK_RUNTIME_NATIVE_BINDING_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-batch-candidate.md",
+        "documentCommitSha": "d20bd848a2c81d9c2bcb3c8a105b870cebcd2bf8",
+        "documentSha256": "7d71d51de1364594bac0aab1c2a81221134de120be70c50fd5aadeeb36dc1d50",
+        "archiveSha256": "f3988894f83d8f0e5debbe21fac49f0b471a869c6a940cbb2444fc8ae5006fbe",
+        "receiptSha256": "4a18fc32ff9adbeb02756f1fcd4e4678496bfcd318323009089a8ec5a06ee656",
+        "scriptSha256": "0b91c52cc63eb0196f1e9ba5ac6774ebb7a9d28478392358976ae8f7138a87ec",
+        "cases": 5,
+        "negativeCases": 9,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzOriginalChildHandle": {
+        "status": "ORIGINAL_HANDLE_WITNESS_REPLAYED_PIXINSIGHT_WINDOW_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-original-child-handle.md",
+        "documentCommitSha": "589026981edb870076e8431b957943ac99ff47d6",
+        "documentSha256": "c4ce245fa3ae6a8e29cc165d6560a587967ebf79ab9d1d39e0415cd60fa7e313",
+        "archiveSha256": "14027f024ac80a0f26b12e5a700ca41b064ea693b7e0e499c735c00b2b4e97db",
+        "receiptSha256": "db45df7e32b1a076d2bac2bead434ec2753961141d56ceb4e3930dc5eff0fec2",
+        "cases": 3,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzBoundBatchIntent": {
+        "status": "BOUND_COMMAND_PREPARATION_REPLAYED_OFFLINE_NATIVE_SUPERVISION_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-bound-batch-intent.md",
+        "documentCommitSha": "4c23f9df07fe656cc448ccfd4f1643d5c1583411",
+        "documentSha256": "d793c24a11acbee1ca59687206954e83546b7d02b388b48e4d6230b71c618d1c",
+        "archiveSha256": "ed9dc41b7a33a1c6b067ea6a8addcabf6f36a8d55e888ac846aa9cadac17889e",
+        "intentReceiptSha256": "0f0ab4c044a6be3b5500aca360669ded6a8dfcc7afa2894f941f17e352fbbedc",
+        "boundParentReceiptSha256": "0fd997c65cdba36e8472710da3793db3d69eb2333fcea86eb160e004958fa6e1",
+        "inputFiles": 33,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzIntegratedWitness": {
+        "status": "END_TO_END_WITNESS_REPLAYED_NATIVE_WINDOW_AND_REVIEW_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-end-to-end-witness.md",
+        "documentCommitSha": "649534e07d0829fadb29d2f74ec194d7e4ad1ef2",
+        "documentSha256": "9ccdd44b59975c229aa7ce00ae0db68560eae408ee4f2007e3613ac5fdbe71cd",
+        "archiveSha256": "1d815ed26e115b1d92431f0356d78092049ad553d33c9a1d692daa2df7daf6ac",
+        "receiptSha256": "4119ce2a771ebb463ecf3223e4517e636e31bd54639c3ea8344ef26055585b14",
+        "cases": 7,
+        "canonicalRegistryFilesUnchanged": 30,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzOriginalWindowIdentity": {
+        "status": "WINDOW_HANDLE_OWNERSHIP_REPLAYED_PIXINSIGHT_CAPTURE_AND_CLOSE_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-window-identity.md",
+        "documentCommitSha": "59b2fe811cebd56a23185954e4f1a7a8555156b5",
+        "documentSha256": "518a8549c098455e7ee53d07d52301751839fe40144700eb1b5ae77b7cf6d5b9",
+        "archiveSha256": "0f33678b13e357bd9fdcf55a9af04ecf0eeece5c9fda549c4b0930bd31dd341d",
+        "receiptSha256": "18c928ee8c5b7b7d2408010f506c8b81248d1ab4374621655b0d064bd21b82a5",
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzOriginalWindowClose": {
+        "status": "HIDDEN_WITNESS_NORMAL_CLOSE_REPLAYED_CAPTURE_REJECTED",
+        "path": "docs/project/BKL-046-CFA-XDRZ-window-close-witness.md",
+        "documentCommitSha": "62e0f941b2a8ee3b2ea9d2a66eb0e520f80bb476",
+        "documentSha256": "65a5826f12274d4bcf4be2e25cf8b6dbfe4ace20052f40965f525abd39312442",
+        "archiveSha256": "e1d2e4ca065588ce46486840c9a27eecd80fab144f67174bab4a961d805ae0e2",
+        "receiptSha256": "ffe3b3051b01c24042ac7e55d0877f8c3b5970b8eaed3f9f170d8bbfec57e0ad",
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      },
+      "xdrzSupervisorSequence": {
+        "status": "SUPERVISOR_SEQUENCE_REPLAYED_BACKENDS_AND_NATIVE_BINDING_PENDING",
+        "path": "docs/project/BKL-046-CFA-XDRZ-supervisor-sequence.md",
+        "documentCommitSha": "d763d188ddfd1b6c68c13cc66982b605a2d300ee",
+        "documentSha256": "75103cb35e5bc7d685f5f9c7115b61b5a3bdb4689855cc57da99310bd5a2e0c7",
+        "archiveSha256": "9104a14eaa1d6deae5c60c22ddb224b76ea9fdd543ff8da052d9c8c77382c150",
+        "receiptSha256": "bf982bc965edf353e32c58a3bcd52d028a357fa4d7353f70cc6c7829b571bd48",
+        "simulatedCases": 16,
+        "negativeCases": 14,
+        "nativeExecutions": 0,
+        "scientificClosures": 0
+      }
+    },
+    {
+      "axis": "NOISE_FLUX/2",
+      "status": "OPEN",
+      "redFlatApertureVariance": {
+        "path": "docs/project/BKL-046-TV4-VARIANZA-APERTURE-RED.md",
+        "documentCommitSha": "6479f452b999498e8b8dc431bc0d9ddaf66b579d",
+        "documentSha256": "c2522d407f0f4a1109ce4d41e9d5e4ab3004aaed29c7439f5fca6ff1f7d8cfff",
+        "receiptSha256": "ff778ec8c42d8d1da726288ab3aa0ff138b0b7aa8a2f67a7ebaed46c15b1bd63",
+        "regionalAperturePredictions": 30,
+        "relatedAxes": [
+          "NOISE_FLUX/3"
+        ],
+        "scientificClosures": 0,
+        "status": "HELDOUT_APERTURE_VARIANCE_REQUIRES_SPATIAL_AND_ORIENTATION_CONTROL",
+        "resamplingCovarianceTransfer": {
+          "path": "docs/project/BKL-046-TV4-COVARIANZA-RICAMPIONAMENTO-RED.md",
+          "documentCommitSha": "e26315b13fb593a0eb09427dd32dec8a7c7fc491",
+          "documentSha256": "b441ef6adde75c8e145aa2fe1b1e061d5dbaebea6c1fb3743aa49dca4e1c4db9",
+          "receiptSha256": "14091d3c521efa0479a939b4b6c30298d4e38027655c79a45cb4b109910f428e",
+          "predictions": 90,
+          "relatedAxes": [
+            "NOISE_FLUX/3"
+          ],
+          "scientificClosures": 0,
+          "status": "COVARIANCE_PROPAGATION_IMPROVES_HELDOUT_RESAMPLING_WITH_HORIZONTAL_RESIDUALS",
+          "signalDependentCovariance": {
+            "path": "docs/project/BKL-046-TV4-COVARIANZA-DIPENDENTE-SEGNALE.md",
+            "documentCommitSha": "305ac92e0c143ee2a9f443cd942145fdc14da932",
+            "documentSha256": "52847251df6d789d6cc708e480e5e7cb8d28e71a541781fed0f00f486b79b569",
+            "receiptSha256": "920891932cbea7b7e8f1a5acf5ee7a47b4bdc53629cd635e69f8358d1cdba116",
+            "pairedPredictions": 90,
+            "relatedAxes": [
+              "NOISE_FLUX/3"
+            ],
+            "scientificClosures": 0,
+            "status": "LAG_AFFINE_COVARIANCE_IMPROVES_HIGH_SIGNAL_HORIZONTAL_BUT_NOT_LOW_SIGNAL"
+          }
+        }
+      }
+    },
+    {
+      "axis": "NOISE_FLUX/1",
+      "status": "OPEN",
+      "redFlatTemporalVariance": {
+        "path": "docs/project/BKL-046-TV4-VARIANZA-FLAT-RED.md",
+        "documentCommitSha": "80e94f2e67d5c1519f910601e493dffb140d07e5",
+        "documentSha256": "be7011dac85633ec91fe17c2ef9ac5f30cb7f5128869ce32e6783c8f6493fe73",
+        "receiptSha256": "738a6e5149c950130f1003e9834fe049cdaad75d2875db918ae0803f95ffa472",
+        "regionalPredictions": 10,
+        "relatedAxes": [
+          "NOISE_FLUX/2"
+        ],
+        "scientificClosures": 0,
+        "status": "EMPIRICAL_AFFINE_VARIANCE_TRANSFER_AT_TWO_HELDOUT_LEVELS"
+      }
+    },
+    {
+      "axis": "DIFFUSE_BACKGROUND/2",
+      "darkReferenceSpatialTransfer": {
+        "path": "docs/project/BKL-046-IC1805-FONDO-DARK.md",
+        "documentCommitSha": "80f8bbdf0ac63f438b19f37d2f8c7c6022eba011",
+        "documentSha256": "8bdb8515aff80a80e05dadffdff8fcec923c2b412ae8831f877c0d1ca51e0f0f",
+        "receiptSha256": "e967c80397d3ec42e2211114386646323021a7c8292f2fa84d44d2d539841b43",
+        "darkFrames": 17,
+        "heldOutWindows": 36,
+        "scientificClosures": 0,
+        "status": "DARK_SURFACE_FIT_DOES_NOT_CONSISTENTLY_IMPROVE_HELDOUT_RESIDUALS"
+      },
+      "status": "OPEN",
+      "redFlatSpatialResponse": {
+        "path": "docs/project/BKL-046-TV4-FLAT-RISPOSTA-SPAZIALE.md",
+        "documentCommitSha": "ab86f09cdd38b9f1a4f0ed4a43a28514fa763d98",
+        "documentSha256": "e4a323cb70258aaedbe837e8b51fbf71a20f4177d88f3b066d6a9070910f4c86",
+        "receiptSha256": "0f4bce3f967101ab1dbd6ea1cc8e179932640ae3d30ebd2028bf8d0f39a0f3b2",
+        "calibrationFrames": 6,
+        "heldoutFrames": 7,
+        "blocksPerFrame": 1280,
+        "scientificClosures": 0,
+        "status": "JOINT_SPATIAL_OFFSET_AND_EFFECTIVE_RESPONSE_IMPROVE_HELDOUT_TV4_FLATS",
+        "matchedBiasComparison": {
+          "path": "docs/project/BKL-046-TV4-BIAS-RED-CONFRONTO.md",
+          "documentCommitSha": "65e401ea1f47c64daa82daff9cfb57c60e6a4774",
+          "documentSha256": "14093aa9f1871677e7f77548b8fe835155dd9da4c15dce86f2ff00b0f346b300",
+          "receiptSha256": "2b573af900a37c3c951b07801f38e9d5b591048e47d54e9704a19be30f2474d5",
+          "biasFrames": 4,
+          "matchedOldResults": 28,
+          "totalResults": 42,
+          "scientificClosures": 0,
+          "status": "SIMILAR_SPATIAL_BIAS_PATTERN_REQUIRES_COMMON_OFFSET_ON_TV4_FLATS",
+          "zeroCommandCheck": {
+            "path": "docs/project/BKL-046-TV4-FLAT-COMANDO-ZERO.md",
+            "documentCommitSha": "f7912a8c3341bfa9ac601745efa55ca7ea7cf7eb",
+            "documentSha256": "1f0d4536267f09fbd5fc069d8f378c7a828a6888abf30244dbf93c7b339120f8",
+            "receiptSha256": "3d11929dc4a54c08e69499ba228f96938d7e5e5268702a385be684f9be55ba2a",
+            "zeroCommandFrames": 8,
+            "matchedOldResults": 42,
+            "scientificClosures": 0,
+            "status": "MEASURED_ILLUMINATED_ZERO_COMMAND_DIFFERS_FROM_BIAS_AND_POSITIVE_FLAT_EXTRAPOLATION"
+          },
+          "overscanCheck": {
+            "path": "docs/project/BKL-046-TV4-OVERSCAN-RED.md",
+            "documentCommitSha": "a7f1e42c9c42bd1460dbaa8224af6da5296de45d",
+            "documentSha256": "7e87380af0e94862adfe5f7aa166f72b6add5057f76c890f803cc4f8cb165836",
+            "receiptSha256": "2689ccc779e4c01ef843027534981f32a1659b4f89e8f54d73d84a1908498d4b",
+            "overscanModelResults": 14,
+            "matchedOldResults": 42,
+            "scientificClosures": 0,
+            "status": "SERIAL_AND_PARALLEL_CORRECTIONS_FAIL_TO_REPRODUCE_THE_COMMON_OFFSET"
+          }
+        }
+      }
+    },
+    {
+      "axis": "DIFFUSE_BACKGROUND/3",
+      "status": "OPEN",
+      "referenceStripContamination": {
+        "path": "docs/project/BKL-046-TV4-CONTAMINAZIONE-BORDI.md",
+        "documentCommitSha": "a7cd5e432b55c1d1f41ea96565224f33837701cc",
+        "documentSha256": "7501de6d7d696824cf3c9ee66bc46814575e0ec97207706fef03da310ef49b83",
+        "receiptSha256": "e4aadfededaacaa7cafa1b442b03d1d8cf35b0b308271f375092223b75b4fcf6",
+        "records": 1280,
+        "scientificClosures": 0,
+        "status": "DIGITAL_REFERENCE_CONTAMINATION_INDUCES_LOCAL_ERRORS_AT_EDGE_AND_CENTER",
+        "agreementVeto": {
+          "path": "docs/project/BKL-046-TV4-ASTENSIONE-RIFERIMENTI.md",
+          "documentCommitSha": "27fcd5d2909b6f4e393c0023dad6ae597e001d32",
+          "documentSha256": "849a0a0d0946a55cb9ad5b2ce0f0370c308720d158e1e9f4b1d8686db9902fb8",
+          "receiptSha256": "2483067d28b832b69405ec62bcb96c538f987516f484b030b67f5f04fe3fdd6c",
+          "records": 640,
+          "scientificClosures": 0,
+          "status": "REFERENCE_AGREEMENT_ALONE_MISSES_COMMON_CONTAMINATION",
+          "calibratedCommonGuard": {
+            "path": "docs/project/BKL-046-TV4-RIFERIMENTO-CALIBRAZIONE.md",
+            "documentCommitSha": "94609ab289fb4d20765781815e39e23ea19205fa",
+            "documentSha256": "1d0ca973c2ea39f3ae10f488debfea9fbd7c61c93156fadf76b65469b7879f85",
+            "receiptSha256": "d50ac586a6ea38ae745c75417ca51a99544614a2bb7436ee658a729818fcd9a2",
+            "records": 640,
+            "scientificClosures": 0,
+            "status": "CALIBRATION_REFERENCE_REDUCES_COMMON_CONTAMINATION_MISSES_WITH_RESIDUALS",
+            "otherAcquisitionTransfer": {
+              "path": "docs/project/BKL-046-TV4-TRASFERIMENTO-ACQUISIZIONI.md",
+              "documentCommitSha": "c9f4e843b3ad6fba9ec591d0e7c311dd91a27965",
+              "documentSha256": "cf4d633d9f9fb16f4491460b63012f606b7ef45f9aff4ab0fd9b9d7f2504ea4e",
+              "receiptSha256": "b8434df013e50957c814e5117a0f42397168f7da86eb25e787850e63c4d259c4",
+              "records": 960,
+              "digitallyInjected": true,
+              "distinctExposures": 6,
+              "differentSessionGroups": 2,
+              "scientificClosures": 0,
+              "status": "PARTIAL_TRANSFER_WITH_RESIDUALS_ON_OTHER_TV4_ACQUISITIONS"
+            }
+          }
+        }
+      }
+    },
+    {
+      "axis": "PSF_PIXEL/2",
+      "path": "docs/project/BKL-046-PSF-PIXEL-2-CONOSCENZA.md",
+      "documentCommitSha": "7abef236c6a59a254682820ec2605c0e57fd1410",
+      "documentSha256": "03115d34a05cd171acfdea68a33c525a67a25dc8e097bfa3af85d60f5df2d996",
+      "receiptSha256": "ed080875f66437a0ca385be1e3d1f9b14bd39695d8a2176fec52be55520cf25a",
+      "documentedFieldCount": 2,
+      "verifiedSourceReceipts": 7,
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "orientationSensitivity": {
+        "path": "docs/project/BKL-046-PSF-ORIENTAZIONE-CENTRAGGIO.md",
+        "documentCommitSha": "6a2eaa2720bfd668b6471d88ef3459e1611c349b",
+        "documentSha256": "92cdf558b5539b17f5fa8597fff2fa5d94969b625909108910c1caae2b0b0d86",
+        "receiptSha256": "2fdc039e93290922baf70aaa4842782cdb360c5bba6dd642071b64350244fabe",
+        "status": "FIXED_CENTROID_OPERATIONAL_SCOPE_NOT_QUALIFIED"
+      },
+      "jointCentroidAndShape": {
+        "path": "docs/project/BKL-046-PSF-CENTRO-LIBERO.md",
+        "documentCommitSha": "5921c550be1eb29120517330439a1c49fbea96c3",
+        "documentSha256": "2d6fbbce947575c90a2926b28eb5c9449ddb79554099c4f239f89ec1abfc422f",
+        "receiptSha256": "5c204733172b58df26569e62c1a7a83618bb0b061584b884fe72413917789197",
+        "status": "NOISELESS_NUMERICAL_CONTROL_ONLY"
+      },
+      "gaussianNoiseOrientation": {
+        "path": "docs/project/BKL-046-PSF-RUMORE-ORIENTAZIONE.md",
+        "documentCommitSha": "ed2db6b499840f94618f2568e1074c162afeba81",
+        "documentSha256": "fd37423acdc7a4d48570bf740195e4e2ec8b6c8983c3e92bff71c55061bee128",
+        "receiptSha256": "7267bbf8d6700576c7582e19c91f11df59c7e778165e68f0996dcc13b194b9a5",
+        "status": "FAILED_FROZEN_NOISY_ORIENTATION_CRITERIA",
+        "shapeBoundaryAudit": {
+          "path": "docs/project/BKL-046-PSF-LIMITE-ELLITTICITA.md",
+          "documentCommitSha": "f6d6b26259457ef883a18db3fae123bd506efa7f",
+          "documentSha256": "25480e231e752969b3d935db9e20805a6fc96f3894d2f8496c152777f03322af",
+          "receiptSha256": "5df254fcd00dca0d4d1788627d4b6f2204d9e437deebe27e9ca1c74dff2e41d7",
+          "status": "LOCAL_CONSTRAINED_OPTIMA_WITH_PRIOR_DISPOSITIONS_RETAINED"
+        },
+        "interiorAudit": {
+          "path": "docs/project/BKL-046-PSF-MINIMI-INTERNI.md",
+          "documentCommitSha": "2e17b3d4740d0e3408a5e9f39b6fa7c05657322f",
+          "documentSha256": "a84ea3600435b753ebcc502baa70a81fb4101ba18a1269402d8a507b9fa25ff0",
+          "receiptSha256": "6d166f73e65c9749f6e246121d118b22dbb745307bbc257cb075859c0d4adf55",
+          "status": "PRIOR_DECISIONS_RETAINED_WITH_66_UNRESOLVED_FITS"
+        },
+        "localAngularInformation": {
+          "path": "docs/project/BKL-046-PSF-INFORMAZIONE-ANGOLARE.md",
+          "documentCommitSha": "2173002f440fd8704b99c50a120614b84b9f3c4e",
+          "documentSha256": "dee7c910487edd5869e827dc8f1d9646cae7729cf052a7bc1b030906c5543b92",
+          "receiptSha256": "1a7719133f96e02e80e1a6a7a1cb61569c8b0251e34a99bb063554b818260be5",
+          "status": "LOCAL_MODEL_BOUND_DITHER_EMPIRICAL_VALIDATION_OPEN"
+        },
+        "pairedDitherTrial": {
+          "path": "docs/project/BKL-046-PSF-DITHER-EMPIRICO.md",
+          "documentCommitSha": "09d0b7e6728c08ecd00ee553ec2500ecf57dc4bd",
+          "documentSha256": "5afc9f2ae7c62de286822db022764cfe0712ca7eda4d3bbe9f74c086bb4b31ee",
+          "receiptSha256": "a3ff67a41645534f82a29851c11d495aaad636ac0447f5962040769b2ba409e5",
+          "status": "EMPIRICAL_DITHER_BENEFIT_ANGLE_CRITERIA_UNMET"
+        },
+        "wingMismatchStudy": {
+          "path": "docs/project/BKL-046-PSF-MOFFAT-ALI.md",
+          "documentCommitSha": "8f07b99435ec545543a5eacd51b71e0757b8ecf0",
+          "documentSha256": "dc606174c1f1a67764180c80e4ccd8405ab6e3d1da666c24d621b24e5e70da6d",
+          "receiptSha256": "8d798d4ee11f39941c4d43f2450abf30fe95f31dc46c316b9c8efbbbd4c11eb2",
+          "status": "MATCHED_FWHM_WING_MISMATCH_ORIENTATION_GATE_FAILED_WITH_NOISE"
+        }
+      },
+      "instrumentalQuadrupoleRepeatability": {
+        "path": "docs/project/BKL-046-NGC5986-QUADRUPOLI-ACS.md",
+        "documentCommitSha": "38db7b3cc7862da32d6a282cc5786741b752ef5a",
+        "documentSha256": "0278b21fde2321be8a0be542f0e6dae1fa870ac7a7e882e860b2748ca2f6242b",
+        "receiptSha256": "27bf61b5c65b48175dcaa2e4b90b796b8f587d29cebd7f0b2d057863d286a597",
+        "status": "OBSERVED_QUADRUPOLE_REPEATABILITY_WITH_DQ_LIMITED_COVERAGE",
+        "dqCommonSupport": {
+          "path": "docs/project/BKL-046-NGC5986-DQ-MASCHERA-COMUNE.md",
+          "documentCommitSha": "6eda4ac3a00c4be0d8db5c8252bd38af36a2b6df",
+          "documentSha256": "164caf71a675cdf8e9fa9fe1010960694dd794f1c8d60912cdf560481773179a",
+          "receiptSha256": "cb5692b0b9eac56a6285a08d5a7891dda03e0daead894e4e9b39a3fa5cd3a425",
+          "status": "COVERAGE_INCREASED_FROZEN_ANGLE_DRIFT_CRITERION_FAILED"
+        },
+        "independentFieldMaskTransfer": {
+          "path": "docs/project/BKL-046-GO14949-QUADRUPOLI.md",
+          "documentCommitSha": "8ae2953c6df53d28b33f0a399855b3cfd51b824b",
+          "documentSha256": "0ad1163f9dd27e1d0f5309bff3e4b18b74dc8052f9a1fdcbe3a9f440ec289a48",
+          "receiptSha256": "352a42e6e6cefd79436957d26b8b6aa474702d92f3c2de069a22b45d360c3b42",
+          "status": "INDEPENDENT_FIELD_COVERAGE_GAIN_ANGLE_DRIFT_LIMIT_FAILED"
+        }
+      }
+    },
+    {
+      "axis": "NOISE_FLUX/3",
+      "apertureOrientationTransfer": {
+        "path": "docs/project/BKL-046-TV4-RUMORE-APERTURE.md",
+        "documentCommitSha": "b9bae73cb06d9c2ed27bcfaeb0bb776d13f73899",
+        "documentSha256": "31bef850a0e4cdf2d6b2080ebaa61bec27a5f65ed6fb06e58df60fb31b4c6e6e",
+        "receiptSha256": "1b3f86616433543967e01c9d161bd5ba85d8eaebb78500eb63ed1c16cc113240",
+        "status": "CORRELATED_MODEL_IMPROVED_HELDOUT_ERRORS_BENCHMARK_FAILED"
+      },
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "detectorStripControl": {
+        "path": "docs/project/BKL-046-TV4-RUMORE-STRISCE.md",
+        "documentCommitSha": "934701fc7e527ed5c7f2b29147d92b9133d0c7ca",
+        "documentSha256": "042dcb674e1bef07895b5bc805e7e1b6035d228a1daf2874ff3ab1ca2c3401d6",
+        "receiptSha256": "875cf9cf976596027dca45b1528d8f83b48a7511e4c7da35a27b3a232582c059",
+        "status": "ROW_COMPONENT_OBSERVED_HELDOUT_VARIANCE_BENCHMARK_FAILED"
+      }
+    },
+    {
+      "axis": "DIFFUSE_BACKGROUND/1",
+      "diffuseExternalBackgroundAnchors": {
+        "path": "docs/project/BKL-046-FONDO-RIFERIMENTI-INDIPENDENTI.md",
+        "documentCommitSha": "086fb6378a179c2dd90ff07ad9fcdb7bb35ad9ff",
+        "documentSha256": "d9d474c5459264c9b3a321129df581b652ea5af7b706db893a6d66e66148388f",
+        "receiptSha256": "dc8082b08d3b09d53f87e5dbd363e2350d5e44af6db73a75b2e35ff71a94c115",
+        "fields": 2,
+        "simulatedReferences": true,
+        "scientificClosures": 0,
+        "status": "SPREAD_EXTERNAL_REFERENCES_IMPROVE_MODE_CONDITIONING_IN_SIMULATION"
+      },
+      "diffuseSkyDetectorIdentifiability": {
+        "path": "docs/project/BKL-046-FONDO-IDENTIFICABILITA.md",
+        "documentCommitSha": "346e11956f2d7e655be4dbfe1e3cfe5032d0fb98",
+        "documentSha256": "2f8a7a076a31dbc9025b1020d8295186ca99645dace3bbaa2d36057de5fd2519",
+        "receiptSha256": "3e802109cb197c89470ee7f7ed2577a17a9a543abe559eec3c0906ca6d085804",
+        "fields": 2,
+        "scientificClosures": 0,
+        "status": "DITHER_DOES_NOT_IDENTIFY_FREE_PER_FRAME_QUADRATIC_SKY_MODES"
+      },
+      "diffuseDataDrivenMask": {
+        "path": "docs/project/BKL-046-M8-M20-MASCHERA-DIFFUSO.md",
+        "documentCommitSha": "2a3cf9967c91e39a7096a41dbd8518b427f9e3b2",
+        "documentSha256": "a30abadad9d1b1f9eac9130900292b4eca01d2733cfc71616fe145aef1930999",
+        "receiptSha256": "219dc1040623a518ede46112be63436942dcda90b6eca3f243bd218a5245a775",
+        "injections": 729,
+        "blindPasses": 20,
+        "blindAbstentions": 16,
+        "scientificClosures": 0,
+        "status": "BLIND_MASK_MISSES_BROAD_DIFFUSE_WITHOUT_ABSTENTION"
+      },
+      "spatialBackgroundModelSelection": {
+        "path": "docs/project/BKL-046-M8-M20-FONDO-DIFFUSO-CV.md",
+        "documentCommitSha": "00f4afcde1f80dc2bd5a3b9006e16027d526188e",
+        "documentSha256": "d1ea6b598165bacbe3084ee5949e71db9199f26774760e0a531505db36601870",
+        "receiptSha256": "dd866044eedbd523d5a4dda18fb0eb2527fb65936277b94f56ce7525fa263552",
+        "injections": 729,
+        "combinedPasses": 0,
+        "scientificClosures": 0,
+        "status": "HELDOUT_BACKGROUND_MODEL_SELECTION_DOES_NOT_PRESERVE_DIFFUSE_INJECTIONS"
+      },
+      "detectorStripSignalLoss": {
+        "path": "docs/project/BKL-046-TV4-SEGNALE-DIFFUSO.md",
+        "documentCommitSha": "c28cb66d871090b213fa496e0015e203ecdbd111",
+        "documentSha256": "22467927a87edc1abef03ed60d033b94b4b4e215130f0fececf6da2942ea86e7",
+        "receiptSha256": "e0c14f59cee31b9e3442d05d720963164af7656c1230ad136fe950edd7ab53f5",
+        "status": "DIRECTIONAL_SIGNAL_LOSS_DEMONSTRATED_IN_CONTROLLED_INJECTION"
+      },
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "robustStripeEstimators": {
+        "path": "docs/project/BKL-046-TV4-STRISCE-ROBUSTE.md",
+        "documentCommitSha": "f950b67f328c138af6758b9e3c2131ccb97b6fb2",
+        "documentSha256": "8e12bae6e4d4f4f0fc2423ce5294fee03d13081325ba631cdd3de69913947d43",
+        "receiptSha256": "78a577edaacc37828049c2f57578ff04b57386e267beca87d6b10113b81ad3c1",
+        "relatedAxes": [
+          "NOISE_FLUX/3"
+        ],
+        "status": "ROBUST_STRIPE_CORRECTION_LOSES_AXIAL_FILAMENTS_NO_COVARIANCE_PREDICTION_PASS",
+        "fixedGainBound": {
+          "path": "docs/project/BKL-046-TV4-LIMITE-GUADAGNO.md",
+          "documentCommitSha": "2760d7266d9b80416b9c31008314e98e5091480d",
+          "documentSha256": "e94ece8f955929495c0d6f42c2e07acb017d7834b386fae990b712ecd1c42c1d",
+          "receiptSha256": "0a68109c52e4b20707717a985498421700879c02fd7e9997845c453e82284217",
+          "relatedAxes": [
+            "NOISE_FLUX/3"
+          ],
+          "status": "SMALL_RETROSPECTIVE_SIGNAL_SAFE_GAIN_NO_COVARIANCE_FORECAST_PASS"
+        }
+      }
+    },
+    {
+      "axis": "SATURATION_BLEND/4",
+      "maskTransitionPeaks": {
+        "path": "docs/project/BKL-046-SATURAZIONE-PICCHI-MASCHERA.md",
+        "documentCommitSha": "2df0655972917a7e14c2420164d1c8b5ca527d9d",
+        "documentSha256": "8b984cb6afb27546e7c070b0c7de5d2249bbcefa60c3a9b5e831e32eaa36e7a6",
+        "receiptSha256": "25d13d631ba528873c2376602527f14caff807295e2114432ba6f5d3692300e0",
+        "status": "REGISTRATION_SENSITIVITY_WITH_FROZEN_BORDER_CRITERION_FAILED"
+      },
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "guideRegistration": {
+        "path": "docs/project/BKL-046-SATURAZIONE-REGISTRAZIONE-GUIDA.md",
+        "documentCommitSha": "46e8c982c58283b041231fd10c43c3bdd8b46f8e",
+        "documentSha256": "a92acd0b9f55ca9597e29299a3e373cbf6843c4ff909e280a7ef5e7f736bb8e8",
+        "receiptSha256": "718e714bf463435915084a02e7f9efa13a71f98a4c8758b8a5c3e82b67186146",
+        "status": "ANNULUS_ESTIMATE_IMPROVES_OFFSET_CASES_REGISTRATION_ENDPOINT_FAILED"
+      },
+      "multiAnchorGuide": {
+        "path": "docs/project/BKL-046-SATURAZIONE-REGISTRAZIONE-STELLE.md",
+        "documentCommitSha": "de5151af524dfec3878db06adf6e29bf260ab693",
+        "documentSha256": "e5e63abe34fa01111a9aef32efbe55c9e5a00cb0c8f0e8ee1ac4939981fea524",
+        "receiptSha256": "fbc152d40bdf7658728ba1bd54226256075f633b10bb232b0ae44516e3dbfb51",
+        "status": "ZERO_SHIFT_PROTECTED_NONZERO_REGISTRATION_ENDPOINT_FAILED"
+      },
+      "realFieldRegistration": {
+        "path": "docs/project/BKL-046-GO14949-REGISTRAZIONE-GUIDA.md",
+        "documentCommitSha": "e7e8a486e2d01c78d0ba5cd64240c602a1495efa",
+        "documentSha256": "ff5fa98d25f873fa8c9094d432a82af47397cbd3f49ad94c879f6eb3cbbb2460",
+        "receiptSha256": "56f688d64225df69eef1ec8123062c3668ed228fbba529639e6ac92fd1ebdb73",
+        "status": "EQUAL_DEPTH_REAL_FIELD_HELDOUT_REGISTRATION_CRITERION_FAILED"
+      },
+      "realCrossDepthRegistration": {
+        "path": "docs/project/BKL-046-GO14949-REGISTRAZIONE-PROFONDITA.md",
+        "documentCommitSha": "84f3761b677103e9168c8847e487f1ea79beb414",
+        "documentSha256": "6acc6aa22341b12a549932c740701b238b8c68c5419180565ab16cb2273bef47",
+        "receiptSha256": "f3b63a2933916551da70054a58d05364b49bd5833380fb68e51fa154a9ac1023",
+        "status": "P90_MET_ON_DQ_VALID_INTERSECTION_ONLY"
+      },
+      "realFullWellGeometry": {
+        "path": "docs/project/BKL-046-GO14949-GUIDA-FULLWELL.md",
+        "documentCommitSha": "1bc117303abdc3453f9c075de6efbef16bf24737",
+        "documentSha256": "49ca623812ad0802c996c0510bcede5fe17235c73810d9e164c6759b310bc17e",
+        "receiptSha256": "9bbec741ccec34d49733035ead3e719aa655abd826066a0d254425b15ead1ddb",
+        "alternateWcsReceiptSha256": "e04cfd6e5dad8c4be001a3e0a0ce79a2f522b02412da2bd4ab754652eb13572a",
+        "status": "PRIMARY_WCS_IMPROVED_SUPPORT_FROZEN_AFFINE_CRITERION_NOT_MET",
+        "replicate": {
+          "path": "docs/project/BKL-046-GO14949-REPLICA-FULLWELL.md",
+          "documentCommitSha": "657b59e3242fe3f539db45fa2c76dd1880897573",
+          "documentSha256": "8dbc1cbd8c1ffd3982a96064b0e57db0453c9fc3ff5ab6ada1c40f68c5472504",
+          "receiptSha256": "faa34f97a0b216b442504aa7574fe03e3ce4dbf87292b6856d9a43caf66f949b",
+          "status": "SAME_FIELD_SECOND_EXPOSURE_FROZEN_AFFINE_CRITERION_NOT_MET"
+        },
+        "newPointing": {
+          "path": "docs/project/BKL-046-GO14949-NUOVO-PUNTAMENTO.md",
+          "documentCommitSha": "7502ce6a9cdd6531cd868f9b3703e15237fcbe7a",
+          "documentSha256": "8a8545c481c07cab06ff92c9a4c733a541a2000546181b0eb17de47501012346",
+          "receiptSha256": "c7ec09530e84efdf140f95200391574d5251d03887856e3621508c6579b4ee66",
+          "status": "NEW_POINTING_ZERO_COMPLETE_FIVE_EXPOSURE_CONTROLS",
+          "diagnostic": {
+            "path": "docs/project/BKL-046-GO14949-DIAGNOSI-GUIDA-B40.md",
+            "documentCommitSha": "7042f0f7abba05abda5ea7a89da37f448718458e",
+            "documentSha256": "80668f3644c71f688e211c1e849bf96fa5a5a2fac64812e9b50bda3fb5c2ae13",
+            "receiptSha256": "2b0d8150cb55768cb658da399c43862ef1f3aaf1e86087847481a766872f9b49",
+            "guideFitReceiptSha256": "db74aa9a170d8cb1cefa281c11a7b8fab9703336f70c4ff16e0da6df082a73b4",
+            "status": "B40_GYRO_ONLY_RECORDED_ALTERNATE_ORIENTATION_NO_COMPLETE_CONTROLS"
+          }
+        },
+        "externalControl": {
+          "path": "docs/project/BKL-046-GO16380-CONTROLLO-ESTERNO.md",
+          "documentCommitSha": "ef2ebb6ff532ff1c90a072090dcc634527427010",
+          "documentSha256": "dcf1906cde3be51170a37b68674a81c1229f2c14500dbf41d4ae3b590c07e5a9",
+          "receiptSha256": "c6958e77af9f1c2a3898bd9c5f9300da68a0818da2778bce9f71f32fc6a124c5",
+          "secondExposureReceiptSha256": "0eb5c6ad39d06ce85654cff00221785d359fc8cf6bef947ba362c1ecfd0c49d0",
+          "status": "INDEPENDENT_FIELD_SHORT_PAIR_VALID_GUIDE_INTERSECTION_EMPTY",
+          "wcsCorrelation": {
+            "path": "docs/project/BKL-046-GO16380-CORRELAZIONE-WCS.md",
+            "documentCommitSha": "9989c684cc0b32250e68ae1c8d51142a05631420",
+            "documentSha256": "4ade24a339bc94d8afc5bd1aa13bfdddec3b989d4a0a70f8f223f2dd16f9ec2a",
+            "receiptSha256": "0ab6a06657e2fb6da6c6922a1565e3d786ee68bba50b1c892b13e0c88decd07c",
+            "boundaryReceiptSha256": "3ffc63382e585af38e8deb6d35c42d3ca63e479be2e1f6a551910fde4bffc611",
+            "status": "CORRELATION_RECOVERED_FIVE_FRAME_COVERAGE_HELDOUT_ERROR_ABOVE_LIMIT"
+          },
+          "guardedAffine": {
+            "path": "docs/project/BKL-046-GO16380-AFFINE-TASSELLI.md",
+            "documentCommitSha": "477b70475dfa091d9d9eb6c88de831c8bf221633",
+            "documentSha256": "3683b3c3d2c1a8cfd8ddc7dacf3ab8b5e76a9db7c4857d77bf7c70738dd999a6",
+            "receiptSha256": "eea78884ba50d06402cf791b4103851dffe698cd038ab332f8adfe131a46f1d4",
+            "replicateReceiptSha256": "00f1f2830ad73315bdc219e4062f145f02af0c992faec6f6c03c8c563b310dd7",
+            "status": "AFFINE_REDUCES_ERROR_THRESHOLD_NOT_REPRODUCED_ON_BOTH_CHIPS"
+          },
+          "pairedResiduals": {
+            "path": "docs/project/BKL-046-GO16380-RESIDUI-APPAIATI.md",
+            "documentCommitSha": "9481108018a1a91416a9dffd40f3417364d636c6",
+            "documentSha256": "7d43f61529428754547cebbed834b326e216fa204d7992ec47fd713d22b77102",
+            "receiptSha256": "14cd555bc8eaf01dd5794c392ff168d3c8db3085283a52c3e03ee61817a35a4d",
+            "status": "PAIRED_HOLDOUT_COMMON_COMPONENT_ABOVE_LIMIT"
+          },
+          "gaiaReference": {
+            "path": "docs/project/BKL-046-GO16380-COPERTURA-GAIA.md",
+            "documentCommitSha": "ae49e5594651a340d8f80df2c328f05899f7346e",
+            "documentSha256": "6c23d34592e6ffdb4367b075a304e5f781f2493a5eea0818c364e044444a47c8",
+            "receiptSha256": "d479d7618176583df95d4e06fa5f4a29c469798224959f13067fd5ae925cdb07",
+            "status": "GAIA_EXISTING_COHORT_INSUFFICIENT_CALIBRATION_SUPPORT",
+            "catalogSeededPair": {
+              "path": "docs/project/BKL-046-GO16380-MISURE-DA-GAIA.md",
+              "documentCommitSha": "8ff21c902259296a3233ba81723fadd84fcdaf88",
+              "documentSha256": "0044675868fb3b92ea060941b656a62fee8c83ac2043961721da8d75fa34a331",
+              "receiptSha256": "12fba94a250c3ba68852c897a7291eb45fd5851f89fdb9d2f95ae77cc3392eb4",
+              "status": "INSUFFICIENT_GAIA_SHORT_PAIR_SUPPORT_AND_PAIRED_COHORT_OVERLAP",
+              "qualityVetoAudit": {
+                "path": "docs/project/BKL-046-GO16380-VETI-DQ-GAIA.md",
+                "documentCommitSha": "d31748c55e12d4b931d25e73193b2d0b76928ffb",
+                "documentSha256": "1e3fefc39c06fc63866eba6110dcde59efc74e88a77251e1da40305e1ece648a",
+                "receiptSha256": "33a626a1e152de4cb04ea38e2202436f0b82207f7d00200c0b6c8559203ffe94",
+                "status": "ALL_A40_QUALITY_REJECTIONS_CORE_DQ_FLAGS_MOSTLY_PERSIST_IN_SECOND_SHORT"
+              },
+              "shiftedShortPair": {
+                "path": "docs/project/BKL-046-GO16380-POSE-SPOSTATE.md",
+                "documentCommitSha": "49189ea1a3a247d956fba992c9cf2714c7da9cd9",
+                "documentSha256": "52b0563cc47d3eb49b1a81172a467e3643d559ba61c5c8856ee387bff43f4477",
+                "receiptSha256": "b26519154eb3038cfb1f643ee86fee08f4591e57e34c6d20173f7f38ad7101e1",
+                "status": "SHIFTED_PAIR_NO_ADDITIONAL_VALID_GAIA_ANCHORS",
+                "astrometricCorrection": {
+                  "path": "docs/project/BKL-046-GO16380-SPOSTAMENTO-CALIBRATO.md",
+                  "documentCommitSha": "3e2b163684aab253d00a8133c1d4fe262e9f3a5b",
+                  "documentSha256": "9cb7ebf4fe4aae8e6eaf8e9d0ad6ef47580f8236a749542247a2229e02ea3df0",
+                  "receiptSha256": "c2fdfdbe058ad67c934a11cba434bde0fdd3049248ee7b0356153f26eddd0e99",
+                  "status": "SECOND_SENSOR_COVERAGE_MET_FIRST_UNCOVERED_GEOMETRY_OPEN"
+                },
+                "unionGeometry": {
+                  "path": "docs/project/BKL-046-GO16380-ERRORE-UNIONE-GAIA.md",
+                  "documentCommitSha": "2c5307df1b9a451878a8629789a180cba3594f01",
+                  "documentSha256": "61dd40e03a921ddfc7a99e067ab40b2c7b4c666d3e656f2abc52ea4981d56eaf",
+                  "receiptSha256": "2a4dd5e2c6849889fe159caac47a4b99a739fb2e2899ab2a1828bd9ef2ec4a8d",
+                  "status": "SECOND_CHIP_GAIA_P90_ABOVE_LIMIT_NO_OVERLAP_WITH_DEEP_PAIRED_SOURCES"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "axis": "FILTER_COLOR/2",
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "wfc3ComponentRevisions": {
+        "path": "docs/project/BKL-046-WFC3-REVISIONI-FILTRO-QE.md",
+        "documentCommitSha": "39ef3113387a5a46ad07c41abd0fc8fdefbe4ba3",
+        "documentSha256": "e3bde8b8f8497c1f49b65138abff18bffdc56ee8a1bd8f70cbf5d37cf4c613db",
+        "receiptSha256": "95f2a8a67a125f194eb1d85b71973f23c5e9f25fb6fe96044409836983b0ac0b",
+        "status": "DOCUMENTED_COMPONENT_REVISIONS_COLOR_TRANSFER_HARDWARE_UNCERTAINTY_OPEN"
+      },
+      "p330eVisitEligibility": {
+        "path": "docs/project/BKL-046-WFC3-P330E-VISITE.md",
+        "documentCommitSha": "f0faa08b31524292b539330ee79e04b398bba81d",
+        "documentSha256": "f4a577b8a895238d69c930f0994d104f22bf521d673a0bbba4701533d8215e12",
+        "receiptSha256": "8efea2431311ca3545b7163e4b6a29988ddd9343b65547182abdf6a4653a5aa3",
+        "coreDqReceiptSha256": "7da57bc6466726d3dd661a9c006daef40e787a866e742a4c4d859e40dc7209e4",
+        "status": "NO_VALID_COLOR_TRIPLETS_TELEMETRY_AND_HOT_PIXEL_VETOES",
+        "laterDitheredSupport": {
+          "path": "docs/project/BKL-046-WFC3-P330E-SUPPORTO-DQ.md",
+          "documentCommitSha": "e15c647d7db7787afefb93f915cc68104c122f63",
+          "documentSha256": "a6e9eace5ff18921ea28bb37db2a0aa092ea2901c208ad8cd41f2351648e9e91",
+          "receiptSha256": "71a6732a965b092c4bb87343311b45ab4b89ec334c21d44183ca6dddb87194f4",
+          "ditheredSupportReceiptSha256": "c11836dcc3bae058bd778ad52f7976c080a5cd0ed1e110bcd0700454a11387d1",
+          "status": "FOUR_LATER_VISITS_NO_VALID_COLOR_TRIPLETS_DITHER_UNION_APERTURE_INCOMPLETE"
+        },
+        "psfMaskStress": {
+          "path": "docs/project/BKL-046-WFC3-P330E-STRESS-PSF.md",
+          "documentCommitSha": "613ef1ac386561ce6092f310ea1f1e5837cc1597",
+          "documentSha256": "f4e7eef2ae0811fc6b43a5b901993d61316b0beda0e15f57cbb2ccadfa610b25",
+          "receiptSha256": "164bcdfba45b918277fb1e2883affaee407b39374f03b6d3e2db2e0f23c6d0ed",
+          "relatedAxes": [
+            "FILTER_COLOR/3"
+          ],
+          "status": "STANDARD_PSF_TEMPLATE_FAILS_NOISELESS_FOCUS_ALTERNATIVES_WITH_REAL_MASKS",
+          "observedCorePrediction": {
+            "path": "docs/project/BKL-046-WFC3-P330E-PREDIZIONE-PIXEL.md",
+            "documentCommitSha": "1a0a224d8fa6e69ac6813e368c7cdd5863b7f7cd",
+            "documentSha256": "b38c69fc0c32bf85196a65cdcd6869908ecbcd5e27870accd40fb100559d40eb",
+            "receiptSha256": "116a0dd52595ac7ffc6fd16ce725f90da3e8561359e56b032ab68d36f0b9fae6",
+            "relatedAxes": [
+              "FILTER_COLOR/3"
+            ],
+            "status": "MIXED_HELD_OUT_CORE_PIXEL_RESULTS_ON_REAL_DQ_ZERO_SAMPLES",
+            "ditherGapPrediction": {
+              "path": "docs/project/BKL-046-WFC3-P330E-LACUNE-FRA-POSE.md",
+              "documentCommitSha": "261edd0134b94a3be0d1b126fe02abd4e133b979",
+              "documentSha256": "62f0638e5cbbfee09fb4b4b91800a36f8753adabf5002d6832d03bf4654022e6",
+              "receiptSha256": "fc1fe8c5a3348887dc8b9c67e983abf039c7fb1fc468b9ad47e76b59560993cb",
+              "relatedAxes": [
+                "FILTER_COLOR/3"
+              ],
+              "status": "DITHER_GAP_PROXY_REMAINS_ABOVE_TWO_PERCENT_MEDIAN_PEAK_NORMALIZED_RMSE"
+            }
+          },
+          "focusFit": {
+            "path": "docs/project/BKL-046-WFC3-P330E-FUOCO-FIT.md",
+            "documentCommitSha": "86c06c122d7a1c085d565663a7137575864fadda",
+            "documentSha256": "495f5025f0bee320fe79734cfadcc843101fe95bb7e53f0fb9ddcd83d4742e54",
+            "receiptSha256": "cdd74b9fc471de5678d89e5b9233791ce49bd85f8fe945b1bd04f4c50637c002",
+            "relatedAxes": [
+              "FILTER_COLOR/3"
+            ],
+            "status": "ESTIMATED_FOCUS_REDUCES_SYNTHETIC_MASKED_ERROR_P90_STILL_ABOVE_ONE_PERCENT",
+            "centerAblation": {
+              "path": "docs/project/BKL-046-WFC3-P330E-CENTRATURA.md",
+              "documentCommitSha": "c8de26a889fcf6fe3da9cbfa2fed64125ed3e342",
+              "documentSha256": "cdb76cb2170ae4b0c7914396728e6ba609316f4d49f92e0d933eccaac498e2c9",
+              "receiptSha256": "9e4fc698955b2557cd39289bd0a8df435f8a59ee0efcd4ad546ebcffe7293efe",
+              "relatedAxes": [
+                "FILTER_COLOR/3"
+              ],
+              "status": "CENTER_ABLATION_RESIDUAL_P90_ABOVE_ONE_PERCENT",
+              "focusInterpolation": {
+                "path": "docs/project/BKL-046-WFC3-P330E-INTERPOLAZIONE.md",
+                "documentCommitSha": "6931b92f4f85e663e62abc20bc25a709d3f3beec",
+                "documentSha256": "ffd1c3c8c4ec323f243c80a9b404e7a30d3bc117719c492629336155d4e45d18",
+                "receiptSha256": "04ef0d18a47a0e35b21ca10cfdd4be66d898412e660b773eb6407d0415a2587f",
+                "relatedAxes": [
+                  "FILTER_COLOR/3"
+                ],
+                "status": "INTERPOLATED_FOCUS_REDUCES_PAIRED_ERROR_P90_ABOVE_ONE_PERCENT",
+                "focusCenterControls": {
+                  "path": "docs/project/BKL-046-WFC3-P330E-DIAGNOSTICA-PSF.md",
+                  "documentCommitSha": "56d4d11eccce8f0dc92e2b62581cfcdb446f94de",
+                  "documentSha256": "9202ad5c036e95107362d19b8d876467365dcfe01f6cdfa999a752a505ac4ab9",
+                  "receiptSha256": "aa0b9bf2a69ac6079a456182d733b6fba99fd3bec4f87260dbfd705787b69385",
+                  "relatedAxes": [
+                    "FILTER_COLOR/3"
+                  ],
+                  "status": "EXACT_CENTER_CONTROL_IDENTIFIES_RESIDUAL_F606W",
+                  "fineCenterGrid": {
+                    "path": "docs/project/BKL-046-WFC3-P330E-CENTRO-FINE.md",
+                    "documentCommitSha": "a7b79b883be5410015b61ef46d1bba0b84af7c75",
+                    "documentSha256": "1a5debc919d4eb5d31e2ba4ceee41cc91e4432d83561620b4040c63ff9811d99",
+                    "receiptSha256": "1efe02abb6d00230235713608c0fbc0999217821489e34a956c953bb215ae23a",
+                    "relatedAxes": [
+                      "FILTER_COLOR/3"
+                    ],
+                    "status": "F438W_HIGH_SIGNAL_ONLY_BELOW_ONE_PERCENT_ON_FOUR_SIMULATED_PHASES",
+                    "withheldPhases": {
+                      "path": "docs/project/BKL-046-WFC3-P330E-FASI-NUOVE.md",
+                      "documentCommitSha": "50015edbf5425f683803ab2b636caf3535fa2b2f",
+                      "documentSha256": "765087e531c125380aa61be06c1bc1be7c8b7e718c27fe9501ab851ee6e6091a",
+                      "receiptSha256": "247afa329fb2a545278cb4786c2639ba8aaf3e7f19cd3137ad9f7c8d170dc698",
+                      "relatedAxes": [
+                        "FILTER_COLOR/3"
+                      ],
+                      "status": "NO_BAND_BELOW_ONE_PERCENT_ON_HELD_OUT_MIDPOINT_PHASES"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "axis": "CFA_DITHER_DRIZZLE/3",
+      "status": "OPEN_SCIENTIFIC_SCOPE",
+      "ic1805CfaEffectiveCoverage": {
+        "path": "docs/project/bkl046-raccordo-conoscenza-cfa-ic1805-v1/conoscenza.json",
+        "sha256": "d67272090cd148e623e70e1b9b0fd0130374a19968fec58aeaf531b4e1f812a3",
+        "localArchiveSha256": "a0d8693053a8f647764eb16434327f5b4ebdc4d5e191d1d6fe1496781d4320da",
+        "evidenceRecords": 3,
+        "scientificClosures": 0,
+        "canonicalKnowledgeUpdated": false
+      }
+    }
+  ],
+  "residualAccounting": {
+    "localLedger": "rendiconto-VM-v69.json",
+    "ledgerSha256": "0f3573b85ca2a4a5a03d91fd33d29692141f1f1a16be0b47c5db5ff3b7a5463a",
+    "archiveZipSha256": "26641df96a888e5449de91cac07d4d8b282d1a100a5f818e3eb83d4580a3a38c",
+    "requirements": 4920,
+    "criteria": 14521,
+    "ownerCriteriaOpen": 19,
+    "scientificFamiliesOpen": 7,
+    "scientificAxesOpen": 25,
+    "scientificClosures": 0,
+    "publicGitHubObject": "metadata-only",
+    "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V69",
+    "precedingLedgerSha256": "d8ff40bdbbff037d2368f798c457faf82e00e1ab8a816cfb5faa7c3514b8fd7a",
+    "precedingIndexCommit": "55f7eca98d406f64a72844f9bc95159388777472",
+    "documentReadbacksVerified": 5,
+    "sourceGitHubHead": "4551d413856167832e30f8a91b7893d11f165b89",
+    "summary": {
+      "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v69.md",
+      "documentCommitSha": "13f9230cfd2f368cf4d4c24358404adc4300ef00",
+      "documentSha256": "c6876500529ad3e9c0c4478bd7c759e1f2bb61797e13c0254cd610d8d57dd718"
+    },
+    "operationalReadiness": {
+      "stream34": "V11_PINNED_INPUT_REFERENCE_VERIFIED_AUTHENTIC_REVIEWS_PENDING",
+      "restrictedDelivery": "DESTINATION_AND_DISTRIBUTION_SCOPE_PENDING",
+      "processInstance": "V601_ISOLATED_VALIDATION_COMPLETE_REAL_DUAL_HOST_AND_CANONICAL_PUBLICATION_PENDING"
+    },
+    "archiveReadbacksVerified": 5,
+    "jsonArchiveMembersVerified": 12,
+    "archiveBytesRead": 242780826,
+    "appendOnlyUpdates": [
+      {
+        "version": 70,
+        "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V70",
+        "ledger": "rendiconto-VM-v70.json",
+        "ledgerSha256": "b67c3d7f0ea1cabb4dfd16e7ef505f3a1b74491cff8cffc4eae024eac78cf854",
+        "archiveZipSha256": "b84bfee73a1883c61060ee815362ed11af265acc9a92ded50ef62782fbbfd669",
+        "summary": {
+          "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v70.md",
+          "documentCommitSha": "53392117c73ad1955a5a03d2959f638bb97e2438",
+          "documentSha256": "877a2a7bc1a8e8b4f7d7b30f73853f885a075a768fde8c3058258017200c33e1"
+        },
+        "sourceIndexCommit": "7fccfef82a950da5294c8d7fffacc47f5e7399f9",
+        "scientificClosures": 0,
+        "nativeExecutions": 0
+      },
+      {
+        "version": 71,
+        "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V71",
+        "ledger": "rendiconto-VM-v71.json",
+        "ledgerSha256": "e45a60cd222a66296d4082abe87b97f08990a5190241becafef2825d1ec84d54",
+        "archiveZipSha256": "aba72cca2603a36fc1b76f1d8f6c3e42877323e3f6e12411f39ecd5bde21671f",
+        "summary": {
+          "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v71.md",
+          "documentCommitSha": "032f450533213e04dd20a60b39ccbe4f3af540ae",
+          "documentSha256": "d6ad92dfe5f9c9c1cb0f94c3e4cf25ca42e6c3b83b8ea314c78589d66f22a8ee"
+        },
+        "sourceIndexCommit": "899695cb953982924d6bc9f1461a3490ce2320a6",
+        "scientificClosures": 0,
+        "nativeExecutions": 0,
+        "githubNotesVerified": 25,
+        "archivesVerified": 25
+      },
+      {
+        "version": 72,
+        "status": "PROVISIONAL_APPEND_ONLY_DSG_SHARED_V72",
+        "ledger": "rendiconto-VM-v72.json",
+        "ledgerSha256": "b41bb7282ebd9518933289f273fa1d6439cdaf64ce9fb74b42620ccc2110346e",
+        "archiveZipSha256": "75fdbd6dce44da711dc81a770cb876c81ce6e9ebc6744e88372648868f22aecf",
+        "summary": {
+          "path": "docs/project/BKL-046-RENDICONTO-RESIDUI-VM-v72.md",
+          "documentCommitSha": "fe821474d608a0ab34730e14e3dc26bd177c383d",
+          "documentSha256": "64d30269b0a86a4654b46e285b17d0af91aefaa5f4d3657dcb859b22488fad3c"
+        },
+        "sourceIndexCommit": "2fdc6abd79d28f215524e6d61634d1a4bd4f42b3",
+        "scientificClosures": 0,
+        "nativeExecutions": 0,
+        "githubNotesVerified": 20,
+        "archivesVerified": 20
+      }
+    ],
+    "postV72ScientificEvidence": {
+      "priorIndexSha256": "df8d3cb7d18b5ac65c028714c08203a9d0c621cd3864bddf8421eff222265440",
+      "evidence": [
+        {
+          "scope": "Tempel1",
+          "path": "docs/project/BKL-046-MRI-TEMPEL1-512-PROVENIENZA-RADREV-VM-v2.md",
+          "documentCommitSha": "2cf297d20103d852e2b71324116ca268bee8dce4",
+          "documentSha256": "9247bd611bf876ded62a73b4b86a59da7564a53eff0d65eba7e0105a603b5c8e",
+          "archive": "BKL046-MRI-TEMPEL1-PDS-512-incrocio-v2.zip",
+          "archiveSha256": "3122ce42db0073cf2966d771c0f333f7a81f202d8433b00d278ddf5d35564656"
+        },
+        {
+          "scope": "Tempel1",
+          "path": "docs/project/BKL-046-MRI-TEMPEL1-NORMALIZZAZIONE-v1.md",
+          "documentCommitSha": "641e6b9e2dd864c90260251ed9ef571d85462b9e",
+          "documentSha256": "2be91ae687fbd5abd4315a2eada46e95e74264dbd21f0f88f4705ef9f5f42a11",
+          "archive": "BKL046-MRI-TEMPEL1-normalizzazione-v1.zip",
+          "archiveSha256": "b3441acc76f1851d4f7e2f370e113a70ac45b30fe2ddd328f1d473e553eba2fb"
+        },
+        {
+          "scope": "Tempel1",
+          "path": "docs/project/BKL-046-MRI-TEMPEL1-INGRESSO-RADREV-v2-v1.md",
+          "documentCommitSha": "6dd940cd53cc96847963a79c708c4fe8954ae49c",
+          "documentSha256": "c2140dfc127e337944f7efdcb8ee47d551795a94effbf7807504adf58fc7da17",
+          "archive": "BKL046-MRI-TEMPEL1-ingresso-RADREV-v2-v1.zip",
+          "archiveSha256": "ac76d784ee95b4114bd3dbebe7871a27e98fa9e63bc1958da47064611df7621c"
+        },
+        {
+          "scope": "Tempel1",
+          "path": "docs/project/BKL-046-MRI-TEMPEL1-COORTE-RADREV-v2-v1.md",
+          "documentCommitSha": "1599f13c781329b150f45dd7b0b803bf79a8bb49",
+          "documentSha256": "124771ef6894d054b89ba7bed06d1f9ff1e16e322cef272edd4c5cd0933cab42",
+          "archive": "BKL046-MRI-TEMPEL1-censimento-v2-v1.zip",
+          "archiveSha256": "97802607991fd3df1f96b0229aaa9f6c6a6165bba6bcb18ff869df315b443a89"
+        },
+        {
+          "scope": "Tempel1",
+          "path": "docs/project/BKL-046-MRI-TEMPEL1-256-CENTRO-v1.md",
+          "documentCommitSha": "c737e30d36c7364d5756e77a85d89a90d6e9f27c",
+          "documentSha256": "d061be8a996763de5c7f1b3cfc3438589205d7e929896cef1df8209bd1101f53",
+          "archive": "BKL046-MRI-TEMPEL1-256-centro-v1.zip",
+          "archiveSha256": "3814254a21b3ed37ec4af58c7b593c3742799bf43bb2c42c1fa63a048c53b409"
+        },
+        {
+          "scope": "CfaV4",
+          "path": "docs/project/BKL-046-CFA-XDRZ-LAUNCHER-ATTIVAZIONE-v4.md",
+          "documentCommitSha": "66fcefd667e90974dc1e83feeb56c9a4cc527972",
+          "documentSha256": "f57e094d46c30b610c4762922a3219639e8f1c9e96347942ef056dc0216a1198",
+          "archive": "BKL046-CFA-XDRZ-launcher-revisione-v4.zip",
+          "archiveSha256": "e792b00f6710243eabd74c6057dec978e65c74797eb4ee9aafc78d23376e950a"
+        },
+        {
+          "scope": "CfaV4",
+          "path": "docs/project/BKL-046-CFA-XDRZ-VERIFICA-ACCESSO-INSTALLAZIONE-v1.md",
+          "documentCommitSha": "67e8d9555387a644aac7772aca27b51c5743bacf",
+          "documentSha256": "194b4eaf0529025751359e8e539676a31c3213f17b1bf1185ab5feceb3502416",
+          "archive": "BKL046-CFA-XDRZ-verifica-accesso-installazione-v1.zip",
+          "archiveSha256": "662bf85d776a5e30938cbd0126706ac3bf329cc2941bd7e45601fa753d4992e4"
+        },
+        {
+          "scope": "CfaV4",
+          "path": "docs/project/BKL-046-CFA-XDRZ-POSA-OFFLINE-v4.md",
+          "documentCommitSha": "9b36d2f033fb291f86338a10fb5979e311a4de6f",
+          "documentSha256": "8eb5fa876f2b2534bc3adcdaf681fac180aadea5f0b61286b89a693c31720dc2",
+          "archive": "BKL046-CFA-XDRZ-posa-offline-v4.zip",
+          "archiveSha256": "74d17bd0478f58a8a461f1d55d97a109171ea8100df18d33c414d410d1ee64ec"
+        }
+      ],
+      "tempel1Status": "ALL_595_CATALOG_ROWS_RECONCILED_AUTHENTIC_RADREV_V2_FITS_AND_VOLUME_CHECKSUMS_PENDING",
+      "cfaV4Status": "INERT_OFFLINE_INSTALL_VERIFIED_PROTECTED_DEPLOYMENT_AND_INDEPENDENT_REVIEWS_PENDING",
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "tv4AndAcsHistoricalEvidence": {
+      "priorIndexSha256": "d3cabff280da2cd7e5b5ede4a396c1badf3b21efccab6f9012d93e042fa58502",
+      "evidence": [
+        {
+          "scope": "TV4",
+          "path": "docs/project/BKL-046-TV4-CLEAR1-FORMA-ESPOSIZIONE-ESCLUSA-v1.md",
+          "documentCommitSha": "097ab01dcf893078adb44df82d897258c30693fa",
+          "documentSha256": "c4e8f90b98c530db3c62936e22e291b138efc9a1096742a556b7cdae4ed5f153",
+          "archive": "BKL046-TV4-CLEAR1-forma-esposizione-esclusa-v1.zip",
+          "archiveSha256": "56ed754b979576f453b3c4d49b8763c0774b2097e5fba65d493100016898e9cd"
+        },
+        {
+          "scope": "TV4",
+          "path": "docs/project/BKL-046-TV4-CLEAR1-CONTROLLO-FORMA-PRIMA-v1.md",
+          "documentCommitSha": "09d886e25b0dcfa1d035e9fb43e953c5447d040a",
+          "documentSha256": "be92d0902e15e7b33dd003f0a88323f8325fc86298f537c110752acdc9ac4591",
+          "archive": "BKL046-TV4-CLEAR1-controllo-forma-prima-v1.zip",
+          "archiveSha256": "d561ee6f2126892b9e3ed4d65196478c8b4cac396893999cff2a4132cdb59a97"
+        },
+        {
+          "scope": "TV4",
+          "path": "docs/project/BKL-046-TV4-CLEAR1-DOSE-IDENTIFICABILITA-v1.md",
+          "documentCommitSha": "cf715e72788b65fef503f87d585afa1f302738bc",
+          "documentSha256": "b880be742da357ff2f5d69d763cb87a89e0536217e5b99bc7c5c60b1f2ab028d",
+          "archive": "BKL046-TV4-CLEAR1-dose-identificabilita-v1.zip",
+          "archiveSha256": "e14be6bcd3ec577a1f028b4fdcb3a85ed33f72a8aa25f41816982bd1d7843839"
+        },
+        {
+          "scope": "GaiaAcs",
+          "path": "docs/project/BKL-046-V571-GAIA-XP-COVARIANZA-BANDE-ACS-v1.md",
+          "documentCommitSha": "c935a9023dee3d0561028d483db703e79bfd873c",
+          "documentSha256": "a45365dd0c2ad518c3a2fa859f11b53040686b5b3e320f5d8553b38005d21bef",
+          "archive": "BKL046-v571-covarianza-bande-acs-v1.zip",
+          "archiveSha256": "3ee867b469921f68f268e6674fcd358187732b207df4c5c87b56db9e139009d0"
+        },
+        {
+          "scope": "GaiaAcs",
+          "path": "docs/project/BKL-046-GAIA-XP-ACS-COVARIANZA-COORTE-v1.md",
+          "documentCommitSha": "4f49e348d71e2d53594f943c34a3f9396b0aade9",
+          "documentSha256": "0666af0290be19b70e922875ba46a443b4bc83912f9638f5e5463cb2e86440a7",
+          "archive": "BKL046-GaiaXP-ACS-covarianza-coorte-v1.zip",
+          "archiveSha256": "481126e96b942fb9e0c306a053f230bf956d60869ec8883ddde38ad83c77f313"
+        },
+        {
+          "scope": "GaiaAcs",
+          "path": "docs/project/BKL-046-GAIA-XP-ACS-COPERTURA-CADC-v1.md",
+          "documentCommitSha": "f95ef52344e38d4eaff31c103f49ef301cab5775",
+          "documentSha256": "042ef132d43e3c5825ed872a856357e76f3bf7e51334d9ab6f5aa7a4aad5ea5c",
+          "archive": "BKL046-GaiaXP-ACS-copertura-CADC-v1.zip",
+          "archiveSha256": "7cb3d65132e6f2b5e162ab886e3582a5f5f517b39153d1cf0975f0997300e21d"
+        },
+        {
+          "scope": "Gd153",
+          "path": "docs/project/BKL-046-GD153-ACS-TRE-BANDE-v1.md",
+          "documentCommitSha": "b6ab35c6fc50a3745269d8e161116626d1f0cb64",
+          "documentSha256": "f06130697c7e03888777692a4e4613545e7173578b7ecf74055f6d4968c9c301",
+          "archive": "BKL046-GD153-ACS-tre-bande-v1.zip",
+          "archiveSha256": "338b58993e69818a12815cba6b9f5da0508b36c67189804fc6b19fd6867978ff"
+        },
+        {
+          "scope": "Gd153",
+          "path": "docs/project/BKL-046-GD153-ACS-FOTOMETRIA-TRE-BANDE-v1.md",
+          "documentCommitSha": "40d4e341c6c3a1adc66af9d73e9b5b1a99c7b46d",
+          "documentSha256": "d59d3a8498cbb3749a27dc5fead28ca3bbe295cc509e85ca904d8201c60e9690",
+          "archive": "BKL046-GD153-ACS-fotometria-tre-bande-v1.zip",
+          "archiveSha256": "3ee3f35de8544ae5e8443b77c6c70022316f00e9fbeb0a4b36ea920922a5f27a"
+        },
+        {
+          "scope": "Gd153",
+          "path": "docs/project/BKL-046-GD153-ACS-CALSPEC-STORICO-v1.md",
+          "documentCommitSha": "a272af11014c84993ad764802c766873bba234f8",
+          "documentSha256": "c4ec667f60339cb46154653371add998b784d9a08dd51a2264fa7ed604f9b2cf",
+          "archive": "BKL046-GD153-ACS-CALSPEC-storico-v1.zip",
+          "archiveSha256": "1fcb13d243fb2ba6c86e56972e1ad965d8d0c5876e32359fe71db55d93cbfe14"
+        },
+        {
+          "scope": "Gd153",
+          "path": "docs/project/BKL-046-GD153-ACS-CRESCITA-DQ64-v1.md",
+          "documentCommitSha": "1f6d80081c86bea99861f0709a84fd99872ea8ae",
+          "documentSha256": "2bb0a1eae908017bd2bc575228838c98245af532a72b0c6da94dd1d862ee3831",
+          "archive": "BKL046-GD153-ACS-crescita-DQ64-v1.zip",
+          "archiveSha256": "48f2e0264ae473900fa37e52481b7e8ee69a0b68ba5505f397c8f6872176563b"
+        },
+        {
+          "scope": "Gd153",
+          "path": "docs/project/BKL-046-GD153-ACS-DOMINIO-CTE-2003-v1.md",
+          "documentCommitSha": "254c3c585a2bb0c7c736e08900e2d5721adcedfe",
+          "documentSha256": "1f70e29a17037ff13365a2288cfb0354cd5756940bb4ad6070a541c1ba1d6faa",
+          "archive": "BKL046-GD153-ACS-dominio-CTE-2003-v1.zip",
+          "archiveSha256": "fe0c3afedc861be36ade715c97f5b70efa7c5a1ff9474d1bc6ab1eda791d047a"
+        },
+        {
+          "scope": "Gd71",
+          "path": "docs/project/BKL-046-ACS-10054-GD71-REPLICA-v1.md",
+          "documentCommitSha": "6624abd4e0cc0b41e25c59f8bb894143ee595d06",
+          "documentSha256": "20bce7f15f5bdcce6cc9fd7751cc4eb844a48ce8e675444493f22f6e2df22847",
+          "archive": "BKL046-ACS-10054-standard-replica-v1.zip",
+          "archiveSha256": "ceb04334c545b97bff5a9374ea1b4c2b7525e0787750e9b675c3a51240aa17a8"
+        },
+        {
+          "scope": "Gd71",
+          "path": "docs/project/BKL-046-GD71-ACS-CALSPEC-STORICO-v1.md",
+          "documentCommitSha": "3fc3bf85d8084f4464a1d4eb203122ac428d52c9",
+          "documentSha256": "27f60758b3b96d86b5503f771f285fb26e1bff30bee1d8c71da7bc9e6115aa42",
+          "archive": "BKL046-GD71-ACS-CALSPEC-storico-v1.zip",
+          "archiveSha256": "dc57f262fb7decc08aeffef0ad448f7f8bd5cf3726899819623543fa2e79c68d"
+        }
+      ],
+      "tv4Status": "TWO_DURATIONS_WITHIN_ONE_SESSION_WITHOUT_INDEPENDENT_DOSE_MONITOR",
+      "gaiaAcsStatus": "FOUR_SOURCES_WITH_COVARIANCE_MODEL_AND_NO_MATCHING_ACS_OBSERVATIONS_FOR_THE_THREE_SOURCE_COHORT",
+      "historicalAcsStatus": "TWELVE_EXPOSURES_ON_TWO_STANDARDS_CALSPEC_APERTURE_AND_CTE_LIMITS_REMAIN",
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "historicalAcsApertureEvidence": {
+      "priorIndexSha256": "40f0dbbc7159c20ef432fec603f163c03410752abf0e0252277922dcaad93cc7",
+      "path": "docs/project/BKL-046-ACS-10054-APERTURA-DIFFERENZIALE-v1.md",
+      "documentCommitSha": "ef12087ced220b165d1f816255bf1f3248a11b2b",
+      "documentSha256": "97290b48021f59e813611488d27b6656a39d068ed06b828e0bbf61697834995c",
+      "differentialReceiptSha256": "8c5a8c83c670c75085b254940f2ad5dbb03d95e0e802e779a9c1f01a444ce6af",
+      "encircledEnergyReceiptSha256": "cfd4b75bea20793a2a0edfdf9c8528b05df9bc07302b10014a5159dbc8cc7422",
+      "status": "LOCAL_APERTURE_VALIDATION_REQUIRED",
+      "controlsQualified": 0,
+      "scientificClosures": 0
+    },
+    "historicalAcsIndependentVisits": {
+      "priorIndexSha256": "52a4797e103debf134df75be3ad514774bb55256ac6a0d099e78d757e603388c",
+      "path": "docs/project/BKL-046-ACS-VISITE-INDIPENDENTI-v1.md",
+      "documentCommitSha": "12cc5a3ceb575edaa4b785b39194c6837c558ed1",
+      "documentSha256": "ebf055caf76cab0a1758710186deb84ab146d523e5ee059a379c5e67185f5f69",
+      "fitsVerified": 24,
+      "completeVisitsAtR3AndR5": 2,
+      "completeVisitsAtR10": 1,
+      "gd71VisitsExcluded": 2,
+      "photometryReceiptSha256": "8a6394cdc9d700f66ba3e44b86390b451b2b343b36f162e65db78e1ec9781d6c",
+      "visitComparisonReceiptSha256": "60a09794141ed7ac26e88cfc094720beb6925c9d3fd35acf1e25877d623c108c",
+      "gd71AstrometryReceiptSha256": "f9d28f68a0c25513e8693626a20c64db126e0a3ec9572b7dfe96aad66b845884",
+      "status": "SAME_CHIP_DESCRIPTIVE_PHOTOMETRY_ONLY",
+      "controlsQualified": 0,
+      "scientificClosures": 0
+    },
+    "processSemanticSheetsMltCfa": {
+      "priorIndexSha256": "115a9f4a0d95c2e202a4fcf237681749a11cb2381f670b4a2bbaa047dae3cefc",
+      "path": "docs/project/BKL-046-SCHEDE-MLT-CFA-WBPP-v1.md",
+      "documentCommitSha": "64800673c217fa2cc6caf2f3a3b30c6bb4e96a1e",
+      "documentSha256": "a2bb690e5a580dc53d8743558283d30ce49f3fe98f288b8044be51c8b4742c40",
+      "processInventory": 125,
+      "installedDirectGuides": 40,
+      "localGuideIndexSha256": "8363ab428d5fa254341799034d1f4a84c21c0f1eb669de420218efbc3cc500be",
+      "xdrzXnmlReceiptSha256": "6933fc53f72a18f1fdc6ee01a2a2773417f988f459fb8720fa3f5e8f924d94ad",
+      "wbppSourceReceiptSha256": "8b938723e4805ebab8a0642839f219cd7f55425027dd1efb56df92642ad46c75",
+      "mltSyntheticReceiptSha256": "86daa91f2c8ad85602cceda7cee339e12b53cd2b71e65de4fb0e31812ea7ad07",
+      "requirements": [
+        "process:MultiscaleLinearTransform",
+        "process:ImageCalibration",
+        "process:Debayer",
+        "process:StarAlignment",
+        "process:LocalNormalization",
+        "process:ImageIntegration",
+        "process:DrizzleIntegration"
+      ],
+      "status": "SOURCE_TRACE_AND_OFFLINE_EVIDENCE_NATIVE_VERIFICATION_REQUIRED",
+      "criteriaPromoted": 0,
+      "scientificClosures": 0
+    },
+    "acsDiffuseCfaEvidenceReplay": {
+      "priorIndexSha256": "bce55faddd9eccf4470d89266f826a7de502a959ff286a9d79a3c3cd214cc365",
+      "path": "docs/project/BKL-046-RILETTURA-ACS-FONDO-CFA-v1.md",
+      "documentCommitSha": "0548aeb70e6dd5c066017385e4744eee64d6e3d2",
+      "documentSha256": "a0fb8709a4dfab29859f66047ce1842b5465ea1884fc3822da125d4b72861108",
+      "acsArchiveSha256": "7833f865b9bba285eb857e090db9c985e05f57190f7aca798e27cbdecf92d850",
+      "acsReplayReceiptSha256": "9cd2b19f77d666a1349d7f3f43b10e14e1ae1a4dbb6661e6bd6b8bd652d7e5e7",
+      "diffuseReceiptSha256": "42ddba38e0a405b4849a47445c6f61dedb279fedc3a8bec3f12e412c5b6a2957",
+      "cfaOfflineReleaseReceiptSha256": "c6fddaa4744f913906871eab4ab788a8390db191c4dbc297fb7eaf138ca33edf",
+      "cfaRecoveryReceiptSha256": "a03c040ed490f0eca3f5c11b439550c035595f7967f86355b88a6b928b82f16d",
+      "cfaPreflightReceiptSha256": "e731518ec7c9a4dfb972eb8c1b364918b42098e1022cfc84c502af6bacfc6cdd",
+      "acsReportsReproduced": 5,
+      "diffuseTested": 729,
+      "unsafeHeuristicMatches": 133,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "acsFractionalApertureEvidence": {
+      "priorIndexSha256": "6c2c6fb026a2154bc56f50ee45d419b2b2f0834c4c58962c56bd1a8548e97a9d",
+      "path": "docs/project/BKL-046-ACS-PIXEL-BORDO-v1.md",
+      "documentSha256": "2156a24f4bc0769a81eab0a3c111fcc9657c1174b78e5f7d6c3ee4953f4ecd58",
+      "receiptPath": "docs/project/BKL-046-ACS-PIXEL-BORDO-v1.json",
+      "receiptSha256": "29901c3f7f22778d3ffdc085eca9911afe4a528ff5cab4bbf7ad302d015806ee",
+      "status": "BETWEEN_VISIT_RATIO_SENSITIVE_TO_PIXEL_EDGE_WEIGHTING",
+      "qualifiedControls": 0,
+      "scientificClosures": 0
+    },
+    "acsExposureRepeatabilityEvidence": {
+      "priorIndexSha256": "5384950c45b7d298ccd9a83ceb1f9ba8268847e2e5af767c1f3d11902a2a897e",
+      "path": "docs/project/bkl046-acs-ripetibilita-v1/README.md",
+      "documentSha256": "93a6bd2149a08c869fc0f447c0a52c16c0c9e5b9012c15faea261e96e8b7c9af",
+      "companionFiles": {
+        "fotometria-CALSPEC-v2.json": "8a6394cdc9d700f66ba3e44b86390b451b2b343b36f162e65db78e1ec9781d6c",
+        "sensibilita-apertura-frazionaria-v1.json": "9d2910cdfc91af3fc912e34410df7b874e36895ed7794a76321c314f073880d8",
+        "ripetibilita-intra-visita-v1.json": "8f1c4d0ec604105b23a98f5282692847776c8eb71a386e05b5f7bd546a3e27e7",
+        "ripetibilita-intra-visita-v1.ps1": "7f2a28d0c580124602c290594238799b1b400499e18e300ec578d99abc4e8d1a",
+        "sensibilita-scelta-posa-visite-v1.json": "6454197a0dc1c158b8c1fb875444fe70b90afaa322729ceb09dcf8931724735e",
+        "sensibilita-scelta-posa-visite-v1.ps1": "184b600e6f8698f3d42781fc20453a88f5b86ef4d5e266583e11292b977dd122"
+      },
+      "status": "DESCRIPTIVE_REPEATABILITY_AND_EXPOSURE_SELECTION_ONLY",
+      "qualifiedControls": 0,
+      "scientificClosures": 0
+    },
+    "acsApertureCenterSensitivity": {
+      "priorIndexSha256": "2bd77462461aa4459c076c5d2bb8dfdb4d5fb0399d9f4dd0aa485e8445f2a261",
+      "priorApertureDocumentSha256": "dbe3a35a44cd2fe2486967363b6036de9e98661f7410b946aded77dd2081f6f5",
+      "correctedApertureDocumentSha256": "2156a24f4bc0769a81eab0a3c111fcc9657c1174b78e5f7d6c3ee4953f4ecd58",
+      "receiptPath": "docs/project/bkl046-acs-ripetibilita-v1/sensibilita-centro-apertura-v1.json",
+      "receiptSha256": "ab751578c92714d1351a20777765f6ec1553344aecdde9fa3af535265fd93246",
+      "sourceScriptSha256": "bc8a554681e48d5e69cab009b44d31a8bb9284415724757120a3c35d69a985b5",
+      "status": "THREE_PIXEL_TRANSFER_SIGN_NOT_ROBUST_TO_INDEPENDENT_CENTER_OFFSETS",
+      "qualifiedControls": 0,
+      "scientificClosures": 0
+    },
+    "acsApertureSupplementReplay": {
+      "priorIndexSha256": "0bcd1b0f99456dc65a1adc59dd0aced8699f60324ed91337aa676b53fd76b8a5",
+      "path": "docs/project/bkl046-acs-ripetibilita-v1/RIPRODUZIONE-ARCHIVIO.md",
+      "documentSha256": "b99b47d27736c0cac2da99c62fe8c71a0abeca071858d509c833f9e9672a2f7b",
+      "supplementPath": "docs/project/bkl046-acs-ripetibilita-v1/BKL046-ACS-evidenze-apertura-v2.zip",
+      "supplementSha256": "a69606202c2545b4e8b895914a3e9afbb00007d070a00b47a0825d0bdcf692bd",
+      "receiptPath": "docs/project/bkl046-acs-ripetibilita-v1/replay-archivio-v2.json",
+      "receiptSha256": "389f123803ce512cfd0bf0ec145bdd2189bc920cc42efa3b64e987680e95014f",
+      "baseArchiveSha256": "7833f865b9bba285eb857e090db9c985e05f57190f7aca798e27cbdecf92d850",
+      "reportsReproduced": 5,
+      "scientificClosures": 0
+    },
+    "acsMastSourceRestore": {
+      "priorIndexSha256": "78f43c521b751c1ca70e6c84d5e1c539a6d71d9709061ca67cf747bf5305a477",
+      "path": "docs/project/bkl046-acs-ripetibilita-v1/ripristino/README.md",
+      "documentSha256": "1f6dce96a4341d3fb0dca8399a3263d62117e246bf0cbdb51a260549963fdfab",
+      "companionFiles": {
+        "acquisizione.json": "689621adafc6090f99dd44908e8ae322fe4e93edfa469f32d7b63cf5bdf8f265",
+        "coorte-congelata.json": "10e2dd1a396d847f43e65de97cbda8e90560326a77a13c7cf2e68b3f85a5c2f3",
+        "astrometria-CALSPEC-v1.json": "cd9e5175e42045a33f12750d956b23930d230fad4d0460eea26f52ed003d8c11",
+        "misura-aperture-CALSPEC-v2.py": "f020e6fe2838acd11dcc004322be48caa9349d448e56883d0dd7662a556e8181",
+        "ripristina-fits-v1.py": "8de570ac702a0b47e7fc3d902ddcf7685090d3e70814df680e824e39130836bc",
+        "riscontro.json": "9c8ae9b8d9907e4786c5fa29b6e6f89f7cce3f8dc451d35e224c292c927aa1fa"
+      },
+      "fitsRestoredFromMast": 24,
+      "controlsQualified": 0,
+      "scientificClosures": 0
+    },
+    "acsMastIndependentReplay": {
+      "priorIndexSha256": "1649b1caea22ea7ec5a7599433ccddb90004de37f8a2b05573d71ebb9e1391c6",
+      "inputCommit": "d6df7a4fbfeb3a9854211a63ac144e2867df691d",
+      "path": "docs/project/bkl046-acs-ripetibilita-v1/ripristino/riscontro-riproduzione-GitHub-MAST.json",
+      "receiptSha256": "6b0bfb49f3e779305b315a79f857b0de48bfb906528092a7bb91f840b1b8f344",
+      "verifiedFITS": 24,
+      "reportsReproduced": 6,
+      "originalArchiveRequired": false,
+      "qualifiedControls": 0,
+      "scientificClosures": 0
+    },
+    "ownerCriteriaEvidenceMatrix": {
+      "priorIndexSha256": "13eaf4187531df870c440f1de548adfff463535b29f9e2fd1197c2b6da81eaba",
+      "path": "docs/project/BKL-046-MATRICE-CRITERI-v2.json",
+      "sha256": "75fa5f3040e54be1009837f7ab86dbc5a4be16757cd7b643a602be8cd1b1940a",
+      "criteria": 19,
+      "knowledgeCriteria": 10,
+      "githubTransferCriteria": 9,
+      "openCriteria": 19,
+      "evidenceDocuments": 9,
+      "scientificClosures": 0
+    },
+    "acsAstrometricAndPhotflamLimits": {
+      "priorIndexSha256": "79239e5e4525a00c289e9999e92f22626e98e04c288cd20ca774079535c85a8b",
+      "path": "docs/project/bkl046-acs-ripetibilita-v1/astrometria-e-risposta/README.md",
+      "documentSha256": "f48767189387bcea5810fd0b5463fd6b72a98a57be112893cb3288163b928ed1",
+      "companionFiles": {
+        "gd71-wcs.json": "9cdbcca96946793a4ae41257b6c621bfc9a91fc82bf8e9784077d23de7be20af",
+        "gd71-hsc.json": "68ed460462faf244d05ce65c65bd3f65dcf01684ccc57d36d699a913b39f84be",
+        "gd71-stelle-campo.json": "11625e2c36d0d0db9ca3ad1b115ffd9d08a8d3935bfc8ec11824ddff6a67b7ad",
+        "grw-photflam.json": "d206a30ec39d739a09a54859ae70a954ea1228e09f6cb015a6f582cb14f18514"
+      },
+      "gd71VisitsExcluded": 2,
+      "grwPhotflamFrames": 12,
+      "qualifiedControls": 0,
+      "scientificClosures": 0
+    },
+    "fwhmEccentricityAggregation": {
+      "priorIndexSha256": "a5868a607246d4b59534f7e18c7a54802c51c8726ebc937caf075c71ba2d3f47",
+      "path": "docs/project/bkl046-fwhmeccentricity-v1/SCHEDA.md",
+      "companionFiles": {
+        "SCHEDA.md": "846826a87701acfca173b8a1b1822f9fa06e92f44aab44ecf95d7db1a22c5435",
+        "riscontro.json": "d1dbc074e96c42cb4edfa75139083e9005ac2960a4723c46747cc444d0cda323",
+        "verifica-aggregazione.cjs": "30db4a3a4d834fe3a70661a8f0765db2e8b4d2655a72eb6b1403d568cff179cc"
+      },
+      "scriptRequirement": "script_file:src/scripts/mschuster/FWHMEccentritity/FWHMEccentricity.js",
+      "sourceScriptSha256": "1743bfde348ebf65bdb8e55a9537d32f5f645b2b5f2063fb333edae2cf7f0f1f",
+      "disposition": "U",
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "wbppImageAnalysisScope": {
+      "priorIndexSha256": "7846b2a67871e975eab46b33530fe2b6fe4d6e3774d18f2862d8a05891804672",
+      "path": "docs/project/bkl046-wbpp-pesi-v1/SCHEDA.md",
+      "companionFiles": {
+        "SCHEDA.md": "e7139ad194a899341f5967c50ad169114f116441c9d06fcf3a700240945959c1",
+        "riscontro.json": "78c541042fa8b530a7e62c354cceaa7e5b1614b8534a8066268752d9c26dfa7c",
+        "verifica-pesi.cjs": "cc28834ea99c7d9b68607f9daf2fdada50e0f3421efac5c6a747244a5049cd25",
+        "perimetro.json": "36e4e11ffe19f345e0ee3ac1ed9eabc329dba8c9d2fc9b63b8caef6141155a8a"
+      },
+      "scriptRequirement": "script_file:src/scripts/BatchPreprocessing/BPP-SubframeAnalyzer.js",
+      "observedMeasurementProcess": "ImageAnalysis",
+      "processAbsentFromFrozenIndex": true,
+      "disposition": "U",
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "installed196ScopeDelta": {
+      "priorIndexSha256": "b3771ca18f6337455d0aea6bc43be211b7256a014cacae97028d2eeaec4f698d",
+      "path": "docs/project/bkl046-perimetro-pixinsight-196-v1/riscontro.json",
+      "companionFiles": {
+        "riscontro.json": "903a27f3cf09d29c9d4a922a2aa84ff71ba29dd54c89a8bc9b87fd5e58fd58d8",
+        "verifica-perimetro.py": "86dd7a777abfdb4be50bee4662051bd7b1f396c9c661ad2ce292d9c447d8e240"
+      },
+      "scannedScripts": 286,
+      "absentScriptEntrypoints": 7,
+      "absentProcessesWithDirectGlobalCalls": [
+        "ImageAnalysis",
+        "ExtendedSources"
+      ],
+      "status": "INSTALLED_VERSION_SCOPE_CANDIDATES_PENDING_RECONCILIATION",
+      "canonicalRequirementsChanged": false,
+      "scientificClosures": 0
+    },
+    "photometricAnalysisVsx": {
+      "priorIndexSha256": "1b1557d71952c2b144ff129540ff7d7160a38afc05ed158e10610480c2453838",
+      "path": "docs/project/bkl046-photometricanalysis-vsx-v1/SCHEDA.md",
+      "companionFiles": {
+        "SCHEDA.md": "0bc511c013aafa4d5f6dfdadc69fdf5840edd0f4ff78cbf7abff7b70bc030224",
+        "riscontro.json": "102c8df3593a53b2a45340afae05bc9f49482688d8a40631003dc6cfef3a56a1",
+        "verifica-vsx.cjs": "5be24f9e65fd2849189cc67897a22ce76b6a374b6f0b3e17eb36baaa6cd80949"
+      },
+      "candidateProcess": "ExtendedSources",
+      "mockCatalog": true,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "semanticKnowledgeDraftV602": {
+      "priorIndexSha256": "ee91c370591f66c8887157a76460ae814af7a54289648fa11acd6c822ddc7e73",
+      "path": "docs/project/bkl046-conoscenza-v602/README.md",
+      "companionFiles": {
+        "Delta-semantico-v602.json": "438103d583e408004af1a622f00a7eef0fb8ee49dc5c20a770889d35aa72b29b",
+        "staging.json": "00f3951f58f49776c0813358f14fa27018c0e47b803f871753c2a473cbd74247",
+        "riscontro-riproduzione.json": "3f9b20776780d7ff9822d13d7aeee69917ca473588c6a188ac001e200de3036c"
+      },
+      "requirements": 4920,
+      "criteria": 14521,
+      "changedFixtureRows": 2,
+      "pendingScopeCandidates": 9,
+      "v602ArchiveSha256": "05cfe6c97a4184eaa041105e726ed483400bc6e8af2faa4a4f975c239f2cf6b7",
+      "v601ArchiveSha256": "5cf38fcb0aefe9188e2d382eaf0bcf2fa0a718094c3cbdd94f543720d85f2c9a",
+      "canonicalWrite": false,
+      "scientificClosures": 0
+    },
+    "imageAnalysisDescriptorContract": {
+      "priorIndexSha256": "05a72d19b6d80ccca432db3debc8214b7d5d3da4c456bf60ccd4ebf03b3ecd68",
+      "path": "docs/project/bkl046-imageanalysis-descrittori-v1/SCHEDA.md",
+      "companionFiles": {
+        "SCHEDA.md": "361a35436e16692ce85ff42f82f21e0e6f4b4a15262f0060e617cb3d169e1120",
+        "riscontro.json": "13cc31596f7120e6d9228468473b14db82be62c99c8598fbae770d346dbb3440",
+        "verifica-descrittori.cjs": "69b9fe8fc7e5b5d3dbdaafa9e2c6b97f211510d700dff8705ecf49684bf4f215"
+      },
+      "hArchiveSha256": "647c614cf0f80fa817dc248423d63e7f17787915fa9eacfab17631415ca0726a",
+      "candidateProcess": "ImageAnalysis",
+      "wrapperSimulatedNativeBackend": true,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "imageAnalysisSyntheticControls": {
+      "priorIndexSha256": "4baedea60ea71dd1b64b6d02e8e42278f36139dc591810a2e400ae488abb8f9a",
+      "path": "docs/project/bkl046-imageanalysis-controlli-v1/PIANO.md",
+      "companionFiles": {
+        "PIANO.md": "af49f2aee3f2a2d2fc4654bdd85b80e446ae10b82c3f0c3ab77d18f3e4f9be9f",
+        "genera-controlli.py": "0ad5eea32263f3ba43d64bf9fcb0695856f89e4bb29fbcdee6e53fda36830bdd",
+        "verifica-fits.py": "eee80912857e75d0ff3a487bd2117b11fc3b46f6f17246f682126105bfc47a93",
+        "rilettura-fits.json": "6fe5e9e31b031f8d9c345d479a7fa538c262968d79332b60a8248147c1001488",
+        "riscontro.json": "93becb09d7e484aff105f8503f223745b2b7d532614a15a1cfdd066be4a96d27"
+      },
+      "hArchiveSha256": "8795b15caeef10e0363c76c6100e8a355858067803eebc8f2d798b2c2167b571",
+      "candidateProcess": "ImageAnalysis",
+      "deterministicFits": 4,
+      "independentFitsReadback": "Astropy 7.2.0",
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "imageAnalysisOfflineRunner": {
+      "priorIndexSha256": "33d2c092d273978cde1cc259deb1bf2cdd6ea8003b85f43fb5ccf57de42f6182",
+      "path": "docs/project/bkl046-imageanalysis-runner-v1/README.md",
+      "companionFiles": {
+        "README.md": "eccc299c6fde63a70a2d683792e99556e06ec683fe4bf7cee510e23e6aef5ce1",
+        "ImageAnalysis-controls.jsh": "127b971782da05ce61def906016a62b261f5d6b6845f2d7485be9af13b479ba2",
+        "verifica-runner.cjs": "8334c7164bd3f8a1900043387d1ee045c90fd299064cd0a363a836e97327f7dc",
+        "riscontro.json": "ceb2aaeb03adfa25bd5090890d0d2ba81a813fc53dcbb547d7a4630cfbc4091d"
+      },
+      "hArchiveSha256": "2fdecca73e074d949bb95bc1f16827a40bd3fb9f58b0d120bf2694f90bf0aeb2",
+      "candidateProcess": "ImageAnalysis",
+      "inputOrderReplicas": 2,
+      "expectedFourColumnLayoutVerified": true,
+      "negativeOfflineCases": 8,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "imageAnalysisPjsrAdapter": {
+      "priorIndexSha256": "17d834a4e79b86fda1d29dbdac708bc9654c82c9e9442dd6c42b2281e396fac1",
+      "path": "docs/project/bkl046-imageanalysis-pjsr-v1/README.md",
+      "companionFiles": {
+        "README.md": "d78d63fbbefb101d155486651cdcbc6d90470df85c4bdc3d350450249928682b",
+        "ImageAnalysis-adapter.jsh": "79086bca7f2c86f560d13cde9bb11f504c88244c8750ea3e03a4be626c5480db",
+        "verifica-adattatore.cjs": "5ba5bd1e85f9866fdc1ab65c29c3a527f3f43e64a3676a0b6f55a8d5daea1d54",
+        "riscontro.json": "8c4457d2f8b73ca4913207c9e3f31e92a7c9f38afefd0fdd25763e2e2932cf00"
+      },
+      "hArchiveSha256": "e42ac5b3310bbc21265655742887cf11b76a8955d74699d73c1cd4fdee04a047",
+      "candidateProcess": "ImageAnalysis",
+      "offlineCases": 10,
+      "processCustodyIntegrated": false,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "imageAnalysisParentCustody": {
+      "priorIndexSha256": "bfe396cbf6ac36cce8e4984e07f099003a617f98b7cf00c58ba535c12f5f2b7f",
+      "path": "docs/project/bkl046-imageanalysis-custodia-v1/README.md",
+      "companionFiles": {
+        "README.md": "208d8f778e532b741f97d9dd83163e6a60c52d49ef23939af49ecf6fefe09465",
+        "imageanalysis_custody.py": "d8255bebaf2e1588d009c9d624082fe66c6d64ac41c82e8ee6b7b9dd8f18c53e",
+        "verifica-custodia.py": "7294d8c3f374ac46e4f00ba726b59528a04128be065b736f056ce4bf20012a99",
+        "riscontro.json": "f9b1d7d8924dc52f8a644f38a0d4fd17404924660e9082fe03f69caf654285b2"
+      },
+      "hArchiveSha256": "17348ea0788471dfed39ca7b534d9b596c5c5fe1ab52ad627b35168ffb85bc7a",
+      "candidateProcess": "ImageAnalysis",
+      "offlineCustodyCases": 5,
+      "realWindowsFileHandles": true,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "imageAnalysisIsolatedR4": {
+      "priorIndexSha256": "29c6bac573a9f4b3f6bb373dd923680af1268eca72c86389e0e49243f890b61b",
+      "path": "docs/project/bkl046-imageanalysis-catena-r4-v2/README.md",
+      "companionFiles": {
+        "README.md": "bd728c71739fb7f04cfc3df9d111051f4b522cd9ba8f7a00532b47d6b6c3d312",
+        "riscontro.json": "16698606ad5aaff13dbcea72e989410070866c6f7869877ee79864fb921eac61"
+      },
+      "hArchiveSha256": "fcf1f936f2678a39e0092aac73f4296f5a6ad1b853acae50eedd78655ded704c",
+      "candidateProcess": "ImageAnalysis",
+      "releaseOnVerifiedOriginalExit": true,
+      "alteredReturnReservationRetained": true,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "imageAnalysisOfflineInterpretation": {
+      "priorIndexSha256": "e5c9f06b6611a0cc16d42478355a03d55af0eaf7660e9ca6594541d879032f6f",
+      "path": "docs/project/bkl046-imageanalysis-interpretazione-v1/README.md",
+      "companionFiles": {
+        "README.md": "9fea28b933b883cf7246d078d10c8cc12a67f5392e57523047d34a742d005973",
+        "interpreta.py": "3cb397eefb6c452229891aafec1bd6dd591b19ca634d2ea82621e29ed3c60a08",
+        "verifica-interpretazione.py": "7c91701502f9800c557ab6452f1aa1ff70e2f61cc5b5cecaf04ea241aec3d87a",
+        "6ff392ff2d964bb5a7056c1be9beaab1.json": "c509ffd6654c7c7096ca5c1ec4faba21b9bae575e07f927a247013ed7c42f3e0",
+        "b1855404d45144ca898bb71131600f81.json": "7306418502f5984b9224ccb98ec6ed2546a1bbc76339cba1e93557ecb22784fe"
+      },
+      "archiveSha256": "9e33d0c013bde10cb0d7c02a5e9e198cf3248ad3c3586862d72971baaadbfad2",
+      "offlineTests": 5,
+      "simulatedR4Readbacks": 2,
+      "oneR4ReadbackWasRejectedByCustody": true,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "imageAnalysisInterpretationIsolatedR4": {
+      "priorIndexSha256": "8758f1b4cfccad795b36339485303dfecdd0baba980d984114c8afda41a9c08a",
+      "path": "docs/project/bkl046-imageanalysis-catena-r4-v3/README.md",
+      "companionFiles": {
+        "README.md": "ae3eb549017b7b79740f57d3a86b8a332b70d28e210b53b8b009c57c5e03220f",
+        "riscontro.json": "c3ee7a8986524138bbdc27e88e1b5fcf036ef39665f7e8b0a6b9d458b02ee172"
+      },
+      "archiveSha256": "0d242929e8ed488d4d49193e3fff1480e566ed59edb153e42f027e76aeee0ba5",
+      "isolatedScenarios": 2,
+      "interpretationCheckedBeforeIsolatedRelease": true,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "tv4ApertureTransfer": {
+      "priorIndexSha256": "9e19bf9ac2ceea9bacc8efcd242778cb45d4c8f489aaa9e536137db71d5faece",
+      "path": "docs/project/bkl046-tv4-trasferibilita-aperture-v1/README.md",
+      "companionFiles": {
+        "README.md": "84f8a1a91dfc45973ea3351ff9cd2fc38565f14ebdf436c7533226eee5deb648",
+        "riscontro.json": "42f9cb77399035812ad124e642665c7e6fc54e3e9c802f13eabf2e23d3daf7d9"
+      },
+      "archives": {
+        "BKL046-TV4-CLEAR1-permutazioni-tutte-coppie-v1.zip": {
+          "archiveSha256": "34a5e3c14d4c5255a2766bf4c5c00f04fc8071f0574bee75cc2960b1307ed52d",
+          "reportSha256": "223b92cee647413e4e182e0bd570c2438423579a8435b279a65d7d1139365c33"
+        },
+        "BKL046-TV4-CLEAR1-replica-23ms-v1.zip": {
+          "archiveSha256": "0506199b67d8ece9fd16d43b22b19ec02c17883e5961899fe658d6f520f9880e",
+          "reportSha256": "7843ec6b40304097e3cd11acb0f9d8915e92b51d777f7226df5f63b9b8e896b6"
+        },
+        "BKL046-TV4-CLEAR1-replica-4p5ms-v1.zip": {
+          "archiveSha256": "ee6c0b76d527e4b23fe7c9efeb63b322940b101b16f45d8fb949f53be63dfaa1",
+          "reportSha256": "eda04b21f470db2338a9f00762ebcd9aa6c5f4c8d9cb7cd0743726844d41055e"
+        }
+      },
+      "axis": "DIFFUSE_BACKGROUND/2",
+      "astrophysicalTransferQualified": false,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "deliveryAndCustodyCheckpoint": {
+      "priorIndexSha256": "989ddadc93ad1b200c73e70ca522254483ddaf07095e3e33c6445dd3034ec18e",
+      "path": "docs/project/bkl046-verifica-github-custodia-v1/README.md",
+      "companionFiles": {
+        "README.md": "574ae21f0facad81dd5d8e3b13d3d1061c8877c961023a13848528c32d2e7b88",
+        "riscontro.json": "2afb967ac0f72cb07cd8d5477038ad094b395e8bef0158448fed5dda5529f624"
+      },
+      "verifiedHead": "62d2eb2a180f5ba396c2631de4f3b7ff609bc472",
+      "documentalPins": 237,
+      "integralTransferVerified": false,
+      "nativeExecutions": 0,
+      "scientificClosures": 0
+    },
+    "diffuseAndCfaResidualV76": {
+      "priorIndexSha256": "67296f7837b98ab7f482c5dac0032f05a6cddaa081c7c821ff68a78d14f8a669",
+      "path": "docs/project/bkl046-residual-evidence-v76/README.md",
+      "companionFiles": {
+        "rendiconto.json": "852f69e2947541b63696b872ec8dc4bc54f92e517fdf465152c370ec523b231f",
+        "conoscenza.json": "8d23bef30d71c1c08a626dee34236998de52c95f53b7b59415c62a33fec2fb9b",
+        "README.md": "696bdd919cf80486a98e1412100d5799687e6f060a0b3a81a8209c3dbea2c743"
+      },
+      "archiveSha256": "a70ddda504dd7e435521c68a6169caa79b1ccec81155f7933c94691dc8d71d52",
+      "sourceReports": 11,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "diffuseAndStream34ResidualV77": {
+      "priorIndexSha256": "cf6c88296927cb0e720a8205f36a9b406a8226e84e7d112bf6308a2b0557558e",
+      "path": "docs/project/bkl046-residual-evidence-v77/README.md",
+      "companionFiles": {
+        "README.md": "3d830c59cca9dddd34f26e402263f6abd9caa8b321aea6455519c376d4befc9e",
+        "rendiconto.json": "415d7d1ffa63e7bb75ca4ab12c32314a933bee5419b80e98a34b882a859cef2c",
+        "conoscenza.json": "90d1688fdf2f3acc40f8a9e458d3b3e8fa3774e72687bd743f957e32cc859cdb"
+      },
+      "archiveSha256": "d676226b489dba29f262ea0e7ddc70c5b8dceb1b59ae24d5f4bc3e968c48f321",
+      "sourceReports": 6,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "psfDarkAndCfaResidualV78": {
+      "priorIndexSha256": "fb98bc2291df5e6e9b1b1abd857b364134cf66c66e387061b96aa68bfc879aac",
+      "path": "docs/project/bkl046-residual-evidence-v78/README.md",
+      "companionFiles": {
+        "rendiconto.json": "6b7b671a1cff6e37d40a355c21381d9db6aaf4e0571bdbfb62100ab2c620aa39",
+        "conoscenza.json": "40a03351a8ce1568f05564fdab091d20baa196886d02caf94bd5ea45da8bcce6",
+        "README.md": "a9db0325b7cce983bb183f28e882e981f20745b64a0b9d2da4c0bdc0f0f76a5c"
+      },
+      "archiveSha256": "c1df6c14b0371dff904a2380a1675ab3e2f59e19fd76757a7765491827ac68c5",
+      "sourceReports": 8,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "adapterAndDarkResidualV79": {
+      "priorIndexSha256": "6faa55e1d905701f3905eea137694a6403f3dd97921361043ee575580febc3b7",
+      "path": "docs/project/bkl046-residual-evidence-v79/README.md",
+      "companionFiles": {
+        "README.md": "62bc8873d67dfee5bf5cb9d52549cb3d88118ecd744e2a225c495a86ca50461f",
+        "rendiconto.json": "23a4c916403d9bbb4f8505541502280f10c514166c51043e39dda5431ae48035",
+        "conoscenza.json": "19650b99bd862a1e8840f71b09c786011e64349afe39115daaed675aa2108147"
+      },
+      "archiveSha256": "3a8e22a672ffb5ed78eb0413a8163c600567ebb2926de0205cdc2bb23003417d",
+      "sourceReports": 11,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "stream34AndShassaResidualV80": {
+      "priorIndexSha256": "f3c489c21b5db1eea9de45efa449d5c3c29ca219f84ae5b78600c1321b2d74f1",
+      "path": "docs/project/bkl046-residual-evidence-v80/README.md",
+      "companionFiles": {
+        "README.md": "c4e9c8e5693231c83a243498c4cad1998a02ab3ee51d7f138ee885403a8f55ce",
+        "rendiconto.json": "c85085d391f924e76c795d749177515af8f3feec4c870b31f5db20f276fc6842",
+        "conoscenza.json": "d56b5ca338178be81dc8a2301d6ae7290224e526daf427ed5671aac52a4fc013"
+      },
+      "archiveSha256": "439af2deccd3ca047c56a41f553c02bd36b4bc1e81beeeeb0776a1a78141d7b8",
+      "sourceReports": 6,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "asi2600NoiseAndBilinearResidualV81": {
+      "priorIndexSha256": "902c123477fd3f604dca1f67531cb9219b65b33ac6978d28b2aa0b73378d064f",
+      "path": "docs/project/bkl046-residual-evidence-v81/README.md",
+      "companionFiles": {
+        "README.md": "ba9120890822f183f2c31fa23d56a9e0699155d518c32442e96a5535659f904d",
+        "rendiconto.json": "ca37bac8f6392dc10a6ce0fc76f12ac40fd6833a5f545632fbd9387efb77bb23",
+        "conoscenza.json": "3f6da4e256209c2e0e1a5af47aa3657ad04ab01025e8b828bf837d09089c26a2"
+      },
+      "archiveSha256": "03379a5bf76c89ef2b5d52e2c69ebaf760af74635f7c48c4703aa1594edf63b6",
+      "sourceReports": 6,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV82": {
+      "priorIndexSha256": "913870e278aa381b65b26c44320e15fe1621f15c85a6b4990ceb582f86547ddb",
+      "path": "docs/project/bkl046-residual-evidence-v82/README.md",
+      "companionFiles": {
+        "README.md": "15e560a8b1ee5ba7be1d9f2d76f9bd2b99deb739476ee254e97f655b973ea3b6",
+        "rendiconto.json": "10b811e706b731eedb7fe7047d8568b8f44f796ffe047a2753079a7a81d5ab27",
+        "conoscenza.json": "73f9e3f662203afa4c7b4877a51fbdc6768ebadb28c21cb75ee198bc7e99d453"
+      },
+      "archiveSha256": "c89501be302d181deb67f78ab3def35fcea8e2dc19738f051391cdcf7d30fc73",
+      "sourceReports": 5,
+      "deliveryReports": 2,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV83": {
+      "priorIndexSha256": "e2d5e0166fb1ccfefa22ffd79a27b1052fd66e540db75d6f892801a3fdad629f",
+      "path": "docs/project/bkl046-residual-evidence-v83/README.md",
+      "companionFiles": {
+        "README.md": "b2c29742d27ee3bd0673433724ae0b6503d266e880e8e10649e4da9d9ba68342",
+        "rendiconto.json": "90d1a49a5123f9f5dd84c85412ae0931eba1e9155d8dd7b271e119d404859c81",
+        "conoscenza.json": "80363d0ead0a3f57f962c3208ee245c7e8caa9dfc180b913c1db6368e070cd8e"
+      },
+      "archiveSha256": "86d859a192172aea0e454852dd0be505b351c00c56816228e991b53778cfd48e",
+      "sourceReports": 11,
+      "studies": 9,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV84": {
+      "priorIndexSha256": "71e1996db2600cf9966c44531c966eb7c69e37155706024c5872ae832c3476f3",
+      "path": "docs/project/bkl046-residual-evidence-v84/README.md",
+      "companionFiles": {
+        "README.md": "44a2c525a8aa4b11f26cc73e756726fdb52b846e959d84cbd2ad5bf1a4252b99",
+        "rendiconto.json": "269d93d01e9329ecf58c62ba270426cdf5c1616d4187d13f3dcdc9c6faeed0ca",
+        "conoscenza.json": "b741920ab4b9a428f4f6daab4f7eb944f7c2b32b8d1483d26fd82bef008fa35b"
+      },
+      "archiveSha256": "3fc85d110fd644e3188ee70ed7ae5434b478a8519c2ff0c971a2651110834b65",
+      "sourceReports": 12,
+      "scientificStudies": 9,
+      "operationalReports": 3,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV85": {
+      "priorIndexSha256": "c3add255a0550346ef1b0ee53812dfc0e308c2d5a5443e55a0194f2a2e35a2dd",
+      "path": "docs/project/bkl046-residual-evidence-v85/README.md",
+      "companionFiles": {
+        "README.md": "aa4916c7883b3ac52def384de87d64afea8dd8298b2cb3c5969b9b662a2c3a3e",
+        "rendiconto.json": "a7749273a2c38f5a40033811be173f997fdbe14fb45cdc52ac4399075de6ea57",
+        "conoscenza.json": "beeb4d7763c9e9d2521c00b387b4bbd1716a6c68216ef91d4c1fc9d7243a374c"
+      },
+      "archiveSha256": "2f5953d5e278caae214e5d878cae8e4ee3486d43e789225d51f98f69eee62bc0",
+      "sourceReports": 14,
+      "scientificStudies": 11,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV86": {
+      "priorIndexSha256": "4c123b394c29ac869c24440077614949e0624ce87b7a5b70bf930acd581f92ef",
+      "path": "docs/project/bkl046-residual-evidence-v86/README.md",
+      "companionFiles": {
+        "README.md": "a894a8d0ba5de939e48578554d8e41472fd5b5f72d3a19c6438ac0712e7f437e",
+        "rendiconto.json": "4588fdb9eec3b88ee6a820f6322d158019819c4386a3c46ca84c463654263e22",
+        "conoscenza.json": "3dc1adde6501059918f9df686f801d9c7dc25c8b3dfb4b260fb3fce99e909d51",
+        "verifica-replica.py": "3c51aa25998115a699ab7549607eb08c8896f6cb1f25a15fb428c51e9c357a15"
+      },
+      "archiveSha256": "c27f385b3af39188b5652294dc194a329e99712c8bf7a8a10041e9b731b9da38",
+      "sourceReports": 7,
+      "scientificStudies": 6,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV87": {
+      "priorIndexSha256": "a92f9f372cb05328abc64bfb1f8b00db812d61dea27aa6ec645d972bbfff95f3",
+      "path": "docs/project/bkl046-residual-evidence-v87/README.md",
+      "companionFiles": {
+        "README.md": "87fede44de29ecb563fcb9bcade5afb41d1313965eeea0bb89bb0452a1ba81a4",
+        "rendiconto.json": "eedceadaffb617d0ce402dcb75fc4504dc2673b83c88ad3738f8d5c8adc5983e",
+        "conoscenza.json": "600fdc179363ddf6fbb05f716870b2d1208c13bde483ee3301a8dcdc394881e6",
+        "verifica-replica.py": "2043d56bd0287395248803e00bea030224f5b4e268e2071a0aadd9aa0ad190ae"
+      },
+      "archiveSha256": "583ad82144df3db4d721066605ee82451c9366f6c196c9e90e97a0eaa5575087",
+      "sourceReports": 5,
+      "scientificStudies": 4,
+      "operationalReports": 1,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV88": {
+      "priorIndexSha256": "0274d7fb2a2550f652b3d3e7d4c2912672b92dc77ef0a97ce3271e66adda605f",
+      "path": "docs/project/bkl046-residual-evidence-v88/README.md",
+      "companionFiles": {
+        "README.md": "8747184d6da7868b6dfa2c868df7032d73f45261795d4fe4411db9769f5e89b1",
+        "rendiconto.json": "2d91c2aba2a359271ec2c8a4e958f874aee1d7a8517800d4ad962e5c6994b115",
+        "conoscenza.json": "89483f9766405520aefbf67fd89b5b2f24c8b6b40826e5d4a1386afdf467685c",
+        "verifica-replica.py": "10232ccffc3f2fa8a9b4f19d767974477a5772e2cd681fb01ce8031fcce69701"
+      },
+      "archiveSha256": "998ad326f2e9c7b800ac42da3eb6a567262f9eb0a4554321d05b30b8317a6c1d",
+      "sourceReports": 6,
+      "scientificStudies": 5,
+      "operationalReports": 1,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "residualEvidenceV89": {
+      "priorIndexSha256": "ddfe335801ed5559a778674eaa61c8f32597cafbc9f463789dbc71a256adc5db",
+      "path": "docs/project/bkl046-residual-evidence-v89/README.md",
+      "companionFiles": {
+        "README.md": "b7469c6b54c6819a9bf3bb0a660fecf7945936d207ef95322c712c20171e7ce6",
+        "rendiconto.json": "561879a18e63f66e5d1dc7d6ac8165dd0abed3b2a496729fe752320b641a31d9",
+        "conoscenza.json": "f0a9ae38d317572350d7b8d8bd3be314fbad9d5640e825dcb5ff550b5977d00c",
+        "verifica-replica.py": "7e6a03658a44677e997b7ac9aad5b5998727ac1cc2b4c4068d188f80c2d39b15"
+      },
+      "archiveSha256": "36f90c8873e2fbaba1c1902f77529872fd89b03d27bb3ab64a632d94882204ba",
+      "sourceReports": 7,
+      "scientificStudies": 6,
+      "operationalReports": 1,
+      "scientificClosures": 0,
+      "nativeExecutions": 0
+    },
+    "blindSolverScopeAndAstrometricEvidence": {
+      "path": "docs/project/bkl046-raccordo-conoscenza-v1171-v1/riscontro.json",
+      "sha256": "c19fc65eca4d0ab5ae868b1ef84481986c48ac942bb793fd2febf55d44a86d06",
+      "localArchiveSha256": "c5dab140146f25861ceaa039b0e7570daac1848ebbb03fc7f390beb645ba140f",
+      "evidenceRecords": 6,
+      "scientificClosures": 0,
+      "canonicalKnowledgeUpdated": false
+    },
+    "campaignPsfAndDetectorMethodsAddendum": {
+      "path": "docs/project/bkl046-campaign-knowledge-methods-v1/riscontro.json",
+      "sha256": "22a3fad3482fd029fa60730789f21a03f6cd0b2b50a273c1808daca26111b3f9",
+      "archiveSha256": "1042d1d4d475f2e491227f3f50e465681e8ea4a7113b7b0f57de288bcde493a4",
+      "evidenceCount": 8,
+      "scientificClosures": 0
+    }
+  }
+}

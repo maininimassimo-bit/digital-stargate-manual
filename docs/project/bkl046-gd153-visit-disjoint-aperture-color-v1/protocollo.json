@@ -1,0 +1,21 @@
+{
+  "schema": "BKL046_GD153_VISIT_DISJOINT_COLOR_APERTURE_PROTOCOL_V1",
+  "sourceArchive": "548371fdcae54b5b896153e1bb29530f3a42b0730cb486157f87e61a8493e9b3",
+  "sourceMember": "riscontro-verificato.json",
+  "sourceReport": "5408d94a2a530b111fd2953cd1789b8f3a6f69a2ae6fe8a4266cacc221b9e4ab",
+  "bands": [
+    "F438W",
+    "F606W",
+    "F814W"
+  ],
+  "radii": [
+    5,
+    10
+  ],
+  "backgrounds": [
+    "historical75to125:median",
+    "historical75to125:modeProxy",
+    "local16to22:median"
+  ],
+  "scope": "Keep exact archived triplets with both apertures. Score the observed r10 minus r5 color change against uncorrected, nominal encircled-energy and visit-disjoint empirical estimates on identical support. Use median by visit, then median across at least two other visits; require at least two other visits at identical commanded dither for phase-specific estimates. Three sky statistics on the same exposures are sensitivity analyses, not independent replications."
+}

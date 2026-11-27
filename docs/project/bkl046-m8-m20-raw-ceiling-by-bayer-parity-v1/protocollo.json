@@ -1,0 +1,13 @@
+{
+  "schema": "BKL046_M8M20_RAW_DIGITAL_CEILING_BY_PARITY_PROTOCOL_V1",
+  "sourceArchiveSha256": "daa8ba4ee748f7616f3db0371b60d95752ff98d00ceaef280fe8f6e8ab937c76",
+  "captureReceiptSha256": "28262b15dc125a0b34600ff56adca5ae327e42f83d7012cf34fa703f01de3f59",
+  "detectorShapeYX": [
+    4176,
+    6248
+  ],
+  "storedCodeMaximum": 65535,
+  "near99PercentCode": 64880,
+  "priorMaskCode": 62000,
+  "design": "Read all 15 FITS in the frozen Colmic M8/M20 light archive before calibration, debayering, alignment or normalization. Require 16-bit unsigned stored coding. Enumerate all four Bayer parities and exact saturation patterns in complete 2x2 RGGB blocks. Count raw locations persistent across images, maintaining field effects and measured dithers as a limitation. Using candidates at the digital ceiling, examine near-ceiling and strictly lower statuses of the other photosites. No interpretation of physical full well or calibrated photometry. Archive and completeness verified by pinned source and receipt."
+}

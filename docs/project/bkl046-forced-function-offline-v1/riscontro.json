@@ -1,0 +1,347 @@
+{
+  "cases": {
+    "alteredBinding": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_DECISION_CHANGED",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_DECISION_CHANGED",
+      "sameOwnerRetryRefused": true
+    },
+    "completedSelect": {
+      "failureEvidence": [],
+      "fakeSendCalls": 1,
+      "outcome": "ACCEPTED",
+      "sameOwnerRetryRefused": true
+    },
+    "completedStop": {
+      "failureEvidence": [],
+      "fakeSendCalls": 1,
+      "outcome": "ACCEPTED",
+      "sameOwnerRetryRefused": true
+    },
+    "completedTest": {
+      "failureEvidence": [],
+      "fakeSendCalls": 1,
+      "outcome": "ACCEPTED",
+      "sameOwnerRetryRefused": true
+    },
+    "duplicatedField": {
+      "failureEvidence": [
+        {
+          "reason": "JSON_INVALID",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "JSON_INVALID",
+      "sameOwnerRetryRefused": true
+    },
+    "http429": {
+      "failureEvidence": [
+        {
+          "httpStatus": 429,
+          "reason": "PROVIDER_HTTP_ERROR",
+          "responseReceived": false
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "PROVIDER_HTTP_ERROR",
+      "sameOwnerRetryRefused": true
+    },
+    "incomplete": {
+      "failureEvidence": [
+        {
+          "incompleteReason": "max_output_tokens",
+          "reason": "RESEARCH_PROVIDER_RESPONSE",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "incomplete",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_RESPONSE",
+      "sameOwnerRetryRefused": true
+    },
+    "incompleteFunction": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_TOOL",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_TOOL",
+      "sameOwnerRetryRefused": true
+    },
+    "invalidModel": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_MODEL",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_MODEL",
+      "sameOwnerRetryRefused": true
+    },
+    "invalidUsage": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_USAGE",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed"
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_USAGE",
+      "sameOwnerRetryRefused": true
+    },
+    "messageOnly": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_TOOL_REQUIRED",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_TOOL_REQUIRED",
+      "sameOwnerRetryRefused": true
+    },
+    "noCall": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_SINGLE_TOOL",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_SINGLE_TOOL",
+      "sameOwnerRetryRefused": true
+    },
+    "observation301Characters": {
+      "failureEvidence": [],
+      "fakeSendCalls": 1,
+      "outcome": "ACCEPTED",
+      "sameOwnerRetryRefused": true
+    },
+    "observationMissingCallId": {
+      "failureEvidence": [],
+      "fakeSendCalls": 1,
+      "outcome": "ACCEPTED",
+      "sameOwnerRetryRefused": true
+    },
+    "overByteLimit": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_DECISION_TEXT_LIMIT",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_DECISION_TEXT_LIMIT",
+      "sameOwnerRetryRefused": true
+    },
+    "oversizedArguments": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_TOOL",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_TOOL",
+      "sameOwnerRetryRefused": true
+    },
+    "privatePath": {
+      "failureEvidence": [
+        {
+          "reason": "AI_TEXT_PRIVATE_OR_INVALID",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "AI_TEXT_PRIVATE_OR_INVALID",
+      "sameOwnerRetryRefused": true
+    },
+    "projectionNotBound": {
+      "failureEvidence": [],
+      "fakeSendCalls": 0,
+      "outcome": "RESEARCH_PROJECTION_BINDING",
+      "sameOwnerRetryRefused": false
+    },
+    "twoCalls": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_SINGLE_TOOL",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_SINGLE_TOOL",
+      "sameOwnerRetryRefused": true
+    },
+    "withoutReservation": {
+      "failureEvidence": [],
+      "fakeSendCalls": 0,
+      "outcome": "RESEARCH_API_RESERVATION_REQUIRED",
+      "sameOwnerRetryRefused": false
+    },
+    "wrongFunction": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_TOOL",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_TOOL",
+      "sameOwnerRetryRefused": true
+    },
+    "wrongParent": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_TERMINAL_FIELDS",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_TERMINAL_FIELDS",
+      "sameOwnerRetryRefused": true
+    },
+    "wrongResponseId": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_PROVIDER_RESPONSE",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_PROVIDER_RESPONSE",
+      "sameOwnerRetryRefused": true
+    },
+    "wrongStageProcess": {
+      "failureEvidence": [
+        {
+          "reason": "RESEARCH_STAGE_PROCESS",
+          "responseId": "resp_fixture",
+          "responseReceived": true,
+          "responseStatus": "completed",
+          "usage": {
+            "input_tokens": 10,
+            "output_tokens": 4,
+            "total_tokens": 14
+          }
+        }
+      ],
+      "fakeSendCalls": 1,
+      "outcome": "RESEARCH_STAGE_PROCESS",
+      "sameOwnerRetryRefused": true
+    }
+  },
+  "nativeExecutions": 0,
+  "providerCalls": 0,
+  "schema": "BKL046_FORCED_FUNCTION_OFFLINE_RESULT_V1",
+  "scientificClosures": 0,
+  "sourceCommit": "1d9e078e2ee645b3ce3286f769aabb06123da6b6",
+  "testProgramSha256": "58b62ad7ad4d3ab3f43d753a1e4c0b9c7fd377126b6f8018020d42c6fd97fbe2"
+}

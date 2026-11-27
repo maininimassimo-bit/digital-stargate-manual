@@ -1,0 +1,9 @@
+# BKL-046 · Rilettura dell’archivio CFA dopo il rilascio
+
+Il verificatore in sola lettura riconcilia il marcatore dell'archivio CFA e una ricevuta R4 di rilascio conservata separatamente. Riceve entrambe le impronte attese. Verifica i 17 membri, l'insieme esatto dei nomi e i legami tra input, log, FITS, chiusura e prenotazione del piano sintetico. Confronta i campi del record acquisito con quelli della ricevuta R4, compresi operazione, coordinatore, istante di acquisizione e uscita zero.
+
+Su due collaudi R4 isolati già conservati, entrambi i set di 17 membri concordano con i relativi rilasci. Sette casi negativi sono respinti. Uno accoppia un archivio integro con una ricevuta autentica del secondo collaudo, usando l'impronta corretta di quella ricevuta. Gli altri coprono mancanze, alterazioni e una voce inattesa nella directory.
+
+Le impronte usate per il collaudo sono fissate dalle copie storiche rilette. In operazione ordinaria vanno conservate separatamente dai file verificati, a partire dalle ricevute dell'esecuzione. La rilettura verifica gli oggetti osservati e la loro coerenza. La protezione persistente dello storage e una prova ammessa con PixInsight rimangono requisiti distinti. Il verificatore non interroga o modifica il registro canonico, non acquisisce blocchi e non emette comandi di rilascio. I due casi positivi provengono da testimoni Windows con dati sintetici. [Ricevuta del collaudo](riscontro.json)
+
+Esecuzione del verificatore con Python 3.12 e libreria standard. Argomenti in ordine: directory archivio con nome pari alla prenotazione, ricevuta R4 di rilascio, SHA-256 atteso del marcatore, SHA-256 atteso del rilascio. Il kit interno conserva anche i due archivi di prova e i casi negativi riproducibili.

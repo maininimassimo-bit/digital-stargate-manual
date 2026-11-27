@@ -1,0 +1,4 @@
+SELECT source_id,ref_epoch,ra,dec,parallax,pmra,pmdec,radial_velocity,ra_error,dec_error,parallax_error,pmra_error,pmdec_error,phot_g_mean_mag,ruwe,astrometric_params_solved
+FROM gaiadr3.gaia_source
+WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',204.710325000000,70.285455555556,0.01))
+ORDER BY phot_g_mean_mag

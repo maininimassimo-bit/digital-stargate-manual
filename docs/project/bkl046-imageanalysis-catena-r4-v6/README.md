@@ -1,0 +1,7 @@
+# BKL-046 — Catena di chiusura ImageAnalysis e rilascio R4 isolato
+
+Su DSG-Shared il padre invia una sola richiesta di chiusura al processo Node testimone già associato alla prenotazione isolata. Il trasporto condiviso verifica il marcatore di ritorno, associa le evidenze alla stessa richiesta, attende l'uscita e controlla il timestamp e il codice rilevati dall'handle originale. Il decisore riapre e trattiene sette file, inclusi ricevuta di chiusura, frame, evidenza di console e riscontro terminale, fino alla decisione R4.
+
+Otto casi completati. Il caso valido ha emesso una ricevuta di rilascio. La ricevuta di ritorno alterata prima dell'uscita e le sei sostituzioni dopo l'uscita con codice zero hanno tutte mantenuto la prenotazione attiva. Le sostituzioni hanno interessato separatamente misure, ricevuta di ritorno, interpretazione, ricevuta di chiusura, frame ed evidenza di console.
+
+Una prima esecuzione del testimone scadeva perché la pipe di ingresso rimaneva aperta mentre il padre attendeva l'uscita. Il collaudo finale chiude la pipe dopo l'invio della richiesta e osserva l'uscita con l'handle originale. Frame, stato dell'applicazione e scomparsa della finestra sono simulati. Processi, custodia NTFS e registro isolato sono reali. Restano da integrare e qualificare le osservazioni della finestra e dello stato applicativo di PixInsight nel launcher operativo prima della revisione.
