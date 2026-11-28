@@ -111,6 +111,25 @@ class PublishObservationPlannerF9Tests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout)
         self.assertEqual(before, after)
 
+    def test_publishes_only_projection_from_dirty_acquisition_checkout(self):
+        self.prepare_local_projection("fresh")
+        readme = self.primary / "README.md"
+        readme.write_text("unstaged acquisition change\n", encoding="utf-8")
+        (self.primary / "unrelated.txt").write_text("staged change\n", encoding="utf-8")
+        run(["git", "add", "unrelated.txt"], self.primary)
+        before = run(["git", "status", "--porcelain"], self.primary).stdout
+        self.advance_remote()
+
+        result = self.publish()
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertEqual(self.remote_json(), {"forecast": "fresh"})
+        self.assertEqual(run(["git", "status", "--porcelain"], self.primary).stdout, before)
+        self.assertEqual(readme.read_text(encoding="utf-8"), "unstaged acquisition change\n")
+        changed = run(["git", "--git-dir", str(self.remote), "diff-tree", "--no-commit-id",
+                       "--name-only", "-r", "main"], self.root)
+        self.assertEqual(changed.stdout.splitlines(), [PROJECTION])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
