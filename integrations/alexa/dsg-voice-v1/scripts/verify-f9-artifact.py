@@ -5,6 +5,7 @@ import json
 import subprocess
 import sys
 import zipfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -17,13 +18,20 @@ def main(run_id):
         raise SystemExit("Expected a numeric run ID")
     repo = "repos/maininimassimo-bit/digital-stargate-manual/actions"
     run = json.loads(github(f"{repo}/runs/{run_id}"))
-    if run["event"] != "schedule" or run["head_branch"] != "main":
-        raise SystemExit("Expected a scheduled run on main")
+    if (run["workflow_id"] != 360908677 or run["event"] != "schedule"
+            or run["head_branch"] != "main" or run["run_attempt"] != 1):
+        raise SystemExit("Expected a first-attempt F9 scheduled run on main")
     root = Path(__file__).resolve().parents[4]
     subprocess.run([
         "git", "merge-base", "--is-ancestor",
         "c2dff35385c36fe7694b4363496bed7dea288729", run["head_sha"],
     ], cwd=root, check=True)
+    validator = ".github/scripts/observation_planner_f9.py"
+    expected = subprocess.check_output(
+        ["git", "show", f"{run['head_sha']}:{validator}"], cwd=root
+    )
+    if (root / validator).read_bytes().replace(b"\r\n", b"\n") != expected:
+        raise SystemExit("Local validator differs from the run revision")
     artifacts = json.loads(github(
         f"{repo}/runs/{run_id}/artifacts?name=f9-current-night-projection"
     ))["artifacts"]
@@ -41,7 +49,6 @@ def main(run_id):
         payload = bundle.read(filename)
     sys.path.insert(0, str(root / ".github" / "scripts"))
     from observation_planner_f9 import validate_projection
-    from datetime import datetime, timezone
 
     projection = json.loads(payload)
     now = datetime.now(timezone.utc)
