@@ -22,10 +22,13 @@ def main(run_id):
             or run["head_branch"] != "main" or run["run_attempt"] != 1):
         raise SystemExit("Expected a first-attempt F9 scheduled run on main")
     root = Path(__file__).resolve().parents[4]
-    subprocess.run([
+    ancestry = subprocess.run([
         "git", "merge-base", "--is-ancestor",
         "c2dff35385c36fe7694b4363496bed7dea288729", run["head_sha"],
-    ], cwd=root, check=True)
+    ], cwd=root)
+    if ancestry.returncode == 1:
+        raise SystemExit("Run revision does not include the merge of PR #654")
+    ancestry.check_returncode()
     validator = ".github/scripts/observation_planner_f9.py"
     expected = subprocess.check_output(
         ["git", "show", f"{run['head_sha']}:{validator}"], cwd=root
