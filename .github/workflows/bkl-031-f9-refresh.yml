@@ -51,5 +51,14 @@ jobs:
         run: python .github/scripts/observation_planner_f9.py --skip-unchanged
       - name: Verify sanitised projection
         run: python .github/scripts/observation_planner_f9.py --validate docs/data/observation-planner-f9-current-night.json
+      - name: Publish validated F9 projection as run artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: f9-current-night-projection
+          path: docs/data/observation-planner-f9-current-night.json
+          if-no-files-found: error
+          retention-days: 1
+        # Preserve the existing planner publication if the secondary channel fails.
+        continue-on-error: true
       - name: Commit only the sanitised projection
         run: bash .github/scripts/publish-observation-planner-f9.sh
