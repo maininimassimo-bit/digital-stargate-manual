@@ -1,0 +1,25 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "osservatorio digitale",
+      "intents": [
+        { "name": "GetObservatorySummary", "slots": [], "samples": ["lo stato dell'osservatorio", "il riepilogo dell'osservatorio", "come sta l'osservatorio"] },
+        { "name": "GetLatestSession", "slots": [], "samples": ["l'ultima sessione pubblicata", "la sessione osservativa più recente", "l'ultima osservazione pubblicata"] },
+        { "name": "GetRecentAlerts", "slots": [], "samples": ["gli ultimi avvisi registrati dell'osservatorio", "gli avvisi pubblicati dell'osservatorio", "quali avvisi sono stati pubblicati sull'osservatorio", "ci sono avvisi pubblicati sull'osservatorio", "mostrami gli avvisi recenti dell'osservatorio"] },
+        { "name": "ExplainUnavailableStatus", "slots": [], "samples": ["cosa significa lo stato non disponibile dell'osservatorio", "spiegami perché la fonte dell'osservatorio non è disponibile", "che cosa vuol dire indisponibile per i dati dell'osservatorio"] },
+        { "name": "ExplainStatus", "slots": [{ "name": "StatusCode", "type": "DSGStatusCode" }], "samples": ["cosa significa {StatusCode}", "spiegami lo stato {StatusCode}", "che vuol dire {StatusCode}", "cosa significa dato {StatusCode}", "spiegami il termine {StatusCode} per l'osservatorio", "che cosa indica {StatusCode} nei dati dell'osservatorio", "spiegami cosa vuol dire {StatusCode} nei dati dell'osservatorio", "che significa dato {StatusCode} per l'osservatorio", "cosa vuol dire lo stato {StatusCode} nell'osservatorio"] },
+        { "name": "GetWeatherForecast", "slots": [{ "name": "Period", "type": "DSGForecastPeriod" }, { "name": "HourCount", "type": "AMAZON.NUMBER" }], "samples": ["le previsioni per {Period}", "il meteo per {Period}", "le previsioni per le prossime {HourCount} ore"] },
+        { "name": "UnsupportedCommandIntent", "slots": [], "samples": ["apri la cupola", "chiudi la cupola", "muovi la montatura", "avvia PixInsight", "pianifica una sessione", "seleziona un obiettivo", "modifica la configurazione", "salva una nota", "crea un promemoria", "dimmi se è sicuro aprire la cupola", "dammi un esito go no go", "puoi comandare la cupola con Digital StarGate", "puoi controllare la montatura tramite Digital StarGate", "Digital StarGate può avviare PixInsight", "Digital StarGate può pianificare una sessione", "Digital StarGate può selezionare un obiettivo", "Digital StarGate può modificare la configurazione", "puoi salvare una nota o un promemoria con Digital StarGate"] },
+        { "name": "AMAZON.HelpIntent", "samples": [] },
+        { "name": "AMAZON.CancelIntent", "samples": [] },
+        { "name": "AMAZON.StopIntent", "samples": [] },
+        { "name": "AMAZON.NavigateHomeIntent", "samples": [] },
+        { "name": "AMAZON.FallbackIntent", "samples": [] }
+      ],
+      "types": [
+        { "name": "DSGStatusCode", "values": [{ "name": { "value": "sconosciuto" } }, { "name": { "value": "non aggiornato" } }, { "name": { "value": "non disponibile" } }, { "name": { "value": "parziale" } }, { "name": { "value": "conflittuale" } }] },
+        { "name": "DSGForecastPeriod", "values": [{ "name": { "value": "stanotte" } }, { "name": { "value": "prossime ore" } }] }
+      ]
+    }
+  }
+}
