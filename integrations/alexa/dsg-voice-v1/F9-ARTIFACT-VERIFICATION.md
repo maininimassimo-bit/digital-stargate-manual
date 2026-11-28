@@ -19,3 +19,7 @@ La skill è privata in Alexa Development e il reader F9 è disabilitato. Restano
 Il 28 novembre 2026 alle 15:50 Europe/Rome il verificatore ha convalidato l’artefatto F9 del [run manuale 46156555129](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/46156555129), primo tentativo su main alla revisione del merge #654. L’artefatto 15267827594 conteneva un solo JSON conforme al validatore della revisione del run. Il run meteo aveva 2,84 ore e la finestra copriva dalle 16:00 del 28 novembre alle 08:00 del 29 novembre, ora italiana. SHA-256 del JSON fc3b06692d8f4f81a85ca8681697d70da8812fe8415e53c356d4df5f8b378e65.
 
 Il passaggio successivo di pubblicazione ordinaria su main è fallito con codice 128. La prova del primo run schedulato resta distinta. Per riprodurre il controllo manuale usare lo script con l’opzione --event workflow_dispatch. La skill resta in Development e il reader F9 disabilitato.
+
+## Correzione della pubblicazione su main
+
+Il run manuale ha incontrato modifiche non salvate nel checkout di acquisizione. Git ha rifiutato il rebase e il tentativo di annullare il rebase ha restituito 128. La [PR #656](https://github.com/maininimassimo-bit/digital-stargate-manual/pull/656), integrata alle 15:56 Europe/Rome del 28 novembre 2026, pubblica il solo JSON validato da un checkout temporaneo pulito. Quattro test locali e Developer Foundation sono passati. Sul primo run schedulato dopo il merge restano da verificare la freschezza del JSON e la corrispondenza tra artefatto e file pubblicato su main.
