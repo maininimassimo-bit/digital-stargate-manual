@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: DSG Voice V1 Alexa custom skill backend. Source readers are off by default.
+
+Parameters:
+  AlexaSkillId:
+    Type: String
+    Description: Exact Alexa skill ID. No default is supplied.
+    MinLength: 1
+    MaxLength: 256
+
+Resources:
+  DsgVoiceFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: DsgVoiceLogGroup
+    Properties:
+      FunctionName: dsg-voice-v1
+      CodeUri: dist/runtime/
+      Handler: src/index.handler
+      Runtime: nodejs24.x
+      MemorySize: 128
+      Timeout: 3
+      Environment:
+        Variables:
+          DSG_VOICE_SKILL_ID: !Ref AlexaSkillId
+          DSG_VOICE_APPROVE_F9_FORECAST: 'false'
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource: !Sub arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/dsg-voice-v1:*
+
+  DsgVoiceLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/dsg-voice-v1
+      RetentionInDays: 7
+
+  AlexaSkillInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt DsgVoiceFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: alexa-appkit.amazon.com
+      EventSourceToken: !Ref AlexaSkillId
+
+Outputs:
+  AlexaLambdaArn:
+    Description: Configure this ARN as the custom skill endpoint after approval.
+    Value: !GetAtt DsgVoiceFunction.Arn
