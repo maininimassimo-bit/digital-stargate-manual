@@ -20,3 +20,7 @@ La Lambda usa un timeout di tre secondi e CloudWatch conserva i log runtime per 
 Il simulatore ha confermato l’apertura e alcuni percorsi deterministici, comprese risposte di fonte indisponibile. Il routing dell’alias «non disponibile», il collaudo su Echo, la consegna della notifica budget e la prova di revoca restano da verificare. Il dettaglio del canale F9 e della prova sull’artefatto è nella [procedura di verifica](F9-ARTIFACT-VERIFICATION.md).
 
 La review della PR #655 ha verificato che l’artefatto F9 serve al collaudo. L’adapter del candidato punta alla proiezione GitHub Pages. Inoltre, il bundle del deployment iniziale precede l’aggiunta del gestore ExplainUnavailableStatus. La prossima prova di routing richiede un deployment Development del candidato e una richiesta verificata in Skill I/O.
+
+### Bundle candidato Development
+
+Il bundle preparato dal commit 116332aee1cfe04703aa47bd3ab97c13aa71d9d2 contiene i quattro moduli runtime e package.json. La verifica di integrità ZIP è riuscita. SHA-256 del bundle locale C29C8B32D5ECD67C6B04966402D62188D384F2F27E1AF6C304DF58FB5EDC6772. Il caricamento in Lambda e il collaudo sul backend aggiornato restano da eseguire. Il reader F9 resta disabilitato durante la verifica dell'artefatto.
