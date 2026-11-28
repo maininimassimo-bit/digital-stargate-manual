@@ -17,12 +17,12 @@ AP-005 separa l’identità della skill dall’identità di chi parla. L’acces
 
 La Lambda usa un timeout di tre secondi e CloudWatch conserva i log runtime per sette giorni. Il codice evita di registrare il contenuto delle richieste. Il budget mensile è una soglia di notifica. Il runbook di disattivazione prevede blocco dei test Development, revoca controllata del permesso Lambda e verifica della mancata invocazione.
 
-Il simulatore ha confermato l’apertura e alcuni percorsi deterministici, comprese risposte di fonte indisponibile. Il routing dell’alias «non disponibile», il collaudo su Echo, la consegna della notifica budget e la prova di revoca restano da verificare. Il dettaglio del canale F9 e della prova sull’artefatto è nella [procedura di verifica](F9-ARTIFACT-VERIFICATION.md).
+Il simulatore ha confermato l’apertura e alcuni percorsi deterministici, comprese risposte di fonte indisponibile. Il collaudo su Echo, la consegna della notifica budget e la prova di revoca restano da verificare. Il dettaglio del canale F9 e della prova sull’artefatto è nella [procedura di verifica](F9-ARTIFACT-VERIFICATION.md).
 
-La review della PR #655 ha verificato che l’artefatto F9 serve al collaudo. L’adapter del candidato punta alla proiezione GitHub Pages. Inoltre, il bundle del deployment iniziale precede l’aggiunta del gestore ExplainUnavailableStatus. La prossima prova di routing richiede un deployment Development del candidato e una richiesta verificata in Skill I/O.
+La review della PR #655 ha verificato che l’artefatto F9 serve al collaudo. L’adapter del candidato punta alla proiezione GitHub Pages. Inoltre, il bundle del deployment iniziale precede l’aggiunta del gestore ExplainUnavailableStatus. Il deployment Development successivo e la prova Skill I/O sono documentati sotto.
 
 ### Bundle candidato Development
 
-Il bundle preparato dal commit 116332aee1cfe04703aa47bd3ab97c13aa71d9d2 contiene i quattro moduli runtime e package.json. La verifica di integrità ZIP è riuscita. SHA-256 del bundle locale C29C8B32D5ECD67C6B04966402D62188D384F2F27E1AF6C304DF58FB5EDC6772. Il caricamento in Lambda e il collaudo sul backend aggiornato restano da eseguire. Il reader F9 resta disabilitato durante la verifica dell'artefatto.
+Il bundle preparato dal commit 116332aee1cfe04703aa47bd3ab97c13aa71d9d2 contiene i quattro moduli runtime e package.json. La verifica di integrità ZIP è riuscita. SHA-256 del bundle locale C29C8B32D5ECD67C6B04966402D62188D384F2F27E1AF6C304DF58FB5EDC6772. Il reader F9 resta disabilitato durante la verifica dell'artefatto.
 
 Il 28 novembre 2026 la console Lambda ha mostrato il codice aggiornato con SHA-256 corrispondente al bundle Development. Nel simulatore italiano Development, dopo l’apertura della skill, la frase «cosa significa lo stato non disponibile dell’osservatorio» ha prodotto in Skill I/O la risposta PlainText prevista. Skill I/O ha confermato nel JSON Input il tipo IntentRequest e il campo request.intent.name uguale a ExplainUnavailableStatus. Il reader F9 è disabilitato.
