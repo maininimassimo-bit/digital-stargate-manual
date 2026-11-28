@@ -13,3 +13,9 @@ Lo ZIP deve contenere solo la proiezione F9. Il validatore del producer controll
 ## Stato della skill
 
 La skill è privata in Alexa Development e il reader F9 è disabilitato. Restano da qualificare il routing vocale dell’alias di indisponibilità, il test su Echo, le proiezioni per riepilogo, sessioni e avvisi, le verifiche di avviso budget e disattivazione backend e la review finale.
+
+## Esito dell’acquisizione manuale autorizzata
+
+Il 28 novembre 2026 alle 15:50 Europe/Rome il verificatore ha convalidato l’artefatto F9 del [run manuale 46156555129](https://github.com/maininimassimo-bit/digital-stargate-manual/actions/runs/46156555129), primo tentativo su main alla revisione del merge #654. L’artefatto 15267827594 conteneva un solo JSON conforme al validatore della revisione del run. Il run meteo aveva 2,84 ore e la finestra copriva dalle 16:00 del 28 novembre alle 08:00 del 29 novembre, ora italiana. SHA-256 del JSON fc3b06692d8f4f81a85ca8681697d70da8812fe8415e53c356d4df5f8b378e65.
+
+Il passaggio successivo di pubblicazione ordinaria su main è fallito con codice 128. La prova del primo run schedulato resta distinta. Per riprodurre il controllo manuale usare lo script con l’opzione --event workflow_dispatch. La skill resta in Development e il reader F9 disabilitato.

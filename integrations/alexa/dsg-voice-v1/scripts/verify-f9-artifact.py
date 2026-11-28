@@ -1,4 +1,5 @@
 """Verify one F9 Actions artifact using the repository's live-time validator."""
+import argparse
 import hashlib
 import io
 import json
@@ -13,14 +14,14 @@ def github(endpoint):
     return subprocess.check_output(["gh", "api", endpoint])
 
 
-def main(run_id):
+def main(run_id, event):
     if not run_id.isdecimal():
         raise SystemExit("Expected a numeric run ID")
     repo = "repos/maininimassimo-bit/digital-stargate-manual/actions"
     run = json.loads(github(f"{repo}/runs/{run_id}"))
-    if (run["workflow_id"] != 360908677 or run["event"] != "schedule"
+    if (run["workflow_id"] != 360908677 or run["event"] != event
             or run["head_branch"] != "main" or run["run_attempt"] != 1):
-        raise SystemExit("Expected a first-attempt F9 scheduled run on main")
+        raise SystemExit(f"Expected a first-attempt F9 {event} run on main")
     root = Path(__file__).resolve().parents[4]
     ancestry = subprocess.run([
         "git", "merge-base", "--is-ancestor",
@@ -70,4 +71,8 @@ def main(run_id):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("run_id")
+    parser.add_argument("--event", choices=("schedule", "workflow_dispatch"), default="schedule")
+    args = parser.parse_args()
+    main(args.run_id, args.event)
