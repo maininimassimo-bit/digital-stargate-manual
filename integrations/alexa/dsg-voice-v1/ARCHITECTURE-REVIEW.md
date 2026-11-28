@@ -18,3 +18,5 @@ AP-005 separa l’identità della skill dall’identità di chi parla. L’acces
 La Lambda usa un timeout di tre secondi e CloudWatch conserva i log runtime per sette giorni. Il codice evita di registrare il contenuto delle richieste. Il budget mensile è una soglia di notifica. Il runbook di disattivazione prevede blocco dei test Development, revoca controllata del permesso Lambda e verifica della mancata invocazione.
 
 Il simulatore ha confermato l’apertura e alcuni percorsi deterministici, comprese risposte di fonte indisponibile. Il routing dell’alias «non disponibile», il collaudo su Echo, la consegna della notifica budget e la prova di revoca restano da verificare. Il dettaglio del canale F9 e della prova sull’artefatto è nella [procedura di verifica](F9-ARTIFACT-VERIFICATION.md).
+
+La review della PR #655 ha verificato che l’artefatto F9 serve al collaudo. L’adapter del candidato punta alla proiezione GitHub Pages. Inoltre, il bundle del deployment iniziale precede l’aggiunta del gestore ExplainUnavailableStatus. La prossima prova di routing richiede un deployment Development del candidato e una richiesta verificata in Skill I/O.
