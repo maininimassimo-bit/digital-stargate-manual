@@ -1,0 +1,14 @@
+{
+  "name": "dsg-voice-v1-alexa-skill",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check src/index.mjs && node --check src/voice.mjs && node --check src/forecast.mjs && node --check src/sources.mjs",
+    "build:runtime": "node scripts/build-runtime.mjs"
+  }
+}
