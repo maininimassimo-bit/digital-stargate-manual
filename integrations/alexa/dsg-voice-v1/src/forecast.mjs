@@ -117,18 +117,19 @@ export function describeForecast(projection, options = {}) {
   const firstFutureHour = Math.ceil(now / HOUR) * HOUR;
   const start = Math.max(firstFutureHour, startOfNight);
   let end = endOfNight;
+  let expectedStart = start;
+  let expectedEnd = end;
   if (period === "prossime ore") {
     if (!Number.isInteger(hours) || hours < 1 || hours > 12) {
       return { state: "INVALID_REQUEST", speech: "Posso consultare da una a dodici ore. Dimmi un intervallo valido." };
     }
-    if (startOfNight > firstFutureHour || endOfNight <= firstFutureHour) {
+    const requestedEnd = firstFutureHour + hours * HOUR;
+    if (startOfNight >= requestedEnd || endOfNight <= firstFutureHour) {
       return { state: "UNAVAILABLE", speech: "La proiezione F9 copre solo la notte corrente; non contiene una finestra mobile per le prossime ore. " + provenance(projection) };
     }
-    const requestedEnd = firstFutureHour + hours * HOUR;
-    if (requestedEnd > endOfNight) {
-      return { state: "UNAVAILABLE", speech: "La proiezione F9 non copre tutte le ore richieste fino a " + localTime(requestedEnd, true) + ". Copre solo la notte corrente; non contiene una finestra mobile per le ore successive. " + provenance(projection) };
-    }
-    end = requestedEnd;
+    expectedStart = firstFutureHour;
+    expectedEnd = requestedEnd;
+    end = Math.min(requestedEnd, endOfNight);
   } else if (period !== "stanotte") {
     return { state: "INVALID_REQUEST", speech: "Posso consultare le previsioni per stanotte o per le prossime ore." };
   }
@@ -146,7 +147,7 @@ export function describeForecast(projection, options = {}) {
       rowsByTime.set(time, row);
     }
   }
-  const expected = expectedHours(start, end);
+  const expected = expectedHours(expectedStart, expectedEnd);
   const rows = expected.filter((time) => rowsByTime.has(time)).map((time) => rowsByTime.get(time));
   if (rows.length === 0) return { state: "UNAVAILABLE", speech: "La proiezione non contiene campioni meteo per l’intervallo richiesto. " + provenance(projection) };
 

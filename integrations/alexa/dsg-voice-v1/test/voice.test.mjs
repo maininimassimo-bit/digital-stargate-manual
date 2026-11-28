@@ -139,8 +139,10 @@ test("next-hours request is explicitly unavailable outside F9 current-night cove
   assert.match(after.speech, /non contiene una finestra mobile/);
 
   const exceedsNight = describeForecast(projection(), { now: Date.parse("2026-11-26T15:00:00Z"), period: "prossime ore", hours: 6 });
-  assert.equal(exceedsNight.state, "UNAVAILABLE");
-  assert.match(exceedsNight.speech, /non copre tutte le ore richieste/);
+  assert.equal(exceedsNight.state, "PARTIAL");
+  assert.equal(exceedsNight.coverage.expectedHours, 6);
+  assert.ok(exceedsNight.coverage.availableHours > 0);
+  assert.match(exceedsNight.speech, /copre solo una parte/);
 });
 
 test("fresh F9 run with an expired night window does not report current forecast", () => {
